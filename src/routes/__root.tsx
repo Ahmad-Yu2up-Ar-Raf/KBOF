@@ -1,11 +1,6 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-// import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
-// import { TanStackDevtools } from '@tanstack/react-devtools'
-
-// import Header from '../components/Header'
-
-import appCss from '../styles.css?url'
-import Providers from '@/components/core/layout/provider'
+import appCss from '@/styles/styles.css?url'
+import Providers from '@/components/core/layout/provider/Provider'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -39,21 +34,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-      <Providers>
-
-        {children}
-      </Providers>
-        {/* <TanStackDevtools
-          config={{
-            position: 'bottom-right',
-          }}
-          plugins={[
-            {
-              name: 'Tanstack Router',
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-          ]}
-        /> */}
+        <Providers>{children}</Providers>
         <Scripts />
       </body>
     </html>

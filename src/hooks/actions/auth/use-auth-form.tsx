@@ -1,27 +1,18 @@
-import { authClient } from "@/lib/auth/auth-client"
-import { useForm } from "../../use-form"
-import { loginSchema, registerCreateSchema } from "@/lib/validations/auth/authValidate"
-import type { LoginSchema, RegisterSchema } from "@/lib/validations/auth/authValidate"
+import { authClient } from '@/lib/auth/auth-client'
+import { useAppForm } from '../../use-form'
+import {
+  changePassword,
+  ChangePassword,
+  loginSchema,
+  registerCreateSchema,
+  UpdateSchema,
+  updateSchema,
+} from '@/lib/validations/auth-validations'
+import { LoginSchema, RegisterSchema } from '@/lib/validations/auth-validations'
 
-/**
- * ✅ Export type untuk form instance
- */
 export type LoginFormReturn = ReturnType<typeof useLoginForm>
 export type RegisterFormReturn = ReturnType<typeof useRegisterForm>
 
-/**
- * Login Form Hook
- * 
- * Usage:
- * ```tsx
- * const { form, isPending, error } = useLoginForm({
- *   onSuccess: async (data) => {
- *     // data is typed as LoginSchema
- *     await api.login(data)
- *   }
- * })
- * ```
- */
 export function useLoginForm({
   onSuccess,
   onError,
@@ -29,57 +20,41 @@ export function useLoginForm({
   onSuccess?: (data: LoginSchema) => void | Promise<void>
   onError?: (error: Error) => void
 } = {}) {
-  return useForm({
-    schema: loginSchema,
-    defaultValues: {
-      email: "",
-      password: "",
+  return useAppForm({
+    validators: {
+      onSubmit: loginSchema,
     },
-    onSubmit: async (data: LoginSchema) => {
-        try {
-         await authClient.signIn.email(
-        {
-          email: data.email,
-          password: data.password,
-          callbackURL: '/dashboard',
-        },
-        {
-          onSuccess:  () => {
-           onSuccess?.(data)
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+    onSubmit: async ({ value: data }) => {
+      try {
+        await authClient.signIn.email(
+          {
+            email: data.email,
+            password: data.password,
+            callbackURL: '/dashboard',
           },
-          onError: (ctx) => {
-        onError?.(ctx.error)
+          {
+            onSuccess: () => {
+              onSuccess?.(data)
+            },
+            onError: (ctx) => {
+              throw ctx.error
+            },
           },
-        },
-      )
-        
-        
-      }  catch (error) {
-        const message = error instanceof Error ? error.message : "Login gagal"
+        )
+      } catch (error) {
+        const message = error instanceof Error ? error.message : 'Login gagal'
         console.log(message)
+        onError?.(error as Error)
         throw error
       }
-    },
-    onError: (error: Error) => {
-      console.error("Login error:", error)
-      onError?.(error)
     },
   })
 }
 
-/**
- * Register Form Hook
- * 
- * Usage:
- * ```tsx
- * const { form, isPending, error } = useRegisterForm({
- *   onSuccess: async (data) => {
- *     // data is typed as UserSchema
- *     await api.register(data)
- *   }
- * })
- * ```
- */
 export function useRegisterForm({
   onSuccess,
   onError,
@@ -87,69 +62,138 @@ export function useRegisterForm({
   onSuccess?: (data: RegisterSchema) => void | Promise<void>
   onError?: (error: Error) => void
 } = {}) {
-  return useForm({
-    schema: registerCreateSchema,
-    defaultValues: {
-      name: "",
-      email: "",
-      password: "",
+  return useAppForm({
+    validators: {
+      onSubmit: registerCreateSchema,
     },
-    onSubmit: async (data) => {
+    defaultValues: {
+      name: '',
+      email: '',
+      password: '',
+    },
+    onSubmit: async ({ value: data }) => {
       try {
-
-             authClient.signUp.email(
-        {
-          email: data.email,
-          password: data.password,
-          name: data.name,
-          callbackURL: '/dashboard',
-        },
-        {
-          onSuccess: () => {
-          onSuccess?.(data)
+        await authClient.signUp.email(
+          {
+            email: data.email,
+            password: data.password,
+            name: data.name,
+            callbackURL: '/dashboard',
           },
-          onError: (ctx) => {
-              onError?.(ctx.error)
+          {
+            onSuccess: () => {
+              onSuccess?.(data)
+            },
+            onError: (ctx) => {
+              throw ctx.error
+            },
           },
-        },
-      )
+        )
       } catch (error) {
-            const message = error instanceof Error ? error.message : "Login gagal"
+        const message = error instanceof Error ? error.message : 'Login gagal'
         console.log(message)
+        onError?.(error as Error)
         throw error
       }
-    },
-    onError: (error: Error) => {
-      console.error("Register error:", error)
-      onError?.(error)
     },
   })
 }
 
-export async function Logout({
+export function useChangePassword({
   onSuccess,
   onError,
 }: {
-  onSuccess?: () => void | Promise<void>
+  onSuccess?: (data: ChangePassword) => void | Promise<void>
   onError?: (error: Error) => void
 } = {}) {
-await authClient.signOut({
-      fetchOptions: {
-        onSuccess: () => {
-           onSuccess?.()
-        },
-        onError: (error ) => {
-        console.error("Logout Error:", error)
-      onError?.(error.error)
-        }
-      },
-    })
+  return useAppForm({
+    validators: {
+      onSubmit: changePassword,
+    },
+    defaultValues: {
+      current_password: '',
+      password: '',
+    },
+    onSubmit: async ({ value: data }) => {
+      try {
+        await authClient.changePassword(
+          {
+            newPassword: data.password, // required
+            currentPassword: data.current_password, // required
+            revokeOtherSessions: true,
+          },
+          {
+            onSuccess: () => {
+              onSuccess?.(data)
+            },
+            onError: (ctx) => {
+              throw ctx.error
+            },
+          },
+        )
+      } catch (error) {
+        const message = error instanceof Error ? error.message : 'Login gagal'
+        console.log(message)
+        onError?.(error as Error)
+        throw error
+      }
+    },
+  })
 }
 
+export function useUpdateForm({
+  onSuccess,
+  onError,
+}: {
+  onSuccess?: (data: UpdateSchema) => void | Promise<void>
+  onError?: (error: Error) => void
+} = {}) {
+  const { data: session } = authClient.useSession()
+  return useAppForm({
+    validators: {
+      onSubmit: updateSchema,
+    },
+    defaultValues: {
+      name: session?.user?.name || '',
+      email: session?.user?.email || '',
+    },
+    onSubmit: async ({ value: data }) => {
+      try {
+        if (
+          data.name === session?.user?.name &&
+          data.email === session?.user?.email
+        ) {
+          throw new Error('No changes detected.')
+        }
 
-export const signInGoogle = async () => {
-  const data = await authClient.signIn.social({
-    provider: "google",
-    callbackURL: '/dashboard',
-  });
-};
+        if (data.name !== session?.user?.name) {
+          await authClient.updateUser(
+            {
+              name: data.name,
+            },
+            {
+              onSuccess: () => {
+                onSuccess?.(data)
+              },
+              onError: (ctx) => {
+                throw ctx.error
+              },
+            },
+          )
+        }
+
+        if (data.email !== session?.user?.email) {
+          await authClient.changeEmail({
+            newEmail: data.email,
+            callbackURL: '/dashboard/settings', // to redirect after verification
+          })
+        }
+      } catch (error) {
+        const message = error instanceof Error ? error.message : 'Login gagal'
+        console.log(message)
+        onError?.(error as Error)
+        throw error
+      }
+    },
+  })
+}

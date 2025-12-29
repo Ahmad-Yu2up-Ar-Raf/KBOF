@@ -1,6 +1,6 @@
 import { Input } from '@/components/ui/fragments/shadcn-ui/input'
 import { FormBase, FormControlProps } from './FormBase'
-import { useFieldContext } from '@/hooks/use-form'
+import { useFieldContext } from '@/hooks/form/use-form'
 import { useStore } from '@tanstack/react-store'
 
 export function FormInput(props: FormControlProps) {

@@ -113,15 +113,13 @@ export const mess = pgTable(
   'mess',
   {
     // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    id: bigint({ mode: 'number' })
-      .primaryKey()
-      .generatedByDefaultAsIdentity({
-        name: 'mess_id_seq',
-        startWith: 1,
-        increment: 1,
-        minValue: 1,
-        cache: 1,
-      }),
+    id: bigint({ mode: 'number' }).primaryKey().generatedByDefaultAsIdentity({
+      name: 'mess_id_seq',
+      startWith: 1,
+      increment: 1,
+      minValue: 1,
+      cache: 1,
+    }),
     userId: text('user_id')
       .notNull()
       .references(() => user.id, { onDelete: 'cascade' }),
@@ -157,15 +155,13 @@ export const employes = pgTable(
   'employes',
   {
     // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    id: bigint({ mode: 'number' })
-      .primaryKey()
-      .generatedByDefaultAsIdentity({
-        name: 'employes_id_seq',
-        startWith: 1,
-        increment: 1,
-        minValue: 1,
-        cache: 1,
-      }),
+    id: bigint({ mode: 'number' }).primaryKey().generatedByDefaultAsIdentity({
+      name: 'employes_id_seq',
+      startWith: 1,
+      increment: 1,
+      minValue: 1,
+      cache: 1,
+    }),
     userId: text('user_id')
       .notNull()
       .references(() => user.id, { onDelete: 'cascade' }),
@@ -208,15 +204,13 @@ export const rooms = pgTable(
   'rooms',
   {
     // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    id: bigint({ mode: 'number' })
-      .primaryKey()
-      .generatedByDefaultAsIdentity({
-        name: 'rooms_id_seq',
-        startWith: 1,
-        increment: 1,
-        minValue: 1,
-        cache: 1,
-      }),
+    id: bigint({ mode: 'number' }).primaryKey().generatedByDefaultAsIdentity({
+      name: 'rooms_id_seq',
+      startWith: 1,
+      increment: 1,
+      minValue: 1,
+      cache: 1,
+    }),
     userId: text('user_id')
       .notNull()
       .references(() => user.id, { onDelete: 'cascade' }),

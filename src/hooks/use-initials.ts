@@ -12,4 +12,5 @@ export function useInitials() {
 
     return `${firstInitial}${lastInitial}`.toUpperCase()
   }, [])
-}
+} 
+ 

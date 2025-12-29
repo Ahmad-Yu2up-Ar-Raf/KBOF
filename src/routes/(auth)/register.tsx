@@ -1,4 +1,4 @@
-import Register from '@/components/core/feature/auth/Register'
+import Register from '@/components/ui/core/feature/auth/Register'
 import { guestMiddleware } from '@/lib/middleware'
 import { createFileRoute } from '@tanstack/react-router'
 

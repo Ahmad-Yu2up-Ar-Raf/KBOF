@@ -219,10 +219,11 @@
 
   /* Updated scrollbar styles */
   ::-webkit-scrollbar {
-    width: 1px;
-    height: 1px;
+    /* width: 1px;
+    height: 1px; */
+    display: none;
   }
-
+/* 
   ::-webkit-scrollbar-track {
     background: transparent;
     border-radius: 1px;
@@ -236,22 +237,22 @@
 
   ::-webkit-scrollbar-thumb:hover {
     background-color: #666666;
-  }
+  } */
 
   /* Firefox */
-  * {
+  /* * {
     scrollbar-width: thin;
     scrollbar-color: oklch(0.2741 0.0055 286.03) transparent;
-  }
+  } */
 
   /* For dark mode */
-  .dark *::-webkit-scrollbar-thumb {
+  /* .dark *::-webkit-scrollbar-thumb {
     background-color: oklch(0.2741 0.0055 286.03);
   }
 
   .dark * {
     scrollbar-color: oklch(0.2741 0.0055 286.03) transparent;
-  }
+  } */
 }
 
 @utility container {

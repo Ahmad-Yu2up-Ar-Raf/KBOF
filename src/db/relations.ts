@@ -2,7 +2,7 @@ import { relations } from 'drizzle-orm/relations'
 import { user, mess, rooms, employes, session, account } from './schema'
 
 export const messRelations = relations(mess, ({ one, many }) => ({
-  profile: one(user, {
+  user: one(user, {
     fields: [mess.userId],
     references: [user.id],
   }),

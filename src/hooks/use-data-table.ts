@@ -2,7 +2,7 @@
 
 import {
   type ColumnFiltersState,
-  getCoreRowModel,
+  getCoreRowModel, 
   getFacetedMinMaxValues,
   getFacetedRowModel,
   getFacetedUniqueValues,

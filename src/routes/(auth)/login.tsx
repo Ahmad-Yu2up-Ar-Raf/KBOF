@@ -1,4 +1,4 @@
-import Login from '@/components/core/feature/auth/Login'
+import Login from '@/components/ui/core/feature/auth/Login'
 import { guestMiddleware } from '@/lib/middleware'
 import { createFileRoute } from '@tanstack/react-router'
 

@@ -1,4 +1,4 @@
-import SettingsLayout from '@/components/core/layout/app/dashboard/AppSettingLayout'
+import SettingsLayout from '@/components/ui/core/layout/dashboard/app-setting-layout'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/dashboard/settings')({

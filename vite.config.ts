@@ -10,14 +10,15 @@ import neon from './neon-vite-plugin'
 const config = defineConfig({
   plugins: [
     devtools(),
+    // ⚠️ TanStack Start plugin MUST come BEFORE viteReact
+    // to properly transform createServerFn into RPC stubs
+    tanstackStart(),
     nitro(),
     neon,
-    // this is the plugin that enables path aliases
     viteTsConfigPaths({
       projects: ['./tsconfig.json'],
     }),
     tailwindcss(),
-    tanstackStart(),
     viteReact(),
   ],
 })

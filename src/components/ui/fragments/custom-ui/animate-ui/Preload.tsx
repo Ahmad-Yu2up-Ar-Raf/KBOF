@@ -72,7 +72,7 @@ export default function Preload({ onComplete }: PreloadProps) {
       isPreload
       className="flex fixed inset-0 bg-background z-9999 justify-center items-center pointer-events-none"
     >
-      <div className="md:scale-100 scale-150">{View}</div>
+      <div className=" scale-200 md:scale-125">{View}</div>
     </BlurFade>
   )
 }

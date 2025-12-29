@@ -1,5 +1,5 @@
-import DeleteUser from '@/components/core/feature/app/settings/DeleteUser'
-import { UpdateForm } from '@/components/core/feature/form/UpdateProfileForm'
+import DeleteUser from '@/components/ui/core/feature/auth/delete-user-block'
+import { UpdateForm } from '@/components/ui/core/feature/form/update-profile-form'
 
 import HeadingSmall from '@/components/ui/fragments/custom-ui/typography/heading-small'
 

@@ -18,6 +18,7 @@ import { Route as DashboardSettingsRouteRouteImport } from './routes/dashboard/s
 import { Route as DashboardSettingsIndexRouteImport } from './routes/dashboard/settings/index'
 import { Route as DashboardMessIndexRouteImport } from './routes/dashboard/mess/index'
 import { Route as DashboardSettingsPasswordRouteImport } from './routes/dashboard/settings/password'
+import { Route as DashboardMessMessIdRouteImport } from './routes/dashboard/mess/$messId'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
 const DashboardRouteRoute = DashboardRouteRouteImport.update({
@@ -66,6 +67,11 @@ const DashboardSettingsPasswordRoute =
     path: '/password',
     getParentRoute: () => DashboardSettingsRouteRoute,
   } as any)
+const DashboardMessMessIdRoute = DashboardMessMessIdRouteImport.update({
+  id: '/mess/$messId',
+  path: '/mess/$messId',
+  getParentRoute: () => DashboardRouteRoute,
+} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -80,6 +86,7 @@ export interface FileRoutesByFullPath {
   '/register': typeof authRegisterRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/dashboard/mess/$messId': typeof DashboardMessMessIdRoute
   '/dashboard/settings/password': typeof DashboardSettingsPasswordRoute
   '/dashboard/mess': typeof DashboardMessIndexRoute
   '/dashboard/settings/': typeof DashboardSettingsIndexRoute
@@ -90,6 +97,7 @@ export interface FileRoutesByTo {
   '/register': typeof authRegisterRoute
   '/dashboard': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/dashboard/mess/$messId': typeof DashboardMessMessIdRoute
   '/dashboard/settings/password': typeof DashboardSettingsPasswordRoute
   '/dashboard/mess': typeof DashboardMessIndexRoute
   '/dashboard/settings': typeof DashboardSettingsIndexRoute
@@ -103,6 +111,7 @@ export interface FileRoutesById {
   '/(auth)/register': typeof authRegisterRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/dashboard/mess/$messId': typeof DashboardMessMessIdRoute
   '/dashboard/settings/password': typeof DashboardSettingsPasswordRoute
   '/dashboard/mess/': typeof DashboardMessIndexRoute
   '/dashboard/settings/': typeof DashboardSettingsIndexRoute
@@ -117,6 +126,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/dashboard/'
     | '/api/auth/$'
+    | '/dashboard/mess/$messId'
     | '/dashboard/settings/password'
     | '/dashboard/mess'
     | '/dashboard/settings/'
@@ -127,6 +137,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/dashboard'
     | '/api/auth/$'
+    | '/dashboard/mess/$messId'
     | '/dashboard/settings/password'
     | '/dashboard/mess'
     | '/dashboard/settings'
@@ -139,6 +150,7 @@ export interface FileRouteTypes {
     | '/(auth)/register'
     | '/dashboard/'
     | '/api/auth/$'
+    | '/dashboard/mess/$messId'
     | '/dashboard/settings/password'
     | '/dashboard/mess/'
     | '/dashboard/settings/'
@@ -217,6 +229,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardSettingsPasswordRouteImport
       parentRoute: typeof DashboardSettingsRouteRoute
     }
+    '/dashboard/mess/$messId': {
+      id: '/dashboard/mess/$messId'
+      path: '/mess/$messId'
+      fullPath: '/dashboard/mess/$messId'
+      preLoaderRoute: typeof DashboardMessMessIdRouteImport
+      parentRoute: typeof DashboardRouteRoute
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -246,12 +265,14 @@ const DashboardSettingsRouteRouteWithChildren =
 interface DashboardRouteRouteChildren {
   DashboardSettingsRouteRoute: typeof DashboardSettingsRouteRouteWithChildren
   DashboardIndexRoute: typeof DashboardIndexRoute
+  DashboardMessMessIdRoute: typeof DashboardMessMessIdRoute
   DashboardMessIndexRoute: typeof DashboardMessIndexRoute
 }
 
 const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
   DashboardSettingsRouteRoute: DashboardSettingsRouteRouteWithChildren,
   DashboardIndexRoute: DashboardIndexRoute,
+  DashboardMessMessIdRoute: DashboardMessMessIdRoute,
   DashboardMessIndexRoute: DashboardMessIndexRoute,
 }
 

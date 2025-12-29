@@ -130,7 +130,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       setShowPassword(!showPassword)
     }
     return (
-      <div className="relative w-full">
+      <div className={cn("relative w-full", className)}>
         {leftIcon && (
           <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground [&_svg]:size-4 [&_svg]:shrink-0 z-10">
             {leftIcon}

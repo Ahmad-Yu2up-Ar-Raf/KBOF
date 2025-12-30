@@ -2,6 +2,10 @@ import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import appCss from '@/styles/styles.css?url'
 import Providers from '@/components/ui/core/provider/Provider'
 
+// ============================================
+// ROOT ROUTE
+// ============================================
+
 export const Route = createRootRoute({
   head: () => ({
     meta: [
@@ -32,10 +36,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
     <html lang="en" suppressHydrationWarning>
       <head suppressHydrationWarning>
         <HeadContent />
-        {/* <script
-          src="https://cdn.userway.org/widget.js"
-          data-account="t85cN7BOL2"
-        />  */}
       </head>
       <body>
         <Providers>{children}</Providers>

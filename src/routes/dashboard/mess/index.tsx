@@ -1,6 +1,6 @@
 // src/routes/dashboard/mess/index.tsx
-import { createFileRoute } from '@tanstack/react-router'
-
+import { createFileRoute, useSearch } from '@tanstack/react-router'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { Building2 } from 'lucide-react'
 
 import Heading from '@/components/ui/fragments/custom-ui/typography/heading'
@@ -10,8 +10,36 @@ import { TasksTable } from '@/components/ui/core/feature/data-table/mess/mess-ta
 import CreateMessSheet from '@/components/ui/core/feature/data-table/mess/create-mess-sheet'
 import { messSearchSchema } from '@/lib/validations/mess-validations'
 import { getValidFilters } from '@/lib/data-table'
-// ⚠️ Server function imported HERE in route file (executes on server via loader)
-import { getMessAggregateServerFn } from '@/lib/server/mess/mess-server-queries'
+import {
+  getMessQueryOptions,
+  type MessAggregateInput,
+} from '@/lib/query-options'
+import { queryClient } from '@/components/ui/core/provider/Provider'
+import { Suspense } from 'react'
+
+// ============================================
+// HELPER: Build filters from search params
+// ============================================
+
+function buildFilters(
+  search: ReturnType<typeof messSearchSchema.parse>,
+): MessAggregateInput {
+  const validFilters = getValidFilters(search.filters ?? [])
+
+  return {
+    filterFlag: search.filterFlag ?? null,
+    page: search.page ?? 1,
+    perPage: search.perPage ?? 10,
+    sort: search.sort ?? [{ id: 'createdAt', desc: true }],
+    name: search.name ?? '',
+    status: search.status ?? [],
+    type: search.type ?? [],
+    statusCapacity: search.statusCapacity ?? [],
+    createdAt: search.createdAt ?? [],
+    filters: validFilters,
+    joinOperator: search.joinOperator ?? 'and',
+  }
+}
 
 // ============================================
 // ROUTE DEFINITION
@@ -22,23 +50,16 @@ export const Route = createFileRoute('/dashboard/mess/')({
   validateSearch: (search) => messSearchSchema.parse(search),
 
   // ⭐ LOADER: Runs on the SERVER before component renders
-  // This is the proper TanStack Start pattern - data fetching happens here
+  // Use queryClient.ensureQueryData to populate cache for SSR hydration
   loader: async ({ location }) => {
-    // Parse search params from location
     const search = messSearchSchema.parse(location.search)
+    const filters = buildFilters(search)
 
-    // Build normalized filter input
-    const validFilters = getValidFilters(search.filters ?? [])
+    // ⭐ ensureQueryData populates the cache so useSuspenseQuery
+    // can use it on the client without refetching
+    await queryClient.ensureQueryData(getMessQueryOptions(filters))
 
-    const filters = {
-      ...search,
-      filters: validFilters,
-    }
-
-    // ⭐ Call server function - this runs on the server!
-    const data = await getMessAggregateServerFn({ data: { filters } })
-
-    return { messData: data, filters }
+    return { filters }
   },
 
   // ⭐ PENDING COMPONENT: Shows while loader is running
@@ -62,17 +83,16 @@ function MessPageSkeleton() {
       />
 
       <DataTableSkeleton
-        columnCount={8}
+        columnCount={7}
         filterCount={2}
         cellWidths={[
-          '3rem', // select
-          '8rem', // name
-          '6rem', // status
-          '6rem', // type
-          '6rem', // capacity
-          '5rem', // rooms
-          '5rem', // employees
-          '8rem', // created
+          '10rem',
+          '30rem',
+          '10rem',
+          '10rem',
+          '6rem',
+          '6rem',
+          '6rem',
         ]}
         shrinkZero
       />
@@ -85,11 +105,16 @@ function MessPageSkeleton() {
 // ============================================
 
 function MessPage() {
-  // ⭐ Get data from loader - already fetched on server!
-  const { messData } = Route.useLoaderData()
+  // Get current search params
+  const search = useSearch({ from: '/dashboard/mess/' })
+  const filters = buildFilters(search)
+
+  // ⭐ useSuspenseQuery reads from cache (populated by loader)
+  // On navigation/filter changes, it fetches fresh data
+  const { data: messData } = useSuspenseQuery(getMessQueryOptions(filters))
 
   return (
-    <div className="  ">
+    <div>
       <Heading
         className="mb-4"
         Icon={Building2}
@@ -97,9 +122,28 @@ function MessPage() {
         description="Here is your mess list. Manage your mess here."
       />
       <main>
-        <FeatureFlagsProvider createSheet={<CreateMessSheet />}>
-          <TasksTable data={messData} />
-        </FeatureFlagsProvider>
+        <Suspense
+          fallback={
+            <DataTableSkeleton
+              columnCount={7}
+              filterCount={2}
+              cellWidths={[
+                '10rem',
+                '30rem',
+                '10rem',
+                '10rem',
+                '6rem',
+                '6rem',
+                '6rem',
+              ]}
+              shrinkZero
+            />
+          }
+        >
+          <FeatureFlagsProvider createSheet={<CreateMessSheet />}>
+            <TasksTable data={messData} />
+          </FeatureFlagsProvider>
+        </Suspense>
       </main>
     </div>
   )

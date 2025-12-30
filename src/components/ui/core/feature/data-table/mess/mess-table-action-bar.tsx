@@ -47,7 +47,11 @@ export function TasksTableActionBar({
   getIsActionPending,
 }: TasksTableActionBarProps) {
   const rows = table.getFilteredSelectedRowModel().rows
-
+  const isPending =
+    getIsActionPending('update-status') ||
+    getIsActionPending('delete') ||
+    getIsActionPending('update-type') ||
+    getIsActionPending('export')
   return (
     <DataTableActionBar table={table} visible={rows.length > 0}>
       <DataTableActionBarSelection table={table} />
@@ -65,7 +69,7 @@ export function TasksTableActionBar({
             <DataTableActionBarAction
               size="icon"
               tooltip="Update status"
-              isPending={getIsActionPending('update-status')}
+              isPending={isPending}
             >
               <CheckCircle2 />
             </DataTableActionBarAction>
@@ -89,7 +93,7 @@ export function TasksTableActionBar({
             <DataTableActionBarAction
               size="icon"
               tooltip="Update Type"
-              isPending={getIsActionPending('update-type')}
+              isPending={isPending}
             >
               <VenusAndMars />
             </DataTableActionBarAction>
@@ -113,13 +117,14 @@ export function TasksTableActionBar({
           size="icon"
           tooltip="Export tasks"
           onClick={onTaskExport}
+          isPending={isPending}
         >
           <Download />
         </DataTableActionBarAction>
         <DataTableActionBarAction
           size="icon"
           tooltip="Delete tasks"
-          isPending={getIsActionPending('delete')}
+          isPending={isPending}
           onClick={onTaskDelete}
         >
           <Trash2 />

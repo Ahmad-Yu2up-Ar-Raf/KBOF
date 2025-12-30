@@ -5,8 +5,6 @@ import type { Row } from '@tanstack/react-table'
 import { Loader } from 'lucide-react'
 import * as React from 'react'
 import { toast } from 'sonner'
-import { useQueryClient } from '@tanstack/react-query'
-import { useRouter } from '@tanstack/react-router'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
 import {
   Dialog,
@@ -27,11 +25,8 @@ import {
   DrawerTitle,
 } from '@/components/ui/fragments/shadcn-ui/drawer'
 
-import { deleteMess } from '@/lib/server/mess/mess-server-actions'
 import { useIsMobile } from '@/hooks/use-mobile'
-import { useServerFn } from '@tanstack/react-start'
-import { MESS_QUERY_KEYS } from '@/lib/utils/mess-utils'
-import { useSession } from '@/lib/auth/auth-client'
+import { useDeleteMessMutation } from '@/hooks/use-mess-mutations'
 
 interface DeleteMessDialogProps extends React.ComponentPropsWithoutRef<
   typeof Dialog
@@ -47,58 +42,25 @@ export function DeleteMessDialog({
   onSuccess,
   ...props
 }: DeleteMessDialogProps) {
-  const [isDeletePending, startDeleteTransition] = React.useTransition()
-
   const isDesktop = !useIsMobile()
 
-  // ✅ Hooks at top level - not inside callbacks
-  const queryClient = useQueryClient()
-  const router = useRouter()
-  const deleteMessFn = useServerFn(deleteMess)
-  const { data: session } = useSession()
+  // ⭐ Use mutation hook for proper cache invalidation
+  const deleteMutation = useDeleteMessMutation({
+    onSuccess: () => {
+      toast.success('Mess deleted successfully')
+      props.onOpenChange?.(false)
+      onSuccess?.()
+    },
+    onError: (error) => {
+      toast.error(error.message || 'Failed to delete mess')
+    },
+  })
 
   const onDelete = React.useCallback(() => {
-    startDeleteTransition(async () => {
-      try {
-        const { error } = await deleteMessFn({
-          data: { ids: mess.map((task) => task.id) },
-        })
+    deleteMutation.mutate(mess.map((task) => task.id))
+  }, [mess, deleteMutation])
 
-        if (error) {
-          toast.error(error, { id: 'mess-deleted-dialog' })
-          return
-        }
-
-        // Invalidate with userId for proper cache isolation
-        if (session?.user?.id) {
-          await queryClient.invalidateQueries({
-            queryKey: MESS_QUERY_KEYS.all(session.user.id),
-          })
-        }
-
-        // ⭐ IMPORTANT: Invalidate + navigate to force fresh loader data (including counts)
-        await router.invalidate()
-
-        toast.success('mess deleted successfully', {
-          id: 'mess-deleted-dialog',
-        })
-
-        props.onOpenChange?.(false)
-        onSuccess?.()
-      } catch (error) {
-        toast.error('Failed to delete mess', { id: 'mess-deleted-dialog' })
-        console.error('Delete mess error:', error)
-      }
-    })
-  }, [
-    mess,
-    deleteMessFn,
-    queryClient,
-    router,
-    session?.user?.id,
-    props,
-    onSuccess,
-  ])
+  const isDeletePending = deleteMutation.isPending
 
   if (isDesktop) {
     return (

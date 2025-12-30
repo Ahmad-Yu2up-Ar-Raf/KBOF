@@ -47,6 +47,7 @@ import { cn } from '@/lib/utils'
 
 import { typeMessColum } from '@/types'
 import { useServerFn } from '@tanstack/react-start'
+import { usePartialUpdateMessMutation } from '@/hooks/use-mess-mutations'
 
 interface GetTasksTableColumnsProps {
   statusCounts: Record<Mess['status'], number>
@@ -364,8 +365,16 @@ export function getTasksTableColumns({
       id: 'actions',
       cell: function Cell({ row }) {
         const [isUpdatePending, startUpdateTransition] = React.useTransition()
-        const updateMessFn = useServerFn(updateMessPartial)
-        const router = useRouter()
+        const updateMutation = usePartialUpdateMessMutation({
+          onSuccess: () => {
+            toast.success('Status updated', { id: 'update-mess-success' })
+          },
+          onError: (error) => {
+            toast.error(error.message || 'Failed to update mess', {
+              id: 'update-mess-success',
+            })
+          },
+        })
 
         return (
           <DropdownMenu modal={false}>
@@ -391,22 +400,14 @@ export function getTasksTableColumns({
                   <DropdownMenuRadioGroup
                     value={`${row.original.status}`}
                     onValueChange={(value) => {
+                      toast.loading('Updating...', {
+                        id: 'update-mess-success',
+                      })
                       startUpdateTransition(async () => {
-                        const result = await updateMessFn({
-                          data: {
-                            id: row.original.id,
-                            status: value as Mess['status'],
-                          },
+                        await updateMutation.mutateAsync({
+                          id: row.original.id,
+                          status: value as Mess['status'],
                         })
-
-                        if (result.error) {
-                          toast.error(result.error)
-                          return
-                        }
-
-                        toast.success('Status updated')
-                        // ⭐ Invalidate + navigate to force fresh loader data (including counts)
-                        await router.invalidate()
                       })
                     }}
                   >

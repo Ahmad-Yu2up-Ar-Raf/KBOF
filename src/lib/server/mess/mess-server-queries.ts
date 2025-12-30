@@ -31,7 +31,7 @@ const mess = schema.mess
 // ============================================
 
 /** Input schema - compatible dengan nuqs parser output */
-const messAggregateInputSchema = z.object({
+export const messAggregateInputSchema = z.object({
   filterFlag: z
     .enum(['advancedFilters', 'commandFilters'])
     .nullable()

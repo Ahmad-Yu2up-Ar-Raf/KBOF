@@ -1,16 +1,13 @@
 import { useAppForm } from './use-form'
 import {
   type CreateMessSchema,
-  type UpdateMessSchema,
   createMesschema,
 } from '@/lib/validations/mess-validations'
-import { useServerFn } from '@tanstack/react-start'
-import { useQueryClient } from '@tanstack/react-query'
-import { useRouter } from '@tanstack/react-router'
-import { MESS_QUERY_KEYS } from '@/lib/utils/mess-utils'
-import { addMess, updateMess } from '@/lib/server/mess/mess-server-actions'
-import { Mess } from '@/db/schema'
-import { useSession } from '@/lib/auth/auth-client'
+import {
+  useCreateMessMutation,
+  useUpdateMessMutation,
+} from '@/hooks/use-mess-mutations'
+import type { Mess } from '@/db/schema'
 
 // =============================================================================
 // FORM HOOK
@@ -29,11 +26,10 @@ export function useCreateMessForm({
   onSuccess?: (data: CreateMessSchema) => void | Promise<void>
   onError?: (error: Error) => void
 } = {}) {
-  // Hook dipanggil di TOP LEVEL - bukan di dalam callback
-  const addMessFn = useServerFn(addMess)
-  const queryClient = useQueryClient()
-  const router = useRouter()
-  const { data: session } = useSession()
+  // ⭐ Use mutation hook for proper cache invalidation
+  const createMutation = useCreateMessMutation({
+    onError,
+  })
 
   return useAppForm({
     validators: {
@@ -49,28 +45,9 @@ export function useCreateMessForm({
       type: undefined,
     } as CreateMessSchema,
     onSubmit: async ({ value: data }) => {
-      try {
-        // Panggil server function dengan data
-        await addMessFn({ data })
-
-        // Invalidate query dengan userId untuk proper cache isolation
-        if (session?.user?.id) {
-          await queryClient.invalidateQueries({
-            queryKey: MESS_QUERY_KEYS.all(session.user.id),
-          })
-        }
-
-        // ⭐ IMPORTANT: Invalidate + navigate to force fresh loader data (including counts)
-        await router.invalidate()
-
-        await onSuccess?.(data)
-      } catch (error) {
-        const message =
-          error instanceof Error ? error.message : 'Gagal menambahkan mess'
-        console.error(message)
-        onError?.(error as Error)
-        throw error
-      }
+      // ⭐ Use mutateAsync for proper error handling
+      await createMutation.mutateAsync(data)
+      await onSuccess?.(data)
     },
   })
 }
@@ -84,11 +61,10 @@ export function useUpdateMessForm({
   onSuccess?: (data: CreateMessSchema) => void | Promise<void>
   onError?: (error: Error) => void
 }) {
-  // Hook dipanggil di TOP LEVEL - bukan di dalam callback
-  const updateMessFn = useServerFn(updateMess)
-  const queryClient = useQueryClient()
-  const router = useRouter()
-  const { data: session } = useSession()
+  // ⭐ Use mutation hook for proper cache invalidation
+  const updateMutation = useUpdateMessMutation({
+    onError,
+  })
 
   return useAppForm({
     validators: {
@@ -104,28 +80,9 @@ export function useUpdateMessForm({
       location: messData.location ?? undefined,
     } as CreateMessSchema,
     onSubmit: async ({ value: data }) => {
-      try {
-        // Panggil server function dengan data + id dari mess
-        await updateMessFn({ data: { ...data, id: messData.id } })
-
-        // Invalidate query dengan userId untuk proper cache isolation
-        if (session?.user?.id) {
-          await queryClient.invalidateQueries({
-            queryKey: MESS_QUERY_KEYS.all(session.user.id),
-          })
-        }
-
-        // ⭐ IMPORTANT: Invalidate router to refetch loader data
-        await router.invalidate()
-
-        await onSuccess?.(data)
-      } catch (error) {
-        const message =
-          error instanceof Error ? error.message : 'Gagal memperbarui mess'
-        console.error(message)
-        onError?.(error as Error)
-        throw error
-      }
+      // ⭐ Use mutateAsync with id for proper error handling
+      await updateMutation.mutateAsync({ ...data, id: messData.id })
+      await onSuccess?.(data)
     },
   })
 }

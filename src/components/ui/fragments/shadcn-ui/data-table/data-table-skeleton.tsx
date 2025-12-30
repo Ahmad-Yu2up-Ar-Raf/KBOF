@@ -10,7 +10,7 @@ import {
 import { cn } from '@/lib/utils'
 
 interface DataTableSkeletonProps extends React.ComponentProps<'div'> {
-  columnCount: number
+  columnCount?: number
   rowCount?: number
   filterCount?: number
   cellWidths?: string[]
@@ -20,13 +20,23 @@ interface DataTableSkeletonProps extends React.ComponentProps<'div'> {
 }
 
 export function DataTableSkeleton({
-  columnCount,
+  columnCount = 8,
+
   rowCount = 10,
-  filterCount = 0,
-  cellWidths = ['auto'],
+  filterCount = 2,
+  cellWidths = [
+    '3rem', // select
+    '8rem', // name
+    '6rem', // status
+    '6rem', // type
+    '6rem', // capacity
+    '5rem', // rooms
+    '5rem', // employees
+    '8rem', // created
+  ],
   withViewOptions = true,
   withPagination = true,
-  shrinkZero = false,
+  shrinkZero = true,
   className,
   ...props
 }: DataTableSkeletonProps) {

@@ -79,12 +79,12 @@ export function DeleteMessDialog({
             <DialogClose asChild>
               <Button variant="outline" disabled={isDeletePending}>
                 {' '}
-                {isDeletePending && (
+                <React.Activity mode={isDeletePending ? 'visible' : 'hidden'}>
                   <Loader
                     className="mr-2 size-4 animate-spin"
                     aria-hidden="true"
                   />
-                )}{' '}
+                </React.Activity>
                 Cancel
               </Button>
             </DialogClose>
@@ -94,13 +94,12 @@ export function DeleteMessDialog({
               onClick={onDelete}
               disabled={isDeletePending}
             >
-              {isDeletePending && (
+              <React.Activity mode={isDeletePending ? 'visible' : 'hidden'}>
                 <Loader
                   className="mr-2 size-4 animate-spin"
                   aria-hidden="true"
                 />
-              )}
-              Delete
+              </React.Activity>
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -122,12 +121,12 @@ export function DeleteMessDialog({
         <DrawerFooter className="gap-2 sm:space-x-0">
           <DrawerClose asChild disabled={isDeletePending}>
             <Button variant="outline">
-              {isDeletePending && (
+              <React.Activity mode={isDeletePending ? 'visible' : 'hidden'}>
                 <Loader
                   className="mr-2 size-4 animate-spin"
                   aria-hidden="true"
                 />
-              )}
+              </React.Activity>
               Cancel
             </Button>
           </DrawerClose>
@@ -137,9 +136,9 @@ export function DeleteMessDialog({
             onClick={onDelete}
             disabled={isDeletePending}
           >
-            {isDeletePending && (
+            <React.Activity mode={isDeletePending ? 'visible' : 'hidden'}>
               <Loader className="mr-2 size-4 animate-spin" aria-hidden="true" />
-            )}
+            </React.Activity>
             Delete
           </Button>
         </DrawerFooter>

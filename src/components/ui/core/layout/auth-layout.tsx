@@ -112,41 +112,37 @@ const AuthLayoutTemplate = ({
                 </h2>
                 <p className=" line-clamp-1   opacity-80">{description}</p>
               </div>
-
-              {signInGoogleButton && (
-                <>
-                  <Button
-                    onClick={signInGoogle}
-                    variant="ghost"
-                    type="button"
-                    className="border border-input/80 cursor-pointer"
-                    disabled={loadingState}
-                  >
-                    {loadingState ? (
-                      <Spinner className="mr-2 h-4 w-4 animate-spin" />
-                    ) : (
-                      <Icons.google className="mr-2 h-4 w-4" />
-                    )}{' '}
-                    Google
-                  </Button>
-                  <div className="relative my-4 ">
-                    <div className="absolute inset-0 flex items-center">
-                      <span className="w-full border-t" />
-                    </div>
-                    <div className="relative flex justify-center text-sm ">
-                      <span className="bg-background px-2 text-muted-foreground">
-                        Atau lanjutkan dengan
-                      </span>
-                    </div>
+              <React.Activity mode={signInGoogleButton ? 'visible' : 'hidden'}>
+                <Button
+                  onClick={signInGoogle}
+                  variant="ghost"
+                  type="button"
+                  className="border border-input/80 cursor-pointer"
+                  disabled={loadingState}
+                >
+                  {loadingState ? (
+                    <Spinner className="mr-2 h-4 w-4 animate-spin" />
+                  ) : (
+                    <Icons.google className="mr-2 h-4 w-4" />
+                  )}{' '}
+                  Google
+                </Button>
+                <div className="relative my-4 ">
+                  <div className="absolute inset-0 flex items-center">
+                    <span className="w-full border-t" />
                   </div>
-                </>
-              )}
+                  <div className="relative flex justify-center text-sm ">
+                    <span className="bg-background px-2 text-muted-foreground">
+                      Atau lanjutkan dengan
+                    </span>
+                  </div>
+                </div>
+              </React.Activity>
               {/* Form content area */}
               {props.children}
 
               <></>
-
-              {formType && (
+              <React.Activity mode={formType ? 'visible' : 'hidden'}>
                 <div className="text-center cursor-target  mt-4 text-muted-foreground text-sm">
                   {formType == 'register'
                     ? `Sudah punya akun? `
@@ -165,7 +161,7 @@ const AuthLayoutTemplate = ({
                     {formTypeLabel}
                   </Link>
                 </div>
-              )}
+              </React.Activity>
             </div>
           </main>
         </div>

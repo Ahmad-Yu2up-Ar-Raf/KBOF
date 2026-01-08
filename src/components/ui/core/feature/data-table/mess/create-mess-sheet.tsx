@@ -25,7 +25,7 @@ import { toast } from 'sonner'
 import { useCreateMessForm } from '@/hooks/form/use-mess-form'
 import MessForm from '../../form/mess-form'
 import { Spinner } from '@/components/ui/fragments/shadcn-ui/spinner'
-import { useState } from 'react'
+import { useState, Activity } from 'react'
 
 interface type {
   trigger?: boolean
@@ -57,14 +57,14 @@ function CreateMessSheet({ ...props }: type) {
   if (!isDesktop) {
     return (
       <Sheet open={open} onOpenChange={setOpen} modal={true}>
-        {props.trigger == null && (
+        <Activity mode={props.trigger ? 'hidden' : 'visible'}>
           <SheetTrigger asChild>
             <Button className="text-sm w-fit">
               <Plus className="mr-3" />
               Add New
             </Button>
           </SheetTrigger>
-        )}
+        </Activity>
         <SheetContent className="flex flex-col gap-6 overflow-y-scroll">
           <SheetHeader className="text-left sm:px-6 space-y-1 bg-background z-30 sticky top-0 p-4 border-b">
             <SheetTitle className="text-lg">
@@ -97,7 +97,9 @@ function CreateMessSheet({ ...props }: type) {
                       size={'sm'}
                       variant="outline"
                     >
-                      {isSubmitting && <Spinner className="" />}
+                      <Activity mode={isSubmitting ? 'visible' : 'hidden'}>
+                        <Spinner />
+                      </Activity>
                       Batalkan
                     </Button>
                   </SheetClose>
@@ -107,7 +109,9 @@ function CreateMessSheet({ ...props }: type) {
                     className="w-fit dark:bg-primary  text-primary-foreground !pointer-siswa-auto dark:primary-foreground bg-primary"
                     size={'sm'}
                   >
-                    {isSubmitting && <Spinner className="" />}
+                    <Activity mode={isSubmitting ? 'visible' : 'hidden'}>
+                      <Spinner />
+                    </Activity>
                     Tambahkan
                   </Button>
                 </SheetFooter>
@@ -121,14 +125,15 @@ function CreateMessSheet({ ...props }: type) {
 
   return (
     <Drawer open={open} onOpenChange={setOpen} modal={true}>
-      {props.trigger == null && (
+      <Activity mode={props.trigger ? 'hidden' : 'visible'}>
         <DrawerTrigger asChild>
           <Button size={'sm'} className="w-fit text-sm">
             <Plus className=" " />
             <span className=" sr-only">Add New</span>
           </Button>
         </DrawerTrigger>
-      )}
+      </Activity>
+
       <DrawerContent className="flex flex-col">
         <DrawerHeader className="text-left sm:px-6 space-y-1 bg-background p-4 border-b">
           <DrawerTitle className="text-xl">
@@ -162,7 +167,9 @@ function CreateMessSheet({ ...props }: type) {
                     size={'sm'}
                     variant="outline"
                   >
-                    {isSubmitting && <Spinner className="" />}
+                    <Activity mode={isSubmitting ? 'visible' : 'hidden'}>
+                      <Spinner />
+                    </Activity>
                     Batalkan
                   </Button>
                 </DrawerClose>
@@ -172,7 +179,9 @@ function CreateMessSheet({ ...props }: type) {
                   className="w-fit !pointer-siswa-auto dark:bg-primary  text-primary-foreground dark:primary-foreground bg-primary"
                   size={'sm'}
                 >
-                  {isSubmitting && <Spinner className="" />}
+                  <Activity mode={isSubmitting ? 'visible' : 'hidden'}>
+                    <Spinner />
+                  </Activity>
                   Tambahkan
                 </Button>
               </DrawerFooter>

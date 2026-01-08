@@ -27,7 +27,7 @@
   --card-foreground: oklch(0.376 0.0225 64.3434);
   --popover: oklch(0.9914 0.0098 87.4695);
   --popover-foreground: oklch(0.376 0.0225 64.3434);
-  --primary: oklch(0.618 0.0778 65.5444);
+  --primary: oklch(0.5628 0.0778 65.5444);
   --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.8846 0.0302 85.5655);
   --secondary-foreground: oklch(0.4313 0.03 64.9288);
@@ -53,8 +53,8 @@
   --sidebar-accent-foreground: oklch(0.376 0.0225 64.3434);
   --sidebar-border: oklch(0.8606 0.0321 84.5881);
   --sidebar-ring: oklch(0.618 0.0778 65.5444);
-  --font-sans: Libre Baskerville, serif;
-  --font-serif: Lora, serif;
+  --font-sans:  serif;
+  --font-serif:  serif;
   --font-mono: IBM Plex Mono, monospace;
   --radius: 0.25rem;
   --shadow-x: 2px;
@@ -62,25 +62,25 @@
   --shadow-blur: 5px;
   --shadow-spread: 0px;
   --shadow-opacity: 0.12;
-  --shadow-color: hsl(28 13% 20%);
-  --shadow-2xs: 2px 3px 5px 0px hsl(28 13% 20% / 0.06);
-  --shadow-xs: 2px 3px 5px 0px hsl(28 13% 20% / 0.06);
+  --shadow-color: oklch(0.3248 0.0147 63.48);
+  --shadow-2xs: 2px 3px 5px 0px oklch(0.3248 0.0147 63.48 / 6%);
+  --shadow-xs: 2px 3px 5px 0px oklch(0.3248 0.0147 63.48 / 6%);
   --shadow-sm:
-    2px 3px 5px 0px hsl(28 13% 20% / 0.12),
-    2px 1px 2px -1px hsl(28 13% 20% / 0.12);
+    2px 3px 5px 0px oklch(0.3248 0.0147 63.48 / 12%),
+    2px 1px 2px -1px oklch(0.3248 0.0147 63.48 / 12%);
   --shadow:
-    2px 3px 5px 0px hsl(28 13% 20% / 0.12),
-    2px 1px 2px -1px hsl(28 13% 20% / 0.12);
+    2px 3px 5px 0px oklch(0.3248 0.0147 63.48 / 12%),
+    2px 1px 2px -1px oklch(0.3248 0.0147 63.48 / 12%);
   --shadow-md:
-    2px 3px 5px 0px hsl(28 13% 20% / 0.12),
-    2px 2px 4px -1px hsl(28 13% 20% / 0.12);
+    2px 3px 5px 0px oklch(0.3248 0.0147 63.48 / 12%),
+    2px 2px 4px -1px oklch(0.3248 0.0147 63.48 / 12%);
   --shadow-lg:
-    2px 3px 5px 0px hsl(28 13% 20% / 0.12),
-    2px 4px 6px -1px hsl(28 13% 20% / 0.12);
+    2px 3px 5px 0px oklch(0.3248 0.0147 63.48 / 12%),
+    2px 4px 6px -1px oklch(0.3248 0.0147 63.48 / 12%);
   --shadow-xl:
-    2px 3px 5px 0px hsl(28 13% 20% / 0.12),
-    2px 8px 10px -1px hsl(28 13% 20% / 0.12);
-  --shadow-2xl: 2px 3px 5px 0px hsl(28 13% 20% / 0.3);
+    2px 3px 5px 0px oklch(0.3248 0.0147 63.48 / 12%),
+    2px 8px 10px -1px oklch(0.3248 0.0147 63.48 / 12%);
+  --shadow-2xl: 2px 3px 5px 0px oklch(0.3248 0.0147 63.48 / 3%);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
 }
@@ -124,25 +124,25 @@
   --shadow-blur: 5px;
   --shadow-spread: 0px;
   --shadow-opacity: 0.12;
-  --shadow-color: hsl(28 13% 20%);
-  --shadow-2xs: 2px 3px 5px 0px hsl(28 13% 20% / 0.06);
-  --shadow-xs: 2px 3px 5px 0px hsl(28 13% 20% / 0.06);
+  --shadow-color: oklch(0.3248 0.0147 63.48);
+  --shadow-2xs: 2px 3px 5px 0px oklch(0.3248 0.0147 63.48 / 6%);
+  --shadow-xs: 2px 3px 5px 0px oklch(0.3248 0.0147 63.48 / 6%);
   --shadow-sm:
-    2px 3px 5px 0px hsl(28 13% 20% / 0.12),
-    2px 1px 2px -1px hsl(28 13% 20% / 0.12);
+    2px 3px 5px 0px oklch(0.3248 0.0147 63.48 / 12%),
+    2px 1px 2px -1px oklch(0.3248 0.0147 63.48 / 12%);
   --shadow:
-    2px 3px 5px 0px hsl(28 13% 20% / 0.12),
-    2px 1px 2px -1px hsl(28 13% 20% / 0.12);
+    2px 3px 5px 0px oklch(0.3248 0.0147 63.48 / 12%),
+    2px 1px 2px -1px oklch(0.3248 0.0147 63.48 / 12%);
   --shadow-md:
-    2px 3px 5px 0px hsl(28 13% 20% / 0.12),
-    2px 2px 4px -1px hsl(28 13% 20% / 0.12);
+    2px 3px 5px 0px oklch(0.3248 0.0147 63.48 / 12%),
+    2px 2px 4px -1px oklch(0.3248 0.0147 63.48 / 12%);
   --shadow-lg:
-    2px 3px 5px 0px hsl(28 13% 20% / 0.12),
-    2px 4px 6px -1px hsl(28 13% 20% / 0.12);
+    2px 3px 5px 0px oklch(0.3248 0.0147 63.48 / 12%),
+    2px 4px 6px -1px oklch(0.3248 0.0147 63.48 / 12%);
   --shadow-xl:
-    2px 3px 5px 0px hsl(28 13% 20% / 0.12),
-    2px 8px 10px -1px hsl(28 13% 20% / 0.12);
-  --shadow-2xl: 2px 3px 5px 0px hsl(28 13% 20% / 0.3);
+    2px 3px 5px 0px oklch(0.3248 0.0147 63.48 / 12%),
+    2px 8px 10px -1px oklch(0.3248 0.0147 63.48 / 12%);
+  --shadow-2xl: 2px 3px 5px 0px oklch(0.3248 0.0147 63.48 / 0.3);
 }
 
 @theme inline {

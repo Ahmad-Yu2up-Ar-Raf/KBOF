@@ -14,7 +14,7 @@ import {
   getMessQueryOptions,
   type MessAggregateInput,
 } from '@/lib/query-options'
-import { queryClient } from '@/components/ui/core/provider/Provider'
+import { queryClient } from '@/components/provider/Provider'
 import { Suspense } from 'react'
 
 // ============================================
@@ -48,11 +48,15 @@ function buildFilters(
 export const Route = createFileRoute('/dashboard/mess/')({
   // Validate and parse search params using Zod
   validateSearch: (search) => messSearchSchema.parse(search),
-
+  loaderDeps: ({ search }) => {
+    return {
+      q: search,
+    }
+  },
   // ⭐ LOADER: Runs on the SERVER before component renders
   // Use queryClient.ensureQueryData to populate cache for SSR hydration
-  loader: async ({ location }) => {
-    const search = messSearchSchema.parse(location.search)
+  loader: async ({ deps: { q } }) => {
+    const search = messSearchSchema.parse(q)
     const filters = buildFilters(search)
 
     // ⭐ ensureQueryData populates the cache so useSuspenseQuery
@@ -82,20 +86,7 @@ function MessPageSkeleton() {
         description="Manage your mess here."
       />
 
-      <DataTableSkeleton
-        columnCount={7}
-        filterCount={2}
-        cellWidths={[
-          '10rem',
-          '30rem',
-          '10rem',
-          '10rem',
-          '6rem',
-          '6rem',
-          '6rem',
-        ]}
-        shrinkZero
-      />
+      <DataTableSkeleton />
     </div>
   )
 }
@@ -122,24 +113,7 @@ function MessPage() {
         description="Here is your mess list. Manage your mess here."
       />
       <main>
-        <Suspense
-          fallback={
-            <DataTableSkeleton
-              columnCount={7}
-              filterCount={2}
-              cellWidths={[
-                '10rem',
-                '30rem',
-                '10rem',
-                '10rem',
-                '6rem',
-                '6rem',
-                '6rem',
-              ]}
-              shrinkZero
-            />
-          }
-        >
+        <Suspense fallback={<DataTableSkeleton />}>
           <FeatureFlagsProvider createSheet={<CreateMessSheet />}>
             <TasksTable data={messData} />
           </FeatureFlagsProvider>

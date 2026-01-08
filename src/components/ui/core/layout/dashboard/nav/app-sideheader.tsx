@@ -1,7 +1,7 @@
 'use client'
 import { SidebarTrigger } from '@/components/ui/fragments/shadcn-ui/sidebar'
 
-import React from 'react'
+import React, { Activity } from 'react'
 
 import {
   Breadcrumb,
@@ -53,7 +53,9 @@ px-4 justify-between"
                       <BreadcrumbLink href={href} text={itemLink} />
                     )}
                   </BreadcrumbItem>
-                  {!isLast && <BreadcrumbSeparator className="block" />}
+                  <Activity mode={isLast ? 'hidden' : 'visible'}>
+                    <BreadcrumbSeparator className="block" />
+                  </Activity>
                 </React.Fragment>
               )
             })}

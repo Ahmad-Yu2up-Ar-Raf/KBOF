@@ -28,6 +28,7 @@ const footerColumns = [
 ]
 
 export default function SiteFooter({ className, ...props }: StickyFooterProps) {
+  const appName = import.meta.env.VITE_APP_NAME
   return (
     <footer
       className={cn(
@@ -77,7 +78,7 @@ export default function SiteFooter({ className, ...props }: StickyFooterProps) {
           {/* Judul besar tengah */}
           <div className="w-full h-fit flex items-center justify-center  ">
             <h1 className="text-center lg:h-80 relative text-[23dvw] lg:text-[16em] font-bold bg-clip-text tracking-tighter bg-linear-to-b to-background text-transparent from-yellow-950/50 select-none">
-              SatuSuara
+              {appName}
             </h1>
           </div>
         </div>

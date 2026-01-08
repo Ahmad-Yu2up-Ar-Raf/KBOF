@@ -183,13 +183,13 @@ export function TasksTable({ data: messData }: TasksTableProps) {
           </DataTableToolbar>
         )}
       </DataTable>
-      {rowAction?.row.original && (
+      <React.Activity mode={rowAction ? 'visible' : 'hidden'}>
         <UpdateMessSheet
           open={rowAction?.variant === 'update'}
           onOpenChange={() => setRowAction(null)}
-          mess={rowAction.row.original}
+          mess={rowAction?.row.original!}
         />
-      )}
+      </React.Activity>
 
       <DeleteMessDialog
         open={rowAction?.variant === 'delete'}

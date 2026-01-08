@@ -17,7 +17,7 @@ import {
 } from '../command'
 import { Popover, PopoverContent, PopoverTrigger } from '../popover'
 import { Separator } from '../separator'
-import { cn } from '@/lib/utils'
+
 import * as React from 'react'
 import { Checkbox } from '../checkbox'
 

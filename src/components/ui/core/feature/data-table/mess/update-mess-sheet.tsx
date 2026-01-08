@@ -23,7 +23,7 @@ import { toast } from 'sonner'
 import { useUpdateMessForm } from '@/hooks/form/use-mess-form'
 import MessForm from '../../form/mess-form'
 import { Spinner } from '@/components/ui/fragments/shadcn-ui/spinner'
-import { useState } from 'react'
+import { useState, Activity } from 'react'
 import { Mess } from '@/db/schema'
 
 interface type {
@@ -90,7 +90,9 @@ function UpdateMessSheet({ ...props }: type) {
                       size={'sm'}
                       variant="outline"
                     >
-                      {isSubmitting && <Spinner className="" />}
+                      <Activity mode={isSubmitting ? 'visible' : 'hidden'}>
+                        <Spinner />
+                      </Activity>
                       Batalkan
                     </Button>
                   </SheetClose>
@@ -100,7 +102,9 @@ function UpdateMessSheet({ ...props }: type) {
                     className="w-fit dark:bg-primary  text-primary-foreground !pointer-siswa-auto dark:primary-foreground bg-primary"
                     size={'sm'}
                   >
-                    {isSubmitting && <Spinner className="" />}
+                    <Activity mode={isSubmitting ? 'visible' : 'hidden'}>
+                      <Spinner />
+                    </Activity>
                     Perbarui
                   </Button>
                 </SheetFooter>
@@ -147,7 +151,9 @@ function UpdateMessSheet({ ...props }: type) {
                     size={'sm'}
                     variant="outline"
                   >
-                    {isSubmitting && <Spinner className="" />}
+                    <Activity mode={isSubmitting ? 'visible' : 'hidden'}>
+                      <Spinner />
+                    </Activity>
                     Batalkan
                   </Button>
                 </DrawerClose>
@@ -157,7 +163,9 @@ function UpdateMessSheet({ ...props }: type) {
                   className="w-fit !pointer-siswa-auto dark:bg-primary  text-primary-foreground dark:primary-foreground bg-primary"
                   size={'sm'}
                 >
-                  {isSubmitting && <Spinner className="" />}
+                  <Activity mode={isSubmitting ? 'visible' : 'hidden'}>
+                    <Spinner />
+                  </Activity>
                   Perbarui
                 </Button>
               </DrawerFooter>

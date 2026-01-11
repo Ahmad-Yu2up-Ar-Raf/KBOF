@@ -1,14 +1,9 @@
 // =============================================================================
-// DESTINATION VALIDATIONS - SUASANA
+// ARTICLE VALIDATIONS - SUASANA
 // =============================================================================
-// Zod schemas untuk destination entity dengan nuqs integration
+// Zod schemas untuk article entity dengan nuqs integration
 
-import {
-  contentStatus,
-  destinationType,
-  provinsiIndonesia,
-  destinationCategory,
-} from '@/db/schema'
+import { contentStatus } from '@/db/schema'
 import {
   createSearchParamsCache,
   parseAsArrayOf,
@@ -20,32 +15,25 @@ import * as z from 'zod'
 
 import { flagConfig } from '@/config/flag'
 import { getFiltersStateParser, getSortingStateParser } from '@/lib/parsers'
-import type { Destination } from '@/db/schema'
+import type { Article } from '@/db/schema'
 
 // ============================================
 // NUQS SEARCH PARAMS CACHE
 // ============================================
 
-export const searchParamsCacheDestination = createSearchParamsCache({
+export const searchParamsCacheArticle = createSearchParamsCache({
   filterFlag: parseAsStringEnum(
     flagConfig.featureFlags.map((flag) => flag.value),
   ),
   page: parseAsInteger.withDefault(1),
   perPage: parseAsInteger.withDefault(10),
-  sort: getSortingStateParser<Destination>().withDefault([
+  sort: getSortingStateParser<Article>().withDefault([
     { id: 'createdAt', desc: true },
   ]),
-  name: parseAsString.withDefault(''),
+  title: parseAsString.withDefault(''),
   status: parseAsArrayOf(
     parseAsStringEnum(contentStatus.enumValues),
   ).withDefault([]),
-  type: parseAsArrayOf(
-    parseAsStringEnum(destinationType.enumValues),
-  ).withDefault([]),
-  category: parseAsArrayOf(
-    parseAsStringEnum(destinationCategory.enumValues),
-  ).withDefault([]),
-  provinsi: parseAsString.withDefault(''),
   createdAt: parseAsArrayOf(parseAsInteger).withDefault([]),
   filters: getFiltersStateParser().withDefault([]),
   joinOperator: parseAsStringEnum(['and', 'or']).withDefault('and'),
@@ -56,44 +44,45 @@ export const searchParamsCacheDestination = createSearchParamsCache({
 // ============================================
 
 // Schema for form validation (accepts both File objects and URLs)
-const fileOrUrlSchema = z.union([z.string().url(), z.instanceof(File)])
-
-const filesOrUrlsSchema = z
-  .array(z.union([z.string().url(), z.instanceof(File)]))
+const fileOrUrlSchema = z
+  .union([z.string().url(), z.string().length(0), z.instanceof(File)])
+  .nullable()
   .optional()
 
-export const createDestinationSchema = z.object({
-  name: z.string().min(1, 'Nama destinasi wajib diisi'),
-  description: z.string().min(10, 'Deskripsi minimal 10 karakter'),
-  type: z.enum(destinationType.enumValues).optional(),
-  category: z.enum(destinationCategory.enumValues).optional(),
-  provinsi: z.enum(provinsiIndonesia.enumValues),
-  kabupatenKota: z.string().optional(),
-  alamat: z.string().optional(),
+export const createArticleSchema = z.object({
+  title: z.string().min(1, 'Judul artikel wajib diisi'),
+  excerpt: z.string().optional(),
+  content: z.string().min(50, 'Konten minimal 50 karakter'),
   coverImage: fileOrUrlSchema,
-  images: filesOrUrlsSchema,
   status: z.enum(contentStatus.enumValues).optional(),
 })
 
-export const updateDestinationSchema = createDestinationSchema
+// Schema for server-side validation (only accepts string URLs, not File)
+export const createArticleServerSchema = z.object({
+  title: z.string().min(1, 'Judul artikel wajib diisi'),
+  excerpt: z.string().optional(),
+  content: z.string().min(50, 'Konten minimal 50 karakter'),
+  coverImage: z.string().url().nullable().optional(),
+  status: z.enum(contentStatus.enumValues).optional(),
+})
+
+export const updateArticleSchema = createArticleSchema.partial().extend({
+  id: z.number(),
+})
+
+export const updateArticleServerSchema = createArticleServerSchema
   .partial()
   .extend({
     id: z.number(),
   })
 
-export const IdSchema = z.object({
-  id: z.union([z.number(), z.array(z.number())]),
-})
-
-export const UpdateDestinationBulkSchema = z.object({
-  id: z.union([z.number(), z.array(z.number())]),
-  status: z.enum(contentStatus.enumValues),
-})
-
-export const updateDestinationPartialSchema = z.object({
+export const ArticleIdSchema = z.object({
   id: z.number(),
-  status: z.enum(contentStatus.enumValues).optional(),
-  type: z.enum(destinationType.enumValues).optional(),
+})
+
+export const UpdateArticleBulkSchema = z.object({
+  ids: z.array(z.number()),
+  status: z.enum(contentStatus.enumValues),
 })
 
 // ============================================
@@ -139,7 +128,7 @@ const jsonParse = <T>(fallback: T) => {
 // SEARCH SCHEMA (untuk route validation)
 // ============================================
 
-export const destinationSearchSchema = z.object({
+export const articleSearchSchema = z.object({
   filterFlag: z
     .preprocess(
       (v) => (v === 'null' || v === '' ? null : v),
@@ -161,27 +150,11 @@ export const destinationSearchSchema = z.object({
     )
     .optional(),
 
-  name: z.string().catch('').optional(),
+  title: z.string().catch('').optional(),
 
   status: z
     .preprocess(csvToArray, z.array(z.enum(contentStatus.enumValues)).catch([]))
     .optional(),
-
-  type: z
-    .preprocess(
-      csvToArray,
-      z.array(z.enum(destinationType.enumValues)).catch([]),
-    )
-    .optional(),
-
-  category: z
-    .preprocess(
-      csvToArray,
-      z.array(z.enum(destinationCategory.enumValues)).catch([]),
-    )
-    .optional(),
-
-  provinsi: z.string().catch('').optional(),
 
   createdAt: z
     .preprocess((v) => {
@@ -209,9 +182,9 @@ export const destinationSearchSchema = z.object({
 // TYPE EXPORTS
 // ============================================
 
-export type DestinationSearchParams = z.infer<typeof destinationSearchSchema>
-export type GetDestinationSchema = Awaited<
-  ReturnType<typeof searchParamsCacheDestination.parse>
+export type ArticleSearchParams = z.infer<typeof articleSearchSchema>
+export type GetArticleSchema = Awaited<
+  ReturnType<typeof searchParamsCacheArticle.parse>
 >
-export type CreateDestinationSchema = z.infer<typeof createDestinationSchema>
-export type UpdateDestinationSchema = z.infer<typeof updateDestinationSchema>
+export type CreateArticleSchema = z.infer<typeof createArticleSchema>
+export type UpdateArticleSchema = z.infer<typeof updateArticleSchema>

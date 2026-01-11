@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import { ReactNode } from 'react'
 import ReactLenis from 'lenis/react'
 import SiteHeader from '../ui/core/layout/nav/site-header'
+import { useShouldShowFooter } from './infinite-scroll-context'
 
 interface LayoutWrapperProps {
   children: ReactNode
@@ -13,6 +14,7 @@ interface LayoutWrapperProps {
 export function LayoutWrapper({ children }: LayoutWrapperProps) {
   const matches = useMatches()
   const currentRouteId = matches[matches.length - 1]?.routeId
+  const shouldShowFooter = useShouldShowFooter()
 
   // Routes yang gak butuh footer/border
   const routesWithoutChrome = [
@@ -40,7 +42,8 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
             {children}
           </div>
         </div>
-        <SiteFooter />
+        {/* Footer only shows when shouldShowFooter is true */}
+        {shouldShowFooter && <SiteFooter />}
       </ReactLenis>
     )
   }

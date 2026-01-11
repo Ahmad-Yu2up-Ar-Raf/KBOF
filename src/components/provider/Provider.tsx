@@ -2,6 +2,7 @@
 import { AnimatePresence } from 'framer-motion'
 
 import { ModalProvider } from './context-provider'
+import { InfiniteScrollProvider } from './infinite-scroll-context'
 import { NuqsAdapter } from 'nuqs/adapters/tanstack-router'
 import { Toaster } from '@/components/ui/fragments/shadcn-ui/sonner'
 import { useEffect, useState } from 'react'
@@ -111,7 +112,9 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
             />
           ) : contentReady && isWebsiteReady ? (
             <ModalProvider key="main-content">
-              <LayoutWrapper>{children}</LayoutWrapper>
+              <InfiniteScrollProvider>
+                <LayoutWrapper>{children}</LayoutWrapper>
+              </InfiniteScrollProvider>
             </ModalProvider>
           ) : null}
         </AnimatePresence>

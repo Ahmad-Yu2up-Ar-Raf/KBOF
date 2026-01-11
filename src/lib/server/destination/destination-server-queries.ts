@@ -15,6 +15,8 @@ import {
   desc,
   gte,
   lte,
+  sql,
+  avg,
 } from 'drizzle-orm'
 import * as schema from '@/db/schema'
 import { authServerMiddleware } from '@/lib/middleware'
@@ -28,7 +30,48 @@ const getDb = async () => {
   return db
 }
 
-const destination = schema.destination
+const { destination, vote, review, donation } = schema
+
+// ============================================
+// SUBQUERIES FOR COMPUTED AGGREGATES
+// ============================================
+
+// Subquery for counting votes per destination
+const voteCountSubquery = (db: Awaited<ReturnType<typeof getDb>>) =>
+  db
+    .select({
+      destinationId: vote.destinationId,
+      totalVote: count().as('total_vote'),
+    })
+    .from(vote)
+    .groupBy(vote.destinationId)
+    .as('vote_counts')
+
+// Subquery for review stats per destination
+const reviewStatsSubquery = (db: Awaited<ReturnType<typeof getDb>>) =>
+  db
+    .select({
+      destinationId: review.destinationId,
+      totalReview: count().as('total_review'),
+      averageRating: avg(review.rating).as('average_rating'),
+    })
+    .from(review)
+    .groupBy(review.destinationId)
+    .as('review_stats')
+
+// Subquery for donation total per destination (completed only)
+const donationTotalSubquery = (db: Awaited<ReturnType<typeof getDb>>) =>
+  db
+    .select({
+      destinationId: donation.destinationId,
+      totalDonation: sql<number>`COALESCE(SUM(${donation.amount}), 0)`.as(
+        'total_donation',
+      ),
+    })
+    .from(donation)
+    .where(eq(donation.status, 'completed'))
+    .groupBy(donation.destinationId)
+    .as('donation_totals')
 
 // ============================================
 // TYPE DEFINITIONS
@@ -62,6 +105,18 @@ export const destinationAggregateInputSchema = z.object({
       ]),
     )
     .default([]),
+  category: z
+    .array(
+      z.enum([
+        'lokasi-budaya',
+        'pariwisata',
+        'adat-istiadat',
+        'kuliner-tradisional',
+        'kesenian-daerah',
+        'situs-sejarah',
+      ]),
+    )
+    .default([]),
   provinsi: z.string().default(''),
   createdAt: z.array(z.number()).default([]),
   filters: z.array(z.any()).default([]),
@@ -91,6 +146,7 @@ export async function fetchDestinationList(
     name,
     status,
     type,
+    category,
     provinsi,
     createdAt,
     filters,
@@ -117,6 +173,9 @@ export async function fetchDestinationList(
         name ? ilike(destination.name, `%${name}%`) : undefined,
         status.length > 0 ? inArray(destination.status, status) : undefined,
         type.length > 0 ? inArray(destination.type, type) : undefined,
+        category.length > 0
+          ? inArray(destination.category, category)
+          : undefined,
         provinsi ? ilike(destination.provinsi, `%${provinsi}%`) : undefined,
         createdAt.length > 0
           ? and(
@@ -130,7 +189,12 @@ export async function fetchDestinationList(
           : undefined,
       )
 
-  // Valid column names untuk sorting
+  // Build subqueries for computed aggregates
+  const voteCounts = voteCountSubquery(db)
+  const reviewStats = reviewStatsSubquery(db)
+  const donationTotals = donationTotalSubquery(db)
+
+  // Valid column names untuk sorting (excluding computed columns)
   type DestinationColumnKey =
     | 'id'
     | 'name'
@@ -138,7 +202,6 @@ export async function fetchDestinationList(
     | 'status'
     | 'type'
     | 'provinsi'
-    | 'totalVote'
 
   const validColumns: DestinationColumnKey[] = [
     'id',
@@ -147,7 +210,6 @@ export async function fetchDestinationList(
     'status',
     'type',
     'provinsi',
-    'totalVote',
   ]
 
   const orderBy =
@@ -162,13 +224,42 @@ export async function fetchDestinationList(
           })
       : [asc(destination.createdAt)]
 
+  // Get data with computed aggregates using subqueries
   const [dataResult, countResult] = await Promise.all([
-    db.query.destination.findMany({
-      where,
-      orderBy,
-      limit: perPage,
-      offset,
-    }),
+    db
+      .select({
+        id: destination.id,
+        userId: destination.userId,
+        slug: destination.slug,
+        name: destination.name,
+        description: destination.description,
+        type: destination.type,
+        category: destination.category,
+        provinsi: destination.provinsi,
+        kabupatenKota: destination.kabupatenKota,
+        alamat: destination.alamat,
+        coverImage: destination.coverImage,
+        images: destination.images,
+        // Computed from relations
+        totalVote: sql<number>`COALESCE(${voteCounts.totalVote}, 0)`,
+        totalReview: sql<number>`COALESCE(${reviewStats.totalReview}, 0)`,
+        averageRating: sql<number>`COALESCE(${reviewStats.averageRating}, 0)::numeric`,
+        totalDonation: sql<number>`COALESCE(${donationTotals.totalDonation}, 0)`,
+        status: destination.status,
+        createdAt: destination.createdAt,
+        updatedAt: destination.updatedAt,
+      })
+      .from(destination)
+      .leftJoin(voteCounts, eq(destination.id, voteCounts.destinationId))
+      .leftJoin(reviewStats, eq(destination.id, reviewStats.destinationId))
+      .leftJoin(
+        donationTotals,
+        eq(destination.id, donationTotals.destinationId),
+      )
+      .where(where)
+      .orderBy(...orderBy)
+      .limit(perPage)
+      .offset(offset),
     db.select({ count: count() }).from(destination).where(where),
   ])
 
@@ -187,10 +278,10 @@ export async function fetchDestinationList(
     alamat: d.alamat,
     coverImage: d.coverImage,
     images: d.images,
-    totalVote: d.totalVote,
-    totalReview: d.totalReview,
-    averageRating: d.averageRating,
-    totalDonation: d.totalDonation,
+    totalVote: Number(d.totalVote) || 0,
+    totalReview: Number(d.totalReview) || 0,
+    averageRating: Number(d.averageRating) || 0,
+    totalDonation: Number(d.totalDonation) || 0,
     status: d.status,
     createdAt: d.createdAt,
     updatedAt: d.updatedAt,

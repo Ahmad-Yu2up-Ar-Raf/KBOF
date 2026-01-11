@@ -26,13 +26,14 @@ import ExploreCard, {
 import { getExploreInfiniteQueryOptions } from '@/lib/query-options'
 import type { ExploreDestination } from '@/lib/server/explore/explore-server-queries'
 import { destinationCategory } from '@/db/schema'
+import { useInfiniteScrollContext } from '@/components/provider/infinite-scroll-context'
 
 const PRIMARY_COLOR = '#63493f'
 
 // Category labels for display
 const categoryLabels: Record<string, string> = {
   'lokasi-budaya': 'Lokasi Budaya',
-  'pariwisata': 'Pariwisata',
+  pariwisata: 'Pariwisata',
   'adat-istiadat': 'Adat Istiadat',
   'kuliner-tradisional': 'Kuliner Tradisional',
   'kesenian-daerah': 'Kesenian Daerah',
@@ -96,6 +97,29 @@ export default function ExploreBlock() {
     isLoading,
     isError,
   } = useInfiniteQuery(getExploreInfiniteQueryOptions(filters))
+
+  // Register infinite scroll state with context (for footer visibility)
+  const { registerInfiniteScroll, unregisterInfiniteScroll } =
+    useInfiniteScrollContext()
+
+  useEffect(() => {
+    // Register this page as having infinite scroll
+    registerInfiniteScroll(
+      hasNextPage ?? false,
+      isLoading || isFetchingNextPage,
+    )
+
+    // Cleanup on unmount
+    return () => {
+      unregisterInfiniteScroll()
+    }
+  }, [
+    hasNextPage,
+    isLoading,
+    isFetchingNextPage,
+    registerInfiniteScroll,
+    unregisterInfiniteScroll,
+  ])
 
   // Flatten all pages into single array
   const destinations = data?.pages.flatMap((page) => page.data) ?? []

@@ -10,15 +10,33 @@ import { neon } from '@neondatabase/serverless'
 import { drizzle } from 'drizzle-orm/neon-http'
 import { eq } from 'drizzle-orm'
 import { nanoid } from 'nanoid'
+import { scrypt, randomBytes } from 'crypto'
+import { promisify } from 'util'
 
 import {
   user,
+  account,
   destination,
   vote,
+  article,
+  donation,
   destinationType,
   destinationCategory,
   provinsiIndonesia,
 } from './schema'
+
+// Promisify scrypt for async usage
+const scryptAsync = promisify(scrypt)
+
+// Password hashing function compatible with Better Auth
+async function hashPassword(password: string): Promise<string> {
+  const salt = randomBytes(16).toString('hex')
+  const derivedKey = (await scryptAsync(password, salt, 64)) as Buffer
+  return `${salt}:${derivedKey.toString('hex')}`
+}
+
+// Default password for all seed users
+const SEED_PASSWORD = 'Test123!'
 
 // =============================================================================
 // SEED DATA - WISATA & BUDAYA INDONESIA
@@ -824,13 +842,19 @@ async function main() {
     // Don't delete users - keep existing auth users
     console.log('   ✓ Cleaned votes and destinations')
 
-    // ========== STEP 2: Create seed users ==========
+    // ========== STEP 2: Create seed users with accounts ==========
     console.log('\n👤 Creating seed users...')
+    console.log(`   Using default password: ${SEED_PASSWORD}`)
     const createdUsers: Array<{ id: string; email: string }> = []
+
+    // Hash password once for all users
+    const hashedPassword = await hashPassword(SEED_PASSWORD)
 
     for (const userData of seedUsers) {
       const userId = nanoid()
+      const accountId = nanoid()
       try {
+        // Create user
         await db.insert(user).values({
           id: userId,
           name: userData.name,
@@ -839,6 +863,18 @@ async function main() {
           createdAt: new Date(),
           updatedAt: new Date(),
         })
+
+        // Create credential account with password
+        await db.insert(account).values({
+          id: accountId,
+          accountId: userId, // Same as user id for credential provider
+          providerId: 'credential',
+          userId: userId,
+          password: hashedPassword,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        })
+
         createdUsers.push({ id: userId, email: userData.email })
         console.log(`   ✓ Created user: ${userData.name}`)
       } catch {
@@ -888,10 +924,7 @@ async function main() {
             `https://picsum.photos/seed/${slug}-2/800/600`,
             `https://picsum.photos/seed/${slug}-3/800/600`,
           ]),
-          totalVote: getRandomInt(50, 2000),
-          totalReview: getRandomInt(10, 500),
-          averageRating: getRandomInt(35, 50), // 3.5 - 5.0
-          totalDonation: getRandomInt(0, 100000000),
+          // Note: totalVote, totalReview, averageRating, totalDonation are now computed from relations
           status: 'published',
           createdAt: new Date(
             Date.now() - getRandomInt(0, 365 * 24 * 60 * 60 * 1000),
@@ -906,7 +939,9 @@ async function main() {
 
       // Progress indicator
       if ((i + 1) % 10 === 0) {
-        console.log(`   ✓ Created ${i + 1}/${destinationData.length} destinations`)
+        console.log(
+          `   ✓ Created ${i + 1}/${destinationData.length} destinations`,
+        )
       }
     }
 
@@ -940,20 +975,191 @@ async function main() {
 
     console.log(`   Total votes: ${voteCount}`)
 
+    // ========== STEP 5: Create articles ==========
+    console.log('\n📝 Creating articles...')
+    const articleData = [
+      {
+        title: 'Pesona Tersembunyi Raja Ampat',
+        excerpt: 'Menjelajahi keindahan bawah laut Raja Ampat yang memukau.',
+        content:
+          'Raja Ampat adalah surga bagi penyelam dengan keanekaragaman hayati laut tertinggi di dunia. Dengan lebih dari 1.500 spesies ikan dan 75% spesies karang dunia, Raja Ampat menawarkan pengalaman menyelam yang tak terlupakan. Kepulauan ini terdiri dari empat pulau besar dan ratusan pulau kecil yang menawarkan pemandangan laut yang spektakuler. Selain diving, Anda juga bisa menikmati snorkeling, island hopping, dan bertemu dengan manta ray yang ramah.',
+      },
+      {
+        title: 'Warisan Budaya Candi Borobudur',
+        excerpt: 'Mengungkap misteri dan keindahan Candi Borobudur.',
+        content:
+          'Candi Borobudur adalah candi Buddha terbesar di dunia dan merupakan UNESCO World Heritage Site. Dibangun pada abad ke-9 oleh Dinasti Syailendra, candi ini memiliki 2.672 panel relief dan 504 arca Buddha. Arsitektur candi yang menakjubkan menggambarkan kosmologi Buddha dengan tiga tingkat: Kamadhatu, Rupadhatu, dan Arupadhatu. Pengalaman terbaik adalah menyaksikan sunrise dari Punthuk Setumbu dengan latar belakang Borobudur yang megah.',
+      },
+      {
+        title: 'Keajaiban Alam Danau Toba',
+        excerpt: 'Danau vulkanik terbesar di Asia Tenggara.',
+        content:
+          'Danau Toba terbentuk dari letusan supervulkanik sekitar 74.000 tahun lalu dan merupakan danau vulkanik terbesar di Asia Tenggara. Pulau Samosir di tengah danau menyimpan warisan budaya Batak yang kaya. Anda dapat mengunjungi desa-desa tradisional Batak, menikmati Tor-Tor dance, dan melihat rumah adat Gorga. Danau ini juga menawarkan aktivitas seperti berenang, memancing, dan berkeliling dengan kapal tradisional.',
+      },
+      {
+        title: 'Festival Lembah Baliem: Pesta Budaya Papua',
+        excerpt: 'Mengintip kemeriahan festival budaya suku Dani.',
+        content:
+          'Festival Lembah Baliem adalah acara tahunan yang memamerkan kekayaan budaya suku Dani dan suku-suku lainnya di Papua. Festival ini menampilkan atraksi perang-perangan tradisional, tarian, dan ritual bakar batu. Pengunjung dapat menyaksikan pakaian tradisional dari bulu burung cenderawasih dan koteka. Ini adalah kesempatan langka untuk melihat budaya asli Papua yang masih terjaga keasliannya.',
+      },
+      {
+        title: 'Eksplorasi Kuliner Nusantara',
+        excerpt: 'Perjalanan rasa melalui masakan tradisional Indonesia.',
+        content:
+          'Indonesia memiliki kekayaan kuliner yang luar biasa dengan ribuan resep tradisional dari Sabang sampai Merauke. Rendang Padang yang dinobatkan sebagai makanan terenak di dunia, Gudeg Jogja yang manis gurih, Pempek Palembang dengan cuko yang asam pedas, dan Papeda Papua yang unik. Setiap daerah memiliki cita rasa khas yang mencerminkan budaya dan kearifan lokal masyarakatnya.',
+      },
+      {
+        title: 'Trekking di Gunung Rinjani',
+        excerpt: 'Petualangan mendaki gunung tertinggi kedua di Indonesia.',
+        content:
+          'Gunung Rinjani di Lombok menawarkan pengalaman pendakian yang menantang dengan pemandangan yang spektakuler. Danau Segara Anak di kawah gunung adalah hadiah bagi para pendaki yang berhasil mencapai puncak. Pendakian biasanya memakan waktu 2-4 hari tergantung rute yang dipilih. Selain keindahan alamnya, Rinjani juga memiliki nilai spiritual bagi masyarakat Sasak yang percaya bahwa gunung ini adalah tempat tinggal dewa.',
+      },
+      {
+        title: 'Mengenal Batik: Warisan Dunia dari Indonesia',
+        excerpt: 'Sejarah dan filosofi di balik motif batik Indonesia.',
+        content:
+          'Batik Indonesia telah diakui UNESCO sebagai Warisan Budaya Takbenda Kemanusiaan. Setiap motif batik memiliki makna filosofis yang dalam, mulai dari Parang yang melambangkan kekuatan, Kawung yang melambangkan kesucian, hingga Mega Mendung yang melambangkan kesabaran. Proses pembuatan batik tulis membutuhkan ketelitian dan kesabaran tinggi, dengan setiap lembar kain bisa memakan waktu berminggu-minggu hingga berbulan-bulan untuk diselesaikan.',
+      },
+      {
+        title: 'Keindahan Sunset di Tanah Lot',
+        excerpt: 'Pura di atas batu karang dengan panorama sunset memukau.',
+        content:
+          'Tanah Lot adalah salah satu pura laut paling ikonik di Bali. Terletak di atas batu karang besar di tengah laut, pura ini menawarkan pemandangan sunset yang spektakuler. Menurut legenda, pura ini didirikan oleh Dang Hyang Nirartha pada abad ke-16. Saat air laut surut, pengunjung dapat berjalan ke batu karang dan melihat ular laut suci yang dipercaya menjaga kesucian pura.',
+      },
+      {
+        title: 'Misteri Blue Fire Kawah Ijen',
+        excerpt: 'Fenomena api biru yang hanya ada di dua tempat di dunia.',
+        content:
+          'Kawah Ijen di Banyuwangi menawarkan fenomena alam yang langka: blue fire atau api biru. Fenomena ini terjadi karena gas belerang yang terbakar saat bersentuhan dengan udara. Untuk menyaksikan blue fire, pengunjung harus mendaki pada malam hari dan mencapai kawah sebelum matahari terbit. Selain blue fire, Anda juga dapat melihat danau asam terbesar di dunia dan penambang belerang tradisional yang bekerja dalam kondisi ekstrem.',
+      },
+      {
+        title: 'Desa Wae Rebo: Permata Tersembunyi di Flores',
+        excerpt: 'Desa adat di atas awan dengan rumah kerucut tradisional.',
+        content:
+          'Desa Wae Rebo adalah desa adat Manggarai yang terletak di ketinggian 1.200 meter di Flores. Untuk mencapai desa ini, pengunjung harus melakukan trekking selama 3-4 jam melalui hutan. Desa ini terkenal dengan rumah adat Mbaru Niang yang berbentuk kerucut dan dapat menampung hingga 8 keluarga. UNESCO telah mengakui Wae Rebo sebagai warisan budaya yang perlu dilestarikan.',
+      },
+    ]
+
+    let articleCount = 0
+    for (const art of articleData) {
+      const author = getRandomElement(createdUsers)
+      const slug = generateSlug(art.title, articleCount)
+      const status = getRandomElement([
+        'published',
+        'published',
+        'published',
+        'draft',
+      ]) as 'published' | 'draft'
+
+      try {
+        await db.insert(article).values({
+          authorId: author.id,
+          slug,
+          title: art.title,
+          excerpt: art.excerpt,
+          content: art.content,
+          coverImage: `https://picsum.photos/seed/article-${slug}/1200/630`,
+          status,
+          publishedAt:
+            status === 'published'
+              ? new Date(
+                  Date.now() - getRandomInt(0, 180 * 24 * 60 * 60 * 1000),
+                )
+              : null,
+          createdAt: new Date(
+            Date.now() - getRandomInt(0, 365 * 24 * 60 * 60 * 1000),
+          ),
+          updatedAt: new Date(),
+        })
+        articleCount++
+      } catch (e) {
+        console.log(`   ⚠ Article exists or error: ${art.title}`)
+      }
+    }
+
+    console.log(`   Total articles: ${articleCount}`)
+
+    // ========== STEP 6: Create donations ==========
+    console.log('\n💝 Creating donations...')
+    let donationCount = 0
+    const paymentMethods = ['bank_transfer', 'e-wallet', 'credit_card', 'qris']
+    const messages = [
+      'Semoga bermanfaat untuk pelestarian wisata!',
+      'Terima kasih sudah menjaga keindahan alam Indonesia.',
+      'Sukses selalu untuk destinasi ini!',
+      'Semoga semakin maju dan berkembang.',
+      null,
+      null,
+    ]
+
+    for (const dest of createdDestinations.slice(0, 30)) {
+      // Create 2-5 donations per destination
+      const numDonations = getRandomInt(2, 5)
+
+      for (let i = 0; i < numDonations; i++) {
+        const donor = getRandomElement(createdUsers)
+        const donationStatusValue = getRandomElement([
+          'completed',
+          'completed',
+          'completed',
+          'pending',
+          'failed',
+        ]) as 'completed' | 'pending' | 'failed'
+        const amount = getRandomInt(10000, 1000000) * 10 // Rp 100k - Rp 10M
+        const isAnonymous = Math.random() < 0.2
+
+        try {
+          await db.insert(donation).values({
+            userId: donor.id,
+            destinationId: dest.id,
+            amount,
+            message: getRandomElement(messages),
+            isAnonymous,
+            status: donationStatusValue,
+            paymentMethod: getRandomElement(paymentMethods),
+            paymentRef:
+              donationStatusValue !== 'pending'
+                ? `PAY-${nanoid(12).toUpperCase()}`
+                : null,
+            createdAt: new Date(
+              Date.now() - getRandomInt(0, 180 * 24 * 60 * 60 * 1000),
+            ),
+            paidAt:
+              donationStatusValue === 'completed'
+                ? new Date(
+                    Date.now() - getRandomInt(0, 30 * 24 * 60 * 60 * 1000),
+                  )
+                : null,
+          })
+          donationCount++
+        } catch {
+          // Error, skip
+        }
+      }
+    }
+
+    console.log(`   Total donations: ${donationCount}`)
+
     // ========== SUMMARY ==========
     console.log('\n' + '='.repeat(60))
     console.log('✅ SEEDING COMPLETED SUCCESSFULLY!')
     console.log('='.repeat(60))
     console.log('\n📊 Summary:')
     console.log(`   • ${createdUsers.length} users`)
-    console.log(`   • ${createdDestinations.length} destinations (wisata & budaya)`)
+    console.log(
+      `   • ${createdDestinations.length} destinations (wisata & budaya)`,
+    )
     console.log(`   • ${voteCount} votes`)
+    console.log(`   • ${articleCount} articles`)
+    console.log(`   • ${donationCount} donations`)
     console.log('\n🎯 Categories seeded:')
     console.log('   • Wisata Alam & Bahari')
     console.log('   • Wisata Budaya & Sejarah')
     console.log('   • Kesenian & Kerajinan')
     console.log('   • Adat Istiadat & Festival')
     console.log('   • Kuliner Tradisional')
+    console.log('   • Articles & Content')
+    console.log('   • Donations')
     console.log('')
   } catch (error) {
     console.error('\n❌ Seeding failed:', error)

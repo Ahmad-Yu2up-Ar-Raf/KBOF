@@ -217,13 +217,8 @@ export const destination = pgTable(
     // Media
     coverImage: text('cover_image').notNull(),
     images: text('images').default('[]'), // JSON array of image URLs
-    // Stats
-    totalVote: integer('total_vote').default(0).notNull(),
-    totalReview: integer('total_review').default(0).notNull(),
-    averageRating: integer('average_rating').default(0).notNull(), // Store as 0-50 (multiply by 10)
-    totalDonation: bigint('total_donation', { mode: 'number' }).default(
-      sql`'0'`,
-    ),
+    // Note: totalVote, totalReview, averageRating are calculated from relations (vote, review tables)
+    // totalDonation is aggregated from donation table with 'completed' status
     // Status
     status: contentStatus('status').default('published').notNull(),
     // Timestamps
@@ -242,7 +237,6 @@ export const destination = pgTable(
     index('destination_category_idx').on(table.category),
     index('destination_provinsi_idx').on(table.provinsi),
     index('destination_status_idx').on(table.status),
-    index('destination_totalVote_idx').on(table.totalVote),
   ],
 )
 

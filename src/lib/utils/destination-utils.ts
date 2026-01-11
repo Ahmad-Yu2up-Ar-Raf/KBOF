@@ -427,7 +427,13 @@ export const provinsiIndonesiaConfig: Record<
   ProvinsiIndonesia,
   {
     label: string
-    region: 'sumatera' | 'jawa' | 'kalimantan' | 'sulawesi' | 'bali-nusra' | 'maluku-papua'
+    region:
+      | 'sumatera'
+      | 'jawa'
+      | 'kalimantan'
+      | 'sulawesi'
+      | 'bali-nusra'
+      | 'maluku-papua'
   }
 > = {
   aceh: { label: 'Aceh', region: 'sumatera' },
@@ -437,7 +443,10 @@ export const provinsiIndonesiaConfig: Record<
   'kepulauan-riau': { label: 'Kepulauan Riau', region: 'sumatera' },
   jambi: { label: 'Jambi', region: 'sumatera' },
   'sumatera-selatan': { label: 'Sumatera Selatan', region: 'sumatera' },
-  'kepulauan-bangka-belitung': { label: 'Kepulauan Bangka Belitung', region: 'sumatera' },
+  'kepulauan-bangka-belitung': {
+    label: 'Kepulauan Bangka Belitung',
+    region: 'sumatera',
+  },
   bengkulu: { label: 'Bengkulu', region: 'sumatera' },
   lampung: { label: 'Lampung', region: 'sumatera' },
   'dki-jakarta': { label: 'DKI Jakarta', region: 'jawa' },

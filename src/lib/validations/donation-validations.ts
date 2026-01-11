@@ -1,99 +1,41 @@
 // =============================================================================
-// DESTINATION VALIDATIONS - SUASANA
+// DONATION VALIDATIONS - SUASANA
 // =============================================================================
-// Zod schemas untuk destination entity dengan nuqs integration
+// Zod schemas untuk donation entity dengan nuqs integration
 
-import {
-  contentStatus,
-  destinationType,
-  provinsiIndonesia,
-  destinationCategory,
-} from '@/db/schema'
+import { donationStatus } from '@/db/schema'
 import {
   createSearchParamsCache,
   parseAsArrayOf,
   parseAsInteger,
-  parseAsString,
   parseAsStringEnum,
 } from 'nuqs/server'
 import * as z from 'zod'
 
 import { flagConfig } from '@/config/flag'
 import { getFiltersStateParser, getSortingStateParser } from '@/lib/parsers'
-import type { Destination } from '@/db/schema'
+import type { Donation } from '@/db/schema'
 
 // ============================================
 // NUQS SEARCH PARAMS CACHE
 // ============================================
 
-export const searchParamsCacheDestination = createSearchParamsCache({
+export const searchParamsCacheDonation = createSearchParamsCache({
   filterFlag: parseAsStringEnum(
     flagConfig.featureFlags.map((flag) => flag.value),
   ),
   page: parseAsInteger.withDefault(1),
   perPage: parseAsInteger.withDefault(10),
-  sort: getSortingStateParser<Destination>().withDefault([
+  sort: getSortingStateParser<Donation>().withDefault([
     { id: 'createdAt', desc: true },
   ]),
-  name: parseAsString.withDefault(''),
   status: parseAsArrayOf(
-    parseAsStringEnum(contentStatus.enumValues),
+    parseAsStringEnum(donationStatus.enumValues),
   ).withDefault([]),
-  type: parseAsArrayOf(
-    parseAsStringEnum(destinationType.enumValues),
-  ).withDefault([]),
-  category: parseAsArrayOf(
-    parseAsStringEnum(destinationCategory.enumValues),
-  ).withDefault([]),
-  provinsi: parseAsString.withDefault(''),
+  destinationId: parseAsInteger.withDefault(0),
   createdAt: parseAsArrayOf(parseAsInteger).withDefault([]),
   filters: getFiltersStateParser().withDefault([]),
   joinOperator: parseAsStringEnum(['and', 'or']).withDefault('and'),
-})
-
-// ============================================
-// CREATE/UPDATE SCHEMAS
-// ============================================
-
-// Schema for form validation (accepts both File objects and URLs)
-const fileOrUrlSchema = z.union([z.string().url(), z.instanceof(File)])
-
-const filesOrUrlsSchema = z
-  .array(z.union([z.string().url(), z.instanceof(File)]))
-  .optional()
-
-export const createDestinationSchema = z.object({
-  name: z.string().min(1, 'Nama destinasi wajib diisi'),
-  description: z.string().min(10, 'Deskripsi minimal 10 karakter'),
-  type: z.enum(destinationType.enumValues).optional(),
-  category: z.enum(destinationCategory.enumValues).optional(),
-  provinsi: z.enum(provinsiIndonesia.enumValues),
-  kabupatenKota: z.string().optional(),
-  alamat: z.string().optional(),
-  coverImage: fileOrUrlSchema,
-  images: filesOrUrlsSchema,
-  status: z.enum(contentStatus.enumValues).optional(),
-})
-
-export const updateDestinationSchema = createDestinationSchema
-  .partial()
-  .extend({
-    id: z.number(),
-  })
-
-export const IdSchema = z.object({
-  id: z.union([z.number(), z.array(z.number())]),
-})
-
-export const UpdateDestinationBulkSchema = z.object({
-  id: z.union([z.number(), z.array(z.number())]),
-  status: z.enum(contentStatus.enumValues),
-})
-
-export const updateDestinationPartialSchema = z.object({
-  id: z.number(),
-  status: z.enum(contentStatus.enumValues).optional(),
-  type: z.enum(destinationType.enumValues).optional(),
 })
 
 // ============================================
@@ -139,7 +81,7 @@ const jsonParse = <T>(fallback: T) => {
 // SEARCH SCHEMA (untuk route validation)
 // ============================================
 
-export const destinationSearchSchema = z.object({
+export const donationSearchSchema = z.object({
   filterFlag: z
     .preprocess(
       (v) => (v === 'null' || v === '' ? null : v),
@@ -161,27 +103,14 @@ export const destinationSearchSchema = z.object({
     )
     .optional(),
 
-  name: z.string().catch('').optional(),
-
   status: z
-    .preprocess(csvToArray, z.array(z.enum(contentStatus.enumValues)).catch([]))
-    .optional(),
-
-  type: z
     .preprocess(
       csvToArray,
-      z.array(z.enum(destinationType.enumValues)).catch([]),
+      z.array(z.enum(donationStatus.enumValues)).catch([]),
     )
     .optional(),
 
-  category: z
-    .preprocess(
-      csvToArray,
-      z.array(z.enum(destinationCategory.enumValues)).catch([]),
-    )
-    .optional(),
-
-  provinsi: z.string().catch('').optional(),
+  destinationId: z.preprocess(toNumber, z.number().int().catch(0)).optional(),
 
   createdAt: z
     .preprocess((v) => {
@@ -209,9 +138,7 @@ export const destinationSearchSchema = z.object({
 // TYPE EXPORTS
 // ============================================
 
-export type DestinationSearchParams = z.infer<typeof destinationSearchSchema>
-export type GetDestinationSchema = Awaited<
-  ReturnType<typeof searchParamsCacheDestination.parse>
+export type DonationSearchParams = z.infer<typeof donationSearchSchema>
+export type GetDonationSchema = Awaited<
+  ReturnType<typeof searchParamsCacheDonation.parse>
 >
-export type CreateDestinationSchema = z.infer<typeof createDestinationSchema>
-export type UpdateDestinationSchema = z.infer<typeof updateDestinationSchema>

@@ -1,17 +1,16 @@
 import { createFileRoute, useSearch } from '@tanstack/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { MapPin } from 'lucide-react'
+import { HandHeart } from 'lucide-react'
 
 import Heading from '@/components/ui/fragments/custom-ui/typography/heading'
 import { DataTableSkeleton } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-skeleton'
 import { FeatureFlagsProvider } from '@/components/ui/core/feature/data-table/feature-flag-provider'
-import { DestinationTable } from '@/components/ui/core/feature/data-table/destination/destination-table'
-import CreateDestinationSheet from '@/components/ui/core/feature/data-table/destination/create-destination-sheet'
-import { destinationSearchSchema } from '@/lib/validations/destination-validations'
+import { DonationTable } from '@/components/ui/core/feature/data-table/donation/donation-table'
+import { donationSearchSchema } from '@/lib/validations/donation-validations'
 import { getValidFilters } from '@/lib/data-table'
 import {
-  getDestinationQueryOptions,
-  type DestinationAggregateInput,
+  getDonationQueryOptions,
+  type DonationAggregateInput,
 } from '@/lib/query-options'
 import { queryClient } from '@/components/provider/Provider'
 import { Suspense } from 'react'
@@ -21,8 +20,8 @@ import { Suspense } from 'react'
 // ============================================
 
 function buildFilters(
-  search: ReturnType<typeof destinationSearchSchema.parse>,
-): DestinationAggregateInput {
+  search: ReturnType<typeof donationSearchSchema.parse>,
+): DonationAggregateInput {
   const validFilters = getValidFilters(search.filters ?? [])
 
   return {
@@ -30,20 +29,17 @@ function buildFilters(
     page: search.page ?? 1,
     perPage: search.perPage ?? 10,
     sort: search.sort ?? [{ id: 'createdAt', desc: true }],
-    name: search.name ?? '',
     status: search.status ?? [],
-    type: search.type ?? [],
-    category: search.category ?? [],
-    provinsi: search.provinsi ?? '',
+    destinationId: search.destinationId ?? undefined,
     createdAt: search.createdAt ?? [],
     filters: validFilters,
     joinOperator: search.joinOperator ?? 'and',
   }
 }
 
-export const Route = createFileRoute('/dashboard/destination')({
+export const Route = createFileRoute('/dashboard/donation')({
   // Validate and parse search params using Zod
-  validateSearch: (search) => destinationSearchSchema.parse(search),
+  validateSearch: (search) => donationSearchSchema.parse(search),
   loaderDeps: ({ search }) => {
     return {
       q: search,
@@ -51,26 +47,26 @@ export const Route = createFileRoute('/dashboard/destination')({
   },
   // ⭐ LOADER: Runs on the SERVER before component renders
   loader: async ({ deps: { q } }) => {
-    const search = destinationSearchSchema.parse(q)
+    const search = donationSearchSchema.parse(q)
     const filters = buildFilters(search)
 
-    await queryClient.ensureQueryData(getDestinationQueryOptions(filters))
+    await queryClient.ensureQueryData(getDonationQueryOptions(filters))
 
     return { filters }
   },
 
   // ⭐ PENDING COMPONENT: Shows while loader is running
-  pendingComponent: DestinationPageSkeleton,
+  pendingComponent: DonationPageSkeleton,
   component: RouteComponent,
 })
 
-function DestinationPageSkeleton() {
+function DonationPageSkeleton() {
   return (
     <div className="space-y-3">
       <Heading
-        Icon={MapPin}
-        title="Destinasi"
-        description="Kelola destinasi wisata dan budaya Indonesia."
+        Icon={HandHeart}
+        title="Donasi"
+        description="Lihat donasi yang masuk ke destinasi Anda."
       />
 
       <DataTableSkeleton />
@@ -79,26 +75,26 @@ function DestinationPageSkeleton() {
 }
 
 function RouteComponent() {
-  const search = useSearch({ from: '/dashboard/destination' })
+  const search = useSearch({ from: '/dashboard/donation' })
   const filters = buildFilters(search)
 
   // ⭐ useSuspenseQuery reads from cache (populated by loader)
-  const { data: destinationData } = useSuspenseQuery(
-    getDestinationQueryOptions(filters),
+  const { data: donationData } = useSuspenseQuery(
+    getDonationQueryOptions(filters),
   )
 
   return (
     <div>
       <Heading
         className="mb-4"
-        Icon={MapPin}
-        title="Destinasi"
-        description="Kelola destinasi wisata dan budaya Indonesia. Tambah, edit, dan publikasikan konten destinasi."
+        Icon={HandHeart}
+        title="Donasi"
+        description="Lihat donasi yang masuk ke destinasi wisata dan budaya Anda."
       />
       <main>
         <Suspense fallback={<DataTableSkeleton />}>
-          <FeatureFlagsProvider createSheet={<CreateDestinationSheet />}>
-            <DestinationTable data={destinationData} />
+          <FeatureFlagsProvider>
+            <DonationTable data={donationData} />
           </FeatureFlagsProvider>
         </Suspense>
       </main>

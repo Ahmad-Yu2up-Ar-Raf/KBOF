@@ -14,8 +14,8 @@ import { authClient } from '@/lib/auth/auth-client'
 export default function SiteHeader() {
   const navItems = [
     {
-      name: 'Fitur',
-      link: '/as',
+      name: 'Artikel',
+      link: '/artikel',
     },
 
     {

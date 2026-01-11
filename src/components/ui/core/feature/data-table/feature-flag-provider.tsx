@@ -36,7 +36,7 @@ export function useFeatureFlags() {
 
 interface FeatureFlagsProviderProps {
   children: React.ReactNode
-  createSheet: React.ReactNode
+  createSheet?: React.ReactNode
 }
 
 export function FeatureFlagsProvider({

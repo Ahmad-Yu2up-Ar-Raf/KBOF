@@ -15,6 +15,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ExploreIndexRouteImport } from './routes/explore/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as ExploreExploreIdRouteImport } from './routes/explore/$exploreId'
+import { Route as DashboardDonationRouteImport } from './routes/dashboard/donation'
 import { Route as DashboardDestinationRouteImport } from './routes/dashboard/destination'
 import { Route as DashboardArticlesRouteImport } from './routes/dashboard/articles'
 import { Route as authRegisterRouteImport } from './routes/(auth)/register'
@@ -53,6 +54,11 @@ const ExploreExploreIdRoute = ExploreExploreIdRouteImport.update({
   id: '/explore/$exploreId',
   path: '/explore/$exploreId',
   getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardDonationRoute = DashboardDonationRouteImport.update({
+  id: '/donation',
+  path: '/donation',
+  getParentRoute: () => DashboardRouteRoute,
 } as any)
 const DashboardDestinationRoute = DashboardDestinationRouteImport.update({
   id: '/destination',
@@ -105,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/register': typeof authRegisterRoute
   '/dashboard/articles': typeof DashboardArticlesRoute
   '/dashboard/destination': typeof DashboardDestinationRoute
+  '/dashboard/donation': typeof DashboardDonationRoute
   '/explore/$exploreId': typeof ExploreExploreIdRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/explore': typeof ExploreIndexRoute
@@ -119,6 +126,7 @@ export interface FileRoutesByTo {
   '/register': typeof authRegisterRoute
   '/dashboard/articles': typeof DashboardArticlesRoute
   '/dashboard/destination': typeof DashboardDestinationRoute
+  '/dashboard/donation': typeof DashboardDonationRoute
   '/explore/$exploreId': typeof ExploreExploreIdRoute
   '/dashboard': typeof DashboardIndexRoute
   '/explore': typeof ExploreIndexRoute
@@ -136,6 +144,7 @@ export interface FileRoutesById {
   '/(auth)/register': typeof authRegisterRoute
   '/dashboard/articles': typeof DashboardArticlesRoute
   '/dashboard/destination': typeof DashboardDestinationRoute
+  '/dashboard/donation': typeof DashboardDonationRoute
   '/explore/$exploreId': typeof ExploreExploreIdRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/explore/': typeof ExploreIndexRoute
@@ -154,6 +163,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/dashboard/articles'
     | '/dashboard/destination'
+    | '/dashboard/donation'
     | '/explore/$exploreId'
     | '/dashboard/'
     | '/explore'
@@ -168,6 +178,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/dashboard/articles'
     | '/dashboard/destination'
+    | '/dashboard/donation'
     | '/explore/$exploreId'
     | '/dashboard'
     | '/explore'
@@ -184,6 +195,7 @@ export interface FileRouteTypes {
     | '/(auth)/register'
     | '/dashboard/articles'
     | '/dashboard/destination'
+    | '/dashboard/donation'
     | '/explore/$exploreId'
     | '/dashboard/'
     | '/explore/'
@@ -246,6 +258,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/explore/$exploreId'
       preLoaderRoute: typeof ExploreExploreIdRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/donation': {
+      id: '/dashboard/donation'
+      path: '/donation'
+      fullPath: '/dashboard/donation'
+      preLoaderRoute: typeof DashboardDonationRouteImport
+      parentRoute: typeof DashboardRouteRoute
     }
     '/dashboard/destination': {
       id: '/dashboard/destination'
@@ -326,6 +345,7 @@ interface DashboardRouteRouteChildren {
   DashboardSettingsRouteRoute: typeof DashboardSettingsRouteRouteWithChildren
   DashboardArticlesRoute: typeof DashboardArticlesRoute
   DashboardDestinationRoute: typeof DashboardDestinationRoute
+  DashboardDonationRoute: typeof DashboardDonationRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
@@ -333,6 +353,7 @@ const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
   DashboardSettingsRouteRoute: DashboardSettingsRouteRouteWithChildren,
   DashboardArticlesRoute: DashboardArticlesRoute,
   DashboardDestinationRoute: DashboardDestinationRoute,
+  DashboardDonationRoute: DashboardDonationRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }
 

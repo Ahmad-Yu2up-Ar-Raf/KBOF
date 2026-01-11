@@ -7,7 +7,17 @@
 
 import { createServerFn } from '@tanstack/react-start'
 import { z } from 'zod'
-import { and, asc, count, desc, eq, ilike, inArray, sql } from 'drizzle-orm'
+import {
+  and,
+  asc,
+  count,
+  desc,
+  eq,
+  ilike,
+  inArray,
+  sql,
+  avg,
+} from 'drizzle-orm'
 import * as schema from '@/db/schema'
 
 // Dynamic import to prevent db from being bundled in client
@@ -16,7 +26,7 @@ const getDb = async () => {
   return db
 }
 
-const { destination, user, review } = schema
+const { destination, user, review, vote, donation } = schema
 
 // ============================================
 // TYPE DEFINITIONS
@@ -71,6 +81,43 @@ export type ExploreResult = {
 // INTERNAL DB FUNCTIONS
 // ============================================
 
+// Subquery for counting votes per destination
+const voteCountSubquery = (db: Awaited<ReturnType<typeof getDb>>) =>
+  db
+    .select({
+      destinationId: vote.destinationId,
+      totalVote: count().as('total_vote'),
+    })
+    .from(vote)
+    .groupBy(vote.destinationId)
+    .as('vote_counts')
+
+// Subquery for review stats per destination
+const reviewStatsSubquery = (db: Awaited<ReturnType<typeof getDb>>) =>
+  db
+    .select({
+      destinationId: review.destinationId,
+      totalReview: count().as('total_review'),
+      averageRating: avg(review.rating).as('average_rating'),
+    })
+    .from(review)
+    .groupBy(review.destinationId)
+    .as('review_stats')
+
+// Subquery for donation total per destination (completed only)
+const donationTotalSubquery = (db: Awaited<ReturnType<typeof getDb>>) =>
+  db
+    .select({
+      destinationId: donation.destinationId,
+      totalDonation: sql<number>`COALESCE(SUM(${donation.amount}), 0)`.as(
+        'total_donation',
+      ),
+    })
+    .from(donation)
+    .where(eq(donation.status, 'completed'))
+    .groupBy(donation.destinationId)
+    .as('donation_totals')
+
 async function fetchExploreDestinations(filters: ExploreFilters): Promise<{
   data: ExploreDestination[]
   nextCursor: number | null
@@ -79,6 +126,10 @@ async function fetchExploreDestinations(filters: ExploreFilters): Promise<{
 }> {
   const db = await getDb()
   const { cursor, limit, search, categories, type, provinsi, sortBy } = filters
+
+  // Build subqueries
+  const voteCounts = voteCountSubquery(db)
+  const reviewStats = reviewStatsSubquery(db)
 
   // Build where conditions - only published destinations
   const whereConditions = [eq(destination.status, 'published')]
@@ -105,18 +156,28 @@ async function fetchExploreDestinations(filters: ExploreFilters): Promise<{
   }
 
   // Build order by with cursor-based pagination support
+  // Use sql`` for computed columns
   const orderByClause = (() => {
     switch (sortBy) {
       case 'newest':
         return [desc(destination.createdAt), desc(destination.id)]
       case 'popular':
-        return [desc(destination.totalVote), desc(destination.id)]
+        return [
+          sql`COALESCE(${voteCounts.totalVote}, 0) DESC`,
+          desc(destination.id),
+        ]
       case 'rating':
-        return [desc(destination.averageRating), desc(destination.id)]
+        return [
+          sql`COALESCE(${reviewStats.averageRating}, 0) DESC`,
+          desc(destination.id),
+        ]
       case 'name':
         return [asc(destination.name), asc(destination.id)]
       default:
-        return [desc(destination.totalVote), desc(destination.id)]
+        return [
+          sql`COALESCE(${voteCounts.totalVote}, 0) DESC`,
+          desc(destination.id),
+        ]
     }
   })()
 
@@ -151,7 +212,7 @@ async function fetchExploreDestinations(filters: ExploreFilters): Promise<{
 
   const totalCount = countResult?.count ?? 0
 
-  // Get paginated data with user relation (fetch one extra to check hasNextPage)
+  // Get paginated data with user relation and computed aggregates
   const data = await db
     .select({
       id: destination.id,
@@ -163,9 +224,10 @@ async function fetchExploreDestinations(filters: ExploreFilters): Promise<{
       provinsi: destination.provinsi,
       kabupatenKota: destination.kabupatenKota,
       coverImage: destination.coverImage,
-      totalVote: destination.totalVote,
-      totalReview: destination.totalReview,
-      averageRating: destination.averageRating,
+      // Computed from relations
+      totalVote: sql<number>`COALESCE(${voteCounts.totalVote}, 0)`,
+      totalReview: sql<number>`COALESCE(${reviewStats.totalReview}, 0)`,
+      averageRating: sql<number>`COALESCE(${reviewStats.averageRating}, 0)::numeric`,
       createdAt: destination.createdAt,
       user: {
         id: user.id,
@@ -175,6 +237,8 @@ async function fetchExploreDestinations(filters: ExploreFilters): Promise<{
     })
     .from(destination)
     .leftJoin(user, eq(destination.userId, user.id))
+    .leftJoin(voteCounts, eq(destination.id, voteCounts.destinationId))
+    .leftJoin(reviewStats, eq(destination.id, reviewStats.destinationId))
     .where(and(...whereConditions))
     .orderBy(...orderByClause)
     .limit(limit + 1) // Fetch one extra to check if there's more
@@ -187,6 +251,9 @@ async function fetchExploreDestinations(filters: ExploreFilters): Promise<{
   return {
     data: items.map((item) => ({
       ...item,
+      totalVote: Number(item.totalVote) || 0,
+      totalReview: Number(item.totalReview) || 0,
+      averageRating: Number(item.averageRating) || 0,
       user: item.user ?? { id: '', name: 'Unknown', image: null },
     })),
     nextCursor,

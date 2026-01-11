@@ -129,6 +129,7 @@ export interface DestinationAggregateInput {
   name?: string
   status?: DestinationStatus[]
   type?: DestinationType[]
+  category?: DestinationCategory[]
   provinsi?: string
   createdAt?: number[]
   filters?: unknown[]
@@ -182,5 +183,78 @@ export interface DestinationAggregateResult {
     kesenian: number
     kerajinan: number
     festival: number
+  }
+}
+
+// ============================================
+// ARTICLE TYPES
+// ============================================
+
+export interface ArticleAggregateInput {
+  filterFlag?: 'advancedFilters' | 'commandFilters' | null
+  page?: number
+  perPage?: number
+  sort?: { id: string; desc: boolean }[]
+  title?: string
+  status?: DestinationStatus[]
+  createdAt?: number[]
+  filters?: unknown[]
+  joinOperator?: 'and' | 'or'
+}
+
+export interface ArticleAggregateResult {
+  data: {
+    id: number
+    authorId: string
+    slug: string
+    title: string
+    excerpt: string | null
+    content: string
+    coverImage: string | null
+    status: DestinationStatus
+    publishedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+  }[]
+  pageCount: number
+  statusCounts: {
+    published: number
+    draft: number
+    archived: number
+  }
+}
+
+// ============================================
+// DONATION TYPES
+// ============================================
+
+import type { Donation, User, Destination } from '@/db/schema'
+
+export interface DonationWithDetails extends Donation {
+  donor: Pick<User, 'id' | 'name' | 'email' | 'image'>
+  destination: Pick<Destination, 'id' | 'name' | 'slug' | 'coverImage'>
+}
+
+export interface DonationAggregateInput {
+  filterFlag?: 'advancedFilters' | 'commandFilters' | null
+  page?: number
+  perPage?: number
+  sort?: { id: string; desc: boolean }[]
+  status?: ('pending' | 'completed' | 'failed' | 'refunded')[]
+  destinationId?: number
+  createdAt?: number[]
+  filters?: unknown[]
+  joinOperator?: 'and' | 'or'
+}
+
+export interface DonationAggregateResult {
+  data: DonationWithDetails[]
+  pageCount: number
+  totalAmount: number
+  statusCounts: {
+    pending: number
+    completed: number
+    failed: number
+    refunded: number
   }
 }

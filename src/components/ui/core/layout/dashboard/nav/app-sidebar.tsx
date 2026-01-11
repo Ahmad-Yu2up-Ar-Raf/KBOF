@@ -11,6 +11,7 @@ import {
   Pin,
   PenLine,
   MapPin,
+  HandHeart,
 } from 'lucide-react'
 
 import { NavMain } from './nav-main'
@@ -53,6 +54,11 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
         title: 'Article',
         url: '/dashboard/articles',
         icon: PenLine,
+      },
+      {
+        title: 'Donasi',
+        url: '/dashboard/donation',
+        icon: HandHeart,
       },
     ],
     navSecondary: [

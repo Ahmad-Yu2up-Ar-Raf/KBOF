@@ -18,11 +18,26 @@ import {
   type ExploreFilters,
 } from './server/explore/explore-server-queries'
 
+import {
+  getArticleAggregateServerFn,
+  type ArticleAggregateInput,
+} from './server/article/article-server-queries'
+
+import {
+  getDonationAggregateServerFn,
+  type DonationAggregateInput,
+} from './server/donation/donation-server-queries'
+
 // ============================================
 // TYPE EXPORTS
 // ============================================
 
-export type { DestinationAggregateInput, ExploreFilters }
+export type {
+  DestinationAggregateInput,
+  ExploreFilters,
+  ArticleAggregateInput,
+  DonationAggregateInput,
+}
 
 // ============================================
 // DESTINATION QUERY KEYS
@@ -157,4 +172,59 @@ export const getExploreDetailQueryOptions = (slug: string) =>
     },
     staleTime: 60 * 1000,
     gcTime: 10 * 60 * 1000,
+  })
+
+// ============================================
+// ARTICLE QUERY KEYS
+// ============================================
+
+export const articleKeys = {
+  all: ['articles'] as const,
+  aggregate: (filters: ArticleAggregateInput) =>
+    [...articleKeys.all, 'aggregate', filters] as const,
+  detail: (id: number) => [...articleKeys.all, 'detail', id] as const,
+} as const
+
+// ============================================
+// ARTICLE QUERY OPTIONS
+// ============================================
+
+export const getArticleQueryOptions = (filters: ArticleAggregateInput) =>
+  queryOptions({
+    queryKey: articleKeys.aggregate(filters),
+    queryFn: async () => {
+      const result = await getArticleAggregateServerFn({
+        data: { filters },
+      })
+      return result
+    },
+    staleTime: 30 * 1000,
+    gcTime: 5 * 60 * 1000,
+  })
+
+// ============================================
+// DONATION QUERY KEYS
+// ============================================
+
+export const donationKeys = {
+  all: ['donations'] as const,
+  aggregate: (filters: DonationAggregateInput) =>
+    [...donationKeys.all, 'aggregate', filters] as const,
+} as const
+
+// ============================================
+// DONATION QUERY OPTIONS
+// ============================================
+
+export const getDonationQueryOptions = (filters: DonationAggregateInput) =>
+  queryOptions({
+    queryKey: donationKeys.aggregate(filters),
+    queryFn: async () => {
+      const result = await getDonationAggregateServerFn({
+        data: { filters },
+      })
+      return result
+    },
+    staleTime: 30 * 1000,
+    gcTime: 5 * 60 * 1000,
   })

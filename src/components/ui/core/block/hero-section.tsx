@@ -147,12 +147,12 @@ export default function HeroSection() {
 
             <BlurFade isPreload delay={delay * 6} direction="up">
               <motion.h1
-                className="text-3xl sm:text-5xl  md:text-7xl  text-center w-full justify-center items-center flex-col flex whitespace-pre sm:leading-12  md:leading-16  font-bold tracking-tighter"
+                className="text-3xl sm:text-5xl  md:text-7xl  text-center w-full justify-center items-center flex-col flex whitespace-pre sm:leading-12  md:leading-16  lg:leading-20 font-bold tracking-tighter"
                 animate={{ opacity: 1, y: 0 }}
                 initial={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.2, ease: 'easeOut', delay: 0.3 }}
               >
-                <span>Jadikan inovasimu</span>
+                <span>Jelajahi Pesona</span>
                 <LayoutGroup>
                   <motion.span layout className="flex whitespace-pre">
                     <motion.span
@@ -169,26 +169,20 @@ export default function HeroSection() {
 
                     <TextRotate
                       texts={[
-                        'terwujud',
-                        'nyata',
-                        'berdampak',
-                        'terdengar',
-                        'didukung',
-                        'dikenal',
-                        'berkembang',
-                        'diperhitungkan',
-                        'diapresiasi',
-                        'tersebar',
-                        'menginspirasi',
-                        'berpengaruh',
-                        'dimulai',
-                        'terlaksana',
-                        'bermakna',
-                        'tervalidasi',
-                        'dipercaya',
-                        'meluas',
-                        'berkelanjutan',
-                        'transformatif',
+                        'Indonesia',
+                        'Nusantara',
+                        'Budaya',
+                        'Alam',
+                        'Lokal',
+                        'Tradisi',
+                        'Warisan',
+                        'Negeri',
+                        'Khatulistiwa',
+                        'Bahari',
+                        'Sejarah',
+                        'Kuliner',
+                        'Kesenian',
+                        'Adat',
                       ]}
                       mainClassName="overflow-hidden bg-primary pr-3 text-primary-foreground py-0 pb-2 px-4 rounded-xl"
                       staggerDuration={0.03}
@@ -211,7 +205,10 @@ export default function HeroSection() {
               delay={delay * 7}
               className=" text-base md:text-lg lg:text-2xl  leading-7  text-balance text-muted-foreground   text-center "
             >
-              <p>Temukan dan dukung explore komunitas — gratis untuk semua.</p>
+              <p>
+                Temukan destinasi wisata tersembunyi dan kekayaan budaya lokal
+                Indonesia yang autentik dan memukau.
+              </p>
             </BlurFade>
           </div>
 
@@ -223,19 +220,19 @@ export default function HeroSection() {
           >
             <Link
               className={cn(
-                ' cursor-target  hover:scale-110 transition-all duration-300 ease-out  lg:text-xl md:text-lg w-full  justify-center flex items-center  gap-5   font-semibold tracking-tight text-background bg-foreground px-4 py-3.5 sm:px-5  md:px-6 md:py-4 lg:px-8 rounded-2xl z-20 shadow-2xl  ',
+                ' cursor-target  hover:scale-110 transition-all duration-300 ease-out  lg:text-xl md:text-lg w-full  justify-center flex items-center  gap-5   font-semibold tracking-tight text-background bg-foreground px-4 py-3.5 sm:px-5  md:px-6 md:py-4 lg:px-8 rounded-full z-20 shadow-2xl  ',
               )}
               to="/explore"
             >
-              <Telescope className=" size-4.5 sm:size-5.5" /> Jelajahi Explore
+              <Telescope className=" size-4.5 sm:size-5.5" /> Jelajahi Destinasi
             </Link>
             <Link
               to={session ? '/dashboard' : '/login'}
               className={cn(
-                'md:text-lg  cursor-target   hover:scale-110 transition-all duration-300 ease-out  lg:text-xl justify-center flex items-center py-3.5   gap-5 w-full font-semibold tracking-tight text-white bg-primary px-4  sm:px-5  md:px-6 md:py-4 lg:px-8  rounded-2xl z-20 shadow-2xl font-calendas',
+                'md:text-lg  cursor-target   hover:scale-110 transition-all duration-300 ease-out  lg:text-xl justify-center flex items-center py-3.5   gap-5 w-full font-semibold tracking-tight text-white bg-primary px-4  sm:px-5  md:px-6 md:py-4 lg:px-8  rounded-full z-20 shadow-2xl font-calendas',
               )}
             >
-              <Pen className=" size-4.5 sm:size-5.5" /> Daftarkan Explore
+              <Pen className=" size-4.5 sm:size-5.5" /> Bagikan Destinasi
             </Link>
           </BlurFade>
         </div>
@@ -261,11 +258,11 @@ export function Marque() {
                 <li key={j.toString()} className=" w-full  ">
                   {contentType === 0 ? (
                     <h6 className="text-xl lg:text-[2dvw]   uppercase  tracking-[-0.05em] font-bold flex items-center gap-x-4">
-                      creative <span> works</span>
+                      WISATA <span> ALAM</span>
                     </h6>
                   ) : (
                     <h6 className="text-xl  lg:text-[2dvw]   uppercase tracking-[-0.05em] font-bold flex items-center gap-x-4">
-                      experience<span> projects</span>
+                      BUDAYA<span> LOKAL</span>
                     </h6>
                   )}
                 </li>
@@ -287,11 +284,11 @@ export function Marque() {
                 <li key={j.toString()} className=" w-full  ">
                   {contentType === 0 ? (
                     <h6 className="text-xl lg:text-[2dvw]   uppercase  tracking-[-0.05em] font-bold flex items-center gap-x-4">
-                      creative <span> works</span>
+                      HIDDEN <span> GEMS</span>
                     </h6>
                   ) : (
                     <h6 className="text-xl  lg:text-[2dvw]   uppercase tracking-[-0.05em] font-bold flex items-center gap-x-4">
-                      experience<span> projects</span>
+                      SENI<span> TRADISI</span>
                     </h6>
                   )}
                 </li>

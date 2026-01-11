@@ -26,9 +26,9 @@ export const NavbarLogo = () => {
       to="/"
       className="relative  z-20  flex items-center space-x-1.5 lg:space-x-2   py-1 md:text-sm text-xs font-normal text-black"
     >
-      <Logo className=" lg:size-8 size-6" />
+      <Logo className=" lg:size-7.5 size-6" />
 
-      <span className="font-bold   text-sm  lg:text-lg text-accent-foreground">
+      <span className="font-bold text-base   md:text-lg text-accent-foreground">
         {appName}
       </span>
     </Link>

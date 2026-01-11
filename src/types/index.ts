@@ -1,5 +1,3 @@
-import { Mess, User } from '@/db/schema'
-import { GetMessSchema } from '@/lib/validations/mess-validations'
 import { LinkProps } from '@tanstack/react-router'
 import { LucideIcon } from 'lucide-react'
 
@@ -23,94 +21,166 @@ export interface NavItem {
   isActive?: boolean
 }
 
-export interface querisType {
-  getMessInput?: GetMessSchema
-
-  user?: User
-  messId?: number
-  Ids?: number[]
-  roomId?: number
-  employeId?: number
-  RoomsstatusCapacity?: 'full' | 'available'
-  Roomsstatus?: 'active' | 'not-active'
-  MesstatusCapacity?: 'full' | 'available'
-  Messtatus?: 'active' | 'not-active'
-  gender?: 'male' | 'female'
-  Employeestatus?: 'active' | 'not-active'
-}
-
-export interface typeMessColum extends Mess {
-  roomCount: number
-  employeeCount: number
-}
-
 /**
- * Output type untuk query result mess
+ * Result type dari aggregate query
  */
-export type MessQueryResult = {
-  data: {
-    id: number
-    name: string
-    location: string | null
-    deskripcion: string | null
-    capacityRoom: number | null
-    createdAt: string
-    status: 'active' | 'not-active'
-    type: 'male' | 'female' | 'mixture'
-    statusCapacity: 'full' | 'available'
-    capacityEmploye: number | null
-    roomCount: number | null
-    employeeCount: number | null
-  }[]
-  pageCount: number
+
+export interface Explore {
+  id: string
+  slug: string
+  judul: string
+  ringkasanPendek: string
+  deskripsi: string
+  media: Media[]
+  pembuat: Pembuat
+  kategori: string
+  subKategori: string
+  tag: string[]
+  lokasi: Lokasi
+  dibuatPada: Date
+  diupdatePada: Date
+  totalVote: number
+  status: Status
+  impactMetrics: ImpactMetrics
+  sumber: Sumber[]
+  confidence: Confidence
 }
 
+export enum Confidence {
+  Reported = 'reported',
+  Verified = 'verified',
+}
 
+export interface ImpactMetrics {
+  beneficiaries?: number
+  co2SavedKg?: number
+  fundsRaisedIdr?: number
+  jobsCreated?: number
+}
 
-export interface MessAggregateInput {
+export interface Lokasi {
+  provinsi: string
+  kabupatenKota: string
+}
+
+export interface Media {
+  kind: Kind
+  url: string
+  caption: string
+  license: License
+  source: string
+}
+
+export enum Kind {
+  Image = 'image',
+}
+
+export enum License {
+  Unsplash = 'Unsplash',
+}
+
+export interface Pembuat {
+  id: string
+  nama: string
+  peran: string
+  organisasi: string
+  avatarUrl: string
+}
+
+export enum Status {
+  Published = 'published',
+}
+
+export interface Sumber {
+  type: Type
+  title: string
+  url: string
+}
+
+export enum Type {
+  Article = 'article',
+  Official = 'official',
+  Paper = 'paper',
+}
+
+// ============================================
+// DESTINATION TYPES - Re-exported from schema
+// ============================================
+
+export type {
+  DestinationType,
+  DestinationStatus,
+  DestinationCategory,
+  ProvinsiIndonesia,
+} from '@/db/schema'
+
+import type {
+  DestinationType,
+  DestinationStatus,
+  DestinationCategory,
+  ProvinsiIndonesia,
+} from '@/db/schema'
+
+export interface DestinationAggregateInput {
   filterFlag?: 'advancedFilters' | 'commandFilters' | null
   page?: number
   perPage?: number
   sort?: { id: string; desc: boolean }[]
   name?: string
-  status?: ('active' | 'not-active')[]
-  type?: ('male' | 'female' | 'mixture')[]
-  statusCapacity?: ('full' | 'available')[]
+  status?: DestinationStatus[]
+  type?: DestinationType[]
+  provinsi?: string
   createdAt?: number[]
   filters?: unknown[]
   joinOperator?: 'and' | 'or'
 }
 
-/**
- * Result type dari aggregate query
- */
-export interface MessAggregateResult {
+export interface DestinationAggregateResult {
   data: {
     id: number
+    userId: string
+    slug: string
     name: string
-    location: string | null
-    deskripcion: string | null
-    capacityRoom: number | null
-    createdAt: string
-    status: 'active' | 'not-active'
-    type: 'male' | 'female' | 'mixture'
-    statusCapacity: 'full' | 'available'
-    capacityEmploye: number | null
-    roomCount: number | null
-    employeeCount: number | null
+    description: string
+    type: DestinationType
+    category: DestinationCategory
+    provinsi: ProvinsiIndonesia
+    kabupatenKota: string | null
+    alamat: string | null
+    coverImage: string | null
+    images: string | null
+    totalVote: number
+    totalReview: number
+    averageRating: number | null | null
+    totalDonation: number | null
+    status: DestinationStatus
+    createdAt: Date
+    updatedAt: Date
   }[]
   pageCount: number
   statusCounts: {
-    active: number
-    'not-active': number
+    published: number
+    draft: number
+    archived: number
+  }
+  categoryCounts: {
+    'lokasi-budaya': number
+    pariwisata: number
+    'adat-istiadat': number
+    'kuliner-tradisional': number
+    'kesenian-daerah': number
+    'situs-sejarah': number
   }
   typeCounts: {
-    male: number
-    female: number
-    mixture: number
-  }
-  capacityCounts: {
-    full: number
-    available: number
+    'wisata-alam': number
+    'wisata-budaya': number
+    'wisata-sejarah': number
+    'wisata-religi': number
+    'wisata-kuliner': number
+    'wisata-bahari': number
+    'adat-istiadat': number
+    kesenian: number
+    kerajinan: number
+    festival: number
   }
 }

@@ -40,7 +40,9 @@ export function NavMain({ items }: sidebarType) {
                   tooltip={item.title}
                 >
                   <Link to={item.url}>
-                    <item.icon className={cn(isActive && ' fill-primary-foreground')} />
+                    <item.icon
+                      className={cn(isActive && ' fill-primary-foreground')}
+                    />
                     <span>{item.title}</span>
                   </Link>
                 </SidebarMenuButton>

@@ -4,6 +4,7 @@ import SiteBorder from '../ui/core/layout/nav/site-border'
 import { cn } from '@/lib/utils'
 import { ReactNode } from 'react'
 import ReactLenis from 'lenis/react'
+import SiteHeader from '../ui/core/layout/nav/site-header'
 
 interface LayoutWrapperProps {
   children: ReactNode
@@ -29,8 +30,8 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
     return (
       <ReactLenis root>
         <SiteBorder />
-
-        <div className={cn('relative min-h-dvh w-full overflow-hidden  ')}>
+        <SiteHeader />
+        <div className={cn('relative min-h-lvh w-full   ')}>
           <div
             className={cn(
               'mx-auto flex flex-col gap-13 lg:gap-25 h-full w-full',
@@ -46,9 +47,7 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
 
   // Layout minimal untuk auth/dashboard/404
   return (
-    <div
-      className={cn('relative min-h-dvh w-full overflow-hidden content-center')}
-    >
+    <div className={cn('relative min-h-lvh w-full   content-center')}>
       <div
         className={cn('mx-auto flex flex-col gap-13 lg:gap-25 h-full w-full')}
       >

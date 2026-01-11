@@ -4,7 +4,7 @@ import {
   SidebarProvider,
 } from '@/components/ui/fragments/shadcn-ui/sidebar'
 import ScrollToTop from '@/components/ui/fragments/custom-ui/button/scroll-to-top-button'
-import { NuqsAdapter } from 'nuqs/adapters/tanstack-router'
+
 import { AppSidebar } from './nav/app-sidebar'
 import { authClient } from '@/lib/auth/auth-client'
 import { User } from '@/db/schema'
@@ -27,7 +27,7 @@ function AppLayout({ children }: AppSidebarProps) {
   }
 
   return (
-    <NuqsAdapter>
+
       <SidebarProvider>
         <AppSidebar user={session.user as User} />
         <SidebarInset className="flex w-full flex-col flex-1 overflow-hidden">
@@ -40,7 +40,7 @@ function AppLayout({ children }: AppSidebarProps) {
         </SidebarInset>
         <ScrollToTop />
       </SidebarProvider>
-    </NuqsAdapter>
+ 
   )
 }
 

@@ -1,8 +1,15 @@
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
+import {
+  HeadContent,
+  Scripts,
+  createRootRoute,
+  useRouteContext,
+  useRouterState,
+} from '@tanstack/react-router'
 import appCss from '@/styles/styles.css?url'
 import Providers from '@/components/provider/Provider'
 import { NotFoundPage } from '@/components/ui/core/block/not-found-block-page'
-
+import NProgress from 'nprogress'
+import { useEffect } from 'react'
 // ============================================
 // ROOT ROUTE
 // ============================================
@@ -22,7 +29,7 @@ export const Route = createRootRoute({
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: 'TanStack Start Starter',
+        title: 'Suasana | Jelajahi budaya & wisata local indonesia',
       },
     ],
     links: [
@@ -37,6 +44,15 @@ export const Route = createRootRoute({
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  //  const routerState = useRouterState()
+
+  //  useEffect(() => {
+  //    if (routerState.isLoading) {
+  //      NProgress.start()
+  //    } else {
+  //      NProgress.done()
+  //    }
+  //  }, [routerState.isLoading])
   return (
     <html lang="en" suppressHydrationWarning>
       <head suppressHydrationWarning>

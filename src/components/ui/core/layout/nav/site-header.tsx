@@ -19,12 +19,8 @@ export default function SiteHeader() {
     },
 
     {
-      name: 'Inovasi',
+      name: 'Explore',
       link: '/explore',
-    },
-    {
-      name: 'Peringkat',
-      link: '/leaderboard',
     },
     {
       name: 'Peringkat',
@@ -34,8 +30,8 @@ export default function SiteHeader() {
   const { data: session } = authClient.useSession()
 
   return (
-    <Navbar className=" z-40">
-      {/* Desktop Navigation */}
+    <Navbar className=" z-99999999">
+      {/* Desktop Navigaion */}
       <NavBody>
         <NavbarLogo />
         <NavItems items={navItems} />
@@ -52,20 +48,20 @@ export default function SiteHeader() {
           ) : (
             <>
               <NavbarButton
-                variant={'default'}
-                className=" rounded-xl"
-                href="/login"
-                size={'sm'}
-              >
-                Masuk
-              </NavbarButton>
-              <NavbarButton
                 size={'sm'}
                 variant={'secondary'}
                 className=" rounded-xl"
                 href="/register"
               >
                 Daftar
+              </NavbarButton>
+              <NavbarButton
+                variant={'default'}
+                className=" rounded-xl"
+                href="/login"
+                size={'sm'}
+              >
+                Masuk
               </NavbarButton>
             </>
           )}

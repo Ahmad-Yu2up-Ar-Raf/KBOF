@@ -15,7 +15,7 @@ import React from 'react'
 import { authClient } from '@/lib/auth/auth-client'
 import { Spinner } from '@/components/ui/fragments/shadcn-ui/spinner'
 import { useQueryClient } from '@tanstack/react-query'
-import { clearAllMessQueries } from '@/lib/utils/mess-utils'
+import { clearAllDestinationQueries } from '@/lib/utils/destination-utils'
 
 interface UserMenuContentProps {
   user: User
@@ -33,7 +33,7 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
     setIsPending(true)
 
     // ⭐ Clear all cached queries before logout to prevent stale data
-    clearAllMessQueries(queryClient)
+    clearAllDestinationQueries(queryClient)
 
     await authClient.signOut({
       fetchOptions: {

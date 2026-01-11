@@ -8,6 +8,9 @@ import {
   LifeBuoy,
   DoorOpen,
   LayoutDashboardIcon,
+  Pin,
+  PenLine,
+  MapPin,
 } from 'lucide-react'
 
 import { NavMain } from './nav-main'
@@ -40,23 +43,16 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
         title: 'Dashboard',
         url: '/dashboard',
         icon: LayoutDashboardIcon,
-        isActive: false,
       },
       {
-        title: 'Mess',
-        url: '/dashboard/mess',
-        icon: Building2,
-        isActive: false,
+        title: 'Destination',
+        url: '/dashboard/destination',
+        icon: MapPin,
       },
       {
-        title: 'Rooms',
-        url: '/dashboard/rooms',
-        icon: DoorOpen,
-      },
-      {
-        title: 'Employe',
-        url: '/dashboard/employe',
-        icon: BriefcaseBusiness,
+        title: 'Article',
+        url: '/dashboard/articles',
+        icon: PenLine,
       },
     ],
     navSecondary: [

@@ -5,109 +5,156 @@
 // This file provides query options for TanStack Query integration.
 // Uses consistent query keys for proper cache invalidation.
 
-import { queryOptions } from '@tanstack/react-query'
+import { queryOptions, infiniteQueryOptions } from '@tanstack/react-query'
+
 import {
-  getMessAggregateServerFn,
-  type MessAggregateInput,
-} from './server/mess/mess-server-queries'
+  getDestinationAggregateServerFn,
+  type DestinationAggregateInput,
+} from './server/destination/destination-server-queries'
 
-// ============================================
-// MESS QUERY KEYS - Single Source of Truth
-// ============================================
-
-/**
- * Unified query keys for mess queries
- * All mess-related queries MUST use these keys for proper invalidation
- */
-export const messKeys = {
-  // Base key - invalidate this to clear ALL mess queries
-  all: ['mess'] as const,
-
-  // Aggregate query key - includes filters for granular caching
-  aggregate: (filters: MessAggregateInput) =>
-    [...messKeys.all, 'aggregate', filters] as const,
-
-  // For future use
-  list: (filters?: Record<string, unknown>) =>
-    [...messKeys.all, 'list', filters] as const,
-  detail: (id: number) => [...messKeys.all, 'detail', id] as const,
-} as const
-
-// ============================================
-// MESS QUERY OPTIONS
-// ============================================
-
-/**
- * Query options factory for mess aggregate data
- *
- * @param filters - Filter parameters from nuqs/search params
- * @returns Query options object for use with useQuery/useSuspenseQuery
- *
- * @example
- * // In loader (SSR) - populate cache:
- * await queryClient.ensureQueryData(getMessQueryOptions(filters))
- *
- * // In component (CSR with hydration):
- * const { data } = useSuspenseQuery(getMessQueryOptions(filters))
- */
-export const getMessQueryOptions = (filters: MessAggregateInput) =>
-  queryOptions({
-    // ⭐ Use unified query key
-    queryKey: messKeys.aggregate(filters),
-
-    // ⭐ queryFn MUST be a function that returns a Promise
-    queryFn: async () => {
-      const result = await getMessAggregateServerFn({
-        data: { filters },
-      })
-      return result
-    },
-
-    // ⭐ Keep data fresh - staleTime: 0 means always refetch on mount
-    staleTime: 0,
-
-    // ⭐ Don't garbage collect immediately
-    gcTime: 5 * 60 * 1000, // 5 minutes
-  })
-
-// ============================================
-// INVALIDATION HELPERS
-// ============================================
-
-/**
- * Invalidate ALL mess queries
- * Use after create/update/delete operations
- *
- * @param queryClient - TanStack Query client
- *
- * @example
- * await invalidateAllMessQueries(queryClient)
- */
-export const invalidateAllMessQueries = async (
-  queryClient: import('@tanstack/react-query').QueryClient,
-) => {
-  await queryClient.invalidateQueries({
-    queryKey: messKeys.all,
-  })
-}
-
-/**
- * Refetch ALL mess queries
- * More aggressive than invalidate - immediately refetches
- *
- * @param queryClient - TanStack Query client
- */
-export const refetchAllMessQueries = async (
-  queryClient: import('@tanstack/react-query').QueryClient,
-) => {
-  await queryClient.refetchQueries({
-    queryKey: messKeys.all,
-    type: 'active', // Only refetch active queries
-  })
-}
+import {
+  getExploreDestinationsServerFn,
+  getDestinationBySlugServerFn,
+  type ExploreFilters,
+} from './server/explore/explore-server-queries'
 
 // ============================================
 // TYPE EXPORTS
 // ============================================
 
-export type { MessAggregateInput }
+export type { DestinationAggregateInput, ExploreFilters }
+
+// ============================================
+// DESTINATION QUERY KEYS
+// ============================================
+
+/**
+ * Unified query keys for destination queries
+ * All destination-related queries MUST use these keys for proper invalidation
+ */
+export const destinationKeys = {
+  // Base key - invalidate this to clear ALL destination queries
+  all: ['destination'] as const,
+
+  // Aggregate query key - includes filters for granular caching
+  aggregate: (filters: DestinationAggregateInput) =>
+    [...destinationKeys.all, 'aggregate', filters] as const,
+
+  // For future use
+  list: (filters?: Record<string, unknown>) =>
+    [...destinationKeys.all, 'list', filters] as const,
+  detail: (id: string) => [...destinationKeys.all, 'detail', id] as const,
+} as const
+
+// ============================================
+// DESTINATION QUERY OPTIONS
+// ============================================
+
+/**
+ * Query options factory for destination aggregate data
+ */
+export const getDestinationQueryOptions = (
+  filters: DestinationAggregateInput,
+) =>
+  queryOptions({
+    queryKey: destinationKeys.aggregate(filters),
+
+    queryFn: async () => {
+      const result = await getDestinationAggregateServerFn({
+        data: { filters },
+      })
+      return result
+    },
+
+    // ⭐ IMPORTANT: Set reasonable staleTime to prevent excessive refetches
+    // Data is considered "fresh" for 30 seconds - nuqs filter changes will
+    // still trigger refetch because queryKey changes (which always fetches)
+    staleTime: 30 * 1000, // 30 seconds
+    gcTime: 5 * 60 * 1000,
+  })
+
+// ============================================
+// DESTINATION INVALIDATION HELPERS
+// ============================================
+
+/**
+ * Invalidate ALL destination queries
+ * Use after create/update/delete operations
+ */
+export const invalidateAllDestinationQueries = async (
+  queryClient: import('@tanstack/react-query').QueryClient,
+) => {
+  await queryClient.invalidateQueries({
+    queryKey: destinationKeys.all,
+  })
+}
+
+/**
+ * Refetch ALL destination queries
+ */
+export const refetchAllDestinationQueries = async (
+  queryClient: import('@tanstack/react-query').QueryClient,
+) => {
+  await queryClient.refetchQueries({
+    queryKey: destinationKeys.all,
+    type: 'active',
+  })
+}
+
+// ============================================
+// EXPLORE QUERY KEYS (Public)
+// ============================================
+
+export const exploreKeys = {
+  all: ['explore'] as const,
+  list: (filters: Omit<ExploreFilters, 'cursor'>) =>
+    [...exploreKeys.all, 'list', filters] as const,
+  detail: (slug: string) => [...exploreKeys.all, 'detail', slug] as const,
+} as const
+
+// ============================================
+// EXPLORE QUERY OPTIONS (Infinite Scroll)
+// ============================================
+
+/**
+ * Infinite query options for explore destinations (public)
+ * Uses cursor-based pagination for infinite scroll
+ */
+export const getExploreInfiniteQueryOptions = (
+  filters: Omit<ExploreFilters, 'cursor'>,
+) =>
+  infiniteQueryOptions({
+    queryKey: exploreKeys.list(filters),
+    queryFn: async ({ pageParam }) => {
+      const result = await getExploreDestinationsServerFn({
+        data: {
+          filters: {
+            ...filters,
+            cursor: pageParam,
+          },
+        },
+      })
+      return result
+    },
+    initialPageParam: undefined as number | undefined,
+    getNextPageParam: (lastPage) =>
+      lastPage.hasNextPage ? (lastPage.nextCursor ?? undefined) : undefined,
+    staleTime: 60 * 1000,
+    gcTime: 10 * 60 * 1000,
+  })
+
+/**
+ * Query options for single destination by slug (public)
+ */
+export const getExploreDetailQueryOptions = (slug: string) =>
+  queryOptions({
+    queryKey: exploreKeys.detail(slug),
+    queryFn: async () => {
+      const result = await getDestinationBySlugServerFn({
+        data: { slug },
+      })
+      return result
+    },
+    staleTime: 60 * 1000,
+    gcTime: 10 * 60 * 1000,
+  })

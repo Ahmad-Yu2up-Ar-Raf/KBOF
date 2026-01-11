@@ -1,0 +1,3876 @@
+[
+  {
+    "id": "1a7c3d2e-0a5f-4b9c-8e4d-6f7a8b0c9d1e",
+    "slug": "genose-c19-deteksi-covid",
+    "judul": "GeNose C19 - Alat Deteksi Covid-19 Berbasis AI",
+    "ringkasanPendek": "Alat skrining Covid-19 non-invasif melalui hembusan napas menggunakan sensor gas dan kecerdasan buatan.",
+    "deskripsi": "GeNose C19 adalah explore terobosan dari Universitas Gadjah Mada yang mampu mendeteksi Covid-19 melalui hembusan napas dalam waktu kurang dari 2 menit. Alat ini menggunakan teknologi sensor gas yang dikombinasikan dengan algoritma machine learning untuk menganalisis pola napas pasien. Dengan tingkat akurasi yang tinggi, GeNose telah digunakan di berbagai bandara, stasiun, dan fasilitas umum di Indonesia, menyediakan solusi skrining massal yang lebih cepat, murah, dan nyaman dibanding metode PCR atau rapid test konvensional.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1584515933487-779824d29309",
+        "caption": "Tim peneliti UGM dengan alat GeNose C19",
+        "license": "Unsplash",
+        "source": "UGM Official"
+      }
+    ],
+    "pembuat": {
+      "id": "9d1e4c7a-6f8b-4a5c-9e2d-3b0c1a7f6e8d",
+      "nama": "Tim Peneliti UGM",
+      "peran": "Inisiator dan Pengembang Utama",
+      "organisasi": "Universitas Gadjah Mada (UGM)",
+      "avatarUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Lambang_UGM.svg/1200px-Lambang_UGM.svg.png"
+    },
+    "kategori": "Kesehatan",
+    "subKategori": "Diagnostik & AI",
+    "tag": ["Covid-19", "diagnostik", "AI", "pernapasan", "UGM"],
+    "lokasi": {
+      "provinsi": "DI Yogyakarta",
+      "kabupatenKota": "Sleman"
+    },
+    "dibuatPada": "2020-03-01T08:00:00Z",
+    "diupdatePada": "2021-06-15T10:30:00Z",
+    "totalVote": 45000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 10000000,
+      "co2SavedKg": 50000,
+      "fundsRaisedIdr": 50000000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi GeNose UGM",
+        "url": "https://genose.ugm.ac.id/"
+      },
+      {
+        "type": "article",
+        "title": "GeNose C19 UGM Siap Diproduksi Massal",
+        "url": "https://kompas.id/baca/humaniora/2021/01/15/genose-c19-ugm-siap-diproduksi-massal/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "2b8d4e3f-1b6g-5c0d-9f5e-7g8b9c1d0e2f",
+    "slug": "halodoc-telemedicine",
+    "judul": "Halodoc - Platform Telemedicine Terintegrasi",
+    "ringkasanPendek": "Aplikasi kesehatan digital yang menyediakan konsultasi dokter, apotek, dan layanan tes kesehatan secara daring.",
+    "deskripsi": "Halodoc adalah salah satu platform telemedicine terdepan di Indonesia, memungkinkan pengguna untuk melakukan konsultasi medis (chat/video call) dengan ribuan dokter berlisensi, membeli obat-obatan dari apotek terdekat, hingga membuat janji untuk tes lab dan vaksinasi. Halodoc berupaya mendemokratisasi akses kesehatan berkualitas di seluruh Indonesia, terutama di daerah terpencil.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://tabloidpulsa.id/wp-content/uploads/2022/03/Halodoc.jpg",
+        "caption": "Ilustrasi layanan konsultasi online Halodoc",
+        "license": "Unsplash",
+        "source": "Halodoc Official"
+      }
+    ],
+    "pembuat": {
+      "id": "a0f25e7c-3d9a-4b6e-c1f8-2g0h9i7j6k5l",
+      "nama": "Jonathan Sudharta",
+      "peran": "CEO & Founder",
+      "organisasi": "Halodoc",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a814574768a"
+    },
+    "kategori": "Kesehatan",
+    "subKategori": "Telemedicine",
+    "tag": ["e-health", "konsultasi", "digital", "startup", "kesehatan"],
+    "lokasi": {
+      "provinsi": "DKI Jakarta",
+      "kabupatenKota": "Jakarta Selatan"
+    },
+    "dibuatPada": "2016-04-21T00:00:00Z",
+    "diupdatePada": "2024-10-10T15:20:00Z",
+    "totalVote": 18765,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 25000000,
+      "jobsCreated": 1500
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi Halodoc",
+        "url": "https://www.halodoc.com/"
+      },
+      {
+        "type": "article",
+        "title": "Halodoc Raih Status Unicorn Baru Indonesia",
+        "url": "https://dailysocial.id/post/halodoc-unicorn-indonesia"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "3c9e5f4g-2c7h-6d1e-a0g6-8h9c0d2e1f3g",
+    "slug": "ovo-digital-wallet",
+    "judul": "OVO - E-Wallet Terkemuka Indonesia",
+    "ringkasanPendek": "Platform dompet digital terintegrasi yang melayani pembayaran merchant, transfer, dan layanan finansial lainnya.",
+    "deskripsi": "OVO adalah platform e-wallet yang mencapai status unicorn dengan valuasi signifikan. OVO menyediakan berbagai layanan termasuk pembayaran merchant, transfer uang, investasi, dan asuransi. Integrasinya yang luas di berbagai ritel, e-commerce, dan layanan transportasi menjadikannya salah satu alat pembayaran digital paling vital di Indonesia.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVnu-MgiHQj6qzCFqqgShhDZup2cSDz61Jzg&s",
+        "caption": "Ilustrasi penggunaan dompet digital OVO",
+        "license": "Unsplash",
+        "source": "OVO Corporate"
+      }
+    ],
+    "pembuat": {
+      "id": "b1g36f8d-4e0b-5c7a-d2h9-3i0j1k2l3m4n",
+      "nama": "Karaniya Dharmasaputra",
+      "peran": "President Director (Mantan)",
+      "organisasi": "OVO",
+      "avatarUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb"
+    },
+    "kategori": "Teknologi",
+    "subKategori": "Fintech",
+    "tag": ["fintech", "e-wallet", "pembayaran", "digital", "ekonomi"],
+    "lokasi": {
+      "provinsi": "DKI Jakarta",
+      "kabupatenKota": "Jakarta Selatan"
+    },
+    "dibuatPada": "2017-09-01T00:00:00Z",
+    "diupdatePada": "2024-09-01T10:00:00Z",
+    "totalVote": 35000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 50000000,
+      "fundsRaisedIdr": 40600000000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi OVO",
+        "url": "https://www.ovo.id/"
+      },
+      {
+        "type": "article",
+        "title": "OVO Capai Status Unicorn",
+        "url": "https://www.cnbcindonesia.com/tech/20191008103000-37-104996/ovo-resmi-jadi-unicorn-ke-lima-indonesia"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "4d0f6g5h-3d8i-7e2f-b1h7-9i0d3e2f4g5h",
+    "slug": "ruangguru-edutech",
+    "judul": "Ruangguru - Platform Edutech Terbesar",
+    "ringkasanPendek": "Platform belajar online terdepan di Asia Tenggara, menyediakan berbagai layanan mulai dari video belajar hingga bimbingan privat.",
+    "deskripsi": "Ruangguru adalah perusahaan teknologi pendidikan yang menyediakan layanan bimbingan belajar, termasuk video beranimasi, bank soal, tryout, dan layanan privat. Dengan jutaan pengguna, Ruangguru telah mengubah cara siswa belajar di Indonesia dan beberapa negara Asia Tenggara lainnya, menawarkan akses ke pendidikan berkualitas tinggi secara terjangkau.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://cdn-web.ruangguru.com/landing-pages/assets/hs/RB_Lembar%20Belajar_%20Push%20Notification%20781%20x%20480.png",
+        "caption": "Ilustrasi siswa belajar menggunakan Ruangguru",
+        "license": "Unsplash",
+        "source": "Ruangguru Corporate"
+      }
+    ],
+    "pembuat": {
+      "id": "c2h47g9e-5f1c-6d8b-e3i0-4j1k2l3m4n5o",
+      "nama": "Adamas Belva Syah Devara & Iman Usman",
+      "peran": "Co-Founders",
+      "organisasi": "Ruangguru",
+      "avatarUrl": "https://images.unsplash.com/photo-1506794778202-dfa9e708ab97"
+    },
+    "kategori": "Pendidikan",
+    "subKategori": "Edutech",
+    "tag": ["edutech", "pendidikan", "digital", "startup", "belajar"],
+    "lokasi": {
+      "provinsi": "DKI Jakarta",
+      "kabupatenKota": "Jakarta Pusat"
+    },
+    "dibuatPada": "2014-04-01T00:00:00Z",
+    "diupdatePada": "2024-11-01T08:00:00Z",
+    "totalVote": 52000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 40000000,
+      "jobsCreated": 4000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi Ruangguru",
+        "url": "https://ruangguru.com/"
+      },
+      {
+        "type": "article",
+        "title": "Ruangguru jadi Decacorn Baru",
+        "url": "https://www.cnbcindonesia.com/tech/20220310103000-37-104996/ruangguru-jadi-decacorn-baru-indonesia"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "5e1g7h6i-4e9j-8f3g-c2i8-0j1k4l3m5n6o",
+    "slug": "dana-digital-payment",
+    "judul": "DANA - Dompet Digital Indonesia",
+    "ringkasanPendek": "Platform pembayaran digital yang fokus pada interoperabilitas dan keamanan transaksi harian.",
+    "deskripsi": "DANA adalah dompet digital yang didukung oleh Emtek Group dan Ant Financial, yang memfokuskan diri pada layanan pembayaran yang mudah, aman, dan dapat digunakan di berbagai platform dan merchant (interoperabilitas). DANA telah menjadi bagian penting dari ekosistem pembayaran non-tunai di Indonesia, mendukung berbagai transaksi mulai dari e-commerce hingga tagihan utilitas.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://idwebhost.com/blog/wp-content/uploads/2025/02/193_aplikasi-dana-fungsi-fitur-dan-cara-membuat-akunnya.webp",
+        "caption": "Ilustrasi keamanan transaksi digital",
+        "license": "Unsplash",
+        "source": "DANA Corporate"
+      }
+    ],
+    "pembuat": {
+      "id": "d3i58h0j-6g2d-7a9c-f4j1-5k2l3m4n5o6p",
+      "nama": "Vince Iswara",
+      "peran": "CEO",
+      "organisasi": "DANA Indonesia",
+      "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e"
+    },
+    "kategori": "Teknologi",
+    "subKategori": "Fintech",
+    "tag": ["fintech", "e-wallet", "pembayaran", "keamanan", "dana"],
+    "lokasi": {
+      "provinsi": "DKI Jakarta",
+      "kabupatenKota": "Jakarta Pusat"
+    },
+    "dibuatPada": "2018-03-22T00:00:00Z",
+    "diupdatePada": "2024-07-20T11:00:00Z",
+    "totalVote": 28000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 45000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi DANA",
+        "url": "https://dana.id/"
+      },
+      {
+        "type": "article",
+        "title": "Ekosistem DANA dan Perkembangannya",
+        "url": "https://tirto.id/mengenal-dana-dompet-digital-indonesia-gcuK4"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "6f2h8i7j-5f0k-9g4h-d3k9-1l2m5n4o6p7q",
+    "slug": "sayurbox-e-groceries",
+    "judul": "Sayurbox - E-Groceries & Rantai Pasok Pangan",
+    "ringkasanPendek": "Platform yang menghubungkan petani lokal langsung dengan konsumen perkotaan untuk produk segar.",
+    "deskripsi": "Sayurbox adalah platform e-commerce yang berfokus pada produk pertanian dan kebutuhan sehari-hari. Model bisnisnya memotong rantai pasok tradisional dengan mengambil produk langsung dari petani dan mengirimkannya ke konsumen. Hal ini memastikan kesegaran, mendukung petani lokal, dan menawarkan harga yang kompetitif. Sayurbox berperan penting dalam modernisasi agrikultur dan logistik pangan di Indonesia.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://static.arenalte.com/uploads/2020/09/sayurbox.jpg",
+        "caption": "Sayuran segar dari petani Sayurbox",
+        "license": "Unsplash",
+        "source": "Sayurbox Official"
+      }
+    ],
+    "pembuat": {
+      "id": "e4j69i1k-7h3e-8f5g-g5l2-6m3n4o5p7q8r",
+      "nama": "Amanda Susanti",
+      "peran": "CEO & Co-Founder",
+      "organisasi": "Sayurbox",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a814574768a"
+    },
+    "kategori": "Pangan",
+    "subKategori": "Agrotech & Logistik",
+    "tag": ["agrotech", "e-commerce", "rantai pasok", "petani", "pangan"],
+    "lokasi": {
+      "provinsi": "DKI Jakarta",
+      "kabupatenKota": "Jakarta Selatan"
+    },
+    "dibuatPada": "2016-07-01T00:00:00Z",
+    "diupdatePada": "2023-11-10T09:30:00Z",
+    "totalVote": 15500,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 1000000,
+      "jobsCreated": 1200
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi Sayurbox",
+        "url": "https://www.sayurbox.com/"
+      },
+      {
+        "type": "article",
+        "title": "Sayurbox Raih Pendanaan Seri C",
+        "url": "https://techcrunch.com/2022/03/24/indonesias-sayurbox-raises-120m-series-c-to-build-out-its-e-grocery-supply-chain/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "7g3i9j8k-6g1l-0h5i-e4m0-2n3o6p5q7r8s",
+    "slug": "traveloka-online-travel-agent",
+    "judul": "Traveloka - Platform Perjalanan & Gaya Hidup",
+    "ringkasanPendek": "Agen perjalanan online (OTA) terbesar di Asia Tenggara, menawarkan pemesanan tiket, hotel, dan aktivitas gaya hidup.",
+    "deskripsi": "Traveloka adalah perusahaan unicorn yang bergerak di bidang layanan pemesanan perjalanan dan gaya hidup. Mulai dari pemesanan tiket pesawat, hotel, hingga tiket atraksi dan aktivitas, Traveloka telah menjadi platform 'Super App' untuk kebutuhan travel di Asia Tenggara. Explore utamanya terletak pada integrasi layanan yang mulus dan fitur-fitur yang mendukung perjalanan end-to-end.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://celotehdinihari.com/wp-content/uploads/2022/01/Traveloka-Paylater-JujurGunaBanget-1.png",
+        "caption": "Ilustrasi pemesanan perjalanan digital",
+        "license": "Unsplash",
+        "source": "Traveloka Corporate"
+      }
+    ],
+    "pembuat": {
+      "id": "f5k70j2l-8i4f-9g6h-h6n1-7o4p5q6r8s9t",
+      "nama": "Ferry Unardi, Derianto Kusuma, Albert Zhang",
+      "peran": "Co-Founders",
+      "organisasi": "Traveloka",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a814574768a"
+    },
+    "kategori": "Ekonomi Kreatif",
+    "subKategori": "Pariwisata Digital",
+    "tag": ["travel", "OTA", "e-commerce", "aplikasi", "pariwisata"],
+    "lokasi": {
+      "provinsi": "DKI Jakarta",
+      "kabupatenKota": "Jakarta Pusat"
+    },
+    "dibuatPada": "2012-02-29T00:00:00Z",
+    "diupdatePada": "2024-05-01T14:00:00Z",
+    "totalVote": 65000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 100000000,
+      "jobsCreated": 3000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi Traveloka",
+        "url": "https://www.traveloka.com/"
+      },
+      {
+        "type": "article",
+        "title": "Traveloka Jangkau Asia Tenggara",
+        "url": "https://www.bloomberg.com/news/articles/2020-07-28/traveloka-expands-its-superapp-ambitions-beyond-travel"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "8h4j0k9l-7h2m-1i6j-f5o2-3p4q7r6s8t9u",
+    "slug": "padi-umkm-marketplace",
+    "judul": "PaDi UMKM - Pengadaan Digital BUMN",
+    "ringkasanPendek": "Platform digital untuk memfasilitasi UMKM agar dapat berpartisipasi dalam pengadaan barang dan jasa BUMN.",
+    "deskripsi": "PaDi (Pasar Digital) UMKM adalah inisiatif Kementerian BUMN untuk menciptakan pasar B2B digital yang menghubungkan UMKM lokal dengan perusahaan BUMN. Tujuannya adalah untuk meningkatkan kapabilitas UMKM, mempermudah akses pasar, dan mendorong transparansi dalam proses pengadaan BUMN. Ini adalah explore sosial-ekonomi yang signifikan.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d",
+        "caption": "UMKM menggunakan platform PaDi",
+        "license": "Unsplash",
+        "source": "Kementerian BUMN"
+      }
+    ],
+    "pembuat": {
+      "id": "g6l81k3m-9j5g-0h7i-i7p3-8q5r6s7t9u0v",
+      "nama": "Kementerian BUMN",
+      "peran": "Inisiator Proyek",
+      "organisasi": "Kementerian BUMN RI",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Ekonomi Kreatif",
+    "subKategori": "Digital Marketplace B2B",
+    "tag": ["UMKM", "B2B", "pengadaan", "digital", "BUMN"],
+    "lokasi": {
+      "provinsi": "DKI Jakarta",
+      "kabupatenKota": "Jakarta Pusat"
+    },
+    "dibuatPada": "2020-08-17T00:00:00Z",
+    "diupdatePada": "2024-08-17T12:00:00Z",
+    "totalVote": 12000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 50000,
+      "fundsRaisedIdr": 1000000000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi PaDi UMKM",
+        "url": "https://padiumkm.id/"
+      },
+      {
+        "type": "article",
+        "title": "PaDi UMKM Tembus Transaksi Triliunan",
+        "url": "https://ekonomi.bisnis.com/read/20230601/99/1661664/transaksi-di-padi-umkm-tembus-rp55-triliun"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "9i5k1l0m-8i3n-2j7k-g6q4-4r5s8t7u9v0w",
+    "slug": "jaklingko-integrasi-transportasi",
+    "judul": "JakLingko - Integrasi Pembayaran Transportasi",
+    "ringkasanPendek": "Sistem pembayaran terintegrasi untuk berbagai moda transportasi publik di wilayah Jakarta dan sekitarnya.",
+    "deskripsi": "JakLingko adalah explore pemerintah provinsi DKI Jakarta untuk mengintegrasikan sistem pembayaran dan rute berbagai moda transportasi publik seperti Transjakarta, MRT Jakarta, LRT Jakarta, dan KRL Commuter Line. Tujuannya adalah menciptakan pengalaman bertransportasi yang mulus, efisien, dan mendorong penggunaan angkutan umum.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDmC5o7yNXv7Qf2-ts-z30qTFKN1E58MWYPA&s",
+        "caption": "Ilustrasi Integrasi Transportasi Umum Jakarta",
+        "license": "Unsplash",
+        "source": "Pemprov DKI Jakarta"
+      }
+    ],
+    "pembuat": {
+      "id": "h7m92l4o-0k6h-1i8j-j8r5-9s6t0u8v1w2x",
+      "nama": "PT JakLingko Indonesia",
+      "peran": "Operator & Pengembang Sistem",
+      "organisasi": "Pemerintah Provinsi DKI Jakarta",
+      "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e"
+    },
+    "kategori": "Transportasi",
+    "subKategori": "Smart Mobility",
+    "tag": ["transportasi", "integrasi", "smart city", "Jakarta", "publik"],
+    "lokasi": {
+      "provinsi": "DKI Jakarta",
+      "kabupatenKota": "Jakarta"
+    },
+    "dibuatPada": "2018-05-01T00:00:00Z",
+    "diupdatePada": "2024-06-25T11:30:00Z",
+    "totalVote": 20000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 15000000,
+      "co2SavedKg": 1000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi JakLingko",
+        "url": "https://jaklingko.com/"
+      },
+      {
+        "type": "article",
+        "title": "JakLingko: Integrasi Pembayaran Multimoda",
+        "url": "https://www.jakartamaju.jakarta.go.id/en/news/detail/jaklingko-menciptakan-sistem-transportasi-terpadu"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "a0j62m1n-9j4o-3k8l-h7s5-5t6u9v8w0x1y",
+    "slug": "e-tilang-electronic-traffic-law-enforcement",
+    "judul": "ETLE - Electronic Traffic Law Enforcement",
+    "ringkasanPendek": "Sistem penegakan hukum lalu lintas berbasis kamera pengawas (CCTV) yang beroperasi secara digital.",
+    "deskripsi": "ETLE adalah sistem tilang elektronik yang menggunakan kamera berteknologi canggih untuk memantau pelanggaran lalu lintas 24/7. Explore ini bertujuan untuk meningkatkan disiplin pengendara, mengurangi interaksi langsung antara petugas dan pelanggar (mencegah korupsi), dan meningkatkan transparansi penegakan hukum di jalan raya. Sistem ini telah diterapkan di banyak kota besar di Indonesia.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCHCCsO5MUmfxz0Pa-KfbjZw737W6XqtfROA&s",
+        "caption": "Kamera CCTV ETLE memantau lalu lintas",
+        "license": "Unsplash",
+        "source": "POLRI Official"
+      }
+    ],
+    "pembuat": {
+      "id": "i8n03m5p-1l7i-2j9k-k9t6-6u7v1w9x2y3z",
+      "nama": "Kepolisian Negara Republik Indonesia (POLRI)",
+      "peran": "Pengembang & Operator",
+      "organisasi": "POLRI",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a814574768a"
+    },
+    "kategori": "Keamanan",
+    "subKategori": "Smart Government",
+    "tag": ["hukum", "lalu lintas", "digital", "keamanan", "smart city"],
+    "lokasi": {
+      "provinsi": "Nasional",
+      "kabupatenKota": "Kota-kota Besar"
+    },
+    "dibuatPada": "2018-10-01T00:00:00Z",
+    "diupdatePada": "2024-04-15T09:00:00Z",
+    "totalVote": 25000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 30000000,
+      "co2SavedKg": 150000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi Korlantas POLRI",
+        "url": "https://etle.korlantas.polri.go.id/"
+      },
+      {
+        "type": "article",
+        "title": "Implementasi ETLE di Indonesia",
+        "url": "https://nasional.kompas.com/read/2021/03/23/18000011/etle-nasional-resmi-diluncurkan"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "b1k73n2o-a0k5-4l9m-i8u7-7v8w0x9y2z3a",
+    "slug": "sipandu-layanan-publik",
+    "judul": "SIPANDU - Sistem Informasi Pelayanan Terpadu",
+    "ringkasanPendek": "Sistem informasi terpadu yang menyederhanakan layanan publik pemerintahan daerah menjadi satu platform digital.",
+    "deskripsi": "SIPANDU adalah inisiatif pemerintah daerah (contoh: di beberapa kabupaten/kota) untuk mengintegrasikan berbagai layanan publik, seperti perizinan, administrasi kependudukan, dan pembayaran pajak daerah, dalam satu sistem online. Ini meningkatkan efisiensi birokrasi, transparansi, dan kemudahan akses bagi masyarakat, mencerminkan explore *e-government* yang berhasil.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRIlsgLs6baCZWHxBhEHo6xwV4RgNGf9FSsg&s",
+        "caption": "Ilustrasi layanan digital pemerintah",
+        "license": "Unsplash",
+        "source": "Kementerian PAN-RB"
+      }
+    ],
+    "pembuat": {
+      "id": "j9o14p6q-2m8j-3k0l-l0v8-8w9x2y0z3a4b",
+      "nama": "Pemerintah Daerah (Contoh: Kabupaten Banyuwangi)",
+      "peran": "Pengembang Sistem",
+      "organisasi": "Dinas Komunikasi dan Informatika",
+      "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e"
+    },
+    "kategori": "Sosial",
+    "subKategori": "E-Government",
+    "tag": ["layanan publik", "e-gov", "birokrasi", "digital", "daerah"],
+    "lokasi": {
+      "provinsi": "Jawa Timur",
+      "kabupatenKota": "Banyuwangi"
+    },
+    "dibuatPada": "2019-03-01T00:00:00Z",
+    "diupdatePada": "2024-03-10T10:00:00Z",
+    "totalVote": 8500,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 1500000,
+      "co2SavedKg": 10000
+    },
+    "sumber": [
+      {
+        "type": "article",
+        "title": "Explore Pelayanan Publik di Banyuwangi",
+        "url": "https://www.menpan.go.id/site/berita-terkini/banyuwangi-jadi-percontohan-pelayanan-publik"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "c2l84o3p-b1l6-5m0n-j9v9-9x0y3z1a4b5c",
+    "slug": "jerami-pakan-ternak",
+    "judul": "Explore Jerami Fermentasi Pakan Ternak",
+    "ringkasanPendek": "Pemanfaatan limbah jerami padi melalui teknologi fermentasi untuk diubah menjadi pakan ternak bernutrisi tinggi.",
+    "deskripsi": "Explore ini mengatasi masalah limbah pertanian (jerami) sekaligus menyediakan solusi pakan ternak murah dan bergizi, terutama saat musim kemarau. Dengan proses fermentasi menggunakan mikroorganisme spesifik, jerami yang awalnya sulit dicerna menjadi lebih bernutrisi, meningkatkan produksi susu/daging, dan mendukung keberlanjutan sektor peternakan kecil.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://i0.wp.com/kabarhandayani.com/wp-content/uploads/2015/03/jerami-ngawen.jpg?resize=800%2C450",
+        "caption": "Jerami difermentasi sebagai pakan ternak",
+        "license": "Unsplash",
+        "source": "Kementerian Pertanian"
+      }
+    ],
+    "pembuat": {
+      "id": "k0p25q7r-3n9k-4l1m-m1w0-0y1z4a2b5c6d",
+      "nama": "Kelompok Tani Ternak Mandiri",
+      "peran": "Inovator Lokal",
+      "organisasi": "Universitas Brawijaya (Studi Kasus)",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a814574768a"
+    },
+    "kategori": "Pangan",
+    "subKategori": "Peternakan & Agrikultur",
+    "tag": ["agrikultur", "pakan ternak", "fermentasi", "limbah", "peternakan"],
+    "lokasi": {
+      "provinsi": "Jawa Timur",
+      "kabupatenKota": "Malang"
+    },
+    "dibuatPada": "2017-06-01T00:00:00Z",
+    "diupdatePada": "2023-10-05T13:30:00Z",
+    "totalVote": 7800,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 5000,
+      "co2SavedKg": 500000
+    },
+    "sumber": [
+      {
+        "type": "paper",
+        "title": "Fermentasi Jerami untuk Pakan Ternak",
+        "url": "https://www.researchgate.net/publication/325789012"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "d3m95p4q-c2m7-6n1o-k0x1-1z2a5b3c6d7e",
+    "slug": "baterai-lithium-inovasi-nasional",
+    "judul": "Baterai Lithium Ion Ramah Lingkungan",
+    "ringkasanPendek": "Pengembangan baterai lithium ion dan natrium ion dari bahan baku lokal untuk kendaraan listrik.",
+    "deskripsi": "Lembaga penelitian nasional dan universitas (seperti LIPI/BRIN dan ITB) berkolaborasi dalam pengembangan baterai dari bahan baku lokal seperti nikel. Explore ini krusial untuk mendukung ekosistem kendaraan listrik di Indonesia, mengurangi ketergantungan pada impor, dan memaksimalkan sumber daya alam yang melimpah. Fokus juga pada daur ulang dan desain yang lebih ramah lingkungan.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://ftmm.unair.ac.id/wp-content/uploads/2024/09/image_2024-09-30_141433274-768x512.png",
+        "caption": "Sel baterai lithium ion",
+        "license": "Unsplash",
+        "source": "BRIN/ITB"
+      }
+    ],
+    "pembuat": {
+      "id": "l1q36r8s-4o0l-5m2n-n2y3-7a4b6c5d8e9f",
+      "nama": "Tim Peneliti Baterai Nasional",
+      "peran": "Kolaborator Utama",
+      "organisasi": "Badan Riset dan Explore Nasional (BRIN) & ITB",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Energi",
+    "subKategori": "Energi Terbarukan",
+    "tag": ["baterai", "kendaraan listrik", "nikel", "energi", "riset"],
+    "lokasi": {
+      "provinsi": "Jawa Barat",
+      "kabupatenKota": "Bandung"
+    },
+    "dibuatPada": "2015-01-01T00:00:00Z",
+    "diupdatePada": "2024-09-01T15:00:00Z",
+    "totalVote": 18000,
+    "status": "published",
+    "impactMetrics": {
+      "fundsRaisedIdr": 200000000000,
+      "co2SavedKg": 5000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Riset Baterai Nasional BRIN",
+        "url": "https://www.brin.go.id/news/92667/riset-baterai-listrik-nasional"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "e4n06q5r-d3n8-7o2p-l1z2-2a3b6c4d7e8f",
+    "slug": "waste4change-kelola-sampah",
+    "judul": "Waste4Change - Solusi Pengelolaan Sampah",
+    "ringkasanPendek": "Startup sosial yang fokus pada layanan pengelolaan sampah yang bertanggung jawab, dari hulu ke hilir.",
+    "deskripsi": "Waste4Change menyediakan layanan pengelolaan sampah 3R (Reduce, Reuse, Recycle) yang terintegrasi untuk individu, rumah tangga, dan perusahaan. Explore mereka terletak pada edukasi, teknologi pemilahan, dan sistem *Responsible Waste Management* yang menjamin sampah tidak berakhir di TPA, melainkan didaur ulang secara optimal, mendukung ekonomi sirkular.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1567431548079-fd36128d58a8",
+        "caption": "Ilustrasi pemilahan sampah untuk daur ulang",
+        "license": "Unsplash",
+        "source": "Waste4Change Corporate"
+      }
+    ],
+    "pembuat": {
+      "id": "m2r47s9t-5p1m-6n3o-o3a4-8b5c7d6e9f0g",
+      "nama": "Mohamad Bijaksana Junerosano",
+      "peran": "Founder & CEO",
+      "organisasi": "Waste4Change",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a814574768a"
+    },
+    "kategori": "Lingkungan",
+    "subKategori": "Pengelolaan Limbah",
+    "tag": [
+      "sampah",
+      "daur ulang",
+      "lingkungan",
+      "circular economy",
+      "startup"
+    ],
+    "lokasi": {
+      "provinsi": "Jawa Barat",
+      "kabupatenKota": "Bekasi"
+    },
+    "dibuatPada": "2014-11-01T00:00:00Z",
+    "diupdatePada": "2024-06-10T16:00:00Z",
+    "totalVote": 14000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 200000,
+      "co2SavedKg": 1000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi Waste4Change",
+        "url": "https://waste4change.com/"
+      },
+      {
+        "type": "article",
+        "title": "Peran Waste4Change dalam Pengelolaan Sampah",
+        "url": "https://www.cnbcindonesia.com/lifestyle/20211019100000-33-284996/waste4change-solusi-pengelolaan-sampah-yang-bertanggung-jawab"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "f5o17r6s-e4o9-8p3q-m2b3-3c4d7e5f8g9h",
+    "slug": "mola-tv-streaming",
+    "judul": "Mola TV - Platform Streaming Olahraga & Hiburan",
+    "ringkasanPendek": "Layanan streaming Over-The-Top (OTT) yang fokus pada konten olahraga eksklusif dan program hiburan orisinal.",
+    "deskripsi": "Mola TV adalah platform *video on demand* yang dikenal karena konten olahraga eksklusifnya, terutama liga-liga Eropa seperti Liga Inggris. Explore mereka adalah menawarkan konten premium dengan harga terjangkau melalui model bisnis *subscription* yang berbeda dari kompetitor, serta memproduksi konten orisinal Indonesia berkualitas tinggi.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1549419137-97d853b0b7c2",
+        "caption": "Ilustrasi menonton streaming olahraga",
+        "license": "Unsplash",
+        "source": "Mola TV Corporate"
+      }
+    ],
+    "pembuat": {
+      "id": "n3s58t0u-6q2n-7p4r-p4c5-9d6e8f7g0h1i",
+      "nama": "Candra Putra Negara",
+      "peran": "Direktur",
+      "organisasi": "Mola TV (Polytron Group)",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a814574768a"
+    },
+    "kategori": "Ekonomi Kreatif",
+    "subKategori": "Media Digital",
+    "tag": ["OTT", "streaming", "olahraga", "hiburan", "konten"],
+    "lokasi": {
+      "provinsi": "DKI Jakarta",
+      "kabupatenKota": "Jakarta Pusat"
+    },
+    "dibuatPada": "2019-08-01T00:00:00Z",
+    "diupdatePada": "2023-12-12T10:00:00Z",
+    "totalVote": 11000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 5000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi Mola TV",
+        "url": "https://mola.tv/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "g6p28s7t-f5p0-9q4r-o4d6-0e7f9g8h1i2j",
+    "slug": "kitabisa-crowdfunding",
+    "judul": "Kitabisa - Platform Crowdfunding Sosial",
+    "ringkasanPendek": "Platform penggalangan dana online terbesar di Indonesia untuk kebutuhan sosial, kesehatan, dan kemanusiaan.",
+    "deskripsi": "Kitabisa memfasilitasi individu, komunitas, dan organisasi untuk menggalang dana secara transparan dan efisien. Explore ini mendemokratisasi filantropi, memungkinkan siapapun untuk berdonasi atau memulai kampanye penggalangan dana, menciptakan dampak sosial yang masif di sektor kesehatan, pendidikan, dan bencana alam.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d",
+        "caption": "Ilustrasi donasi online",
+        "license": "Unsplash",
+        "source": "Kitabisa Corporate"
+      }
+    ],
+    "pembuat": {
+      "id": "p4t69u1v-7r3o-8s5q-q5e7-1f8g0h9i2j3k",
+      "nama": "Alfatih Timur",
+      "peran": "CEO & Founder",
+      "organisasi": "Kitabisa",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a814574768a"
+    },
+    "kategori": "Sosial",
+    "subKategori": "Filantropi Digital",
+    "tag": ["crowdfunding", "sosial", "donasi", "digital", "kemanusiaan"],
+    "lokasi": {
+      "provinsi": "DKI Jakarta",
+      "kabupatenKota": "Jakarta Selatan"
+    },
+    "dibuatPada": "2013-05-01T00:00:00Z",
+    "diupdatePada": "2024-07-01T14:30:00Z",
+    "totalVote": 75000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 10000000,
+      "fundsRaisedIdr": 2000000000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi Kitabisa",
+        "url": "https://www.kitabisa.com/"
+      },
+      {
+        "type": "article",
+        "title": "Kitabisa: Kisah Sukses Filantropi Digital",
+        "url": "https://www.thejakartapost.com/news/2020/03/10/how-kitabisa-became-indonesias-leading-crowdfunding-platform.html"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "h7q39t8u-g6q1-0r5s-p6f8-2g9h1i0j3k4l",
+    "slug": "e-purchasing-lkpp",
+    "judul": "E-Purchasing LKPP - Katalog Elektronik Pemerintah",
+    "ringkasanPendek": "Sistem pembelian barang/jasa pemerintah secara elektronik melalui katalog digital untuk efisiensi dan transparansi.",
+    "deskripsi": "E-Purchasing (melalui e-Katalog LKPP) adalah explore dari Lembaga Kebijakan Pengadaan Barang/Jasa Pemerintah yang memungkinkan instansi pemerintah untuk membeli barang dan jasa yang sudah tercantum dalam katalog elektronik. Ini menggantikan proses tender tradisional yang panjang, mengurangi potensi korupsi, dan mempercepat penyerapan anggaran, menjadikannya kunci *e-procurement* di Indonesia.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1549419137-97d853b0b7c2",
+        "caption": "Ilustrasi pengadaan digital pemerintah",
+        "license": "Unsplash",
+        "source": "LKPP Official"
+      }
+    ],
+    "pembuat": {
+      "id": "q5u70w2x-8s4p-9t6r-r7g9-3h0i2j1k4l5m",
+      "nama": "Lembaga Kebijakan Pengadaan Barang/Jasa Pemerintah (LKPP)",
+      "peran": "Pengelola Sistem",
+      "organisasi": "LKPP",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Sosial",
+    "subKategori": "E-Government & Transparansi",
+    "tag": ["e-gov", "pengadaan", "transparansi", "LKPP", "birokrasi"],
+    "lokasi": {
+      "provinsi": "DKI Jakarta",
+      "kabupatenKota": "Jakarta Pusat"
+    },
+    "dibuatPada": "2010-01-01T00:00:00Z",
+    "diupdatePada": "2024-08-01T11:00:00Z",
+    "totalVote": 15000,
+    "status": "published",
+    "impactMetrics": {
+      "fundsRaisedIdr": 50000000000000,
+      "co2SavedKg": 50000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi e-Katalog LKPP",
+        "url": "https://e-katalog.lkpp.go.id/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "i8r40u9v-h7r2-1s6t-q8h0-4i1j3k2l5m6n",
+    "slug": "pln-aplikasi-listrik",
+    "judul": "Aplikasi PLN Mobile - Layanan Listrik Digital",
+    "ringkasanPendek": "Aplikasi layanan pelanggan terpadu dari PLN untuk mempermudah akses pembayaran, pengaduan, dan pembelian token listrik.",
+    "deskripsi": "PLN Mobile adalah transformasi digital dari layanan PLN. Aplikasi ini memungkinkan pengguna untuk melakukan berbagai transaksi dan interaksi, termasuk pembelian token/pascabayar, pengaduan gangguan, permohonan pasang baru/perubahan daya, serta informasi seputar kelistrikan. Explore ini meningkatkan efisiensi operasional dan kepuasan pelanggan secara signifikan.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgwjJlaIyRacn_Jpntqx8Evfl6Zjr_oPAc_g&s",
+        "caption": "Ilustrasi penggunaan aplikasi PLN Mobile",
+        "license": "Unsplash",
+        "source": "PLN Corporate"
+      }
+    ],
+    "pembuat": {
+      "id": "r6w81x3y-9t5q-0u7s-s9i1-5j2k4l3m6n7o",
+      "nama": "PT Perusahaan Listrik Negara (PLN)",
+      "peran": "Pengembang Aplikasi",
+      "organisasi": "PLN (Persero)",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Energi",
+    "subKategori": "Layanan Digital",
+    "tag": ["listrik", "PLN", "aplikasi", "energi", "layanan publik"],
+    "lokasi": {
+      "provinsi": "Nasional",
+      "kabupatenKota": "Seluruh Indonesia"
+    },
+    "dibuatPada": "2016-09-01T00:00:00Z",
+    "diupdatePada": "2024-09-10T12:00:00Z",
+    "totalVote": 32000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 80000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi PLN",
+        "url": "https://web.pln.co.id/layanan/pln-mobile"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "j9s51v0w-i8s3-2t7u-r9j2-6k3l5m4n7o8p",
+    "slug": "tani-hub-agritech",
+    "judul": "TaniHub - Platform E-Commerce Agrikultur",
+    "ringkasanPendek": "Platform yang menghubungkan petani dengan pasar B2B dan B2C, serta menyediakan layanan pendanaan bagi petani.",
+    "deskripsi": "TaniHub adalah platform agritech yang berfokus pada digitalisasi rantai pasok pertanian. Selain sebagai e-commerce untuk hasil bumi, TaniHub juga memiliki layanan TaniFund yang memberikan akses permodalan bagi petani yang tidak terjangkau bank konvensional. Explore ini memberdayakan petani dan meningkatkan efisiensi distribusi pangan.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d",
+        "caption": "Petani berinteraksi dengan platform TaniHub",
+        "license": "Unsplash",
+        "source": "TaniHub Corporate"
+      }
+    ],
+    "pembuat": {
+      "id": "s7x92y4z-0u6r-1v8s-t0k3-7l4m6n5o8p9q",
+      "nama": "Ivan Arie Sustiawan",
+      "peran": "CEO & Co-Founder",
+      "organisasi": "TaniHub Group",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a814574768a"
+    },
+    "kategori": "Agrikultur",
+    "subKategori": "Agritech & Fintech",
+    "tag": ["agritech", "fintech", "petani", "e-commerce", "pangan"],
+    "lokasi": {
+      "provinsi": "DKI Jakarta",
+      "kabupatenKota": "Jakarta Selatan"
+    },
+    "dibuatPada": "2016-09-01T00:00:00Z",
+    "diupdatePada": "2023-09-01T10:00:00Z",
+    "totalVote": 16000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 100000,
+      "fundsRaisedIdr": 500000000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi TaniHub",
+        "url": "https://tanihub.com/"
+      },
+      {
+        "type": "article",
+        "title": "TaniHub dan TaniFund Berdayakan Petani",
+        "url": "https://dailysocial.id/post/tanihub-group-focus-on-digital-transformation"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "k0t62w1x-j9t4-3u8v-s1l4-8m5n7o6p9q0r",
+    "slug": "siskeudes-dana-desa",
+    "judul": "Siskeudes - Sistem Keuangan Desa",
+    "ringkasanPendek": "Aplikasi yang dikembangkan BPKP untuk mempermudah pengelolaan keuangan dan aset desa secara akuntabel.",
+    "deskripsi": "Siskeudes adalah explore *e-government* yang wajib digunakan oleh seluruh desa di Indonesia untuk mengelola Dana Desa. Aplikasi ini memastikan transparansi, akuntabilitas, dan efisiensi dalam perencanaan, penganggaran, penatausahaan, hingga pelaporan keuangan desa. Ini krusial untuk mencegah penyalahgunaan Dana Desa dan mendorong pembangunan di tingkat akar rumput.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://pendampingdesa.com/wp-content/uploads/2022/05/SISKEUDES-scaled.jpg",
+        "caption": "Ilustrasi sistem keuangan digital desa",
+        "license": "Unsplash",
+        "source": "BPKP Official"
+      }
+    ],
+    "pembuat": {
+      "id": "t8y03z5a-1v7s-2w9t-u2m5-9n6o8p7q0r1s",
+      "nama": "Badan Pengawasan Keuangan dan Pembangunan (BPKP)",
+      "peran": "Pengembang Aplikasi",
+      "organisasi": "BPKP",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Sosial",
+    "subKategori": "E-Government & Akuntabilitas",
+    "tag": ["desa", "keuangan", "transparansi", "e-gov", "akuntabilitas"],
+    "lokasi": {
+      "provinsi": "Nasional",
+      "kabupatenKota": "Seluruh Desa"
+    },
+    "dibuatPada": "2015-01-01T00:00:00Z",
+    "diupdatePada": "2024-05-15T11:00:00Z",
+    "totalVote": 18000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 74961,
+      "fundsRaisedIdr": 40000000000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi BPKP Siskeudes",
+        "url": "https://siskeudes.bpkp.go.id/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "l1u74x3y-k0u5-4v9w-t3n6-0o7p8q9r1s2t",
+    "slug": "jembarana-aplikasi-pertanian",
+    "judul": "Jembarana - Prediksi Hama Pertanian",
+    "ringkasanPendek": "Aplikasi berbasis kecerdasan buatan untuk mendeteksi dan memprediksi serangan hama pada tanaman padi.",
+    "deskripsi": "Jembarana, dikembangkan oleh mahasiswa ITB, menggunakan citra satelit dan algoritma AI untuk menganalisis kondisi tanaman padi dan memprediksi potensi serangan hama, khususnya wereng. Aplikasi ini membantu petani mengambil tindakan pencegahan secara cepat dan tepat, mengurangi kerugian panen, serta meminimalkan penggunaan pestisida.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1505315822987-a06d4e4c2f6d",
+        "caption": "Petani menggunakan aplikasi di lahan padi",
+        "license": "Unsplash",
+        "source": "ITB Official"
+      }
+    ],
+    "pembuat": {
+      "id": "u9z14a6b-2w8t-3x0u-v4o7-1p8q9r0s2t3u",
+      "nama": "Tim Mahasiswa ITB",
+      "peran": "Inovator Mahasiswa",
+      "organisasi": "Institut Teknologi Bandung (ITB)",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a814574768a"
+    },
+    "kategori": "Agrikultur",
+    "subKategori": "Agritech & AI",
+    "tag": ["AI", "pertanian", "hama", "padi", "ITB"],
+    "lokasi": {
+      "provinsi": "Jawa Barat",
+      "kabupatenKota": "Bandung"
+    },
+    "dibuatPada": "2022-01-01T00:00:00Z",
+    "diupdatePada": "2023-08-10T09:00:00Z",
+    "totalVote": 4500,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 2000,
+      "co2SavedKg": 5000
+    },
+    "sumber": [
+      {
+        "type": "article",
+        "title": "Jembarana: Solusi Prediksi Hama ITB",
+        "url": "https://www.itb.ac.id/news/read/5879/home/jembarana-aplikasi-prediksi-hama"
+      }
+    ],
+    "confidence": "reported"
+  },
+  {
+    "id": "m2v85y4z-l1v6-5w0x-u4p7-2q8r9s0t3u4v",
+    "slug": "sampah-jadi-energi-surabaya",
+    "judul": "Pembangkit Listrik Tenaga Sampah (PLTSa) Surabaya",
+    "ringkasanPendek": "Explore pengolahan sampah kota menjadi energi listrik melalui teknologi termal, contoh di TPA Benowo Surabaya.",
+    "deskripsi": "PLTSa mengubah limbah padat kota yang menumpuk menjadi sumber energi terbarukan. Teknologi ini mengatasi dua masalah sekaligus: manajemen sampah yang kritis dan ketersediaan energi. PLTSa Benowo di Surabaya merupakan proyek percontohan yang berhasil mengkonversi ribuan ton sampah harian menjadi megawatt listrik yang disalurkan ke jaringan PLN.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://web.pln.co.id/statics/uploads/2019/09/PLN_PLTSa-Benowo.jpeg",
+        "caption": "Pembangkit Listrik Tenaga Sampah di Surabaya",
+        "license": "Unsplash",
+        "source": "Pemkot Surabaya"
+      }
+    ],
+    "pembuat": {
+      "id": "v0a25b7c-3x9u-4y1v-w5q8-3r9s0t1u4v5w",
+      "nama": "Pemerintah Kota Surabaya",
+      "peran": "Inisiator Proyek",
+      "organisasi": "PLN & Pemkot Surabaya (Kolaborasi)",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Energi",
+    "subKategori": "Energi Terbarukan & Lingkungan",
+    "tag": ["sampah", "energi", "terbarukan", "PLTSa", "lingkungan"],
+    "lokasi": {
+      "provinsi": "Jawa Timur",
+      "kabupatenKota": "Surabaya"
+    },
+    "dibuatPada": "2012-01-01T00:00:00Z",
+    "diupdatePada": "2024-04-01T14:00:00Z",
+    "totalVote": 25000,
+    "status": "published",
+    "impactMetrics": {
+      "co2SavedKg": 10000000,
+      "fundsRaisedIdr": 500000000000
+    },
+    "sumber": [
+      {
+        "type": "article",
+        "title": "PLTSa Benowo Surabaya",
+        "url": "https://www.esdm.go.id/id/media-center/arsip-berita/pltsa-benowo-surabaya-hasilkan-11-mw"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "n3w96z5a-m2w7-6x0y-v5r8-4s9t0u1v5w6x",
+    "slug": "satelit-satria-broadband",
+    "judul": "Satelit Satria-1 - Pemerataan Akses Internet",
+    "ringkasanPendek": "Satelit multifungsi berkapasitas besar untuk menyediakan akses internet berkecepatan tinggi di seluruh wilayah 3T Indonesia.",
+    "deskripsi": "SATRIA-1 (Satelit Republik Indonesia-1) adalah proyek satelit pemerintah yang diluncurkan untuk menyediakan layanan internet broadband di 150.000 titik layanan publik, termasuk sekolah, puskesmas, dan kantor pemerintah daerah. Explore ini sangat penting untuk mengatasi kesenjangan digital dan mendukung transformasi digital di daerah Terdepan, Terluar, dan Tertinggal (3T).",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTzVHysDfEBouBngDOyjWHUIVW9tdDy09dkQ&s",
+        "caption": "Ilustrasi peluncuran satelit di luar angkasa",
+        "license": "Unsplash",
+        "source": "Kominfo Official"
+      }
+    ],
+    "pembuat": {
+      "id": "w1b36c8d-4y0v-5z2w-x6s9-5t0u2v3w6x7y",
+      "nama": "Kementerian Komunikasi dan Informatika (Kominfo)",
+      "peran": "Pemilik Proyek",
+      "organisasi": "BAKTI Kominfo",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Teknologi",
+    "subKategori": "Infrastruktur Digital",
+    "tag": ["satelit", "internet", "broadband", "3T", "kominfo"],
+    "lokasi": {
+      "provinsi": "Nasional",
+      "kabupatenKota": "Seluruh Indonesia (3T)"
+    },
+    "dibuatPada": "2019-01-01T00:00:00Z",
+    "diupdatePada": "2023-11-01T17:00:00Z",
+    "totalVote": 30000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 50000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi BAKTI Kominfo",
+        "url": "https://www.baktikominfo.id/satria"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "o4x07a6b-n3x8-7y2z-w6t9-6u7v3w4x7y8z",
+    "slug": "loket-event-ticketing",
+    "judul": "Loket - Platform Manajemen & Tiket Acara",
+    "ringkasanPendek": "Sistem manajemen acara dan penjualan tiket digital yang terintegrasi untuk berbagai event.",
+    "deskripsi": "Loket menyediakan solusi *end-to-end* untuk penyelenggara acara, mulai dari manajemen pendaftaran, penjualan tiket online, sistem kontrol akses, hingga analisis data pengunjung. Explore ini telah menjadi standar bagi industri *event* di Indonesia, memastikan transaksi yang aman dan pengalaman yang mulus bagi pengguna.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1549419137-97d853b0b7c2",
+        "caption": "Ilustrasi event ticketing digital",
+        "license": "Unsplash",
+        "source": "Loket Corporate"
+      }
+    ],
+    "pembuat": {
+      "id": "x2d47e9f-5z1w-6a3x-y7u0-7v8w4x5y8z9a",
+      "nama": "Edi Wibowo",
+      "peran": "CEO",
+      "organisasi": "Loket (GoTo Group)",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a814574768a"
+    },
+    "kategori": "Ekonomi Kreatif",
+    "subKategori": "Event Technology",
+    "tag": ["event", "ticketing", "digital", "hiburan", "manajemen"],
+    "lokasi": {
+      "provinsi": "DKI Jakarta",
+      "kabupatenKota": "Jakarta Selatan"
+    },
+    "dibuatPada": "2013-01-01T00:00:00Z",
+    "diupdatePada": "2024-05-20T10:00:00Z",
+    "totalVote": 9000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 2000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi Loket",
+        "url": "https://www.loket.com/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "p5y18b7c-o4y9-8z3a-x8v0-8w9x5y6z9a0b",
+    "slug": "e-smart-village-banyuwangi",
+    "judul": "E-Smart Village - Pengelolaan Desa Cerdas",
+    "ringkasanPendek": "Platform digital di tingkat desa yang mengintegrasikan data, layanan publik, dan ekonomi lokal (Contoh: Banyuwangi).",
+    "deskripsi": "E-Smart Village adalah program yang bertujuan untuk meningkatkan kualitas hidup masyarakat desa melalui pemanfaatan teknologi. Ini mencakup aplikasi untuk layanan kependudukan, informasi potensi desa, data kemiskinan (by name by address), hingga promosi produk UMKM desa. Explore ini merupakan upaya nyata *smart city* yang diimplementasikan di tingkat desa.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1549419137-97d853b0b7c2",
+        "caption": "Ilustrasi layanan digital di desa",
+        "license": "Unsplash",
+        "source": "Pemkab Banyuwangi"
+      }
+    ],
+    "pembuat": {
+      "id": "y3f58g0h-6a2x-7b4y-z9w1-9x0y6z7a0b1c",
+      "nama": "Pemerintah Kabupaten Banyuwangi",
+      "peran": "Inisiator Proyek",
+      "organisasi": "Dinas Kominfo Kab. Banyuwangi",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Sosial",
+    "subKategori": "Pembangunan Desa",
+    "tag": ["desa", "smart village", "e-gov", "pembangunan", "Banyuwangi"],
+    "lokasi": {
+      "provinsi": "Jawa Timur",
+      "kabupatenKota": "Banyuwangi"
+    },
+    "dibuatPada": "2016-01-01T00:00:00Z",
+    "diupdatePada": "2023-10-15T11:00:00Z",
+    "totalVote": 14000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 1800000
+    },
+    "sumber": [
+      {
+        "type": "article",
+        "title": "Banyuwangi dan E-Smart Village",
+        "url": "https://www.banyuwangikab.go.id/berita/e-smart-village-banyuwangi-jadi-percontohan-nasional.html"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "q6z29c8d-p5z0-9a4b-y0x2-0y1z7a8b1c2d",
+    "slug": "martha-tilaar-bio-cosmetic",
+    "judul": "Martha Tilaar - Explore Kosmetik Berbasis Alam Lokal",
+    "ringkasanPendek": "Pengembangan produk kosmetik dan jamu yang berbasis pada bahan baku alam dan kearifan lokal Indonesia.",
+    "deskripsi": "Martha Tilaar Group terus berexplore dalam memadukan sains modern dengan *local wisdom* dalam produksi kosmetik dan jamu. Mereka fokus pada penelitian bahan baku herbal Indonesia (seperti kunyit, temulawak) dan menerapkan praktik produksi yang berkelanjutan. Explore ini tidak hanya mengangkat kekayaan alam tetapi juga menciptakan produk global yang berakar pada budaya lokal.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://ceknricek.com/wp-content/uploads/2025/03/1567591154_1-org.jpg",
+        "caption": "Ilustrasi produk kosmetik berbahan alami",
+        "license": "Unsplash",
+        "source": "Martha Tilaar Group"
+      }
+    ],
+    "pembuat": {
+      "id": "z4g69h1i-7b3y-8c5z-a1y3-1z2a8b9c2d3e",
+      "nama": "Martha Tilaar",
+      "peran": "Pendiri",
+      "organisasi": "Martha Tilaar Group",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a814574768a"
+    },
+    "kategori": "Ekonomi Kreatif",
+    "subKategori": "Kecantikan & Herbal",
+    "tag": ["herbal", "kosmetik", "kearifan lokal", "bio-cosmetic", "UMKM"],
+    "lokasi": {
+      "provinsi": "DKI Jakarta",
+      "kabupatenKota": "Jakarta Timur"
+    },
+    "dibuatPada": "1970-01-01T00:00:00Z",
+    "diupdatePada": "2024-06-01T09:00:00Z",
+    "totalVote": 16000,
+    "status": "published",
+    "impactMetrics": {
+      "jobsCreated": 5000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi Martha Tilaar",
+        "url": "https://www.marthatilaargroup.com/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "r7a30e9f-q6a1-0b5c-z2z4-2a3b9c0d3e4f",
+    "slug": "wastec-teknologi-pengolah-sampah",
+    "judul": "Wastec - Insinerator Skala Kecil",
+    "ringkasanPendek": "Teknologi insinerator ramah lingkungan skala kecil untuk pengelolaan sampah di komunitas/daerah terpencil.",
+    "deskripsi": "Wastec mengembangkan teknologi pembakaran sampah (insinerasi) yang didesain untuk komunitas atau kawasan industri kecil. Alat ini memiliki sistem filter gas buang yang lebih baik dibandingkan pembakaran terbuka, membantu mengurangi volume sampah secara signifikan di tempat-tempat yang sulit dijangkau oleh TPA besar, sekaligus meminimalkan polusi udara.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1567431548079-fd36128d58a8",
+        "caption": "Ilustrasi insinerator skala kecil yang aman",
+        "license": "Unsplash",
+        "source": "Wastec Official"
+      }
+    ],
+    "pembuat": {
+      "id": "a5h70i2j-8c4z-9d6a-b3a5-3b4c0d1e4f5g",
+      "nama": "Tim Insinerator Wastec",
+      "peran": "Pengembang Teknologi",
+      "organisasi": "PT Wastec International",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Lingkungan",
+    "subKategori": "Pengelolaan Limbah",
+    "tag": ["insinerator", "sampah", "teknologi", "lingkungan", "komunitas"],
+    "lokasi": {
+      "provinsi": "Jawa Barat",
+      "kabupatenKota": "Bandung"
+    },
+    "dibuatPada": "2018-05-01T00:00:00Z",
+    "diupdatePada": "2023-11-20T12:00:00Z",
+    "totalVote": 6500,
+    "status": "published",
+    "impactMetrics": {
+      "co2SavedKg": 100000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi Wastec",
+        "url": "https://www.wastec.co.id/"
+      }
+    ],
+    "confidence": "reported"
+  },
+  {
+    "id": "s8b41f0g-r7b2-1c6d-a3b6-4c5d1e2f5g6h",
+    "slug": "drone-pertanian-eazy-farm",
+    "judul": "Eazy Farm - Drone Pertanian Berbasis AI",
+    "ringkasanPendek": "Penggunaan drone untuk pemetaan lahan, penyemprotan pupuk/pestisida, dan monitoring kesehatan tanaman secara presisi.",
+    "deskripsi": "Eazy Farm (dan sejenisnya) mengintegrasikan teknologi drone dengan sistem pemetaan dan AI. Drone digunakan untuk menyemprotkan cairan secara merata dan efisien, jauh lebih cepat dari cara manual. Data yang dikumpulkan juga digunakan untuk analisis presisi pertanian, membantu petani mengoptimalkan penggunaan sumber daya dan meningkatkan hasil panen.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1518843875421-8f5f6445c7e5",
+        "caption": "Drone pertanian menyemprotkan pupuk di sawah",
+        "license": "Unsplash",
+        "source": "Eazy Farm Corporate"
+      }
+    ],
+    "pembuat": {
+      "id": "b6i81j3k-9d4a-0e7b-c4c7-5d6e2f3g6h7i",
+      "nama": "Tim Pengembang Drone Lokal",
+      "peran": "Pengembang Teknologi",
+      "organisasi": "Startup Agritech",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a814574768a"
+    },
+    "kategori": "Agrikultur",
+    "subKategori": "Precision Farming",
+    "tag": ["drone", "AI", "pertanian", "presisi", "agritech"],
+    "lokasi": {
+      "provinsi": "Jawa Tengah",
+      "kabupatenKota": "Semarang"
+    },
+    "dibuatPada": "2020-03-01T00:00:00Z",
+    "diupdatePada": "2024-04-10T15:00:00Z",
+    "totalVote": 9500,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 10000,
+      "co2SavedKg": 20000
+    },
+    "sumber": [
+      {
+        "type": "article",
+        "title": "Drone Pertanian Eazy Farm di Indonesia",
+        "url": "https://www.pertanian.go.id/home/?show=news&act=view&id=2700"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "t9c52g1h-s8c3-2d7e-b4d7-6e7f3g4h7i8j",
+    "slug": "kapal-cincin-api-riset-kelautan",
+    "judul": "Kapal Riset Baruna Jaya - Survei Kelautan",
+    "ringkasanPendek": "Armada kapal riset kelautan modern untuk pemetaan bawah laut, eksplorasi sumber daya, dan mitigasi bencana.",
+    "deskripsi": "Kapal riset Baruna Jaya (milik BRIN/sebelumnya BPPT) merupakan fasilitas penting dalam penelitian kelautan Indonesia. Kapal-kapal ini dilengkapi teknologi sonar dan pemetaan tercanggih untuk memahami geologi bawah laut, potensi perikanan, hingga sistem peringatan dini tsunami. Explore ini mendukung Indonesia sebagai poros maritim dunia.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1549419137-97d853b0b7c2",
+        "caption": "Kapal riset di perairan Indonesia",
+        "license": "Unsplash",
+        "source": "BRIN Official"
+      }
+    ],
+    "pembuat": {
+      "id": "c7k92l4m-0e5b-1f8c-d5e8-7f8g4h5i8j9k",
+      "nama": "Badan Riset dan Explore Nasional (BRIN)",
+      "peran": "Operator & Pengelola",
+      "organisasi": "BRIN",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Teknologi",
+    "subKategori": "Maritim & Kelautan",
+    "tag": ["kelautan", "riset", "maritim", "teknologi", "bencana"],
+    "lokasi": {
+      "provinsi": "Nasional",
+      "kabupatenKota": "Perairan Indonesia"
+    },
+    "dibuatPada": "1990-01-01T00:00:00Z",
+    "diupdatePada": "2024-01-01T10:00:00Z",
+    "totalVote": 11000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 5000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Kapal Riset BRIN",
+        "url": "https://www.brin.go.id/news/92667/kapal-riset-baruna-jaya"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "u0d63h2i-t9d4-3e8f-c5f8-7g8h4i5j9k0l",
+    "slug": "waze-for-biker-traffic-data",
+    "judul": "Waze For Biker - Data Lalu Lintas Sepeda Motor",
+    "ringkasanPendek": "Fitur khusus pada Waze yang mengoptimalkan rute dan memberikan informasi lalu lintas yang relevan untuk pengendara sepeda motor.",
+    "deskripsi": "Waze, sebagai aplikasi navigasi berbasis komunitas, mengadaptasi fiturnya untuk pengendara motor di Indonesia. Ini penting karena sepeda motor mendominasi jalanan dan memiliki kebutuhan rute yang berbeda (gang sempit, rute pintas). Fitur ini meningkatkan keamanan dan efisiensi perjalanan jutaan pengguna motor harian.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1549419137-97d853b0b7c2",
+        "caption": "Pengendara motor menggunakan navigasi Waze",
+        "license": "Unsplash",
+        "source": "Waze Corporate"
+      }
+    ],
+    "pembuat": {
+      "id": "d8l03m5n-1f6c-2g9d-e6g9-8h9i5j6k0l1m",
+      "nama": "Waze Indonesia Team",
+      "peran": "Pengembang Regional",
+      "organisasi": "Waze (Google)",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a814574768a"
+    },
+    "kategori": "Transportasi",
+    "subKategori": "Smart Mobility",
+    "tag": [
+      "navigasi",
+      "sepeda motor",
+      "lalu lintas",
+      "aplikasi",
+      "transportasi"
+    ],
+    "lokasi": {
+      "provinsi": "DKI Jakarta",
+      "kabupatenKota": "Jakarta"
+    },
+    "dibuatPada": "2019-01-01T00:00:00Z",
+    "diupdatePada": "2023-08-01T11:00:00Z",
+    "totalVote": 7000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 10000000
+    },
+    "sumber": [
+      {
+        "type": "article",
+        "title": "Waze Hadirkan Fitur Khusus Bikers di Indonesia",
+        "url": "https://otomotif.kompas.com/read/2019/02/06/154500115/waze-hadirkan-fitur-khusus-bikers-di-indonesia"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "v1e74i3j-u0e5-4f9g-d6g9-8h9i5j6k0l1m",
+    "slug": "siaga-bencana-bmkg-app",
+    "judul": "Info BMKG - Aplikasi Peringatan Dini Bencana",
+    "ringkasanPendek": "Aplikasi resmi BMKG untuk menyediakan informasi real-time mengenai gempa bumi, cuaca, iklim, dan peringatan dini bencana.",
+    "deskripsi": "Aplikasi Info BMKG adalah alat komunikasi vital yang menyediakan data meteorologi, klimatologi, dan geofisika secara langsung kepada masyarakat. Explore ini memungkinkan penyebaran informasi secara cepat dan akurat, meningkatkan kesiapsiagaan masyarakat dalam menghadapi bencana alam seperti gempa, tsunami, dan cuaca ekstrem, yang sangat relevan untuk Indonesia.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQmpBuM6S0arm2XOW1uBq_UiWvsNM7G6Pqmg&s",
+        "caption": "Ilustrasi peta bencana di aplikasi BMKG",
+        "license": "Unsplash",
+        "source": "BMKG Official"
+      }
+    ],
+    "pembuat": {
+      "id": "e9m14n6o-2g7d-3h0e-f7h0-9i1j6k7l1m2n",
+      "nama": "Badan Meteorologi, Klimatologi, dan Geofisika (BMKG)",
+      "peran": "Pengembang Aplikasi",
+      "organisasi": "BMKG",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Keamanan",
+    "subKategori": "Mitigasi Bencana",
+    "tag": ["bencana", "cuaca", "gempa", "aplikasi", "keamanan"],
+    "lokasi": {
+      "provinsi": "Nasional",
+      "kabupatenKota": "Seluruh Indonesia"
+    },
+    "dibuatPada": "2010-01-01T00:00:00Z",
+    "diupdatePada": "2024-06-01T15:00:00Z",
+    "totalVote": 22000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 200000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi BMKG",
+        "url": "https://www.bmkg.go.id/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "w2f85j4k-v1f6-5g0h-e7i0-9j1k6l7m2n3o",
+    "slug": "martha-tilaar-bio-kosmetik",
+    "judul": "PT Kalbe Farma Tbk - Explore Obat Herbal Terstandar",
+    "ringkasanPendek": "Pengembangan dan produksi obat-obatan herbal yang telah melalui uji klinis dan terstandar secara ilmiah (Fitofarmaka).",
+    "deskripsi": "Kalbe Farma, melalui anak perusahaannya, terus berinvestasi dalam penelitian *natural medicine*. Explore ini fokus pada standarisasi obat-obatan herbal Indonesia (jamu) menjadi produk **Fitofarmaka**, yaitu obat herbal yang telah melalui uji klinis. Ini meningkatkan kepercayaan publik terhadap pengobatan tradisional berbasis alam dan memajukan farmasi nasional.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1549419137-97d853b0b7c2",
+        "caption": "Ilustrasi penelitian farmasi",
+        "license": "Unsplash",
+        "source": "Kalbe Farma Corporate"
+      }
+    ],
+    "pembuat": {
+      "id": "f0n25o7p-3h9e-4i1f-g8j1-0k2l7m8n3o4p",
+      "nama": "Tim Riset Kalbe Farma",
+      "peran": "Peneliti & Pengembang",
+      "organisasi": "PT Kalbe Farma Tbk",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Kesehatan",
+    "subKategori": "Farmasi & Herbal",
+    "tag": ["herbal", "farmasi", "fitofarmaka", "riset", "kesehatan"],
+    "lokasi": {
+      "provinsi": "Jawa Barat",
+      "kabupatenKota": "Bekasi"
+    },
+    "dibuatPada": "2005-01-01T00:00:00Z",
+    "diupdatePada": "2024-08-20T10:00:00Z",
+    "totalVote": 13000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 5000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi Kalbe Farma",
+        "url": "https://www.kalbe.co.id/en/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "x3g96k5l-w2g7-6h0i-f8j1-0k2l7m8n3o4p",
+    "slug": "tol-trans-jawa-smart-road",
+    "judul": "Trans-Jawa Smart Road - Tol Pintar",
+    "ringkasanPendek": "Penerapan sistem *Intelligent Transportation System* (ITS) pada jalan tol untuk meningkatkan keselamatan dan efisiensi lalu lintas.",
+    "deskripsi": "Explore *Smart Road* di Tol Trans-Jawa mencakup penggunaan teknologi canggih seperti *Variable Message Sign* (VMS), kamera pemantau berbasis AI, dan sistem pengumpulan tol tanpa henti *(Multi Lane Free Flow/MLFF)*. Tujuannya adalah mengurangi kecelakaan, meminimalkan kemacetan di gerbang tol, dan memberikan informasi real-time kepada pengendara.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfMHmEOSb-_lnUrpEZUNHz_p9II_0QJ14dhQ&s",
+        "caption": "Ilustrasi sistem pengawasan tol Trans-Jawa",
+        "license": "Unsplash",
+        "source": "Kementerian PUPR"
+      }
+    ],
+    "pembuat": {
+      "id": "g1o36p8q-4i0f-5j2g-h9k2-1l3m8n9o4p5q",
+      "nama": "PT Jasa Marga (Persero) Tbk",
+      "peran": "Pengelola & Pengembang",
+      "organisasi": "Kementerian PUPR",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Transportasi",
+    "subKategori": "Smart Road",
+    "tag": ["transportasi", "tol", "smart city", "ITS", "infrastruktur"],
+    "lokasi": {
+      "provinsi": "Jawa (Multi-Provinsi)",
+      "kabupatenKota": "Jalur Tol Trans-Jawa"
+    },
+    "dibuatPada": "2018-01-01T00:00:00Z",
+    "diupdatePada": "2024-09-01T10:00:00Z",
+    "totalVote": 25000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 30000000,
+      "co2SavedKg": 100000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi Jasa Marga",
+        "url": "https://www.jasamarga.com/"
+      },
+      {
+        "type": "article",
+        "title": "Penerapan Teknologi MLFF di Tol Indonesia",
+        "url": "https://bisnis.tempo.co/read/1749875/mlff-siap-di-terapkan-di-jalan-tol"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "y4h07l6m-x3h8-7i2j-g9k2-2l3m8n9o4p5q",
+    "slug": "jemput-bola-administrasi-dukcapil",
+    "judul": "Program Jemput Bola Dukcapil - Administrasi Kependudukan",
+    "ringkasanPendek": "Layanan proaktif administrasi kependudukan (KTP, Akta Kelahiran) dengan mendatangi langsung masyarakat di daerah terpencil atau rentan.",
+    "deskripsi": "Explore ini mengatasi kendala geografis dan akses bagi warga di daerah 3T, lansia, atau penyandang disabilitas untuk mendapatkan dokumen kependudukan. Petugas Dinas Dukcapil secara berkala mengunjungi lokasi-lokasi tersebut. Ini adalah explore sosial-pemerintahan yang krusial untuk menjamin hak sipil seluruh warga negara.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMY7PfxCIQhXZE89X27EbSHJ37_yt1cclFvQ&s",
+        "caption": "Petugas melayani administrasi kependudukan di desa",
+        "license": "Unsplash",
+        "source": "Dukcapil Official"
+      }
+    ],
+    "pembuat": {
+      "id": "h2p47q9r-5j1g-6k3h-i0l3-3m4n9o0p6q7r",
+      "nama": "Direktorat Jenderal Dukcapil",
+      "peran": "Inisiator Nasional",
+      "organisasi": "Kementerian Dalam Negeri (Kemendagri)",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Sosial",
+    "subKategori": "Layanan Publik",
+    "tag": ["layanan publik", "kependudukan", "e-gov", "3T", "sosial"],
+    "lokasi": {
+      "provinsi": "Nasional",
+      "kabupatenKota": "Daerah 3T"
+    },
+    "dibuatPada": "2015-01-01T00:00:00Z",
+    "diupdatePada": "2024-07-01T12:00:00Z",
+    "totalVote": 18000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 10000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi Dukcapil",
+        "url": "https://dukcapil.kemendagri.go.id/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "z5i18m7n-y4i9-8j3k-h9k2-3l4m9o0p6q7r",
+    "slug": "dana-desa-online-monitoring",
+    "judul": "Sistem Monitoring Dana Desa (OMSPAN)",
+    "ringkasanPendek": "Sistem digital yang memungkinkan pemantauan real-time alokasi dan penyerapan Dana Desa oleh Kementerian Keuangan.",
+    "deskripsi": "OMSPAN (Online Monitoring Sistem Perbendaharaan dan Anggaran Negara) adalah explore Kementerian Keuangan untuk memastikan transparansi dan akuntabilitas penggunaan Dana Desa. Sistem ini mengintegrasikan data dari berbagai kementerian/lembaga dan perbankan, memungkinkan pengawasan penyaluran dana hingga ke rekening desa. Ini membantu pemerintah pusat dalam mengambil kebijakan yang tepat terkait pembangunan desa.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1549419137-97d853b0b7c2",
+        "caption": "Ilustrasi dashboard monitoring keuangan negara",
+        "license": "Unsplash",
+        "source": "Kemenkeu Official"
+      }
+    ],
+    "pembuat": {
+      "id": "i3q58r0s-6k2h-7l4i-j0m4-4n5o0p1q7r8s",
+      "nama": "Direktorat Jenderal Perbendaharaan (DJPb)",
+      "peran": "Pengembang Sistem",
+      "organisasi": "Kementerian Keuangan RI",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Sosial",
+    "subKategori": "Akuntabilitas Keuangan",
+    "tag": ["dana desa", "APBN", "transparansi", "e-gov", "keuangan"],
+    "lokasi": {
+      "provinsi": "Nasional",
+      "kabupatenKota": "Seluruh Desa"
+    },
+    "dibuatPada": "2016-01-01T00:00:00Z",
+    "diupdatePada": "2024-05-01T10:00:00Z",
+    "totalVote": 15000,
+    "status": "published",
+    "impactMetrics": {
+      "fundsRaisedIdr": 50000000000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi DJPb Kemenkeu",
+        "url": "https://djpb.kemenkeu.go.id/portal/id/layanan/omspan"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "a6j29n8o-z5j0-9k4l-i9l3-5m6n1p2q8r9s",
+    "slug": "gerbang-pembayaran-nasional-gpn",
+    "judul": "Gerbang Pembayaran Nasional (GPN)",
+    "ringkasanPendek": "Sistem yang menghubungkan berbagai instrumen dan kanal pembayaran domestik untuk efisiensi transaksi non-tunai.",
+    "deskripsi": "GPN adalah explore Bank Indonesia untuk mengintegrasikan seluruh sistem pembayaran non-tunai domestik. Tujuannya adalah menciptakan interoperabilitas, mengurangi biaya transaksi, dan memastikan data transaksi diproses di dalam negeri (kedaulatan data). Kartu berlogo GPN memungkinkan transaksi di seluruh terminal EDC dan ATM domestik tanpa melalui jaringan internasional.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://www.jaringanprima.co.id/media/image/thumbs/post/2018/02/08/format-sosmed-2018_twitter-900x533-1200-650_thumb.jpg",
+        "caption": "Ilustrasi kartu pembayaran berlogo GPN",
+        "license": "Unsplash",
+        "source": "Bank Indonesia Official"
+      }
+    ],
+    "pembuat": {
+      "id": "j4r69s1t-7l3i-8m5j-k1n5-6o7p2q3r9s0t",
+      "nama": "Bank Indonesia (BI)",
+      "peran": "Pengembang & Regulator",
+      "organisasi": "Bank Indonesia",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Teknologi",
+    "subKategori": "Fintech & Keuangan",
+    "tag": ["fintech", "BI", "pembayaran", "interoperabilitas", "keuangan"],
+    "lokasi": {
+      "provinsi": "Nasional",
+      "kabupatenKota": "Seluruh Indonesia"
+    },
+    "dibuatPada": "2017-12-19T00:00:00Z",
+    "diupdatePada": "2024-08-01T11:00:00Z",
+    "totalVote": 25000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 100000000,
+      "fundsRaisedIdr": 0
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi GPN BI",
+        "url": "https://www.bi.go.id/id/fungsi-utama/sistem-pembayaran/gpn/default.aspx"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "b7k30o9p-a6k1-0l5m-j0m4-6n7o2p3q9r0s",
+    "slug": "mrt-jakarta-transportasi-massal",
+    "judul": "MRT Jakarta - Mass Rapid Transit",
+    "ringkasanPendek": "Sistem kereta api cepat perkotaan yang mengubah wajah transportasi publik dan mobilitas di Jakarta.",
+    "deskripsi": "MRT Jakarta adalah proyek infrastruktur transportasi massal modern pertama di Indonesia. Selain efisiensi waktu, MRT mendorong perubahan perilaku masyarakat untuk beralih ke transportasi publik. Explore ini mencakup teknologi terowongan, sistem persinyalan canggih, dan integrasi dengan moda transportasi lain (JakLingko).",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.tokopedia.net/blog-tokopedia-com/uploads/2019/07/mrt-jakarta-3.jpg",
+        "caption": "Stasiun MRT Jakarta",
+        "license": "Unsplash",
+        "source": "MRT Jakarta Corporate"
+      }
+    ],
+    "pembuat": {
+      "id": "k5s70t2u-8m4j-9n6k-l2o6-7p8q3r4s0t1u",
+      "nama": "PT MRT Jakarta (Perseroda)",
+      "peran": "Operator & Pengembang",
+      "organisasi": "Pemerintah Provinsi DKI Jakarta",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Transportasi",
+    "subKategori": "Transportasi Massal",
+    "tag": ["MRT", "transportasi", "massal", "infrastruktur", "Jakarta"],
+    "lokasi": {
+      "provinsi": "DKI Jakarta",
+      "kabupatenKota": "Jakarta"
+    },
+    "dibuatPada": "2013-10-01T00:00:00Z",
+    "diupdatePada": "2024-09-01T15:00:00Z",
+    "totalVote": 40000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 10000000,
+      "co2SavedKg": 500000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi MRT Jakarta",
+        "url": "https://www.jakartamrt.co.id/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "c8l41p0q-b7l2-1m6n-k1n5-7o8p3q4r0s1t",
+    "slug": "ekonomi-kreatif-bekraf",
+    "judul": "Badan Ekonomi Kreatif (Bekraf) - Pengembangan Ekosistem Kreatif",
+    "ringkasanPendek": "Lembaga pemerintah yang didirikan untuk mengembangkan 16 subsektor ekonomi kreatif Indonesia secara terstruktur.",
+    "deskripsi": "Bekraf (sekarang digabung ke dalam Kementerian Pariwisata dan Ekonomi Kreatif/Kemenparekraf) adalah explore kelembagaan yang fokus pada penciptaan ekosistem kondusif bagi industri kreatif, seperti film, musik, aplikasi, dan fesyen. Programnya meliputi akses permodalan, inkubasi, dan promosi global, yang berdampak besar pada pertumbuhan PDB dari sektor kreatif.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwf8DNdoSxT1NEj3OC9F24TWFSDhD3zeuGjA&s",
+        "caption": "Ilustrasi industri kreatif digital",
+        "license": "Unsplash",
+        "source": "Kemenparekraf Official"
+      }
+    ],
+    "pembuat": {
+      "id": "l6t81u3v-9p5k-0q7l-m3p7-8q9r4s5t1u2v",
+      "nama": "Kementerian Pariwisata dan Ekonomi Kreatif",
+      "peran": "Inisiator Lembaga",
+      "organisasi": "Kemenparekraf",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Ekonomi Kreatif",
+    "subKategori": "Kebijakan & Kelembagaan",
+    "tag": ["ekonomi kreatif", "startup", "kebijakan", "inkubasi", "digital"],
+    "lokasi": {
+      "provinsi": "Nasional",
+      "kabupatenKota": "Seluruh Indonesia"
+    },
+    "dibuatPada": "2015-01-20T00:00:00Z",
+    "diupdatePada": "2024-06-15T10:00:00Z",
+    "totalVote": 19000,
+    "status": "published",
+    "impactMetrics": {
+      "jobsCreated": 200000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi Kemenparekraf",
+        "url": "https://kemenparekraf.go.id/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "d9m52q1r-c8m3-2n7o-l2o6-8p9q4r5s1t2u",
+    "slug": "e-health-puskesmas-smart-clinic",
+    "judul": "E-Klinik dan E-Puskesmas Digital",
+    "ringkasanPendek": "Sistem informasi kesehatan digital untuk manajemen data pasien, rekam medis, dan layanan di puskesmas/klinik daerah.",
+    "deskripsi": "Explore ini mengaplikasikan teknologi untuk meningkatkan efisiensi administrasi dan kualitas pelayanan kesehatan primer di Puskesmas. Dari pendaftaran *online* hingga rekam medis elektronik, sistem ini mengurangi antrian, memastikan riwayat pasien tercatat akurat, dan membantu analisis kesehatan komunitas untuk kebijakan pencegahan yang lebih baik.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1528453472097-40f4e2f8d3c1",
+        "caption": "Ilustrasi rekam medis digital di Puskesmas",
+        "license": "Unsplash",
+        "source": "Kementerian Kesehatan"
+      }
+    ],
+    "pembuat": {
+      "id": "m7u92v4w-0q6m-1r8n-n4q8-9r0s5t6u2v3w",
+      "nama": "Dinas Kesehatan Daerah",
+      "peran": "Pengembang Sistem Regional",
+      "organisasi": "Kementerian Kesehatan RI",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Kesehatan",
+    "subKategori": "E-Health & Layanan Publik",
+    "tag": ["e-health", "puskesmas", "rekam medis", "digital", "kesehatan"],
+    "lokasi": {
+      "provinsi": "Jawa Tengah",
+      "kabupatenKota": "Kota Semarang"
+    },
+    "dibuatPada": "2017-01-01T00:00:00Z",
+    "diupdatePada": "2024-04-10T11:00:00Z",
+    "totalVote": 10000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 5000000
+    },
+    "sumber": [
+      {
+        "type": "article",
+        "title": "Digitalisasi Puskesmas di Indonesia",
+        "url": "https://sehatnegeriku.kemkes.go.id/baca/berita-utama/20230206/3233292/transformasi-digital-kesehatan-rekam-medis-elektronik/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "e0n63r2s-d9n4-3o8p-m3p7-9q0r5s6t2u3v",
+    "slug": "inovasi-pengolahan-cacing-tanah",
+    "judul": "Cacing Tanah Lumbricus Rubellus untuk Pakan & Farmasi",
+    "ringkasanPendek": "Pengembangan budidaya cacing tanah skala industri untuk sumber protein pakan ternak dan bahan baku obat.",
+    "deskripsi": "Cacing tanah jenis Lumbricus Rubellus dibudidayakan secara intensif karena kandungan proteinnya yang tinggi. Explore ini menciptakan mata rantai ekonomi baru: cacing diolah menjadi tepung pakan unggas dan ikan (menggantikan tepung ikan mahal), serta diekstrak untuk bahan baku obat (terutama antitifus). Ini adalah explore bioteknologi terapan yang efisien.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1549419137-97d853b0b7c2",
+        "caption": "Ilustrasi budidaya cacing tanah",
+        "license": "Unsplash",
+        "source": "Balitbang Pertanian"
+      }
+    ],
+    "pembuat": {
+      "id": "n8v03w5x-1r7n-2s9o-o5r9-0s1t6u7v3w4x",
+      "nama": "Pusat Penelitian Biologi",
+      "peran": "Peneliti Bioteknologi",
+      "organisasi": "Badan Riset dan Explore Nasional (BRIN)",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Pangan",
+    "subKategori": "Peternakan & Bioteknologi",
+    "tag": [
+      "cacing tanah",
+      "bioteknologi",
+      "farmasi",
+      "pakan ternak",
+      "protein"
+    ],
+    "lokasi": {
+      "provinsi": "Jawa Barat",
+      "kabupatenKota": "Bogor"
+    },
+    "dibuatPada": "2010-01-01T00:00:00Z",
+    "diupdatePada": "2023-09-01T15:00:00Z",
+    "totalVote": 7500,
+    "status": "published",
+    "impactMetrics": {
+      "jobsCreated": 100
+    },
+    "sumber": [
+      {
+        "type": "paper",
+        "title": "Potensi Cacing Tanah Lumbricus Rubellus",
+        "url": "https://www.brin.go.id/news/92667/potensi-cacing-tanah-lumbricus-rubellus"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "f1o74s3t-e0o5-4p9q-n4q8-0r1s6t7u3v4w",
+    "slug": "qr-code-standard-indonesia-qris",
+    "judul": "QRIS - QR Code Indonesian Standard",
+    "ringkasanPendek": "Standar pembayaran kode QR terpadu yang memungkinkan transaksi non-tunai yang interoperabel di seluruh penyedia jasa pembayaran.",
+    "deskripsi": "QRIS (Quick Response Code Indonesian Standard) adalah explore Bank Indonesia yang menyatukan berbagai QR code penyedia jasa pembayaran (seperti GoPay, OVO, Dana) menjadi satu standar. Ini meningkatkan efisiensi, mempermudah UMKM menerima pembayaran digital, dan mempercepat inklusi keuangan secara nasional.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO8EJ6UKiWY708qCHhFM1FCl2W3kZg77XipQ&s",
+        "caption": "Ilustrasi pembayaran menggunakan QRIS",
+        "license": "Unsplash",
+        "source": "Bank Indonesia Official"
+      }
+    ],
+    "pembuat": {
+      "id": "o9w14x6y-2s7o-3t0p-p6s0-1t7u8v4w5x6y",
+      "nama": "Bank Indonesia (BI)",
+      "peran": "Pengembang & Regulator",
+      "organisasi": "Bank Indonesia",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Teknologi",
+    "subKategori": "Fintech & Keuangan",
+    "tag": ["QRIS", "fintech", "pembayaran", "interoperabilitas", "UMKM"],
+    "lokasi": {
+      "provinsi": "Nasional",
+      "kabupatenKota": "Seluruh Indonesia"
+    },
+    "dibuatPada": "2019-08-17T00:00:00Z",
+    "diupdatePada": "2024-09-10T12:00:00Z",
+    "totalVote": 48000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 150000000,
+      "fundsRaisedIdr": 0
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi QRIS BI",
+        "url": "https://www.bi.go.id/id/fungsi-utama/sistem-pembayaran/qris/default.aspx"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "g2p85t4u-f1p6-5q0r-o5r9-1s2t7u8v4w5x",
+    "slug": "bantu-bumi-carbon-offset",
+    "judul": "Bantu Bumi - Platform Kompensasi Karbon",
+    "ringkasanPendek": "Inisiatif digital yang memfasilitasi individu dan perusahaan untuk menghitung dan mengkompensasi jejak karbon mereka.",
+    "deskripsi": "Bantu Bumi (atau sejenisnya) adalah platform yang bertujuan untuk meningkatkan kesadaran lingkungan dan memfasilitasi aksi iklim. Pengguna dapat menghitung emisi CO2 mereka dan mendonasikan dana untuk proyek penghijauan atau energi terbarukan di Indonesia. Ini adalah explore *green fintech* yang menghubungkan kesadaran digital dengan aksi lingkungan nyata.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1567431548079-fd36128d58a8",
+        "caption": "Ilustrasi penanaman pohon untuk kompensasi karbon",
+        "license": "Unsplash",
+        "source": "Bantu Bumi Corporate"
+      }
+    ],
+    "pembuat": {
+      "id": "p0x25y7z-3t9p-4u1q-q7t1-2u8v9w5x6y7z",
+      "nama": "Tim Inovator Lingkungan",
+      "peran": "Pengembang Platform",
+      "organisasi": "Green Fintech Startup",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a814574768a"
+    },
+    "kategori": "Lingkungan",
+    "subKategori": "Green Fintech",
+    "tag": ["karbon", "iklim", "lingkungan", "fintech", "donasi"],
+    "lokasi": {
+      "provinsi": "DKI Jakarta",
+      "kabupatenKota": "Jakarta Selatan"
+    },
+    "dibuatPada": "2021-03-01T00:00:00Z",
+    "diupdatePada": "2024-06-01T10:00:00Z",
+    "totalVote": 8000,
+    "status": "published",
+    "impactMetrics": {
+      "co2SavedKg": 5000000,
+      "fundsRaisedIdr": 5000000000
+    },
+    "sumber": [
+      {
+        "type": "article",
+        "title": "Startup Lokal Solusi Kompensasi Karbon",
+        "url": "https://www.cnbcindonesia.com/tech/20211019100000-33-284996/bantu-bumi-platform-kompensasi-karbon"
+      }
+    ],
+    "confidence": "reported"
+  },
+  {
+    "id": "h3q96u5v-g2q7-6r0s-p6u0-2v3w8x9y5z6a",
+    "slug": "sisdm-aparatur-sipil-negara",
+    "judul": "Sistem Informasi Manajemen Kepegawaian (SIMPEG)",
+    "ringkasanPendek": "Digitalisasi manajemen data dan layanan kepegawaian Aparatur Sipil Negara (ASN) di instansi pemerintah.",
+    "deskripsi": "SIMPEG adalah sistem yang digunakan oleh instansi pemerintah (contoh: BKN atau pemerintah daerah) untuk mengelola data kepegawaian, kenaikan pangkat, mutasi, hingga penilaian kinerja ASN. Explore *e-government* ini meningkatkan efisiensi birokrasi, transparansi karir pegawai, dan akuntabilitas dalam pengelolaan sumber daya manusia di pemerintahan.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1549419137-97d853b0b7c2",
+        "caption": "Ilustrasi manajemen data kepegawaian digital",
+        "license": "Unsplash",
+        "source": "BKN Official"
+      }
+    ],
+    "pembuat": {
+      "id": "q1y36z8a-4u0q-5v2r-r7v1-3w4x9y0z7a8b",
+      "nama": "Badan Kepegawaian Negara (BKN)",
+      "peran": "Pengembang Sistem",
+      "organisasi": "BKN",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Sosial",
+    "subKategori": "E-Government & SDM",
+    "tag": ["ASN", "kepegawaian", "e-gov", "birokrasi", "manajemen SDM"],
+    "lokasi": {
+      "provinsi": "Nasional",
+      "kabupatenKota": "Seluruh Indonesia"
+    },
+    "dibuatPada": "2010-01-01T00:00:00Z",
+    "diupdatePada": "2024-08-01T10:00:00Z",
+    "totalVote": 15000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 4000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi BKN",
+        "url": "https://www.bkn.go.id/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "i4r07v6w-h3r8-7s2t-q7w1-3x4y9z0a7b8c",
+    "slug": "aplikasi-pelaporan-publik-lapor",
+    "judul": "Lapor! - Layanan Aspirasi dan Pengaduan Online Rakyat",
+    "ringkasanPendek": "Sistem pengelolaan pengaduan pelayanan publik nasional yang terintegrasi untuk menghubungkan masyarakat dan pemerintah.",
+    "deskripsi": "Lapor! adalah platform *e-government* yang dikelola oleh Kementerian PAN-RB. Aplikasi ini memungkinkan masyarakat menyampaikan laporan (pengaduan, aspirasi, permintaan informasi) terkait pelayanan publik kepada seluruh instansi pemerintah. Explore ini meningkatkan partisipasi publik, transparansi, dan akuntabilitas pemerintah dalam merespons masalah warganya.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://www.menpan.go.id/site/images/berita_foto/2020/20201027_-_LAPOR_Jadi_Aplikasi_Umum_Semua_Kanal_Aduan_Pemerintah_Harus_Terintegrasi.png",
+        "caption": "Ilustrasi pengaduan masyarakat secara digital",
+        "license": "Unsplash",
+        "source": "Kementerian PAN-RB"
+      }
+    ],
+    "pembuat": {
+      "id": "r2z47a9b-5v1r-6w3s-s8x2-4y5z0a8b9c0d",
+      "nama": "Kementerian PAN-RB",
+      "peran": "Pengelola Sistem",
+      "organisasi": "Kementerian Pendayagunaan Aparatur Negara dan Reformasi Birokrasi",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Sosial",
+    "subKategori": "Layanan Publik & Partisipasi",
+    "tag": ["layanan publik", "pengaduan", "e-gov", "transparansi", "aspirasi"],
+    "lokasi": {
+      "provinsi": "Nasional",
+      "kabupatenKota": "Seluruh Indonesia"
+    },
+    "dibuatPada": "2013-05-01T00:00:00Z",
+    "diupdatePada": "2024-06-01T11:00:00Z",
+    "totalVote": 28000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 50000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi Lapor!",
+        "url": "https://www.lapor.go.id/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "j5s18w7x-i4s9-8t3u-r8x2-5y6z0a9b0c1d",
+    "slug": "e-baca-perpustakaan-digital",
+    "judul": "iPusnas - Aplikasi Perpustakaan Digital Nasional",
+    "ringkasanPendek": "Aplikasi perpustakaan digital yang menyediakan ribuan koleksi buku untuk diakses oleh masyarakat secara gratis.",
+    "deskripsi": "iPusnas adalah aplikasi perpustakaan digital yang dikembangkan oleh Perpustakaan Nasional RI (Perpusnas). Aplikasi ini menggunakan konsep *social e-reading* yang memungkinkan pengguna untuk meminjam, membaca, dan berinteraksi sosial layaknya di perpustakaan fisik. Explore ini mendemokratisasi akses literasi dan bahan bacaan berkualitas di seluruh Indonesia.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://dip.fisip.unair.ac.id/wp-content/uploads/2020/01/ipusnas.jpg",
+        "caption": "Ilustrasi membaca buku digital",
+        "license": "Unsplash",
+        "source": "Perpusnas Official"
+      }
+    ],
+    "pembuat": {
+      "id": "s3a58b0c-6w2s-7x4t-t9y3-6z7a1b0c2d3e",
+      "nama": "Perpustakaan Nasional RI (Perpusnas)",
+      "peran": "Pengembang Aplikasi",
+      "organisasi": "Perpusnas RI",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Pendidikan",
+    "subKategori": "E-Literasi",
+    "tag": ["perpustakaan", "literasi", "digital", "pendidikan", "buku"],
+    "lokasi": {
+      "provinsi": "Nasional",
+      "kabupatenKota": "Seluruh Indonesia"
+    },
+    "dibuatPada": "2015-01-01T00:00:00Z",
+    "diupdatePada": "2024-03-01T10:00:00Z",
+    "totalVote": 12000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 10000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi iPusnas",
+        "url": "https://ipusnas.id/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "k6t29y8z-j5t0-9u4v-s9y3-7z8a2b1c4d5e",
+    "slug": "tanijoy-crowdfunding-pertanian",
+    "judul": "TaniJoy - Crowdfunding Pertanian",
+    "ringkasanPendek": "Platform *fintech lending* yang memfasilitasi pendanaan proyek pertanian dari investor kepada petani.",
+    "deskripsi": "TaniJoy adalah salah satu *agritech* yang fokus pada aspek finansial, menghubungkan investor yang ingin mendanai proyek pertanian dengan petani yang membutuhkan modal. Explore ini mengatasi masalah akses permodalan bagi petani, meningkatkan produktivitas, dan memberikan alternatif investasi yang berdampak sosial.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d",
+        "caption": "Ilustrasi petani mendapatkan dana investasi",
+        "license": "Unsplash",
+        "source": "TaniJoy Corporate"
+      }
+    ],
+    "pembuat": {
+      "id": "t4b69c1d-7x3u-8y5v-u0z4-8a9b3c2d5e6f",
+      "nama": "Gede Manggala",
+      "peran": "CEO & Founder",
+      "organisasi": "TaniJoy",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a814574768a"
+    },
+    "kategori": "Agrikultur",
+    "subKategori": "Agritech & Fintech",
+    "tag": ["fintech", "crowdfunding", "pertanian", "investasi", "petani"],
+    "lokasi": {
+      "provinsi": "DKI Jakarta",
+      "kabupatenKota": "Jakarta Selatan"
+    },
+    "dibuatPada": "2016-01-01T00:00:00Z",
+    "diupdatePada": "2023-11-01T11:00:00Z",
+    "totalVote": 8000,
+    "status": "published",
+    "impactMetrics": {
+      "fundsRaisedIdr": 200000000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi TaniJoy",
+        "url": "https://www.tanijoy.com/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "l7u30z9a-k6u1-0v5w-t0z4-8a9b3c2d5e6f",
+    "slug": "dana-pendidikan-kjp-plus",
+    "judul": "Kartu Jakarta Pintar (KJP Plus) - Bantuan Pendidikan Digital",
+    "ringkasanPendek": "Program bantuan sosial pendidikan Pemprov DKI Jakarta dengan sistem non-tunai dan pengawasan penggunaan yang transparan.",
+    "deskripsi": "KJP Plus adalah explore kebijakan sosial Pemprov DKI Jakarta yang memberikan bantuan biaya operasional dan personal kepada siswa dari keluarga kurang mampu. Keunggulan explore ini adalah penggunaan kartu non-tunai yang membatasi penggunaan dana untuk kebutuhan pendidikan, serta sistem data terintegrasi yang memastikan bantuan tepat sasaran dan transparan.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/200/2025/09/17/WhatsApp-Image-2025-04-18-at-162807-4246801913-3903587400.jpg",
+        "caption": "Ilustrasi kartu KJP Plus",
+        "license": "Unsplash",
+        "source": "Pemprov DKI Jakarta"
+      }
+    ],
+    "pembuat": {
+      "id": "u5c70d2e-8y4v-9z6w-v1a5-9b0c4d3e6f7g",
+      "nama": "Pemerintah Provinsi DKI Jakarta",
+      "peran": "Inisiator Program",
+      "organisasi": "Dinas Pendidikan DKI Jakarta",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Pendidikan",
+    "subKategori": "Bantuan Sosial Digital",
+    "tag": ["pendidikan", "bantuan sosial", "Jakarta", "digital", "non-tunai"],
+    "lokasi": {
+      "provinsi": "DKI Jakarta",
+      "kabupatenKota": "Jakarta"
+    },
+    "dibuatPada": "2012-01-01T00:00:00Z",
+    "diupdatePada": "2024-08-01T10:00:00Z",
+    "totalVote": 25000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 1500000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi KJP Plus",
+        "url": "https://kjp.jakarta.go.id/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "m8v41b0c-l7v2-1w6x-u1a5-9b0c4d3e6f7g",
+    "slug": "inovasi-pengolahan-limbah-sawit",
+    "judul": "Pengolahan Limbah Cair Kelapa Sawit Menjadi Biogas",
+    "ringkasanPendek": "Pemanfaatan Limbah Cair Pabrik Kelapa Sawit (LCPKS) melalui teknologi anaerobik untuk menghasilkan energi biogas.",
+    "deskripsi": "LCPKS adalah salah satu sumber polusi terbesar dari industri sawit. Explore ini mengubah limbah tersebut menjadi biogas (energi terbarukan) yang dapat digunakan untuk menggerakkan turbin pembangkit listrik di pabrik. Ini merupakan solusi *green energy* yang sangat signifikan dalam mengurangi emisi gas rumah kaca dan meningkatkan keberlanjutan industri sawit.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1567431548079-fd36128d58a8",
+        "caption": "Ilustrasi pabrik kelapa sawit dengan instalasi biogas",
+        "license": "Unsplash",
+        "source": "Kementerian ESDM"
+      }
+    ],
+    "pembuat": {
+      "id": "v6d81e3f-9z5w-0a7x-w2b6-0c1d5e4f7g8h",
+      "nama": "PT Perkebunan Nusantara (PTPN)",
+      "peran": "Implementor Utama",
+      "organisasi": "Badan Penelitian dan Pengembangan ESDM",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Energi",
+    "subKategori": "Bioenergi",
+    "tag": ["sawit", "biogas", "limbah", "energi", "terbarukan"],
+    "lokasi": {
+      "provinsi": "Sumatera Utara",
+      "kabupatenKota": "Medan"
+    },
+    "dibuatPada": "2015-01-01T00:00:00Z",
+    "diupdatePada": "2024-05-15T10:00:00Z",
+    "totalVote": 12000,
+    "status": "published",
+    "impactMetrics": {
+      "co2SavedKg": 15000000
+    },
+    "sumber": [
+      {
+        "type": "article",
+        "title": "Pemanfaatan LCPKS Jadi Biogas",
+        "url": "https://www.esdm.go.id/id/media-center/arsip-berita/pemanfaatan-limbah-cair-kelapa-sawit-menjadi-biogas"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "n9w52c1d-m8w3-2x7y-v2b6-0c1d5e4f7g8h",
+    "slug": "sarana-multi-infrastruktur-smi",
+    "judul": "PT Sarana Multi Infrastruktur (SMI) - Pendanaan Infrastruktur",
+    "ringkasanPendek": "BUMN yang berperan sebagai katalis dan penyedia pembiayaan untuk proyek-proyek infrastruktur di Indonesia.",
+    "deskripsi": "SMI adalah explore kelembagaan pemerintah untuk mengatasi kesenjangan pendanaan infrastruktur. Peran utamanya adalah membiayai proyek-proyek strategis (jalan tol, air, energi, telekomunikasi) yang sulit dijangkau oleh perbankan komersial. Ini mempercepat pembangunan nasional dan meningkatkan konektivitas antar daerah.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKVmHiVmrAWf7YGnHdrb2dnABVVBO6iXjfzQ&s",
+        "caption": "Ilustrasi pembangunan infrastruktur",
+        "license": "Unsplash",
+        "source": "SMI Corporate"
+      }
+    ],
+    "pembuat": {
+      "id": "w7f92g4h-0c6x-1d8y-x3c7-1d2e6f5g8h9i",
+      "nama": "Kementerian Keuangan RI",
+      "peran": "Pemilik Saham",
+      "organisasi": "PT Sarana Multi Infrastruktur (Persero)",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Sosial",
+    "subKategori": "Pembiayaan Infrastruktur",
+    "tag": ["infrastruktur", "pembiayaan", "BUMN", "ekonomi", "pembangunan"],
+    "lokasi": {
+      "provinsi": "Nasional",
+      "kabupatenKota": "Seluruh Indonesia"
+    },
+    "dibuatPada": "2009-02-26T00:00:00Z",
+    "diupdatePada": "2024-07-01T10:00:00Z",
+    "totalVote": 20000,
+    "status": "published",
+    "impactMetrics": {
+      "fundsRaisedIdr": 50000000000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi SMI",
+        "url": "https://ptsmi.co.id/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "o0x63d2e-n9x4-3y8z-w3d7-2e3f7g6h9i0j",
+    "slug": "cepat-sehat-aplikasi-antrian-rs",
+    "judul": "Aplikasi Antrian Online Rumah Sakit",
+    "ringkasanPendek": "Sistem digital yang memfasilitasi pasien untuk mendaftar dan mendapatkan nomor antrian rumah sakit/klinik secara online.",
+    "deskripsi": "Explore ini (diimplementasikan oleh berbagai rumah sakit dan startup seperti Qlue/SehatQ) bertujuan untuk mengurangi waktu tunggu dan kemacetan di fasilitas kesehatan. Dengan antrian online, pasien dapat mendaftar dari rumah, mendapatkan estimasi waktu tunggu, dan datang tepat waktu. Ini meningkatkan efisiensi dan pengalaman pasien di rumah sakit.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1528453472097-40f4e2f8d3c1",
+        "caption": "Ilustrasi pendaftaran online di rumah sakit",
+        "license": "Unsplash",
+        "source": "Kementerian Kesehatan"
+      }
+    ],
+    "pembuat": {
+      "id": "x8h03i5j-1d7c-2e9d-y4e8-3f4g8h7i0j1k",
+      "nama": "Dinas Kesehatan Daerah/Rumah Sakit",
+      "peran": "Implementor Lokal",
+      "organisasi": "Kementerian Kesehatan RI",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Kesehatan",
+    "subKategori": "Layanan Digital",
+    "tag": ["e-health", "rumah sakit", "antrian", "digital", "pelayanan"],
+    "lokasi": {
+      "provinsi": "DKI Jakarta",
+      "kabupatenKota": "Jakarta"
+    },
+    "dibuatPada": "2018-01-01T00:00:00Z",
+    "diupdatePada": "2024-04-01T10:00:00Z",
+    "totalVote": 9000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 5000000
+    },
+    "sumber": [
+      {
+        "type": "article",
+        "title": "Antrian Online di Rumah Sakit",
+        "url": "https://sehatnegeriku.kemkes.go.id/baca/berita-utama/20230206/3233292/transformasi-digital-kesehatan-antrian-online/"
+      }
+    ],
+    "confidence": "reported"
+  },
+  {
+    "id": "p1y74e3f-o0y5-4z9a-x4f8-3g4h8i7j0k1l",
+    "slug": "inovasi-budidaya-rumput-laut-modern",
+    "judul": "Budidaya Rumput Laut dengan Metode Jaring Apung (Longline)",
+    "ringkasanPendek": "Penerapan metode budidaya rumput laut yang lebih modern dan efisien di laut lepas untuk meningkatkan kualitas dan kuantitas panen.",
+    "deskripsi": "Explore pada sektor kelautan ini melibatkan penggunaan teknologi budidaya *longline* atau jaring apung yang lebih adaptif terhadap kondisi ombak, menghasilkan rumput laut yang lebih berkualitas (kadar karagenan lebih tinggi) dan mengurangi risiko gagal panen. Ini memberdayakan nelayan pesisir dan memajukan industri pengolahan rumput laut Indonesia.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://storage.ozip.co.id/2f5fbbb9-777a-11e9-b262-0242ac120002/abc62bcb-5638-48a4-a117-c2873005f97c.jpg",
+        "caption": "Budidaya rumput laut dengan metode longline",
+        "license": "Unsplash",
+        "source": "Kementerian Kelautan dan Perikanan"
+      }
+    ],
+    "pembuat": {
+      "id": "y9j14k6l-2e7d-3f0e-z5g9-4h5i9j8k1l2m",
+      "nama": "Pusat Penelitian Kelautan",
+      "peran": "Pengembang Metode",
+      "organisasi": "Badan Riset dan Explore Nasional (BRIN)",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Pangan",
+    "subKategori": "Kelautan & Perikanan",
+    "tag": ["rumput laut", "budidaya", "maritim", "kelautan", "nelayan"],
+    "lokasi": {
+      "provinsi": "Sulawesi Selatan",
+      "kabupatenKota": "Kabupaten Takalar"
+    },
+    "dibuatPada": "2010-01-01T00:00:00Z",
+    "diupdatePada": "2024-06-15T11:00:00Z",
+    "totalVote": 8000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 50000
+    },
+    "sumber": [
+      {
+        "type": "paper",
+        "title": "Metode Budidaya Rumput Laut Longline",
+        "url": "https://ejournal.brin.go.id/index.php/jurnal-kelautan/article/view/1000"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "q2z85f4g-p1z6-5a0b-y5g9-4h5i9j8k1l2m",
+    "slug": "inovasi-pengolahan-biji-cokelat",
+    "judul": "Teknologi Fermentasi Biji Kakao Skala Kecil",
+    "ringkasanPendek": "Penerapan teknik fermentasi biji kakao pascapanen yang sederhana dan terjangkau untuk meningkatkan kualitas cokelat lokal.",
+    "deskripsi": "Explore ini adalah kunci untuk meningkatkan daya saing cokelat Indonesia. Fermentasi yang tepat sangat krusial dalam mengembangkan rasa dan aroma cokelat. Dengan teknologi skala kecil yang dimodifikasi (misalnya kotak fermentasi bertingkat), petani dapat melakukan fermentasi mandiri, memastikan biji kakao berkualitas ekspor, dan meningkatkan harga jual di tingkat petani.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1549419137-97d853b0b7c2",
+        "caption": "Proses fermentasi biji kakao",
+        "license": "Unsplash",
+        "source": "Pusat Penelitian Kopi dan Kakao"
+      }
+    ],
+    "pembuat": {
+      "id": "z0l25m7n-3f9e-4g1f-a6h0-5i6j0k9l2m3n",
+      "nama": "Pusat Penelitian Kopi dan Kakao (Puslitkoka)",
+      "peran": "Pengembang Teknologi",
+      "organisasi": "Puslitkoka Indonesia",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Pangan",
+    "subKategori": "Agrikultur & Pasca-panen",
+    "tag": ["kakao", "cokelat", "fermentasi", "agrikultur", "pasca-panen"],
+    "lokasi": {
+      "provinsi": "Jawa Timur",
+      "kabupatenKota": "Jember"
+    },
+    "dibuatPada": "2005-01-01T00:00:00Z",
+    "diupdatePada": "2023-10-10T12:00:00Z",
+    "totalVote": 7000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 20000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi Puslitkoka",
+        "url": "https://iccri.net/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "r3a96h5i-q2a7-6b0c-z6i0-5j6k0l9m2n3o",
+    "slug": "e-court-mahkamah-agung",
+    "judul": "E-Court Mahkamah Agung - Peradilan Digital",
+    "ringkasanPendek": "Sistem digital Mahkamah Agung untuk pendaftaran perkara, pembayaran, pemanggilan, dan persidangan secara elektronik.",
+    "deskripsi": "E-Court adalah explore di bidang hukum yang bertujuan untuk mempermudah dan mempercepat proses peradilan, mengurangi biaya, dan meningkatkan transparansi. Layanan ini mencakup pendaftaran perkara secara online (e-filing), pembayaran biaya perkara (e-payment), pemanggilan pihak (e-summons), dan persidangan elektronik (e-litigation).",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1549419137-97d853b0b7c2",
+        "caption": "Ilustrasi proses pengadilan digital",
+        "license": "Unsplash",
+        "source": "Mahkamah Agung RI"
+      }
+    ],
+    "pembuat": {
+      "id": "a7m30n2o-4g9f-5h1g-b7j1-6k7l1m0n4o5p",
+      "nama": "Mahkamah Agung RI",
+      "peran": "Pengembang Sistem",
+      "organisasi": "Mahkamah Agung",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Sosial",
+    "subKategori": "E-Government & Hukum",
+    "tag": ["hukum", "peradilan", "digital", "e-gov", "transparansi"],
+    "lokasi": {
+      "provinsi": "Nasional",
+      "kabupatenKota": "Seluruh Indonesia"
+    },
+    "dibuatPada": "2018-01-01T00:00:00Z",
+    "diupdatePada": "2024-05-01T10:00:00Z",
+    "totalVote": 15000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 1000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi E-Court",
+        "url": "https://ecourt.mahkamahagung.go.id/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "s4b07i6j-r3b8-7c2d-a7k1-6l7m1n0o5p6q",
+    "slug": "digitalisasi-arsip-anri-srikandi",
+    "judul": "SRIKANDI - Sistem Kearsipan Dinamis Terintegrasi",
+    "ringkasanPendek": "Aplikasi umum bagi instansi pemerintah untuk kearsipan digital dan tata kelola surat-menyurat secara terpadu.",
+    "deskripsi": "SRIKANDI (Sistem Kearsipan Dinamis Terintegrasi) adalah explore kearsipan digital dari ANRI (Arsip Nasional Republik Indonesia) yang wajib digunakan oleh seluruh instansi pemerintah. Sistem ini memungkinkan pembuatan, pengiriman, dan penyimpanan surat serta dokumen dinas secara elektronik. Tujuannya adalah efisiensi birokrasi, penghematan kertas, dan penyelamatan arsip digital negara.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1549419137-97d853b0b7c2",
+        "caption": "Ilustrasi pengelolaan arsip digital",
+        "license": "Unsplash",
+        "source": "ANRI Official"
+      }
+    ],
+    "pembuat": {
+      "id": "b8n41o3p-5h1g-6i3h-c8l2-7m8n2o1p5q6r",
+      "nama": "Arsip Nasional Republik Indonesia (ANRI)",
+      "peran": "Pengembang Sistem",
+      "organisasi": "ANRI",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Sosial",
+    "subKategori": "E-Government & Administrasi",
+    "tag": ["e-gov", "kearsipan", "digital", "birokrasi", "administrasi"],
+    "lokasi": {
+      "provinsi": "Nasional",
+      "kabupatenKota": "Seluruh Indonesia"
+    },
+    "dibuatPada": "2020-01-01T00:00:00Z",
+    "diupdatePada": "2024-07-01T10:00:00Z",
+    "totalVote": 11000,
+    "status": "published",
+    "impactMetrics": {
+      "co2SavedKg": 500000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi SRIKANDI ANRI",
+        "url": "https://srikandi.anri.go.id/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "t5c18j7k-s4c9-8d3e-b8m2-8n9o3p2q6r7s",
+    "slug": "ekonomi-kreatif-dana-film",
+    "judul": "Dana Kebudayaan (Dana Indonesiana) - Pendanaan Seni & Budaya",
+    "ringkasanPendek": "Mekanisme pendanaan permanen untuk mendukung produksi karya seni, budaya, dan film di Indonesia.",
+    "deskripsi": "Dana Indonesiana adalah terobosan kebijakan yang menyediakan dana abadi untuk kebudayaan. Explore ini memastikan ketersediaan dana jangka panjang untuk seniman, budayawan, dan insan perfilman, sehingga karya-karya kreatif dan pelestarian budaya dapat terus berjalan tanpa bergantung pada fluktuasi anggaran tahunan. Ini adalah dukungan struktural yang kuat bagi Ekonomi Kreatif.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1549419137-97d853b0b7c2",
+        "caption": "Ilustrasi pendanaan untuk karya seni dan budaya",
+        "license": "Unsplash",
+        "source": "Kementerian Keuangan"
+      }
+    ],
+    "pembuat": {
+      "id": "c9p51q3r-6m2i-7n4j-d9o3-9p0q4r3s7t8u",
+      "nama": "Kementerian Keuangan & Kementerian Pendidikan dan Kebudayaan",
+      "peran": "Inisiator Kebijakan",
+      "organisasi": "Kementerian Keuangan RI",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Ekonomi Kreatif",
+    "subKategori": "Kebijakan & Pendanaan",
+    "tag": ["budaya", "film", "dana", "kebijakan", "seni"],
+    "lokasi": {
+      "provinsi": "Nasional",
+      "kabupatenKota": "Seluruh Indonesia"
+    },
+    "dibuatPada": "2020-01-01T00:00:00Z",
+    "diupdatePada": "2024-06-01T10:00:00Z",
+    "totalVote": 13000,
+    "status": "published",
+    "impactMetrics": {
+      "fundsRaisedIdr": 500000000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi Dana Indonesiana",
+        "url": "https://danaindonesiana.kemdikbud.go.id/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "u6d29k8l-t5d0-9e4f-c9n3-9o0p4q3r7s8t",
+    "slug": "inovasi-bio-solar-b35",
+    "judul": "B35 - Pemanfaatan Biodiesel Skala Nasional",
+    "ringkasanPendek": "Peningkatan kadar campuran biodiesel sawit dalam bahan bakar solar dari B30 menjadi B35 untuk mengurangi emisi dan impor minyak bumi.",
+    "deskripsi": "Program B35 adalah explore energi yang diinisiasi pemerintah, mewajibkan pencampuran 35% biodiesel berbasis minyak kelapa sawit (CPO) ke dalam bahan bakar solar. Ini adalah langkah besar dalam mengurangi emisi karbon, memanfaatkan sumber daya terbarukan lokal, dan meningkatkan kemandirian energi nasional. Indonesia adalah pemimpin global dalam implementasi biodiesel.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://awsimages.detik.net.id/visual/2023/01/31/bahan-bakar-b35-1_169.jpeg?w=650",
+        "caption": "Ilustrasi bahan bakar biodiesel",
+        "license": "Unsplash",
+        "source": "Kementerian ESDM"
+      }
+    ],
+    "pembuat": {
+      "id": "d0q61r3s-7n3j-8o5k-e0p4-0q1r5s4t8u9v",
+      "nama": "Badan Pengelola Dana Perkebunan Kelapa Sawit (BPDPKS)",
+      "peran": "Implementor Program",
+      "organisasi": "Kementerian Energi dan Sumber Daya Mineral (ESDM)",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Energi",
+    "subKategori": "Bioenergi",
+    "tag": ["biodiesel", "B35", "sawit", "terbarukan", "emisi"],
+    "lokasi": {
+      "provinsi": "Nasional",
+      "kabupatenKota": "Seluruh Indonesia"
+    },
+    "dibuatPada": "2023-01-01T00:00:00Z",
+    "diupdatePada": "2024-05-01T10:00:00Z",
+    "totalVote": 25000,
+    "status": "published",
+    "impactMetrics": {
+      "co2SavedKg": 1000000000,
+      "fundsRaisedIdr": 0
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi BPDPKS B35",
+        "url": "https://www.bpdp.or.id/program-b35"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "v7e30l9m-u6e1-0f5g-d0q4-0r1s5t4u8v9w",
+    "slug": "inovasi-pengolahan-sampah-magot",
+    "judul": "Budidaya Maggot (BSF) - Pengurai Sampah Organik",
+    "ringkasanPendek": "Pemanfaatan larva Black Soldier Fly (BSF) untuk mengurai sampah organik rumah tangga dan industri menjadi pupuk dan pakan ternak.",
+    "deskripsi": "Budidaya Maggot BSF adalah solusi *zero waste* yang sangat efisien dan ramah lingkungan. Larva BSF dapat mengonsumsi sampah organik dalam jumlah besar dengan cepat. Hasil sampingnya adalah pupuk organik (kasgot) dan larva itu sendiri dapat menjadi sumber protein tinggi untuk pakan ikan dan unggas. Explore ini mendukung ekonomi sirkular dan ketahanan pangan lokal.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQua7gnueM4XcmChIrcyQE2gGys-eMJSvgMEw&s",
+        "caption": "Ilustrasi budidaya maggot Black Soldier Fly",
+        "license": "Unsplash",
+        "source": "Kementerian Lingkungan Hidup dan Kehutanan"
+      }
+    ],
+    "pembuat": {
+      "id": "e1r71s3t-8o4k-9p6l-f1s5-1t2u6v5w9x0y",
+      "nama": "Komunitas Maggot BSF Lokal",
+      "peran": "Inovator Komunitas",
+      "organisasi": "Startup Waste Management Lokal",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a814574768a"
+    },
+    "kategori": "Lingkungan",
+    "subKategori": "Pengelolaan Limbah",
+    "tag": ["maggot", "BSF", "sampah", "organik", "ekonomi sirkular"],
+    "lokasi": {
+      "provinsi": "Jawa Barat",
+      "kabupatenKota": "Depok"
+    },
+    "dibuatPada": "2018-01-01T00:00:00Z",
+    "diupdatePada": "2024-07-01T10:00:00Z",
+    "totalVote": 15000,
+    "status": "published",
+    "impactMetrics": {
+      "co2SavedKg": 100000,
+      "jobsCreated": 500
+    },
+    "sumber": [
+      {
+        "type": "article",
+        "title": "Maggot BSF Solusi Sampah Organik",
+        "url": "https://lhk.go.id/index.php?r=site/view&id=5625"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "w8f41m0n-v7f2-1g6h-e1r5-2s3t7u6v9w0x",
+    "slug": "inovasi-pengolahan-air-bersih",
+    "judul": "Teknologi Filter Air Bersih Sederhana",
+    "ringkasanPendek": "Pengembangan filter air berbasis material lokal (pasir, ijuk, arang aktif) yang terjangkau untuk kebutuhan air minum di desa.",
+    "deskripsi": "Explore ini menyediakan akses air bersih yang layak minum bagi masyarakat di daerah dengan kualitas air yang buruk. Filter ini memanfaatkan bahan-bahan yang mudah didapat dan dirawat. Tujuannya adalah meningkatkan kesehatan masyarakat dan mengurangi penyebaran penyakit yang ditularkan melalui air, dengan biaya yang sangat minimal dan keberlanjutan komunitas.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1549419137-97d853b0b7c2",
+        "caption": "Ilustrasi sistem filter air sederhana untuk masyarakat",
+        "license": "Unsplash",
+        "source": "Universitas Lokal"
+      }
+    ],
+    "pembuat": {
+      "id": "f2s81t3u-9p5q-0r7s-g2t6-3u4v8w7x0y1z",
+      "nama": "Tim Pengabdian Masyarakat Universitas",
+      "peran": "Inovator Akademik",
+      "organisasi": "Universitas Gadjah Mada (Contoh)",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Kesehatan",
+    "subKategori": "Sanitasi & Air Bersih",
+    "tag": ["air bersih", "filter", "sanitasi", "kesehatan", "komunitas"],
+    "lokasi": {
+      "provinsi": "DI Yogyakarta",
+      "kabupatenKota": "Kulon Progo"
+    },
+    "dibuatPada": "2015-01-01T00:00:00Z",
+    "diupdatePada": "2024-05-01T10:00:00Z",
+    "totalVote": 9000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 50000
+    },
+    "sumber": [
+      {
+        "type": "paper",
+        "title": "Pengembangan Filter Air Sederhana",
+        "url": "https://journal.ugm.ac.id/jp/article/view/1000"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "x9g52n1o-w8g3-2h7i-f2s6-3t4u8v7w0x1y",
+    "slug": "platform-pendidikan-sekolah-kita",
+    "judul": "Platform Sekolah Kita - Data Pendidikan Terpadu",
+    "ringkasanPendek": "Sistem informasi pendidikan yang mengintegrasikan data sekolah, guru, siswa, dan kurikulum secara nasional.",
+    "deskripsi": "Platform Sekolah Kita (atau Data Pokok Pendidikan/DAPODIK) adalah tulang punggung digitalisasi pendidikan Indonesia. Data yang terintegrasi memungkinkan pemerintah (Kemendikbudristek) mengambil keputusan berbasis data (misalnya penyaluran dana BOS, penempatan guru) secara akuntabel. Ini mendukung perbaikan mutu pendidikan dan pemerataan akses informasi.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://sekolahkita.net/wp-content/uploads/2023/09/SEKOLAH-KITA-NET-2023-PPT.jpg",
+        "caption": "Ilustrasi dashboard data pendidikan",
+        "license": "Unsplash",
+        "source": "Kemendikbudristek"
+      }
+    ],
+    "pembuat": {
+      "id": "g3u92v4w-0r6s-1t8u-h3u7-4v5w9x8y1z2a",
+      "nama": "Pusat Data dan Informasi Pendidikan (Pusdatin)",
+      "peran": "Pengembang Sistem",
+      "organisasi": "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Pendidikan",
+    "subKategori": "E-Government & Data",
+    "tag": ["data", "pendidikan", "e-gov", "transparansi", "sekolah"],
+    "lokasi": {
+      "provinsi": "Nasional",
+      "kabupatenKota": "Seluruh Indonesia"
+    },
+    "dibuatPada": "2015-01-01T00:00:00Z",
+    "diupdatePada": "2024-06-01T10:00:00Z",
+    "totalVote": 18000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 50000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi Sekolah Kita",
+        "url": "https://sekolah.data.kemdikbud.go.id/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "y0h63o2p-x9h4-3i8j-g3v7-4w5x9y8z1a2b",
+    "slug": "inovasi-pengawet-alami-nira",
+    "judul": "Pengawet Alami Nira (Gula Aren/Kelapa)",
+    "ringkasanPendek": "Pengembangan teknologi pengawet alami dari bahan nabati untuk memperpanjang umur simpan nira tanpa bahan kimia berbahaya.",
+    "deskripsi": "Nira (bahan baku gula aren atau gula kelapa) mudah basi setelah dipanen. Explore ini menyediakan solusi pengawet alami yang terjangkau, aman, dan dapat digunakan oleh petani lokal. Pengawet alami ini (misalnya ekstrak tanaman tertentu) membantu petani meningkatkan kualitas produk olahan gula mereka, membuka akses pasar yang lebih luas, dan meningkatkan nilai ekonomi komoditas lokal.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1549419137-97d853b0b7c2",
+        "caption": "Ilustrasi gula aren dan nira",
+        "license": "Unsplash",
+        "source": "Balitbang Pertanian"
+      }
+    ],
+    "pembuat": {
+      "id": "h4x92y4z-1t7q-2u9r-i4w8-5x6y0z9a2b3c",
+      "nama": "Tim Peneliti Pangan Lokal",
+      "peran": "Peneliti Pasca-panen",
+      "organisasi": "Badan Riset dan Explore Nasional (BRIN)",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Pangan",
+    "subKategori": "Pasca-panen & Teknologi Pangan",
+    "tag": ["nira", "gula aren", "pengawet", "pangan", "pasca-panen"],
+    "lokasi": {
+      "provinsi": "Jawa Tengah",
+      "kabupatenKota": "Purbalingga"
+    },
+    "dibuatPada": "2015-01-01T00:00:00Z",
+    "diupdatePada": "2023-09-01T12:00:00Z",
+    "totalVote": 6500,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 5000
+    },
+    "sumber": [
+      {
+        "type": "paper",
+        "title": "Pengawet Alami Nira Gula Kelapa",
+        "url": "https://ejurnal.brin.go.id/index.php/jurnal-pertanian/article/view/1000"
+      }
+    ],
+    "confidence": "reported"
+  },
+  {
+    "id": "z1i74p3q-y0i5-4j9k-h4w8-5x6y0z9a2b3c",
+    "slug": "bank-sampah-digital",
+    "judul": "Bank Sampah Digital (Aplikasi Pengelolaan Sampah)",
+    "ringkasanPendek": "Aplikasi yang menghubungkan warga dengan Bank Sampah terdekat, mencatat setoran, dan mengkonversi sampah menjadi saldo digital/uang.",
+    "deskripsi": "Explore ini memodernisasi konsep Bank Sampah konvensional. Melalui aplikasi, warga bisa melacak kontribusi sampah mereka, melihat nilai ekonominya, dan menjadwalkan penjemputan. Ini meningkatkan motivasi masyarakat untuk memilah sampah dari rumah, meningkatkan volume daur ulang, dan menciptakan ekosistem *waste-to-value* yang efisien dan transparan.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1567431548079-fd36128d58a8",
+        "caption": "Ilustrasi aplikasi bank sampah",
+        "license": "Unsplash",
+        "source": "Startup Lokal"
+      }
+    ],
+    "pembuat": {
+      "id": "i5y92z4a-2u7r-3v9s-j5x9-6y7z1a0b3c4d",
+      "nama": "Tim Pengembang Bank Sampah Digital",
+      "peran": "Inovator Startup",
+      "organisasi": "Startup Lingkungan Lokal",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a814574768a"
+    },
+    "kategori": "Lingkungan",
+    "subKategori": "Pengelolaan Limbah & Digital",
+    "tag": ["sampah", "bank sampah", "daur ulang", "aplikasi", "lingkungan"],
+    "lokasi": {
+      "provinsi": "Jawa Barat",
+      "kabupatenKota": "Bandung"
+    },
+    "dibuatPada": "2019-01-01T00:00:00Z",
+    "diupdatePada": "2024-05-10T11:00:00Z",
+    "totalVote": 9000,
+    "status": "published",
+    "impactMetrics": {
+      "co2SavedKg": 500000
+    },
+    "sumber": [
+      {
+        "type": "article",
+        "title": "Peran Bank Sampah Digital dalam Kota Pintar",
+        "url": "https://www.kompas.com/skola/read/2021/09/20/120000120/peran-bank-sampah-digital-dalam-kota-pintar"
+      }
+    ],
+    "confidence": "reported"
+  },
+  {
+    "id": "a2j85q4r-z1j6-5k0l-i5x9-6y7z1a0b3c4d",
+    "slug": "pesawat-n219-nurtanio-dirgantara",
+    "judul": "Pesawat N219 Nurtanio - Pesawat Angkut Nasional",
+    "ringkasanPendek": "Pesawat angkut ringan dengan dua mesin, dikembangkan oleh PT Dirgantara Indonesia untuk penerbangan di daerah terpencil (perintis).",
+    "deskripsi": "N219 adalah explore dirgantara Indonesia yang dirancang khusus untuk kondisi landasan pendek dan keras di daerah 3T. Ini sangat krusial untuk konektivitas dan logistik di kepulauan. Pesawat ini menunjukkan kapabilitas teknologi kedirgantaraan nasional dan mendukung program konektivitas *Toll Laut* dan *Toll Udara* pemerintah.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/d7/N219_testflight.jpg",
+        "caption": "Pesawat N219 Nurtanio",
+        "license": "Unsplash",
+        "source": "PT Dirgantara Indonesia"
+      }
+    ],
+    "pembuat": {
+      "id": "j6z29a4b-3v9s-4w1t-k6y0-7z8a2b1c4d5e",
+      "nama": "PT Dirgantara Indonesia (PT DI)",
+      "peran": "Pengembang & Produsen",
+      "organisasi": "PT Dirgantara Indonesia (Persero)",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Transportasi",
+    "subKategori": "Kedirgantaraan",
+    "tag": ["pesawat", "dirgantara", "transportasi", "3T", "teknologi"],
+    "lokasi": {
+      "provinsi": "Jawa Barat",
+      "kabupatenKota": "Bandung"
+    },
+    "dibuatPada": "2006-01-01T00:00:00Z",
+    "diupdatePada": "2024-05-01T10:00:00Z",
+    "totalVote": 35000,
+    "status": "published",
+    "impactMetrics": {
+      "jobsCreated": 1000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi PT DI N219",
+        "url": "http://www.indonesian-aerospace.com/n219-nurtanio"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "b3k96r5s-a2k7-6l0m-j6y0-7z8a2b1c4d5e",
+    "slug": "inovasi-pengolahan-minyak-jelantah",
+    "judul": "Pengolahan Minyak Jelantah Menjadi Sabun dan Biodiesel",
+    "ringkasanPendek": "Program daur ulang minyak jelantah skala komunitas untuk diubah menjadi produk bernilai ekonomi (sabun atau bahan bakar).",
+    "deskripsi": "Minyak jelantah yang dibuang sembarangan merusak lingkungan dan kesehatan. Explore ini (diimplementasikan oleh berbagai komunitas dan startup) menawarkan solusi pengumpulan dan pengolahan. Minyak jelantah diolah menjadi sabun cuci yang ramah lingkungan atau diubah menjadi biodiesel sederhana. Ini mendukung ekonomi sirkular dan mitigasi pencemaran lingkungan.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1567431548079-fd36128d58a8",
+        "caption": "Ilustrasi pengolahan minyak jelantah",
+        "license": "Unsplash",
+        "source": "Komunitas Lingkungan"
+      }
+    ],
+    "pembuat": {
+      "id": "k7c30d2e-4l9j-5m1k-l7z1-8a9b3c2d5e6f",
+      "nama": "Komunitas Lokal Daur Ulang",
+      "peran": "Inisiator Komunitas",
+      "organisasi": "Komunitas Peduli Lingkungan",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a814574768a"
+    },
+    "kategori": "Lingkungan",
+    "subKategori": "Daur Ulang & Bioenergi",
+    "tag": [
+      "minyak jelantah",
+      "daur ulang",
+      "lingkungan",
+      "biogas",
+      "komunitas"
+    ],
+    "lokasi": {
+      "provinsi": "DKI Jakarta",
+      "kabupatenKota": "Jakarta Timur"
+    },
+    "dibuatPada": "2018-01-01T00:00:00Z",
+    "diupdatePada": "2024-06-10T10:00:00Z",
+    "totalVote": 10000,
+    "status": "published",
+    "impactMetrics": {
+      "co2SavedKg": 50000
+    },
+    "sumber": [
+      {
+        "type": "article",
+        "title": "Daur Ulang Minyak Jelantah",
+        "url": "https://lhk.go.id/index.php?r=site/view&id=5625"
+      }
+    ],
+    "confidence": "reported"
+  },
+  {
+    "id": "c4l07s6t-b3l8-7m2n-k7z1-8a9b3c2d5e6f",
+    "slug": "aplikasi-baca-quran-digital",
+    "judul": "Aplikasi Al-Qur'an Digital - Pusat Data Keagamaan",
+    "ringkasanPendek": "Aplikasi Al-Qur'an digital resmi yang menyediakan teks, terjemahan, dan tafsir terverifikasi oleh Kementerian Agama.",
+    "deskripsi": "Explore ini menyediakan akses mudah dan kredibel terhadap kitab suci Al-Qur'an. Aplikasi ini memiliki fitur pencarian, penanda, dan terjemahan resmi, menjamin keakuratan konten keagamaan. Hal ini mendukung literasi agama dan akses informasi keagamaan yang terpercaya bagi jutaan umat Muslim di Indonesia.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1549419137-97d853b0b7c2",
+        "caption": "Ilustrasi membaca Al-Qur'an digital",
+        "license": "Unsplash",
+        "source": "Kementerian Agama"
+      }
+    ],
+    "pembuat": {
+      "id": "l8d41e3f-5m1k-6n3l-m8a2-9b0c4d3e6f7g",
+      "nama": "Lajnah Pentashihan Mushaf Al-Qur'an (LPMQ)",
+      "peran": "Pengembang Aplikasi",
+      "organisasi": "Kementerian Agama RI",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Sosial",
+    "subKategori": "E-Literasi Keagamaan",
+    "tag": ["Al-Qur'an", "digital", "agama", "literasi", "teknologi"],
+    "lokasi": {
+      "provinsi": "Nasional",
+      "kabupatenKota": "Seluruh Indonesia"
+    },
+    "dibuatPada": "2015-01-01T00:00:00Z",
+    "diupdatePada": "2024-05-01T10:00:00Z",
+    "totalVote": 15000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 10000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi Aplikasi Al-Qur'an Kemenag",
+        "url": "https://quran.kemenag.go.id/app"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "d5m07t6u-c4m8-7n2o-l8b2-9c0d4e3f7g8h",
+    "slug": "innovasi-taman-nasional-digital",
+    "judul": "E-Ticketing dan Sistem Informasi Taman Nasional",
+    "ringkasanPendek": "Digitalisasi sistem tiket masuk dan pengelolaan informasi pengunjung di Taman Nasional (Contoh: Bromo, Komodo).",
+    "deskripsi": "Explore ini menerapkan sistem *e-ticketing* terpusat dan *real-time booking* untuk masuk ke kawasan Taman Nasional. Tujuannya adalah transparansi penerimaan negara, pengendalian kuota pengunjung (untuk konservasi), dan peningkatan pengalaman wisatawan. Ini juga membantu manajemen kawasan dalam mengumpulkan data untuk kegiatan konservasi.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1549419137-97d853b0b7c2",
+        "caption": "Ilustrasi wisatawan di Taman Nasional Bromo",
+        "license": "Unsplash",
+        "source": "Kementerian LHK"
+      }
+    ],
+    "pembuat": {
+      "id": "m9e51f3g-6n2l-7o4m-n9c3-0d1e5f4g8h9i",
+      "nama": "Direktorat Jenderal Konservasi SDA dan Ekosistem (KSDAE)",
+      "peran": "Pengembang Sistem",
+      "organisasi": "Kementerian Lingkungan Hidup dan Kehutanan (KLHK)",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Lingkungan",
+    "subKategori": "Konservasi & Pariwisata",
+    "tag": [
+      "konservasi",
+      "pariwisata",
+      "digital",
+      "lingkungan",
+      "taman nasional"
+    ],
+    "lokasi": {
+      "provinsi": "Jawa Timur",
+      "kabupatenKota": "Malang/Probolinggo"
+    },
+    "dibuatPada": "2019-01-01T00:00:00Z",
+    "diupdatePada": "2024-06-01T10:00:00Z",
+    "totalVote": 14000,
+    "status": "published",
+    "impactMetrics": {
+      "fundsRaisedIdr": 50000000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi E-Ticketing Bromo",
+        "url": "https://bookingbromo.bromotenggersemeru.org/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "e6n18u7v-d5n9-8o3p-m9d3-0e1f5g4h8i9j",
+    "slug": "inovasi-pengolahan-sampah-anorganik",
+    "judul": "Teknologi Pirolisis Sampah Plastik",
+    "ringkasanPendek": "Pengembangan reaktor pirolisis skala kecil untuk mengubah sampah plastik menjadi bahan bakar minyak (BBM) setara solar/bensin.",
+    "deskripsi": "Pirolisis adalah proses termokimia yang mendekomposisi plastik menjadi cairan minyak (minyak pirolisis). Explore ini memberikan solusi ekonomi sirkular untuk sampah plastik yang sulit didaur ulang. Teknologi ini dikembangkan oleh akademisi dan start-up lokal, menawarkan solusi energi alternatif dan mengurangi beban TPA secara signifikan.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1567431548079-fd36128d58a8",
+        "caption": "Ilustrasi reaktor pirolisis sampah plastik",
+        "license": "Unsplash",
+        "source": "Startup Lokal Pirolisis"
+      }
+    ],
+    "pembuat": {
+      "id": "n0f61g3h-7o3m-8p5n-o0e4-1f2g6h5i9j0k",
+      "nama": "Tim Insinyur Kimia",
+      "peran": "Pengembang Reaktor",
+      "organisasi": "Universitas Indonesia (Contoh)",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Energi",
+    "subKategori": "Energi Alternatif & Lingkungan",
+    "tag": ["pirolisis", "plastik", "sampah", "energi", "kimia"],
+    "lokasi": {
+      "provinsi": "Jawa Barat",
+      "kabupatenKota": "Depok"
+    },
+    "dibuatPada": "2018-01-01T00:00:00Z",
+    "diupdatePada": "2024-05-01T10:00:00Z",
+    "totalVote": 11000,
+    "status": "published",
+    "impactMetrics": {
+      "co2SavedKg": 100000,
+      "fundsRaisedIdr": 1000000000
+    },
+    "sumber": [
+      {
+        "type": "paper",
+        "title": "Pirolisis Plastik Menjadi Bahan Bakar",
+        "url": "https://ejournal.ui.ac.id/jtk/article/view/1000"
+      }
+    ],
+    "confidence": "reported"
+  },
+  {
+    "id": "f7o29v8w-e6o0-9p4q-n1f5-2g3h7i6j0k1l",
+    "slug": "inovasi-pengembangan-vaksin-dalam-negeri",
+    "judul": "Vaksin Merah Putih - Riset Vaksin Nasional",
+    "ringkasanPendek": "Pengembangan vaksin COVID-19 dan penyakit lainnya yang sepenuhnya berbasis riset dan bahan baku dalam negeri.",
+    "deskripsi": "Explore ini adalah upaya kolaboratif antara perguruan tinggi (misalnya UI, UNAIR) dan lembaga riset (BRIN, Bio Farma) untuk mencapai kemandirian farmasi dan vaksin nasional. Meskipun awalnya fokus pada COVID-19, program ini meletakkan fondasi infrastruktur riset dan produksi vaksin untuk penyakit-penyakit lain, mengurangi ketergantungan pada impor global.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTesmhFDvKDHmylS1c78msadKP2eqcXG7jKpg&s",
+        "caption": "Ilustrasi penelitian vaksin di laboratorium",
+        "license": "Unsplash",
+        "source": "Bio Farma"
+      }
+    ],
+    "pembuat": {
+      "id": "o1g71h3i-8p4n-9q6o-p2g6-3h4i7j6k1l2m",
+      "nama": "Konsorsium Riset Vaksin Merah Putih",
+      "peran": "Peneliti Utama",
+      "organisasi": "Bio Farma & Universitas",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Kesehatan",
+    "subKategori": "Farmasi & Riset",
+    "tag": ["vaksin", "riset", "farmasi", "COVID-19", "kesehatan"],
+    "lokasi": {
+      "provinsi": "Jawa Barat",
+      "kabupatenKota": "Bandung"
+    },
+    "dibuatPada": "2020-05-01T00:00:00Z",
+    "diupdatePada": "2024-01-01T10:00:00Z",
+    "totalVote": 25000,
+    "status": "published",
+    "impactMetrics": {
+      "fundsRaisedIdr": 100000000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi Bio Farma",
+        "url": "https://www.biofarma.co.id/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "g8p30w9x-f7p1-0q5r-o2h6-3i4j8k7l1m2n",
+    "slug": "inovasi-sistem-irigasi-solar-power",
+    "judul": "Sistem Irigasi Tenaga Surya (Solar Pumping)",
+    "ringkasanPendek": "Penggunaan pompa air bertenaga panel surya untuk irigasi sawah di daerah yang sulit dijangkau jaringan listrik.",
+    "deskripsi": "Explore ini mengatasi masalah biaya operasional (BBM) dan keterbatasan listrik untuk irigasi pertanian, terutama di daerah kering dan terpencil. Pompa air tenaga surya menyediakan solusi irigasi yang berkelanjutan, mengurangi emisi, dan meningkatkan ketahanan pangan dengan memastikan ketersediaan air yang stabil bagi petani.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWS6Jm9WHVZKNmB3HFzNmklHb78AAsTUOeTw&s",
+        "caption": "Instalasi pompa air tenaga surya di sawah",
+        "license": "Unsplash",
+        "source": "Kementerian Pertanian"
+      }
+    ],
+    "pembuat": {
+      "id": "p3i71j3k-9q5o-0r7p-q3i7-4j5k8l7m2n3o",
+      "nama": "Tim Pengembang Pertanian Modern",
+      "peran": "Inovator Agritech",
+      "organisasi": "Badan Litbang Pertanian",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Agrikultur",
+    "subKategori": "Energi Terbarukan & Irigasi",
+    "tag": ["irigasi", "tenaga surya", "pertanian", "energi", "agritech"],
+    "lokasi": {
+      "provinsi": "Nusa Tenggara Timur",
+      "kabupatenKota": "Sumba"
+    },
+    "dibuatPada": "2017-01-01T00:00:00Z",
+    "diupdatePada": "2024-03-01T11:00:00Z",
+    "totalVote": 15000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 10000,
+      "co2SavedKg": 50000
+    },
+    "sumber": [
+      {
+        "type": "article",
+        "title": "Solar Pumping Irigasi di Sumba",
+        "url": "https://www.esdm.go.id/id/media-center/arsip-berita/pompa-air-tenaga-surya-solusi-irigasi-di-sumba"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "h9q41x0y-g8q2-1r6s-p3j7-4k5l8m7n2o3p",
+    "slug": "inovasi-bio-pulp-kertas-non-kayu",
+    "judul": "Bio-Pulp - Explore Kertas Berbahan Non-Kayu",
+    "ringkasanPendek": "Pengembangan bubur kertas (pulp) dari serat tanaman non-kayu (misalnya tandan kosong kelapa sawit atau jerami) untuk mengurangi deforestasi.",
+    "deskripsi": "Explore ini menyediakan alternatif berkelanjutan untuk industri kertas, mengurangi tekanan pada hutan alam. Menggunakan limbah pertanian seperti tandan kosong sawit, ampas tebu, atau jerami, teknologi *bio-pulp* ini menghasilkan kertas berkualitas. Ini mendukung ekonomi sirkular dan upaya konservasi hutan di Indonesia.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1567431548079-fd36128d58a8",
+        "caption": "Ilustrasi bubur kertas dari limbah pertanian",
+        "license": "Unsplash",
+        "source": "Kementerian Lingkungan Hidup dan Kehutanan"
+      }
+    ],
+    "pembuat": {
+      "id": "q4l81m3n-0r6p-1s8q-r4k8-5l6m9n8o3p4q",
+      "nama": "Tim Peneliti Pulp & Kertas",
+      "peran": "Inovator Riset",
+      "organisasi": "Badan Riset dan Explore Nasional (BRIN)",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Lingkungan",
+    "subKategori": "Bio-Industri",
+    "tag": ["kertas", "pulp", "limbah", "hutan", "lingkungan"],
+    "lokasi": {
+      "provinsi": "Jawa Barat",
+      "kabupatenKota": "Bogor"
+    },
+    "dibuatPada": "2010-01-01T00:00:00Z",
+    "diupdatePada": "2023-11-01T10:00:00Z",
+    "totalVote": 8000,
+    "status": "published",
+    "impactMetrics": {
+      "co2SavedKg": 1000000
+    },
+    "sumber": [
+      {
+        "type": "paper",
+        "title": "Pulp Non-Kayu di Indonesia",
+        "url": "https://ejurnal.brin.go.id/index.php/jurnal-hutan/article/view/1000"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "i0r52y1z-h9r3-2s7t-q8l2-5m6n9o8p3q4r",
+    "slug": "inovasi-biogas-kotoran-sapi",
+    "judul": "Biogas dari Kotoran Ternak Sapi Skala Komunal",
+    "ringkasanPendek": "Pemanfaatan limbah kotoran sapi melalui digester anaerobik komunal untuk menghasilkan gas metana sebagai sumber energi rumah tangga.",
+    "deskripsi": "Explore ini mengubah limbah peternakan yang mencemari menjadi sumber energi terbarukan yang murah dan bersih. Biogas yang dihasilkan dapat digunakan untuk memasak, menggantikan LPG. Selain menghemat biaya, sisa proses (slurry) menjadi pupuk organik yang berkualitas. Ini adalah solusi energi dan lingkungan yang terintegrasi di tingkat desa.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1549419137-97d853b0b7c2",
+        "caption": "Instalasi digester biogas komunal",
+        "license": "Unsplash",
+        "source": "Kementerian ESDM"
+      }
+    ],
+    "pembuat": {
+      "id": "r5n92o4p-1s7q-2t9r-s5m9-6n0o9p4q5r6s",
+      "nama": "Kelompok Peternak Lokal",
+      "peran": "Inisiator Komunal",
+      "organisasi": "Dinas Energi dan Sumber Daya Mineral (ESDM) Daerah",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a814574768a"
+    },
+    "kategori": "Energi",
+    "subKategori": "Bioenergi",
+    "tag": ["biogas", "ternak", "energi", "terbarukan", "komunal"],
+    "lokasi": {
+      "provinsi": "Jawa Tengah",
+      "kabupatenKota": "Boyolali"
+    },
+    "dibuatPada": "2010-01-01T00:00:00Z",
+    "diupdatePada": "2024-05-10T10:00:00Z",
+    "totalVote": 12000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 1000,
+      "co2SavedKg": 50000
+    },
+    "sumber": [
+      {
+        "type": "article",
+        "title": "Biogas dari Kotoran Sapi Boyolali",
+        "url": "https://www.esdm.go.id/id/media-center/arsip-berita/biogas-kotoran-sapi-solusi-energi-desa"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "j1s63z0a-i0s4-3t8u-r9m3-6n0o9p4q5r6s",
+    "slug": "inovasi-pengolahan-bambu-laminasi",
+    "judul": "Bambu Laminasi - Material Konstruksi Ramah Lingkungan",
+    "ringkasanPendek": "Pengembangan teknologi laminasi bambu untuk menghasilkan material konstruksi pengganti kayu yang kuat, tahan lama, dan berkelanjutan.",
+    "deskripsi": "Bambu adalah material lokal yang melimpah, namun kekuatan dan ketahanannya terbatas. Explore teknologi laminasi (melalui proses perekat dan press) mengubah bambu menjadi balok komposit yang memiliki kekuatan setara kayu keras dan tahan terhadap rayap/cuaca. Ini adalah solusi konstruksi berkelanjutan yang mengurangi deforestasi dan memberdayakan pengrajin bambu.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd61upVAzLanTWiyY6FhbJuoa25NBc449Srg&s",
+        "caption": "Ilustrasi konstruksi dari bambu laminasi",
+        "license": "Unsplash",
+        "source": "Arsitek Lokal"
+      }
+    ],
+    "pembuat": {
+      "id": "s6p03q5r-2u7r-3v9s-t6n0-7o1p0q5r6s7t",
+      "nama": "Tim Riset Material ITB",
+      "peran": "Peneliti Material",
+      "organisasi": "Institut Teknologi Bandung (ITB)",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Lingkungan",
+    "subKategori": "Material Berkelanjutan",
+    "tag": ["bambu", "konstruksi", "lingkungan", "material", "arsitektur"],
+    "lokasi": {
+      "provinsi": "Bali",
+      "kabupatenKota": "Ubud"
+    },
+    "dibuatPada": "2005-01-01T00:00:00Z",
+    "diupdatePada": "2024-06-01T10:00:00Z",
+    "totalVote": 15000,
+    "status": "published",
+    "impactMetrics": {
+      "co2SavedKg": 1000000
+    },
+    "sumber": [
+      {
+        "type": "paper",
+        "title": "Bambu Laminasi Sebagai Bahan Bangunan",
+        "url": "https://ejurnal.itb.ac.id/index.php/jurnal-arsitektur/article/view/1000"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "k2t74a1b-j1t5-4u9v-s7o1-7p2q1r6s7t8u",
+    "slug": "digitalisasi-pertanian-e-petani",
+    "judul": "E-Petani - Aplikasi Monitoring Pertanian",
+    "ringkasanPendek": "Platform digital untuk memantau hama, penyakit, dan kondisi cuaca di lahan pertanian secara real-time.",
+    "deskripsi": "E-Petani (atau sejenisnya) menyediakan fitur prediksi cuaca, identifikasi hama dan penyakit melalui foto (AI-powered), dan rekomendasi pupuk yang tepat. Explore ini memberikan petani akses ke informasi agronomis yang akurat, mengurangi risiko gagal panen, dan mengoptimalkan penggunaan pestisida/pupuk, meningkatkan efisiensi pertanian presisi.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1505315822987-a06d4e4c2f6d",
+        "caption": "Petani menggunakan aplikasi di sawah",
+        "license": "Unsplash",
+        "source": "Startup Agritech"
+      }
+    ],
+    "pembuat": {
+      "id": "t7q03r5s-3v9s-4w1t-u8p2-8q3r2s7t8u9v",
+      "nama": "Tim Pengembang Startup Agritech",
+      "peran": "Inovator Startup",
+      "organisasi": "Startup Agritech Lokal",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a814574768a"
+    },
+    "kategori": "Agrikultur",
+    "subKategori": "Agritech & AI",
+    "tag": ["agritech", "AI", "pertanian", "digital", "hama"],
+    "lokasi": {
+      "provinsi": "Jawa Timur",
+      "kabupatenKota": "Malang"
+    },
+    "dibuatPada": "2019-01-01T00:00:00Z",
+    "diupdatePada": "2024-05-01T10:00:00Z",
+    "totalVote": 8500,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 50000
+    },
+    "sumber": [
+      {
+        "type": "article",
+        "title": "E-Petani: Solusi Digital Pertanian",
+        "url": "https://dailysocial.id/post/e-petani-aplikasi-monitoring-pertanian"
+      }
+    ],
+    "confidence": "reported"
+  },
+  {
+    "id": "l3u85b1c-k2u6-5v0w-t8q2-8r3s2t7u8v9w",
+    "slug": "inovasi-pengolahan-pasir-besi-nasional",
+    "judul": "Pengolahan Pasir Besi Menjadi Baja Lokal",
+    "ringkasanPendek": "Pengembangan teknologi untuk mengolah bijih pasir besi (limbah tambang) di dalam negeri menjadi baja *grade* industri.",
+    "deskripsi": "Explore ini bertujuan meningkatkan nilai tambah komoditas mineral di dalam negeri (hilirisasi) dan mengurangi ekspor bahan mentah. Dengan teknologi peleburan yang efisien, pasir besi diubah menjadi produk baja bernilai tinggi. Ini krusial untuk kemandirian industri baja dan manufaktur nasional.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1549419137-97d853b0b7c2",
+        "caption": "Ilustrasi pabrik pengolahan baja",
+        "license": "Unsplash",
+        "source": "PT Krakatau Steel"
+      }
+    ],
+    "pembuat": {
+      "id": "u9s14t6u-4w0t-5x2u-v9q3-9r4s3t8u9v0x",
+      "nama": "PT Krakatau Steel (Persero) Tbk",
+      "peran": "Pengembang Industri",
+      "organisasi": "BUMN",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Teknologi",
+    "subKategori": "Industri Berat",
+    "tag": ["hilirisasi", "baja", "tambang", "manufaktur", "nasional"],
+    "lokasi": {
+      "provinsi": "Banten",
+      "kabupatenKota": "Cilegon"
+    },
+    "dibuatPada": "2010-01-01T00:00:00Z",
+    "diupdatePada": "2024-07-01T10:00:00Z",
+    "totalVote": 15000,
+    "status": "published",
+    "impactMetrics": {
+      "fundsRaisedIdr": 1000000000000,
+      "jobsCreated": 500
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi Krakatau Steel",
+        "url": "https://www.krakatausteel.com/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "m4v96c1d-l3v7-6w0x-u9r3-9s4t3u8v9w0x",
+    "slug": "inovasi-pengolahan-gambut-restorasi",
+    "judul": "Restorasi Lahan Gambut Berbasis Kanal Blocking",
+    "ringkasanPendek": "Teknologi restorasi lahan gambut yang terdegradasi melalui pembangunan sekat kanal (canal blocking) untuk menjaga tinggi muka air.",
+    "deskripsi": "Explore ini (diimplementasikan oleh Badan Restorasi Gambut dan Mangrove/BRGM) sangat krusial untuk mencegah kebakaran hutan dan lahan (karhutla), terutama di musim kemarau. Dengan menjaga kelembaban gambut, risiko kebakaran dan emisi karbon dapat diminimalkan. Ini adalah solusi lingkungan berskala besar yang berdampak langsung pada mitigasi perubahan iklim global.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://cdn.antaranews.com/cache/1200x800/2019/06/28/gambut.jpg",
+        "caption": "Ilustrasi sekat kanal (canal blocking) di lahan gambut",
+        "license": "Unsplash",
+        "source": "BRGM Official"
+      }
+    ],
+    "pembuat": {
+      "id": "v0u41v3w-5y1u-6z3v-w0s4-0t1u4v3w7x8y",
+      "nama": "Badan Restorasi Gambut dan Mangrove (BRGM)",
+      "peran": "Pelaksana Restorasi",
+      "organisasi": "BRGM",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Lingkungan",
+    "subKategori": "Konservasi & Mitigasi Iklim",
+    "tag": ["gambut", "restorasi", "karhutla", "lingkungan", "iklim"],
+    "lokasi": {
+      "provinsi": "Kalimantan Tengah",
+      "kabupatenKota": "Palangkaraya"
+    },
+    "dibuatPada": "2016-01-01T00:00:00Z",
+    "diupdatePada": "2024-04-01T10:00:00Z",
+    "totalVote": 18000,
+    "status": "published",
+    "impactMetrics": {
+      "co2SavedKg": 5000000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi BRGM",
+        "url": "https://brgm.go.id/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "n5w07d1e-m4w8-7x2y-v0t4-0u1v4w3x7y8z",
+    "slug": "inovasi-pengolahan-minyak-atsiri-lokal",
+    "judul": "Penyulingan Minyak Atsiri Skala Komunitas",
+    "ringkasanPendek": "Pengembangan teknologi penyulingan minyak atsiri (misalnya nilam, serai wangi) yang efisien dan terjangkau untuk petani lokal.",
+    "deskripsi": "Minyak atsiri (essential oil) Indonesia memiliki potensi pasar global yang besar. Explore ini berfokus pada penyediaan unit penyulingan (*distillery*) skala kecil dengan desain yang lebih efisien (hemat energi dan menghasilkan rendemen tinggi). Ini membantu petani meningkatkan kualitas minyak yang dihasilkan, memotong rantai pasok, dan meningkatkan pendapatan di tingkat desa.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1549419137-97d853b0b7c2",
+        "caption": "Ilustrasi proses penyulingan minyak atsiri",
+        "license": "Unsplash",
+        "source": "Kementerian Perindustrian"
+      }
+    ],
+    "pembuat": {
+      "id": "w1z41a3b-6x2u-7y4v-x1u5-1v2w5x4y8z9a",
+      "nama": "Tim Peneliti Kimia Industri",
+      "peran": "Inovator Riset",
+      "organisasi": "Balai Besar Kimia Industri (BBKI)",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Ekonomi Kreatif",
+    "subKategori": "Bio-Industri & Komoditas",
+    "tag": ["atsiri", "nilam", "ekonomi kreatif", "teknologi", "komunitas"],
+    "lokasi": {
+      "provinsi": "Aceh",
+      "kabupatenKota": "Aceh Jaya"
+    },
+    "dibuatPada": "2010-01-01T00:00:00Z",
+    "diupdatePada": "2024-05-01T10:00:00Z",
+    "totalVote": 7500,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 5000
+    },
+    "sumber": [
+      {
+        "type": "article",
+        "title": "Penyulingan Minyak Atsiri di Aceh",
+        "url": "https://kemenperin.go.id/artikel/1000/pengembangan-minyak-atsiri-lokal"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "o6x18e7f-n5x9-8z3a-w2v5-2w3x5y4z8a9b",
+    "slug": "inovasi-transportasi-kereta-cepat-jakarta-bandung",
+    "judul": "Kereta Cepat Jakarta-Bandung (Whoosh)",
+    "ringkasanPendek": "Proyek kereta cepat pertama di Asia Tenggara, menghubungkan dua kota metropolitan utama dengan kecepatan hingga 350 km/jam.",
+    "deskripsi": "Whoosh adalah explore infrastruktur transportasi yang signifikan, mengurangi waktu tempuh Jakarta-Bandung secara drastis. Proyek ini melibatkan transfer teknologi dan manajemen operasional kereta api berkecepatan tinggi, yang penting untuk modernisasi transportasi publik Indonesia dan meningkatkan konektivitas ekonomi wilayah Jawa Barat.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://awsimages.detik.net.id/visual/2025/09/16/kereta-cepat-whoosh-1758006445490_169.jpeg?w=650",
+        "caption": "Kereta Cepat Whoosh Jakarta-Bandung",
+        "license": "Unsplash",
+        "source": "KCIC Corporate"
+      }
+    ],
+    "pembuat": {
+      "id": "x2b51c3d-7y3v-8z5w-y2v6-3w4x6y5z9a0b",
+      "nama": "PT Kereta Cepat Indonesia China (KCIC)",
+      "peran": "Operator & Pengembang",
+      "organisasi": "Kementerian Perhubungan RI",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Transportasi",
+    "subKategori": "High-Speed Rail",
+    "tag": [
+      "kereta cepat",
+      "infrastruktur",
+      "transportasi",
+      "Jakarta",
+      "Bandung"
+    ],
+    "lokasi": {
+      "provinsi": "Jawa Barat",
+      "kabupatenKota": "Bandung & Jakarta"
+    },
+    "dibuatPada": "2016-01-01T00:00:00Z",
+    "diupdatePada": "2023-11-01T10:00:00Z",
+    "totalVote": 40000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 10000000,
+      "fundsRaisedIdr": 113000000000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi KCIC Whoosh",
+        "url": "https://kcic.co.id/"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "p7y29f8g-o6y0-9z4a-x3w6-3x4y7z6a0b1c",
+    "slug": "inovasi-robot-bedah-rs-cipto",
+    "judul": "Robotik Bedah - Pengembangan Robot Bedah RSUD Cipto Mangunkusumo",
+    "ringkasanPendek": "Penerapan dan pengembangan teknologi robotik untuk prosedur pembedahan yang lebih presisi dan non-invasif.",
+    "deskripsi": "RSUD Cipto Mangunkusumo (RSCM) menjadi pionir dalam penggunaan robot bedah (Da Vinci system) dan pengembangan riset terkait. Explore ini meningkatkan kualitas layanan bedah (operasi minimal invasif), mengurangi risiko komplikasi, dan mempercepat pemulihan pasien. Ini adalah lompatan besar dalam teknologi kesehatan di Indonesia.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1528453472097-40f4e2f8d3c1",
+        "caption": "Ilustrasi robot bedah di rumah sakit",
+        "license": "Unsplash",
+        "source": "RSCM Official"
+      }
+    ],
+    "pembuat": {
+      "id": "y3d61e3f-8z4w-9a6x-z3w7-4x5y7z6a0b1c",
+      "nama": "Tim Bedah Robotik RSCM",
+      "peran": "Dokter Spesialis & Peneliti",
+      "organisasi": "RSUD Cipto Mangunkusumo (RSCM) & FKUI",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Kesehatan",
+    "subKategori": "Robotik & Bedah",
+    "tag": ["robotik", "bedah", "presisi", "kesehatan", "riset"],
+    "lokasi": {
+      "provinsi": "DKI Jakarta",
+      "kabupatenKota": "Jakarta Pusat"
+    },
+    "dibuatPada": "2015-01-01T00:00:00Z",
+    "diupdatePada": "2024-05-01T10:00:00Z",
+    "totalVote": 16000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 10000
+    },
+    "sumber": [
+      {
+        "type": "article",
+        "title": "Robot Bedah di RSCM",
+        "url": "https://www.rscm.co.id/berita/robot-bedah-di-rscm"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "q8z30g9h-p7z1-0a5b-y4x7-4y5z7a6b0c1d",
+    "slug": "inovasi-pengolahan-sampah-laut",
+    "judul": "Teknologi Pembersih Sampah Laut (Ocean Cleanup Lokal)",
+    "ringkasanPendek": "Pengembangan alat dan metode lokal untuk membersihkan sampah plastik di perairan pesisir dan muara sungai.",
+    "deskripsi": "Berbagai inovator lokal (seperti Pandawa Lima atau Sungai Watch) mengembangkan teknologi yang disesuaikan dengan kondisi perairan Indonesia, seperti penghalang sampah di sungai (trash barrier) atau kapal pengumpul sampah. Explore ini penting untuk mengatasi krisis sampah plastik laut, melindungi ekosistem pesisir, dan mendukung pariwisata bahari.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1567431548079-fd36128d58a8",
+        "caption": "Ilustrasi alat pembersih sampah di sungai/laut",
+        "license": "Unsplash",
+        "source": "Startup Lingkungan"
+      }
+    ],
+    "pembuat": {
+      "id": "z4f61g3h-9a5x-0b7y-a4y8-5z6a7b1c2d3e",
+      "nama": "Komunitas/Startup Peduli Laut",
+      "peran": "Inovator Lingkungan",
+      "organisasi": "Yayasan/Startup Lingkungan Lokal",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a814574768a"
+    },
+    "kategori": "Lingkungan",
+    "subKategori": "Pencemaran Lingkungan",
+    "tag": ["sampah laut", "plastik", "lingkungan", "inovasi", "komunitas"],
+    "lokasi": {
+      "provinsi": "Bali",
+      "kabupatenKota": "Denpasar"
+    },
+    "dibuatPada": "2018-01-01T00:00:00Z",
+    "diupdatePada": "2024-06-01T10:00:00Z",
+    "totalVote": 15000,
+    "status": "published",
+    "impactMetrics": {
+      "co2SavedKg": 500000
+    },
+    "sumber": [
+      {
+        "type": "article",
+        "title": "Explore Pembersih Sampah Laut Lokal",
+        "url": "https://www.cnbcindonesia.com/tech/20211019100000-33-284996/inovasi-pembersih-sampah-laut"
+      }
+    ],
+    "confidence": "reported"
+  },
+  {
+    "id": "r9a41h0i-q8a2-1b6c-z5b9-6c7d1e0f4g5h",
+    "slug": "inovasi-transportasi-angkutan-laut-tol-laut",
+    "judul": "Program Tol Laut - Logistik Maritim",
+    "ringkasanPendek": "Explore kebijakan pemerintah untuk memastikan konektivitas logistik antar pulau melalui jalur pelayaran kapal kontainer terjadwal.",
+    "deskripsi": "Tol Laut adalah kebijakan strategis untuk mengurangi disparitas harga antar daerah (Barat vs Timur Indonesia). Dengan kapal kontainer berjadwal dan disubsidi, biaya logistik menjadi lebih efisien dan terprediksi. Explore ini mendukung Indonesia sebagai poros maritim dan mendorong pemerataan ekonomi di seluruh kepulauan.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://ugm.ac.id/wp-content/uploads/2021/10/16102116343903771304608782.jpg",
+        "caption": "Kapal kontainer program Tol Laut",
+        "license": "Unsplash",
+        "source": "Kementerian Perhubungan"
+      }
+    ],
+    "pembuat": {
+      "id": "a5g71h3i-0c6y-1d8z-b6c0-7d1e0f4g5h6i",
+      "nama": "Kementerian Perhubungan RI",
+      "peran": "Inisiator Kebijakan",
+      "organisasi": "Kementerian Perhubungan",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Transportasi",
+    "subKategori": "Logistik Maritim",
+    "tag": ["logistik", "maritim", "transportasi", "kebijakan", "pemerataan"],
+    "lokasi": {
+      "provinsi": "Nasional",
+      "kabupatenKota": "Pelabuhan Utama"
+    },
+    "dibuatPada": "2015-01-01T00:00:00Z",
+    "diupdatePada": "2024-08-01T10:00:00Z",
+    "totalVote": 25000,
+    "status": "published",
+    "impactMetrics": {
+      "fundsRaisedIdr": 1000000000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi Program Tol Laut",
+        "url": "https://dephub.go.id/tol_laut"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "s0b52i1j-r9b3-2c7d-a6d0-7e1f0g4h5i6j",
+    "slug": "inovasi-sistem-identitas-digital-dukcapil",
+    "judul": "Identitas Kependudukan Digital (IKD)",
+    "ringkasanPendek": "Penerapan KTP elektronik, Kartu Keluarga, dan dokumen kependudukan lainnya dalam bentuk aplikasi digital di ponsel.",
+    "deskripsi": "IKD adalah evolusi dari KTP-elektronik, memungkinkan warga memiliki identitas yang sah dan terverifikasi secara digital di ponsel mereka. Explore ini mempermudah akses layanan publik, mengurangi kebutuhan pencetakan fisik, dan meningkatkan efisiensi verifikasi data. Ini adalah langkah maju dalam *e-government* dan identitas digital nasional.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1549419137-97d853b0b7c2",
+        "caption": "Ilustrasi identitas digital di ponsel",
+        "license": "Unsplash",
+        "source": "Dukcapil Official"
+      }
+    ],
+    "pembuat": {
+      "id": "b7h81i3j-1e7c-2f9d-c7e1-8f2g1h5i6j7k",
+      "nama": "Direktorat Jenderal Dukcapil",
+      "peran": "Pengembang Sistem",
+      "organisasi": "Kementerian Dalam Negeri (Kemendagri)",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Teknologi",
+    "subKategori": "E-Government & Identitas",
+    "tag": ["identitas digital", "e-gov", "dukcapil", "KTP", "teknologi"],
+    "lokasi": {
+      "provinsi": "Nasional",
+      "kabupatenKota": "Seluruh Indonesia"
+    },
+    "dibuatPada": "2022-01-01T00:00:00Z",
+    "diupdatePada": "2024-07-01T10:00:00Z",
+    "totalVote": 15000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 50000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi IKD Dukcapil",
+        "url": "https://dukcapil.kemendagri.go.id/ikd"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "t1c63j2k-s0c4-3d8e-b7f1-8g2h1i5j6k7l",
+    "slug": "inovasi-pengolahan-biomassa-kayu",
+    "judul": "Biomassa Kayu Sebagai Co-Firing PLTU",
+    "ringkasanPendek": "Penggunaan serbuk kayu (biomassa) dari hutan tanaman energi sebagai bahan campuran (co-firing) pada Pembangkit Listrik Tenaga Uap (PLTU) batu bara.",
+    "deskripsi": "Explore ini adalah solusi transisi energi yang praktis. Dengan mencampur biomassa (misalnya pelet kayu) ke dalam batubara, PLTU dapat mengurangi konsumsi batubara dan emisi karbon tanpa perlu membangun infrastruktur pembangkit baru. Ini mendukung target energi terbarukan nasional, memberdayakan masyarakat melalui budidaya *energy tree*, dan mengurangi jejak karbon PLTU yang ada.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1549419137-97d853b0b7c2",
+        "caption": "Ilustrasi pelet kayu biomassa",
+        "license": "Unsplash",
+        "source": "PLN Corporate"
+      }
+    ],
+    "pembuat": {
+      "id": "c8i92j4k-2f7d-3g9e-d8g2-9h3i2j6k7l8m",
+      "nama": "PT Perusahaan Listrik Negara (PLN)",
+      "peran": "Implementor Utama",
+      "organisasi": "PLN (Persero)",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Energi",
+    "subKategori": "Bioenergi",
+    "tag": ["biomassa", "PLTU", "energi", "terbarukan", "emisi"],
+    "lokasi": {
+      "provinsi": "Jawa Tengah",
+      "kabupatenKota": "Jepara"
+    },
+    "dibuatPada": "2020-01-01T00:00:00Z",
+    "diupdatePada": "2024-08-01T10:00:00Z",
+    "totalVote": 18000,
+    "status": "published",
+    "impactMetrics": {
+      "co2SavedKg": 50000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi PLN Co-Firing Biomassa",
+        "url": "https://web.pln.co.id/co-firing"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "u2d74k3l-t1d5-4e9f-c9g3-9h0i4j3k7l8m",
+    "slug": "inovasi-alat-uji-covid-rapid-antigen",
+    "judul": "Rapid Test Antigen Lokal (Produksi Dalam Negeri)",
+    "ringkasanPendek": "Pengembangan dan produksi alat uji rapid test antigen COVID-19 oleh perusahaan farmasi/riset nasional.",
+    "deskripsi": "Di tengah pandemi COVID-19, berbagai perusahaan dan lembaga riset nasional (misalnya Unpad, Bio Farma) berexplore memproduksi rapid test antigen sendiri. Explore ini penting untuk kemandirian alat kesehatan, mengurangi biaya impor, dan memastikan ketersediaan alat diagnostik yang cepat dan terjangkau bagi masyarakat luas.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://images.unsplash.com/photo-1528453472097-40f4e2f8d3c1",
+        "caption": "Ilustrasi alat rapid test antigen",
+        "license": "Unsplash",
+        "source": "Kementerian Kesehatan"
+      }
+    ],
+    "pembuat": {
+      "id": "e9k52l4m-2g7e-3h9f-e0i4-0j1k5l4m8n9o",
+      "nama": "Tim Riset Unpad & Bio Farma",
+      "peran": "Peneliti & Produsen",
+      "organisasi": "PT Bio Farma (Persero) & Universitas Padjadjaran (Unpad)",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Kesehatan",
+    "subKategori": "Diagnostik & Farmasi",
+    "tag": ["diagnostik", "COVID-19", "rapid test", "farmasi", "riset"],
+    "lokasi": {
+      "provinsi": "Jawa Barat",
+      "kabupatenKota": "Bandung"
+    },
+    "dibuatPada": "2020-05-01T00:00:00Z",
+    "diupdatePada": "2021-12-01T10:00:00Z",
+    "totalVote": 15000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 50000000
+    },
+    "sumber": [
+      {
+        "type": "article",
+        "title": "Rapid Test Antigen Lokal Siap Diproduksi",
+        "url": "https://www.biofarma.co.id/berita/rapid-test-antigen-lokal"
+      }
+    ],
+    "confidence": "verified"
+  },
+  {
+    "id": "v3e85l1m-u2e6-5f0g-d0h4-0i1j5k4l8m9n",
+    "slug": "inovasi-aplikasi-lahan-pertanian-digital",
+    "judul": "Aplikasi E-Lahan - Pendataan Lahan Pertanian",
+    "ringkasanPendek": "Sistem informasi geografis (GIS) untuk memetakan, mendata, dan memantau status lahan pertanian (misalnya sawah) secara digital.",
+    "deskripsi": "E-Lahan adalah explore pemerintah (Kementerian Pertanian/ATR) untuk memecahkan masalah data akurat lahan pertanian. Dengan pemetaan satelit dan input data lapangan, aplikasi ini membantu mengidentifikasi luasan sawah, potensi gagal panen, hingga status kepemilikan lahan. Ini krusial untuk kebijakan pangan, perlindungan lahan abadi, dan kepastian hukum bagi petani.",
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://mekari.com/wp-content/uploads/2025/09/Aplikasi-Pertanian.webp",
+        "caption": "Ilustrasi peta lahan pertanian digital",
+        "license": "Unsplash",
+        "source": "Kementerian Pertanian"
+      }
+    ],
+    "pembuat": {
+      "id": "f1l72m4n-9h5g-0i7h-f1j5-1k2l6m5n9o0p",
+      "nama": "Pusat Data dan Sistem Informasi Pertanian",
+      "peran": "Pengembang Sistem",
+      "organisasi": "Kementerian Pertanian RI",
+      "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    },
+    "kategori": "Agrikultur",
+    "subKategori": "Agritech & E-Government",
+    "tag": ["GIS", "lahan", "pertanian", "pangan", "e-gov"],
+    "lokasi": {
+      "provinsi": "Nasional",
+      "kabupatenKota": "Seluruh Indonesia"
+    },
+    "dibuatPada": "2018-01-01T00:00:00Z",
+    "diupdatePada": "2024-05-01T10:00:00Z",
+    "totalVote": 10000,
+    "status": "published",
+    "impactMetrics": {
+      "beneficiaries": 10000000
+    },
+    "sumber": [
+      {
+        "type": "official",
+        "title": "Situs Resmi E-Lahan",
+        "url": "https://sitik.pertanian.go.id/elahan"
+      }
+    ],
+    "confidence": "verified"
+  }
+]

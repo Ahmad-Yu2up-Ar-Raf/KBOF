@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils'
 import { useLottie } from 'lottie-react'
 import * as React from 'react'
 import { Logo } from '@/components/icons/app-logo-icon'
-import animationData from 'public/assets/animations/Phoenix.json'
+import animationData from '@/assets/animations/Phoenix.json'
 import { ArrowLeft } from 'lucide-react'
 import {
   Button,

@@ -3,7 +3,7 @@ import { Link } from '@tanstack/react-router'
 import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
 import { ArrowLeft } from 'lucide-react'
 import { useLottie } from 'lottie-react'
-import animationData from 'public/assets/animations/404.json'
+import animationData from '@/assets/animations/404.json'
 import {
   Card,
   CardAction,
@@ -32,10 +32,10 @@ export function NotFoundPage() {
           <CardHeader className=" max-w-sm md:max-w-lg w-full m-auto     px-6 py-0 text-center md:gap-9">
             <div className="  m-auto  sm:w-80 w-[70dvw] h-42 ">{View}</div>
             <div className=" md:space-y-2">
-              <CardTitle className="text-2xl  md:text-3xl   tracking-tighter ">
+              <CardTitle className="text-2xl  md:text-3xl  lg:text-4xl  tracking-tighter ">
                 Sepertinya kamu tersesat
               </CardTitle>
-              <CardDescription className=" text-base text-muted-foreground ">
+              <CardDescription className=" text-base lg:text-lg text-muted-foreground ">
                 Halaman yang Anda cari tidak tersedia!
               </CardDescription>
             </div>

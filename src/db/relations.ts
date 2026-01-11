@@ -1,44 +1,40 @@
-import { relations } from 'drizzle-orm/relations'
-import { user, mess, rooms, employes, session, account } from './schema'
+// =============================================================================
+// DATABASE RELATIONS - SUASANA
+// =============================================================================
+// Definisi relasi antar tabel untuk Drizzle ORM
+// =============================================================================
 
-export const messRelations = relations(mess, ({ one, many }) => ({
-  user: one(user, {
-    fields: [mess.userId],
-    references: [user.id],
-  }),
-  rooms: many(rooms),
-}))
+import { relations } from 'drizzle-orm'
+import {
+  user,
+  session,
+  account,
+  destination,
+  vote,
+  donation,
+  comment,
+  review,
+  article,
+} from './schema'
 
-export const employesRelations = relations(employes, ({ one }) => ({
-  room: one(rooms, {
-    fields: [employes.roomId],
-    references: [rooms.id],
-  }),
-  profile: one(user, {
-    fields: [employes.userId],
-    references: [user.id],
-  }),
-}))
-
-export const roomsRelations = relations(rooms, ({ one, many }) => ({
-  employes: many(employes),
-  mess: one(mess, {
-    fields: [rooms.meesId],
-    references: [mess.id],
-  }),
-  profile: one(user, {
-    fields: [rooms.userId],
-    references: [user.id],
-  }),
-}))
+// =============================================================================
+// USER RELATIONS
+// =============================================================================
 
 export const userRelations = relations(user, ({ many }) => ({
   sessions: many(session),
-  messes: many(mess),
-  employes: many(employes),
-  rooms: many(rooms),
   accounts: many(account),
+  destinations: many(destination),
+  votes: many(vote),
+  donations: many(donation),
+  comments: many(comment),
+  reviews: many(review),
+  articles: many(article),
 }))
+
+// =============================================================================
+// AUTH RELATIONS
+// =============================================================================
 
 export const sessionRelations = relations(session, ({ one }) => ({
   user: one(user, {
@@ -50,6 +46,100 @@ export const sessionRelations = relations(session, ({ one }) => ({
 export const accountRelations = relations(account, ({ one }) => ({
   user: one(user, {
     fields: [account.userId],
+    references: [user.id],
+  }),
+}))
+
+// =============================================================================
+// DESTINATION RELATIONS
+// =============================================================================
+
+export const destinationRelations = relations(destination, ({ one, many }) => ({
+  user: one(user, {
+    fields: [destination.userId],
+    references: [user.id],
+  }),
+  votes: many(vote),
+  donations: many(donation),
+  comments: many(comment),
+  reviews: many(review),
+}))
+
+// =============================================================================
+// VOTE RELATIONS
+// =============================================================================
+
+export const voteRelations = relations(vote, ({ one }) => ({
+  user: one(user, {
+    fields: [vote.userId],
+    references: [user.id],
+  }),
+  destination: one(destination, {
+    fields: [vote.destinationId],
+    references: [destination.id],
+  }),
+}))
+
+// =============================================================================
+// DONATION RELATIONS
+// =============================================================================
+
+export const donationRelations = relations(donation, ({ one }) => ({
+  user: one(user, {
+    fields: [donation.userId],
+    references: [user.id],
+  }),
+  destination: one(destination, {
+    fields: [donation.destinationId],
+    references: [destination.id],
+  }),
+}))
+
+// =============================================================================
+// COMMENT RELATIONS
+// =============================================================================
+
+export const commentRelations = relations(comment, ({ one, many }) => ({
+  user: one(user, {
+    fields: [comment.userId],
+    references: [user.id],
+  }),
+  destination: one(destination, {
+    fields: [comment.destinationId],
+    references: [destination.id],
+  }),
+  parent: one(comment, {
+    fields: [comment.parentId],
+    references: [comment.id],
+    relationName: 'commentReplies',
+  }),
+  replies: many(comment, {
+    relationName: 'commentReplies',
+  }),
+}))
+
+// =============================================================================
+// REVIEW RELATIONS
+// =============================================================================
+
+export const reviewRelations = relations(review, ({ one }) => ({
+  user: one(user, {
+    fields: [review.userId],
+    references: [user.id],
+  }),
+  destination: one(destination, {
+    fields: [review.destinationId],
+    references: [destination.id],
+  }),
+}))
+
+// =============================================================================
+// ARTICLE RELATIONS
+// =============================================================================
+
+export const articleRelations = relations(article, ({ one }) => ({
+  author: one(user, {
+    fields: [article.authorId],
     references: [user.id],
   }),
 }))

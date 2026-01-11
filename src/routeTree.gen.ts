@@ -9,25 +9,21 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as DashboardRouteRouteImport } from './routes/dashboard/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ExploreIndexRouteImport } from './routes/explore/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
+import { Route as ExploreExploreIdRouteImport } from './routes/explore/$exploreId'
+import { Route as DashboardDestinationRouteImport } from './routes/dashboard/destination'
+import { Route as DashboardArticlesRouteImport } from './routes/dashboard/articles'
 import { Route as authRegisterRouteImport } from './routes/(auth)/register'
 import { Route as authLoginRouteImport } from './routes/(auth)/login'
 import { Route as DashboardSettingsRouteRouteImport } from './routes/dashboard/settings/route'
 import { Route as DashboardSettingsIndexRouteImport } from './routes/dashboard/settings/index'
-import { Route as DashboardMessIndexRouteImport } from './routes/dashboard/mess/index'
 import { Route as DashboardSettingsPasswordRouteImport } from './routes/dashboard/settings/password'
-import { Route as DashboardMessMessIdRouteImport } from './routes/dashboard/mess/$messId'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
-const ExploreRoute = ExploreRouteImport.update({
-  id: '/explore',
-  path: '/explore',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SplatRoute = SplatRouteImport.update({
   id: '/$',
   path: '/$',
@@ -43,9 +39,29 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExploreIndexRoute = ExploreIndexRouteImport.update({
+  id: '/explore/',
+  path: '/explore/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardIndexRoute = DashboardIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => DashboardRouteRoute,
+} as any)
+const ExploreExploreIdRoute = ExploreExploreIdRouteImport.update({
+  id: '/explore/$exploreId',
+  path: '/explore/$exploreId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardDestinationRoute = DashboardDestinationRouteImport.update({
+  id: '/destination',
+  path: '/destination',
+  getParentRoute: () => DashboardRouteRoute,
+} as any)
+const DashboardArticlesRoute = DashboardArticlesRouteImport.update({
+  id: '/articles',
+  path: '/articles',
   getParentRoute: () => DashboardRouteRoute,
 } as any)
 const authRegisterRoute = authRegisterRouteImport.update({
@@ -68,22 +84,12 @@ const DashboardSettingsIndexRoute = DashboardSettingsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardSettingsRouteRoute,
 } as any)
-const DashboardMessIndexRoute = DashboardMessIndexRouteImport.update({
-  id: '/mess/',
-  path: '/mess/',
-  getParentRoute: () => DashboardRouteRoute,
-} as any)
 const DashboardSettingsPasswordRoute =
   DashboardSettingsPasswordRouteImport.update({
     id: '/password',
     path: '/password',
     getParentRoute: () => DashboardSettingsRouteRoute,
   } as any)
-const DashboardMessMessIdRoute = DashboardMessMessIdRouteImport.update({
-  id: '/mess/$messId',
-  path: '/mess/$messId',
-  getParentRoute: () => DashboardRouteRoute,
-} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -94,28 +100,30 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteRouteWithChildren
   '/$': typeof SplatRoute
-  '/explore': typeof ExploreRoute
   '/dashboard/settings': typeof DashboardSettingsRouteRouteWithChildren
   '/login': typeof authLoginRoute
   '/register': typeof authRegisterRoute
+  '/dashboard/articles': typeof DashboardArticlesRoute
+  '/dashboard/destination': typeof DashboardDestinationRoute
+  '/explore/$exploreId': typeof ExploreExploreIdRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/explore': typeof ExploreIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/dashboard/mess/$messId': typeof DashboardMessMessIdRoute
   '/dashboard/settings/password': typeof DashboardSettingsPasswordRoute
-  '/dashboard/mess': typeof DashboardMessIndexRoute
   '/dashboard/settings/': typeof DashboardSettingsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
-  '/explore': typeof ExploreRoute
   '/login': typeof authLoginRoute
   '/register': typeof authRegisterRoute
+  '/dashboard/articles': typeof DashboardArticlesRoute
+  '/dashboard/destination': typeof DashboardDestinationRoute
+  '/explore/$exploreId': typeof ExploreExploreIdRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/explore': typeof ExploreIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/dashboard/mess/$messId': typeof DashboardMessMessIdRoute
   '/dashboard/settings/password': typeof DashboardSettingsPasswordRoute
-  '/dashboard/mess': typeof DashboardMessIndexRoute
   '/dashboard/settings': typeof DashboardSettingsIndexRoute
 }
 export interface FileRoutesById {
@@ -123,15 +131,16 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteRouteWithChildren
   '/$': typeof SplatRoute
-  '/explore': typeof ExploreRoute
   '/dashboard/settings': typeof DashboardSettingsRouteRouteWithChildren
   '/(auth)/login': typeof authLoginRoute
   '/(auth)/register': typeof authRegisterRoute
+  '/dashboard/articles': typeof DashboardArticlesRoute
+  '/dashboard/destination': typeof DashboardDestinationRoute
+  '/explore/$exploreId': typeof ExploreExploreIdRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/explore/': typeof ExploreIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/dashboard/mess/$messId': typeof DashboardMessMessIdRoute
   '/dashboard/settings/password': typeof DashboardSettingsPasswordRoute
-  '/dashboard/mess/': typeof DashboardMessIndexRoute
   '/dashboard/settings/': typeof DashboardSettingsIndexRoute
 }
 export interface FileRouteTypes {
@@ -140,43 +149,46 @@ export interface FileRouteTypes {
     | '/'
     | '/dashboard'
     | '/$'
-    | '/explore'
     | '/dashboard/settings'
     | '/login'
     | '/register'
+    | '/dashboard/articles'
+    | '/dashboard/destination'
+    | '/explore/$exploreId'
     | '/dashboard/'
+    | '/explore'
     | '/api/auth/$'
-    | '/dashboard/mess/$messId'
     | '/dashboard/settings/password'
-    | '/dashboard/mess'
     | '/dashboard/settings/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/$'
-    | '/explore'
     | '/login'
     | '/register'
+    | '/dashboard/articles'
+    | '/dashboard/destination'
+    | '/explore/$exploreId'
     | '/dashboard'
+    | '/explore'
     | '/api/auth/$'
-    | '/dashboard/mess/$messId'
     | '/dashboard/settings/password'
-    | '/dashboard/mess'
     | '/dashboard/settings'
   id:
     | '__root__'
     | '/'
     | '/dashboard'
     | '/$'
-    | '/explore'
     | '/dashboard/settings'
     | '/(auth)/login'
     | '/(auth)/register'
+    | '/dashboard/articles'
+    | '/dashboard/destination'
+    | '/explore/$exploreId'
     | '/dashboard/'
+    | '/explore/'
     | '/api/auth/$'
-    | '/dashboard/mess/$messId'
     | '/dashboard/settings/password'
-    | '/dashboard/mess/'
     | '/dashboard/settings/'
   fileRoutesById: FileRoutesById
 }
@@ -184,21 +196,15 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRouteRoute: typeof DashboardRouteRouteWithChildren
   SplatRoute: typeof SplatRoute
-  ExploreRoute: typeof ExploreRoute
   authLoginRoute: typeof authLoginRoute
   authRegisterRoute: typeof authRegisterRoute
+  ExploreExploreIdRoute: typeof ExploreExploreIdRoute
+  ExploreIndexRoute: typeof ExploreIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/explore': {
-      id: '/explore'
-      path: '/explore'
-      fullPath: '/explore'
-      preLoaderRoute: typeof ExploreRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/$': {
       id: '/$'
       path: '/$'
@@ -220,11 +226,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/explore/': {
+      id: '/explore/'
+      path: '/explore'
+      fullPath: '/explore'
+      preLoaderRoute: typeof ExploreIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard/': {
       id: '/dashboard/'
       path: '/'
       fullPath: '/dashboard/'
       preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof DashboardRouteRoute
+    }
+    '/explore/$exploreId': {
+      id: '/explore/$exploreId'
+      path: '/explore/$exploreId'
+      fullPath: '/explore/$exploreId'
+      preLoaderRoute: typeof ExploreExploreIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/destination': {
+      id: '/dashboard/destination'
+      path: '/destination'
+      fullPath: '/dashboard/destination'
+      preLoaderRoute: typeof DashboardDestinationRouteImport
+      parentRoute: typeof DashboardRouteRoute
+    }
+    '/dashboard/articles': {
+      id: '/dashboard/articles'
+      path: '/articles'
+      fullPath: '/dashboard/articles'
+      preLoaderRoute: typeof DashboardArticlesRouteImport
       parentRoute: typeof DashboardRouteRoute
     }
     '/(auth)/register': {
@@ -255,26 +289,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardSettingsIndexRouteImport
       parentRoute: typeof DashboardSettingsRouteRoute
     }
-    '/dashboard/mess/': {
-      id: '/dashboard/mess/'
-      path: '/mess'
-      fullPath: '/dashboard/mess'
-      preLoaderRoute: typeof DashboardMessIndexRouteImport
-      parentRoute: typeof DashboardRouteRoute
-    }
     '/dashboard/settings/password': {
       id: '/dashboard/settings/password'
       path: '/password'
       fullPath: '/dashboard/settings/password'
       preLoaderRoute: typeof DashboardSettingsPasswordRouteImport
       parentRoute: typeof DashboardSettingsRouteRoute
-    }
-    '/dashboard/mess/$messId': {
-      id: '/dashboard/mess/$messId'
-      path: '/mess/$messId'
-      fullPath: '/dashboard/mess/$messId'
-      preLoaderRoute: typeof DashboardMessMessIdRouteImport
-      parentRoute: typeof DashboardRouteRoute
     }
     '/api/auth/$': {
       id: '/api/auth/$'
@@ -304,16 +324,16 @@ const DashboardSettingsRouteRouteWithChildren =
 
 interface DashboardRouteRouteChildren {
   DashboardSettingsRouteRoute: typeof DashboardSettingsRouteRouteWithChildren
+  DashboardArticlesRoute: typeof DashboardArticlesRoute
+  DashboardDestinationRoute: typeof DashboardDestinationRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
-  DashboardMessMessIdRoute: typeof DashboardMessMessIdRoute
-  DashboardMessIndexRoute: typeof DashboardMessIndexRoute
 }
 
 const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
   DashboardSettingsRouteRoute: DashboardSettingsRouteRouteWithChildren,
+  DashboardArticlesRoute: DashboardArticlesRoute,
+  DashboardDestinationRoute: DashboardDestinationRoute,
   DashboardIndexRoute: DashboardIndexRoute,
-  DashboardMessMessIdRoute: DashboardMessMessIdRoute,
-  DashboardMessIndexRoute: DashboardMessIndexRoute,
 }
 
 const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(
@@ -324,9 +344,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRouteRoute: DashboardRouteRouteWithChildren,
   SplatRoute: SplatRoute,
-  ExploreRoute: ExploreRoute,
   authLoginRoute: authLoginRoute,
   authRegisterRoute: authRegisterRoute,
+  ExploreExploreIdRoute: ExploreExploreIdRoute,
+  ExploreIndexRoute: ExploreIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
 export const routeTree = rootRouteImport

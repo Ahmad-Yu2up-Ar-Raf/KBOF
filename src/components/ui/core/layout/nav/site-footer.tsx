@@ -1,6 +1,5 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
-
 import { Logo } from '@/components/icons/app-logo-icon'
 import { Link } from '@tanstack/react-router'
 
@@ -32,7 +31,7 @@ export default function SiteFooter({ className, ...props }: StickyFooterProps) {
   return (
     <footer
       className={cn(
-        'relative bg-muted py-20 min-h-lvh content-center z-40 w-full',
+        'relative bg-muted py-20 min-h-lvh content-center z-99999999 w-full',
         className,
       )}
       style={{ clipPath: 'polygon(0% 0, 100% 0%, 100% 100%, 0 100%)' }}
@@ -77,8 +76,8 @@ export default function SiteFooter({ className, ...props }: StickyFooterProps) {
 
           {/* Judul besar tengah */}
           <div className="w-full h-fit flex items-center justify-center  ">
-            <h1 className="text-center lg:h-80 relative text-[23dvw] lg:text-[16em] font-bold bg-clip-text tracking-tighter bg-linear-to-b to-background text-transparent from-yellow-950/50 select-none">
-              {appName}
+            <h1 className="text-center lg:h-80 relative text-[23dvw] lg:text-[16em] font-bold bg-clip-text tracking-tighter   bg-linear-to-b to-background text-transparent from-yellow-950/50 select-none">
+           Suasanaaa.
             </h1>
           </div>
         </div>

@@ -720,7 +720,7 @@ function onFilterInputRender<TData>({
                       selectedOption.icon ? (
                         <div
                           key={selectedOption.value}
-                          className="rounded-xl border bg-background p-0.5"
+                          className="rounded-full border bg-background p-0.5"
                         >
                           <selectedOption.icon className="size-3.5" />
                         </div>

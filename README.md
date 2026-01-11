@@ -1,310 +1,370 @@
-Welcome to your new TanStack app! 
+<div align="center">
 
-# Getting Started
+# 🌏 Suasana
 
-To run this application:
+### _Mengangkat Kekayaan Tersembunyi Indonesia ke Panggung Digital_
+
+<img src="@/assets/logo/suasana-banner.png" alt="Suasana Banner" width="100%" />
+
+[![Live Demo](https://img.shields.io/badge/🌐_Demo-suasana.vercel.app-00C853?style=for-the-badge&logoColor=white)](https://suasana.vercel.app)
+[![Status](https://img.shields.io/badge/Status-In_Development-FFB300?style=for-the-badge)]()
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)]()
+[![React](https://img.shields.io/badge/React_19-61DAFB?style=for-the-badge&logo=react&logoColor=black)]()
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)]()
+[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)]()
+
+**Platform interaktif untuk memperkenalkan, mendukung, dan melestarikan ekowisata serta budaya lokal Indonesia yang masih tersembunyi.**
+
+[🚀 Live Demo](https://suasana.vercel.app) • [📖 Dokumentasi](#-arsitektur-project) • [🤝 Kontribusi](#-kontribusi)
+
+---
+
+</div>
+
+## 📖 Tentang Suasana
+
+Di tengah maraknya promosi destinasi wisata populer, **jutaan kekayaan budaya dan ekowisata lokal Indonesia** di pelosok negeri tetap tersembunyi dari perhatian publik. Padahal, destinasi-destinasi ini memiliki nilai tinggi yang patut dikenal masyarakat luas.
+
+**Suasana** hadir sebagai **jembatan digital** antara masyarakat dengan kekayaan budaya dan ekowisata Indonesia. Platform ini menggunakan pendekatan yang **informatif, visual, dan partisipatif** untuk mengangkat visibilitas destinasi yang kurang dikenal.
+
+### 🎯 Misi Kami
+
+<table>
+<tr>
+<td width="50%">
+
+**📢 Meningkatkan Visibilitas**
+
+Memberikan panggung digital bagi wisata & budaya lokal yang belum terekspos ke masyarakat luas.
+
+</td>
+<td width="50%">
+
+**🤝 Mendorong Partisipasi**
+
+Melibatkan publik dalam mendukung pelestarian budaya melalui voting, donasi, dan diskusi.
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+**🌱 Pelestarian Berkelanjutan**
+
+Menumbuhkan kesadaran pentingnya menjaga kekayaan budaya dan lingkungan Indonesia.
+
+</td>
+<td width="50%">
+
+**🔗 Menghubungkan Komunitas**
+
+Menyatukan masyarakat, wisatawan, dan pelaku lokal dalam satu ekosistem digital.
+
+</td>
+</tr>
+</table>
+
+---
+
+## ✨ Fitur Utama
+
+<div align="center">
+
+|            Fitur            | Deskripsi                                                                                                                                                  |
+| :-------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|  🗺️ **Eksplorasi Budaya**   | Jelajahi 80+ destinasi ekowisata dan explore lokal dari seluruh Indonesia dengan tampilan visual yang menarik, terstruktur berdasarkan kategori dan lokasi |
+| 🗳️ **Voting & Leaderboard** | Berikan dukungan (vote) untuk destinasi favorit Anda. Sistem leaderboard dinamis menampilkan destinasi dengan dukungan terbanyak secara real-time          |
+|    💝 **Sistem Donasi**     | Dukung pelestarian budaya dan destinasi lokal secara langsung melalui fitur donasi yang terintegrasi                                                       |
+|  💬 **Komentar & Diskusi**  | Bagikan pengalaman, pendapat, dan tips tentang destinasi atau budaya tertentu bersama komunitas                                                            |
+|   📝 **Artikel Edukatif**   | Baca artikel informatif dan edukatif seputar ekowisata, budaya lokal, dan tips perjalanan                                                                  |
+|   🔐 **Autentikasi Aman**   | Sistem login & registrasi yang aman dengan dukungan Google OAuth dan Magic Link                                                                            |
+|   🔍 **Pencarian Cerdas**   | Temukan konten dengan mudah berdasarkan kategori, lokasi, atau kata kunci                                                                                  |
+
+</div>
+
+---
+
+## 🏗️ Arsitektur Project
+
+### Tech Stack
+
+<div align="center">
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                        FRONTEND                              │
+├─────────────────────────────────────────────────────────────┤
+│  React 19  │  TanStack Router  │  TanStack Form  │  NUQS   │
+│            │  (File-based)     │  (Type-safe)    │  (URL)  │
+├─────────────────────────────────────────────────────────────┤
+│                     UI COMPONENTS                            │
+├─────────────────────────────────────────────────────────────┤
+│        shadcn/ui (New York Style)  │  Tailwind CSS v4       │
+├─────────────────────────────────────────────────────────────┤
+│                       FRAMEWORK                              │
+├─────────────────────────────────────────────────────────────┤
+│                    TanStack Start                            │
+│              (Full-stack React + Nitro Server)               │
+├─────────────────────────────────────────────────────────────┤
+│                        BACKEND                               │
+├─────────────────────────────────────────────────────────────┤
+│   Drizzle ORM   │   Better Auth   │   Server Functions      │
+│   (Type-safe)   │   (Auth Layer)  │   (createServerFn)      │
+├─────────────────────────────────────────────────────────────┤
+│                       DATABASE                               │
+├─────────────────────────────────────────────────────────────┤
+│              Neon PostgreSQL (Serverless)                    │
+└─────────────────────────────────────────────────────────────┘
+```
+
+</div>
+
+### Teknologi yang Digunakan
+
+| Layer          | Teknologi                                      | Fungsi                                         |
+| -------------- | ---------------------------------------------- | ---------------------------------------------- |
+| **Framework**  | [TanStack Start](https://tanstack.com/start)   | Full-stack React framework dengan Nitro server |
+| **Frontend**   | [React 19](https://react.dev/)                 | Library UI dengan fitur terbaru (RSC, Actions) |
+| **Routing**    | [TanStack Router](https://tanstack.com/router) | File-based routing dengan type-safety          |
+| **Forms**      | [TanStack Form](https://tanstack.com/form)     | Form handling dengan validasi Zod              |
+| **State URL**  | [NUQS](https://nuqs.47ng.com/)                 | Type-safe URL query state management           |
+| **ORM**        | [Drizzle](https://orm.drizzle.team/)           | TypeScript ORM yang lightweight & performant   |
+| **Database**   | [Neon](https://neon.tech/)                     | Serverless PostgreSQL dengan edge support      |
+| **Auth**       | [Better Auth](https://better-auth.com/)        | Auth library dengan OAuth & Magic Link         |
+| **UI**         | [shadcn/ui](https://ui.shadcn.com/)            | Accessible components dengan Radix UI          |
+| **Styling**    | [Tailwind CSS v4](https://tailwindcss.com/)    | Utility-first CSS framework                    |
+| **Validation** | [Zod](https://zod.dev/)                        | TypeScript-first schema validation             |
+
+---
+
+## 📁 Struktur Project
+
+```
+src/
+├── 📂 routes/              # File-based routing (TanStack Router)
+│   ├── 📂 (auth)/          # Auth routes (login, register)
+│   ├── 📂 api/             # API routes
+│   ├── 📂 dashboard/       # Protected dashboard routes
+│   └── 📂 explore/         # Explore pages
+├── 📂 db/                  # Database layer
+│   ├── schema.ts           # Drizzle schema definitions
+│   ├── relations.ts        # Table relations
+│   ├── seed.ts             # Database seeder
+│   └── index.ts            # Database connection
+├── 📂 lib/
+│   ├── 📂 auth/            # Better Auth configuration
+│   ├── 📂 server/          # Server functions & queries
+│   ├── 📂 validations/     # Zod validation schemas
+│   └── 📂 utils/           # Utility functions
+├── 📂 hooks/               # Custom React hooks
+│   └── 📂 form/            # Form-specific hooks
+├── 📂 components/
+│   └── 📂 ui/
+│       ├── 📂 core/        # Feature components
+│       └── 📂 fragments/   # Reusable UI fragments
+├── 📂 config/              # App configuration
+│   └── 📂 data/            # Static data (JSON)
+└── 📂 types/               # TypeScript type definitions
+```
+
+---
+
+## 🗄️ Database Schema
+
+### Entity Relationship Diagram
+
+```
+┌─────────────┐       ┌─────────────┐       ┌─────────────┐
+│    USER     │       │   EXPLORE   │       │  CATEGORY   │
+├─────────────┤       ├─────────────┤       ├─────────────┤
+│ id (PK)     │       │ id (PK)     │       │ id (PK)     │
+│ name        │       │ categoryId  │◄──────│ name        │
+│ email       │       │ title       │       │ slug        │
+│ image       │       │ slug        │       │ description │
+│ ...         │       │ description │       │ color       │
+└──────┬──────┘       │ location    │       └─────────────┘
+       │              │ totalVote   │
+       │              │ status      │
+       ▼              └──────┬──────┘
+┌─────────────┐              │
+│    VOTE     │◄─────────────┤
+├─────────────┤              │
+│ userId (FK) │              │
+│ exploreId   │              ▼
+└─────────────┘       ┌─────────────┐
+                      │   COMMENT   │
+┌─────────────┐       ├─────────────┤
+│  DONATION   │       │ userId (FK) │
+├─────────────┤       │ exploreId   │
+│ userId (FK) │       │ content     │
+│ exploreId   │       │ parentId    │
+│ amount      │       └─────────────┘
+│ message     │
+└─────────────┘       ┌─────────────┐
+                      │   ARTICLE   │
+                      ├─────────────┤
+                      │ authorId    │
+                      │ categoryId  │
+                      │ title       │
+                      │ content     │
+                      └─────────────┘
+```
+
+### Entitas Utama
+
+| Entitas    | Deskripsi                                                |
+| ---------- | -------------------------------------------------------- |
+| `user`     | Data pengguna (terintegrasi dengan Better Auth)          |
+| `explore`  | Explore, wisata, dan budaya lokal Indonesia              |
+| `category` | Kategori konten (Kesehatan, Pendidikan, Lingkungan, dll) |
+| `vote`     | Vote/dukungan pengguna untuk explore                     |
+| `donation` | Donasi pengguna untuk explore                            |
+| `comment`  | Komentar dan diskusi pada explore                        |
+| `article`  | Artikel edukatif tentang budaya & wisata                 |
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js 18+
+- pnpm (recommended) atau npm
+- PostgreSQL database ([Neon](https://neon.tech/) recommended)
+
+### Installation
 
 ```bash
-npm install
-npm run start
+# Clone repository
+git clone https://github.com/Ahmad-Yu2up-Ar-Raf/KBOF.git
+cd KBOF
+
+# Install dependencies
+pnpm install
+
+# Setup environment variables
+cp .env.example .env
+# Edit .env dengan credentials Anda
+
+# Push database schema
+npx drizzle-kit push
+
+# Seed database (optional)
+pnpm db:seed
+
+# Run development server
+pnpm dev
 ```
 
-# Building For Production
+### Environment Variables
 
-To build this application for production:
+```env
+# Database
+DATABASE_URL="postgresql://..."
+
+# Better Auth
+BETTER_AUTH_URL="http://localhost:3000"
+BETTER_AUTH_SECRET="your-secret-key"
+
+# OAuth (Google)
+GOOGLE_CLIENT_ID="..."
+GOOGLE_CLIENT_SECRET="..."
+
+# Email (Resend)
+RESEND_API_KEY="..."
+EMAIL_SENDER_NAME="Suasana"
+EMAIL_SENDER_ADDRESS="noreply@suasana.id"
+```
+
+---
+
+## 📜 Scripts
+
+| Command                  | Deskripsi                               |
+| ------------------------ | --------------------------------------- |
+| `pnpm dev`               | Jalankan development server (port 3000) |
+| `pnpm build`             | Build production                        |
+| `pnpm start`             | Jalankan production server              |
+| `pnpm check`             | Lint & format code                      |
+| `pnpm test`              | Jalankan tests                          |
+| `npx drizzle-kit push`   | Push schema ke database                 |
+| `npx drizzle-kit studio` | Buka Drizzle Studio                     |
+| `pnpm db:seed`           | Seed database dengan dummy data         |
+
+---
+
+## 💡 Manfaat Platform
+
+<div align="center">
+
+|           Untuk Masyarakat           |      Untuk Destinasi Lokal      |
+| :----------------------------------: | :-----------------------------: |
+| ✅ Akses informasi wisata yang mudah | ✅ Media promosi digital gratis |
+|  ✅ Menemukan destinasi tersembunyi  |    ✅ Meningkatkan eksposur     |
+| ✅ Berpartisipasi dalam pelestarian  |  ✅ Menerima dukungan langsung  |
+|   ✅ Berbagi pengalaman perjalanan   |     ✅ Membangun komunitas      |
+
+</div>
+
+---
+
+## 📌 Batasan & Disclaimer
+
+- 🔹 Platform fokus pada **informasi dan promosi**, bukan layanan pemesanan
+- 🔹 Sistem voting bersifat **apresiasi komunitas**, bukan penilaian resmi
+- 🔹 Konten bersifat **informatif dan edukatif**
+- 🔹 Fitur donasi akan terintegrasi dengan payment gateway terpercaya
+
+---
+
+## 🤝 Kontribusi
+
+Kami menyambut kontribusi dari komunitas! Silakan baca [CONTRIBUTING.md](CONTRIBUTING.md) untuk panduan kontribusi.
 
 ```bash
-npm run build
+# Fork repository
+# Buat branch baru
+git checkout -b feature/AmazingFeature
+
+# Commit perubahan
+git commit -m 'Add some AmazingFeature'
+
+# Push ke branch
+git push origin feature/AmazingFeature
+
+# Buat Pull Request
 ```
 
-## Testing
+---
 
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
+## 🏆 Dibuat Untuk
 
-```bash
-npm run test
-```
+<div align="center">
 
-## Styling
+**Lomba Web Design**
 
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
+### 🎖️ Kesatuan Bogor Olympic Festival (KBOF)
 
+_IBI Kesatuan Bogor_
 
-## Linting & Formatting
+</div>
 
+---
 
-This project uses [eslint](https://eslint.org/) and [prettier](https://prettier.io/) for linting and formatting. Eslint is configured using [tanstack/eslint-config](https://tanstack.com/config/latest/docs/eslint). The following scripts are available:
+## 📄 Lisensi
 
-```bash
-npm run lint
-npm run format
-npm run check
-```
+Project ini dilisensikan di bawah [MIT License](LICENSE.md).
 
+---
 
-## Shadcn
+<div align="center">
 
-Add components using the latest version of [Shadcn](https://ui.shadcn.com/).
+### 🌏 Mari Bersama Lestarikan Budaya dan Ekowisata Indonesia!
 
-```bash
-pnpm dlx shadcn@latest add button
-```
+<img src="https://flagcdn.com/w160/id.png" width="80" alt="Indonesia Flag" />
 
+**Made with ❤️ in Indonesia**
 
+[⬆ Back to Top](#-suasana)
 
-## Routing
-This project uses [TanStack Router](https://tanstack.com/router). The initial setup is a file based router. Which means that the routes are managed as files in `src/routes`.
-
-### Adding A Route
-
-To add a new route to your application just add another a new file in the `./src/routes` directory.
-
-TanStack will automatically generate the content of the route file for you.
-
-Now that you have two routes you can use a `Link` component to navigate between them.
-
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
-
-```tsx
-import { Link } from "@tanstack/react-router";
-```
-
-Then anywhere in your JSX you can use it like so:
-
-```tsx
-<Link to="/about">About</Link>
-```
-
-This will create a link that will navigate to the `/about` route.
-
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you use the `<Outlet />` component.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { Outlet, createRootRoute } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
-
-import { Link } from "@tanstack/react-router";
-
-export const Route = createRootRoute({
-  component: () => (
-    <>
-      <header>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-        </nav>
-      </header>
-      <Outlet />
-      <TanStackRouterDevtools />
-    </>
-  ),
-})
-```
-
-The `<TanStackRouterDevtools />` component is not required so you can remove it if you don't want it in your layout.
-
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
-
-## Data Fetching
-
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-const peopleRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/people",
-  loader: async () => {
-    const response = await fetch("https://swapi.dev/api/people");
-    return response.json() as Promise<{
-      results: {
-        name: string;
-      }[];
-    }>;
-  },
-  component: () => {
-    const data = peopleRoute.useLoaderData();
-    return (
-      <ul>
-        {data.results.map((person) => (
-          <li key={person.name}>{person.name}</li>
-        ))}
-      </ul>
-    );
-  },
-});
-```
-
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
-
-### React-Query
-
-React-Query is an excellent addition or alternative to route loading and integrating it into you application is a breeze.
-
-First add your dependencies:
-
-```bash
-npm install @tanstack/react-query @tanstack/react-query-devtools
-```
-
-Next we'll need to create a query client and provider. We recommend putting those in `main.tsx`.
-
-```tsx
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-// ...
-
-const queryClient = new QueryClient();
-
-// ...
-
-if (!rootElement.innerHTML) {
-  const root = ReactDOM.createRoot(rootElement);
-
-  root.render(
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
-  );
-}
-```
-
-You can also add TanStack Query Devtools to the root route (optional).
-
-```tsx
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-
-const rootRoute = createRootRoute({
-  component: () => (
-    <>
-      <Outlet />
-      <ReactQueryDevtools buttonPosition="top-right" />
-      <TanStackRouterDevtools />
-    </>
-  ),
-});
-```
-
-Now you can use `useQuery` to fetch your data.
-
-```tsx
-import { useQuery } from "@tanstack/react-query";
-
-import "./App.css";
-
-function App() {
-  const { data } = useQuery({
-    queryKey: ["people"],
-    queryFn: () =>
-      fetch("https://swapi.dev/api/people")
-        .then((res) => res.json())
-        .then((data) => data.results as { name: string }[]),
-    initialData: [],
-  });
-
-  return (
-    <div>
-      <ul>
-        {data.map((person) => (
-          <li key={person.name}>{person.name}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-export default App;
-```
-
-You can find out everything you need to know on how to use React-Query in the [React-Query documentation](https://tanstack.com/query/latest/docs/framework/react/overview).
-
-## State Management
-
-Another common requirement for React applications is state management. There are many options for state management in React. TanStack Store provides a great starting point for your project.
-
-First you need to add TanStack Store as a dependency:
-
-```bash
-npm install @tanstack/store
-```
-
-Now let's create a simple counter in the `src/App.tsx` file as a demonstration.
-
-```tsx
-import { useStore } from "@tanstack/react-store";
-import { Store } from "@tanstack/store";
-import "./App.css";
-
-const countStore = new Store(0);
-
-function App() {
-  const count = useStore(countStore);
-  return (
-    <div>
-      <button onClick={() => countStore.setState((n) => n + 1)}>
-        Increment - {count}
-      </button>
-    </div>
-  );
-}
-
-export default App;
-```
-
-One of the many nice features of TanStack Store is the ability to derive state from other state. That derived state will update when the base state updates.
-
-Let's check this out by doubling the count using derived state.
-
-```tsx
-import { useStore } from "@tanstack/react-store";
-import { Store, Derived } from "@tanstack/store";
-import "./App.css";
-
-const countStore = new Store(0);
-
-const doubledStore = new Derived({
-  fn: () => countStore.state * 2,
-  deps: [countStore],
-});
-doubledStore.mount();
-
-function App() {
-  const count = useStore(countStore);
-  const doubledCount = useStore(doubledStore);
-
-  return (
-    <div>
-      <button onClick={() => countStore.setState((n) => n + 1)}>
-        Increment - {count}
-      </button>
-      <div>Doubled - {doubledCount}</div>
-    </div>
-  );
-}
-
-export default App;
-```
-
-We use the `Derived` class to create a new store that is derived from another store. The `Derived` class has a `mount` method that will start the derived store updating.
-
-Once we've created the derived store we can use it in the `App` component just like we would any other store using the `useStore` hook.
-
-You can find out everything you need to know on how to use TanStack Store in the [TanStack Store documentation](https://tanstack.com/store/latest).
-
-# Demo files
-
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
-
-# Learn More
-
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
+</div>

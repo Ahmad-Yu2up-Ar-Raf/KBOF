@@ -9,12 +9,12 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/fragments/shadcn-ui/drawer'
-import { MenuIcon, XIcon } from 'lucide-react'
+import { MenuIcon } from 'lucide-react'
 import { motion, useScroll, useMotionValueEvent } from 'motion/react'
 import { Link, useMatches } from '@tanstack/react-router'
 
-import React, { useRef, useState } from 'react'
-import { Logo } from '@/components/icons/app-logo-icon'
+import React, { useEffect, useRef, useState } from 'react'
+
 import {
   Button,
   buttonVariants,
@@ -83,13 +83,26 @@ export const Navbar = ({ children, className }: NavbarProps) => {
   const [visiblee, setVisiblee] = useState(true)
   const [delay, setDelay] = useState(true)
 
+  // Handle initial visibility when path changes
+  useEffect(() => {
+    // Kalau bukan di "/" dan masih di top, hide navbar
+    if (paths !== '/' && scrollYProgress.get() < 0.05) {
+      setVisiblee(false)
+      setDelay(false)
+    } else if (paths === '/') {
+      // Di homepage, selalu show navbar
+      setVisiblee(true)
+    }
+  }, [paths, scrollYProgress])
+
   useMotionValueEvent(scrollYProgress, 'change', (current) => {
     // Check if current is not undefined and is a number
     if (typeof current === 'number') {
       const direction = current! - scrollYProgress.getPrevious()!
       setDelay(false)
 
-      if (scrollYProgress.get() < 0.05 && paths === '/explore') {
+      if (scrollYProgress.get() < 0.05 && paths !== '/') {
+        // Di halaman selain "/" dan di top, hide navbar
         setVisiblee(false)
       } else {
         if (direction < 0) {
@@ -117,7 +130,8 @@ export const Navbar = ({ children, className }: NavbarProps) => {
         delay: delay ? 2 : 0,
       }}
       className={cn(
-        '  fixed    inset-x-0 top-7.5 md:top-4.5  z-40 w-full',
+        '         top-7.5 md:top-4.5   fixed  z-40 w-full',
+        // paths != '/' && visible == false ? '   ' : ' sticky',
         className,
       )}
     >
@@ -146,15 +160,15 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
       }}
       transition={{
         type: 'spring',
-        stiffness: 200,
+        stiffness: 190,
         damping: 50,
       }}
       style={{
-        minWidth: '800px',
+        minWidth: '750px',
       }}
       className={cn(
-        'relative z-60       bg-background transition-all duration-300 ease-out   mx-auto hidden w-full max-w-6xl flex-row items-center justify-between self-start rounded-2xl  px-3 py-2 lg:flex ',
-
+        'relative z-60     transition-all duration-300 ease-out   mx-auto hidden w-full max-w-4xl flex-row items-center justify-between self-start rounded-2xl  px-3 py-2 lg:flex ',
+        visible && '  bg-background/80  border',
         className,
       )}
     >
@@ -210,7 +224,7 @@ export const MobileNav = ({ children, className }: MobileNavProps) => {
           '0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset',
       }}
       className={cn(
-        'relative z-60  flex    backdrop-blur-md     mx-auto lg:hidden w-full  flex-row items-center justify-between self-start rounded-xl max-w-[calc(90vw-2rem)]  px-0.5 py-1 ',
+        'relative z-60  flex bg-background/90    backdrop-blur-md     mx-auto lg:hidden w-full  flex-row items-center justify-between self-start rounded-2xl max-w-[calc(90vw-2rem)]  px-3 py-2 ',
 
         className,
       )}
@@ -237,8 +251,9 @@ export const MobileNavHeader = ({
 }
 
 export const MobileNavMenu = ({ items, name }: MobileNavMenuProps) => {
+  const [internalOpen, setInternalOpen] = useState(false)
   return (
-    <Drawer>
+    <Drawer open={internalOpen} onOpenChange={setInternalOpen} modal={true}>
       <div className="flex   items-center">
         <DrawerTrigger asChild>
           <Button size={'sm'} variant={'ghost'}>
@@ -257,6 +272,7 @@ export const MobileNavMenu = ({ items, name }: MobileNavMenuProps) => {
         <div className="flex flex-col overflow-y-auto">
           {items.map((menu, idx) => (
             <Link
+              onClick={() => setInternalOpen(false)}
               key={idx}
               to={menu.link}
               className="py-3 px-1 font-medium text-base  flex items-center"
@@ -270,6 +286,7 @@ export const MobileNavMenu = ({ items, name }: MobileNavMenuProps) => {
             {name == null ? (
               <>
                 <Link
+                  onClick={() => setInternalOpen(false)}
                   to="/login"
                   className={buttonVariants({ variant: 'default' })}
                 >
@@ -277,6 +294,7 @@ export const MobileNavMenu = ({ items, name }: MobileNavMenuProps) => {
                 </Link>
 
                 <Link
+                  onClick={() => setInternalOpen(false)}
                   to="/register"
                   className={buttonVariants({ variant: 'outline' })}
                 >
@@ -285,6 +303,7 @@ export const MobileNavMenu = ({ items, name }: MobileNavMenuProps) => {
               </>
             ) : (
               <Link
+                onClick={() => setInternalOpen(false)}
                 to="/dashboard"
                 className={buttonVariants({ variant: 'default' })}
               >

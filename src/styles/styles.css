@@ -53,8 +53,8 @@
   --sidebar-accent-foreground: oklch(0.376 0.0225 64.3434);
   --sidebar-border: oklch(0.8606 0.0321 84.5881);
   --sidebar-ring: oklch(0.618 0.0778 65.5444);
-  --font-sans:  serif;
-  --font-serif:  serif;
+  --font-sans: serif;
+  --font-serif: serif;
   --font-mono: IBM Plex Mono, monospace;
   --radius: 0.25rem;
   --shadow-x: 2px;
@@ -198,6 +198,7 @@
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
   --animate-infinite-scroll: infiniteScroll 25s linear infinite;
+  --animate-infinite-scroll-rigth: infiniteScrollRigth 25s linear infinite;
 
   @keyframes infiniteScroll {
     from {
@@ -205,6 +206,15 @@
     }
     to {
       transform: translateX(-100%);
+    }
+  }
+
+  @keyframes infiniteScrollRigth {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
     }
   }
 }
@@ -223,7 +233,7 @@
     height: 1px; */
     display: none;
   }
-/* 
+  /* 
   ::-webkit-scrollbar-track {
     background: transparent;
     border-radius: 1px;

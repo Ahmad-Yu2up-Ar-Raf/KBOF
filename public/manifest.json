@@ -1,6 +1,6 @@
 {
-  "short_name": "TanStack App",
-  "name": "Create TanStack App Sample",
+  "short_name": "Suasana",
+  "name": "Suasana | Jelajahi budaya & wisata local indonesia",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "oklch(0.5628 0.0778 65.5444)",
+  "background_color": "oklch(0.9582 0.0152 90.2357)"
 }

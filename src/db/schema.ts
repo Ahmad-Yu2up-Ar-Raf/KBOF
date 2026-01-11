@@ -1,3 +1,11 @@
+// =============================================================================
+// DATABASE SCHEMA - SUASANA
+// =============================================================================
+// Platform untuk memperkenalkan ekowisata & budaya lokal Indonesia
+// Entitas: user, session, account, verification, category, destination,
+//          vote, donation, comment, article
+// =============================================================================
+
 import {
   pgTable,
   boolean,
@@ -7,31 +15,99 @@ import {
   bigint,
   text,
   timestamp,
-  date,
   pgEnum,
+  integer,
 } from 'drizzle-orm/pg-core'
 import { sql } from 'drizzle-orm'
 
-export const bussinesDo = pgEnum('bussines_do', [
-  'Animation',
-  'Analytics',
-  'Mining',
-  'Other',
+// =============================================================================
+// ENUMS
+// =============================================================================
+
+/** Status konten (published, draft, archived) */
+export const contentStatus = pgEnum('content_status', [
+  'published',
+  'draft',
+  'archived',
 ])
-export const capacity = pgEnum('capacity', ['full', 'available'])
-export const gender = pgEnum('gender', ['male', 'female'])
-export const messType = pgEnum('mess_type', ['male', 'female', 'mixture'])
-export const role = pgEnum('role', [
-  'supervisor',
-  'operator',
-  'engineer',
-  'mechanic',
-  'technician',
-  'driver',
-  'HRD',
-  'other',
+
+/** Status donasi */
+export const donationStatus = pgEnum('donation_status', [
+  'pending',
+  'completed',
+  'failed',
+  'refunded',
 ])
-export const status = pgEnum('status', ['active', 'not-active'])
+
+/** Tipe destinasi wisata/budaya */
+export const destinationType = pgEnum('destination_type', [
+  'wisata-alam',
+  'wisata-budaya',
+  'wisata-sejarah',
+  'wisata-religi',
+  'wisata-kuliner',
+  'wisata-bahari',
+  'adat-istiadat',
+  'kesenian',
+  'kerajinan',
+  'festival',
+])
+
+/** Kategori destinasi (Lokasi Budaya, Pariwisata, Adat Istiadat) */
+export const destinationCategory = pgEnum('destination_category', [
+  'lokasi-budaya',
+  'pariwisata',
+  'adat-istiadat',
+  'kuliner-tradisional',
+  'kesenian-daerah',
+  'situs-sejarah',
+])
+
+/** Provinsi Indonesia */
+export const provinsiIndonesia = pgEnum('provinsi_indonesia', [
+  'aceh',
+  'sumatera-utara',
+  'sumatera-barat',
+  'riau',
+  'kepulauan-riau',
+  'jambi',
+  'sumatera-selatan',
+  'kepulauan-bangka-belitung',
+  'bengkulu',
+  'lampung',
+  'dki-jakarta',
+  'jawa-barat',
+  'banten',
+  'jawa-tengah',
+  'di-yogyakarta',
+  'jawa-timur',
+  'bali',
+  'nusa-tenggara-barat',
+  'nusa-tenggara-timur',
+  'kalimantan-barat',
+  'kalimantan-tengah',
+  'kalimantan-selatan',
+  'kalimantan-timur',
+  'kalimantan-utara',
+  'sulawesi-utara',
+  'gorontalo',
+  'sulawesi-tengah',
+  'sulawesi-selatan',
+  'sulawesi-barat',
+  'sulawesi-tenggara',
+  'maluku',
+  'maluku-utara',
+  'papua',
+  'papua-barat',
+  'papua-barat-daya',
+  'papua-tengah',
+  'papua-pegunungan',
+  'papua-selatan',
+])
+
+// =============================================================================
+// AUTH TABLES (Better Auth Compatible)
+// =============================================================================
 
 export const user = pgTable(
   'user',
@@ -44,7 +120,7 @@ export const user = pgTable(
     createdAt: timestamp('created_at').defaultNow().notNull(),
     updatedAt: timestamp('updated_at')
       .defaultNow()
-      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .$onUpdate(() => new Date())
       .notNull(),
   },
   (table) => [unique('user_email_key').on(table.email)],
@@ -58,7 +134,7 @@ export const session = pgTable(
     token: text('token').notNull().unique(),
     createdAt: timestamp('created_at').defaultNow().notNull(),
     updatedAt: timestamp('updated_at')
-      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .$onUpdate(() => new Date())
       .notNull(),
     ipAddress: text('ip_address'),
     userAgent: text('user_agent'),
@@ -87,7 +163,7 @@ export const account = pgTable(
     password: text('password'),
     createdAt: timestamp('created_at').defaultNow().notNull(),
     updatedAt: timestamp('updated_at')
-      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .$onUpdate(() => new Date())
       .notNull(),
   },
   (table) => [index('account_userId_idx').on(table.userId)],
@@ -103,60 +179,82 @@ export const verification = pgTable(
     createdAt: timestamp('created_at').defaultNow().notNull(),
     updatedAt: timestamp('updated_at')
       .defaultNow()
-      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .$onUpdate(() => new Date())
       .notNull(),
   },
   (table) => [index('verification_identifier_idx').on(table.identifier)],
 )
 
-export const mess = pgTable(
-  'mess',
+// =============================================================================
+// DESTINATION TABLE (Wisata & Budaya Lokal)
+// =============================================================================
+
+export const destination = pgTable(
+  'destination',
   {
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     id: bigint({ mode: 'number' }).primaryKey().generatedByDefaultAsIdentity({
-      name: 'mess_id_seq',
+      name: 'destination_id_seq',
       startWith: 1,
       increment: 1,
       minValue: 1,
       cache: 1,
     }),
+    // Owner - setiap user punya destinations sendiri
     userId: text('user_id')
       .notNull()
       .references(() => user.id, { onDelete: 'cascade' }),
-    name: text().notNull(),
-    location: text(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    capacityRoom: bigint('capacity_room', { mode: 'number' }).default(
-      sql`'30'`,
+    // Basic info
+    slug: text('slug').notNull(),
+    name: text('name').notNull(),
+    description: text('description').notNull(),
+    // Type & Category
+    type: destinationType('type').default('wisata-alam').notNull(),
+    category: destinationCategory('category').default('pariwisata').notNull(),
+    // Location - using enum for provinsi
+    provinsi: provinsiIndonesia('provinsi').default('jawa-tengah').notNull(),
+    kabupatenKota: text('kabupaten_kota'),
+    alamat: text('alamat'),
+    // Media
+    coverImage: text('cover_image').notNull(),
+    images: text('images').default('[]'), // JSON array of image URLs
+    // Stats
+    totalVote: integer('total_vote').default(0).notNull(),
+    totalReview: integer('total_review').default(0).notNull(),
+    averageRating: integer('average_rating').default(0).notNull(), // Store as 0-50 (multiply by 10)
+    totalDonation: bigint('total_donation', { mode: 'number' }).default(
+      sql`'0'`,
     ),
-    type: messType().default('mixture').notNull(),
-    deskripcion: text(),
-    createdAt: timestamp('created_at', { withTimezone: true, mode: 'string' })
+    // Status
+    status: contentStatus('status').default('published').notNull(),
+    // Timestamps
+    createdAt: timestamp('created_at', { withTimezone: true })
       .defaultNow()
       .notNull(),
-    status: status().default('active').notNull(),
-    statusCapacity: capacity('status_capacity').default('available').notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    capacityEmploye: bigint('capacity_employe', { mode: 'number' }),
+    updatedAt: timestamp('updated_at', { withTimezone: true })
+      .defaultNow()
+      .$onUpdate(() => new Date())
+      .notNull(),
   },
   (table) => [
-    foreignKey({
-      columns: [table.userId],
-      foreignColumns: [user.id],
-      name: 'mess_user_id_fkey',
-    })
-      .onUpdate('cascade')
-      .onDelete('cascade'),
-    unique('mess_name_key').on(table.name),
+    unique('destination_slug_key').on(table.slug),
+    index('destination_userId_idx').on(table.userId),
+    index('destination_type_idx').on(table.type),
+    index('destination_category_idx').on(table.category),
+    index('destination_provinsi_idx').on(table.provinsi),
+    index('destination_status_idx').on(table.status),
+    index('destination_totalVote_idx').on(table.totalVote),
   ],
 )
 
-export const employes = pgTable(
-  'employes',
+// =============================================================================
+// VOTE TABLE
+// =============================================================================
+
+export const vote = pgTable(
+  'vote',
   {
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     id: bigint({ mode: 'number' }).primaryKey().generatedByDefaultAsIdentity({
-      name: 'employes_id_seq',
+      name: 'vote_id_seq',
       startWith: 1,
       increment: 1,
       minValue: 1,
@@ -165,47 +263,29 @@ export const employes = pgTable(
     userId: text('user_id')
       .notNull()
       .references(() => user.id, { onDelete: 'cascade' }),
-    name: text().notNull(),
-    birth: date(),
-    phone: text(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    nik: bigint({ mode: 'number' }),
-    address: text(),
-    email: text(),
-    createdAt: timestamp('created_at', { withTimezone: true, mode: 'string' })
+    destinationId: bigint('destination_id', { mode: 'number' })
+      .notNull()
+      .references(() => destination.id, { onDelete: 'cascade' }),
+    createdAt: timestamp('created_at', { withTimezone: true })
       .defaultNow()
       .notNull(),
-    gender: gender().default('male').notNull(),
-    role: role().default('other').notNull(),
-    status: status().default('active').notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    roomId: bigint({ mode: 'number' }),
   },
   (table) => [
-    foreignKey({
-      columns: [table.roomId],
-      foreignColumns: [rooms.id],
-      name: 'employes_roomId_fkey',
-    })
-      .onUpdate('cascade')
-      .onDelete('set null'),
-    foreignKey({
-      columns: [table.userId],
-      foreignColumns: [user.id],
-      name: 'employes_user_id_fkey',
-    })
-      .onUpdate('cascade')
-      .onDelete('cascade'),
-    unique('employes_name_key').on(table.name),
+    unique('vote_user_destination_key').on(table.userId, table.destinationId),
+    index('vote_userId_idx').on(table.userId),
+    index('vote_destinationId_idx').on(table.destinationId),
   ],
 )
 
-export const rooms = pgTable(
-  'rooms',
+// =============================================================================
+// DONATION TABLE
+// =============================================================================
+
+export const donation = pgTable(
+  'donation',
   {
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     id: bigint({ mode: 'number' }).primaryKey().generatedByDefaultAsIdentity({
-      name: 'rooms_id_seq',
+      name: 'donation_id_seq',
       startWith: 1,
       increment: 1,
       minValue: 1,
@@ -214,39 +294,180 @@ export const rooms = pgTable(
     userId: text('user_id')
       .notNull()
       .references(() => user.id, { onDelete: 'cascade' }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    meesId: bigint('mees_id', { mode: 'number' }).notNull(),
-    name: text().notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    capacity: bigint({ mode: 'number' }).default(sql`'6'`),
-    deskripcion: text(),
-    createdAt: timestamp('created_at', { withTimezone: true, mode: 'string' })
+    destinationId: bigint('destination_id', { mode: 'number' })
+      .notNull()
+      .references(() => destination.id, { onDelete: 'cascade' }),
+    amount: bigint('amount', { mode: 'number' }).notNull(),
+    message: text('message'),
+    isAnonymous: boolean('is_anonymous').default(false).notNull(),
+    status: donationStatus('status').default('pending').notNull(),
+    paymentMethod: text('payment_method'),
+    paymentRef: text('payment_ref'),
+    createdAt: timestamp('created_at', { withTimezone: true })
       .defaultNow()
       .notNull(),
-    status: status().default('active').notNull(),
-    statusCapacity: capacity('status_capacity').default('available').notNull(),
-    type: messType().default('mixture').notNull(),
+    paidAt: timestamp('paid_at', { withTimezone: true }),
   },
   (table) => [
-    foreignKey({
-      columns: [table.meesId],
-      foreignColumns: [mess.id],
-      name: 'rooms_mees_id_fkey',
-    })
-      .onUpdate('cascade')
-      .onDelete('cascade'),
-    foreignKey({
-      columns: [table.userId],
-      foreignColumns: [user.id],
-      name: 'rooms_user_id_fkey',
-    })
-      .onUpdate('cascade')
-      .onDelete('cascade'),
-    unique('rooms_name_key').on(table.name),
+    index('donation_userId_idx').on(table.userId),
+    index('donation_destinationId_idx').on(table.destinationId),
+    index('donation_status_idx').on(table.status),
   ],
 )
 
-export type Employes = typeof employes.$inferSelect
+// =============================================================================
+// COMMENT TABLE
+// =============================================================================
+
+export const comment = pgTable(
+  'comment',
+  {
+    id: bigint({ mode: 'number' }).primaryKey().generatedByDefaultAsIdentity({
+      name: 'comment_id_seq',
+      startWith: 1,
+      increment: 1,
+      minValue: 1,
+      cache: 1,
+    }),
+    userId: text('user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    destinationId: bigint('destination_id', { mode: 'number' })
+      .notNull()
+      .references(() => destination.id, { onDelete: 'cascade' }),
+    parentId: bigint('parent_id', { mode: 'number' }),
+    content: text('content').notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true })
+      .defaultNow()
+      .$onUpdate(() => new Date())
+      .notNull(),
+  },
+  (table) => [
+    index('comment_userId_idx').on(table.userId),
+    index('comment_destinationId_idx').on(table.destinationId),
+    index('comment_parentId_idx').on(table.parentId),
+    foreignKey({
+      columns: [table.parentId],
+      foreignColumns: [table.id],
+      name: 'comment_parent_fkey',
+    })
+      .onUpdate('cascade')
+      .onDelete('cascade'),
+  ],
+)
+
+// =============================================================================
+// REVIEW TABLE
+// =============================================================================
+
+export const review = pgTable(
+  'review',
+  {
+    id: bigint({ mode: 'number' }).primaryKey().generatedByDefaultAsIdentity({
+      name: 'review_id_seq',
+      startWith: 1,
+      increment: 1,
+      minValue: 1,
+      cache: 1,
+    }),
+    userId: text('user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    destinationId: bigint('destination_id', { mode: 'number' })
+      .notNull()
+      .references(() => destination.id, { onDelete: 'cascade' }),
+    rating: integer('rating').notNull(), // 1-5 stars
+    title: text('title'),
+    content: text('content'),
+    visitDate: timestamp('visit_date', { withTimezone: true }),
+    createdAt: timestamp('created_at', { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true })
+      .defaultNow()
+      .$onUpdate(() => new Date())
+      .notNull(),
+  },
+  (table) => [
+    unique('review_user_destination_key').on(table.userId, table.destinationId),
+    index('review_userId_idx').on(table.userId),
+    index('review_destinationId_idx').on(table.destinationId),
+    index('review_rating_idx').on(table.rating),
+  ],
+)
+
+// =============================================================================
+// ARTICLE TABLE
+// =============================================================================
+
+export const article = pgTable(
+  'article',
+  {
+    id: bigint({ mode: 'number' }).primaryKey().generatedByDefaultAsIdentity({
+      name: 'article_id_seq',
+      startWith: 1,
+      increment: 1,
+      minValue: 1,
+      cache: 1,
+    }),
+    authorId: text('author_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    slug: text('slug').notNull(),
+    title: text('title').notNull(),
+    excerpt: text('excerpt'),
+    content: text('content').notNull(),
+    coverImage: text('cover_image'),
+    status: contentStatus('status').default('draft').notNull(),
+    publishedAt: timestamp('published_at', { withTimezone: true }),
+    createdAt: timestamp('created_at', { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true })
+      .defaultNow()
+      .$onUpdate(() => new Date())
+      .notNull(),
+  },
+  (table) => [
+    unique('article_slug_key').on(table.slug),
+    index('article_authorId_idx').on(table.authorId),
+    index('article_status_idx').on(table.status),
+  ],
+)
+
+// =============================================================================
+// TYPE EXPORTS
+// =============================================================================
+
 export type User = typeof user.$inferSelect
-export type Rooms = typeof rooms.$inferSelect
-export type Mess = typeof mess.$inferSelect
+export type NewUser = typeof user.$inferInsert
+
+export type Session = typeof session.$inferSelect
+export type Account = typeof account.$inferSelect
+export type Verification = typeof verification.$inferSelect
+
+export type Destination = typeof destination.$inferSelect
+export type NewDestination = typeof destination.$inferInsert
+export type DestinationType = (typeof destinationType.enumValues)[number]
+export type DestinationCategory =
+  (typeof destinationCategory.enumValues)[number]
+export type DestinationStatus = (typeof contentStatus.enumValues)[number]
+export type ProvinsiIndonesia = (typeof provinsiIndonesia.enumValues)[number]
+
+export type Vote = typeof vote.$inferSelect
+export type NewVote = typeof vote.$inferInsert
+
+export type Review = typeof review.$inferSelect
+export type NewReview = typeof review.$inferInsert
+
+export type Donation = typeof donation.$inferSelect
+export type NewDonation = typeof donation.$inferInsert
+
+export type Comment = typeof comment.$inferSelect
+export type NewComment = typeof comment.$inferInsert
+
+export type Article = typeof article.$inferSelect
+export type NewArticle = typeof article.$inferInsert

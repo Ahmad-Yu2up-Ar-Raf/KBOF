@@ -25,6 +25,7 @@ import {
 
 import {
   getPublicArticlesServerFn,
+  getArticleBySlugServerFn,
   type ArticlePublicFilters,
 } from './server/article/article-public-queries'
 
@@ -239,6 +240,22 @@ export const getArticleInfiniteQueryOptions = (
     initialPageParam: undefined as number | undefined,
     getNextPageParam: (lastPage) =>
       lastPage.hasNextPage ? (lastPage.nextCursor ?? undefined) : undefined,
+    staleTime: 60 * 1000,
+    gcTime: 10 * 60 * 1000,
+  })
+
+/**
+ * Query options for single article by slug (public)
+ */
+export const getArticleDetailQueryOptions = (slug: string) =>
+  queryOptions({
+    queryKey: articleKeys.detailBySlug(slug),
+    queryFn: async () => {
+      const result = await getArticleBySlugServerFn({
+        data: { slug },
+      })
+      return result
+    },
     staleTime: 60 * 1000,
     gcTime: 10 * 60 * 1000,
   })

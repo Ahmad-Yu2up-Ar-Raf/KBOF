@@ -9,7 +9,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/fragments/shadcn-ui/drawer'
-import { MenuIcon } from 'lucide-react'
+import { LucideIcon, MenuIcon } from 'lucide-react'
 import { motion, useScroll, useMotionValueEvent } from 'motion/react'
 import { Link, useMatches } from '@tanstack/react-router'
 
@@ -37,6 +37,7 @@ interface NavItemsProps {
   items: {
     name: string
     link: string
+    icon?: LucideIcon
   }[]
   className?: string
   onItemClick?: () => void
@@ -57,6 +58,8 @@ interface MobileNavMenuProps {
   items: {
     name: string
     link: string
+    icon: LucideIcon
+    content?: React.ReactNode
   }[]
   name?: string
 }
@@ -146,6 +149,27 @@ export const Navbar = ({ children, className }: NavbarProps) => {
     </motion.nav>
   )
 }
+export const NavbarMobile = ({ children, className }: NavbarProps) => {
+  return (
+    <motion.nav
+      initial={{
+        opacity: 1,
+        y: 100,
+      }}
+      animate={{
+        y: 0,
+        opacity: 1,
+      }}
+      transition={{
+        duration: 0.4,
+        delay: 3.5,
+      }}
+      className={cn('     fixed   block bottom-0 w-full  z-60 ', className)}
+    >
+      {children}
+    </motion.nav>
+  )
+}
 
 export const NavBody = ({ children, className, visible }: NavBodyProps) => {
   return (
@@ -167,7 +191,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         minWidth: '750px',
       }}
       className={cn(
-        'relative z-60     transition-all duration-300 ease-out   mx-auto hidden w-full max-w-4xl flex-row items-center justify-between self-start rounded-2xl  px-3 py-2 lg:flex ',
+        'relative z-60     transition-all duration-300 ease-out   mx-auto hidden w-full max-w-5xl flex-row items-center justify-between self-start rounded-2xl  px-3 py-2 lg:flex ',
         visible && '  bg-background/80  border',
         className,
       )}
@@ -224,12 +248,18 @@ export const MobileNav = ({ children, className }: MobileNavProps) => {
           '0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset',
       }}
       className={cn(
-        'relative z-60  flex bg-background/90    backdrop-blur-md     mx-auto lg:hidden w-full  flex-row items-center justify-between self-start rounded-2xl max-w-[calc(90vw-2rem)]  px-3 py-2 ',
+        'relative z-60  border-primary border-t min-h-[9svh] content-center  bg-background/95 backdrop-blur-md supports-backdrop-filter:bg-background/90  flex          mx-auto lg:hidden   flex-row items-center justify-between self-start   rounded-t-2xl  w-full   ',
 
         className,
       )}
     >
-      {children}
+      <div className="flex items-center w-full justify-between px-5 lg:px-15 mx-auto py-3.5">
+        <div className="flex items-center w-full">
+          <ul className="flex  justify-between  w-full items-center">
+            {children}
+          </ul>
+        </div>
+      </div>
     </div>
   )
 }
@@ -250,70 +280,46 @@ export const MobileNavHeader = ({
   )
 }
 
-export const MobileNavMenu = ({ items, name }: MobileNavMenuProps) => {
-  const [internalOpen, setInternalOpen] = useState(false)
+export const MobileNavMenu = ({ items }: MobileNavMenuProps) => {
+  const matches = useMatches()
+  const paths = matches[matches.length - 1]?.routeId
   return (
-    <Drawer open={internalOpen} onOpenChange={setInternalOpen} modal={true}>
-      <div className="flex   items-center">
-        <DrawerTrigger asChild>
-          <Button size={'sm'} variant={'ghost'}>
-            <MenuIcon />
-          </Button>
-        </DrawerTrigger>
-      </div>
-      <DrawerContent className="pb-5  px-4">
-        <DrawerHeader className="   sm:px-7 space-y-1 bg-background     p-4    pb-3 justify-center items-center mb-6 ">
-          <DrawerTitle>Menu</DrawerTitle>
-
-          <DrawerDescription className=" sr-only hidden text-sm">
-            Fill in the details below to create a new task
-          </DrawerDescription>
-        </DrawerHeader>
-        <div className="flex flex-col overflow-y-auto">
-          {items.map((menu, idx) => (
-            <Link
-              onClick={() => setInternalOpen(false)}
-              key={idx}
-              to={menu.link}
-              className="py-3 px-1 font-medium text-base  flex items-center"
-            >
-              {menu.name}
-            </Link>
-          ))}
-        </div>
-        <DrawerFooter className="   px-0 pt-3 mt-6">
-          <div className="mt-2 flex flex-col gap-2">
-            {name == null ? (
-              <>
-                <Link
-                  onClick={() => setInternalOpen(false)}
-                  to="/login"
-                  className={buttonVariants({ variant: 'default' })}
-                >
-                  Masuk
-                </Link>
-
-                <Link
-                  onClick={() => setInternalOpen(false)}
-                  to="/register"
-                  className={buttonVariants({ variant: 'outline' })}
-                >
-                  Daftar
-                </Link>
-              </>
+    <>
+      {items.map((item, index) => {
+        const isActive = item.link == paths
+        return (
+          <li key={index}>
+            {item.content ? (
+              <>{item.content}</>
             ) : (
               <Link
-                onClick={() => setInternalOpen(false)}
-                to="/dashboard"
-                className={buttonVariants({ variant: 'default' })}
+                to={item.link}
+                className={cn(
+                  buttonVariants({ variant: 'ghost', size: 'icon' }),
+                  'gap-0.5  cursor-pointer   flex flex-col items-center   ',
+                )}
               >
-                Dashboard
+                <item.icon
+                  className={cn(
+                    ' not-odd: text-accent-foreground size-5',
+                    isActive && 'fill-primary-foreground   text-primary',
+                  )}
+                />
+
+                <span
+                  className={cn(
+                    '  sr-only tracking-tightest text-xs transition-all duration-300 ease-out',
+                    !isActive && '  text-muted-foreground ',
+                  )}
+                >
+                  {item.name}
+                </span>
               </Link>
             )}
-          </div>
-        </DrawerFooter>
-      </DrawerContent>
-    </Drawer>
+          </li>
+        )
+      })}
+    </>
   )
 }
 

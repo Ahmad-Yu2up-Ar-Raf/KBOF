@@ -1,5 +1,12 @@
 import React from 'react'
-import { ArrowRight, Tag, ThumbsUp } from 'lucide-react'
+import {
+  ArrowRight,
+  MapIcon,
+  MapPin,
+  StarIcon,
+  Tag,
+  ThumbsUp,
+} from 'lucide-react'
 import { Badge } from '../../shadcn-ui/badge'
 import {
   Card,
@@ -14,15 +21,11 @@ import MediaItem from '@/components/ui/fragments/custom-ui/media/media-item'
 import { cn } from '@/lib/utils'
 
 import { Link } from '@tanstack/react-router'
-import { batasiHuruf } from '@/hooks/use-word'
+import { batasiHuruf, batasiKata } from '@/hooks/use-word'
 import { Avatar, AvatarFallback, AvatarImage } from '../../shadcn-ui/avatar'
 import type { DestinasiDestination } from '@/lib/server/explore/destinasi-server-queries'
 import { Skeleton } from '../../shadcn-ui/skeleton'
-import {
-  categoryColors,
-  categoryLabels,
-  provinsiLabels,
-} from '@/lib/utils/destination-utils'
+import { categoryColors, provinsiLabels } from '@/lib/utils/destination-utils'
 
 interface DestinasiCardProps {
   destination: DestinasiDestination
@@ -46,10 +49,10 @@ function DestinasiCard({
 
   // Creator info
   const creator = destination.user
-  const creatorName = batasiHuruf(creator?.name ?? 'Unknown', 9)
-  const provinsiLabel = batasiHuruf(
+  const creatorName = batasiKata(creator?.name ?? 'Unknown', 2)
+  const provinsiLabel = batasiKata(
     provinsiLabels[destination.provinsi] ?? destination.provinsi,
-    15,
+    2,
   )
 
   const tags: string[] = [
@@ -74,7 +77,7 @@ function DestinasiCard({
       style={{ willChange: 'transform' }}
       onClick={() => onClick?.(destination)}
     >
-      <CardContent className=" rounded-[30px] content-center justify-center gap-5 flex flex-col flex-1 relative mx-auto  p-6 w-full   border border-black/5 bg-neutral-800/5    h-full  overflow-hidden shadow-sm md:items-start   ">
+      <CardContent className=" rounded-[30px] content-center justify-center gap-5 flex flex-col flex-1 relative mx-auto  p-5 w-full   border border-black/5 bg-neutral-800/5    h-full  overflow-hidden shadow-sm md:items-start   ">
         {/* Category Badge */}
 
         {/* Header */}
@@ -133,27 +136,32 @@ function DestinasiCard({
                 variant="outline"
                 className="text-accent-foreground text-sm w-fit border-0 p-0"
               >
-                <ThumbsUp className="size-4 fill-primary text-primary mr-1" />
+                <StarIcon className="size-4 fill-primary text-primary mr-1" />
                 <span className="font-semibold ">
-                  {(destination.totalVote ?? 0).toLocaleString('id-ID')}
+                  {(destination.averageRating ?? 0).toLocaleString('id-ID')}
                 </span>
               </Badge>
             </div>
           </div>
           <div className="flex flex-wrap gap-1.5">
-            {tags.slice(0, 2).map((tag, idx) => (
-              <Badge
-                key={idx}
-                className="px-2 py-0.5 bg-primary/10 text-primary rounded-full text-xs font-medium"
-              >
-                #{tag}
-              </Badge>
-            ))}
-            {tags.length > 3 && (
+            <Badge className="px-2 py-0.5 bg-primary/10 text-primary rounded-full text-xs font-medium">
+              <MapPin />
+              {destination.provinsi}
+            </Badge>
+            {/* <Badge className="px-2 py-0.5 bg-primary/10 text-primary rounded-full text-xs font-medium">
+              #{destination.category}
+            </Badge> */}
+            <Badge className="px-2 py-0.5 bg-primary/10 text-primary rounded-full text-xs font-medium">
+              #{destination.type}
+            </Badge>
+            {/* {tags.slice(0, 2).map((tag, idx) => (
+         
+            ))} */}
+            {/* {tags.length > 3 && (
               <Badge className="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs">
                 +{tags.length - 3}
               </Badge>
-            )}
+            )} */}
           </div>
         </div>
 

@@ -132,13 +132,13 @@ const MediaItem = ({
 
   return (
     <div
-      className={cn(` flex justify-center h-full relative `, className)}
+      className={cn(` overflow-hidden  flex justify-center h-full relative `, className)}
       style={style}
     >
       <Image
         src={webViewLink}
         alt={webViewLink}
-        className="object-cover "
+        className="object-cover  w-full h-full  cursor-pointer"
         onClick={onClick}
         width={800}
         height={600}

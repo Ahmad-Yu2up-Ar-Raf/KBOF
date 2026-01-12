@@ -14,12 +14,12 @@ import { Route as DashboardRouteRouteImport } from './routes/dashboard/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DestinasiIndexRouteImport } from './routes/destinasi/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
-import { Route as DestinasiDestinasiIdRouteImport } from './routes/destinasi/$destinasiId'
 import { Route as DashboardDestinationRouteImport } from './routes/dashboard/destination'
 import { Route as DashboardArticlesRouteImport } from './routes/dashboard/articles'
 import { Route as authRegisterRouteImport } from './routes/(auth)/register'
 import { Route as authLoginRouteImport } from './routes/(auth)/login'
 import { Route as DashboardSettingsRouteRouteImport } from './routes/dashboard/settings/route'
+import { Route as DestinasiDestinasiIdIndexRouteImport } from './routes/destinasi/$destinasiId/index'
 import { Route as DashboardSettingsIndexRouteImport } from './routes/dashboard/settings/index'
 import { Route as DashboardSettingsPasswordRouteImport } from './routes/dashboard/settings/password'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
@@ -49,11 +49,6 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardRouteRoute,
 } as any)
-const DestinasiDestinasiIdRoute = DestinasiDestinasiIdRouteImport.update({
-  id: '/destinasi/$destinasiId',
-  path: '/destinasi/$destinasiId',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const DashboardDestinationRoute = DashboardDestinationRouteImport.update({
   id: '/destination',
   path: '/destination',
@@ -79,6 +74,12 @@ const DashboardSettingsRouteRoute = DashboardSettingsRouteRouteImport.update({
   path: '/settings',
   getParentRoute: () => DashboardRouteRoute,
 } as any)
+const DestinasiDestinasiIdIndexRoute =
+  DestinasiDestinasiIdIndexRouteImport.update({
+    id: '/destinasi/$destinasiId/',
+    path: '/destinasi/$destinasiId/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DashboardSettingsIndexRoute = DashboardSettingsIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -105,12 +106,12 @@ export interface FileRoutesByFullPath {
   '/register': typeof authRegisterRoute
   '/dashboard/articles': typeof DashboardArticlesRoute
   '/dashboard/destination': typeof DashboardDestinationRoute
-  '/destinasi/$destinasiId': typeof DestinasiDestinasiIdRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/destinasi': typeof DestinasiIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/dashboard/settings/password': typeof DashboardSettingsPasswordRoute
   '/dashboard/settings/': typeof DashboardSettingsIndexRoute
+  '/destinasi/$destinasiId': typeof DestinasiDestinasiIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -119,12 +120,12 @@ export interface FileRoutesByTo {
   '/register': typeof authRegisterRoute
   '/dashboard/articles': typeof DashboardArticlesRoute
   '/dashboard/destination': typeof DashboardDestinationRoute
-  '/destinasi/$destinasiId': typeof DestinasiDestinasiIdRoute
   '/dashboard': typeof DashboardIndexRoute
   '/destinasi': typeof DestinasiIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/dashboard/settings/password': typeof DashboardSettingsPasswordRoute
   '/dashboard/settings': typeof DashboardSettingsIndexRoute
+  '/destinasi/$destinasiId': typeof DestinasiDestinasiIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -136,12 +137,12 @@ export interface FileRoutesById {
   '/(auth)/register': typeof authRegisterRoute
   '/dashboard/articles': typeof DashboardArticlesRoute
   '/dashboard/destination': typeof DashboardDestinationRoute
-  '/destinasi/$destinasiId': typeof DestinasiDestinasiIdRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/destinasi/': typeof DestinasiIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/dashboard/settings/password': typeof DashboardSettingsPasswordRoute
   '/dashboard/settings/': typeof DashboardSettingsIndexRoute
+  '/destinasi/$destinasiId/': typeof DestinasiDestinasiIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -154,12 +155,12 @@ export interface FileRouteTypes {
     | '/register'
     | '/dashboard/articles'
     | '/dashboard/destination'
-    | '/destinasi/$destinasiId'
     | '/dashboard/'
     | '/destinasi'
     | '/api/auth/$'
     | '/dashboard/settings/password'
     | '/dashboard/settings/'
+    | '/destinasi/$destinasiId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -168,12 +169,12 @@ export interface FileRouteTypes {
     | '/register'
     | '/dashboard/articles'
     | '/dashboard/destination'
-    | '/destinasi/$destinasiId'
     | '/dashboard'
     | '/destinasi'
     | '/api/auth/$'
     | '/dashboard/settings/password'
     | '/dashboard/settings'
+    | '/destinasi/$destinasiId'
   id:
     | '__root__'
     | '/'
@@ -184,12 +185,12 @@ export interface FileRouteTypes {
     | '/(auth)/register'
     | '/dashboard/articles'
     | '/dashboard/destination'
-    | '/destinasi/$destinasiId'
     | '/dashboard/'
     | '/destinasi/'
     | '/api/auth/$'
     | '/dashboard/settings/password'
     | '/dashboard/settings/'
+    | '/destinasi/$destinasiId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -198,9 +199,9 @@ export interface RootRouteChildren {
   SplatRoute: typeof SplatRoute
   authLoginRoute: typeof authLoginRoute
   authRegisterRoute: typeof authRegisterRoute
-  DestinasiDestinasiIdRoute: typeof DestinasiDestinasiIdRoute
   DestinasiIndexRoute: typeof DestinasiIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  DestinasiDestinasiIdIndexRoute: typeof DestinasiDestinasiIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -240,13 +241,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof DashboardRouteRoute
     }
-    '/destinasi/$destinasiId': {
-      id: '/destinasi/$destinasiId'
-      path: '/destinasi/$destinasiId'
-      fullPath: '/destinasi/$destinasiId'
-      preLoaderRoute: typeof DestinasiDestinasiIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/dashboard/destination': {
       id: '/dashboard/destination'
       path: '/destination'
@@ -281,6 +275,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard/settings'
       preLoaderRoute: typeof DashboardSettingsRouteRouteImport
       parentRoute: typeof DashboardRouteRoute
+    }
+    '/destinasi/$destinasiId/': {
+      id: '/destinasi/$destinasiId/'
+      path: '/destinasi/$destinasiId'
+      fullPath: '/destinasi/$destinasiId'
+      preLoaderRoute: typeof DestinasiDestinasiIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/dashboard/settings/': {
       id: '/dashboard/settings/'
@@ -346,9 +347,9 @@ const rootRouteChildren: RootRouteChildren = {
   SplatRoute: SplatRoute,
   authLoginRoute: authLoginRoute,
   authRegisterRoute: authRegisterRoute,
-  DestinasiDestinasiIdRoute: DestinasiDestinasiIdRoute,
   DestinasiIndexRoute: DestinasiIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  DestinasiDestinasiIdIndexRoute: DestinasiDestinasiIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

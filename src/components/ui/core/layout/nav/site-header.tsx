@@ -8,27 +8,86 @@ import {
   NavbarButton,
   MobileNavHeader,
   MobileNavMenu,
+  NavbarMobile,
 } from '@/components/ui/fragments/custom-ui/header/navbar'
+import { useIsMobile } from '@/hooks/use-mobile'
 import { authClient } from '@/lib/auth/auth-client'
+import {
+  CircleStar,
+  Home,
+  Layers,
+  MapPin,
+  Medal,
+  Newspaper,
+  Search,
+  Telescope,
+  UserRound,
+} from 'lucide-react'
 
 export default function SiteHeader() {
+  const { data: session } = authClient.useSession()
   const navItems = [
     {
       name: 'Artikel',
-      link: '/artikel',
+      link: '/artikel/',
+      icon: Newspaper,
     },
 
     {
       name: 'Destinasi',
-      link: '/destinasi',
+      link: '/destinasi/',
+      icon: MapPin,
     },
     {
       name: 'Peringkat',
-      link: '/leaderboard',
+      link: '/leaderboard/',
+      icon: Newspaper,
     },
   ]
-  const { data: session } = authClient.useSession()
+  const navItemsMobiles = [
+    {
+      name: 'Home',
+      link: '/',
+      icon: Layers,
+    },
+    {
+      name: 'Artikel',
+      link: '/artikel/',
+      icon: Newspaper,
+    },
 
+    {
+      name: 'Destinasi',
+      link: '/destinasi/',
+      icon: Telescope,
+    },
+    {
+      name: 'Peringkat',
+      link: '/leaderboard/',
+      icon: Medal,
+    },
+    {
+      name: 'User',
+      link: session ? '/dashboard/settings/' : '/login',
+      icon: UserRound,
+    },
+  ]
+
+  const isMobile = useIsMobile()
+  if (isMobile) {
+    return (
+      <NavbarMobile className="     bottom-0      z-60 w-full">
+        <MobileNav>
+          {/* <MobileNavHeader>
+            <NavbarLogo />
+            <NavItems items={navItems} />
+          </MobileNavHeader> */}
+
+          <MobileNavMenu name={session?.user.name} items={navItemsMobiles} />
+        </MobileNav>
+      </NavbarMobile>
+    )
+  }
   return (
     <Navbar className=" z-99999999">
       {/* Desktop Navigaion */}
@@ -69,14 +128,6 @@ export default function SiteHeader() {
       </NavBody>
 
       {/* Mobile Navigation */}
-      <MobileNav>
-        <MobileNavHeader>
-          <NavbarLogo />
-          <NavItems items={navItems} />
-        </MobileNavHeader>
-
-        <MobileNavMenu name={session?.user.name} items={navItems} />
-      </MobileNav>
     </Navbar>
   )
 }

@@ -200,3 +200,27 @@ export const getArticleQueryOptions = (filters: ArticleAggregateInput) =>
     staleTime: 30 * 1000,
     gcTime: 5 * 60 * 1000,
   })
+
+// ============================================
+// REVIEW QUERY KEYS
+// ============================================
+
+export const reviewKeys = {
+  all: ['review'] as const,
+  userReview: (destinationId: number) =>
+    [...reviewKeys.all, 'user', destinationId] as const,
+  list: (destinationId: number) =>
+    [...reviewKeys.all, 'list', destinationId] as const,
+} as const
+
+// ============================================
+// VOTE QUERY KEYS
+// ============================================
+
+export const voteKeys = {
+  all: ['vote'] as const,
+  userVote: (destinationId: number) =>
+    [...voteKeys.all, 'user', destinationId] as const,
+  count: (destinationId: number) =>
+    [...voteKeys.all, 'count', destinationId] as const,
+} as const

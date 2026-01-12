@@ -147,7 +147,7 @@ export default function HeroSection() {
 
             <BlurFade isPreload delay={delay * 6} direction="up">
               <motion.h1
-                className="text-3xl sm:text-5xl  md:text-7xl  text-center w-full justify-center items-center flex-col flex whitespace-pre sm:leading-12  md:leading-16  lg:leading-20 font-bold tracking-tighter"
+                className="text-4xl sm:text-5xl  md:text-7xl  text-center w-full justify-center items-center flex-col flex whitespace-pre sm:leading-12  md:leading-16  lg:leading-20 font-bold tracking-tighter"
                 animate={{ opacity: 1, y: 0 }}
                 initial={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.2, ease: 'easeOut', delay: 0.3 }}
@@ -207,7 +207,7 @@ export default function HeroSection() {
             >
               <p>
                 Temukan destinasi wisata tersembunyi dan kekayaan budaya lokal
-                Indonesia yang autentik dan memukau.
+                Indonesia <span className=' hidden sm:inline'>yang autentik dan memukau.</span>
               </p>
             </BlurFade>
           </div>

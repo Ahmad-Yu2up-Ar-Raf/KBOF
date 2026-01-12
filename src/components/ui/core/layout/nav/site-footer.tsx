@@ -37,8 +37,8 @@ export default function SiteFooter({ className, ...props }: StickyFooterProps) {
       {...props}
     >
       <div className="fixed z-50 bottom-0 h-full w-full">
-        <div className="sticky z-50 overflow-hidden flex flex-col justify-end  h-full container px-5 sm:px-6 lg:px-14">
-          <div className="grid border-b pb-6 sm:gap-8 md:pb-15 grid-cols-2 gap-5 md:grid-cols-4 lg:grid-cols-4">
+        <div className="sticky z-50 overflow-hidden flex flex-col justify-end  h-full container px-5 sm:px-6 lg:px-20">
+          <div className="grid border-b  pb-6 sm:gap-8 md:pb-15 grid-cols-2 gap-5 md:grid-cols-4 lg:grid-cols-4">
             {/* Kolom logo dan deskripsi */}
             <div className="col-span-2 lg:col-span-1">
               <div className="mb-5 md:mb-6 flex items-center space-x-2 group transition-transform">
@@ -76,7 +76,7 @@ export default function SiteFooter({ className, ...props }: StickyFooterProps) {
           {/* Judul besar tengah */}
           <div className="w-full h-fit flex items-center justify-center  ">
             <h1 className="text-center lg:h-80 relative text-[23dvw] lg:text-[16em] font-bold bg-clip-text tracking-tighter   bg-linear-to-b to-background text-transparent from-yellow-950/50 select-none">
-              Suasanaa.
+              Suasanaaa.
             </h1>
           </div>
         </div>

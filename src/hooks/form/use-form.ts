@@ -4,6 +4,7 @@ import { FormTextarea } from '@/components/ui/fragments/custom-ui/form/form-text
 import { FormSelect } from '@/components/ui/fragments/custom-ui/form/form-select'
 import { FormCheckbox } from '@/components/ui/fragments/custom-ui/form/form-checkbox'
 import { FormCombobox } from '@/components/ui/fragments/custom-ui/form/form-combobox'
+import { FormRating } from '@/components/ui/fragments/custom-ui/form/form-rating'
 import {
   FormFileUpload,
   FormMultiFileUpload,
@@ -19,6 +20,7 @@ const { useAppForm } = createFormHook({
     Select: FormSelect,
     Combobox: FormCombobox,
     Checkbox: FormCheckbox,
+    Rating: FormRating,
     FileUpload: FormFileUpload,
     MultiFileUpload: FormMultiFileUpload,
   },

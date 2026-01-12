@@ -6,6 +6,7 @@ import { ReactNode } from 'react'
 import ReactLenis from 'lenis/react'
 import SiteHeader from '../ui/core/layout/nav/site-header'
 import { useShouldShowFooter } from './infinite-scroll-context'
+import { useIsMobile } from '@/hooks/use-mobile'
 
 interface LayoutWrapperProps {
   children: ReactNode
@@ -15,7 +16,7 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
   const matches = useMatches()
   const currentRouteId = matches[matches.length - 1]?.routeId
   const shouldShowFooter = useShouldShowFooter()
-
+  const isMobile = useIsMobile()
   // Routes yang gak butuh footer/border
   const routesWithoutChrome = [
     '/(auth)/login',
@@ -31,12 +32,11 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
   if (shouldShowChrome) {
     return (
       <ReactLenis root>
-        <SiteBorder />
-        <SiteHeader />
-        <div className={cn('relative min-h-lvh w-full   ')}>
+        {!isMobile && <SiteBorder />}
+        <div className={cn('relative min-h-lvh w-full  pb-10  ')}>
           <div
             className={cn(
-              'mx-auto flex flex-col gap-13 lg:gap-25 h-full w-full',
+              'mx-auto flex  flex-col gap-13 lg:gap-25 h-full w-full',
             )}
           >
             {children}
@@ -44,6 +44,7 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
         </div>
         {/* Footer only shows when shouldShowFooter is true */}
         {shouldShowFooter && <SiteFooter />}
+        <SiteHeader />
       </ReactLenis>
     )
   }

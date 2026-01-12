@@ -24,6 +24,11 @@ import {
 } from './server/article/article-server-queries'
 
 import {
+  getPublicArticlesServerFn,
+  type ArticlePublicFilters,
+} from './server/article/article-public-queries'
+
+import {
   getDonationAggregateServerFn,
   type DonationAggregateInput,
 } from './server/donation/donation-server-queries'
@@ -36,6 +41,7 @@ export type {
   DestinationAggregateInput,
   ExploreFilters,
   ArticleAggregateInput,
+  ArticlePublicFilters,
   DonationAggregateInput,
 }
 
@@ -182,7 +188,11 @@ export const articleKeys = {
   all: ['articles'] as const,
   aggregate: (filters: ArticleAggregateInput) =>
     [...articleKeys.all, 'aggregate', filters] as const,
+  list: (filters: Omit<ArticlePublicFilters, 'cursor'>) =>
+    [...articleKeys.all, 'list', filters] as const,
   detail: (id: number) => [...articleKeys.all, 'detail', id] as const,
+  detailBySlug: (slug: string) =>
+    [...articleKeys.all, 'detail', slug] as const,
 } as const
 
 // ============================================
@@ -200,6 +210,37 @@ export const getArticleQueryOptions = (filters: ArticleAggregateInput) =>
     },
     staleTime: 30 * 1000,
     gcTime: 5 * 60 * 1000,
+  })
+
+// ============================================
+// ARTICLE INFINITE QUERY OPTIONS (Public)
+// ============================================
+
+/**
+ * Infinite query options for browse articles (public)
+ * Uses cursor-based pagination for infinite scroll
+ */
+export const getArticleInfiniteQueryOptions = (
+  filters: Omit<ArticlePublicFilters, 'cursor'>,
+) =>
+  infiniteQueryOptions({
+    queryKey: articleKeys.list(filters),
+    queryFn: async ({ pageParam }) => {
+      const result = await getPublicArticlesServerFn({
+        data: {
+          filters: {
+            ...filters,
+            cursor: pageParam,
+          },
+        },
+      })
+      return result
+    },
+    initialPageParam: undefined as number | undefined,
+    getNextPageParam: (lastPage) =>
+      lastPage.hasNextPage ? (lastPage.nextCursor ?? undefined) : undefined,
+    staleTime: 60 * 1000,
+    gcTime: 10 * 60 * 1000,
   })
 
 // ============================================

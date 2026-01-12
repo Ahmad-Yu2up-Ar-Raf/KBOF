@@ -16,7 +16,7 @@ import { cn } from '@/lib/utils'
 import { Link } from '@tanstack/react-router'
 import { batasiHuruf } from '@/hooks/use-word'
 import { Avatar, AvatarFallback, AvatarImage } from '../../shadcn-ui/avatar'
-import type { ExploreDestination } from '@/lib/server/explore/explore-server-queries'
+import type { DestinasiDestination } from '@/lib/server/explore/destinasi-server-queries'
 import { Skeleton } from '../../shadcn-ui/skeleton'
 import {
   categoryColors,
@@ -24,23 +24,23 @@ import {
   provinsiLabels,
 } from '@/lib/utils/destination-utils'
 
-interface ExploreCardProps {
-  destination: ExploreDestination
+interface DestinasiCardProps {
+  destination: DestinasiDestination
   className?: string
   index: number
   hovered: number | null
   setHovered: React.Dispatch<React.SetStateAction<number | null>>
-  onClick?: (destination: ExploreDestination) => void
+  onClick?: (destination: DestinasiDestination) => void
 }
 
-function ExploreCard({
+function DestinasiCard({
   destination,
   className,
   onClick,
   index,
   hovered,
   setHovered,
-}: ExploreCardProps) {
+}: DestinasiCardProps) {
   // Get primary image
   const primaryImage = destination.coverImage
 
@@ -51,8 +51,7 @@ function ExploreCard({
     provinsiLabels[destination.provinsi] ?? destination.provinsi,
     15,
   )
-  const categoryLabel =
-    categoryLabels[destination.category] ?? destination.category
+
   const tags: string[] = [
     destination.provinsi,
     destination.category,
@@ -139,20 +138,6 @@ function ExploreCard({
                   {(destination.totalVote ?? 0).toLocaleString('id-ID')}
                 </span>
               </Badge>
-              {/* {destination.averageRating && destination.averageRating > 0 && (
-                <Badge
-                  variant="outline"
-                  className="text-accent-foreground text-xs w-fit border-0 p-0"
-                >
-                  <Star className="size-3 fill-yellow-400 text-yellow-400 mr-1" />
-                  <span className="font-semibold">
-                    {destination.averageRating.toFixed(1)}
-                  </span>
-                  <span className="text-muted-foreground ml-1">
-                    ({destination.totalReview ?? 0})
-                  </span>
-                </Badge>
-              )} */}
             </div>
           </div>
           <div className="flex flex-wrap gap-1.5">
@@ -175,8 +160,8 @@ function ExploreCard({
         {/* Footer */}
         <CardFooter className="flex mt-0  [.border-t]:pt-4  w-full border-t pt- py-1 items-center justify-between  px-0 ">
           <Link
-            to={'/explore/$exploreId'}
-            params={{ exploreId: destination.slug }}
+            to={'/destinasi/$destinasiId'}
+            params={{ destinasiId: destination.slug }}
             className={cn(
               buttonVariants({ variant: 'default', size: 'sm' }),
               'hover:opacity-90 transition-transform w-full hover:scale-105 text-xs ',
@@ -190,7 +175,7 @@ function ExploreCard({
   )
 }
 
-export default ExploreCard
+export default DestinasiCard
 
 export function SkeletonCard() {
   return (

@@ -25,7 +25,7 @@ export interface NavItem {
  * Result type dari aggregate query
  */
 
-export interface Explore {
+export interface Destinasi {
   id: string
   slug: string
   judul: string
@@ -153,7 +153,7 @@ export interface DestinationAggregateResult {
     totalVote: number
     totalReview: number
     averageRating: number | null | null
-    totalDonation: number | null
+
     status: DestinationStatus
     createdAt: Date
     updatedAt: Date
@@ -221,40 +221,5 @@ export interface ArticleAggregateResult {
     published: number
     draft: number
     archived: number
-  }
-}
-
-// ============================================
-// DONATION TYPES
-// ============================================
-
-import type { Donation, User, Destination } from '@/db/schema'
-
-export interface DonationWithDetails extends Donation {
-  donor: Pick<User, 'id' | 'name' | 'email' | 'image'>
-  destination: Pick<Destination, 'id' | 'name' | 'slug' | 'coverImage'>
-}
-
-export interface DonationAggregateInput {
-  filterFlag?: 'advancedFilters' | 'commandFilters' | null
-  page?: number
-  perPage?: number
-  sort?: { id: string; desc: boolean }[]
-  status?: ('pending' | 'completed' | 'failed' | 'refunded')[]
-  destinationId?: number
-  createdAt?: number[]
-  filters?: unknown[]
-  joinOperator?: 'and' | 'or'
-}
-
-export interface DonationAggregateResult {
-  data: DonationWithDetails[]
-  pageCount: number
-  totalAmount: number
-  statusCounts: {
-    pending: number
-    completed: number
-    failed: number
-    refunded: number
   }
 }

@@ -13,20 +13,16 @@ import {
 } from './server/destination/destination-server-queries'
 
 import {
-  getExploreDestinationsServerFn,
+  getDestinasiDestinationsServerFn,
   getDestinationBySlugServerFn,
-  type ExploreFilters,
-} from './server/explore/explore-server-queries'
+  type DestinasiFilters,
+  type DestinasiDetailDestination,
+} from './server/explore/destinasi-server-queries'
 
 import {
   getArticleAggregateServerFn,
   type ArticleAggregateInput,
 } from './server/article/article-server-queries'
-
-import {
-  getDonationAggregateServerFn,
-  type DonationAggregateInput,
-} from './server/donation/donation-server-queries'
 
 // ============================================
 // TYPE EXPORTS
@@ -34,9 +30,9 @@ import {
 
 export type {
   DestinationAggregateInput,
-  ExploreFilters,
+  DestinasiFilters,
+  DestinasiDetailDestination,
   ArticleAggregateInput,
-  DonationAggregateInput,
 }
 
 // ============================================
@@ -117,31 +113,31 @@ export const refetchAllDestinationQueries = async (
 }
 
 // ============================================
-// EXPLORE QUERY KEYS (Public)
+// Destinasi QUERY KEYS (Public)
 // ============================================
 
-export const exploreKeys = {
-  all: ['explore'] as const,
-  list: (filters: Omit<ExploreFilters, 'cursor'>) =>
-    [...exploreKeys.all, 'list', filters] as const,
-  detail: (slug: string) => [...exploreKeys.all, 'detail', slug] as const,
+export const DestinasiKeys = {
+  all: ['Destinasi'] as const,
+  list: (filters: Omit<DestinasiFilters, 'cursor'>) =>
+    [...DestinasiKeys.all, 'list', filters] as const,
+  detail: (slug: string) => [...DestinasiKeys.all, 'detail', slug] as const,
 } as const
 
 // ============================================
-// EXPLORE QUERY OPTIONS (Infinite Scroll)
+// Destinasi QUERY OPTIONS (Infinite Scroll)
 // ============================================
 
 /**
- * Infinite query options for explore destinations (public)
+ * Infinite query options for Destinasi destinations (public)
  * Uses cursor-based pagination for infinite scroll
  */
-export const getExploreInfiniteQueryOptions = (
-  filters: Omit<ExploreFilters, 'cursor'>,
+export const getDestinasiInfiniteQueryOptions = (
+  filters: Omit<DestinasiFilters, 'cursor'>,
 ) =>
   infiniteQueryOptions({
-    queryKey: exploreKeys.list(filters),
+    queryKey: DestinasiKeys.list(filters),
     queryFn: async ({ pageParam }) => {
-      const result = await getExploreDestinationsServerFn({
+      const result = await getDestinasiDestinationsServerFn({
         data: {
           filters: {
             ...filters,
@@ -160,18 +156,21 @@ export const getExploreInfiniteQueryOptions = (
 
 /**
  * Query options for single destination by slug (public)
+ * Returns DestinasiDetailDestination with full relations and computed fields
  */
-export const getExploreDetailQueryOptions = (slug: string) =>
+export const getDestinasiDetailQueryOptions = (slug: string) =>
   queryOptions({
-    queryKey: exploreKeys.detail(slug),
-    queryFn: async () => {
+    queryKey: DestinasiKeys.detail(slug),
+    queryFn: async (): Promise<DestinasiDetailDestination | null> => {
       const result = await getDestinationBySlugServerFn({
         data: { slug },
       })
       return result
     },
-    staleTime: 60 * 1000,
-    gcTime: 10 * 60 * 1000,
+    staleTime: 60 * 1000, // 1 minute - reasonable for detail page
+    gcTime: 10 * 60 * 1000, // 10 minutes
+    // Enable retry for network errors
+    retry: 2,
   })
 
 // ============================================
@@ -194,33 +193,6 @@ export const getArticleQueryOptions = (filters: ArticleAggregateInput) =>
     queryKey: articleKeys.aggregate(filters),
     queryFn: async () => {
       const result = await getArticleAggregateServerFn({
-        data: { filters },
-      })
-      return result
-    },
-    staleTime: 30 * 1000,
-    gcTime: 5 * 60 * 1000,
-  })
-
-// ============================================
-// DONATION QUERY KEYS
-// ============================================
-
-export const donationKeys = {
-  all: ['donations'] as const,
-  aggregate: (filters: DonationAggregateInput) =>
-    [...donationKeys.all, 'aggregate', filters] as const,
-} as const
-
-// ============================================
-// DONATION QUERY OPTIONS
-// ============================================
-
-export const getDonationQueryOptions = (filters: DonationAggregateInput) =>
-  queryOptions({
-    queryKey: donationKeys.aggregate(filters),
-    queryFn: async () => {
-      const result = await getDonationAggregateServerFn({
         data: { filters },
       })
       return result

@@ -70,15 +70,15 @@ Menyatukan masyarakat, wisatawan, dan pelaku lokal dalam satu ekosistem digital.
 
 <div align="center">
 
-|            Fitur            | Deskripsi                                                                                                                                                  |
-| :-------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|  🗺️ **Eksplorasi Budaya**   | Jelajahi 80+ destinasi ekowisata dan explore lokal dari seluruh Indonesia dengan tampilan visual yang menarik, terstruktur berdasarkan kategori dan lokasi |
-| 🗳️ **Voting & Leaderboard** | Berikan dukungan (vote) untuk destinasi favorit Anda. Sistem leaderboard dinamis menampilkan destinasi dengan dukungan terbanyak secara real-time          |
-|    💝 **Sistem Donasi**     | Dukung pelestarian budaya dan destinasi lokal secara langsung melalui fitur donasi yang terintegrasi                                                       |
-|  💬 **Komentar & Diskusi**  | Bagikan pengalaman, pendapat, dan tips tentang destinasi atau budaya tertentu bersama komunitas                                                            |
-|   📝 **Artikel Edukatif**   | Baca artikel informatif dan edukatif seputar ekowisata, budaya lokal, dan tips perjalanan                                                                  |
-|   🔐 **Autentikasi Aman**   | Sistem login & registrasi yang aman dengan dukungan Google OAuth dan Magic Link                                                                            |
-|   🔍 **Pencarian Cerdas**   | Temukan konten dengan mudah berdasarkan kategori, lokasi, atau kata kunci                                                                                  |
+|            Fitur            | Deskripsi                                                                                                                                                    |
+| :-------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|  🗺️ **Eksplorasi Budaya**   | Jelajahi 80+ destinasi ekowisata dan Destinasi lokal dari seluruh Indonesia dengan tampilan visual yang menarik, terstruktur berdasarkan kategori dan lokasi |
+| 🗳️ **Voting & Leaderboard** | Berikan dukungan (vote) untuk destinasi favorit Anda. Sistem leaderboard dinamis menampilkan destinasi dengan dukungan terbanyak secara real-time            |
+|    💝 **Sistem Donasi**     | Dukung pelestarian budaya dan destinasi lokal secara langsung melalui fitur donasi yang terintegrasi                                                         |
+|  💬 **Komentar & Diskusi**  | Bagikan pengalaman, pendapat, dan tips tentang destinasi atau budaya tertentu bersama komunitas                                                              |
+|   📝 **Artikel Edukatif**   | Baca artikel informatif dan edukatif seputar ekowisata, budaya lokal, dan tips perjalanan                                                                    |
+|   🔐 **Autentikasi Aman**   | Sistem login & registrasi yang aman dengan dukungan Google OAuth dan Magic Link                                                                              |
+|   🔍 **Pencarian Cerdas**   | Temukan konten dengan mudah berdasarkan kategori, lokasi, atau kata kunci                                                                                    |
 
 </div>
 
@@ -145,7 +145,7 @@ src/
 │   ├── 📂 (auth)/          # Auth routes (login, register)
 │   ├── 📂 api/             # API routes
 │   ├── 📂 dashboard/       # Protected dashboard routes
-│   └── 📂 explore/         # Explore pages
+│   └── 📂 Destinasi/         # Destinasi pages
 ├── 📂 db/                  # Database layer
 │   ├── schema.ts           # Drizzle schema definitions
 │   ├── relations.ts        # Table relations
@@ -171,56 +171,18 @@ src/
 
 ## 🗄️ Database Schema
 
-### Entity Relationship Diagram
-
-```
-┌─────────────┐       ┌─────────────┐       ┌─────────────┐
-│    USER     │       │   EXPLORE   │       │  CATEGORY   │
-├─────────────┤       ├─────────────┤       ├─────────────┤
-│ id (PK)     │       │ id (PK)     │       │ id (PK)     │
-│ name        │       │ categoryId  │◄──────│ name        │
-│ email       │       │ title       │       │ slug        │
-│ image       │       │ slug        │       │ description │
-│ ...         │       │ description │       │ color       │
-└──────┬──────┘       │ location    │       └─────────────┘
-       │              │ totalVote   │
-       │              │ status      │
-       ▼              └──────┬──────┘
-┌─────────────┐              │
-│    VOTE     │◄─────────────┤
-├─────────────┤              │
-│ userId (FK) │              │
-│ exploreId   │              ▼
-└─────────────┘       ┌─────────────┐
-                      │   COMMENT   │
-┌─────────────┐       ├─────────────┤
-│  DONATION   │       │ userId (FK) │
-├─────────────┤       │ exploreId   │
-│ userId (FK) │       │ content     │
-│ exploreId   │       │ parentId    │
-│ amount      │       └─────────────┘
-│ message     │
-└─────────────┘       ┌─────────────┐
-                      │   ARTICLE   │
-                      ├─────────────┤
-                      │ authorId    │
-                      │ categoryId  │
-                      │ title       │
-                      │ content     │
-                      └─────────────┘
-```
+````
 
 ### Entitas Utama
 
 | Entitas    | Deskripsi                                                |
 | ---------- | -------------------------------------------------------- |
 | `user`     | Data pengguna (terintegrasi dengan Better Auth)          |
-| `explore`  | Explore, wisata, dan budaya lokal Indonesia              |
+| `Destinasi`  | Destinasi, wisata, dan budaya lokal Indonesia              |
 | `category` | Kategori konten (Kesehatan, Pendidikan, Lingkungan, dll) |
-| `vote`     | Vote/dukungan pengguna untuk explore                     |
-| `donation` | Donasi pengguna untuk explore                            |
-| `comment`  | Komentar dan diskusi pada explore                        |
-| `article`  | Artikel edukatif tentang budaya & wisata                 |
+| `vote`     | Vote/dukungan pengguna untuk Destinasi                     |
+| `comment` | Komentar dan diskusi pada Destinasi |
+| `article` | Artikel edukatif tentang budaya & wisata |
 
 ---
 
@@ -254,7 +216,7 @@ pnpm db:seed
 
 # Run development server
 pnpm dev
-```
+````
 
 ### Environment Variables
 

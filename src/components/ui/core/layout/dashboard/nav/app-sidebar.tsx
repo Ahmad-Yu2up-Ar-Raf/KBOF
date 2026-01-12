@@ -55,11 +55,6 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
         url: '/dashboard/articles',
         icon: PenLine,
       },
-      {
-        title: 'Donasi',
-        url: '/dashboard/donation',
-        icon: HandHeart,
-      },
     ],
     navSecondary: [
       {

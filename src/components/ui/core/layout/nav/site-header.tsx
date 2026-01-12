@@ -19,8 +19,8 @@ export default function SiteHeader() {
     },
 
     {
-      name: 'Explore',
-      link: '/explore',
+      name: 'Destinasi',
+      link: '/destinasi',
     },
     {
       name: 'Peringkat',

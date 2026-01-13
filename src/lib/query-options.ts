@@ -30,7 +30,15 @@ import {
   type ArticlePublicFilters,
 } from './server/article/article-public-queries'
 
-
+import {
+  getLeaderboardServerFn,
+  getLeaderboardTopServerFn,
+  getLeaderboardPodiumServerFn,
+  type LeaderboardFilters,
+  type LeaderboardResult,
+  type LeaderboardTopEntry,
+  type LeaderboardEntry,
+} from './server/leaderboard/leaderboard-server-queries'
 
 // ============================================
 // TYPE EXPORTS
@@ -41,6 +49,10 @@ export type {
   DestinasiFilters,
   DestinasiDetailDestination,
   ArticleAggregateInput,
+  LeaderboardFilters,
+  LeaderboardResult,
+  LeaderboardTopEntry,
+  LeaderboardEntry,
 }
 
 // ============================================
@@ -192,8 +204,7 @@ export const articleKeys = {
   list: (filters: Omit<ArticlePublicFilters, 'cursor'>) =>
     [...articleKeys.all, 'list', filters] as const,
   detail: (id: number) => [...articleKeys.all, 'detail', id] as const,
-  detailBySlug: (slug: string) =>
-    [...articleKeys.all, 'detail', slug] as const,
+  detailBySlug: (slug: string) => [...articleKeys.all, 'detail', slug] as const,
 } as const
 
 // ============================================
@@ -283,3 +294,87 @@ export const voteKeys = {
   count: (destinationId: number) =>
     [...voteKeys.all, 'count', destinationId] as const,
 } as const
+
+// ============================================
+// LEADERBOARD QUERY KEYS
+// ============================================
+
+export const leaderboardKeys = {
+  all: ['leaderboard'] as const,
+  list: (filters: Omit<LeaderboardFilters, 'offset'>) =>
+    [...leaderboardKeys.all, 'list', filters] as const,
+  top: (limit: number) => [...leaderboardKeys.all, 'top', limit] as const,
+  podium: (filters: Omit<LeaderboardFilters, 'limit' | 'offset'>) =>
+    [...leaderboardKeys.all, 'podium', filters] as const,
+} as const
+
+// ============================================
+// LEADERBOARD QUERY OPTIONS
+// ============================================
+
+/**
+ * Query options for paginated leaderboard with filters
+ * Includes filter counts for UI
+ */
+export const getLeaderboardQueryOptions = (filters: LeaderboardFilters) =>
+  queryOptions({
+    queryKey: leaderboardKeys.list(filters),
+    queryFn: async (): Promise<LeaderboardResult> => {
+      const result = await getLeaderboardServerFn({
+        data: { filters },
+      })
+      return result
+    },
+    staleTime: 30 * 1000, // 30 seconds - leaderboard changes frequently
+    gcTime: 5 * 60 * 1000,
+  })
+
+/**
+ * Query options for TOP N destinations (homepage widget)
+ */
+export const getLeaderboardTopQueryOptions = (limit: number = 4) =>
+  queryOptions({
+    queryKey: leaderboardKeys.top(limit),
+    queryFn: async (): Promise<LeaderboardTopEntry[]> => {
+      const result = await getLeaderboardTopServerFn({
+        data: { limit },
+      })
+      return result
+    },
+    staleTime: 60 * 1000, // 1 minute
+    gcTime: 10 * 60 * 1000,
+  })
+
+/**
+ * Query options for podium (TOP 3) with full details
+ */
+export const getLeaderboardPodiumQueryOptions = (
+  filters: Omit<LeaderboardFilters, 'limit' | 'offset'>,
+) =>
+  queryOptions({
+    queryKey: leaderboardKeys.podium(filters),
+    queryFn: async (): Promise<LeaderboardEntry[]> => {
+      const result = await getLeaderboardPodiumServerFn({
+        data: { filters },
+      })
+      return result
+    },
+    staleTime: 30 * 1000,
+    gcTime: 5 * 60 * 1000,
+  })
+
+// ============================================
+// LEADERBOARD INVALIDATION HELPERS
+// ============================================
+
+/**
+ * Invalidate ALL leaderboard queries
+ * Call this after a vote is added/removed
+ */
+export const invalidateAllLeaderboardQueries = async (
+  queryClient: import('@tanstack/react-query').QueryClient,
+) => {
+  await queryClient.invalidateQueries({
+    queryKey: leaderboardKeys.all,
+  })
+}

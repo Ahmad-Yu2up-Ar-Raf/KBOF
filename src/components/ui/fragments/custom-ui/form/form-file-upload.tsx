@@ -84,8 +84,8 @@ function ImagePreview({
       <MediaItem webViewLink={url} className="w-full h-full object-cover" />
       {/* Pending upload indicator */}
       {isPending && (
-        <div className="absolute inset-0 sr-only bg-black/30 flex items-center justify-center">
-          <span className="text-xs text-white bg-black/50 px-2 py-1 rounded">
+        <div className="absolute inset-0 sr-only bg-primary/30 flex items-center justify-center">
+          <span className="text-xs text-primary-foreground  bg-primary/50 px-2 py-1 rounded">
             Pending upload
           </span>
         </div>

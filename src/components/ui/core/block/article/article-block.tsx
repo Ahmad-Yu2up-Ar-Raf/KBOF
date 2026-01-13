@@ -2,11 +2,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { useInfiniteQuery } from '@tanstack/react-query'
-import {
-  parseAsString,
-  parseAsStringLiteral,
-  useQueryState,
-} from 'nuqs'
+import { parseAsString, parseAsStringLiteral, useQueryState } from 'nuqs'
 import { Loader2 } from 'lucide-react'
 
 import type { PublicArticle } from '@/lib/server/article/article-public-queries'
@@ -42,9 +38,7 @@ export default function ArticleBlock() {
 
   const [sortBy, setSortBy] = useQueryState(
     'sortBy',
-    parseAsStringLiteral(sortOptions.map((o) => o.value)).withDefault(
-      'newest',
-    ),
+    parseAsStringLiteral(sortOptions.map((o) => o.value)).withDefault('newest'),
   )
 
   // Build filters for query
@@ -159,7 +153,8 @@ export default function ArticleBlock() {
               onClick={() => void setSortBy(option.value)}
               className={cn(
                 'rounded-2xl',
-                sortBy === option.value && 'bg-[#63493f] text-white hover:bg-[#63493f]/90',
+                sortBy === option.value &&
+                  'bg-[#63493f] text-primary-foreground  hover:bg-[#63493f]/90',
               )}
             >
               {option.label}

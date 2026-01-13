@@ -14,7 +14,7 @@ import {
   checkUserVote,
   getVoteCount,
 } from '@/lib/server/vote/vote-server-actions'
-import { DestinasiKeys } from '@/lib/query-options'
+import { DestinasiKeys, leaderboardKeys } from '@/lib/query-options'
 
 // ============================================
 // QUERY KEYS
@@ -106,6 +106,11 @@ export function useAddVoteMutation(options?: UseAddVoteMutationOptions) {
         queryKey: DestinasiKeys.all,
       })
 
+      // Invalidate leaderboard queries (vote count changed)
+      await queryClient.invalidateQueries({
+        queryKey: leaderboardKeys.all,
+      })
+
       await options?.onSuccess?.()
     },
 
@@ -157,6 +162,11 @@ export function useRemoveVoteMutation(options?: UseRemoveVoteMutationOptions) {
       // Invalidate all destinasi list queries
       await queryClient.invalidateQueries({
         queryKey: DestinasiKeys.all,
+      })
+
+      // Invalidate leaderboard queries
+      await queryClient.invalidateQueries({
+        queryKey: leaderboardKeys.all,
       })
 
       await options?.onSuccess?.()

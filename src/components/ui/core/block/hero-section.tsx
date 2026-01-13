@@ -2,6 +2,7 @@
 import { Link } from '@tanstack/react-router'
 import { useLottie } from 'lottie-react'
 import { LayoutGroup, motion } from 'framer-motion'
+import { useQuery } from '@tanstack/react-query'
 import { TextRotate } from '@/components/ui/fragments/custom-ui/animate-ui/text-rotate'
 import Floating, {
   FloatingElement,
@@ -13,8 +14,10 @@ import { useIsMobile } from '@/hooks/use-mobile'
 import { cn } from '@/lib/utils'
 import animationData from '@/assets/animations/Businessman.json'
 import { authClient } from '@/lib/auth/auth-client'
+import { getLeaderboardTopQueryOptions } from '@/lib/query-options'
 
-const exampleImages = [
+// Fallback images when no leaderboard data
+const fallbackImages = [
   {
     url: 'https://images.pexels.com/photos/7869139/pexels-photo-7869139.jpeg',
     author: 'Branislav Rodman',
@@ -51,9 +54,9 @@ const exampleImages = [
   },
   {
     url: 'https://images.unsplash.com/photo-1721968317938-cf8c60fccd1a?q=80&w=2728&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    title: 'A blurry photo of white flowers in a field',
+    title: 'A blurry photo of primary-foreground  flowers in a field',
     author: 'Eugene Golovesov',
-    link: 'https://unsplash.com/photos/a-blurry-photo-of-white-flowers-in-a-field-6qbx0lzGPyc',
+    link: 'https://unsplash.com/photos/a-blurry-photo-of-primary-foreground -flowers-in-a-field-6qbx0lzGPyc',
   },
   {
     url: 'https://images.unsplash.com/photo-1677338354108-223e807fb1bd?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -64,6 +67,26 @@ const exampleImages = [
 ]
 
 export default function HeroSection() {
+  // Fetch top destinations for floating images
+  const { data: topDestinations } = useQuery(getLeaderboardTopQueryOptions(4))
+
+  // Merge leaderboard images with fallback images
+  // Use top destinations' cover images if available, otherwise use fallback
+  const exampleImages = [...fallbackImages]
+
+  // Replace first 4 images with top destinations if available
+  if (topDestinations && topDestinations.length > 0) {
+    topDestinations.forEach((dest, index) => {
+      if (dest.coverImage && index < 4) {
+        exampleImages[index + 1] = {
+          url: dest.coverImage,
+          title: dest.name,
+          author: `🏆 #${index + 1} - ${dest.voteCount} votes`,
+        }
+      }
+    })
+  }
+
   // parameter animasi masuk di BlurFade (seconds)
 
   const isMobile = useIsMobile()
@@ -147,17 +170,20 @@ export default function HeroSection() {
 
             <BlurFade isPreload delay={delay * 6} direction="up">
               <motion.h1
-                className="text-4xl sm:text-5xl  md:text-7xl  text-center w-full justify-center items-center flex-col flex whitespace-pre sm:leading-12  md:leading-16  lg:leading-20 font-bold tracking-tighter"
+                className="text-4xl sm:text-5xl  md:text-7xl  text-center w-full justify-center items-center flex-col flex primary-foreground space-pre sm:leading-12  md:leading-16  lg:leading-20 font-bold tracking-tighter"
                 animate={{ opacity: 1, y: 0 }}
                 initial={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.2, ease: 'easeOut', delay: 0.3 }}
               >
                 <span>Jelajahi Pesona</span>
                 <LayoutGroup>
-                  <motion.span layout className="flex whitespace-pre">
+                  <motion.span
+                    layout
+                    className="flex primary-foreground space-pre"
+                  >
                     <motion.span
                       layout
-                      className="flex whitespace-pre"
+                      className="flex primary-foreground space-pre"
                       transition={{
                         type: 'spring',
                         damping: 30,
@@ -207,7 +233,10 @@ export default function HeroSection() {
             >
               <p>
                 Temukan destinasi wisata tersembunyi dan kekayaan budaya lokal
-                Indonesia <span className=' hidden sm:inline'>yang autentik dan memukau.</span>
+                Indonesia{' '}
+                <span className=" hidden sm:inline">
+                  yang autentik dan memukau.
+                </span>
               </p>
             </BlurFade>
           </div>
@@ -229,7 +258,7 @@ export default function HeroSection() {
             <Link
               to={session ? '/dashboard' : '/login'}
               className={cn(
-                'md:text-lg  cursor-target   hover:scale-110 transition-all duration-300 ease-out  lg:text-xl justify-center flex items-center py-3.5   gap-5 w-full font-semibold tracking-tight text-white bg-primary px-4  sm:px-5  md:px-6 md:py-4 lg:px-8  rounded-full z-20 shadow-2xl font-calendas',
+                'md:text-lg  cursor-target   hover:scale-110 transition-all duration-300 ease-out  lg:text-xl justify-center flex items-center py-3.5   gap-5 w-full font-semibold tracking-tight text-primary-foreground  bg-primary px-4  sm:px-5  md:px-6 md:py-4 lg:px-8  rounded-full z-20 shadow-2xl font-calendas',
               )}
             >
               <Pen className=" size-4.5 sm:size-5.5" /> Bagikan Destinasi

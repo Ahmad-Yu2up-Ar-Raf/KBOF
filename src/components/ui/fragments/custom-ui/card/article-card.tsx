@@ -44,10 +44,10 @@ function ArticleCard({
   // Format date
   const publishedDate = article.publishedAt
     ? new Date(article.publishedAt).toLocaleDateString('id-ID', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric',
-    })
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+      })
     : null
 
   return (
@@ -57,7 +57,7 @@ function ArticleCard({
       className={cn(
         'relative group cursor-target w-full m-auto md:px-4 md:py-4 shadow-none border rounded-2xl',
         'transform transition-all duration-300 hover:scale-105 hover:rotate-1',
-        'mx-auto cursor-target content-center w-full p-3 border border-black/5 shadow-sm rounded-[30px]',
+        'mx-auto cursor-target content-center w-full p-3 border border-primary/5 shadow-sm rounded-[30px]',
         'overflow-hidden hover:shadow-2xl flex flex-col h-full',
         'cursor-target',
         hovered !== null && hovered !== index && 'lg:blur-sm lg:scale-[0.98]',
@@ -66,7 +66,7 @@ function ArticleCard({
       style={{ willChange: 'transform' }}
       onClick={() => onClick?.(article)}
     >
-      <CardContent className="rounded-[30px] content-center justify-between gap-5 flex flex-col flex-1 relative mx-auto p-6 w-full border border-black/5 bg-neutral-800/5 h-full overflow-hidden shadow-sm md:items-start">
+      <CardContent className="rounded-[30px] content-center justify-between gap-5 flex flex-col flex-1 relative mx-auto p-6 w-full border border-primary/5 bg-neutral-800/5 h-full overflow-hidden shadow-sm md:items-start">
         {/* Header */}
         <CardHeader className="p-0 w-full max-w-[15em] gap-2.5">
           {/* Published Date Badge */}
@@ -130,7 +130,8 @@ function ArticleCard({
               'hover:opacity-90 transition-transform w-full hover:scale-105 text-xs',
             )}
           >
-            Baca Selengkapnya <ArrowRight className="ml-2 w-3 h-3 md:w-4 md:h-4" />
+            Baca Selengkapnya{' '}
+            <ArrowRight className="ml-2 w-3 h-3 md:w-4 md:h-4" />
           </Link>
         </CardFooter>
       </CardContent>
@@ -145,11 +146,11 @@ export function ArticleCardSkeleton() {
     <Card
       className={cn(
         'relative group w-full m-auto md:px-4 md:py-4 shadow-none border rounded-2xl',
-        'mx-auto content-center w-full p-3 border border-black/5 shadow-sm rounded-[30px]',
+        'mx-auto content-center w-full p-3 border border-primary/5 shadow-sm rounded-[30px]',
         'overflow-hidden flex flex-col h-full',
       )}
     >
-      <CardContent className="rounded-[30px] content-center justify-center gap-5 flex flex-col flex-1 relative mx-auto p-6 w-full border border-black/5 bg-neutral-800/5 h-full overflow-hidden shadow-sm md:items-start">
+      <CardContent className="rounded-[30px] content-center justify-center gap-5 flex flex-col flex-1 relative mx-auto p-6 w-full border border-primary/5 bg-neutral-800/5 h-full overflow-hidden shadow-sm md:items-start">
         {/* Header Section */}
         <CardHeader className="p-0 w-full max-w-[15em] gap-2.5">
           {/* Date Skeleton */}

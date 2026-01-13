@@ -296,7 +296,8 @@ export const MobileNavMenu = ({ items }: MobileNavMenuProps) => {
                 to={item.link}
                 className={cn(
                   buttonVariants({ variant: 'ghost', size: 'icon' }),
-                  'gap-0.5  cursor-pointer   flex flex-col items-center   ',
+                  'gap-0.5  cursor-pointer    flex flex-col items-center   ',
+                  isActive && '  bg-accent   text-primary ',
                 )}
               >
                 <item.icon

@@ -16,7 +16,7 @@ import {
   CardHeader,
   CardTitle,
 } from '../../shadcn-ui/card'
-import { buttonVariants } from '../../shadcn-ui/button'
+import { Button, buttonVariants } from '../../shadcn-ui/button'
 import MediaItem from '@/components/ui/fragments/custom-ui/media/media-item'
 import { cn } from '@/lib/utils'
 
@@ -25,7 +25,11 @@ import { batasiHuruf, batasiKata } from '@/hooks/use-word'
 import { Avatar, AvatarFallback, AvatarImage } from '../../shadcn-ui/avatar'
 import type { DestinasiDestination } from '@/lib/server/explore/destinasi-server-queries'
 import { Skeleton } from '../../shadcn-ui/skeleton'
-import { categoryColors, provinsiLabels } from '@/lib/utils/destination-utils'
+import {
+  categoryColors,
+  getProvinsiLabel,
+  provinsiLabels,
+} from '@/lib/utils/destination-utils'
 
 interface DestinasiCardProps {
   destination: DestinasiDestination
@@ -48,19 +52,7 @@ function DestinasiCard({
   const primaryImage = destination.coverImage
 
   // Creator info
-  const creator = destination.user
-  const creatorName = batasiKata(creator?.name ?? 'Unknown', 2)
-  const provinsiLabel = batasiKata(
-    provinsiLabels[destination.provinsi] ?? destination.provinsi,
-    2,
-  )
 
-  const tags: string[] = [
-    destination.provinsi,
-    destination.category,
-    destination.type,
-    destination.slug,
-  ]
   return (
     <Card
       onMouseEnter={() => setHovered(index)}
@@ -68,7 +60,7 @@ function DestinasiCard({
       className={cn(
         'relative  group  cursor-target w-full  m-auto  md:px-4 md:py-4  shadow-none  border  rounded-2xl',
         'transform transition-all duration-300 hover:scale-105 hover:rotate-1 ',
-        'mx-auto cursor-target content-center w-full  p-3   border border-black/5  shadow-sm  rounded-[30px]',
+        'mx-auto cursor-target content-center w-full  p-3   border border-primary/5  shadow-sm  rounded-[30px]',
         ' overflow-hidden hover:shadow-2xl flex flex-col h-full',
         'cursor-target',
         hovered !== null && hovered !== index && 'lg:blur-sm lg:scale-[0.98]',
@@ -77,11 +69,11 @@ function DestinasiCard({
       style={{ willChange: 'transform' }}
       onClick={() => onClick?.(destination)}
     >
-      <CardContent className=" rounded-[30px] content-center justify-center gap-5 flex flex-col flex-1 relative mx-auto  p-5 w-full   border border-black/5 bg-neutral-800/5    h-full  overflow-hidden shadow-sm md:items-start   ">
+      <CardContent className=" rounded-[30px] content-center justify-center gap-5 flex flex-col flex-1 relative mx-auto   p-5 w-full   border border-primary/5 bg-neutral-800/5    h-full  overflow-hidden shadow-sm md:items-start   ">
         {/* Category Badge */}
 
         {/* Header */}
-        <CardHeader className="p-0 w-full max-w-[15em] gap-2.5">
+        <CardHeader className="p-0 w-full max-w-[15em] gap-3">
           <Badge
             variant="outline"
             className={cn(
@@ -93,11 +85,11 @@ function DestinasiCard({
             <Tag className="mr-1 size-3 md:size-4" />
             {destination.category}
           </Badge>
-          <CardTitle className="text-xl w-full  leading-6 font-bold tracking-tighter md:leading-6 line-clamp-2">
+          <CardTitle className="text-2xl w-full  leading-6 font-bold tracking-tighter md:leading-6 line-clamp-2">
             {destination.name}
           </CardTitle>
 
-          <CardDescription className="text-muted-foreground text-xs line-clamp-2 ">
+          <CardDescription className="text-muted-foreground  line-clamp-2 ">
             {destination.description}
           </CardDescription>
         </CardHeader>
@@ -116,18 +108,26 @@ function DestinasiCard({
         <div className="space-y-4 w-full">
           <div className="  gap-20  flex w-full justify-between">
             <div className="flex  gap-3  w-full items-start  justify-between   text-xs">
-              <Avatar className="">
+              <MapPin className=" size-6 fill-primary   text-background" />
+              {/* <Button
+                variant={'ghost'}
+                size={'sm'}
+                className=" rounded-full p-0  border-primary text-primary   cursor-none"
+              ></Button> */}
+              {/* <Avatar className="">
                 {creator?.image && (
                   <AvatarImage src={creator.image} alt={creator.name ?? ''} />
                 )}
                 <AvatarFallback>
                   {(creator?.name ?? 'U').charAt(0)}
                 </AvatarFallback>
-              </Avatar>
+              </Avatar> */}
               <div className="flex-1">
-                <p className="font-medium  truncate">{creatorName}</p>
-                <p className="text-muted-foreground text-xs truncate flex items-center gap-1">
-                  {provinsiLabel}
+                <p className="font-medium  truncate">
+                  {destination.kabupatenKota}
+                </p>
+                <p className="text-muted-foreground   text-xs  capitalize  truncate flex items-center gap-1">
+                  {getProvinsiLabel(destination.provinsi)}
                 </p>
               </div>
             </div>
@@ -145,14 +145,14 @@ function DestinasiCard({
           </div>
           <div className="flex flex-wrap gap-1.5">
             <Badge className="px-2 py-0.5 bg-primary/10 text-primary rounded-full text-xs font-medium">
-              <MapPin />
-              {destination.provinsi}
+              <ThumbsUp />
+              {destination.totalVote}
             </Badge>
             {/* <Badge className="px-2 py-0.5 bg-primary/10 text-primary rounded-full text-xs font-medium">
               #{destination.category}
             </Badge> */}
             <Badge className="px-2 py-0.5 bg-primary/10 text-primary rounded-full text-xs font-medium">
-              #{destination.type}
+              # {destination.type}
             </Badge>
             {/* {tags.slice(0, 2).map((tag, idx) => (
          
@@ -190,11 +190,11 @@ export function SkeletonCard() {
     <Card
       className={cn(
         'relative group w-full m-auto md:px-4 md:py-4 shadow-none border rounded-2xl',
-        'mx-auto content-center w-full p-3 border border-black/5 shadow-sm rounded-[30px]',
+        'mx-auto content-center w-full p-3 border border-primary/5 shadow-sm rounded-[30px]',
         'overflow-hidden flex flex-col h-full',
       )}
     >
-      <CardContent className="rounded-[30px] content-center justify-center gap-5 flex flex-col flex-1 relative mx-auto p-6 w-full border border-black/5 bg-neutral-800/5 h-full overflow-hidden shadow-sm md:items-start">
+      <CardContent className="rounded-[30px] content-center justify-center gap-5 flex flex-col flex-1 relative mx-auto p-6 w-full border border-primary/5 bg-neutral-800/5 h-full overflow-hidden shadow-sm md:items-start">
         {/* Header Section */}
         <CardHeader className="p-0 w-full max-w-[15em] gap-2.5">
           {/* Category Badge Skeleton */}

@@ -44,7 +44,7 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
         </div>
         {/* Footer only shows when shouldShowFooter is true */}
         {shouldShowFooter && <SiteFooter />}
-        <SiteHeader />
+        {/* <SiteHeader /> */}
       </ReactLenis>
     )
   }

@@ -18,6 +18,13 @@ import {
   CarouselContent,
   CarouselItem,
 } from '@/components/ui/fragments/shadcn-ui/carousel'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/fragments/shadcn-ui/select'
 import { cn } from '@/lib/utils'
 import DestinasiCard, {
   SkeletonCard,
@@ -25,7 +32,11 @@ import DestinasiCard, {
 
 import { getDestinasiInfiniteQueryOptions } from '@/lib/query-options'
 import type { DestinasiDestination } from '@/lib/server/explore/destinasi-server-queries'
-import { destinationCategory } from '@/db/schema'
+import {
+  destinationCategory,
+  destinationType,
+  provinsiIndonesia,
+} from '@/db/schema'
 import { useInfiniteScrollContext } from '@/components/provider/infinite-scroll-context'
 
 const PRIMARY_COLOR = '#63493f'
@@ -41,6 +52,64 @@ const categoryLabels: Record<string, string> = {
 }
 
 const categoryList = destinationCategory.enumValues
+const typeList = destinationType.enumValues
+const provinsiList = provinsiIndonesia.enumValues
+
+// Type labels for display
+const typeLabels: Record<string, string> = {
+  'wisata-alam': 'Wisata Alam',
+  'wisata-budaya': 'Wisata Budaya',
+  'wisata-sejarah': 'Wisata Sejarah',
+  'wisata-religi': 'Wisata Religi',
+  'wisata-kuliner': 'Wisata Kuliner',
+  'wisata-bahari': 'Wisata Bahari',
+  'adat-istiadat': 'Adat Istiadat',
+  kesenian: 'Kesenian',
+  kerajinan: 'Kerajinan',
+  festival: 'Festival',
+}
+
+// Provinsi labels for display
+const provinsiLabels: Record<string, string> = {
+  aceh: 'Aceh',
+  'sumatera-utara': 'Sumatera Utara',
+  'sumatera-barat': 'Sumatera Barat',
+  riau: 'Riau',
+  'kepulauan-riau': 'Kepulauan Riau',
+  jambi: 'Jambi',
+  'sumatera-selatan': 'Sumatera Selatan',
+  'kepulauan-bangka-belitung': 'Bangka Belitung',
+  bengkulu: 'Bengkulu',
+  lampung: 'Lampung',
+  'dki-jakarta': 'DKI Jakarta',
+  'jawa-barat': 'Jawa Barat',
+  banten: 'Banten',
+  'jawa-tengah': 'Jawa Tengah',
+  'di-yogyakarta': 'DI Yogyakarta',
+  'jawa-timur': 'Jawa Timur',
+  bali: 'Bali',
+  'nusa-tenggara-barat': 'NTB',
+  'nusa-tenggara-timur': 'NTT',
+  'kalimantan-barat': 'Kalimantan Barat',
+  'kalimantan-tengah': 'Kalimantan Tengah',
+  'kalimantan-selatan': 'Kalimantan Selatan',
+  'kalimantan-timur': 'Kalimantan Timur',
+  'kalimantan-utara': 'Kalimantan Utara',
+  'sulawesi-utara': 'Sulawesi Utara',
+  gorontalo: 'Gorontalo',
+  'sulawesi-tengah': 'Sulawesi Tengah',
+  'sulawesi-selatan': 'Sulawesi Selatan',
+  'sulawesi-barat': 'Sulawesi Barat',
+  'sulawesi-tenggara': 'Sulawesi Tenggara',
+  maluku: 'Maluku',
+  'maluku-utara': 'Maluku Utara',
+  papua: 'Papua',
+  'papua-barat': 'Papua Barat',
+  'papua-barat-daya': 'Papua Barat Daya',
+  'papua-tengah': 'Papua Tengah',
+  'papua-pegunungan': 'Papua Pegunungan',
+  'papua-selatan': 'Papua Selatan',
+}
 
 // Sort options
 const sortOptions = [
@@ -52,6 +121,8 @@ const sortOptions = [
 
 type SortBy = (typeof sortOptions)[number]['value']
 type Category = (typeof categoryList)[number]
+type DestinationType = (typeof typeList)[number]
+type Provinsi = (typeof provinsiList)[number]
 
 export default function DestinasiBlock() {
   const navigate = useNavigate()
@@ -71,6 +142,16 @@ export default function DestinasiBlock() {
     parseAsArrayOf(parseAsStringLiteral(categoryList)).withDefault([]),
   )
 
+  const [type, setType] = useQueryState(
+    'type',
+    parseAsStringLiteral(['all', ...typeList] as const).withDefault('all'),
+  )
+
+  const [provinsi, setProvinsi] = useQueryState(
+    'provinsi',
+    parseAsStringLiteral(['all', ...provinsiList] as const).withDefault('all'),
+  )
+
   const [sortBy, setSortBy] = useQueryState(
     'sortBy',
     parseAsStringLiteral(sortOptions.map((o) => o.value)).withDefault(
@@ -83,8 +164,8 @@ export default function DestinasiBlock() {
     limit: 12,
     search,
     categories: categories as Category[],
-    type: 'all' as const,
-    provinsi: 'all' as const,
+    type: type as 'all' | DestinationType,
+    provinsi: provinsi as 'all' | Provinsi,
     sortBy: sortBy as SortBy,
   }
 
@@ -159,8 +240,10 @@ export default function DestinasiBlock() {
   const handleResetFilter = useCallback(() => {
     void setSearch(null)
     void setCategories(null)
+    void setType(null)
+    void setProvinsi(null)
     void setSortBy(null)
-  }, [setSearch, setCategories, setSortBy])
+  }, [setSearch, setCategories, setType, setProvinsi, setSortBy])
 
   const handleCardClick = useCallback(
     (destination: DestinasiDestination) => {
@@ -173,7 +256,11 @@ export default function DestinasiBlock() {
   )
 
   const hasActiveFilters =
-    categories.length > 0 || sortBy !== 'popular' || search !== ''
+    categories.length > 0 ||
+    type !== 'all' ||
+    provinsi !== 'all' ||
+    sortBy !== 'popular' ||
+    search !== ''
 
   if (isLoading) {
     return <DestinasiBlockSkeleton />
@@ -224,7 +311,7 @@ export default function DestinasiBlock() {
                     variant={isSelected ? 'default' : 'outline'}
                     style={{
                       backgroundColor: isSelected ? PRIMARY_COLOR : undefined,
-                      color: isSelected ? 'white' : undefined,
+                      color: isSelected ? 'primary-foreground ' : undefined,
                     }}
                     onClick={() => handleCategoryToggle(cat)}
                   >
@@ -239,8 +326,70 @@ export default function DestinasiBlock() {
           </CarouselContent>
         </Carousel>
 
+        {/* Type & Provinsi Filters */}
+        <div className="flex flex-wrap gap-3 px-5">
+          {/* Type Filter */}
+          <Select
+            value={type}
+            onValueChange={(value) =>
+              void setType(value === 'all' ? null : (value as DestinationType))
+            }
+          >
+            <SelectTrigger className="w-45">
+              <SelectValue placeholder="Tipe Destinasi" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Semua Tipe</SelectItem>
+              {typeList.map((t) => (
+                <SelectItem key={t} value={t}>
+                  {typeLabels[t] ?? t}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+
+          {/* Provinsi Filter */}
+          <Select
+            value={provinsi}
+            onValueChange={(value) =>
+              void setProvinsi(value === 'all' ? null : (value as Provinsi))
+            }
+          >
+            <SelectTrigger className="w-45">
+              <SelectValue placeholder="Provinsi" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Semua Provinsi</SelectItem>
+              {provinsiList.map((p) => (
+                <SelectItem key={p} value={p}>
+                  {provinsiLabels[p] ?? p}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+
+          {/* Sort By */}
+          <Select
+            value={sortBy}
+            onValueChange={(value) =>
+              void setSortBy(value === 'popular' ? null : (value as SortBy))
+            }
+          >
+            <SelectTrigger className="w-35">
+              <SelectValue placeholder="Urutkan" />
+            </SelectTrigger>
+            <SelectContent>
+              {sortOptions.map((opt) => (
+                <SelectItem key={opt.value} value={opt.value}>
+                  {opt.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
         {/* Info & Reset */}
-        <div className="flex items-center justify-between px-5">
+        <div className="flex flex-wrap items-center justify-between gap-2 px-5">
           <p className="text-sm text-muted-foreground">
             Menampilkan{' '}
             <span className="font-semibold text-foreground">
@@ -260,6 +409,22 @@ export default function DestinasiBlock() {
                 di{' '}
                 <span className="font-semibold text-foreground">
                   {categories.map((c) => categoryLabels[c]).join(', ')}
+                </span>
+              </span>
+            )}
+            {type !== 'all' && (
+              <span className="ml-1">
+                • Tipe:{' '}
+                <span className="font-semibold text-foreground">
+                  {typeLabels[type] ?? type}
+                </span>
+              </span>
+            )}
+            {provinsi !== 'all' && (
+              <span className="ml-1">
+                • Provinsi:{' '}
+                <span className="font-semibold text-foreground">
+                  {provinsiLabels[provinsi] ?? provinsi}
                 </span>
               </span>
             )}

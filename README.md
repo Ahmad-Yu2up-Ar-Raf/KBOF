@@ -6,11 +6,11 @@
 
 <img src="@/assets/logo/suasana-banner.png" alt="Suasana Banner" width="100%" />
 
-[![Live Demo](https://img.shields.io/badge/🌐_Demo-suasana.vercel.app-00C853?style=for-the-badge&logoColor=white)](https://suasana.vercel.app)
+[![Live Demo](https://img.shields.io/badge/🌐_Demo-suasana.vercel.app-00C853?style=for-the-badge&logoColor=primary-foreground)](https://suasana.vercel.app)
 [![Status](https://img.shields.io/badge/Status-In_Development-FFB300?style=for-the-badge)]()
-[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)]()
-[![React](https://img.shields.io/badge/React_19-61DAFB?style=for-the-badge&logo=react&logoColor=black)]()
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)]()
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=primary-foreground)]()
+[![React](https://img.shields.io/badge/React_19-61DAFB?style=for-the-badge&logo=react&logoColor=primary)]()
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=primary-foreground)]()
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)]()
 
 **Platform interaktif untuk memperkenalkan, mendukung, dan melestarikan ekowisata serta budaya lokal Indonesia yang masih tersembunyi.**

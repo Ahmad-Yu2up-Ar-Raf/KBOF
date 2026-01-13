@@ -156,7 +156,7 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
       <span
         className={cn(
           containerClassName,
-          'flex flex-wrap  whitespace-pre-wrap',
+          'flex flex-wrap  primary-foreground space-pre-wrap',
           splitBy === 'lines' && 'flex-col',
         )}
         onClick={onClick}
@@ -186,7 +186,7 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
                 <span
                   className={cn(
                     elementLevelClassName,
-                    'whitespace-pre-wrap relative',
+                    'primary-foreground space-pre-wrap relative',
                   )}
                   key={charIndex}
                 >

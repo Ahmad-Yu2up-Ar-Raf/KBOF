@@ -132,8 +132,15 @@ export function RelatedDestinationsSection({
   return (
     <section className="space-y-4">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold">Destinasi Serupa</h3>
+      <header className="flex border-b pb-7  items-center justify-between">
+        <div className="space-y-1">
+          <h2 className="text-2xl font-bold tracking-tight">
+            Rekomendasi Destinasi
+          </h2>
+          <p className="text-muted-foreground">
+            Destinasi lainnya yang mungkin Anda suka
+          </p>
+        </div>
         <Link
           to="/destinasi"
           search={{ categories: [category] }}
@@ -145,7 +152,7 @@ export function RelatedDestinationsSection({
           Lihat Semua
           <ChevronRight className="size-3" />
         </Link>
-      </div>
+      </header>
 
       {/* Content */}
       {isLoading ? (

@@ -144,16 +144,13 @@ export default function ArticleBlock() {
     <section className="py-1 w-full container md:py-2 sm:px-8 px-1.5 flex-1">
       <div className="space-y-5">
         {/* Sort Options */}
-        <div className="flex items-center gap-2 px-2 overflow-x-auto">
+        <div className="flex items-center gap-2   overflow-x-auto">
           {sortOptions.map((option) => (
             <Button
               key={option.value}
               variant={sortBy === option.value ? 'default' : 'outline'}
               onClick={() => void setSortBy(option.value)}
-              className={cn(
-                'rounded-lg',
-                sortBy === option.value && 'bg-[#63493f] text-white hover:bg-[#63493f]/90',
-              )}
+             
             >
               {option.label}
             </Button>
@@ -161,7 +158,7 @@ export default function ArticleBlock() {
         </div>
 
         {/* Info & Reset */}
-        <div className="flex items-center justify-between px-5">
+        <div className="flex flex-wrap items-center justify-between gap-2 px-3 ">
           <p className="text-sm text-muted-foreground">
             Menampilkan{' '}
             <span className="font-semibold text-foreground">
@@ -176,11 +173,18 @@ export default function ArticleBlock() {
                 <span className="font-semibold text-foreground">{search}</span>"
               </span>
             )}
-          >
-            {option.label}
-          </Button>
-        ))}
-      </div>
+          </p>
+          {hasActiveFilters && (
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={handleResetFilter}
+              className="text-primary rounded-2xl"
+            >
+              Reset Semua
+            </Button>
+          )}
+        </div>
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 w-full">
@@ -212,60 +216,22 @@ export default function ArticleBlock() {
               </p>
             </div>
           )}
-        </p>
-        {hasActiveFilters && (
-          <Button
-            variant="secondary"
-            size="sm"
-            onClick={handleResetFilter}
-            className="text-primary rounded-2xl"
-          >
-            Reset Semua
-          </Button>
-        )}
-      </div>
+        </div>
 
-      {/* Grid */}
-      <div className="grid gap-7 md:gap-3  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full auto-rows-fr">
-        {articles.length > 0 ? (
-          articles.map((article: PublicArticle, i: number) => (
-            <ArticleCard
-              key={article.id}
-              index={i}
-              hovered={hovered}
-              setHovered={setHovered}
-              article={article}
-              onClick={handleCardClick}
-            />
-          ))
-        ) : (
-          <div className="col-span-full flex flex-col items-center justify-center min-h-100 animate-fadeIn">
-            <div className="text-6xl mb-4">📝</div>
-            <p className="text-gray-500 text-lg text-center mb-2">
-              {search
-                ? `Tidak ada artikel yang cocok dengan "${search}"`
-                : 'Belum ada artikel tersedia'}
+        {/* Infinite Scroll Trigger & Loading */}
+        <div ref={loadMoreRef} className="flex justify-center py-8">
+          {isFetchingNextPage && (
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <Loader2 className="h-5 w-5 animate-spin" />
+              <span>Memuat lebih banyak...</span>
+            </div>
+          )}
+          {!hasNextPage && articles.length > 0 && (
+            <p className="text-muted-foreground text-sm">
+              Kamu sudah melihat semua artikel 🎉
             </p>
-            <p className="text-gray-400 text-sm">
-              {search ? 'Coba kata kunci lain' : 'Artikel akan segera tersedia'}
-            </p>
-          </div>
-        )}
-      </div>
-
-      {/* Infinite Scroll Trigger & Loading */}
-      <div ref={loadMoreRef} className="flex justify-center py-8">
-        {isFetchingNextPage && (
-          <div className="flex items-center gap-2 text-muted-foreground">
-            <Loader2 className="h-5 w-5 animate-spin" />
-            <span>Memuat lebih banyak...</span>
-          </div>
-        )}
-        {!hasNextPage && articles.length > 0 && (
-          <p className="text-muted-foreground text-sm">
-            Kamu sudah melihat semua artikel 🎉
-          </p>
-        )}
+          )}
+        </div>
       </div>
     </section>
   )

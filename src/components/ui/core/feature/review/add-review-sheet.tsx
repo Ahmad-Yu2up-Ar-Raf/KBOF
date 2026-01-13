@@ -121,7 +121,7 @@ function AddReviewSheet({
       ) : (
         <>
           <Plus className="size-4" />
-          Tambah Review
+          Bagi Pengalaman
         </>
       )}
     </Button>

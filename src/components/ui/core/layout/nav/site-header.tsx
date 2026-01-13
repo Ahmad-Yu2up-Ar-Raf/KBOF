@@ -42,8 +42,8 @@ export default function SiteHeader() {
     },
     {
       name: 'Peringkat',
-      link: '/leaderboard/',
-      icon: Newspaper,
+      link: '/destinasi/leaderboard/',
+     
     },
   ]
   const navItemsMobiles = [

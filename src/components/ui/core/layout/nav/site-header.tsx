@@ -13,6 +13,8 @@ import {
 import { useIsMobile } from '@/hooks/use-mobile'
 import { authClient } from '@/lib/auth/auth-client'
 import {
+  BookOpen,
+  BookOpenText,
   CircleStar,
   Home,
   Layers,
@@ -45,15 +47,15 @@ export default function SiteHeader() {
     },
   ]
   const navItemsMobiles = [
-    {
-      name: 'Home',
-      link: '/',
-      icon: Layers,
-    },
+    // {
+    //   name: 'Home',
+    //   link: '/',
+    //   icon: Layers,
+    // },
     {
       name: 'Artikel',
       link: '/artikel/',
-      icon: Newspaper,
+      icon: BookOpenText,
     },
 
     {
@@ -63,11 +65,11 @@ export default function SiteHeader() {
     },
     {
       name: 'Peringkat',
-      link: '/leaderboard/',
+      link: '/destinasi/leaderboard/',
       icon: Medal,
     },
     {
-      name: 'User',
+      name: 'Akun',
       link: session ? '/dashboard/settings/' : '/login',
       icon: UserRound,
     },
@@ -76,7 +78,7 @@ export default function SiteHeader() {
   const isMobile = useIsMobile()
   if (isMobile) {
     return (
-      <NavbarMobile className="     bottom-0      z-60 w-full">
+      <NavbarMobile className="     ">
         <MobileNav>
           {/* <MobileNavHeader>
             <NavbarLogo />

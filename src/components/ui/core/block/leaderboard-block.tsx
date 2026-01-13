@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { Link } from '@tanstack/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import {
@@ -6,6 +7,15 @@ import {
   parseAsStringLiteral,
   useQueryStates,
 } from 'nuqs'
+import {
+  ArrowLeft,
+  Trophy,
+  Medal,
+  Award,
+  ThumbsUp,
+  ChevronLeft,
+  ChevronRight,
+} from 'lucide-react'
 
 import {
   getLeaderboardQueryOptions,
@@ -13,14 +23,11 @@ import {
   type LeaderboardFilters,
   type LeaderboardEntry,
 } from '@/lib/query-options'
-import {
-  destinationCategory,
-  destinationType,
-  provinsiIndonesia,
-} from '@/db/schema'
 import { cn } from '@/lib/utils'
-import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
-import { Button } from '@/components/ui/fragments/shadcn-ui/button'
+import {
+  buttonVariants,
+  Button,
+} from '@/components/ui/fragments/shadcn-ui/button'
 import {
   Avatar,
   AvatarFallback,
@@ -33,95 +40,25 @@ import {
   CardContent,
   CardHeader,
 } from '@/components/ui/fragments/shadcn-ui/card'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/fragments/shadcn-ui/select'
 import MediaItem from '@/components/ui/fragments/custom-ui/media/media-item'
 import {
-  ArrowLeft,
-  Trophy,
-  Medal,
-  Award,
-  ThumbsUp,
-  ChevronLeft,
-  ChevronRight,
-  Filter,
-  X,
-} from 'lucide-react'
+  FacetedFilter,
+  FilterToolbar,
+} from '@/components/ui/fragments/custom-ui/filter'
 
-// ============================================
-// TYPE LABELS
-// ============================================
-
-const typeLabels: Record<string, string> = {
-  'wisata-alam': 'Wisata Alam',
-  'wisata-budaya': 'Wisata Budaya',
-  'wisata-sejarah': 'Wisata Sejarah',
-  'wisata-religi': 'Wisata Religi',
-  'wisata-kuliner': 'Wisata Kuliner',
-  'wisata-bahari': 'Wisata Bahari',
-  'adat-istiadat': 'Adat Istiadat',
-  kesenian: 'Kesenian',
-  kerajinan: 'Kerajinan',
-  festival: 'Festival',
-}
-
-const provinsiLabels: Record<string, string> = {
-  aceh: 'Aceh',
-  'sumatera-utara': 'Sumatera Utara',
-  'sumatera-barat': 'Sumatera Barat',
-  riau: 'Riau',
-  'kepulauan-riau': 'Kepulauan Riau',
-  jambi: 'Jambi',
-  'sumatera-selatan': 'Sumatera Selatan',
-  'kepulauan-bangka-belitung': 'Bangka Belitung',
-  bengkulu: 'Bengkulu',
-  lampung: 'Lampung',
-  'dki-jakarta': 'DKI Jakarta',
-  'jawa-barat': 'Jawa Barat',
-  banten: 'Banten',
-  'jawa-tengah': 'Jawa Tengah',
-  'di-yogyakarta': 'DI Yogyakarta',
-  'jawa-timur': 'Jawa Timur',
-  bali: 'Bali',
-  'nusa-tenggara-barat': 'NTB',
-  'nusa-tenggara-timur': 'NTT',
-  'kalimantan-barat': 'Kalimantan Barat',
-  'kalimantan-tengah': 'Kalimantan Tengah',
-  'kalimantan-selatan': 'Kalimantan Selatan',
-  'kalimantan-timur': 'Kalimantan Timur',
-  'kalimantan-utara': 'Kalimantan Utara',
-  'sulawesi-utara': 'Sulawesi Utara',
-  gorontalo: 'Gorontalo',
-  'sulawesi-tengah': 'Sulawesi Tengah',
-  'sulawesi-selatan': 'Sulawesi Selatan',
-  'sulawesi-barat': 'Sulawesi Barat',
-  'sulawesi-tenggara': 'Sulawesi Tenggara',
-  maluku: 'Maluku',
-  'maluku-utara': 'Maluku Utara',
-  papua: 'Papua',
-  'papua-barat': 'Papua Barat',
-  'papua-barat-daya': 'Papua Barat Daya',
-  'papua-tengah': 'Papua Tengah',
-  'papua-pegunungan': 'Papua Pegunungan',
-  'papua-selatan': 'Papua Selatan',
-}
-
-// ============================================
-// NUQS PARSERS FOR URL STATE
-// ============================================
-
-const categoryList = destinationCategory.enumValues
+import {
+  categoryList,
+  typeList,
+  provinsiList,
+  buildCategoryOptions,
+  buildTypeOptions,
+  buildProvinsiOptions,
+} from '@/lib/utils/destination-labels'
 
 // ============================================
 // MAIN COMPONENT
 // ============================================
-const typeList = destinationType.enumValues
-const provinsiList = provinsiIndonesia.enumValues
+
 export default function LeaderboardPage() {
   // URL state with nuqs
   const leaderboardParsers = {
@@ -159,6 +96,20 @@ export default function LeaderboardPage() {
 
   const { data: leaderboardData } = useSuspenseQuery(
     getLeaderboardQueryOptions(queryFilters),
+  )
+
+  // Build filter options with counts
+  const categoryOptions = useMemo(
+    () => buildCategoryOptions(leaderboardData.categoryCounts),
+    [leaderboardData.categoryCounts],
+  )
+  const typeOptions = useMemo(
+    () => buildTypeOptions(leaderboardData.typeCounts),
+    [leaderboardData.typeCounts],
+  )
+  const provinsiOptions = useMemo(
+    () => buildProvinsiOptions(leaderboardData.provinceCounts),
+    [leaderboardData.provinceCounts],
   )
 
   const hasActiveFilters =
@@ -227,108 +178,57 @@ export default function LeaderboardPage() {
       )}
 
       {/* Filters */}
-      <section className="space-y-4">
-        <div className="flex flex-wrap items-center gap-2">
-          <Filter className="size-4 text-muted-foreground" />
-          <span className="text-sm text-muted-foreground">Filter:</span>
+      <FilterToolbar showReset={hasActiveFilters} onReset={handleResetFilters}>
+        {/* Category Filter - Multiple selection */}
+        <FacetedFilter
+          title="Kategori"
+          options={categoryOptions}
+          value={filters.categories}
+          onChange={(values) =>
+            void setFilters({
+              categories:
+                values.length > 0
+                  ? (values as typeof filters.categories)
+                  : null,
+              page: 1,
+            })
+          }
+          multiple
+          popoverWidth="w-[14rem]"
+        />
 
-          {hasActiveFilters && (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleResetFilters}
-              className="text-destructive"
-            >
-              <X className="size-4 mr-1" />
-              Reset
-            </Button>
-          )}
-        </div>
+        {/* Type Filter - Multiple selection */}
+        <FacetedFilter
+          title="Tipe"
+          options={typeOptions}
+          value={filters.types}
+          onChange={(values) =>
+            void setFilters({
+              types:
+                values.length > 0 ? (values as typeof filters.types) : null,
+              page: 1,
+            })
+          }
+          multiple
+          popoverWidth="w-[14rem]"
+        />
 
-        {/* Type & Province Select Filters */}
-        <div className="flex flex-wrap gap-3">
-          {/* Type Filter */}
-          <Select
-            value={filters.types.length === 1 ? filters.types[0] : 'all'}
-            onValueChange={(value) => {
-              if (value === 'all') {
-                void setFilters({ types: null, page: 1 })
-              } else {
-                void setFilters({
-                  types: [value] as typeof filters.types,
-                  page: 1,
-                })
-              }
-            }}
-          >
-            <SelectTrigger className="w-45">
-              <SelectValue placeholder="Tipe Destinasi" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">Semua Tipe</SelectItem>
-              {typeList.map((t) => (
-                <SelectItem key={t} value={t}>
-                  {typeLabels[t] ?? t.replace(/-/g, ' ')}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-
-          {/* Province Filter */}
-          <Select
-            value={
-              filters.provinces.length === 1 ? filters.provinces[0] : 'all'
-            }
-            onValueChange={(value) => {
-              if (value === 'all') {
-                void setFilters({ provinces: null, page: 1 })
-              } else {
-                void setFilters({
-                  provinces: [value] as typeof filters.provinces,
-                  page: 1,
-                })
-              }
-            }}
-          >
-            <SelectTrigger className="w-45">
-              <SelectValue placeholder="Provinsi" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">Semua Provinsi</SelectItem>
-              {provinsiList.map((p) => (
-                <SelectItem key={p} value={p}>
-                  {provinsiLabels[p] ?? p.replace(/-/g, ' ')}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
-        {/* Category filter badges */}
-        <div className="flex flex-wrap gap-1">
-          {categoryList.map((cat) => (
-            <Badge
-              key={cat}
-              variant={filters.categories.includes(cat) ? 'default' : 'outline'}
-              className="cursor-pointer"
-              onClick={() => {
-                const newCategories = filters.categories.includes(cat)
-                  ? filters.categories.filter((c) => c !== cat)
-                  : [...filters.categories, cat]
-                void setFilters({
-                  categories: newCategories.length > 0 ? newCategories : null,
-                  page: 1,
-                })
-              }}
-            >
-              {cat.replace(/-/g, ' ')}
-              {leaderboardData.categoryCounts[cat]
-                ? ` (${leaderboardData.categoryCounts[cat]})`
-                : ''}
-            </Badge>
-          ))}
-        </div>
-      </section>
+        {/* Provinsi Filter - Multiple selection */}
+        <FacetedFilter
+          title="Provinsi"
+          options={provinsiOptions}
+          value={filters.provinces}
+          onChange={(values) =>
+            void setFilters({
+              provinces:
+                values.length > 0 ? (values as typeof filters.provinces) : null,
+              page: 1,
+            })
+          }
+          multiple
+          popoverWidth="w-[14rem]"
+        />
+      </FilterToolbar>
 
       {/* Leaderboard List */}
       <section className="space-y-4">
@@ -552,6 +452,13 @@ export function LeaderboardSkeleton() {
         <Skeleton className="h-48 w-36 md:w-48 rounded-xl" />
         <Skeleton className="h-56 w-48 md:w-64 rounded-xl" />
         <Skeleton className="h-48 w-36 md:w-48 rounded-xl" />
+      </div>
+
+      {/* Filter toolbar skeleton */}
+      <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center">
+        <Skeleton className="h-8 w-28 rounded-md" />
+        <Skeleton className="h-8 w-24 rounded-md" />
+        <Skeleton className="h-8 w-28 rounded-md" />
       </div>
 
       {/* List skeleton */}

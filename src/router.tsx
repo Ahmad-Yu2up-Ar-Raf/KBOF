@@ -15,7 +15,8 @@ import { routeTree } from './routeTree.gen'
 export const getRouter = () => {
   const router = createRouter({
     routeTree,
-    scrollRestoration: true,
+    // Disable default scroll restoration - we handle it manually
+    scrollRestoration: false,
     notFoundMode: 'root',
     defaultPreloadStaleTime: 0,
 

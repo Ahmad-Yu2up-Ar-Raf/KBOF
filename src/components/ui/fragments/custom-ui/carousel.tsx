@@ -644,7 +644,7 @@ export const ThumbsSlider = forwardRef<
             onClick={() => onThumbClick(index)}
             className={cn(
               ' cursor-pointer transition-opacity',
-              'border-2 rounded-md',
+              '  rounded-xl',
               orientation === 'vertical'
                 ? 'basis-[15%] h-20'
                 : 'basis-[15%] h-24',

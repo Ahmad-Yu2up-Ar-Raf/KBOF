@@ -141,100 +141,96 @@ export default function ArticleBlock() {
   }
 
   return (
-    <section className="py-1 w-full container md:py-2 sm:px-8 px-1.5 flex-1">
-      <div className="space-y-5">
-        {/* Sort Options */}
-        <div className="flex items-center gap-2 px-5 overflow-x-auto">
-          {sortOptions.map((option) => (
-            <Button
-              key={option.value}
-              variant={sortBy === option.value ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => void setSortBy(option.value)}
-              className={cn(
-                'rounded-2xl',
-                sortBy === option.value &&
-                  'bg-[#63493f] text-primary-foreground  hover:bg-[#63493f]/90',
-              )}
-            >
-              {option.label}
-            </Button>
-          ))}
-        </div>
-
-        {/* Info & Reset */}
-        <div className="flex items-center justify-between px-5">
-          <p className="text-sm text-muted-foreground">
-            Menampilkan{' '}
-            <span className="font-semibold text-foreground">
-              {articles.length}
-            </span>{' '}
-            dari{' '}
-            <span className="font-semibold text-foreground">{totalCount}</span>{' '}
-            artikel
-            {search && (
-              <span className="ml-1">
-                untuk "
-                <span className="font-semibold text-foreground">{search}</span>"
-              </span>
+    <section className="container py-3 space-y-5">
+      {/* Sort Options */}
+      <div className="flex items-center gap-2 px-3 overflow-x-auto">
+        {sortOptions.map((option) => (
+          <Button
+            key={option.value}
+            variant={sortBy === option.value ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => void setSortBy(option.value)}
+            className={cn(
+              'rounded-2xl',
+              sortBy === option.value &&
+                'bg-[#63493f] text-primary-foreground  hover:bg-[#63493f]/90',
             )}
-          </p>
-          {hasActiveFilters && (
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={handleResetFilter}
-              className="text-primary rounded-2xl"
-            >
-              Reset Semua
-            </Button>
-          )}
-        </div>
+          >
+            {option.label}
+          </Button>
+        ))}
+      </div>
 
-        {/* Grid */}
-        <div className="grid gap-7 md:gap-3 px-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full auto-rows-fr">
-          {articles.length > 0 ? (
-            articles.map((article: PublicArticle, i: number) => (
-              <ArticleCard
-                key={article.id}
-                index={i}
-                hovered={hovered}
-                setHovered={setHovered}
-                article={article}
-                onClick={handleCardClick}
-              />
-            ))
-          ) : (
-            <div className="col-span-full flex flex-col items-center justify-center min-h-100 animate-fadeIn">
-              <div className="text-6xl mb-4">📝</div>
-              <p className="text-gray-500 text-lg text-center mb-2">
-                {search
-                  ? `Tidak ada artikel yang cocok dengan "${search}"`
-                  : 'Belum ada artikel tersedia'}
-              </p>
-              <p className="text-gray-400 text-sm">
-                {search
-                  ? 'Coba kata kunci lain'
-                  : 'Artikel akan segera tersedia'}
-              </p>
-            </div>
+      {/* Info & Reset */}
+      <div className="flex flex-wrap items-center justify-between gap-2 px-3 ">
+        <p className="text-sm text-muted-foreground">
+          Menampilkan{' '}
+          <span className="font-semibold text-foreground">
+            {articles.length}
+          </span>{' '}
+          dari{' '}
+          <span className="font-semibold text-foreground">{totalCount}</span>{' '}
+          artikel
+          {search && (
+            <span className="ml-1">
+              untuk "
+              <span className="font-semibold text-foreground">{search}</span>"
+            </span>
           )}
-        </div>
+        </p>
+        {hasActiveFilters && (
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={handleResetFilter}
+            className="text-primary rounded-2xl"
+          >
+            Reset Semua
+          </Button>
+        )}
+      </div>
 
-        {/* Infinite Scroll Trigger & Loading */}
-        <div ref={loadMoreRef} className="flex justify-center py-8">
-          {isFetchingNextPage && (
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Loader2 className="h-5 w-5 animate-spin" />
-              <span>Memuat lebih banyak...</span>
-            </div>
-          )}
-          {!hasNextPage && articles.length > 0 && (
-            <p className="text-muted-foreground text-sm">
-              Kamu sudah melihat semua artikel 🎉
+      {/* Grid */}
+      <div className="grid gap-7 md:gap-3  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full auto-rows-fr">
+        {articles.length > 0 ? (
+          articles.map((article: PublicArticle, i: number) => (
+            <ArticleCard
+              key={article.id}
+              index={i}
+              hovered={hovered}
+              setHovered={setHovered}
+              article={article}
+              onClick={handleCardClick}
+            />
+          ))
+        ) : (
+          <div className="col-span-full flex flex-col items-center justify-center min-h-100 animate-fadeIn">
+            <div className="text-6xl mb-4">📝</div>
+            <p className="text-gray-500 text-lg text-center mb-2">
+              {search
+                ? `Tidak ada artikel yang cocok dengan "${search}"`
+                : 'Belum ada artikel tersedia'}
             </p>
-          )}
-        </div>
+            <p className="text-gray-400 text-sm">
+              {search ? 'Coba kata kunci lain' : 'Artikel akan segera tersedia'}
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* Infinite Scroll Trigger & Loading */}
+      <div ref={loadMoreRef} className="flex justify-center py-8">
+        {isFetchingNextPage && (
+          <div className="flex items-center gap-2 text-muted-foreground">
+            <Loader2 className="h-5 w-5 animate-spin" />
+            <span>Memuat lebih banyak...</span>
+          </div>
+        )}
+        {!hasNextPage && articles.length > 0 && (
+          <p className="text-muted-foreground text-sm">
+            Kamu sudah melihat semua artikel 🎉
+          </p>
+        )}
       </div>
     </section>
   )

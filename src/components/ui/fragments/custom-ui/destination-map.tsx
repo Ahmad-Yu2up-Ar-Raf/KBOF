@@ -20,7 +20,7 @@ export function DestinationMap() {
 
   return (
     <div className="">
-      <header className="mb-4 border-b flex justify-between w-full pb-2">
+      <header className="mb-4  flex justify-between w-full  ">
         <h4 className=" flex items-center gap-3 font-semibold tracking-tight">
           <span>Lokasi</span>
         </h4>
@@ -34,8 +34,8 @@ export function DestinationMap() {
           Lihat di Peta
         </Link>
       </header>
-      <div className=" rounded-2xl">
-        <div className="  h-60 w-full overflow-hidden">
+      <div className=" rounded-2xl outline-2 p-2      ">
+        <div className="  h-40 w-full overflow-hidden rounded-2xl">
           <Map center={[-73.98, 40.75]} zoom={12}>
             <MapMarker
               longitude={draggableMarker.lng}

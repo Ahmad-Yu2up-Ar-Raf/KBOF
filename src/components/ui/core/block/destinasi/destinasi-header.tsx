@@ -45,7 +45,7 @@ const HeaderDestinasi = () => {
   }
   const { data: session } = authClient.useSession()
   return (
-    <div className=" space-y-2 sm:px-10 pt-2.5 sm:pt-0 px-6  container ">
+    <div className=" space-y-2   pt-1 sm:pt-0   container ">
       <nav className="z-50 top-0 bg-background/95 backdrop-blur flex items-center justify-between">
         <Link
           to="/"
@@ -58,7 +58,7 @@ const HeaderDestinasi = () => {
           <span>Kembali</span>
         </Link>
       </nav>
-      <div className="  flex flex-col md:gap-4  md:justify-between gap-6">
+      <div className="  flex flex-col md:gap-4  md:justify-between gap-5">
         <header className="w-full md:items-center flex-col md:flex-row flex justify-between m-auto">
           <h1 className="xl:text-[6rem] font-medium  tracking-tight lg:leading-30 lg:text-8xl text-7xl lg:-space-y-10 -space-y-6">
             <VerticalCutReveal

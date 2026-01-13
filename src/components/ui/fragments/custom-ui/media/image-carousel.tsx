@@ -9,20 +9,27 @@ type componentProps = {
 }
 
 function ThumnailSlider({ images }: componentProps) {
-  const OPTIONS: EmblaOptionsType = { loop: false }
+  const isMobile = useIsMobile()
+  const OPTIONS: EmblaOptionsType = isMobile
+    ? { loop: false }
+    : {
+        loop: false,
+        axis: 'y',
+        direction: 'rtl',
+      }
 
   return (
     <>
-      <div className="w-full   h-full  md:sticky top-10   md:w-[28em] overflow-hidden rounded-xl mx-auto">
+      <div className="w-full md:sticky top-10     h-full   overflow-hidden rounded-xl mx-auto">
         <Carousel
           options={OPTIONS}
-          className="relative w-full   md:h-[35em]   space-y-2"
+          className="relative w-full md:h-[80lvh] md:flex md:gap-2 space-y-2"
         >
-          <SliderContainer className="gap-2    border-2 ">
+          <SliderContainer className="gap-2 md:order-2  md:h-full md:w-full ">
             {images.map((item, i) => (
               <Slider
                 key={i}
-                className=" md:h-[24em] h-[30lvh] w-full"
+                className="md:h-full h-[45dvh] w-full"
                 thumbnailSrc={item}
               >
                 <MediaItem
@@ -33,9 +40,9 @@ function ThumnailSlider({ images }: componentProps) {
             ))}
           </SliderContainer>
           <ThumbsSlider
-            className="  "
-            thumbsSliderClassName="w-full h-14    rounded-xl basis-[25%]"
-            thumbsClassName="  md:h-[400px]"
+            className="md:w-20  "
+            thumbsSliderClassName="w-full h-18  md:order-1 rounded-xl basis-[25%]"
+            thumbsClassName="md:h-[400px]"
           />
         </Carousel>
       </div>

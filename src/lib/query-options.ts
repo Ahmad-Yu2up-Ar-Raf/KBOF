@@ -15,8 +15,10 @@ import {
 import {
   getDestinasiDestinationsServerFn,
   getDestinationBySlugServerFn,
+  getRelatedDestinationsServerFn,
   type DestinasiFilters,
   type DestinasiDetailDestination,
+  type RelatedDestination,
 } from './server/explore/destinasi-server-queries'
 
 import {
@@ -48,6 +50,7 @@ export type {
   DestinationAggregateInput,
   DestinasiFilters,
   DestinasiDetailDestination,
+  RelatedDestination,
   ArticleAggregateInput,
   LeaderboardFilters,
   LeaderboardResult,
@@ -141,6 +144,8 @@ export const DestinasiKeys = {
   list: (filters: Omit<DestinasiFilters, 'cursor'>) =>
     [...DestinasiKeys.all, 'list', filters] as const,
   detail: (slug: string) => [...DestinasiKeys.all, 'detail', slug] as const,
+  related: (destinationId: number) =>
+    [...DestinasiKeys.all, 'related', destinationId] as const,
 } as const
 
 // ============================================
@@ -191,6 +196,46 @@ export const getDestinasiDetailQueryOptions = (slug: string) =>
     gcTime: 10 * 60 * 1000, // 10 minutes
     // Enable retry for network errors
     retry: 2,
+  })
+
+/**
+ * Query options for related destinations
+ * Fetches destinations similar to the current one (same category/provinsi)
+ */
+export type RelatedDestinationsInput = {
+  destinationId: number
+  category: string
+  provinsi: string
+  limit?: number
+}
+
+export const getRelatedDestinationsQueryOptions = ({
+  destinationId,
+  category,
+  provinsi,
+  limit = 6,
+}: RelatedDestinationsInput) =>
+  queryOptions({
+    queryKey: DestinasiKeys.related(destinationId),
+    queryFn: async (): Promise<RelatedDestination[]> => {
+      const result = await getRelatedDestinationsServerFn({
+        data: {
+          destinationId,
+          category: category as Parameters<
+            typeof getRelatedDestinationsServerFn
+          >[0]['data']['category'],
+          provinsi: provinsi as Parameters<
+            typeof getRelatedDestinationsServerFn
+          >[0]['data']['provinsi'],
+          limit,
+        },
+      })
+      return result
+    },
+    staleTime: 5 * 60 * 1000, // 5 minutes - related destinations don't change often
+    gcTime: 15 * 60 * 1000, // 15 minutes
+    // Only fetch if we have a valid destination
+    enabled: destinationId > 0,
   })
 
 // ============================================

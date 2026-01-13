@@ -5,6 +5,7 @@ import {
   MapPin,
   StarIcon,
   Tag,
+  TagIcon,
   ThumbsUp,
 } from 'lucide-react'
 import { Badge } from '../../shadcn-ui/badge'
@@ -69,27 +70,27 @@ function DestinasiCard({
       style={{ willChange: 'transform' }}
       onClick={() => onClick?.(destination)}
     >
-      <CardContent className=" rounded-[30px] content-center justify-center gap-5 flex flex-col flex-1 relative mx-auto   p-5 w-full   border border-primary/5 bg-neutral-800/5    h-full  overflow-hidden shadow-sm md:items-start   ">
+      <CardContent className=" rounded-[30px] content-center justify-center gap-4.5 flex flex-col flex-1 relative mx-auto  sm:px-4.5 py-3 w-full   border border-primary/5 bg-neutral-800/5    h-full  overflow-hidden shadow-sm md:items-start     ">
         {/* Category Badge */}
 
         {/* Header */}
-        <CardHeader className="p-0 w-full max-w-[15em] gap-3">
+        <CardHeader className="p-0 w-full max-w-[15em] gap-2">
           <Badge
             variant="outline"
             className={cn(
-              'text-xs md:text-xs font-semibold w-fit',
+              'text-xs  font-semibold w-fit',
               categoryColors[destination.category] ||
                 'bg-gray-100 text-gray-700',
             )}
           >
-            <Tag className="mr-1 size-3 md:size-4" />
+            <Tag className="mr-1 size-3 " />
             {destination.category}
           </Badge>
-          <CardTitle className="text-2xl w-full  leading-6 font-bold tracking-tighter md:leading-6 line-clamp-2">
+          <CardTitle className="text-xl w-full  leading-6 font-bold tracking-tighter md:leading-6 line-clamp-2">
             {destination.name}
           </CardTitle>
 
-          <CardDescription className="text-muted-foreground  line-clamp-2 ">
+          <CardDescription className="text-muted-foreground  text-sm line-clamp-2 ">
             {destination.description}
           </CardDescription>
         </CardHeader>
@@ -106,22 +107,10 @@ function DestinasiCard({
 
         {/* Creator Info */}
         <div className="space-y-4 w-full">
-          <div className="  gap-20  flex w-full justify-between">
-            <div className="flex  gap-3  w-full items-start  justify-between   text-xs">
-              <MapPin className=" size-6 fill-primary   text-background" />
-              {/* <Button
-                variant={'ghost'}
-                size={'sm'}
-                className=" rounded-full p-0  border-primary text-primary   cursor-none"
-              ></Button> */}
-              {/* <Avatar className="">
-                {creator?.image && (
-                  <AvatarImage src={creator.image} alt={creator.name ?? ''} />
-                )}
-                <AvatarFallback>
-                  {(creator?.name ?? 'U').charAt(0)}
-                </AvatarFallback>
-              </Avatar> */}
+          <div className="  gap-20 items-center  flex w-full justify-between">
+            <div className="flex  gap-2.5  w-full items-start  justify-between   text-xs">
+              <MapPin className=" size-6.5 fill-primary   text-background" />
+
               <div className="flex-1">
                 <p className="font-medium  truncate">
                   {destination.kabupatenKota}
@@ -134,9 +123,9 @@ function DestinasiCard({
             <div className="flex flex-col gap-1 items-end">
               <Badge
                 variant="outline"
-                className="text-accent-foreground text-sm w-fit border-0 p-0"
+                className="text-accent-foreground text-xs w-fit border-0 p-0"
               >
-                <StarIcon className="size-4 fill-primary text-primary mr-1" />
+                <StarIcon className="size-3.5 fill-primary text-primary mr-1" />
                 <span className="font-semibold ">
                   {(destination.averageRating ?? 0).toLocaleString('id-ID')}
                 </span>
@@ -144,24 +133,16 @@ function DestinasiCard({
             </div>
           </div>
           <div className="flex flex-wrap gap-1.5">
-            <Badge className="px-2 py-0.5 bg-primary/10 text-primary rounded-full text-xs font-medium">
+            <Badge className="px-2 py-0 bg-primary/10 text-primary rounded-full text-xs font-medium">
               <ThumbsUp />
               {destination.totalVote}
             </Badge>
-            {/* <Badge className="px-2 py-0.5 bg-primary/10 text-primary rounded-full text-xs font-medium">
-              #{destination.category}
-            </Badge> */}
+            <Badge className="px-2 py-0.5 bg-primary/10 text-primary rounded-full text-xs font-medium">
+              # {destination.category}
+            </Badge>
             <Badge className="px-2 py-0.5 bg-primary/10 text-primary rounded-full text-xs font-medium">
               # {destination.type}
             </Badge>
-            {/* {tags.slice(0, 2).map((tag, idx) => (
-         
-            ))} */}
-            {/* {tags.length > 3 && (
-              <Badge className="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs">
-                +{tags.length - 3}
-              </Badge>
-            )} */}
           </div>
         </div>
 

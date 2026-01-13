@@ -18,8 +18,8 @@ export const Route = createFileRoute('/destinasi/')({
       limit: 12,
       search: '',
       categories: [],
-      type: 'all' as const,
-      provinsi: 'all' as const,
+      types: [],
+      provinces: [],
       sortBy: 'popular' as const,
     }
 

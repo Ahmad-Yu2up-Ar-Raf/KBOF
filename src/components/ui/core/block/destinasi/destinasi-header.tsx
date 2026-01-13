@@ -14,14 +14,14 @@ import { authClient } from '@/lib/auth/auth-client'
 
 const DEBOUNCE_DELAY = 400 // ms
 
-const HeaderExplore = () => {
+const HeaderDestinasi = () => {
   // URL state with nuqs - clean URLs (no default values in URL)
   const [searchParam, setSearchParam] = useQueryState(
     'search',
     parseAsString.withDefault(''),
   )
 
-  // Local state for instant UI updates
+  // Local state for instant UI updatesq
   const [inputValue, setInputValue] = useState(searchParam)
 
   // Sync local state when URL changes (e.g., browser back/forward)
@@ -146,4 +146,4 @@ const HeaderExplore = () => {
   )
 }
 
-export default HeaderExplore
+export default HeaderDestinasi

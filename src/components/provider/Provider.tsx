@@ -32,6 +32,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
     '/(auth)/login',
     '/(auth)/register',
     '/dashboard',
+ 
     '/$', // 404 page
   ]
 

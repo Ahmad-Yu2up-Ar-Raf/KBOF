@@ -147,7 +147,7 @@ export default function HeroSection() {
 
             <BlurFade isPreload delay={delay * 6} direction="up">
               <motion.h1
-                className="text-3xl sm:text-5xl  md:text-7xl  text-center w-full justify-center items-center flex-col flex whitespace-pre sm:leading-12  md:leading-16  lg:leading-20 font-bold tracking-tighter"
+                className="text-4xl sm:text-5xl  md:text-7xl  text-center w-full justify-center items-center flex-col flex whitespace-pre sm:leading-12  md:leading-16  lg:leading-20 font-bold tracking-tighter"
                 animate={{ opacity: 1, y: 0 }}
                 initial={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.2, ease: 'easeOut', delay: 0.3 }}
@@ -207,7 +207,7 @@ export default function HeroSection() {
             >
               <p>
                 Temukan destinasi wisata tersembunyi dan kekayaan budaya lokal
-                Indonesia yang autentik dan memukau.
+                Indonesia <span className=' hidden sm:inline'>yang autentik dan memukau.</span>
               </p>
             </BlurFade>
           </div>
@@ -222,7 +222,7 @@ export default function HeroSection() {
               className={cn(
                 ' cursor-target  hover:scale-110 transition-all duration-300 ease-out  lg:text-xl md:text-lg w-full  justify-center flex items-center  gap-5   font-semibold tracking-tight text-background bg-foreground px-4 py-3.5 sm:px-5  md:px-6 md:py-4 lg:px-8 rounded-full z-20 shadow-2xl  ',
               )}
-              to="/explore"
+              to="/destinasi"
             >
               <Telescope className=" size-4.5 sm:size-5.5" /> Jelajahi Destinasi
             </Link>

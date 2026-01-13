@@ -30,7 +30,7 @@ const getDb = async () => {
   return db
 }
 
-const { destination, vote, review, donation } = schema
+const { destination, vote, review } = schema
 
 // ============================================
 // SUBQUERIES FOR COMPUTED AGGREGATES
@@ -59,19 +59,7 @@ const reviewStatsSubquery = (db: Awaited<ReturnType<typeof getDb>>) =>
     .groupBy(review.destinationId)
     .as('review_stats')
 
-// Subquery for donation total per destination (completed only)
-const donationTotalSubquery = (db: Awaited<ReturnType<typeof getDb>>) =>
-  db
-    .select({
-      destinationId: donation.destinationId,
-      totalDonation: sql<number>`COALESCE(SUM(${donation.amount}), 0)`.as(
-        'total_donation',
-      ),
-    })
-    .from(donation)
-    .where(eq(donation.status, 'completed'))
-    .groupBy(donation.destinationId)
-    .as('donation_totals')
+ 
 
 // ============================================
 // TYPE DEFINITIONS
@@ -192,7 +180,6 @@ export async function fetchDestinationList(
   // Build subqueries for computed aggregates
   const voteCounts = voteCountSubquery(db)
   const reviewStats = reviewStatsSubquery(db)
-  const donationTotals = donationTotalSubquery(db)
 
   // Valid column names untuk sorting (excluding computed columns)
   type DestinationColumnKey =
@@ -244,7 +231,7 @@ export async function fetchDestinationList(
         totalVote: sql<number>`COALESCE(${voteCounts.totalVote}, 0)`,
         totalReview: sql<number>`COALESCE(${reviewStats.totalReview}, 0)`,
         averageRating: sql<number>`COALESCE(${reviewStats.averageRating}, 0)::numeric`,
-        totalDonation: sql<number>`COALESCE(${donationTotals.totalDonation}, 0)`,
+
         status: destination.status,
         createdAt: destination.createdAt,
         updatedAt: destination.updatedAt,
@@ -252,10 +239,7 @@ export async function fetchDestinationList(
       .from(destination)
       .leftJoin(voteCounts, eq(destination.id, voteCounts.destinationId))
       .leftJoin(reviewStats, eq(destination.id, reviewStats.destinationId))
-      .leftJoin(
-        donationTotals,
-        eq(destination.id, donationTotals.destinationId),
-      )
+
       .where(where)
       .orderBy(...orderBy)
       .limit(perPage)
@@ -281,7 +265,7 @@ export async function fetchDestinationList(
     totalVote: Number(d.totalVote) || 0,
     totalReview: Number(d.totalReview) || 0,
     averageRating: Number(d.averageRating) || 0,
-    totalDonation: Number(d.totalDonation) || 0,
+
     status: d.status,
     createdAt: d.createdAt,
     updatedAt: d.updatedAt,

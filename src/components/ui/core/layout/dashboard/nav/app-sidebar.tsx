@@ -2,16 +2,11 @@
 
 import * as React from 'react'
 import {
-  Building2,
-  BriefcaseBusiness,
   Send,
   LifeBuoy,
-  DoorOpen,
   LayoutDashboardIcon,
-  Pin,
-  PenLine,
+  Newspaper,
   MapPin,
-  HandHeart,
 } from 'lucide-react'
 
 import { NavMain } from './nav-main'
@@ -53,12 +48,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
       {
         title: 'Article',
         url: '/dashboard/articles',
-        icon: PenLine,
-      },
-      {
-        title: 'Donasi',
-        url: '/dashboard/donation',
-        icon: HandHeart,
+        icon: Newspaper,
       },
     ],
     navSecondary: [

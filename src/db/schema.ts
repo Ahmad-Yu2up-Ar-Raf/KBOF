@@ -3,7 +3,7 @@
 // =============================================================================
 // Platform untuk memperkenalkan ekowisata & budaya lokal Indonesia
 // Entitas: user, session, account, verification, category, destination,
-//          vote, donation, comment, article
+//          vote,  comment, article
 // =============================================================================
 
 import {
@@ -18,8 +18,7 @@ import {
   pgEnum,
   integer,
 } from 'drizzle-orm/pg-core'
-import { sql } from 'drizzle-orm'
-
+ 
 // =============================================================================
 // ENUMS
 // =============================================================================
@@ -29,14 +28,6 @@ export const contentStatus = pgEnum('content_status', [
   'published',
   'draft',
   'archived',
-])
-
-/** Status donasi */
-export const donationStatus = pgEnum('donation_status', [
-  'pending',
-  'completed',
-  'failed',
-  'refunded',
 ])
 
 /** Tipe destinasi wisata/budaya */
@@ -218,7 +209,7 @@ export const destination = pgTable(
     coverImage: text('cover_image').notNull(),
     images: text('images').default('[]'), // JSON array of image URLs
     // Note: totalVote, totalReview, averageRating are calculated from relations (vote, review tables)
-    // totalDonation is aggregated from donation table with 'completed' status
+ 
     // Status
     status: contentStatus('status').default('published').notNull(),
     // Timestamps
@@ -268,44 +259,6 @@ export const vote = pgTable(
     unique('vote_user_destination_key').on(table.userId, table.destinationId),
     index('vote_userId_idx').on(table.userId),
     index('vote_destinationId_idx').on(table.destinationId),
-  ],
-)
-
-// =============================================================================
-// DONATION TABLE
-// =============================================================================
-
-export const donation = pgTable(
-  'donation',
-  {
-    id: bigint({ mode: 'number' }).primaryKey().generatedByDefaultAsIdentity({
-      name: 'donation_id_seq',
-      startWith: 1,
-      increment: 1,
-      minValue: 1,
-      cache: 1,
-    }),
-    userId: text('user_id')
-      .notNull()
-      .references(() => user.id, { onDelete: 'cascade' }),
-    destinationId: bigint('destination_id', { mode: 'number' })
-      .notNull()
-      .references(() => destination.id, { onDelete: 'cascade' }),
-    amount: bigint('amount', { mode: 'number' }).notNull(),
-    message: text('message'),
-    isAnonymous: boolean('is_anonymous').default(false).notNull(),
-    status: donationStatus('status').default('pending').notNull(),
-    paymentMethod: text('payment_method'),
-    paymentRef: text('payment_ref'),
-    createdAt: timestamp('created_at', { withTimezone: true })
-      .defaultNow()
-      .notNull(),
-    paidAt: timestamp('paid_at', { withTimezone: true }),
-  },
-  (table) => [
-    index('donation_userId_idx').on(table.userId),
-    index('donation_destinationId_idx').on(table.destinationId),
-    index('donation_status_idx').on(table.status),
   ],
 )
 
@@ -456,9 +409,6 @@ export type NewVote = typeof vote.$inferInsert
 
 export type Review = typeof review.$inferSelect
 export type NewReview = typeof review.$inferInsert
-
-export type Donation = typeof donation.$inferSelect
-export type NewDonation = typeof donation.$inferInsert
 
 export type Comment = typeof comment.$inferSelect
 export type NewComment = typeof comment.$inferInsert

@@ -11,7 +11,6 @@ import {
   account,
   destination,
   vote,
-  donation,
   comment,
   review,
   article,
@@ -26,7 +25,7 @@ export const userRelations = relations(user, ({ many }) => ({
   accounts: many(account),
   destinations: many(destination),
   votes: many(vote),
-  donations: many(donation),
+
   comments: many(comment),
   reviews: many(review),
   articles: many(article),
@@ -60,7 +59,7 @@ export const destinationRelations = relations(destination, ({ one, many }) => ({
     references: [user.id],
   }),
   votes: many(vote),
-  donations: many(donation),
+
   comments: many(comment),
   reviews: many(review),
 }))
@@ -76,21 +75,6 @@ export const voteRelations = relations(vote, ({ one }) => ({
   }),
   destination: one(destination, {
     fields: [vote.destinationId],
-    references: [destination.id],
-  }),
-}))
-
-// =============================================================================
-// DONATION RELATIONS
-// =============================================================================
-
-export const donationRelations = relations(donation, ({ one }) => ({
-  user: one(user, {
-    fields: [donation.userId],
-    references: [user.id],
-  }),
-  destination: one(destination, {
-    fields: [donation.destinationId],
     references: [destination.id],
   }),
 }))

@@ -343,8 +343,8 @@ export function getDestinationTableColumns({
             <DropdownMenuContent align="end" className="w-40">
               <DropdownMenuItem asChild>
                 <Link
-                  to="/explore/$exploreId"
-                  params={{ exploreId: row.original.slug }}
+                  to="/destinasi/$destinasiId"
+                  params={{ destinasiId: row.original.slug }}
                 >
                   Preview
                 </Link>

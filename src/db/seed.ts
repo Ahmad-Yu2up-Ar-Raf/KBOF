@@ -19,7 +19,6 @@ import {
   destination,
   vote,
   article,
-  donation,
   destinationType,
   destinationCategory,
   provinsiIndonesia,
@@ -924,7 +923,7 @@ async function main() {
             `https://picsum.photos/seed/${slug}-2/800/600`,
             `https://picsum.photos/seed/${slug}-3/800/600`,
           ]),
-          // Note: totalVote, totalReview, averageRating, totalDonation are now computed from relations
+
           status: 'published',
           createdAt: new Date(
             Date.now() - getRandomInt(0, 365 * 24 * 60 * 60 * 1000),
@@ -1079,67 +1078,6 @@ async function main() {
 
     console.log(`   Total articles: ${articleCount}`)
 
-    // ========== STEP 6: Create donations ==========
-    console.log('\n💝 Creating donations...')
-    let donationCount = 0
-    const paymentMethods = ['bank_transfer', 'e-wallet', 'credit_card', 'qris']
-    const messages = [
-      'Semoga bermanfaat untuk pelestarian wisata!',
-      'Terima kasih sudah menjaga keindahan alam Indonesia.',
-      'Sukses selalu untuk destinasi ini!',
-      'Semoga semakin maju dan berkembang.',
-      null,
-      null,
-    ]
-
-    for (const dest of createdDestinations.slice(0, 30)) {
-      // Create 2-5 donations per destination
-      const numDonations = getRandomInt(2, 5)
-
-      for (let i = 0; i < numDonations; i++) {
-        const donor = getRandomElement(createdUsers)
-        const donationStatusValue = getRandomElement([
-          'completed',
-          'completed',
-          'completed',
-          'pending',
-          'failed',
-        ]) as 'completed' | 'pending' | 'failed'
-        const amount = getRandomInt(10000, 1000000) * 10 // Rp 100k - Rp 10M
-        const isAnonymous = Math.random() < 0.2
-
-        try {
-          await db.insert(donation).values({
-            userId: donor.id,
-            destinationId: dest.id,
-            amount,
-            message: getRandomElement(messages),
-            isAnonymous,
-            status: donationStatusValue,
-            paymentMethod: getRandomElement(paymentMethods),
-            paymentRef:
-              donationStatusValue !== 'pending'
-                ? `PAY-${nanoid(12).toUpperCase()}`
-                : null,
-            createdAt: new Date(
-              Date.now() - getRandomInt(0, 180 * 24 * 60 * 60 * 1000),
-            ),
-            paidAt:
-              donationStatusValue === 'completed'
-                ? new Date(
-                    Date.now() - getRandomInt(0, 30 * 24 * 60 * 60 * 1000),
-                  )
-                : null,
-          })
-          donationCount++
-        } catch {
-          // Error, skip
-        }
-      }
-    }
-
-    console.log(`   Total donations: ${donationCount}`)
-
     // ========== SUMMARY ==========
     console.log('\n' + '='.repeat(60))
     console.log('✅ SEEDING COMPLETED SUCCESSFULLY!')
@@ -1151,7 +1089,7 @@ async function main() {
     )
     console.log(`   • ${voteCount} votes`)
     console.log(`   • ${articleCount} articles`)
-    console.log(`   • ${donationCount} donations`)
+
     console.log('\n🎯 Categories seeded:')
     console.log('   • Wisata Alam & Bahari')
     console.log('   • Wisata Budaya & Sejarah')
@@ -1159,7 +1097,7 @@ async function main() {
     console.log('   • Adat Istiadat & Festival')
     console.log('   • Kuliner Tradisional')
     console.log('   • Articles & Content')
-    console.log('   • Donations')
+
     console.log('')
   } catch (error) {
     console.error('\n❌ Seeding failed:', error)

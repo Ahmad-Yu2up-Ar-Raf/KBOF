@@ -1,6 +1,6 @@
 import { createFileRoute, useSearch } from '@tanstack/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { PenLine } from 'lucide-react'
+import { Newspaper } from 'lucide-react'
 
 import Heading from '@/components/ui/fragments/custom-ui/typography/heading'
 import { DataTableSkeleton } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-skeleton'
@@ -65,7 +65,7 @@ function ArticlePageSkeleton() {
   return (
     <div className="space-y-3">
       <Heading
-        Icon={PenLine}
+        Icon={Newspaper}
         title="Artikel"
         description="Kelola artikel dan konten edukasi."
       />
@@ -88,7 +88,7 @@ function RouteComponent() {
     <div>
       <Heading
         className="mb-4"
-        Icon={PenLine}
+        Icon={Newspaper}
         title="Artikel"
         description="Kelola artikel dan konten edukasi tentang wisata dan budaya Indonesia."
       />

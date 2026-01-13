@@ -5,7 +5,7 @@
 // =============================================================================
 
 import { z } from 'zod'
-import { contentStatus, donationStatus, destinationType } from '@/db/schema'
+import { contentStatus, destinationType } from '@/db/schema'
 
 // =============================================================================
 // DESTINATION VALIDATIONS (Wisata & Budaya)
@@ -63,33 +63,6 @@ export const deleteVoteSchema = z.object({
 
 export type CreateVoteInput = z.infer<typeof createVoteSchema>
 export type DeleteVoteInput = z.infer<typeof deleteVoteSchema>
-
-// =============================================================================
-// DONATION VALIDATIONS
-// =============================================================================
-
-export const createDonationSchema = z.object({
-  destinationId: z.number().int().positive('ID destinasi wajib'),
-  amount: z
-    .number()
-    .int()
-    .min(10000, 'Minimal donasi Rp10.000')
-    .max(100000000, 'Maksimal donasi Rp100.000.000'),
-  message: z.string().max(500).optional(),
-  isAnonymous: z.boolean().optional(),
-  paymentMethod: z.string().max(50).optional(),
-})
-
-export const updateDonationStatusSchema = z.object({
-  id: z.number(),
-  status: z.enum(donationStatus.enumValues),
-  paymentRef: z.string().optional(),
-})
-
-export type CreateDonationInput = z.infer<typeof createDonationSchema>
-export type UpdateDonationStatusInput = z.infer<
-  typeof updateDonationStatusSchema
->
 
 // =============================================================================
 // COMMENT VALIDATIONS

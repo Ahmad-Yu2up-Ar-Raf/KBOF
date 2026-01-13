@@ -14,7 +14,7 @@ export const appName = 'Suasana'
 export const appDescription =
   'Platform interaktif untuk memperkenalkan, mendukung, dan melestarikan ekowisata serta budaya lokal Indonesia'
 
-/** Category colors for explore */
+/** Category colors for Destinasi */
 export const categoryColors: Record<string, string> = {
   Kesehatan: 'bg-red-100 text-red-700 border-red-200',
   Pendidikan: 'bg-blue-100 text-blue-700 border-blue-200',

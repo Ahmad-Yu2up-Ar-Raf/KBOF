@@ -1,18 +1,7 @@
-import {
-  HeadContent,
-  Scripts,
-  createRootRoute,
-  useRouteContext,
-  useRouterState,
-} from '@tanstack/react-router'
+import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import appCss from '@/styles/styles.css?url'
 import Providers from '@/components/provider/Provider'
 import { NotFoundPage } from '@/components/ui/core/block/not-found-block-page'
-import NProgress from 'nprogress'
-import { useEffect } from 'react'
-// ============================================
-// ROOT ROUTE
-// ============================================
 
 export const Route = createRootRoute({
   notFoundComponent: () => {

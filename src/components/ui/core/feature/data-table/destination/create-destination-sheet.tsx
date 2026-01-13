@@ -25,8 +25,7 @@ import { toast } from 'sonner'
 import { useCreateDestinationForm } from '@/hooks/form/use-destination-form'
 import DestinationForm from '../../form/destination-form'
 import { Spinner } from '@/components/ui/fragments/shadcn-ui/spinner'
-import { Activity, useState, useEffect, useRef } from 'react'
-import { useStore } from '@tanstack/react-store'
+import { Activity, useState, useRef } from 'react'
 
 interface CreateDestinationSheetProps {
   trigger?: boolean
@@ -66,7 +65,6 @@ function CreateDestinationSheet({ ...props }: CreateDestinationSheetProps) {
   })
 
   // Subscribe to isSubmitting to show loading toast
- 
 
   if (!isMobile) {
     return (

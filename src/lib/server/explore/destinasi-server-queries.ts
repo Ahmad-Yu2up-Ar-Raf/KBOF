@@ -1,7 +1,7 @@
 // =============================================================================
-// EXPLORE SERVER QUERIES - SUASANA
+// Destinasi SERVER QUERIES - SUASANA
 // =============================================================================
-// Public server-side query functions untuk explore destinations
+// Public server-side query functions untuk Destinasi destinations
 // Tidak memerlukan authentication - data publik
 // =============================================================================
 
@@ -26,13 +26,13 @@ const getDb = async () => {
   return db
 }
 
-const { destination, user, review, vote, donation } = schema
+const { destination, user, review, vote } = schema
 
 // ============================================
 // TYPE DEFINITIONS
 // ============================================
 
-export const exploreFiltersSchema = z.object({
+export const DestinasiFiltersSchema = z.object({
   cursor: z.number().int().nonnegative().optional(), // For infinite scroll
   limit: z.number().int().positive().default(12),
   search: z.string().default(''),
@@ -46,9 +46,9 @@ export const exploreFiltersSchema = z.object({
   sortBy: z.enum(['newest', 'popular', 'rating', 'name']).default('popular'),
 })
 
-export type ExploreFilters = z.infer<typeof exploreFiltersSchema>
+export type DestinasiFilters = z.infer<typeof DestinasiFiltersSchema>
 
-export type ExploreDestination = {
+export type DestinasiDestination = {
   id: number
   slug: string
   name: string
@@ -69,12 +69,63 @@ export type ExploreDestination = {
   }
 }
 
-export type ExploreResult = {
-  data: ExploreDestination[]
+export type DestinasiResult = {
+  data: DestinasiDestination[]
   nextCursor: number | null
   hasNextPage: boolean
   totalCount: number
   categoryCounts: Record<string, number>
+}
+
+// Type for detail page - includes full destination with relations
+export type DestinasiDetailDestination = {
+  id: number
+  slug: string
+  name: string
+  description: string
+  type: schema.DestinationType
+  category: schema.DestinationCategory
+  provinsi: schema.ProvinsiIndonesia
+  kabupatenKota: string | null
+  alamat: string | null
+  coverImage: string | null
+  images: string[] // Parsed from JSON
+  status: schema.DestinationStatus
+  totalVote: number
+  totalReview: number
+  averageRating: number
+  createdAt: Date
+  updatedAt: Date
+  user: {
+    id: string
+    name: string
+    email: string
+    image: string | null
+  }
+  votes: {
+    id: number
+    userId: string
+    createdAt: Date
+    user: {
+      id: string
+      name: string
+      image: string | null
+    }
+  }[]
+  reviews?: {
+    id: number
+    userId: string
+    rating: number
+    title: string | null
+    content: string | null
+    visitDate: Date | null
+    createdAt: Date
+    user: {
+      id: string
+      name: string
+      image: string | null
+    }
+  }[]
 }
 
 // ============================================
@@ -104,22 +155,8 @@ const reviewStatsSubquery = (db: Awaited<ReturnType<typeof getDb>>) =>
     .groupBy(review.destinationId)
     .as('review_stats')
 
-// Subquery for donation total per destination (completed only)
-const donationTotalSubquery = (db: Awaited<ReturnType<typeof getDb>>) =>
-  db
-    .select({
-      destinationId: donation.destinationId,
-      totalDonation: sql<number>`COALESCE(SUM(${donation.amount}), 0)`.as(
-        'total_donation',
-      ),
-    })
-    .from(donation)
-    .where(eq(donation.status, 'completed'))
-    .groupBy(donation.destinationId)
-    .as('donation_totals')
-
-async function fetchExploreDestinations(filters: ExploreFilters): Promise<{
-  data: ExploreDestination[]
+async function fetchDestinasiDestinations(filters: DestinasiFilters): Promise<{
+  data: DestinasiDestination[]
   nextCursor: number | null
   hasNextPage: boolean
   totalCount: number
@@ -294,13 +331,13 @@ async function fetchCategoryCounts(): Promise<Record<string, number>> {
 // PUBLIC SERVER FUNCTION
 // ============================================
 
-export const getExploreDestinationsServerFn = createServerFn({
+export const getDestinasiDestinationsServerFn = createServerFn({
   method: 'GET',
 })
-  .inputValidator(z.object({ filters: exploreFiltersSchema }))
-  .handler(async ({ data: { filters } }): Promise<ExploreResult> => {
+  .inputValidator(z.object({ filters: DestinasiFiltersSchema }))
+  .handler(async ({ data: { filters } }): Promise<DestinasiResult> => {
     const [destinationsResult, categoryCounts] = await Promise.all([
-      fetchExploreDestinations(filters),
+      fetchDestinasiDestinations(filters),
       fetchCategoryCounts(),
     ])
 
@@ -321,35 +358,96 @@ export const getDestinationBySlugServerFn = createServerFn({
   method: 'GET',
 })
   .inputValidator(z.object({ slug: z.string() }))
-  .handler(async ({ data: { slug } }) => {
-    const db = await getDb()
+  .handler(
+    async ({ data: { slug } }): Promise<DestinasiDetailDestination | null> => {
+      const db = await getDb()
 
-    const result = await db.query.destination.findFirst({
-      where: and(
-        eq(destination.slug, slug),
-        eq(destination.status, 'published'),
-      ),
-      with: {
-        user: true,
-        votes: {
-          limit: 10,
-          with: {
-            user: {
-              columns: { id: true, name: true, image: true },
+      // First get the destination with relations
+      const result = await db.query.destination.findFirst({
+        where: and(
+          eq(destination.slug, slug),
+          eq(destination.status, 'published'),
+        ),
+        with: {
+          user: true,
+          votes: {
+            with: {
+              user: {
+                columns: { id: true, name: true, image: true },
+              },
+            },
+          },
+          reviews: {
+            orderBy: [desc(review.createdAt)],
+            with: {
+              user: {
+                columns: { id: true, name: true, image: true },
+              },
             },
           },
         },
-        reviews: {
-          orderBy: [desc(review.createdAt)],
-          limit: 10,
-          with: {
-            user: {
-              columns: { id: true, name: true, image: true },
-            },
-          },
-        },
-      },
-    })
+      })
 
-    return result ?? null
-  })
+      if (!result) {
+        return null
+      }
+
+      // Parse images from JSON string to array
+      let parsedImages: string[] = []
+      try {
+        parsedImages = result.images ? JSON.parse(result.images) : []
+      } catch {
+        parsedImages = []
+      }
+
+      // Calculate aggregates from relations
+      const totalVote = result.votes?.length ?? 0
+      const totalReview = result.reviews?.length ?? 0
+      const averageRating =
+        totalReview > 0
+          ? result.reviews.reduce((sum, r) => sum + r.rating, 0) / totalReview
+          : 0
+
+      return {
+        id: result.id,
+        slug: result.slug,
+        name: result.name,
+        description: result.description,
+        type: result.type,
+        category: result.category,
+        provinsi: result.provinsi,
+        kabupatenKota: result.kabupatenKota,
+        alamat: result.alamat,
+        coverImage: result.coverImage,
+        images: parsedImages,
+        status: result.status,
+        totalVote,
+        totalReview,
+        averageRating: Math.round(averageRating * 10) / 10, // Round to 1 decimal
+        createdAt: result.createdAt,
+        updatedAt: result.updatedAt,
+        user: {
+          id: result.user.id,
+          name: result.user.name,
+          email: result.user.email,
+          image: result.user.image,
+        },
+        votes: result.votes.map((v) => ({
+          id: v.id,
+          userId: v.userId,
+          createdAt: v.createdAt,
+          user: v.user,
+        })),
+        reviews: result.reviews.map((r) => ({
+          id: r.id,
+          userId: r.userId,
+          rating: r.rating,
+          title: r.title,
+          content: r.content,
+          visitDate: r.visitDate,
+          createdAt: r.createdAt,
+          user: r.user,
+        })),
+      }
+    },
+  )

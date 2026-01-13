@@ -19,12 +19,12 @@ import {
   CarouselItem,
 } from '@/components/ui/fragments/shadcn-ui/carousel'
 import { cn } from '@/lib/utils'
-import ExploreCard, {
+import DestinasiCard, {
   SkeletonCard,
-} from '@/components/ui/fragments/custom-ui/card/explore-card'
+} from '@/components/ui/fragments/custom-ui/card/destinasi-card'
 
-import { getExploreInfiniteQueryOptions } from '@/lib/query-options'
-import type { ExploreDestination } from '@/lib/server/explore/explore-server-queries'
+import { getDestinasiInfiniteQueryOptions } from '@/lib/query-options'
+import type { DestinasiDestination } from '@/lib/server/explore/destinasi-server-queries'
 import { destinationCategory } from '@/db/schema'
 import { useInfiniteScrollContext } from '@/components/provider/infinite-scroll-context'
 
@@ -53,7 +53,7 @@ const sortOptions = [
 type SortBy = (typeof sortOptions)[number]['value']
 type Category = (typeof categoryList)[number]
 
-export default function ExploreBlock() {
+export default function DestinasiBlock() {
   const navigate = useNavigate()
 
   // Local UI state
@@ -96,7 +96,7 @@ export default function ExploreBlock() {
     isFetchingNextPage,
     isLoading,
     isError,
-  } = useInfiniteQuery(getExploreInfiniteQueryOptions(filters))
+  } = useInfiniteQuery(getDestinasiInfiniteQueryOptions(filters))
 
   // Register infinite scroll state with context (for footer visibility)
   const { registerInfiniteScroll, unregisterInfiniteScroll } =
@@ -163,10 +163,10 @@ export default function ExploreBlock() {
   }, [setSearch, setCategories, setSortBy])
 
   const handleCardClick = useCallback(
-    (destination: ExploreDestination) => {
+    (destination: DestinasiDestination) => {
       void navigate({
-        to: '/explore/$exploreId',
-        params: { exploreId: destination.slug },
+        to: '/destinasi/$destinasiId',
+        params: { destinasiId: destination.slug },
       })
     },
     [navigate],
@@ -176,7 +176,7 @@ export default function ExploreBlock() {
     categories.length > 0 || sortBy !== 'popular' || search !== ''
 
   if (isLoading) {
-    return <ExploreBlockSkeleton />
+    return <DestinasiBlockSkeleton />
   }
 
   if (isError) {
@@ -279,8 +279,8 @@ export default function ExploreBlock() {
         {/* Grid */}
         <div className="grid gap-7 md:gap-3 px-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full auto-rows-fr">
           {destinations.length > 0 ? (
-            destinations.map((destination: ExploreDestination, i: number) => (
-              <ExploreCard
+            destinations.map((destination: DestinasiDestination, i: number) => (
+              <DestinasiCard
                 key={destination.id}
                 index={i}
                 hovered={hovered}
@@ -327,7 +327,7 @@ export default function ExploreBlock() {
   )
 }
 
-export function ExploreBlockSkeleton() {
+export function DestinasiBlockSkeleton() {
   return (
     <>
       <section className="py-1 w-full container md:py-2 sm:px-8 px-1.5 flex-1">

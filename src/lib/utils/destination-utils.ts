@@ -31,11 +31,8 @@ import {
   ChefHat,
   Theater,
   Castle,
-  // Donation Status icons
-  Clock,
-  CheckCheck,
-  XCircle,
-  RotateCcw,
+ 
+
   // General
   Map,
 } from 'lucide-react'
@@ -45,7 +42,7 @@ import {
 // =============================================================================
 
 export type ContentStatus = 'published' | 'draft' | 'archived'
-export type DonationStatus = 'pending' | 'completed' | 'failed' | 'refunded'
+
 export type DestinationType = Destination['type']
 export type DestinationCategory = Destination['category']
 export type ProvinsiIndonesia = Destination['provinsi']
@@ -107,73 +104,6 @@ export const STATUS_OPTIONS = [
   { value: 'published', label: 'Published' },
   { value: 'draft', label: 'Draft' },
   { value: 'archived', label: 'Archived' },
-] as const
-
-// =============================================================================
-// DONATION STATUS UTILS
-// =============================================================================
-
-export const donationStatusConfig: Record<
-  DonationStatus,
-  {
-    label: string
-    icon: LucideIcon
-    color: string
-    bgColor: string
-    borderColor: string
-  }
-> = {
-  pending: {
-    label: 'Menunggu',
-    icon: Clock,
-    color: 'text-yellow-700',
-    bgColor: 'bg-yellow-100',
-    borderColor: 'border-yellow-200',
-  },
-  completed: {
-    label: 'Berhasil',
-    icon: CheckCheck,
-    color: 'text-green-700',
-    bgColor: 'bg-green-100',
-    borderColor: 'border-green-200',
-  },
-  failed: {
-    label: 'Gagal',
-    icon: XCircle,
-    color: 'text-red-700',
-    bgColor: 'bg-red-100',
-    borderColor: 'border-red-200',
-  },
-  refunded: {
-    label: 'Dikembalikan',
-    icon: RotateCcw,
-    color: 'text-blue-700',
-    bgColor: 'bg-blue-100',
-    borderColor: 'border-blue-200',
-  },
-}
-
-export function getDonationStatusIcon(status: DonationStatus): LucideIcon {
-  return donationStatusConfig[status]?.icon ?? CircleIcon
-}
-
-export function getDonationStatusLabel(status: DonationStatus): string {
-  return donationStatusConfig[status]?.label ?? status
-}
-
-export function getDonationStatusColor(status: DonationStatus): string {
-  return donationStatusConfig[status]?.color ?? 'text-gray-700'
-}
-
-export function getDonationStatusBgColor(status: DonationStatus): string {
-  return donationStatusConfig[status]?.bgColor ?? 'bg-gray-100'
-}
-
-export const DONATION_STATUS_OPTIONS = [
-  { value: 'pending', label: 'Menunggu' },
-  { value: 'completed', label: 'Berhasil' },
-  { value: 'failed', label: 'Gagal' },
-  { value: 'refunded', label: 'Dikembalikan' },
 ] as const
 
 // =============================================================================

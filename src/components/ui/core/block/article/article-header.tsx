@@ -45,7 +45,7 @@ const ArticleHeader = () => {
   }
   const { data: session } = authClient.useSession()
   return (
-    <div className=" space-y-2 sm:px-10 pt-2.5 sm:pt-0 px-6  container ">
+    <div className=" space-y-2   pt-1 sm:pt-0   container ">
       <nav className="z-50 top-0 bg-background/95 backdrop-blur flex items-center justify-between">
         <Link
           to="/"
@@ -107,7 +107,8 @@ const ArticleHeader = () => {
               }}
             >
               Dengarkan suara hati lokal melalui artikel-artikel inspiratif yang
-              menghubungkan budaya, cerita, dan ide-ide segar dari berbagai tempat.
+              menghubungkan budaya, cerita, dan ide-ide segar dari berbagai
+              tempat.
             </VerticalCutReveal>
           </div>
         </header>

@@ -15,7 +15,8 @@ import { routeTree } from './routeTree.gen'
 export const getRouter = () => {
   const router = createRouter({
     routeTree,
-    scrollRestoration: true,
+    // Disable default scroll restoration - we handle it manually
+    scrollRestoration: false,
     notFoundMode: 'root',
     defaultPreloadStaleTime: 0,
 
@@ -25,7 +26,7 @@ export const getRouter = () => {
     defaultErrorComponent: ({ error }) => (
       <div className="container mx-auto p-8">
         <h1 className="text-2xl font-bold mb-4">An error occurred</h1>
-        <pre className="whitespace-pre-wrap bg-red-50 p-4 rounded">
+        <pre className="primary-foreground space-pre-wrap bg-red-50 p-4 rounded">
           {error.message}
         </pre>
       </div>

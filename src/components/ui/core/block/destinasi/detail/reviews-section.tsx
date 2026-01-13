@@ -150,20 +150,17 @@ function ReviewsSkeleton() {
 function ReviewsSection({ reviews, totalReview }: ReviewsSectionProps) {
   const displayReviews = reviews?.slice(0, 4) ?? []
   const hasMoreReviews = totalReview > 4
+  if (displayReviews.length > 0)
+    return (
+      <section className="max-w-md h-full">
+        <main>
+          <header className="mb-4 border-b flex justify-between w-full pb-2">
+            <h4 className=" flex items-center gap-3 font-semibold tracking-tight">
+              <span>Reviews ({totalReview})</span>
+              <MessageCircle className="sr-only fill-primary-foreground text-primary" />
+            </h4>
+          </header>
 
-  return (
-    <section className="max-w-md h-full">
-      <main>
-        <header className="mb-4 border-b flex justify-between w-full pb-2">
-          <h4 className="text-sm flex items-center gap-3 font-semibold tracking-tight">
-            <span>Review Populer ({totalReview})</span>
-            <MessageCircle className="sr-only fill-primary-foreground text-primary" />
-          </h4>
-        </header>
-
-        {displayReviews.length === 0 ? (
-          <EmptyReviews />
-        ) : (
           <div className="border-b space-y-5">
             {displayReviews.map((review, i) => (
               <ReviewCard
@@ -173,24 +170,23 @@ function ReviewsSection({ reviews, totalReview }: ReviewsSectionProps) {
               />
             ))}
           </div>
-        )}
 
-        {hasMoreReviews && (
-          <footer className="border-b">
-            <Link
-              to="/"
-              className={cn(
-                buttonVariants({ variant: 'ghost', size: 'sm' }),
-                'px-0 py-0 w-full rounded-none text-xs',
-              )}
-            >
-              Lihat semua {totalReview} review
-            </Link>
-          </footer>
-        )}
-      </main>
-    </section>
-  )
+          {hasMoreReviews && (
+            <footer className="border-b">
+              <Link
+                to="/"
+                className={cn(
+                  buttonVariants({ variant: 'ghost', size: 'sm' }),
+                  'px-0 py-0 w-full rounded-none text-xs',
+                )}
+              >
+                Lihat semua {totalReview} review
+              </Link>
+            </footer>
+          )}
+        </main>
+      </section>
+    )
 }
 
 export { ReviewsSection, ReviewsSkeleton, ReviewCard, EmptyReviews }

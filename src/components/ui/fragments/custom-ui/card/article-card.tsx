@@ -45,10 +45,10 @@ function ArticleCard({
   // Format date
   const publishedDate = article.publishedAt
     ? new Date(article.publishedAt).toLocaleDateString('id-ID', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric',
-    })
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+      })
     : null
 
   // Calculate corner rounding classes

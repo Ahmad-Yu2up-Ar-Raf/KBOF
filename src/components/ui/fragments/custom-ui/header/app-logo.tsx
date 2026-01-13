@@ -24,7 +24,7 @@ export const NavbarLogo = () => {
   return (
     <Link
       to="/"
-      className="relative  z-20  flex items-center space-x-1.5 lg:space-x-2   py-1 md:text-sm text-xs font-normal text-black"
+      className="relative  z-20  flex items-center space-x-1.5 lg:space-x-2   py-1 md:text-sm text-xs font-normal text-primary"
     >
       <Logo className=" lg:size-7.5 size-6" />
 

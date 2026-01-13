@@ -18,6 +18,12 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
+  .maplibregl-popup-content {
+    @apply bg-transparent! shadow-none! p-0! rounded-none!;
+  }
+  .maplibregl-popup-tip {
+    @apply hidden!;
+  }
 }
 
 :root {
@@ -266,20 +272,7 @@
 }
 
 @utility container {
-  margin-inline: auto;
-  padding-inline: 2rem;
-
-  @media (width >= --theme(--breakpoint-sm)) {
-    max-width: none;
-  }
-
-  @media (width >= 1400px) {
-    max-width: 1280px;
-  }
-
-  @media (max-width: 640px) {
-    @apply px-1;
-  }
+  @apply px-2.5 sm:px-6 max-w-5xl m-auto;
 }
 /* View Transition Wave Effect */
 ::view-transition-old(root),

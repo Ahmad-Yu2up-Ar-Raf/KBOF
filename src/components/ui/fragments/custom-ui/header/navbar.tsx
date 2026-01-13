@@ -164,7 +164,8 @@ export const NavbarMobile = ({ children, className }: NavbarProps) => {
         duration: 0.4,
         delay: 3.5,
       }}
-      className={cn('     fixed   block bottom-0 w-full  z-60 ', className)}
+      // Use fixed positioning to stay above footer's fixed content
+      className={cn('fixed bottom-0 left-0 right-0 w-full z-100', className)}
     >
       {children}
     </motion.nav>
@@ -191,8 +192,8 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         minWidth: '750px',
       }}
       className={cn(
-        'relative z-60     transition-all duration-300 ease-out   mx-auto hidden w-full max-w-5xl flex-row items-center justify-between self-start rounded-2xl  px-3 py-2 lg:flex ',
-        visible && '  bg-background/80  border',
+        'relative z-60     transition-all duration-300 ease-out   mx-auto hidden w-full container  flex-row items-center justify-between self-start rounded-2xl  px-3 py-2 lg:flex ',
+        visible && '  bg-header  border',
         className,
       )}
     >
@@ -248,7 +249,7 @@ export const MobileNav = ({ children, className }: MobileNavProps) => {
           '0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset',
       }}
       className={cn(
-        'relative z-60  border-primary border-t min-h-[9svh] content-center  bg-background/95 backdrop-blur-md supports-backdrop-filter:bg-background/90  flex          mx-auto lg:hidden   flex-row items-center justify-between self-start   rounded-t-2xl  w-full   ',
+        'relative z-60  border-primary border-t min-h-[9svh] content-center  bg-header/95 backdrop-blur-md supports-backdrop-filter:bg-header/90  flex          mx-auto lg:hidden   flex-row items-center justify-between self-start   rounded-t-2xl  w-full   ',
 
         className,
       )}
@@ -295,8 +296,9 @@ export const MobileNavMenu = ({ items }: MobileNavMenuProps) => {
               <Link
                 to={item.link}
                 className={cn(
-                  buttonVariants({ variant: 'ghost', size: 'icon' }),
-                  'gap-0.5  cursor-pointer   flex flex-col items-center   ',
+                  buttonVariants({ variant: 'ghost' }),
+                  'gap-0.5  cursor-pointer    flex flex-col items-center   ',
+                  isActive && '  bg-accent   text-primary ',
                 )}
               >
                 <item.icon
@@ -308,7 +310,7 @@ export const MobileNavMenu = ({ items }: MobileNavMenuProps) => {
 
                 <span
                   className={cn(
-                    '  sr-only tracking-tightest text-xs transition-all duration-300 ease-out',
+                    '    tracking-tightest text-xs transition-all duration-300 ease-out',
                     !isActive && '  text-muted-foreground ',
                   )}
                 >

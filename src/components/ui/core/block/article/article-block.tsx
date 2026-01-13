@@ -2,11 +2,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { useInfiniteQuery } from '@tanstack/react-query'
-import {
-  parseAsString,
-  parseAsStringLiteral,
-  useQueryState,
-} from 'nuqs'
+import { parseAsString, parseAsStringLiteral, useQueryState } from 'nuqs'
 import { Loader2 } from 'lucide-react'
 
 import type { PublicArticle } from '@/lib/server/article/article-public-queries'
@@ -42,9 +38,7 @@ export default function ArticleBlock() {
 
   const [sortBy, setSortBy] = useQueryState(
     'sortBy',
-    parseAsStringLiteral(sortOptions.map((o) => o.value)).withDefault(
-      'newest',
-    ),
+    parseAsStringLiteral(sortOptions.map((o) => o.value)).withDefault('newest'),
   )
 
   // Build filters for query
@@ -182,18 +176,11 @@ export default function ArticleBlock() {
                 <span className="font-semibold text-foreground">{search}</span>"
               </span>
             )}
-          </p>
-          {hasActiveFilters && (
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={handleResetFilter}
-              className="text-primary rounded-2xl"
-            >
-              Reset Semua
-            </Button>
-          )}
-        </div>
+          >
+            {option.label}
+          </Button>
+        ))}
+      </div>
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 w-full">
@@ -225,22 +212,60 @@ export default function ArticleBlock() {
               </p>
             </div>
           )}
-        </div>
+        </p>
+        {hasActiveFilters && (
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={handleResetFilter}
+            className="text-primary rounded-2xl"
+          >
+            Reset Semua
+          </Button>
+        )}
+      </div>
 
-        {/* Infinite Scroll Trigger & Loading */}
-        <div ref={loadMoreRef} className="flex justify-center py-8">
-          {isFetchingNextPage && (
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Loader2 className="h-5 w-5 animate-spin" />
-              <span>Memuat lebih banyak...</span>
-            </div>
-          )}
-          {!hasNextPage && articles.length > 0 && (
-            <p className="text-muted-foreground text-sm">
-              Kamu sudah melihat semua artikel 🎉
+      {/* Grid */}
+      <div className="grid gap-7 md:gap-3  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full auto-rows-fr">
+        {articles.length > 0 ? (
+          articles.map((article: PublicArticle, i: number) => (
+            <ArticleCard
+              key={article.id}
+              index={i}
+              hovered={hovered}
+              setHovered={setHovered}
+              article={article}
+              onClick={handleCardClick}
+            />
+          ))
+        ) : (
+          <div className="col-span-full flex flex-col items-center justify-center min-h-100 animate-fadeIn">
+            <div className="text-6xl mb-4">📝</div>
+            <p className="text-gray-500 text-lg text-center mb-2">
+              {search
+                ? `Tidak ada artikel yang cocok dengan "${search}"`
+                : 'Belum ada artikel tersedia'}
             </p>
-          )}
-        </div>
+            <p className="text-gray-400 text-sm">
+              {search ? 'Coba kata kunci lain' : 'Artikel akan segera tersedia'}
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* Infinite Scroll Trigger & Loading */}
+      <div ref={loadMoreRef} className="flex justify-center py-8">
+        {isFetchingNextPage && (
+          <div className="flex items-center gap-2 text-muted-foreground">
+            <Loader2 className="h-5 w-5 animate-spin" />
+            <span>Memuat lebih banyak...</span>
+          </div>
+        )}
+        {!hasNextPage && articles.length > 0 && (
+          <p className="text-muted-foreground text-sm">
+            Kamu sudah melihat semua artikel 🎉
+          </p>
+        )}
       </div>
     </section>
   )

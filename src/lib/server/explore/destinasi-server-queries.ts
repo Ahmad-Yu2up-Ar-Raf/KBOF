@@ -39,10 +39,8 @@ export const DestinasiFiltersSchema = z.object({
   categories: z
     .array(z.enum(schema.destinationCategory.enumValues))
     .default([]), // Multiple categories
-  type: z.enum(['all', ...schema.destinationType.enumValues]).default('all'),
-  provinsi: z
-    .enum(['all', ...schema.provinsiIndonesia.enumValues])
-    .default('all'),
+  types: z.array(z.enum(schema.destinationType.enumValues)).default([]), // Multiple types
+  provinces: z.array(z.enum(schema.provinsiIndonesia.enumValues)).default([]), // Multiple provinces
   sortBy: z.enum(['newest', 'popular', 'rating', 'name']).default('popular'),
 })
 
@@ -162,7 +160,8 @@ async function fetchDestinasiDestinations(filters: DestinasiFilters): Promise<{
   totalCount: number
 }> {
   const db = await getDb()
-  const { cursor, limit, search, categories, type, provinsi, sortBy } = filters
+  const { cursor, limit, search, categories, types, provinces, sortBy } =
+    filters
 
   // Build subqueries
   const voteCounts = voteCountSubquery(db)
@@ -182,13 +181,17 @@ async function fetchDestinasiDestinations(filters: DestinasiFilters): Promise<{
     )
   }
 
-  if (type !== 'all') {
-    whereConditions.push(eq(destination.type, type as schema.DestinationType))
+  // Multiple types filter
+  if (types.length > 0) {
+    whereConditions.push(
+      inArray(destination.type, types as schema.DestinationType[]),
+    )
   }
 
-  if (provinsi !== 'all') {
+  // Multiple provinces filter
+  if (provinces.length > 0) {
     whereConditions.push(
-      eq(destination.provinsi, provinsi as schema.ProvinsiIndonesia),
+      inArray(destination.provinsi, provinces as schema.ProvinsiIndonesia[]),
     )
   }
 
@@ -233,12 +236,14 @@ async function fetchDestinasiDestinations(filters: DestinasiFilters): Promise<{
       inArray(destination.category, categories as schema.DestinationCategory[]),
     )
   }
-  if (type !== 'all') {
-    baseConditions.push(eq(destination.type, type as schema.DestinationType))
-  }
-  if (provinsi !== 'all') {
+  if (types.length > 0) {
     baseConditions.push(
-      eq(destination.provinsi, provinsi as schema.ProvinsiIndonesia),
+      inArray(destination.type, types as schema.DestinationType[]),
+    )
+  }
+  if (provinces.length > 0) {
+    baseConditions.push(
+      inArray(destination.provinsi, provinces as schema.ProvinsiIndonesia[]),
     )
   }
 
@@ -449,5 +454,104 @@ export const getDestinationBySlugServerFn = createServerFn({
           user: r.user,
         })),
       }
+    },
+  )
+
+// ============================================
+// GET RELATED DESTINATIONS
+// ============================================
+
+export type RelatedDestination = {
+  id: number
+  slug: string
+  name: string
+  coverImage: string | null
+  category: schema.DestinationCategory
+  provinsi: schema.ProvinsiIndonesia
+  kabupatenKota: string | null
+  totalVote: number
+  averageRating: number
+}
+
+export const getRelatedDestinationsServerFn = createServerFn({
+  method: 'GET',
+})
+  .inputValidator(
+    z.object({
+      destinationId: z.number(),
+      category: z.enum(schema.destinationCategory.enumValues),
+      provinsi: z.enum(schema.provinsiIndonesia.enumValues),
+      limit: z.number().int().positive().max(10).default(6),
+    }),
+  )
+  .handler(
+    async ({
+      data: { destinationId, category, provinsi, limit },
+    }): Promise<RelatedDestination[]> => {
+      const db = await getDb()
+
+      // Build subqueries for aggregates
+      const voteCounts = voteCountSubquery(db)
+      const reviewStats = reviewStatsSubquery(db)
+
+      // Get related destinations:
+      // Priority 1: Same category AND same provinsi (excluding current)
+      // Priority 2: Same category OR same provinsi
+      const results = await db
+        .select({
+          id: destination.id,
+          slug: destination.slug,
+          name: destination.name,
+          coverImage: destination.coverImage,
+          category: destination.category,
+          provinsi: destination.provinsi,
+          kabupatenKota: destination.kabupatenKota,
+          totalVote: sql<number>`COALESCE(${voteCounts.totalVote}, 0)`,
+          averageRating: sql<number>`COALESCE(${reviewStats.averageRating}, 0)::numeric`,
+          // Score for sorting: same category AND provinsi = 2, same category OR provinsi = 1
+          relevanceScore: sql<number>`
+            CASE 
+              WHEN ${destination.category} = ${category} AND ${destination.provinsi} = ${provinsi} THEN 2
+              WHEN ${destination.category} = ${category} THEN 1
+              WHEN ${destination.provinsi} = ${provinsi} THEN 1
+              ELSE 0
+            END
+          `,
+        })
+        .from(destination)
+        .leftJoin(voteCounts, eq(destination.id, voteCounts.destinationId))
+        .leftJoin(reviewStats, eq(destination.id, reviewStats.destinationId))
+        .where(
+          and(
+            eq(destination.status, 'published'),
+            // Exclude current destination
+            sql`${destination.id} != ${destinationId}`,
+            // Must match either category OR provinsi
+            sql`(${destination.category} = ${category} OR ${destination.provinsi} = ${provinsi})`,
+          ),
+        )
+        .orderBy(
+          // Sort by relevance score desc, then by votes desc
+          sql`CASE 
+            WHEN ${destination.category} = ${category} AND ${destination.provinsi} = ${provinsi} THEN 2
+            WHEN ${destination.category} = ${category} THEN 1
+            WHEN ${destination.provinsi} = ${provinsi} THEN 1
+            ELSE 0
+          END DESC`,
+          sql`COALESCE(${voteCounts.totalVote}, 0) DESC`,
+        )
+        .limit(limit)
+
+      return results.map((r) => ({
+        id: r.id,
+        slug: r.slug,
+        name: r.name,
+        coverImage: r.coverImage,
+        category: r.category,
+        provinsi: r.provinsi,
+        kabupatenKota: r.kabupatenKota,
+        totalVote: r.totalVote,
+        averageRating: Math.round(r.averageRating * 10) / 10,
+      }))
     },
   )

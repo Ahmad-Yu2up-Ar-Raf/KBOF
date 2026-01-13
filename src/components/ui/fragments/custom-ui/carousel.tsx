@@ -461,7 +461,7 @@ export const SliderProgress = forwardRef<
       {...props}
     >
       <div
-        className="dark:bg-white bg-black absolute w-full top-0 -left-full bottom-0 transition-transform"
+        className="dark:bg-primary-foreground  bg-primary absolute w-full top-0 -left-full bottom-0 transition-transform"
         style={{ transform: `translate3d(${scrollProgress}%,0px,0px)` }}
       />
     </div>
@@ -558,7 +558,7 @@ export const SliderDotButton = forwardRef<HTMLDivElement, SliderDotButtonProps>(
                   }}
                   layoutId={`hover-${carouselId}`}
                   className={cn(
-                    'absolute z-3 w-full h-full left-0 top-0 dark:bg-white bg-black rounded-full',
+                    'absolute z-3 w-full h-full left-0 top-0 dark:bg-primary-foreground  bg-primary rounded-full',
                     orientation === 'vertical' ? 'h-6 w-1' : 'w-6 h-1',
                     activeClass,
                   )}
@@ -644,7 +644,7 @@ export const ThumbsSlider = forwardRef<
             onClick={() => onThumbClick(index)}
             className={cn(
               ' cursor-pointer transition-opacity',
-              'border-2 rounded-md',
+              '  rounded-xl',
               orientation === 'vertical'
                 ? 'basis-[15%] h-20'
                 : 'basis-[15%] h-24',

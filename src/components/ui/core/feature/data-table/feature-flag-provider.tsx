@@ -92,7 +92,7 @@ export function FeatureFlagsProvider({
             <Tooltip key={flag.value} delayDuration={700}>
               <ToggleGroupItem
                 value={flag.value}
-                className="whitespace-nowrap px-3 text-xs data-[state=on]:bg-accent/70 data-[state=on]:hover:bg-accent/90 "
+                className="primary-foreground space-nowrap px-3 text-xs data-[state=on]:bg-accent/70 data-[state=on]:hover:bg-accent/90 "
                 asChild
               >
                 <TooltipTrigger>

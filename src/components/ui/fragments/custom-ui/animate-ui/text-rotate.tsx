@@ -191,7 +191,10 @@ const TextRotate = forwardRef<TextRotateRef, TextRotateProps>(
 
     return (
       <motion.span
-        className={cn('flex flex-wrap whitespace-pre-wrap', mainClassName)}
+        className={cn(
+          'flex flex-wrap primary-foreground space-pre-wrap',
+          mainClassName,
+        )}
         {...props}
         layout
         transition={transition}
@@ -249,7 +252,7 @@ const TextRotate = forwardRef<TextRotateRef, TextRotateProps>(
                     </motion.span>
                   ))}
                   {wordObj.needsSpace && (
-                    <span className="whitespace-pre"> </span>
+                    <span className="primary-foreground space-pre"> </span>
                   )}
                 </span>
               )

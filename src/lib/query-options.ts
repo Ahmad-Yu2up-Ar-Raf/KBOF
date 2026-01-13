@@ -29,6 +29,7 @@ import {
 import {
   getPublicArticlesServerFn,
   getArticleBySlugServerFn,
+  getRecommendedArticlesServerFn,
   type ArticlePublicFilters,
 } from './server/article/article-public-queries'
 
@@ -249,7 +250,10 @@ export const articleKeys = {
   list: (filters: Omit<ArticlePublicFilters, 'cursor'>) =>
     [...articleKeys.all, 'list', filters] as const,
   detail: (id: number) => [...articleKeys.all, 'detail', id] as const,
-  detailBySlug: (slug: string) => [...articleKeys.all, 'detail', slug] as const,
+  detailBySlug: (slug: string) =>
+    [...articleKeys.all, 'detail', slug] as const,
+  recommendations: (excludeSlug: string) =>
+    [...articleKeys.all, 'recommendations', excludeSlug] as const,
 } as const
 
 // ============================================
@@ -309,6 +313,26 @@ export const getArticleDetailQueryOptions = (slug: string) =>
     queryFn: async () => {
       const result = await getArticleBySlugServerFn({
         data: { slug },
+      })
+      return result
+    },
+    staleTime: 60 * 1000,
+    gcTime: 10 * 60 * 1000,
+  })
+
+/**
+ * Query options for recommended articles (public)
+ * Excludes the current article being viewed
+ */
+export const getRecommendedArticlesQueryOptions = (
+  excludeSlug: string,
+  limit: number = 3,
+) =>
+  queryOptions({
+    queryKey: articleKeys.recommendations(excludeSlug),
+    queryFn: async () => {
+      const result = await getRecommendedArticlesServerFn({
+        data: { excludeSlug, limit },
       })
       return result
     },

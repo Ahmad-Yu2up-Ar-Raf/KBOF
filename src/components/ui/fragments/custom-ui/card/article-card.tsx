@@ -1,17 +1,14 @@
 import React from 'react'
-import { Link } from '@tanstack/react-router'
-import { ArrowRight, Calendar, User } from 'lucide-react'
+import { Calendar } from 'lucide-react'
 
 import { Avatar, AvatarFallback, AvatarImage } from '../../shadcn-ui/avatar'
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '../../shadcn-ui/card'
-import { buttonVariants } from '../../shadcn-ui/button'
 import { Skeleton } from '../../shadcn-ui/skeleton'
 
 import type { PublicArticle } from '@/lib/server/article/article-public-queries'
@@ -27,6 +24,8 @@ interface ArticleCardProps {
   hovered: number | null
   setHovered: React.Dispatch<React.SetStateAction<number | null>>
   onClick?: (article: PublicArticle) => void
+  totalItems?: number
+  columns?: number
 }
 
 function ArticleCard({
@@ -36,6 +35,8 @@ function ArticleCard({
   index,
   hovered,
   setHovered,
+  totalItems = 0,
+  columns = 2,
 }: ArticleCardProps) {
   // Author info
   const author = article.author
@@ -50,57 +51,68 @@ function ArticleCard({
       })
     : null
 
+  // Calculate corner rounding classes
+  const isFirstRow = index < columns
+  const totalRows = Math.ceil(totalItems / columns)
+  const currentRow = Math.floor(index / columns) + 1
+  const isLastRow = currentRow === totalRows
+  const isFirstCol = index % columns === 0
+  const isLastCol = (index + 1) % columns === 0 || index === totalItems - 1
+
+  // Corner classes for grid corners only
+  const cornerClasses = cn(
+    isFirstRow && isFirstCol && 'rounded-tl-3xl',
+    isFirstRow && isLastCol && 'rounded-tr-3xl',
+    isLastRow && isFirstCol && 'rounded-bl-3xl',
+    isLastRow && isLastCol && 'rounded-br-3xl',
+  )
+
   return (
     <Card
       onMouseEnter={() => setHovered(index)}
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        'relative group cursor-target w-full m-auto md:px-4 md:py-4 shadow-none border rounded-2xl',
-        'transform transition-all duration-300 hover:scale-105 hover:rotate-1',
-        'mx-auto cursor-target content-center w-full p-3 border border-primary/5 shadow-sm rounded-[30px]',
-        'overflow-hidden hover:shadow-2xl flex flex-col h-full',
+        'relative group cursor-pointer w-full bg-background shadow-none border-secondary rounded-none',
+        'transform transition-all duration-300 hover:scale-102',
+        'mx-auto cursor-target content-center w-full p-0',
+        'overflow-hidden hover:shadow-none flex flex-col h-full',
         'cursor-target',
+        cornerClasses,
         hovered !== null && hovered !== index && 'lg:blur-sm lg:scale-[0.98]',
         className,
       )}
       style={{ willChange: 'transform' }}
       onClick={() => onClick?.(article)}
     >
-      <CardContent className="rounded-[30px] content-center justify-between gap-5 flex flex-col flex-1 relative mx-auto p-6 w-full border border-primary/5 bg-neutral-800/5 h-full overflow-hidden shadow-sm md:items-start">
-        {/* Header */}
-        <CardHeader className="p-0 w-full max-w-[15em] gap-2.5">
-          {/* Published Date Badge */}
-          {publishedDate && (
-            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-              <Calendar className="size-3" />
-              <span>{publishedDate}</span>
-            </div>
-          )}
+      <CardContent className={cn(
+        'content-center justify-center gap-0 flex flex-row flex-1 relative mx-auto p-0 w-full h-full overflow-hidden',
+        cornerClasses,
+      )}>
+        {/* Text Content - 50% width */}
+        <div className="flex-1 flex flex-col gap-4 justify-between p-6">
+          {/* Header */}
+          <CardHeader className="p-0 w-full gap-2.5">
+            {/* Published Date Badge */}
+            {publishedDate && (
+              <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                <Calendar className="size-3" />
+                <span>{publishedDate}</span>
+              </div>
+            )}
 
-          <CardTitle className="text-xl w-full leading-6 font-bold tracking-tighter md:leading-6 line-clamp-2">
-            {article.title}
-          </CardTitle>
+            <CardTitle className="text-xl w-full leading-6 font-bold tracking-tighter md:leading-6 line-clamp-2">
+              {article.title}
+            </CardTitle>
 
-          <CardDescription className="text-muted-foreground text-xs line-clamp-2">
-            {article.excerpt}
-          </CardDescription>
-        </CardHeader>
+            <CardDescription className="text-muted-foreground text-xs line-clamp-2">
+              {article.excerpt}
+            </CardDescription>
+          </CardHeader>
 
-        {/* Cover Image */}
-        {article.coverImage && (
-          <div className="h-45 w-full rounded-xl overflow-hidden">
-            <MediaItem
-              webViewLink={article.coverImage}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-            />
-          </div>
-        )}
-
-        {/* Author Info */}
-        <div className="space-y-4 w-full">
-          <div className="gap-20 flex w-full justify-between">
-            <div className="flex gap-3 w-full items-start justify-between text-xs">
-              <Avatar>
+          {/* Author Info */}
+          <div className="w-full">
+            <div className="flex gap-3 items-center text-xs">
+              <Avatar className="size-8">
                 {author.image && (
                   <AvatarImage src={author.image} alt={author.name || ''} />
                 )}
@@ -109,33 +121,27 @@ function ArticleCard({
                 </AvatarFallback>
               </Avatar>
               <div className="flex-1">
-                <p className="font-medium truncate flex items-center gap-1">
+                <p className="font-medium truncate">
                   {authorName}
-                </p>
-                <p className="text-muted-foreground text-xs truncate">
-                  Penulis
                 </p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Footer */}
-        <CardFooter className="flex mt-0 [.border-t]:pt-4 w-full border-t pt- py-1 items-center justify-between px-0">
-          <Link
-            to={'/artikel/$artikelId'}
-            params={{ artikelId: article.slug }}
-            className={cn(
-              buttonVariants({ variant: 'default', size: 'sm' }),
-              'hover:opacity-90 transition-transform w-full hover:scale-105 text-xs',
-            )}
-          >
-            Baca Selengkapnya{' '}
-            <ArrowRight className="ml-2 w-3 h-3 md:w-4 md:h-4" />
-          </Link>
-        </CardFooter>
+        {/* Cover Image */}
+        {article.coverImage && (
+          <div className="flex-1 relative min-h-45 md:min-h-50 overflow-hidden">
+            <div className="absolute inset-0 bg-linear-to-r from-background via-background/30 to-transparent z-10" />
+            <MediaItem
+              webViewLink={article.coverImage}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+            />
+          </div>
+        )}
       </CardContent>
     </Card>
+
   )
 }
 
@@ -145,14 +151,13 @@ export function ArticleCardSkeleton() {
   return (
     <Card
       className={cn(
-        'relative group w-full m-auto md:px-4 md:py-4 shadow-none border rounded-2xl',
-        'mx-auto content-center w-full p-3 border border-primary/5 shadow-sm rounded-[30px]',
-        'overflow-hidden flex flex-col h-full',
+        'relative group w-full shadow-none border-secondary rounded-none',
+        'overflow-hidden flex flex-row h-full',
       )}
     >
-      <CardContent className="rounded-[30px] content-center justify-center gap-5 flex flex-col flex-1 relative mx-auto p-6 w-full border border-primary/5 bg-neutral-800/5 h-full overflow-hidden shadow-sm md:items-start">
+      <CardContent className="flex-1 flex flex-col gap-4 justify-between p-6">
         {/* Header Section */}
-        <CardHeader className="p-0 w-full max-w-[15em] gap-2.5">
+        <CardHeader className="p-0 w-full gap-2.5">
           {/* Date Skeleton */}
           <Skeleton className="h-4 w-24 rounded" />
 
@@ -169,31 +174,17 @@ export function ArticleCardSkeleton() {
           </div>
         </CardHeader>
 
-        {/* Image Skeleton */}
-        <Skeleton className="h-45 w-full rounded-xl" />
-
         {/* Author Info Section */}
-        <div className="space-y-4 w-full">
-          <div className="gap-20 flex w-full justify-between">
-            {/* Author Info - Left */}
-            <div className="flex gap-3 w-full items-start justify-between text-xs">
-              {/* Avatar Skeleton */}
-              <Skeleton className="h-10 w-10 rounded-full shrink-0" />
-
-              {/* Name & Role */}
-              <div className="flex-1 space-y-1.5">
-                <Skeleton className="h-3.5 w-24" />
-                <Skeleton className="h-3 w-16" />
-              </div>
-            </div>
-          </div>
+        <div className="flex gap-3 items-center">
+          <Skeleton className="size-8 rounded-full shrink-0" />
+          <Skeleton className="h-4 w-24" />
         </div>
-
-        {/* Footer Button */}
-        <CardFooter className="flex mt-0 [.border-t]:pt-4 w-full border-t pt- py-1 items-center justify-between px-0">
-          <Skeleton className="h-9 w-full rounded-xl" />
-        </CardFooter>
       </CardContent>
+
+      {/* Image Skeleton - 50% width */}
+      <div className="flex-1 relative min-h-45 md:min-h-50">
+        <Skeleton className="absolute inset-0 w-full h-full rounded-none" />
+      </div>
     </Card>
   )
 }

@@ -24,6 +24,14 @@ import {
   type ArticleAggregateInput,
 } from './server/article/article-server-queries'
 
+import {
+  getPublicArticlesServerFn,
+  getArticleBySlugServerFn,
+  type ArticlePublicFilters,
+} from './server/article/article-public-queries'
+
+
+
 // ============================================
 // TYPE EXPORTS
 // ============================================
@@ -181,7 +189,11 @@ export const articleKeys = {
   all: ['articles'] as const,
   aggregate: (filters: ArticleAggregateInput) =>
     [...articleKeys.all, 'aggregate', filters] as const,
+  list: (filters: Omit<ArticlePublicFilters, 'cursor'>) =>
+    [...articleKeys.all, 'list', filters] as const,
   detail: (id: number) => [...articleKeys.all, 'detail', id] as const,
+  detailBySlug: (slug: string) =>
+    [...articleKeys.all, 'detail', slug] as const,
 } as const
 
 // ============================================
@@ -202,7 +214,54 @@ export const getArticleQueryOptions = (filters: ArticleAggregateInput) =>
   })
 
 // ============================================
-// REVIEW QUERY KEYS
+// ARTICLE INFINITE QUERY OPTIONS (Public)
+// ============================================
+
+/**
+ * Infinite query options for browse articles (public)
+ * Uses cursor-based pagination for infinite scroll
+ */
+export const getArticleInfiniteQueryOptions = (
+  filters: Omit<ArticlePublicFilters, 'cursor'>,
+) =>
+  infiniteQueryOptions({
+    queryKey: articleKeys.list(filters),
+    queryFn: async ({ pageParam }) => {
+      const result = await getPublicArticlesServerFn({
+        data: {
+          filters: {
+            ...filters,
+            cursor: pageParam,
+          },
+        },
+      })
+      return result
+    },
+    initialPageParam: undefined as number | undefined,
+    getNextPageParam: (lastPage) =>
+      lastPage.hasNextPage ? (lastPage.nextCursor ?? undefined) : undefined,
+    staleTime: 60 * 1000,
+    gcTime: 10 * 60 * 1000,
+  })
+
+/**
+ * Query options for single article by slug (public)
+ */
+export const getArticleDetailQueryOptions = (slug: string) =>
+  queryOptions({
+    queryKey: articleKeys.detailBySlug(slug),
+    queryFn: async () => {
+      const result = await getArticleBySlugServerFn({
+        data: { slug },
+      })
+      return result
+    },
+    staleTime: 60 * 1000,
+    gcTime: 10 * 60 * 1000,
+  })
+
+// ============================================
+// DONATION QUERY KEYS
 // ============================================
 
 export const reviewKeys = {

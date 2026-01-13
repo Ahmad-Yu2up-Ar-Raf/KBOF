@@ -14,8 +14,11 @@ import { Route as DashboardRouteRouteImport } from './routes/dashboard/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DestinasiIndexRouteImport } from './routes/destinasi/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
+import { Route as ArtikelIndexRouteImport } from './routes/artikel/index'
+ 
 import { Route as DashboardDestinationRouteImport } from './routes/dashboard/destination'
 import { Route as DashboardArticlesRouteImport } from './routes/dashboard/articles'
+import { Route as ArtikelArtikelIdRouteImport } from './routes/artikel/$artikelId'
 import { Route as authRegisterRouteImport } from './routes/(auth)/register'
 import { Route as authLoginRouteImport } from './routes/(auth)/login'
 import { Route as DashboardSettingsRouteRouteImport } from './routes/dashboard/settings/route'
@@ -49,6 +52,12 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardRouteRoute,
 } as any)
+const ArtikelIndexRoute = ArtikelIndexRouteImport.update({
+  id: '/artikel/',
+  path: '/artikel/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+
 const DashboardDestinationRoute = DashboardDestinationRouteImport.update({
   id: '/destination',
   path: '/destination',
@@ -58,6 +67,11 @@ const DashboardArticlesRoute = DashboardArticlesRouteImport.update({
   id: '/articles',
   path: '/articles',
   getParentRoute: () => DashboardRouteRoute,
+} as any)
+const ArtikelArtikelIdRoute = ArtikelArtikelIdRouteImport.update({
+  id: '/artikel/$artikelId',
+  path: '/artikel/$artikelId',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const authRegisterRoute = authRegisterRouteImport.update({
   id: '/(auth)/register',
@@ -104,8 +118,11 @@ export interface FileRoutesByFullPath {
   '/dashboard/settings': typeof DashboardSettingsRouteRouteWithChildren
   '/login': typeof authLoginRoute
   '/register': typeof authRegisterRoute
+  '/artikel/$artikelId': typeof ArtikelArtikelIdRoute
   '/dashboard/articles': typeof DashboardArticlesRoute
   '/dashboard/destination': typeof DashboardDestinationRoute
+
+  '/artikel': typeof ArtikelIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/destinasi': typeof DestinasiIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -118,8 +135,11 @@ export interface FileRoutesByTo {
   '/$': typeof SplatRoute
   '/login': typeof authLoginRoute
   '/register': typeof authRegisterRoute
+  '/artikel/$artikelId': typeof ArtikelArtikelIdRoute
   '/dashboard/articles': typeof DashboardArticlesRoute
   '/dashboard/destination': typeof DashboardDestinationRoute
+
+  '/artikel': typeof ArtikelIndexRoute
   '/dashboard': typeof DashboardIndexRoute
   '/destinasi': typeof DestinasiIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -135,8 +155,11 @@ export interface FileRoutesById {
   '/dashboard/settings': typeof DashboardSettingsRouteRouteWithChildren
   '/(auth)/login': typeof authLoginRoute
   '/(auth)/register': typeof authRegisterRoute
+  '/artikel/$artikelId': typeof ArtikelArtikelIdRoute
   '/dashboard/articles': typeof DashboardArticlesRoute
   '/dashboard/destination': typeof DashboardDestinationRoute
+
+  '/artikel/': typeof ArtikelIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/destinasi/': typeof DestinasiIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -153,8 +176,11 @@ export interface FileRouteTypes {
     | '/dashboard/settings'
     | '/login'
     | '/register'
+    | '/artikel/$artikelId'
     | '/dashboard/articles'
     | '/dashboard/destination'
+
+    | '/artikel'
     | '/dashboard/'
     | '/destinasi'
     | '/api/auth/$'
@@ -167,8 +193,11 @@ export interface FileRouteTypes {
     | '/$'
     | '/login'
     | '/register'
+    | '/artikel/$artikelId'
     | '/dashboard/articles'
     | '/dashboard/destination'
+
+    | '/artikel'
     | '/dashboard'
     | '/destinasi'
     | '/api/auth/$'
@@ -183,8 +212,11 @@ export interface FileRouteTypes {
     | '/dashboard/settings'
     | '/(auth)/login'
     | '/(auth)/register'
+    | '/artikel/$artikelId'
     | '/dashboard/articles'
     | '/dashboard/destination'
+
+    | '/artikel/'
     | '/dashboard/'
     | '/destinasi/'
     | '/api/auth/$'
@@ -199,6 +231,10 @@ export interface RootRouteChildren {
   SplatRoute: typeof SplatRoute
   authLoginRoute: typeof authLoginRoute
   authRegisterRoute: typeof authRegisterRoute
+  ArtikelArtikelIdRoute: typeof ArtikelArtikelIdRoute
+
+  ArtikelIndexRoute: typeof ArtikelIndexRoute
+
   DestinasiIndexRoute: typeof DestinasiIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   DestinasiDestinasiIdIndexRoute: typeof DestinasiDestinasiIdIndexRoute
@@ -241,6 +277,14 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof DashboardRouteRoute
     }
+    '/artikel/': {
+      id: '/artikel/'
+      path: '/artikel'
+      fullPath: '/artikel'
+      preLoaderRoute: typeof ArtikelIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+  
     '/dashboard/destination': {
       id: '/dashboard/destination'
       path: '/destination'
@@ -254,6 +298,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard/articles'
       preLoaderRoute: typeof DashboardArticlesRouteImport
       parentRoute: typeof DashboardRouteRoute
+    }
+    '/artikel/$artikelId': {
+      id: '/artikel/$artikelId'
+      path: '/artikel/$artikelId'
+      fullPath: '/artikel/$artikelId'
+      preLoaderRoute: typeof ArtikelArtikelIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/(auth)/register': {
       id: '/(auth)/register'
@@ -347,6 +398,10 @@ const rootRouteChildren: RootRouteChildren = {
   SplatRoute: SplatRoute,
   authLoginRoute: authLoginRoute,
   authRegisterRoute: authRegisterRoute,
+  ArtikelArtikelIdRoute: ArtikelArtikelIdRoute,
+  
+  ArtikelIndexRoute: ArtikelIndexRoute,
+ 
   DestinasiIndexRoute: DestinasiIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   DestinasiDestinasiIdIndexRoute: DestinasiDestinasiIdIndexRoute,

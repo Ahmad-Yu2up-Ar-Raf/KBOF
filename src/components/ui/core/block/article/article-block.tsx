@@ -150,15 +150,14 @@ export default function ArticleBlock() {
     <section className="py-1 w-full container md:py-2 sm:px-8 px-1.5 flex-1">
       <div className="space-y-5">
         {/* Sort Options */}
-        <div className="flex items-center gap-2 px-5 overflow-x-auto">
+        <div className="flex items-center gap-2 px-2 overflow-x-auto">
           {sortOptions.map((option) => (
             <Button
               key={option.value}
               variant={sortBy === option.value ? 'default' : 'outline'}
-              size="sm"
               onClick={() => void setSortBy(option.value)}
               className={cn(
-                'rounded-2xl',
+                'rounded-lg',
                 sortBy === option.value && 'bg-[#63493f] text-white hover:bg-[#63493f]/90',
               )}
             >
@@ -197,7 +196,7 @@ export default function ArticleBlock() {
         </div>
 
         {/* Grid */}
-        <div className="grid gap-7 md:gap-3 px-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full auto-rows-fr">
+        <div className="grid grid-cols-1 md:grid-cols-2 w-full">
           {articles.length > 0 ? (
             articles.map((article: PublicArticle, i: number) => (
               <ArticleCard
@@ -207,6 +206,8 @@ export default function ArticleBlock() {
                 setHovered={setHovered}
                 article={article}
                 onClick={handleCardClick}
+                totalItems={articles.length}
+                columns={2}
               />
             ))
           ) : (

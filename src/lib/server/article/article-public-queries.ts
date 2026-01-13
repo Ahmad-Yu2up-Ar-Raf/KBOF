@@ -184,3 +184,52 @@ export const getArticleBySlugServerFn = createServerFn({
 
     return result ?? null
   })
+
+// ============================================
+// GET RECOMMENDED ARTICLES (exclude current article)
+// ============================================
+
+export const getRecommendedArticlesServerFn = createServerFn({
+  method: 'GET',
+})
+  .inputValidator(
+    z.object({
+      excludeSlug: z.string(),
+      limit: z.number().int().positive().default(3),
+    }),
+  )
+  .handler(async ({ data: { excludeSlug, limit } }) => {
+    const db = await getDb()
+
+    // Get recommended articles (newest first, excluding current article)
+    const data = await db
+      .select({
+        id: article.id,
+        slug: article.slug,
+        title: article.title,
+        excerpt: article.excerpt,
+        coverImage: article.coverImage,
+        publishedAt: article.publishedAt,
+        createdAt: article.createdAt,
+        author: {
+          id: user.id,
+          name: user.name,
+          image: user.image,
+        },
+      })
+      .from(article)
+      .leftJoin(user, eq(article.authorId, user.id))
+      .where(
+        and(
+          eq(article.status, 'published'),
+          sql`${article.slug} != ${excludeSlug}`,
+        ),
+      )
+      .orderBy(desc(article.publishedAt), desc(article.id))
+      .limit(limit)
+
+    return data.map((item) => ({
+      ...item,
+      author: item.author ?? { id: '', name: 'Unknown', image: null },
+    })) as Array<PublicArticle>
+  })

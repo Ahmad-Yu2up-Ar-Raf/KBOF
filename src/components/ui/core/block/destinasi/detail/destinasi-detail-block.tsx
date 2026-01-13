@@ -25,6 +25,7 @@ import ThumnailSlider from '@/components/ui/fragments/custom-ui/media/image-caro
 import VoteButton from '@/components/ui/fragments/custom-ui/button/vote-button'
 import AddReviewSheet from '@/components/ui/core/feature/review/add-review-sheet'
 import { ReviewsSection } from './reviews-section'
+import { Skeleton } from '@/components/ui/fragments/shadcn-ui/skeleton'
 // ==================================================
 // MAIN COMPONENT
 // ==================================================
@@ -37,7 +38,10 @@ export default function DestinasiDetailBlock({
 }: DestinasiDetailBlockProps) {
   // Format date helper
   const isMobile = useIsMobile()
-
+  const imagesGallery: string[] = [
+    ...destination.images,
+    destination.coverImage!,
+  ]
   if (isMobile)
     return (
       <div className="   ">
@@ -169,9 +173,9 @@ export default function DestinasiDetailBlock({
                 </div>
               </div>
 
-              <ThumnailSlider images={destination.images} />
+              <ThumnailSlider images={imagesGallery} />
               {/* {isMobile ? (
-              destination.images.length > 0 && (
+              imagesGallery.length > 0 && (
                 <Carousel
                   className="overflow-hidden"
                   opts={{
@@ -184,7 +188,7 @@ export default function DestinasiDetailBlock({
                   }}
                 >
                   <CarouselContent className="mx-6 md:mx-2.5 relative cursor-grab">
-                    {destination.images.map((cat, i) => {
+                    {imagesGallery.map((cat, i) => {
                       return (
                         <CarouselItem
                           key={cat}
@@ -214,11 +218,11 @@ export default function DestinasiDetailBlock({
             </div>
           )} */}
             {/* Gallery Images */}
-            {/* {destination.images && destination.images.length > 0 && (
+            {/* {imagesGallery && imagesGallery.length > 0 && (
             <div className="space-y-4">
               <h2 className="text-xl font-semibold">Galeri</h2>
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {destination.images.map((image, index) => (
+                {imagesGallery.map((image, index) => (
                   <div
                     key={index}
                     className="aspect-square rounded-xl overflow-hidden"
@@ -362,9 +366,9 @@ export default function DestinasiDetailBlock({
               </section>
             </div>
 
-            <ThumnailSlider images={destination.images} />
+            <ThumnailSlider images={imagesGallery} />
             {/* {isMobile ? (
-              destination.images.length > 0 && (
+              imagesGallery.length > 0 && (
                 <Carousel
                   className="overflow-hidden"
                   opts={{
@@ -377,7 +381,7 @@ export default function DestinasiDetailBlock({
                   }}
                 >
                   <CarouselContent className="mx-6 md:mx-2.5 relative cursor-grab">
-                    {destination.images.map((cat, i) => {
+                    {imagesGallery.map((cat, i) => {
                       return (
                         <CarouselItem
                           key={cat}
@@ -402,3 +406,187 @@ export default function DestinasiDetailBlock({
     </div>
   )
 }
+function DestinasiDetailSkeleton() {
+  const isMobile = useIsMobile()
+
+  // Mobile Skeleton
+  if (isMobile) {
+    return (
+      <div>
+        {/* Cover Image Skeleton */}
+        <Skeleton className="h-[12em] w-full" />
+
+        {/* Navigation Skeleton */}
+        <nav className="z-50 absolute top-3 w-full">
+          <div className="relative w-full px-5 container flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <ArrowLeft className="size-5 text-muted-foreground/50" />
+            </div>
+            <MoreVertical className="size-5 text-muted-foreground/50" />
+          </div>
+        </nav>
+
+        <div className="space-y-2">
+          <section className="min-h-lvh space-y-6">
+            <section className="max-w-5xl h-full sm:px-10 pt-2.5 w-full container content-center sm:pt-0 px-6 space-y-6">
+              {/* Title & Location Skeleton */}
+              <div className="space-y-4">
+                <header className="space-y-2">
+                  <Skeleton className="h-9 w-3/4" />
+                  <Skeleton className="h-4 w-48" />
+                </header>
+                <div className="h-0.5 w-36 bg-muted rounded-full" />
+
+                {/* Stats Badges Skeleton */}
+                <div className="flex flex-wrap gap-2">
+                  <Skeleton className="h-6 w-24 rounded-full" />
+                  <Skeleton className="h-6 w-20 rounded-full" />
+                  <Skeleton className="h-6 w-28 rounded-full" />
+                  <Skeleton className="h-6 w-32 rounded-full" />
+                </div>
+
+                {/* Description Skeleton */}
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-2/3" />
+                </div>
+
+                {/* Action Buttons Skeleton */}
+                <div className="flex flex-col sm:flex-row gap-3 mt-6">
+                  <Skeleton className="h-10 w-full sm:w-36" />
+                  <Skeleton className="h-10 w-full sm:w-28" />
+                </div>
+              </div>
+
+              {/* Image Gallery Skeleton */}
+              <div className="w-full space-y-2">
+                <Skeleton className="h-[45dvh] w-full rounded-xl" />
+                <div className="flex gap-2 overflow-hidden">
+                  {[1, 2, 3, 4].map((i) => (
+                    <Skeleton
+                      key={i}
+                      className="h-18 w-1/4 rounded-xl shrink-0"
+                    />
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* Reviews Section Skeleton */}
+            <section className="sm:px-10 pt-2.5 sm:pt-0 px-6 container content-center space-y-6">
+              <div className="space-y-4">
+                <Skeleton className="h-7 w-32" />
+                <div className="space-y-4">
+                  {[1, 2].map((i) => (
+                    <div key={i} className="p-4 border rounded-xl space-y-3">
+                      <div className="flex items-center gap-3">
+                        <Skeleton className="size-10 rounded-full" />
+                        <div className="space-y-1">
+                          <Skeleton className="h-4 w-24" />
+                          <Skeleton className="h-3 w-16" />
+                        </div>
+                      </div>
+                      <Skeleton className="h-4 w-full" />
+                      <Skeleton className="h-4 w-3/4" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          </section>
+        </div>
+      </div>
+    )
+  }
+
+  // Desktop Skeleton
+  return (
+    <div className="max-w-5xl m-auto w-full">
+      {/* Navigation Skeleton */}
+      <nav className="z-50 absolute max-w-6xl m-auto top-3 w-full">
+        <div className="relative w-full px-10 container flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <ArrowLeft className="size-5 text-muted-foreground/50" />
+            <Skeleton className="h-5 w-16" />
+          </div>
+          <MoreVertical className="size-5 text-muted-foreground/50" />
+        </div>
+      </nav>
+
+      {/* Cover Image Skeleton */}
+      <Skeleton className="h-[17em] w-full" />
+
+      <div className="space-y-2 mt-10">
+        <section className="min-h-lvh space-y-6">
+          <section className="h-full sm:px-10 pt-4 w-full md:flex md:justify-between md:gap-10 lg:gap-25 container content-center sm:pt-0 px-6 relative space-y-6">
+            {/* Left Content */}
+            <div className="space-y-10 flex-1">
+              <div className="space-y-4">
+                {/* Title & Location */}
+                <header className="space-y-2">
+                  <Skeleton className="h-12 w-3/4" />
+                  <Skeleton className="h-4 w-48" />
+                </header>
+                <div className="h-0.5 w-36 bg-muted rounded-full" />
+
+                {/* Stats Badges */}
+                <div className="flex flex-wrap gap-2">
+                  <Skeleton className="h-6 w-24 rounded-full" />
+                  <Skeleton className="h-6 w-20 rounded-full" />
+                  <Skeleton className="h-6 w-28 rounded-full" />
+                  <Skeleton className="h-6 w-32 rounded-full" />
+                </div>
+
+                {/* Description */}
+                <div className="space-y-2 max-w-xl">
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-2/3" />
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex flex-col sm:flex-row gap-3 mt-6">
+                  <Skeleton className="h-10 w-36" />
+                  <Skeleton className="h-10 w-28" />
+                </div>
+              </div>
+
+              {/* Reviews Section Skeleton */}
+              <section className="space-y-4">
+                <Skeleton className="h-7 w-32" />
+                <div className="space-y-4">
+                  {[1, 2].map((i) => (
+                    <div key={i} className="p-4 border rounded-xl space-y-3">
+                      <div className="flex items-center gap-3">
+                        <Skeleton className="size-10 rounded-full" />
+                        <div className="space-y-1">
+                          <Skeleton className="h-4 w-24" />
+                          <Skeleton className="h-3 w-16" />
+                        </div>
+                      </div>
+                      <Skeleton className="h-4 w-full" />
+                      <Skeleton className="h-4 w-3/4" />
+                    </div>
+                  ))}
+                </div>
+              </section>
+            </div>
+
+            {/* Right: Image Gallery Skeleton */}
+            <div className="w-full md:w-[28em] h-full sticky top-2 space-y-2">
+              <Skeleton className="md:h-[27em] h-[45dvh] w-full rounded-xl" />
+              <div className="flex gap-2">
+                {[1, 2, 3, 4].map((i) => (
+                  <Skeleton key={i} className="h-18 flex-1 rounded-xl" />
+                ))}
+              </div>
+            </div>
+          </section>
+        </section>
+      </div>
+    </div>
+  )
+}
+
+export { DestinasiDetailSkeleton }

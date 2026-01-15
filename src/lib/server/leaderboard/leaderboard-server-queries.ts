@@ -7,7 +7,7 @@
 
 import { createServerFn } from '@tanstack/react-start'
 import { z } from 'zod'
-import { and, count, desc, eq, inArray, sql } from 'drizzle-orm'
+import { and, count, desc, eq, inArray, sql, avg } from 'drizzle-orm'
 import * as schema from '@/db/schema'
 
 // Dynamic import to prevent db from being bundled in client
@@ -16,7 +16,7 @@ const getDb = async () => {
   return db
 }
 
-const { destination, user, vote } = schema
+const { destination, user, vote, review } = schema
 
 // ============================================
 // TYPE DEFINITIONS
@@ -59,6 +59,8 @@ export type LeaderboardEntry = {
   type: schema.DestinationType
   provinsi: schema.ProvinsiIndonesia
   kabupatenKota: string | null
+  averageRating: number
+  totalReview: number
   user: {
     id: string
     name: string
@@ -147,6 +149,17 @@ async function fetchLeaderboardData(
     .groupBy(vote.destinationId)
     .as('vote_counts')
 
+  // Review stats subquery for average rating and total reviews
+  const reviewStatsSubquery = db
+    .select({
+      destinationId: review.destinationId,
+      totalReview: count().as('total_review'),
+      averageRating: avg(review.rating).as('average_rating'),
+    })
+    .from(review)
+    .groupBy(review.destinationId)
+    .as('review_stats')
+
   const results = await db
     .select({
       destinationId: destination.id,
@@ -159,6 +172,8 @@ async function fetchLeaderboardData(
       provinsi: destination.provinsi,
       kabupatenKota: destination.kabupatenKota,
       voteCount: sql<number>`COALESCE(${voteCountsSubquery.voteCount}, 0)`,
+      totalReview: sql<number>`COALESCE(${reviewStatsSubquery.totalReview}, 0)`,
+      averageRating: sql<number>`COALESCE(${reviewStatsSubquery.averageRating}, 0)::numeric`,
       user: {
         id: user.id,
         name: user.name,
@@ -170,6 +185,10 @@ async function fetchLeaderboardData(
     .leftJoin(
       voteCountsSubquery,
       eq(destination.id, voteCountsSubquery.destinationId),
+    )
+    .leftJoin(
+      reviewStatsSubquery,
+      eq(destination.id, reviewStatsSubquery.destinationId),
     )
     .where(and(...whereConditions))
     .orderBy(
@@ -192,6 +211,8 @@ async function fetchLeaderboardData(
     type: row.type,
     provinsi: row.provinsi,
     kabupatenKota: row.kabupatenKota,
+    averageRating: Number(row.averageRating) || 0,
+    totalReview: Number(row.totalReview) || 0,
     user: row.user ?? { id: '', name: 'Unknown', image: null },
   }))
 

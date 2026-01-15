@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import {
@@ -16,6 +16,7 @@ import {
   ChevronLeft,
   ChevronRight,
   MapPin,
+  StarIcon,
 } from 'lucide-react'
 import { useLottie } from 'lottie-react'
 import trophyAnimation from '@/assets/animations/Winner Trophy Emoji.json'
@@ -27,6 +28,7 @@ import {
   type LeaderboardEntry,
 } from '@/lib/query-options'
 import { cn } from '@/lib/utils'
+import confetti from "canvas-confetti"
 import {
   buttonVariants,
   Button,
@@ -142,146 +144,174 @@ export default function LeaderboardPage() {
 
   const totalPages = Math.ceil(leaderboardData.totalCount / filters.perPage)
 
+  // Confetti effect - runs once on mount
+  useEffect(() => {
+    const end = Date.now() + 3 * 1000 // 3 seconds
+    const colors = ["#956c42", "#e2d8c3", "#d4c8aa", "#b54a35"]
+    
+    const frame = () => {
+      if (Date.now() > end) return
+      confetti({
+        particleCount: 6,
+        angle: 60,
+        spread: 55,
+        startVelocity: 60,
+        origin: { x: 0, y: 0.5 },
+        colors: colors,
+      })
+      confetti({
+        particleCount: 6,
+        angle: 120,
+        spread: 55,
+        startVelocity: 60,
+        origin: { x: 1, y: 0.5 },
+        colors: colors,
+      })
+      requestAnimationFrame(frame)
+    }
+    frame()
+  }, []) // Empty array = runs once on mount
+
   return (
-    <section className="container py-3 space-y-5">
-      {/* Navigation */}
-      <nav className="flex items-center justify-between">
-        <Link
-          to="/"
-          className={cn(
-            buttonVariants({ variant: 'link' }),
-            'flex has-[>svg]:px-0 w-fit py-2 items-center gap-2 px-0 group',
-          )}
-        >
-          <ArrowLeft className="size-5 group-hover:-translate-x-1 transition-transform" />
-          <span>Kembali</span>
-        </Link>
-      </nav>
-
-      {/* Header */}
-      <header className="text-center space-y-2 md:space-y-4 pb-4 md:pb-5 border-b">
-        {/* Trophy Animation */}
-        <div className="flex justify-center">
-          {TrophyAnimation}
-        </div>
-        <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight">
-          Leaderboard Destinasi
-        </h1>
-        <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto px-2">
-          Destinasi dengan dukungan terbanyak dari komunitas. Vote destinasi
-          favoritmu untuk membantu mereka naik peringkat!
-        </p>
-      </header>
-
-      {/* Podium Section - TOP 3 */}
-      {podium.length > 0 && (
-        <section className="relative py-4 md:py-8">
-          <div className="flex items-end justify-center gap-2 sm:gap-6 md:gap-4 md:hover:gap-16 transition-all duration-300">
-            {/* 2nd Place */}
-            {podium[1] && (
-              <div className=" order-1 -mr-8 hover:mr-4 md:translate-y-4 -rotate-5 z-1 hover:scale-105 transition-all duration-300">
-                <PodiumCard entry={podium[1]} position={2} size="large" index={1} hovered={hoveredPodium} setHovered={setHoveredPodium} />
-              </div>
+      <section className="container py-3 space-y-5">
+        {/* Navigation */}
+        <nav className="flex items-center justify-between">
+          <Link
+            to="/"
+            className={cn(
+              buttonVariants({ variant: 'link' }),
+              'flex has-[>svg]:px-0 w-fit py-2 items-center gap-2 px-0 group',
             )}
+          >
+            <ArrowLeft className="size-5 group-hover:-translate-x-1 transition-transform" />
+            <span>Kembali</span>
+          </Link>
+        </nav>
 
-            {/* 1st Place - Larger and higher */}
-            {podium[0] && (
-              <div className=" order-2 -translate-y-4 z-10 hover:mx-4 hover:scale-105 transition-all duration-300">
-                <PodiumCard entry={podium[0]} position={1} size="larger" index={0} hovered={hoveredPodium} setHovered={setHoveredPodium} />
-              </div>
-            )}
-
-            {/* 3rd Place */}
-            {podium[2] && (
-              <div className="order-3 -ml-8 hover:ml-4 md:translate-y-7 hover:translate-y-4 rotate-5 z-1 hover:scale-105 transition-all duration-300">
-                <PodiumCard entry={podium[2]} position={3} size="large" index={2} hovered={hoveredPodium} setHovered={setHoveredPodium} />
-              </div>
-            )}
+        {/* Header */}
+        <header className="text-center space-y-2 md:space-y-4 pb-4 md:pb-5 border-b">
+          {/* Trophy Animation */}
+          <div className="flex justify-center">
+            {TrophyAnimation}
           </div>
-        </section>
-      )}
+          <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight">
+            Leaderboard Destinasi
+          </h1>
+          <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto px-2">
+            Destinasi dengan dukungan terbanyak dari komunitas. Vote destinasi
+            favoritmu untuk membantu mereka naik peringkat!
+          </p>
+        </header>
 
-      {/* Leaderboard List */}
-      <section className="space-y-3 md:space-y-4">
-        <h2 className="text-base md:text-xl text-center font-semibold">
-          <span className="text-primary">10 Destinasi</span> Teratas
-        </h2>
+        {/* Podium Section - TOP 3 */}
+        {podium.length > 0 && (
+          <section className="relative py-4 md:py-8">
+            <div className="flex items-end justify-center gap-2 sm:gap-6 md:gap-4 md:hover:gap-16 transition-all duration-300">
+              {/* 2nd Place */}
+              {podium[1] && (
+                <div className=" order-1 -mr-8 hover:mr-4 md:translate-y-4 -rotate-5 z-1 hover:scale-105 transition-all duration-300">
+                  <PodiumCard entry={podium[1]} position={2} size="large" index={1} hovered={hoveredPodium} setHovered={setHoveredPodium} />
+                </div>
+              )}
 
-        <div className="w-full flex items-center justify-center">
-          {/* Filters */}
-          <FilterToolbar layoutClassName={cn('w-full flex items-center justify-center',)} showReset={hasActiveFilters} onReset={handleResetFilters}>
-            {/* Category Filter - Multiple selection */}
-            <FacetedFilter
-              title="Kategori"
-              options={categoryOptions}
-              value={filters.categories}
-              onChange={(values) =>
-                void setFilters({
-                  categories:
-                    values.length > 0
-                      ? (values as typeof filters.categories)
-                      : null,
-                  page: 1,
-                })
-              }
-              multiple
-              popoverWidth="w-[14rem]"
-            />
+              {/* 1st Place - Larger and higher */}
+              {podium[0] && (
+                <div className=" order-2 -translate-y-4 z-10 hover:mx-4 hover:scale-105 transition-all duration-300">
+                  <PodiumCard entry={podium[0]} position={1} size="larger" index={0} hovered={hoveredPodium} setHovered={setHoveredPodium} />
+                </div>
+              )}
 
-            {/* Type Filter - Multiple selection */}
-            <FacetedFilter
-              title="Tipe"
-              options={typeOptions}
-              value={filters.types}
-              onChange={(values) =>
-                void setFilters({
-                  types:
-                    values.length > 0 ? (values as typeof filters.types) : null,
-                  page: 1,
-                })
-              }
-              multiple
-              popoverWidth="w-[14rem]"
-            />
-
-            {/* Provinsi Filter - Multiple selection */}
-            <FacetedFilter
-              title="Provinsi"
-              options={provinsiOptions}
-              value={filters.provinces}
-              onChange={(values) =>
-                void setFilters({
-                  provinces:
-                    values.length > 0 ? (values as typeof filters.provinces) : null,
-                  page: 1,
-                })
-              }
-              multiple
-              popoverWidth="w-[14rem]"
-            />
-          </FilterToolbar>
-        </div>
-
-        <div className="space-y-3">
-          {leaderboardData.data.map((entry, index) => (
-            <LeaderboardRow
-              key={entry.destinationId}
-              entry={entry}
-              index={index}
-              hovered={hoveredRow}
-              setHovered={setHoveredRow}
-            />
-          ))}
-        </div>
-
-        {leaderboardData.data.length === 0 && (
-          <div className="text-center py-12 text-muted-foreground">
-            Tidak ada destinasi yang cocok dengan filter.
-          </div>
+              {/* 3rd Place */}
+              {podium[2] && (
+                <div className="order-3 -ml-8 hover:ml-4 md:translate-y-7 hover:translate-y-4 rotate-5 z-1 hover:scale-105 transition-all duration-300">
+                  <PodiumCard entry={podium[2]} position={3} size="large" index={2} hovered={hoveredPodium} setHovered={setHoveredPodium} />
+                </div>
+              )}
+            </div>
+          </section>
         )}
+
+        {/* Leaderboard List */}
+        <section className="space-y-3 md:space-y-4">
+          <h2 className="text-base md:text-xl text-center font-semibold">
+            <span className="text-primary">10 Destinasi</span> Teratas
+          </h2>
+
+          <div className="w-full flex items-center justify-center">
+            {/* Filters */}
+            <FilterToolbar layoutClassName={cn('w-full flex items-center justify-center',)} showReset={hasActiveFilters} onReset={handleResetFilters}>
+              {/* Category Filter - Multiple selection */}
+              <FacetedFilter
+                title="Kategori"
+                options={categoryOptions}
+                value={filters.categories}
+                onChange={(values) =>
+                  void setFilters({
+                    categories:
+                      values.length > 0
+                        ? (values as typeof filters.categories)
+                        : null,
+                    page: 1,
+                  })
+                }
+                multiple
+                popoverWidth="w-[14rem]"
+              />
+
+              {/* Type Filter - Multiple selection */}
+              <FacetedFilter
+                title="Tipe"
+                options={typeOptions}
+                value={filters.types}
+                onChange={(values) =>
+                  void setFilters({
+                    types:
+                      values.length > 0 ? (values as typeof filters.types) : null,
+                    page: 1,
+                  })
+                }
+                multiple
+                popoverWidth="w-[14rem]"
+              />
+
+              {/* Provinsi Filter - Multiple selection */}
+              <FacetedFilter
+                title="Provinsi"
+                options={provinsiOptions}
+                value={filters.provinces}
+                onChange={(values) =>
+                  void setFilters({
+                    provinces:
+                      values.length > 0 ? (values as typeof filters.provinces) : null,
+                    page: 1,
+                  })
+                }
+                multiple
+                popoverWidth="w-[14rem]"
+              />
+            </FilterToolbar>
+          </div>
+
+          <div className="space-y-3">
+            {leaderboardData.data.map((entry, index) => (
+              <LeaderboardRow
+                key={entry.destinationId}
+                entry={entry}
+                index={index}
+                hovered={hoveredRow}
+                setHovered={setHoveredRow}
+              />
+            ))}
+          </div>
+
+          {leaderboardData.data.length === 0 && (
+            <div className="text-center py-12 text-muted-foreground">
+              Tidak ada destinasi yang cocok dengan filter.
+            </div>
+          )}
+        </section>
       </section>
-    </section>
-  )
+    )
 }
 
 // ============================================
@@ -289,252 +319,291 @@ export default function LeaderboardPage() {
 // ============================================
 
 function PodiumCard({
-  entry,
-  position,
-  size,
-  index,
-  hovered,
-  setHovered,
-}: {
-  entry: LeaderboardEntry
-  position: 1 | 2 | 3
-  size: 'large' | 'medium' | 'larger'
-  index: number
-  hovered: number | null
-  setHovered: React.Dispatch<React.SetStateAction<number | null>>
-}) {
-  const Icon = position === 1 ? Trophy : position === 2 ? Medal : Award
-  const colors = {
-    1: 'from-yellow-500/20 to-yellow-600/5 border-yellow-500/30 shadow-yellow-500/10',
-    2: 'from-slate-400/20 to-slate-500/5 border-slate-400/30 shadow-slate-400/10',
-    3: 'from-amber-600/20 to-amber-700/5 border-amber-600/30 shadow-amber-600/10',
-  }
-  const iconColors = {
-    1: 'text-yellow-500',
-    2: 'text-slate-400',
-    3: 'text-amber-600',
-  }
-  const badgeBgColors = {
-    1: 'bg-yellow-500',
-    2: 'bg-slate-400',
-    3: 'bg-amber-600',
-  }
+    entry,
+    position,
+    size,
+    index,
+    hovered,
+    setHovered,
+  }: {
+    entry: LeaderboardEntry
+    position: 1 | 2 | 3
+    size: 'large' | 'medium' | 'larger'
+    index: number
+    hovered: number | null
+    setHovered: React.Dispatch<React.SetStateAction<number | null>>
+  }) {
+    const Icon = position === 1 ? Trophy : position === 2 ? Medal : Award
+    const colors = {
+      1: 'from-yellow-500/20 to-yellow-600/5 border-yellow-500/30 shadow-yellow-500/10',
+      2: 'from-slate-400/20 to-slate-500/5 border-slate-400/30 shadow-slate-400/10',
+      3: 'from-amber-600/20 to-amber-700/5 border-amber-600/30 shadow-amber-600/10',
+    }
+    const iconColors = {
+      1: 'text-yellow-500',
+      2: 'text-slate-400',
+      3: 'text-amber-600',
+    }
+    const badgeBgColors = {
+      1: 'bg-yellow-500',
+      2: 'bg-slate-400',
+      3: 'bg-amber-600',
+    }
 
-  return (
-    <Link
-      to="/destinasi/$destinasiId"
-      params={{ destinasiId: entry.slug }}
-      className="block group"
-      onMouseEnter={() => setHovered(index)}
-      onMouseLeave={() => setHovered(null)}
-    >
-      <Card
-        className={cn(
-          'bg-white relative transition-all duration-300 hover:scale-103 md:hover:scale-105 hover:shadow-xl py-0 p-1 md:p-4 rounded-3xl border-2 bg-linear-to-b shadow-none',
-          size === 'large' ? 'w-32 md:w-64' : size === 'larger' ? 'w-36 md:w-72' : 'w-32 md:w-48',
-          colors[position],
-          hovered !== null && hovered !== index && 'lg:blur-sm lg:scale-[0.98]',
-        )}
+    return (
+      <Link
+        to="/destinasi/$destinasiId"
+        params={{ destinasiId: entry.slug }}
+        className="block group"
+        onMouseEnter={() => setHovered(index)}
+        onMouseLeave={() => setHovered(null)}
       >
-
-        <div className="relative rounded-3xl border">
-          {entry.coverImage ? (
-            <div
-              className={cn(
-                'w-full overflow-hidden rounded-t-3xl',
-                size === 'large' ? 'h-fit md:h-40' : size === 'larger' ? 'h-fit md:h-48' : 'h-fit md:h-32',
-              )}
-            >
-              <MediaItem
-                webViewLink={entry.coverImage}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300 rounded-t-2xl"
-              />
-            </div>
-          ) : (
-            <div
-              className={cn(
-                'w-full bg-muted flex items-center justify-center',
-                size === 'large' ? 'h-40' : 'h-32',
-              )}
-            >
-              <Icon className={cn('size-12 opacity-30', iconColors[position])} />
-            </div>
+        <Card
+          className={cn(
+            'bg-white relative transition-all duration-300 hover:scale-103 md:hover:scale-105 hover:shadow-xl py-0 p-1 md:p-4 rounded-3xl border-2 bg-linear-to-b shadow-none',
+            size === 'large' ? 'w-32 md:w-64' : size === 'larger' ? 'w-36 md:w-72' : 'w-32 md:w-48',
+            colors[position],
+            hovered !== null && hovered !== index && 'lg:blur-sm lg:scale-[0.98]',
           )}
+        >
+
+          <div className="relative rounded-3xl border">
+            {entry.coverImage ? (
+              <div
+                className={cn(
+                  'w-full overflow-hidden rounded-t-3xl',
+                  size === 'large' ? 'h-fit md:h-40' : size === 'larger' ? 'h-fit md:h-48' : 'h-fit md:h-32',
+                )}
+              >
+                <MediaItem
+                  webViewLink={entry.coverImage}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300 rounded-t-2xl"
+                />
+              </div>
+            ) : (
+              <div
+                className={cn(
+                  'w-full bg-muted flex items-center justify-center',
+                  size === 'large' ? 'h-40' : 'h-32',
+                )}
+              >
+                <Icon className={cn('size-12 opacity-30', iconColors[position])} />
+              </div>
+            )}
+            {/* Strong gradient overlay from bottom - fades image to background */}
+            <div className="absolute inset-0 bg-linear-to-t from-background via-background/20 to-transparent" />
+
+            {/* Trophy Badge - positioned centered at top */}
+            <div
+              className={cn(
+                'absolute -top-6 md:-top-9 left-1/2 -translate-x-1/2 z-10 px-4 py-1.5 bg-primary-foreground rounded-full flex items-center justify-center gap-1 shadow-md border'
+              )}
+            >
+              <Icon className={cn('size-4 md:size-5 fill-white/70',
+                iconColors[position]
+              )} />
+              <span className={cn('font-bold text-base', iconColors[position])}>#{position}</span>
+            </div>
+          </div>
+
+          <CardContent className="bg-background p-2 md:p-4 space-y-2 -mt-8 relative z-10 rounded-b-2xl border border-t-0">
+            {/* Info */}
+            <div className="flex-1 min-w-0">
+              <h3 className="text-sm md:text-base font-semibold truncate">{entry.name}</h3>
+              <p className="text-xs md:text-sm text-muted-foreground line-clamp-1">
+                {entry.description}
+              </p>
+              {/* Location & Rating */}
+              <div className="flex items-center justify-between gap-2 mt-1">
+                <span className="text-xs text-muted-foreground flex items-center gap-1 truncate">
+                  <MapPin className="size-3" />
+                  {entry.provinsi.replace(/-/g, ' ')}
+                </span>
+                <Badge variant="outline" className="text-xs border-0 p-0 flex items-center gap-0.5">
+                  <StarIcon className="size-3 fill-primary text-primary" />
+                  <span className="font-semibold">{entry.averageRating.toFixed(1)}</span>
+                  <span className="text-muted-foreground">({entry.totalReview})</span>
+                </Badge>
+              </div>
+            </div>
+
+            {/* Hashtags - Multiple tags */}
+            <div className="flex flex-wrap gap-1">
+              <Badge className="px-1.5 py-0 bg-primary/10 text-primary rounded-full text-[10px] md:text-xs font-medium">
+                # {entry.category.replace(/-/g, ' ')}
+              </Badge>
+              <Badge className="px-1.5 py-0 bg-primary/10 text-primary rounded-full text-[10px] md:text-xs font-medium">
+                # {entry.type.replace(/-/g, ' ')}
+              </Badge>
+            </div>
+
+            {/* Vote Count */}
+            <div
+              className={cn(
+                'flex items-center justify-center gap-1.5 py-0.5 md:py-1.5 rounded-full',
+                badgeBgColors[position]
+              )}
+            >
+              <ThumbsUp className="size-3 md:size-4 text-primary-foreground fill-primary/20" />
+              <span className="text-sm md:text-base font-bold text-primary-foreground">{entry.voteCount}</span>
+              <span className="text-xs text-primary-foreground">votes</span>
+            </div>
+          </CardContent>
+
           {/* Strong gradient overlay from bottom - fades image to background */}
-          <div className="absolute inset-0 bg-linear-to-t from-background via-background/20 to-transparent" />
-
-          {/* Trophy Badge - positioned centered at top */}
-          <div
-            className={cn(
-              'absolute -top-6 md:-top-9 left-1/2 -translate-x-1/2 z-10 px-4 py-1.5 bg-primary-foreground rounded-full flex items-center justify-center gap-1 shadow-md border'
-            )}
-          >
-            <Icon className={cn('size-4 md:size-5 fill-white/70',
-              iconColors[position]
-            )} />
-            <span className={cn('font-bold text-base', iconColors[position])}>#{position}</span>
-          </div>
-        </div>
-
-        <CardContent className="bg-background p-2 md:p-4 space-y-2 -mt-8 relative z-10 rounded-b-2xl border border-t-0">
-          {/* Info */}
-          <div className="flex-1 min-w-0">
-            <h3 className="text-sm md:text-base font-semibold truncate">{entry.name}</h3>
-            <p className="text-xs md:text-sm text-muted-foreground line-clamp-1">
-              {entry.description}
-            </p>
-            <div className="flex items-center gap-2 mt-1">
-              <Badge variant="secondary" className="text-xs">
-                {entry.category.replace(/-/g, ' ')}
-              </Badge>
-              <span className="text-xs text-muted-foreground flex items-center gap-1 truncate">
-                <MapPin className="size-3" />
-                {entry.provinsi.replace(/-/g, ' ')}
-              </span>
-            </div>
-          </div>
-
-          {/* Vote Count */}
-          <div
-            className={cn(
-              'flex items-center justify-center gap-1.5 py-0.5 md:py-1.5 rounded-full',
-              badgeBgColors[position]
-            )}
-          >
-            <ThumbsUp className="size-3 md:size-4 text-primary-foreground fill-primary/20" />
-            <span className="text-sm md:text-base font-bold text-primary-foreground">{entry.voteCount}</span>
-            <span className="text-xs text-primary-foreground">votes</span>
-          </div>
-        </CardContent>
-
-        {/* Strong gradient overlay from bottom - fades image to background */}
-        <div className="absolute inset-0 -bottom-1 opacity-100 group-hover:opacity-0 bg-linear-to-t h-10 md:h-24 self-end from-background via-background-15 md:via-background/30 to-transparent z-10 rounded-b-3xl scale-102 transition-all duration-300" />
-      </Card>
-    </Link>
-  )
-}
-
-function LeaderboardRow({
-  entry,
-  index,
-  hovered,
-  setHovered,
-}: {
-  entry: LeaderboardEntry
-  index: number
-  hovered: number | null
-  setHovered: React.Dispatch<React.SetStateAction<number | null>>
-}) {
-  const isTop3 = entry.rank <= 3
-  const rankColors = {
-    1: 'bg-yellow-500 text-white',
-    2: 'bg-slate-400 text-white',
-    3: 'bg-amber-600 text-white',
-  }
-  const borderColors = {
-    1: 'border-yellow-500/50',
-    2: 'border-slate-400/50',
-    3: 'border-amber-600/50',
+          <div className="absolute inset-0 -bottom-1 opacity-100 group-hover:opacity-0 bg-linear-to-t h-10 md:h-24 self-end from-background via-background-15 md:via-background/30 to-transparent z-10 rounded-b-3xl scale-102 transition-all duration-300" />
+        </Card>
+      </Link>
+    )
   }
 
-  return (
-    <Link
-      to="/destinasi/$destinasiId"
-      params={{ destinasiId: entry.slug }}
-      className="block"
-      onMouseEnter={() => setHovered(index)}
-      onMouseLeave={() => setHovered(null)}
-    >
-      <Card className={cn(
-        'hover:shadow-md transition-all duration-300 rounded-2xl md:rounded-3xl p-1.5 hover:scale-105 hover:rotate-1',
-        hovered !== null && hovered !== index && 'lg:blur-sm lg:scale-[0.98]',
-        isTop3 && borderColors[entry.rank as 1 | 2 | 3],
-        isTop3 && 'border-2',
-      )}>
-        <CardContent className="bg-background flex items-center gap-2 md:gap-4 p-2 md:p-4 rounded-2xl md:rounded-3xl">
-          {/* Rank */}
-          <div
-            className={cn(
-              'flex items-center justify-center size-8 md:size-10 rounded-full font-bold text-sm md:text-lg shrink-0',
-              isTop3
-                ? rankColors[entry.rank as 1 | 2 | 3]
-                : 'bg-muted text-muted-foreground',
+  function LeaderboardRow({
+    entry,
+    index,
+    hovered,
+    setHovered,
+  }: {
+    entry: LeaderboardEntry
+    index: number
+    hovered: number | null
+    setHovered: React.Dispatch<React.SetStateAction<number | null>>
+  }) {
+    const isTop3 = entry.rank <= 3
+    const rankColors = {
+      1: 'bg-yellow-500 text-white',
+      2: 'bg-slate-400 text-white',
+      3: 'bg-amber-600 text-white',
+    }
+    const borderColors = {
+      1: 'border-yellow-500/50',
+      2: 'border-slate-400/50',
+      3: 'border-amber-600/50',
+    }
+
+    return (
+      <Link
+        to="/destinasi/$destinasiId"
+        params={{ destinasiId: entry.slug }}
+        className="block"
+        onMouseEnter={() => setHovered(index)}
+        onMouseLeave={() => setHovered(null)}
+      >
+        <Card className={cn(
+          'relative overflow-visible hover:shadow-md transition-all duration-300 rounded-2xl md:rounded-3xl p-1.5 hover:scale-105 hover:rotate-1',
+          hovered !== null && hovered !== index && 'lg:blur-sm lg:scale-[0.98]',
+          isTop3 && borderColors[entry.rank as 1 | 2 | 3],
+          isTop3 && 'border-2',
+        )}>
+          <CardContent className="bg-background flex items-center gap-2 md:gap-4 p-0 rounded-2xl md:rounded-3xl">
+            {/* Rank */}
+            <div
+              className={cn(
+                'absolute -top-3 -left-3 md:-top-4 md:-left-4 flex items-center justify-center size-10 md:size-12 rounded-full font-bold text-sm md:text-lg shrink-0 z-10 border-2 border-background shadow-sm',
+                isTop3
+                  ? rankColors[entry.rank as 1 | 2 | 3]
+                  : 'bg-primary text-primary-foreground',
+              )}
+            >
+              #{entry.rank}
+            </div>
+
+            {/* Image */}
+            {entry.coverImage && (
+              <div className="relative size-18 md:size-32 rounded-l-xl md:rounded-l-2xl overflow-hidden shrink-0">
+                <MediaItem
+                  webViewLink={entry.coverImage}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-linear-to-r from-transparent via-transparent to-background" />
+              </div>
             )}
-          >
-            {entry.rank}
-          </div>
 
-          {/* Image */}
-          {entry.coverImage && (
-            <div className="size-14 md:size-24 rounded-lg overflow-hidden shrink-0">
-              <MediaItem
-                webViewLink={entry.coverImage}
-                className="w-full h-full object-cover"
-              />
+            {/* Info */}
+            <div className="flex-1 flex flex-col gap-3 min-w-0 px-2">
+              <div className="flex flex-col">
+                <div className="flex items-center gap-2">
+                  <h3 className="text-sm md:text-base font-semibold leading-none truncate">{entry.name}</h3>
+                  {/* Rating */}
+                  <Badge variant="outline" className="text-[10px] md:text-xs border-0 p-0 flex items-center gap-0.5 shrink-0">
+                    <StarIcon className="size-3 md:size-3.5 fill-primary text-primary" />
+                    <span className="font-semibold">{entry.averageRating.toFixed(1)}</span>
+                    <span className="text-muted-foreground">({entry.totalReview})</span>
+                  </Badge>
+                </div>
+                <div className="flex gap-1 items-center">
+                  {entry.kabupatenKota && (
+                    <span className="text-xs md:text-sm text-muted-foreground flex items-center gap-0.5 md:gap-1 truncate">
+                      {entry.kabupatenKota.replace(/-/g, ' ')}
+                    </span>
+                  )}
+                  -
+                  <span className="text-xs md:text-sm text-muted-foreground flex items-center gap-0.5 md:gap-1 truncate">
+                    {entry.provinsi.replace(/-/g, ' ')}
+                  </span>
+                </div>
+              </div>
+              <p className="max-w-lg text-xs md:text-sm text-muted-foreground line-clamp-1">
+                {entry.description}
+              </p>
+              {/* Tags & Rating Row */}
+              <div className=" mt-0.5 md:mt-1">
+                {/* Multiple Hashtags */}
+                <div className="flex items-center gap-1 md:gap-1.5 flex-wrap">
+                  <Badge className="px-1.5 py-0 bg-primary/10 text-primary rounded-xl text-[10px] md:text-xs font-medium">
+                    # {entry.category.replace(/-/g, ' ')}
+                  </Badge>
+                  <Badge className="px-1.5 py-0 bg-primary/10 text-primary rounded-xl text-[10px] md:text-xs font-medium">
+                    # {entry.type.replace(/-/g, ' ')}
+                  </Badge>
+                </div>
+              </div>
             </div>
-          )}
 
-          {/* Info */}
-          <div className="flex-1 min-w-0">
-            <h3 className="text-sm md:text-base font-semibold truncate">{entry.name}</h3>
-            <p className="text-xs md:text-sm text-muted-foreground line-clamp-1">
-              {entry.description}
-            </p>
-            <div className="flex items-center gap-1 md:gap-2 mt-0.5 md:mt-1 flex-wrap">
-              <Badge variant="secondary" className="text-[10px] md:text-xs px-1.5 md:px-2">
-                {entry.category.replace(/-/g, ' ')}
-              </Badge>
-              <span className="text-[10px] md:text-xs text-muted-foreground flex items-center gap-0.5 md:gap-1 truncate">
-                <MapPin className="size-2.5 md:size-3" />
-                {entry.provinsi.replace(/-/g, ' ')}
-              </span>
+            {/* Vote Count */}
+            <div className="flex items-center gap-0.5 md:gap-1 px-2 md:px-4 text-primary font-semibold text-sm md:text-base shrink-0">
+              <ThumbsUp className="size-3.5 md:size-4" />
+              {entry.voteCount}
+              <span className="hidden sm:block">Votes</span>
             </div>
-          </div>
-
-          {/* Vote Count */}
-          <div className="flex items-center gap-0.5 md:gap-1 text-primary font-semibold text-sm md:text-base shrink-0">
-            <ThumbsUp className="size-3.5 md:size-4" />
-            <span>{entry.voteCount} Votes</span>
-          </div>
-        </CardContent>
-      </Card>
-    </Link>
-  )
+          </CardContent>
+        </Card>
+      </Link>
+    )
 }
+
 
 // ============================================
 // SKELETON
 // ============================================
-
 export function LeaderboardSkeleton() {
-  return (
-    <div className="container max-w-6xl mx-auto py-6 px-4 space-y-8">
-      {/* Header skeleton */}
-      <div className="text-center space-y-4">
-        <Skeleton className="h-12 w-64 mx-auto" />
-        <Skeleton className="h-6 w-96 mx-auto" />
-      </div>
+    return (
+      <div className="container max-w-6xl mx-auto py-6 px-4 space-y-8">
+        {/* Header skeleton */}
+        <div className="text-center space-y-4">
+          <Skeleton className="h-12 w-64 mx-auto" />
+          <Skeleton className="h-6 w-96 mx-auto" />
+        </div>
 
-      {/* Podium skeleton */}
-      <div className="flex items-center justify-center gap-4 md:gap-8 py-8">
-        <Skeleton className="h-48 w-36 md:w-48 rounded-xl" />
-        <Skeleton className="h-56 w-48 md:w-64 rounded-xl" />
-        <Skeleton className="h-48 w-36 md:w-48 rounded-xl" />
-      </div>
+        {/* Podium skeleton */}
+        <div className="flex items-center justify-center gap-4 md:gap-8 py-8">
+          <Skeleton className="h-48 w-36 md:w-48 rounded-xl" />
+          <Skeleton className="h-56 w-48 md:w-64 rounded-xl" />
+          <Skeleton className="h-48 w-36 md:w-48 rounded-xl" />
+        </div>
 
-      {/* Filter toolbar skeleton */}
-      <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center">
-        <Skeleton className="h-8 w-28 rounded-md" />
-        <Skeleton className="h-8 w-24 rounded-md" />
-        <Skeleton className="h-8 w-28 rounded-md" />
-      </div>
+        {/* Filter toolbar skeleton */}
+        <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center">
+          <Skeleton className="h-8 w-28 rounded-md" />
+          <Skeleton className="h-8 w-24 rounded-md" />
+          <Skeleton className="h-8 w-28 rounded-md" />
+        </div>
 
-      {/* List skeleton */}
-      <div className="space-y-3">
-        {Array.from({ length: 5 }).map((_, i) => (
-          <Skeleton key={i} className="h-24 w-full rounded-xl" />
-        ))}
+        {/* List skeleton */}
+        <div className="space-y-3">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Skeleton key={i} className="h-24 w-full rounded-xl" />
+          ))}
+        </div>
       </div>
-    </div>
-  )
-}
+    )
+  }

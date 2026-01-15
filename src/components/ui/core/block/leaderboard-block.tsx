@@ -180,27 +180,24 @@ export default function LeaderboardPage() {
   }, []) // Empty array = runs once on mount
 
   return (
-    <section className="container py-3 space-y-5">
+    <section className="container py-4.5 space-y-5">
       {/* Navigation */}
-      <nav className="flex items-center justify-between">
+      <nav className="z-50 top-0 bg-background/95 backdrop-blur flex items-center justify-between">
         <Link
           to="/"
           className={cn(
             buttonVariants({ variant: 'link' }),
-            'flex has-[>svg]:px-0 w-fit py-2 items-center gap-2 px-0 group',
+            'flex has-[>svg]:px-0 w-fit py-2 md:flex text-base items-center gap-2 px-0 group transition-colors',
           )}
         >
-          <ArrowLeft className="size-5 group-hover:-translate-x-1 transition-transform" />
+          <ArrowLeft className="size-5 group-hover:-translate-x-1 group-hover:transform transition-all ease-out duration-300" />
           <span>Kembali</span>
         </Link>
       </nav>
-
       {/* Header */}
       <header className="text-center space-y-2 md:space-y-4 pb-4 md:pb-5 border-b">
         {/* Trophy Animation */}
-        <div className="flex justify-center">
-          {TrophyAnimation}
-        </div>
+        <div className="flex justify-center">{TrophyAnimation}</div>
         <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight">
           Leaderboard Destinasi
         </h1>

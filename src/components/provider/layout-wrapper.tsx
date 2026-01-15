@@ -108,11 +108,7 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
             isMobile && 'pb-[12svh]', // Extra space for mobile bottom navbar
           )}
         >
-          <div
-            className={cn(
-              'mx-auto flex   flex-col gap-13 lg:gap-25 h-full w-full',
-            )}
-          >
+          <div className={cn('mx-auto flex   flex-col  gap-10 sm:gap-8   h-full w-full')}>
             {children}
           </div>
         </div>

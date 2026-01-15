@@ -13,17 +13,13 @@ import {
 import { useIsMobile } from '@/hooks/use-mobile'
 import { authClient } from '@/lib/auth/auth-client'
 import {
-  BookOpen,
   BookOpenText,
-  CircleStar,
-  Home,
-  Layers,
+  Gamepad,
+  Gamepad2,
   MapPin,
   Medal,
   Newspaper,
-  Search,
   Telescope,
-  UserRound,
 } from 'lucide-react'
 
 export default function SiteHeader() {
@@ -43,21 +39,24 @@ export default function SiteHeader() {
     {
       name: 'Peringkat',
       link: '/destinasi/leaderboard/',
-     
+    },
+    {
+      name: 'Game',
+      link: '/game',
+      icon: Gamepad,
     },
   ]
   const navItemsMobiles = [
-    // {
-    //   name: 'Home',
-    //   link: '/',
-    //   icon: Layers,
-    // },
     {
       name: 'Artikel',
       link: '/artikel/',
       icon: BookOpenText,
     },
-
+    {
+      name: 'Game',
+      link: '/game',
+      icon: Gamepad2,
+    },
     {
       name: 'Destinasi',
       link: '/destinasi/',
@@ -67,11 +66,6 @@ export default function SiteHeader() {
       name: 'Peringkat',
       link: '/destinasi/leaderboard/',
       icon: Medal,
-    },
-    {
-      name: 'Akun',
-      link: session ? '/dashboard/settings/' : '/login',
-      icon: UserRound,
     },
   ]
 
@@ -91,7 +85,7 @@ export default function SiteHeader() {
     )
   }
   return (
-    <Navbar className=" z-99999999">
+    <Navbar className=" z-999">
       {/* Desktop Navigaion */}
       <NavBody>
         <NavbarLogo />
@@ -102,7 +96,14 @@ export default function SiteHeader() {
               variant={'default'}
               size={'sm'}
               className=" rounded-xl"
-              href="/dashboard"
+              href={
+                (session && session.user.role === 'admin') ||
+                (session && session.user.role === 'superAdmin')
+                  ? '/dashboard'
+                  : session && session.user.role === 'pribumi'
+                    ? '/profile/destinasi'
+                    : '/login'
+              }
             >
               Dashboard
             </NavbarButton>

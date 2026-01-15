@@ -17,60 +17,75 @@ import {
   CardHeader,
   CardTitle,
 } from '../../shadcn-ui/card'
-import { Button, buttonVariants } from '../../shadcn-ui/button'
+import { buttonVariants } from '../../shadcn-ui/button'
 import MediaItem from '@/components/ui/fragments/custom-ui/media/media-item'
 import { cn } from '@/lib/utils'
 
 import { Link } from '@tanstack/react-router'
-import { batasiHuruf, batasiKata } from '@/hooks/use-word'
-import { Avatar, AvatarFallback, AvatarImage } from '../../shadcn-ui/avatar'
+
 import type { DestinasiDestination } from '@/lib/server/explore/destinasi-server-queries'
 import { Skeleton } from '../../shadcn-ui/skeleton'
-import {
-  categoryColors,
-  getProvinsiLabel,
-  provinsiLabels,
-} from '@/lib/utils/destination-utils'
+import { categoryColors, getProvinsiLabel } from '@/lib/utils/destination-utils'
 
 interface DestinasiCardProps {
   destination: DestinasiDestination
   className?: string
   index: number
   hovered: number | null
+  totalItems: number
   setHovered: React.Dispatch<React.SetStateAction<number | null>>
-  onClick?: (destination: DestinasiDestination) => void
 }
 
 function DestinasiCard({
   destination,
   className,
-  onClick,
+
+  totalItems = 0,
+
   index,
   hovered,
   setHovered,
 }: DestinasiCardProps) {
   // Get primary image
   const primaryImage = destination.coverImage
-
+  const columns = 3
   // Creator info
+  const isFirstRow = index < columns
+  const totalRows = Math.ceil(totalItems / columns)
+  const currentRow = Math.floor(index / columns) + 1
+  const isLastRow = currentRow === totalRows
+  const isFirstCol = index % columns === 0
+  const isLastCol = (index + 1) % columns === 0 || index === totalItems - 1
 
+  // Corner classes for grid corners only
+  const cornerClasses = cn(
+    isFirstRow &&
+      isFirstCol &&
+      ' rounded-t-3xl md:rounded-t-none md:rounded-tl-3xl',
+    isFirstRow && isLastCol && 'md:rounded-tr-3xl',
+    isLastRow && isFirstCol && 'md:rounded-bl-3xl',
+    isLastRow &&
+      isLastCol &&
+      'rounded-b-3xl md:rounded-b-none md:rounded-br-3xl',
+  )
   return (
     <Card
       onMouseEnter={() => setHovered(index)}
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        'relative  group  cursor-target w-full  m-auto  md:px-4 md:py-4  shadow-none  border  rounded-2xl',
+        'relative  group  cursor-target w-full  m-auto         rounded-2xl',
         'transform transition-all duration-300 hover:scale-105 hover:rotate-1 ',
-        'mx-auto cursor-target content-center w-full  p-3   border border-primary/5  shadow-sm  rounded-[30px]',
+        'mx-auto cursor-target content-center w-full        p-5  rounded-none shadow-none      bg-background  ',
         ' overflow-hidden hover:shadow-2xl flex flex-col h-full',
         'cursor-target',
-        hovered !== null && hovered !== index && 'lg:blur-sm lg:scale-[0.98]',
+        cornerClasses,
+        hovered !== null && hovered !== index && 'lg:blur-sm   lg:scale-[0.98]',
         className,
       )}
       style={{ willChange: 'transform' }}
-      onClick={() => onClick?.(destination)}
+      // onClick={() => onClick?.(destination)}
     >
-      <CardContent className=" rounded-[30px] content-center justify-center gap-4.5 flex flex-col flex-1 relative mx-auto  sm:px-4.5 py-3 w-full   border border-primary/5 bg-neutral-800/5    h-full  overflow-hidden shadow-sm md:items-start     ">
+      <CardContent className=" rounded-[30px] content-center justify-center gap-4.5 flex flex-col flex-1 relative mx-auto w-full      shadow-none  border-0   p-0 h-full   md:items-start     ">
         {/* Category Badge */}
 
         {/* Header */}
@@ -86,7 +101,7 @@ function DestinasiCard({
             <Tag className="mr-1 size-3 " />
             {destination.category}
           </Badge>
-          <CardTitle className="text-xl w-full  leading-6 font-bold tracking-tighter md:leading-6 line-clamp-2">
+          <CardTitle className="text-xl  w-full  leading-6 font-bold tracking-tighter md:leading-6 line-clamp-1">
             {destination.name}
           </CardTitle>
 
@@ -107,7 +122,7 @@ function DestinasiCard({
 
         {/* Creator Info */}
         <div className="space-y-4 w-full">
-          <div className="  gap-20 items-center  flex w-full justify-between">
+          <div className="  gap-20 items-center relative     w-full ">
             <div className="flex  gap-2.5  w-full items-start  justify-between   text-xs">
               <MapPin className=" size-6.5 fill-primary   text-background" />
 
@@ -120,28 +135,26 @@ function DestinasiCard({
                 </p>
               </div>
             </div>
-            <div className="flex flex-col gap-1 items-end">
+            <div className="flex flex-col absolute  bottom-1/2 right-0 top-1/2  gap-1 items-end">
               <Badge
                 variant="outline"
                 className="text-accent-foreground text-xs w-fit border-0 p-0"
               >
-                <StarIcon className="size-3.5 fill-primary text-primary mr-1" />
-                <span className="font-semibold ">
-                  {(destination.averageRating ?? 0).toLocaleString('id-ID')}
-                </span>
+                <ThumbsUp className="size-3.5 fill-primary text-primary mr-1" />
+                <span className="font-semibold ">{destination.totalVote}</span>
               </Badge>
             </div>
           </div>
           <div className="flex flex-wrap gap-1.5">
-            <Badge className="px-2 py-0 bg-primary/10 text-primary rounded-full text-xs font-medium">
-              <ThumbsUp />
-              {destination.totalVote}
-            </Badge>
-            <Badge className="px-2 py-0.5 bg-primary/10 text-primary rounded-full text-xs font-medium">
-              # {destination.category}
-            </Badge>
             <Badge className="px-2 py-0.5 bg-primary/10 text-primary rounded-full text-xs font-medium">
               # {destination.type}
+            </Badge>
+            <Badge
+              variant={'outline'}
+              className="px-2 py-0 bg-background text-primary rounded-full text-xs font-medium"
+            >
+              <StarIcon className=" fill-primary" />
+              {(destination.averageRating ?? 0).toLocaleString('id-ID')}
             </Badge>
           </div>
         </div>
@@ -171,11 +184,11 @@ export function SkeletonCard() {
     <Card
       className={cn(
         'relative group w-full m-auto md:px-4 md:py-4 shadow-none border rounded-2xl',
-        'mx-auto content-center w-full p-3 border border-primary/5 shadow-sm rounded-[30px]',
+        'mx-auto content-center w-full p-0  border   bg-background shadow-sm rounded-0',
         'overflow-hidden flex flex-col h-full',
       )}
     >
-      <CardContent className="rounded-[30px] content-center justify-center gap-5 flex flex-col flex-1 relative mx-auto p-6 w-full border border-primary/5 bg-neutral-800/5 h-full overflow-hidden shadow-sm md:items-start">
+      <CardContent className="  content-center justify-center  gap-5 flex flex-col flex-1 relative mx-auto p-0 w-full h-full   shadow-none md:items-start">
         {/* Header Section */}
         <CardHeader className="p-0 w-full max-w-[15em] gap-2.5">
           {/* Category Badge Skeleton */}
@@ -199,7 +212,7 @@ export function SkeletonCard() {
 
         {/* Creator Info & Stats Section */}
         <div className="space-y-4 w-full">
-          <div className="gap-20 flex w-full justify-between">
+          <div className="gap-20  relative flex w-full justify-between">
             {/* Creator Info - Left */}
             <div className="flex gap-3 w-full items-start justify-between text-xs">
               {/* Avatar Skeleton */}
@@ -213,7 +226,7 @@ export function SkeletonCard() {
             </div>
 
             {/* Stats - Right */}
-            <div className="flex flex-col gap-1 items-end">
+            <div className=" absolute gap-1 top-0  right-0 items-end">
               {/* Vote Badge Skeleton */}
               <Skeleton className="h-5 w-12 rounded-xl" />
             </div>

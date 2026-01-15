@@ -296,3 +296,43 @@ export const getDestinationById = createServerFn({ method: 'GET' })
 
     return result
   })
+
+// ============================================
+// GET USER DESTINATIONS
+// ============================================
+
+const getUserDestinationsSchema = z.object({
+  status: z.enum(['published', 'draft', 'all']).optional().default('all'),
+})
+
+export const getUserDestinationsByStatus = createServerFn({ method: 'GET' })
+  .middleware([authServerMiddleware])
+  .inputValidator(getUserDestinationsSchema)
+  .handler(async ({ data, context }) => {
+    const db = await getDb()
+    const userId = context.user!.id
+
+    const conditions = [eq(destination.userId, userId)]
+
+    if (data.status && data.status !== 'all') {
+      conditions.push(eq(destination.status, data.status))
+    }
+
+    const results = await db.query.destination.findMany({
+      where: and(...conditions),
+      orderBy: (destination, { desc }) => [desc(destination.createdAt)],
+      columns: {
+        id: true,
+        name: true,
+        slug: true,
+        category: true,
+        provinsi: true,
+        status: true,
+        coverImage: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    })
+
+    return results
+  })

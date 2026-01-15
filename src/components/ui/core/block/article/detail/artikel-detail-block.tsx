@@ -1,14 +1,18 @@
 'use client'
 import { Link } from '@tanstack/react-router'
-import { ArrowLeft, Calendar } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 
 import RecommendedArticles from './recommended-articles'
 import type { Article } from '@/db/schema'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/fragments/shadcn-ui/avatar'
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from '@/components/ui/fragments/shadcn-ui/avatar'
 import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
-import MediaItem from '@/components/ui/fragments/custom-ui/media/media-item'
-import { cn } from '@/lib/utils'
 
+import { cn } from '@/lib/utils'
+import { formatDate } from '@/lib/format'
 
 interface ArticleDetailProps {
   article: Article & {
@@ -23,106 +27,32 @@ interface ArticleDetailProps {
 
 export default function ArtikelDetailBlock({ article }: ArticleDetailProps) {
   // Format date
-  const publishedDate = article.publishedAt
-    ? new Date(article.publishedAt).toLocaleDateString('id-ID', {
-      weekday: 'long',
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    })
-    : null
 
   const author = article.author
 
   return (
-    <div className="container py-3 px-5 space-y-7">
+    <article className="space-y-7   py-6 sm:pt-5     container  px-6 ">
+      {/* Header Section */}
+      <header className=" space-y-4 lg:space-y-6 ">
+        {/* Navigation */}
 
-      {/* Article Content */}
-      <article className="min-h-lvh space-y-8">
-        {/* Header Section */}
-        <header className="max-w-3xl mx-auto space-y-6">
-          {/* Navigation */}
-          <nav className="relative w-full">
-            <div className="px-0 relative w-full container flex items-center justify-between ">
-              <Link
-                to={'/artikel'}
-                className={cn(
-                  buttonVariants({ variant: 'link', size: 'lg' }),
-                  'flex has-[>svg]:px-0 text-sm  text-primary w-fit py-2 md:flex items-center gap-2 px-0 group transition-colors',
-                )}
-              >
-                <ArrowLeft className="size-5 group-hover:-translate-x-1  group-hover:transform transition-all ease-out duration-300" />
-                <span className="text-primary">Kembali</span>
-              </Link>
-            </div>
-          </nav>
-
-          <div className="space-y-1">
-            {/* Title */}
-            <h1 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight">
-              {article.title}
-            </h1>
-
-            {/* Excerpt */}
-            {article.excerpt && (
-              <p className="text-lg text-muted-foreground leading-none">
-                {article.excerpt}
-              </p>
+        <nav className="z-50 top-0 bg-background/95 backdrop-blur flex items-center justify-between">
+          <Link
+            to="/artikel"
+            className={cn(
+              buttonVariants({ variant: 'link' }),
+              'flex has-[>svg]:px-0 w-fit py-2 md:flex text-base items-center gap-2 px-0 group transition-colors',
             )}
-          </div>
-
-          {/* Divider */}
-          <div className="h-1 w-36 bg-primary rounded-full" />
-
-          {/* Author Info */}
-          <div className="flex items-center gap-3">
-            <Avatar className="size-7">
-              {author.image && (
-                <AvatarImage src={author.image} alt={author.name} />
-              )}
-              <AvatarFallback>{(author.name || 'U').charAt(0)}</AvatarFallback>
-            </Avatar>
-            <div className="flex items-center flex-row gap-5">
-              <p className="font-medium flex items-center gap-1">
-                {author.name}
-              </p>
-              {publishedDate && (
-                <p className="text-sm text-muted-foreground flex items-center gap-1">
-                  <Calendar className="size-3" />
-                  {publishedDate}
-                </p>
-              )}
-            </div>
-          </div>
-
-          {/* Cover Image */}
-          {article.coverImage && (
-            <div className="relative rounded-2xl">
-              <div className="rounded-2xl h-fit w-full overflow-hidden">
-                <MediaItem
-                  webViewLink={article.coverImage}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="absolute inset-0 bg-linear-to-b from-transparent via-background/15 to-background rounded-2xl pointer-events-none" />
-            </div>
-          )}
-        </header>
-
-
-        {/* Article Content */}
-        {article.content && (
-          <div
-            className="prose prose-lg max-w-3xl mx-auto dark:prose-invert prose-headings:tracking-tight prose-p:leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: article.content }}
-          />
-        )}
-
-        {/* Footer */}
-        <footer className="max-w-3xl mx-auto pt-8 border-t">
-          <div className="flex items-center justify-between">
+          >
+            <ArrowLeft className="size-5 group-hover:-translate-x-1 group-hover:transform transition-all ease-out duration-300" />
+            <span>Kembali</span>
+          </Link>
+        </nav>
+        <div className="space-y-4">
+          {/* Title */}
+          <div className="flex items-center justify-between ">
             <div className="flex items-center gap-3">
-              <Avatar className="size-12">
+              <Avatar className="size-10">
                 {author.image && (
                   <AvatarImage src={author.image} alt={author.name} />
                 )}
@@ -131,15 +61,83 @@ export default function ArtikelDetailBlock({ article }: ArticleDetailProps) {
                 </AvatarFallback>
               </Avatar>
               <div>
-                <p className="font-semibold">Ditulis oleh</p>
-                <p className="text-muted-foreground">{author.name}</p>
+                <p className="font-semibold">{author.name}</p>
+                <p className="text-muted-foreground">
+                  {formatDate(article.createdAt)}
+                </p>
               </div>
             </div>
           </div>
-        </footer>
-        {/* Recommended Articles Section */}
-        <RecommendedArticles currentSlug={article.slug} />
-      </article>
-    </div>
+          <div className=" space-y-4">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight ">
+              {article.title}
+            </h1>
+
+            {/* Excerpt */}
+            {article.excerpt && (
+              <p className="text-lg lg:text-xl   text-muted-foreground  ">
+                {article.excerpt}
+              </p>
+            )}
+          </div>
+        </div>
+      </header>
+      <div className="h-1  w-full max-w-xs bg-primary rounded-full" />
+      <div className=" border-b pb-10 mb-20   space-y-5">
+        {/* Divider */}
+
+        {/* Author Info */}
+
+        {/* Cover Image */}
+        {article.coverImage && (
+          <section
+            style={{
+              backgroundImage: `url(${article.coverImage})`,
+            }}
+            className={cn(
+              'relative min-h-67 md:min-h-90 rounded-t-2xl  bg-fixed bg-no-repeat bg-center  bg-cover  flex items-center justify-center overflow-hidden hero-parallax  ',
+            )}
+          >
+            {/* <nav className="z-50 absolute  top-3  w-full    ">
+              <div className=" relative  w-full   max-w-5xl   px-5 container    flex items-center justify-between ">
+                <Link
+                  to={'/destinasi'}
+                  className={cn(
+                    buttonVariants({ variant: 'link', size: 'lg' }),
+                    'flex has-[>svg]:px-0 text-sm  text-background w-fit py-2 md:flex items-center gap-2 px-0 group transition-colors',
+                  )}
+                >
+                  <ArrowLeft className="size-5 group-hover:-translate-x-1  group-hover:transform transition-all ease-out duration-300" />
+                  <span className=" sr-only ">Kembali</span>
+                </Link>
+                <Link
+                  to={'/destinasi'}
+                  className={cn(
+                    buttonVariants({ variant: 'link', size: 'lg' }),
+                    'flex has-[>svg]:px-0 text-sm  text-background w-fit py-2 md:flex items-center gap-2 px-0 group transition-colors',
+                  )}
+                >
+                  <MoreVertical className="size-5 group-hover:-translate-x-1  group-hover:transform transition-all ease-out duration-300" />
+                  <span className=" sr-only ">Kembali</span>
+                </Link>
+              </div>
+            </nav> */}
+            <div className="absolute inset-0 bg-linear-to-b from-background/10 via-background/50 to-background     " />
+          </section>
+        )}
+        {article.content && (
+          <p
+            className="prose mt-6 prose-lg  mx-auto dark:prose-invert prose-headings:tracking-tight tracking-wide text-lg   lg:text-xl lg:leading-8 leading-7 prose-a:text-primary prose-a:underline prose-a:underline-offset-4"
+            dangerouslySetInnerHTML={{ __html: article.content }}
+          />
+        )}
+      </div>
+
+      {/* Article Content */}
+      {/* Footer */}
+
+      {/* Recommended Articles Section */}
+      <RecommendedArticles currentSlug={article.slug} />
+    </article>
   )
 }

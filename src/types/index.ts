@@ -21,9 +21,30 @@ export interface NavItem {
   isActive?: boolean
 }
 
+export interface ChartDataType {
+  date: string
+
+  orders?: number
+  revenue?: number
+  [key: string]: number
+}
+
+export interface TopDestination {
+  nama_jurusan: string
+  siswas_count: number
+}
+
 /**
  * Result type dari aggregate query
  */
+
+export interface DataCard {
+  title: string
+  description: string
+  value: number | number
+  icon: LucideIcon
+  label?: string
+}
 
 export interface Destinasi {
   id: string

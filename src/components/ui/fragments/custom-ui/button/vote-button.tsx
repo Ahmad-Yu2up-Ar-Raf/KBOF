@@ -22,6 +22,7 @@ import { Spinner } from '../../shadcn-ui/spinner'
 import { useSession } from '@/lib/auth/auth-client'
 import { useCheckUserVote, useToggleVote } from '@/hooks/use-vote-mutations'
 import { cn } from '@/lib/utils'
+import { useNavigate } from '@tanstack/react-router'
 
 function VoteButton({ destination }: DestinasiDetailBlockProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -51,10 +52,13 @@ function VoteButton({ destination }: DestinasiDetailBlockProps) {
       toast.error(error.message)
     },
   })
-
+  const navigate = useNavigate()
   // Handle button click for unauthenticated users
   const handleVoteClick = () => {
     if (!session?.user) {
+      navigate({
+        to: '/login',
+      })
       toast.error('Silakan login terlebih dahulu untuk memberikan vote')
       return
     }

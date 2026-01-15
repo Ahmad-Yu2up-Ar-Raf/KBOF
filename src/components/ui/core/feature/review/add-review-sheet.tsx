@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, Activity } from 'react'
+import React, { useState, useRef, Activity } from 'react'
 import { toast } from 'sonner'
 import { Plus, Star } from 'lucide-react'
 
@@ -32,6 +32,7 @@ import { useCreateReviewForm } from '@/hooks/form/use-review-form'
 import { useCheckUserReview } from '@/hooks/use-review-mutations'
 import { useSession } from '@/lib/auth/auth-client'
 import ReviewForm from '../form/review-form'
+import { useNavigate } from '@tanstack/react-router'
 
 // ============================================
 // TYPES
@@ -88,10 +89,13 @@ function AddReviewSheet({
       toast.error(error.message)
     },
   })
-
+  const navigate = useNavigate()
   // Handle unauthenticated users
   const handleTriggerClick = () => {
     if (!session?.user) {
+      navigate({
+        to: '/login',
+      })
       toast.error('Silakan login terlebih dahulu untuk memberikan review')
       return
     }
@@ -139,10 +143,9 @@ function AddReviewSheet({
         <Activity mode={props.trigger ? 'hidden' : 'visible'}>
           <SheetTrigger asChild>{TriggerButton}</SheetTrigger>
         </Activity>
-        <SheetContent className="flex flex-col gap-0 overflow-y-auto">
-          <SheetHeader className="text-left sm:px-6 space-y-1 bg-background z-30 sticky top-0 p-4 border-b">
+        <SheetContent className="flex flex-col z-999999999999 gap-0 overflow-y-auto">
+          <SheetHeader className="text-left sm:px-6   bg-background z-30 sticky top-0 p-4 border-b">
             <SheetTitle className="text-lg flex items-center gap-2">
-              <Star className="size-5 text-amber-400 fill-amber-400" />
               Berikan Review
             </SheetTitle>
             <SheetDescription>
@@ -196,10 +199,10 @@ function AddReviewSheet({
         <DrawerTrigger asChild>{TriggerButton}</DrawerTrigger>
       </Activity>
 
-      <DrawerContent className="flex flex-col max-h-[90vh]">
-        <DrawerHeader className="text-left px-4 space-y-1 bg-background border-b">
-          <DrawerTitle className="text-xl flex items-center gap-2">
-            <Star className="size-5 text-amber-400 fill-amber-400" />
+      <DrawerContent className="flex  z-999999999999  flex-col max-h-[90vh]">
+        <DrawerHeader className=" text-center sm:px-6 space-y-1 bg-background p-4 border-b">
+          <DrawerTitle className="text-xl  gap-2">
+            {/* <Star className="size-5 text-primary fill-primary" /> */}
             Berikan Review
           </DrawerTitle>
           <DrawerDescription className="text-sm">

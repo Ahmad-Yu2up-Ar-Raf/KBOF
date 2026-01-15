@@ -233,3 +233,46 @@ export const getRecommendedArticlesServerFn = createServerFn({
       author: item.author ?? { id: '', name: 'Unknown', image: null },
     })) as Array<PublicArticle>
   })
+
+// ============================================
+// GET FEATURED ARTICLES (for homepage)
+// ============================================
+
+export const getFeaturedArticlesServerFn = createServerFn({
+  method: 'GET',
+})
+  .inputValidator(
+    z.object({
+      limit: z.number().int().positive().default(4),
+    }),
+  )
+  .handler(async ({ data: { limit } }) => {
+    const db = await getDb()
+
+    // Get featured articles (newest published first)
+    const data = await db
+      .select({
+        id: article.id,
+        slug: article.slug,
+        title: article.title,
+        excerpt: article.excerpt,
+        coverImage: article.coverImage,
+        publishedAt: article.publishedAt,
+        createdAt: article.createdAt,
+        author: {
+          id: user.id,
+          name: user.name,
+          image: user.image,
+        },
+      })
+      .from(article)
+      .leftJoin(user, eq(article.authorId, user.id))
+      .where(eq(article.status, 'published'))
+      .orderBy(desc(article.publishedAt), desc(article.id))
+      .limit(limit)
+
+    return data.map((item) => ({
+      ...item,
+      author: item.author ?? { id: '', name: 'Unknown', image: null },
+    })) as Array<PublicArticle>
+  })

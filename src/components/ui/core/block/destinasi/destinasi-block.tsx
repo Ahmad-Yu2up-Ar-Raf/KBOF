@@ -210,7 +210,11 @@ export default function DestinasiBlock() {
   return (
     <section className="container py-3 space-y-5">
       {/* Filters - Category, Type, Provinsi */}
-      <FilterToolbar showReset={hasActiveFilters} onReset={handleResetFilter}>
+      <FilterToolbar
+        showReset={hasActiveFilters}
+        className=""
+        onReset={handleResetFilter}
+      >
         {/* Category Filter */}
         <FacetedFilter
           title="Kategori"
@@ -315,7 +319,7 @@ export default function DestinasiBlock() {
       </div>
 
       {/* Grid */}
-      <div className="grid gap-7 md:gap-3  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full auto-rows-fr">
+      <div className="grid    grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full auto-rows-fr">
         {destinations.length > 0 ? (
           destinations.map((destination: DestinasiDestination, i: number) => (
             <DestinasiCard
@@ -324,7 +328,7 @@ export default function DestinasiBlock() {
               hovered={hovered}
               setHovered={setHovered}
               destination={destination}
-              onClick={handleCardClick}
+              totalItems={destinations.length}
             />
           ))
         ) : (
@@ -369,11 +373,11 @@ export function DestinasiBlockSkeleton() {
     <section className="py-1 w-full container md:py-2 sm:px-8 px-1.5 flex-1">
       <div className="space-y-5">
         {/* Filter Toolbar Skeleton */}
-        <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center px-5">
-          <Skeleton className="h-8 w-28 rounded-md" />
-          <Skeleton className="h-8 w-24 rounded-md" />
-          <Skeleton className="h-8 w-28 rounded-md" />
-          <Skeleton className="h-8 w-24 rounded-md" />
+        <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center px-5 md:px-0">
+          <Skeleton className="h-8 w-28 rounded-xl" />
+          <Skeleton className="h-8 w-24 rounded-xl" />
+          <Skeleton className="h-8 w-28 rounded-xl" />
+          <Skeleton className="h-8 w-24 rounded-xl" />
         </div>
 
         {/* Current Filter Info */}
@@ -382,7 +386,7 @@ export function DestinasiBlockSkeleton() {
         </div>
 
         {/* Grid */}
-        <div className="grid gap-7 md:gap-3 px-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full auto-rows-fr">
+        <div className="grid  px-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full auto-rows-fr">
           {Array.from({ length: 6 }, (_, index) => (
             <SkeletonCard key={index} />
           ))}

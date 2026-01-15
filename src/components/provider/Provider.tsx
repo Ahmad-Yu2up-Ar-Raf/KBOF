@@ -11,6 +11,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import { LayoutWrapper } from './layout-wrapper'
 import { useMatches } from '@tanstack/react-router'
+import { Spinner } from '../ui/fragments/shadcn-ui/spinner'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,7 +33,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
     '/(auth)/login',
     '/(auth)/register',
     '/dashboard',
- 
+
     '/$', // 404 page
   ]
 
@@ -97,7 +98,9 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
 
   if (isInitializing) {
     return (
-      <div className="flex min-h-lvh w-full content-center justify-center items-center" />
+      <div className="flex min-h-lvh w-full content-center justify-center items-center">
+        <Spinner />
+       </div>
     )
   }
 

@@ -30,19 +30,10 @@ export const Route = createFileRoute('/artikel/')({
 function RouteComponent() {
   return (
     <div className="mx-auto container max-w-6xl space-y-4 pt-5">
+      <ArticleHeader />
       <Suspense fallback={<ArticleBlockSkeleton />}>
-        <ArticleContent />
+        <ArticleBlock />
       </Suspense>
     </div>
-  )
-}
-
-// Separate component to use nuqs hooks
-function ArticleContent() {
-  return (
-    <>
-      <ArticleHeader />
-      <ArticleBlock />
-    </>
   )
 }

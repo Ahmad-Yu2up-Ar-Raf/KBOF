@@ -1,6 +1,6 @@
 'use client'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { useNavigate } from '@tanstack/react-router'
+
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { parseAsString, parseAsStringLiteral, useQueryState } from 'nuqs'
 import { Loader2 } from 'lucide-react'
@@ -9,7 +9,7 @@ import type { PublicArticle } from '@/lib/server/article/article-public-queries'
 
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
 import { Skeleton } from '@/components/ui/fragments/shadcn-ui/skeleton'
-import { cn } from '@/lib/utils'
+
 import ArticleCard, {
   ArticleCardSkeleton,
 } from '@/components/ui/fragments/custom-ui/card/article-card'
@@ -24,8 +24,6 @@ const sortOptions = [
 ] as const
 
 export default function ArticleBlock() {
-  const navigate = useNavigate()
-
   // Local UI state
   const [hovered, setHovered] = useState<number | null>(null)
   const loadMoreRef = useRef<HTMLDivElement | null>(null)
@@ -106,16 +104,6 @@ export default function ArticleBlock() {
     void setSortBy(null)
   }, [setSearch, setSortBy])
 
-  const handleCardClick = useCallback(
-    (article: PublicArticle) => {
-      void navigate({
-        to: '/artikel/$artikelId',
-        params: { artikelId: article.slug },
-      })
-    },
-    [navigate],
-  )
-
   const hasActiveFilters = sortBy !== 'newest' || search !== ''
 
   if (isLoading) {
@@ -144,13 +132,12 @@ export default function ArticleBlock() {
     <section className="py-1 w-full container md:py-2 sm:px-8 px-1.5 flex-1">
       <div className="space-y-5">
         {/* Sort Options */}
-        <div className="flex items-center gap-2   overflow-x-auto">
+        <div className="flex items-center gap-2  mt-1 px-1.5 sm:px-0  overflow-x-auto">
           {sortOptions.map((option) => (
             <Button
               key={option.value}
               variant={sortBy === option.value ? 'default' : 'outline'}
               onClick={() => void setSortBy(option.value)}
-             
             >
               {option.label}
             </Button>
@@ -196,7 +183,7 @@ export default function ArticleBlock() {
                 hovered={hovered}
                 setHovered={setHovered}
                 article={article}
-                onClick={handleCardClick}
+                // onClick={handleCardClick}
                 totalItems={articles.length}
                 columns={2}
               />
@@ -226,11 +213,11 @@ export default function ArticleBlock() {
               <span>Memuat lebih banyak...</span>
             </div>
           )}
-          {!hasNextPage && articles.length > 0 && (
+          {/* {!hasNextPage && articles.length > 0 && (
             <p className="text-muted-foreground text-sm">
               Kamu sudah melihat semua artikel 🎉
             </p>
-          )}
+          )} */}
         </div>
       </div>
     </section>

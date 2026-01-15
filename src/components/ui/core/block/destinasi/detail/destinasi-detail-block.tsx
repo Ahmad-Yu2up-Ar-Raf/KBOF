@@ -171,17 +171,17 @@ export default function DestinasiDetailBlock({
           'relative min-h-67  bg-fixed bg-no-repeat bg-center  bg-cover  flex items-center justify-center overflow-hidden hero-parallax  ',
         )}
       >
-        <nav className="z-50 absolute  top-3  w-full    ">
+        <nav className="z-50 absolute px-0  container  top-3  w-full    ">
           <div className=" relative  w-full   max-w-5xl   px-5 container    flex items-center justify-between ">
             <Link
               to={'/destinasi'}
               className={cn(
                 buttonVariants({ variant: 'link', size: 'lg' }),
-                'flex has-[>svg]:px-0 text-sm  text-background w-fit py-2 md:flex items-center gap-2 px-0 group transition-colors',
+                'flex has-[>svg]:px-0 text-sm text-primary   w-fit py-2 md:flex items-center gap-2 px-0 group transition-colors',
               )}
             >
               <ArrowLeft className="size-5 group-hover:-translate-x-1  group-hover:transform transition-all ease-out duration-300" />
-              <span className=" sr-only ">Kembali</span>
+              <span className="  y ">Kembali</span>
             </Link>
             <Link
               to={'/destinasi'}
@@ -195,9 +195,11 @@ export default function DestinasiDetailBlock({
             </Link>
           </div>
         </nav>
-        <div className="absolute inset-0 bg-linear-to-b from-background/10 via-background/50 to-background     " />
+        <div className="absolute inset-0 bg-linear-to-b from-background/10 via-background/10 to-background     " />
+        <div className="absolute inset-0 bg-linear-to-r from-background/10 via-background/0 to-background     " />
+        <div className="absolute inset-0 bg-linear-to-l from-background/10 via-background/0 to-background     " />
       </section>
-      <div className="container space-y-4 -mt-10 h-full  relative ">
+      <div className="container space-y-4 -mt-15 h-full  relative ">
         <div className="        md:flex    gap-4    sm:gap-20            relative  space-y-6">
           {/* Key prop forces remount when destination changes */}
           <ThumnailSlider

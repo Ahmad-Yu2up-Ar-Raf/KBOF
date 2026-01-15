@@ -30,7 +30,7 @@ function DestinationForm({ form, children }: DestinationFormProps) {
             {(field) => (
               <field.Input
                 label="Nama Destinasi"
-                placeholder="Contoh: Candi Borobudur"
+                placeholder="Candi Borobudur"
                 description="Nama destinasi wisata atau budaya."
               />
             )}
@@ -93,10 +93,7 @@ function DestinationForm({ form, children }: DestinationFormProps) {
 
           <form.AppField name="kabupatenKota">
             {(field) => (
-              <field.Input
-                label="Kabupaten/Kota"
-                placeholder="Contoh: Magelang"
-              />
+              <field.Input label="Kabupaten/Kota" placeholder="Magelang" />
             )}
           </form.AppField>
 

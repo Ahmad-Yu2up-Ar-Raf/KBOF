@@ -1,5 +1,5 @@
 import { useMatches, useRouter } from '@tanstack/react-router'
-import { useEffect, useRef } from 'react'
+import { Activity, useEffect, useRef } from 'react'
 import SiteFooter from '../ui/core/layout/nav/site-footer'
 import SiteBorder from '../ui/core/layout/nav/site-border'
 import { cn } from '@/lib/utils'
@@ -98,17 +98,19 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
     return (
       <ReactLenis root>
         <ScrollToTop />
-        {!isMobile && <SiteBorder />}
+
+        <SiteBorder />
+
         {/* Add padding-bottom on mobile to account for fixed navbar */}
         <div
           className={cn(
-            'relative min-h-lvh w-full pb-10',
+            'relative  min-h-lvh w-full pb-10',
             isMobile && 'pb-[12svh]', // Extra space for mobile bottom navbar
           )}
         >
           <div
             className={cn(
-              'mx-auto flex  flex-col gap-13 lg:gap-25 h-full w-full',
+              'mx-auto flex   flex-col gap-13 lg:gap-25 h-full w-full',
             )}
           >
             {children}

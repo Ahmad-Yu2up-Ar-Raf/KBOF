@@ -7,6 +7,7 @@ import {
   LayoutDashboardIcon,
   Newspaper,
   MapPin,
+  Users,
 } from 'lucide-react'
 
 import { NavMain } from './nav-main'
@@ -21,7 +22,7 @@ import {
 } from '@/components/ui/fragments/shadcn-ui/sidebar'
 import { NavSecondary } from './nav-secondary'
 import { useIsMobile } from '@/hooks/use-mobile'
-import type { User } from '@/db/schema'
+import type { User, UserRoleType } from '@/db/schema'
 import SidebarHeaderLogo from './app-sidebar-header'
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
@@ -33,24 +34,38 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
   const massage: string = 'Hi Yusuf, I want to discuss a project with you!'
   const link: string = `https://api.whatsapp.com/send?phone=${number}&text=${massage}&type=phone_number&app_absent=0`
 
+  const isSuperAdmin = (user.role as UserRoleType) === 'superAdmin'
+
+  const navMain = [
+    {
+      title: 'Dashboard',
+      url: '/dashboard',
+      icon: LayoutDashboardIcon,
+    },
+    {
+      title: 'Destination',
+      url: '/dashboard/destination',
+      icon: MapPin,
+    },
+    {
+      title: 'Article',
+      url: '/dashboard/articles',
+      icon: Newspaper,
+    },
+    // Only show for SuperAdmin
+    ...(isSuperAdmin
+      ? [
+          {
+            title: 'Users',
+            url: '/dashboard/user-menagement',
+            icon: Users,
+          },
+        ]
+      : []),
+  ]
+
   const data = {
-    navMain: [
-      {
-        title: 'Dashboard',
-        url: '/dashboard',
-        icon: LayoutDashboardIcon,
-      },
-      {
-        title: 'Destination',
-        url: '/dashboard/destination',
-        icon: MapPin,
-      },
-      {
-        title: 'Article',
-        url: '/dashboard/articles',
-        icon: Newspaper,
-      },
-    ],
+    navMain,
     navSecondary: [
       {
         title: 'Support',

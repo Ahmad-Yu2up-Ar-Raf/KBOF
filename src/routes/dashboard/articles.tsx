@@ -1,6 +1,7 @@
 import { createFileRoute, useSearch } from '@tanstack/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { Newspaper } from 'lucide-react'
+import { Newspaper, FileText, Plus } from 'lucide-react'
+import { Suspense, useState } from 'react'
 
 import Heading from '@/components/ui/fragments/custom-ui/typography/heading'
 import { DataTableSkeleton } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-skeleton'
@@ -10,11 +11,11 @@ import CreateArticleSheet from '@/components/ui/core/feature/data-table/article/
 import { articleSearchSchema } from '@/lib/validations/article-validations'
 import { getValidFilters } from '@/lib/data-table'
 import {
-  getArticleQueryOptions,
+  getArticleAdminQueryOptions,
   type ArticleAggregateInput,
 } from '@/lib/query-options'
 import { queryClient } from '@/components/provider/Provider'
-import { Suspense } from 'react'
+import { EmptyState } from '@/components/ui/fragments/custom-ui/empty-state'
 
 // ============================================
 // HELPER: Build filters from search params
@@ -51,7 +52,8 @@ export const Route = createFileRoute('/dashboard/articles')({
     const search = articleSearchSchema.parse(q)
     const filters = buildFilters(search)
 
-    await queryClient.ensureQueryData(getArticleQueryOptions(filters))
+    // Use admin query - fetches ALL articles for admin panel
+    await queryClient.ensureQueryData(getArticleAdminQueryOptions(filters))
 
     return { filters }
   },
@@ -78,11 +80,18 @@ function ArticlePageSkeleton() {
 function RouteComponent() {
   const search = useSearch({ from: '/dashboard/articles' })
   const filters = buildFilters(search)
+  const [sheetOpen, setSheetOpen] = useState(false)
 
-  // ⭐ useSuspenseQuery reads from cache (populated by loader)
+  // ⭐ useSuspenseQuery reads from cache (populated by loader) - ADMIN version
   const { data: articleData } = useSuspenseQuery(
-    getArticleQueryOptions(filters),
+    getArticleAdminQueryOptions(filters),
   )
+
+  // Check if database is truly empty (no data at all, not just filtered)
+  const { statusCounts } = articleData
+  const totalDataCount =
+    statusCounts.published + statusCounts.draft + statusCounts.archived
+  const isDatabaseEmpty = totalDataCount === 0
 
   return (
     <div>
@@ -93,11 +102,29 @@ function RouteComponent() {
         description="Kelola artikel dan konten edukasi tentang wisata dan budaya Indonesia."
       />
       <main>
-        <Suspense fallback={<DataTableSkeleton />}>
-          <FeatureFlagsProvider createSheet={<CreateArticleSheet />}>
-            <ArticleTable data={articleData} />
-          </FeatureFlagsProvider>
-        </Suspense>
+        {isDatabaseEmpty ? (
+          // Database is truly empty - show only EmptyState + Sheet
+          <>
+            <EmptyState
+              title="Belum ada artikel"
+              description="Tambahkan artikel atau konten edukasi tentang wisata dan budaya Indonesia."
+              icons={[Newspaper, FileText, Plus]}
+              action={{
+                label: 'Tambah Artikel',
+                onClick: () => setSheetOpen(true),
+              }}
+            />
+            <CreateArticleSheet className=' sr-only' open={sheetOpen} onOpenChange={setSheetOpen}/>
+           
+          </>
+        ) : (
+          // Has data - show full DataTable with filters
+          <Suspense fallback={<DataTableSkeleton />}>
+            <FeatureFlagsProvider createSheet={<CreateArticleSheet />}>
+              <ArticleTable data={articleData} />
+            </FeatureFlagsProvider>
+          </Suspense>
+        )}
       </main>
     </div>
   )

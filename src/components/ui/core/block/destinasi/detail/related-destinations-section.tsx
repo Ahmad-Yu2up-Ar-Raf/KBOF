@@ -55,7 +55,7 @@ function RelatedDestinationCard({
         params={{ destinasiId: destination.slug }}
         to={`/destinasi/$destinasiId`}
       >
-        <div className="pointer-events-none z-30 absolute inset-x-0 bottom-0 h-5/6 bg-gradient-to-t from-black/90 dark:from-black" />
+        <div className="pointer-events-none z-30 absolute inset-x-0 bottom-0 h-5/6 bg-gradient-to-t from-accent-foreground/90 dark:from-accent-foreground" />
 
         <CardContent className=" p-0  z-20 w-full h-full absolute shadow-none">
           <MediaItem
@@ -135,7 +135,7 @@ export function RelatedDestinationsSection({
       <header className="flex border-b pb-7  items-center justify-between">
         <div className="space-y-1">
           <h2 className="text-2xl font-bold tracking-tight">
-            Rekomendasi Destinasi
+            Destinasi Serupa
           </h2>
           <p className="text-muted-foreground">
             Destinasi lainnya yang mungkin Anda suka
@@ -145,8 +145,8 @@ export function RelatedDestinationsSection({
           to="/destinasi"
           search={{ categories: [category] }}
           className={cn(
-            buttonVariants({ variant: 'ghost', size: 'sm' }),
-            'text-xs text-muted-foreground hover:text-primary gap-1',
+            buttonVariants({ variant: 'link', size: 'lg' }),
+            ' text-muted-foreground hover:text-primary gap-1',
           )}
         >
           Lihat Semua
@@ -167,6 +167,19 @@ export function RelatedDestinationsSection({
           ))}
         </div>
       )}
+      <footer className=" md:sr-only mt-7 w-full flex justify-center">
+        <Link
+          to="/destinasi"
+          search={{ categories: [category] }}
+          className={cn(
+            buttonVariants({ variant: 'link', size: 'lg' }),
+            ' text-muted-foreground hover:text-primary gap-1',
+          )}
+        >
+          Lihat Semua
+          <ChevronRight className="size-3" />
+        </Link>
+      </footer>
     </section>
   )
 }

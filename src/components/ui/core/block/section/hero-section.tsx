@@ -21,7 +21,7 @@ const fallbackImages = [
   {
     url: 'https://images.pexels.com/photos/7869139/pexels-photo-7869139.jpeg',
     author: 'Branislav Rodman',
-    title: 'A Black and White Photo of a Woman Brushing Her Teeth',
+    title: 'A accent-foreground and White Photo of a Woman Brushing Her Teeth',
   },
   {
     url: 'https://images.pexels.com/photos/2599244/pexels-photo-2599244.jpeg',
@@ -249,16 +249,22 @@ export default function HeroSection() {
           >
             <Link
               className={cn(
-                ' cursor-target  hover:scale-110 transition-all duration-300 ease-out  lg:text-xl md:text-lg w-full  justify-center flex items-center  gap-5   font-semibold tracking-tight text-background bg-foreground px-4 py-3.5 sm:px-5  md:px-6 md:py-4 lg:px-8 rounded-full z-20 shadow-2xl  ',
+                ' cursor-target  hover:scale-110 transition-all duration-300 ease-out  lg:text-xl md:text-lg w-full  justify-center flex items-center  gap-5   font-semibold tracking-tight text-background bg-foreground px-4 py-3.5 sm:px-5  md:px-6 md:py-4 lg:px-8 rounded-2xl z-20 shadow-2xl  ',
               )}
               to="/destinasi"
             >
               <Telescope className=" size-4.5 sm:size-5.5" /> Jelajahi Destinasi
             </Link>
             <Link
-              to={session ? '/dashboard' : '/login'}
+              to={
+                (session && session.user.role === 'admin' || session && session.user.role === 'superAdmin')
+                  ? '/dashboard'
+                  : session && session.user.role === 'pribumi'
+                    ? '/profile/destinasi'
+                    : '/login'
+              }
               className={cn(
-                'md:text-lg  cursor-target   hover:scale-110 transition-all duration-300 ease-out  lg:text-xl justify-center flex items-center py-3.5   gap-5 w-full font-semibold tracking-tight text-primary-foreground  bg-primary px-4  sm:px-5  md:px-6 md:py-4 lg:px-8  rounded-full z-20 shadow-2xl font-calendas',
+                'md:text-lg  cursor-target   hover:scale-110 transition-all duration-300 ease-out  lg:text-xl justify-center flex items-center py-3.5   gap-5 w-full font-semibold tracking-tight text-primary-foreground  bg-primary px-4  sm:px-5  md:px-6 md:py-4 lg:px-8  rounded-2xl z-20 shadow-2xl font-calendas',
               )}
             >
               <Pen className=" size-4.5 sm:size-5.5" /> Bagikan Destinasi

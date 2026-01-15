@@ -6,11 +6,15 @@ import { Link } from '@tanstack/react-router'
 import { parseAsString, useQueryState } from 'nuqs'
 
 import { cn } from '@/lib/utils'
-import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
+import {
+  Button,
+  buttonVariants,
+} from '@/components/ui/fragments/shadcn-ui/button'
 import { Input } from '@/components/ui/fragments/shadcn-ui/input'
 import VerticalCutReveal from '@/components/ui/fragments/custom-ui/animate-ui/vertical-cut'
 import { useDebouncedCallback } from '@/hooks/use-debounced-callback'
 import { authClient } from '@/lib/auth/auth-client'
+import CreateArticleSheet from '../../feature/data-table/article/create-article-sheet'
 
 const DEBOUNCE_DELAY = 400 // ms
 
@@ -95,6 +99,7 @@ const ArticleHeader = () => {
 
             <VerticalCutReveal
               splitBy="words"
+              containerClassName=" md:justify-end "
               staggerDuration={0.1}
               staggerFrom="first"
               reverse={true}
@@ -107,8 +112,7 @@ const ArticleHeader = () => {
               }}
             >
               Dengarkan suara hati lokal melalui artikel-artikel inspiratif yang
-              menghubungkan budaya, cerita, dan ide-ide segar dari berbagai
-              tempat.
+              menghubungkan budaya, cerita, dan ide-ide segar.
             </VerticalCutReveal>
           </div>
         </header>
@@ -129,16 +133,31 @@ const ArticleHeader = () => {
           </div>
 
           {/* Stats */}
-          <Link
-            to={session ? '/dashboard/articles' : '/login'}
-            className={cn(
-              buttonVariants({ variant: 'default' }),
-              ' m-auto md:mr-0 text-sm  mt-3 w-full md:max-w-3xs ',
-            )}
-          >
-            Suarakan Ceritamu
-            <PlusCircle />
-          </Link>
+          {session ? (
+            <>
+              <CreateArticleSheet>
+                <Button
+                  className={cn(
+                    ' m-auto md:mr-0 text-sm  mt-3 w-full md:max-w-3xs ',
+                  )}
+                >
+                  Suarakan Ceritamu
+                  <PlusCircle />
+                </Button>
+              </CreateArticleSheet>
+            </>
+          ) : (
+            <Link
+              to={'/login'}
+              className={cn(
+                buttonVariants({ variant: 'default' }),
+                ' m-auto md:mr-0 text-sm  mt-3 w-full md:max-w-3xs ',
+              )}
+            >
+              Suarakan Ceritamu
+              <PlusCircle />
+            </Link>
+          )}
         </div>
       </div>
 

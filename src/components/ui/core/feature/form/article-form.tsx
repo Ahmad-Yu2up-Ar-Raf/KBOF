@@ -29,7 +29,7 @@ function ArticleForm({ form, children }: ArticleFormProps) {
             {(field) => (
               <field.Input
                 label="Judul Artikel"
-                placeholder="Contoh: Keindahan Alam Nusantara"
+                placeholder="Keindahan Alam Nusantara"
                 description="Judul artikel yang menarik."
               />
             )}

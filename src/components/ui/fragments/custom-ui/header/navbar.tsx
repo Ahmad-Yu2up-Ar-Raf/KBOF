@@ -39,6 +39,7 @@ interface NavItemsProps {
     link: string
     icon?: LucideIcon
   }[]
+  visible?: boolean
   className?: string
   onItemClick?: () => void
 }
@@ -59,7 +60,6 @@ interface MobileNavMenuProps {
     name: string
     link: string
     icon: LucideIcon
-    content?: React.ReactNode
   }[]
   name?: string
 }
@@ -189,11 +189,11 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         damping: 50,
       }}
       style={{
-        minWidth: '750px',
+        minWidth: '650px',
       }}
       className={cn(
-        'relative z-60     transition-all duration-300 ease-out   mx-auto hidden w-full container  flex-row items-center justify-between self-start rounded-2xl  px-3 py-2 lg:flex ',
-        visible && '  bg-header  border',
+        'relative z-60     transition-all duration-300 ease-out max-w-4xl   mx-auto hidden w-full container  flex-row items-center justify-between self-start rounded-2xl  px-3 py-2 lg:flex ',
+        visible && '  bg-header/80  border',
         className,
       )}
     >
@@ -210,7 +210,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
     <motion.div
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        'absolute inset-0 hidden flex-1 flex-row items-center justify-center text-xs font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex lg:space-x-3',
+        'absolute inset-0 hidden flex-1 flex-row items-center justify-center text-xs font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex ',
         className,
       )}
     >
@@ -221,7 +221,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
             onMouseEnter={() => setHovered(idx)}
             onClick={onItemClick}
             className={cn(
-              'relative px-4 py-2 cursor-target text-neutral-600 dark:text-neutral-300',
+              'relative px-4 py-2 cursor-target text-accent-foreground',
               isActive && '',
             )}
             key={`link-${idx}`}
@@ -290,34 +290,30 @@ export const MobileNavMenu = ({ items }: MobileNavMenuProps) => {
         const isActive = item.link == paths
         return (
           <li key={index}>
-            {item.content ? (
-              <>{item.content}</>
-            ) : (
-              <Link
-                to={item.link}
+            <Link
+              to={item.link}
+              className={cn(
+                buttonVariants({ variant: 'ghost' }),
+                'gap-0.5  cursor-pointer    flex flex-col items-center   ',
+                isActive && '  bg-accent   text-primary ',
+              )}
+            >
+              <item.icon
                 className={cn(
-                  buttonVariants({ variant: 'ghost' }),
-                  'gap-0.5  cursor-pointer    flex flex-col items-center   ',
-                  isActive && '  bg-accent   text-primary ',
+                  ' not-odd: text-accent-foreground size-5',
+                  isActive && 'fill-primary-foreground   text-primary',
+                )}
+              />
+
+              <span
+                className={cn(
+                  '    tracking-tightest text-xs transition-all duration-300 ease-out',
+                  !isActive && '  text-muted-foreground ',
                 )}
               >
-                <item.icon
-                  className={cn(
-                    ' not-odd: text-accent-foreground size-5',
-                    isActive && 'fill-primary-foreground   text-primary',
-                  )}
-                />
-
-                <span
-                  className={cn(
-                    '    tracking-tightest text-xs transition-all duration-300 ease-out',
-                    !isActive && '  text-muted-foreground ',
-                  )}
-                >
-                  {item.name}
-                </span>
-              </Link>
-            )}
+                {item.name}
+              </span>
+            </Link>
           </li>
         )
       })}

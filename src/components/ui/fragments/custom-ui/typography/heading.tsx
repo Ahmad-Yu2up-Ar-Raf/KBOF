@@ -23,7 +23,7 @@ export default function Heading({
         <Icon className=" bg-primary  hidden md:flex text-primary-foreground content-center p-2 t rounded-xl size-10" />
       )}
       <div className="  m-auto w-full items-center content-center md:gap-2 ">
-        <h1 className="  m-auto w-full text-3xl font-bold   gap-5 tracking-tighter ">
+        <h1 className=" text-accent-foreground  m-auto w-full text-3xl font-bold   gap-5 tracking-tighter ">
           {title}
         </h1>
         <p className="text-muted-foreground ">{description}</p>

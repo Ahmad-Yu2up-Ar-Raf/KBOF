@@ -359,7 +359,7 @@ export default function DestinasiBlock() {
           </div>
         )}
         {!hasNextPage && destinations.length > 0 && (
-          <p className="text-muted-foreground text-sm">
+          <p className="text-muted-foreground sr-only text-sm">
             Kamu sudah melihat semua destinasi 🎉
           </p>
         )}

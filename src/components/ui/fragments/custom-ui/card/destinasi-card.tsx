@@ -1,13 +1,5 @@
 import React from 'react'
-import {
-  ArrowRight,
-  MapIcon,
-  MapPin,
-  StarIcon,
-  Tag,
-  TagIcon,
-  ThumbsUp,
-} from 'lucide-react'
+import { ArrowRight, MapPin, StarIcon, Tag, ThumbsUp } from 'lucide-react'
 import { Badge } from '../../shadcn-ui/badge'
 import {
   Card,
@@ -25,15 +17,21 @@ import { Link } from '@tanstack/react-router'
 
 import type { DestinasiDestination } from '@/lib/server/explore/destinasi-server-queries'
 import { Skeleton } from '../../shadcn-ui/skeleton'
-import { categoryColors, getProvinsiLabel } from '@/lib/utils/destination-utils'
+import { getProvinsiLabel } from '@/lib/utils/destination-utils'
 
 interface DestinasiCardProps {
   destination: DestinasiDestination
   className?: string
   index: number
   hovered: number | null
-  totalItems: number
+  totalItems?: number
   setHovered: React.Dispatch<React.SetStateAction<number | null>>
+  /**
+   * Layout variant:
+   * - 'grid' (default): For vertical grid layout (3 columns), rounded corners on grid corners
+   * - 'horizontal': For horizontal carousel, rounded-l on first item, rounded-r on last item
+   */
+  variant?: 'grid' | 'horizontal'
 }
 
 function DestinasiCard({
@@ -45,11 +43,13 @@ function DestinasiCard({
   index,
   hovered,
   setHovered,
+  variant = 'grid',
 }: DestinasiCardProps) {
   // Get primary image
   const primaryImage = destination.coverImage
   const columns = 3
-  // Creator info
+
+  // Grid layout calculations
   const isFirstRow = index < columns
   const totalRows = Math.ceil(totalItems / columns)
   const currentRow = Math.floor(index / columns) + 1
@@ -57,16 +57,29 @@ function DestinasiCard({
   const isFirstCol = index % columns === 0
   const isLastCol = (index + 1) % columns === 0 || index === totalItems - 1
 
-  // Corner classes for grid corners only
+  // Horizontal carousel calculations
+  const isFirstItem = index === 0
+  const isLastItem = index === totalItems - 1
+
+  // Corner classes based on variant
   const cornerClasses = cn(
-    isFirstRow &&
-      isFirstCol &&
-      ' rounded-t-3xl md:rounded-t-none md:rounded-tl-3xl',
-    isFirstRow && isLastCol && 'md:rounded-tr-3xl',
-    isLastRow && isFirstCol && 'md:rounded-bl-3xl',
-    isLastRow &&
-      isLastCol &&
-      'rounded-b-3xl md:rounded-b-none md:rounded-br-3xl',
+    // Grid variant - rounded corners on grid corners only
+    variant === 'grid' && [
+      isFirstRow &&
+        isFirstCol &&
+        'rounded-t-3xl md:rounded-t-none md:rounded-tl-3xl',
+      isFirstRow && isLastCol && 'md:rounded-tr-3xl',
+      isLastRow && isFirstCol && 'md:rounded-bl-3xl',
+      isLastRow &&
+        isLastCol &&
+        'rounded-b-3xl md:rounded-b-none md:rounded-br-3xl',
+    ],
+    // Horizontal variant - rounded-l on first, rounded-r on last
+    variant === 'horizontal' && [
+      isFirstItem && 'rounded-l-3xl',
+      isLastItem && 'rounded-r-3xl',
+      !isFirstItem && !isLastItem && 'rounded-none',
+    ],
   )
   return (
     <Card
@@ -91,12 +104,8 @@ function DestinasiCard({
         {/* Header */}
         <CardHeader className="p-0 w-full max-w-[15em] gap-2">
           <Badge
-            variant="outline"
-            className={cn(
-              'text-xs  font-semibold w-fit',
-              categoryColors[destination.category] ||
-                'bg-gray-100 text-gray-700',
-            )}
+            variant="secondary"
+            className={cn('text-xs  font-semibold w-fit')}
           >
             <Tag className="mr-1 size-3 " />
             {destination.category}
@@ -216,7 +225,7 @@ export function SkeletonCard() {
             {/* Creator Info - Left */}
             <div className="flex gap-3 w-full items-start justify-between text-xs">
               {/* Avatar Skeleton */}
-              <Skeleton className="h-10 w-10 rounded-full flex-shrink-0" />
+              <Skeleton className="h-10 w-10 rounded-full" />
 
               {/* Name & Location */}
               <div className="flex-1 space-y-1.5">

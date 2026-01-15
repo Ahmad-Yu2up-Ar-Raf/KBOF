@@ -26,15 +26,15 @@ export default function ArtikelSection() {
   }
 
   return (
-    <section className="container px-5 py-10 space-y-8">
+    <section className="container px-5   space-y-8">
       {/* Section Header */}
-      <header className="flex items-center justify-between">
+      <header className="flex   items-center justify-between">
         <div className="space-y-1">
           <h2 className="text-2xl md:text-3xl font-bold tracking-tight flex items-center gap-2">
             <Newspaper className="size-6 md:size-7 sr-only" />
             Artikel Terbaru
           </h2>
-          <p className="text-muted-foreground text-sm md:text-base">
+          <p className="text-muted-foreground text-base">
             Cerita dan inspirasi dari seluruh Nusantara
           </p>
         </div>
@@ -70,8 +70,8 @@ export default function ArtikelSection() {
         <Link
           to="/artikel"
           className={cn(
-            buttonVariants({ variant: 'outline', size: 'sm' }),
-            'flex items-center gap-2 rounded-full',
+            buttonVariants({ variant: 'outline', size: 'lg' }),
+            'flex items-center gap-2   ',
           )}
         >
           Lihat Semua Artikel
@@ -84,7 +84,7 @@ export default function ArtikelSection() {
 
 export function ArtikelSectionSkeleton() {
   return (
-    <section className="container px-5 py-10 space-y-8">
+    <section className="container px-5  space-y-8">
       {/* Header Skeleton */}
       <header className="flex items-center justify-between">
         <div className="space-y-2">

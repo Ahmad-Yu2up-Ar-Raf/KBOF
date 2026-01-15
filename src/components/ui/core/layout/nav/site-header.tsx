@@ -16,6 +16,7 @@ import {
   BookOpenText,
   Gamepad,
   Gamepad2,
+  Home,
   MapPin,
   Medal,
   Newspaper,
@@ -48,6 +49,11 @@ export default function SiteHeader() {
   ]
   const navItemsMobiles = [
     {
+      name: 'Beranda',
+      link: '/',
+      icon: Home,
+    },
+    {
       name: 'Artikel',
       link: '/artikel/',
       icon: BookOpenText,
@@ -74,11 +80,6 @@ export default function SiteHeader() {
     return (
       <NavbarMobile className="     ">
         <MobileNav>
-          {/* <MobileNavHeader>
-            <NavbarLogo />
-            <NavItems items={navItems} />
-          </MobileNavHeader> */}
-
           <MobileNavMenu name={session?.user.name} items={navItemsMobiles} />
         </MobileNav>
       </NavbarMobile>

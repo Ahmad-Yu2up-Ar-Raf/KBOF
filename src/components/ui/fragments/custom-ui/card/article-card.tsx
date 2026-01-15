@@ -24,7 +24,7 @@ interface ArticleCardProps {
   index: number
   hovered: number | null
   setHovered: React.Dispatch<React.SetStateAction<number | null>>
-  onClick?: (article: PublicArticle) => void
+
   totalItems?: number
   columns?: number
 }
@@ -32,7 +32,7 @@ interface ArticleCardProps {
 function ArticleCard({
   article,
   className,
-  onClick,
+
   index,
   hovered,
   setHovered,
@@ -89,15 +89,10 @@ function ArticleCard({
       style={{ willChange: 'transform' }}
       // onClick={() => onClick?.(article)}
     >
-      <CardContent
-        className={cn(
-        ' p-0',
-          cornerClasses,
-        )}
-      >
+      <CardContent className={cn(' p-0', cornerClasses)}>
         <Link
           to={'/artikel/$artikelId'}
-          className=' content-center  justify-center gap-0 flex flex-row flex-1 relative mx-auto   w-full h-full overflow-hidden '
+          className=" content-center  justify-center gap-0 flex flex-row flex-1 relative mx-auto   w-full h-full overflow-hidden "
           params={{ artikelId: article.slug }}
         >
           <div className="flex-1 flex flex-col gap-4 justify-between py-6 px-5 ">

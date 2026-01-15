@@ -60,11 +60,11 @@ export type DestinasiDestination = {
   totalReview: number
   averageRating: number
   createdAt: Date
-  user: {
-    id: string
-    name: string
-    image: string | null
-  }
+  // user: {
+  //   id: string
+  //   name: string
+  //   image: string | null
+  // }
 }
 
 export type DestinasiResult = {
@@ -555,3 +555,80 @@ export const getRelatedDestinationsServerFn = createServerFn({
       }))
     },
   )
+
+// ============================================
+// FEATURED DESTINATIONS (Homepage)
+// ============================================
+
+/**
+ * Get featured/latest destinations for homepage
+ * Returns published destinations sorted by creation date (newest first)
+ * Uses DestinasiDestination type for full card compatibility
+ */
+export const getFeaturedDestinationsServerFn = createServerFn({
+  method: 'GET',
+})
+  .inputValidator(z.object({ limit: z.number().int().positive().default(8) }))
+  .handler(async ({ data: { limit } }): Promise<DestinasiDestination[]> => {
+    const db = await getDb()
+
+    // Subquery for vote counts
+    const voteCounts = db
+      .select({
+        destinationId: vote.destinationId,
+        totalVote: count(vote.id).as('totalVote'),
+      })
+      .from(vote)
+      .groupBy(vote.destinationId)
+      .as('voteCounts')
+
+    // Subquery for review stats
+    const reviewStats = db
+      .select({
+        destinationId: review.destinationId,
+        totalReview: count(review.id).as('totalReview'),
+        averageRating: avg(review.rating).as('averageRating'),
+      })
+      .from(review)
+      .groupBy(review.destinationId)
+      .as('reviewStats')
+
+    const results = await db
+      .select({
+        id: destination.id,
+        slug: destination.slug,
+        name: destination.name,
+        description: destination.description,
+        type: destination.type,
+        category: destination.category,
+        provinsi: destination.provinsi,
+        kabupatenKota: destination.kabupatenKota,
+        coverImage: destination.coverImage,
+        totalVote: sql<number>`COALESCE(${voteCounts.totalVote}, 0)`,
+        totalReview: sql<number>`COALESCE(${reviewStats.totalReview}, 0)`,
+        averageRating: sql<number>`COALESCE(${reviewStats.averageRating}, 0)::numeric`,
+        createdAt: destination.createdAt,
+      })
+      .from(destination)
+      .leftJoin(voteCounts, eq(destination.id, voteCounts.destinationId))
+      .leftJoin(reviewStats, eq(destination.id, reviewStats.destinationId))
+      .where(eq(destination.status, 'published'))
+      .orderBy(desc(destination.createdAt))
+      .limit(limit)
+
+    return results.map((r) => ({
+      id: r.id,
+      slug: r.slug,
+      name: r.name,
+      description: r.description,
+      type: r.type,
+      category: r.category,
+      provinsi: r.provinsi,
+      kabupatenKota: r.kabupatenKota,
+      coverImage: r.coverImage,
+      totalVote: r.totalVote,
+      totalReview: r.totalReview,
+      averageRating: Math.round(r.averageRating * 10) / 10,
+      createdAt: r.createdAt,
+    }))
+  })

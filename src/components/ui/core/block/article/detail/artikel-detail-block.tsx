@@ -83,7 +83,7 @@ export default function ArtikelDetailBlock({ article }: ArticleDetailProps) {
         </div>
       </header>
       <div className="h-1  w-full max-w-xs bg-primary rounded-full" />
-      <div className=" border-b pb-10 mb-20   space-y-5">
+      <div className=" border-b-2 pb-10 mb-10   space-y-5">
         {/* Divider */}
 
         {/* Author Info */}

@@ -173,145 +173,169 @@ export default function LeaderboardPage() {
   }, []) // Empty array = runs once on mount
 
   return (
-      <section className="container py-3 space-y-5">
-        {/* Navigation */}
-        <nav className="flex items-center justify-between">
-          <Link
-            to="/"
-            className={cn(
-              buttonVariants({ variant: 'link' }),
-              'flex has-[>svg]:px-0 w-fit py-2 items-center gap-2 px-0 group',
-            )}
-          >
-            <ArrowLeft className="size-5 group-hover:-translate-x-1 transition-transform" />
-            <span>Kembali</span>
-          </Link>
-        </nav>
-
-        {/* Header */}
-        <header className="text-center space-y-2 md:space-y-4 pb-4 md:pb-5 border-b">
-          {/* Trophy Animation */}
-          <div className="flex justify-center">
-            {TrophyAnimation}
-          </div>
-          <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight">
-            Leaderboard Destinasi
-          </h1>
-          <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto px-2">
-            Destinasi dengan dukungan terbanyak dari komunitas. Vote destinasi
-            favoritmu untuk membantu mereka naik peringkat!
-          </p>
-        </header>
-
-        {/* Podium Section - TOP 3 */}
-        {podium.length > 0 && (
-          <section className="relative py-4 md:py-8">
-            <div className="flex items-end justify-center gap-2 sm:gap-6 md:gap-4 md:hover:gap-16 transition-all duration-300">
-              {/* 2nd Place */}
-              {podium[1] && (
-                <div className=" order-1 -mr-8 hover:mr-4 md:translate-y-4 -rotate-5 z-1 hover:scale-105 transition-all duration-300">
-                  <PodiumCard entry={podium[1]} position={2} size="large" index={1} hovered={hoveredPodium} setHovered={setHoveredPodium} />
-                </div>
-              )}
-
-              {/* 1st Place - Larger and higher */}
-              {podium[0] && (
-                <div className=" order-2 -translate-y-4 z-10 hover:mx-4 hover:scale-105 transition-all duration-300">
-                  <PodiumCard entry={podium[0]} position={1} size="larger" index={0} hovered={hoveredPodium} setHovered={setHoveredPodium} />
-                </div>
-              )}
-
-              {/* 3rd Place */}
-              {podium[2] && (
-                <div className="order-3 -ml-8 hover:ml-4 md:translate-y-7 hover:translate-y-4 rotate-5 z-1 hover:scale-105 transition-all duration-300">
-                  <PodiumCard entry={podium[2]} position={3} size="large" index={2} hovered={hoveredPodium} setHovered={setHoveredPodium} />
-                </div>
-              )}
-            </div>
-          </section>
-        )}
-
-        {/* Leaderboard List */}
-        <section className="space-y-3 md:space-y-4">
-          <h2 className="text-base md:text-xl text-center font-semibold">
-            <span className="text-primary">10 Destinasi</span> Teratas
-          </h2>
-
-          <div className="w-full flex items-center justify-center">
-            {/* Filters */}
-            <FilterToolbar layoutClassName={cn('w-full flex items-center justify-center',)} showReset={hasActiveFilters} onReset={handleResetFilters}>
-              {/* Category Filter - Multiple selection */}
-              <FacetedFilter
-                title="Kategori"
-                options={categoryOptions}
-                value={filters.categories}
-                onChange={(values) =>
-                  void setFilters({
-                    categories:
-                      values.length > 0
-                        ? (values as typeof filters.categories)
-                        : null,
-                    page: 1,
-                  })
-                }
-                multiple
-                popoverWidth="w-[14rem]"
-              />
-
-              {/* Type Filter - Multiple selection */}
-              <FacetedFilter
-                title="Tipe"
-                options={typeOptions}
-                value={filters.types}
-                onChange={(values) =>
-                  void setFilters({
-                    types:
-                      values.length > 0 ? (values as typeof filters.types) : null,
-                    page: 1,
-                  })
-                }
-                multiple
-                popoverWidth="w-[14rem]"
-              />
-
-              {/* Provinsi Filter - Multiple selection */}
-              <FacetedFilter
-                title="Provinsi"
-                options={provinsiOptions}
-                value={filters.provinces}
-                onChange={(values) =>
-                  void setFilters({
-                    provinces:
-                      values.length > 0 ? (values as typeof filters.provinces) : null,
-                    page: 1,
-                  })
-                }
-                multiple
-                popoverWidth="w-[14rem]"
-              />
-            </FilterToolbar>
-          </div>
-
-          <div className="space-y-3">
-            {leaderboardData.data.map((entry, index) => (
-              <LeaderboardRow
-                key={entry.destinationId}
-                entry={entry}
-                index={index}
-                hovered={hoveredRow}
-                setHovered={setHoveredRow}
-              />
-            ))}
-          </div>
-
-          {leaderboardData.data.length === 0 && (
-            <div className="text-center py-12 text-muted-foreground">
-              Tidak ada destinasi yang cocok dengan filter.
-            </div>
+    <section className="container py-4.5 space-y-5">
+      {/* Navigation */}
+      <nav className="z-50 top-0 bg-background/95 backdrop-blur flex items-center justify-between">
+        <Link
+          to="/"
+          className={cn(
+            buttonVariants({ variant: 'link' }),
+            'flex has-[>svg]:px-0 w-fit py-2 md:flex text-base items-center gap-2 px-0 group transition-colors',
           )}
+        >
+          <ArrowLeft className="size-5 group-hover:-translate-x-1 group-hover:transform transition-all ease-out duration-300" />
+          <span>Kembali</span>
+        </Link>
+      </nav>
+      {/* Header */}
+      <header className="text-center space-y-2 md:space-y-4 pb-4 md:pb-5 border-b">
+        {/* Trophy Animation */}
+        <div className="flex justify-center">{TrophyAnimation}</div>
+        <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight">
+          Leaderboard Destinasi
+        </h1>
+        <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto px-2">
+          Destinasi dengan dukungan terbanyak dari komunitas. Vote destinasi
+          favoritmu untuk membantu mereka naik peringkat!
+        </p>
+      </header>
+
+      {/* Podium Section - TOP 3 */}
+      {podium.length > 0 && (
+        <section className="relative py-4 md:py-8">
+          <div className="flex items-end justify-center gap-2 sm:gap-6 md:gap-4 md:hover:gap-16 transition-all duration-300">
+            {/* 2nd Place */}
+            {podium[1] && (
+              <div className=" order-1 -mr-8 hover:mr-4 md:translate-y-4 -rotate-5 z-1 hover:scale-105 transition-all duration-300">
+                <PodiumCard
+                  entry={podium[1]}
+                  position={2}
+                  size="large"
+                  index={1}
+                  hovered={hoveredPodium}
+                  setHovered={setHoveredPodium}
+                />
+              </div>
+            )}
+
+            {/* 1st Place - Larger and higher */}
+            {podium[0] && (
+              <div className=" order-2 -translate-y-4 z-10 hover:mx-4 hover:scale-105 transition-all duration-300">
+                <PodiumCard
+                  entry={podium[0]}
+                  position={1}
+                  size="larger"
+                  index={0}
+                  hovered={hoveredPodium}
+                  setHovered={setHoveredPodium}
+                />
+              </div>
+            )}
+
+            {/* 3rd Place */}
+            {podium[2] && (
+              <div className="order-3 -ml-8 hover:ml-4 md:translate-y-7 hover:translate-y-4 rotate-5 z-1 hover:scale-105 transition-all duration-300">
+                <PodiumCard
+                  entry={podium[2]}
+                  position={3}
+                  size="large"
+                  index={2}
+                  hovered={hoveredPodium}
+                  setHovered={setHoveredPodium}
+                />
+              </div>
+            )}
+          </div>
         </section>
+      )}
+
+      {/* Leaderboard List */}
+      <section className="space-y-3 md:space-y-4">
+        <h2 className="text-base md:text-xl text-center font-semibold">
+          <span className="text-primary">10 Destinasi</span> Teratas
+        </h2>
+
+        <div className="w-full flex items-center justify-center">
+          {/* Filters */}
+          <FilterToolbar
+            layoutClassName={cn('w-full flex items-center justify-center')}
+            showReset={hasActiveFilters}
+            onReset={handleResetFilters}
+          >
+            {/* Category Filter - Multiple selection */}
+            <FacetedFilter
+              title="Kategori"
+              options={categoryOptions}
+              value={filters.categories}
+              onChange={(values) =>
+                void setFilters({
+                  categories:
+                    values.length > 0
+                      ? (values as typeof filters.categories)
+                      : null,
+                  page: 1,
+                })
+              }
+              multiple
+              popoverWidth="w-[14rem]"
+            />
+
+            {/* Type Filter - Multiple selection */}
+            <FacetedFilter
+              title="Tipe"
+              options={typeOptions}
+              value={filters.types}
+              onChange={(values) =>
+                void setFilters({
+                  types:
+                    values.length > 0 ? (values as typeof filters.types) : null,
+                  page: 1,
+                })
+              }
+              multiple
+              popoverWidth="w-[14rem]"
+            />
+
+            {/* Provinsi Filter - Multiple selection */}
+            <FacetedFilter
+              title="Provinsi"
+              options={provinsiOptions}
+              value={filters.provinces}
+              onChange={(values) =>
+                void setFilters({
+                  provinces:
+                    values.length > 0
+                      ? (values as typeof filters.provinces)
+                      : null,
+                  page: 1,
+                })
+              }
+              multiple
+              popoverWidth="w-[14rem]"
+            />
+          </FilterToolbar>
+        </div>
+
+        <div className="space-y-3">
+          {leaderboardData.data.map((entry, index) => (
+            <LeaderboardRow
+              key={entry.destinationId}
+              entry={entry}
+              index={index}
+              hovered={hoveredRow}
+              setHovered={setHoveredRow}
+            />
+          ))}
+        </div>
+
+        {leaderboardData.data.length === 0 && (
+          <div className="text-center py-12 text-muted-foreground">
+            Tidak ada destinasi yang cocok dengan filter.
+          </div>
+        )}
       </section>
-    )
+    </section>
+  )
 }
 
 // ============================================

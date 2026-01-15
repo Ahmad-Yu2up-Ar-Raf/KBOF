@@ -210,7 +210,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
     <motion.div
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        'absolute inset-0 hidden flex-1 flex-row items-center justify-center text-xs font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex ',
+        'absolute px-0 p-0 inset-0 hidden flex-1 flex-row items-center justify-center text-xs font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex ',
         className,
       )}
     >
@@ -254,9 +254,9 @@ export const MobileNav = ({ children, className }: MobileNavProps) => {
         className,
       )}
     >
-      <div className="flex items-center w-full justify-between px-5 lg:px-15 mx-auto py-3.5">
+      <div className="flex items-center w-full justify-between px-3 lg:px-15 mx-auto py-3.5">
         <div className="flex items-center w-full">
-          <ul className="flex  justify-between  w-full items-center">
+          <ul className="flex   justify-between  w-full items-center">
             {children}
           </ul>
         </div>

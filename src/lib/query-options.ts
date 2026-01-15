@@ -17,8 +17,10 @@ import {
   getDestinasiDestinationsServerFn,
   getDestinationBySlugServerFn,
   getRelatedDestinationsServerFn,
+  getFeaturedDestinationsServerFn,
   type DestinasiFilters,
   type DestinasiDetailDestination,
+  type DestinasiDestination,
   type RelatedDestination,
 } from './server/explore/destinasi-server-queries'
 
@@ -66,6 +68,7 @@ export type {
   DestinationAggregateInput,
   DestinasiFilters,
   DestinasiDetailDestination,
+  DestinasiDestination,
   RelatedDestination,
   ArticleAggregateInput,
   LeaderboardFilters,
@@ -186,6 +189,8 @@ export const DestinasiKeys = {
   detail: (slug: string) => [...DestinasiKeys.all, 'detail', slug] as const,
   related: (destinationId: number) =>
     [...DestinasiKeys.all, 'related', destinationId] as const,
+  featured: (limit: number) =>
+    [...DestinasiKeys.all, 'featured', limit] as const,
 } as const
 
 // ============================================
@@ -276,6 +281,23 @@ export const getRelatedDestinationsQueryOptions = ({
     gcTime: 15 * 60 * 1000, // 15 minutes
     // Only fetch if we have a valid destination
     enabled: destinationId > 0,
+  })
+
+/**
+ * Query options for featured destinations (homepage)
+ * Returns latest published destinations sorted by creation date
+ */
+export const getFeaturedDestinationsQueryOptions = (limit: number = 8) =>
+  queryOptions({
+    queryKey: DestinasiKeys.featured(limit),
+    queryFn: async (): Promise<DestinasiDestination[]> => {
+      const result = await getFeaturedDestinationsServerFn({
+        data: { limit },
+      })
+      return result
+    },
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    gcTime: 15 * 60 * 1000, // 15 minutes
   })
 
 // ============================================

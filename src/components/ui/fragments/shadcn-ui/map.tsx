@@ -402,7 +402,7 @@ function MarkerPopup({
   return createPortal(
     <div
       className={cn(
-        'relative rounded-md border bg-popover p-3 text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95',
+        'relative rounded-xl border bg-popover p-3 text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95',
         className,
       )}
     >
@@ -488,7 +488,7 @@ function MarkerTooltip({
   return createPortal(
     <div
       className={cn(
-        'rounded-md bg-foreground px-2 py-1 text-xs text-background shadow-md animate-in fade-in-0 zoom-in-95',
+        'rounded-xl bg-foreground px-2 py-1 text-xs text-background shadow-md animate-in fade-in-0 zoom-in-95',
         className,
       )}
     >
@@ -557,7 +557,7 @@ const positionClasses = {
 
 function ControlGroup({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex flex-col rounded-md border border-border bg-background shadow-sm overflow-hidden [&>button:not(:last-child)]:border-b [&>button:not(:last-child)]:border-border">
+    <div className="flex flex-col rounded-xl border border-border bg-background shadow-sm overflow-hidden [&>button:not(:last-child)]:border-b [&>button:not(:last-child)]:border-border">
       {children}
     </div>
   )
@@ -828,7 +828,7 @@ function MapPopup({
   return createPortal(
     <div
       className={cn(
-        'relative rounded-md border bg-popover p-3 text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95',
+        'relative rounded-xl border bg-popover p-3 text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95',
         className,
       )}
     >

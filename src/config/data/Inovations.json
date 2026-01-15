@@ -514,7 +514,7 @@
     "slug": "sipandu-layanan-publik",
     "judul": "SIPANDU - Sistem Informasi Pelayanan Terpadu",
     "ringkasanPendek": "Sistem informasi terpadu yang menyederhanakan layanan publik pemerintahan daerah menjadi satu platform digital.",
-    "deskripsi": "SIPANDU adalah inisiatif pemerintah daerah (contoh: di beberapa kabupaten/kota) untuk mengintegrasikan berbagai layanan publik, seperti perizinan, administrasi kependudukan, dan pembayaran pajak daerah, dalam satu sistem online. Ini meningkatkan efisiensi birokrasi, transparansi, dan kemudahan akses bagi masyarakat, mencerminkan Destinasi *e-government* yang berhasil.",
+    "deskripsi": "SIPANDU adalah inisiatif pemerintah daerah (di beberapa kabupaten/kota) untuk mengintegrasikan berbagai layanan publik, seperti perizinan, administrasi kependudukan, dan pembayaran pajak daerah, dalam satu sistem online. Ini meningkatkan efisiensi birokrasi, transparansi, dan kemudahan akses bagi masyarakat, mencerminkan Destinasi *e-government* yang berhasil.",
     "media": [
       {
         "kind": "image",
@@ -526,7 +526,7 @@
     ],
     "pembuat": {
       "id": "j9o14p6q-2m8j-3k0l-l0v8-8w9x2y0z3a4b",
-      "nama": "Pemerintah Daerah (Contoh: Kabupaten Banyuwangi)",
+      "nama": "Pemerintah Daerah (Kabupaten Banyuwangi)",
       "peran": "Pengembang Sistem",
       "organisasi": "Dinas Komunikasi dan Informatika",
       "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e"
@@ -1174,7 +1174,7 @@
     "id": "p5y18b7c-o4y9-8z3a-x8v0-8w9x5y6z9a0b",
     "slug": "e-smart-village-banyuwangi",
     "judul": "E-Smart Village - Pengelolaan Desa Cerdas",
-    "ringkasanPendek": "Platform digital di tingkat desa yang mengintegrasikan data, layanan publik, dan ekonomi lokal (Contoh: Banyuwangi).",
+    "ringkasanPendek": "Platform digital di tingkat desa yang mengintegrasikan data, layanan publik, dan ekonomi lokal (Banyuwangi).",
     "deskripsi": "E-Smart Village adalah program yang bertujuan untuk meningkatkan kualitas hidup masyarakat desa melalui pemanfaatan teknologi. Ini mencakup aplikasi untuk layanan kependudukan, informasi potensi desa, data kemiskinan (by name by address), hingga promosi produk UMKM desa. Destinasi ini merupakan upaya nyata *smart city* yang diimplementasikan di tingkat desa.",
     "media": [
       {
@@ -2008,7 +2008,7 @@
     "slug": "sisdm-aparatur-sipil-negara",
     "judul": "Sistem Informasi Manajemen Kepegawaian (SIMPEG)",
     "ringkasanPendek": "Digitalisasi manajemen data dan layanan kepegawaian Aparatur Sipil Negara (ASN) di instansi pemerintah.",
-    "deskripsi": "SIMPEG adalah sistem yang digunakan oleh instansi pemerintah (contoh: BKN atau pemerintah daerah) untuk mengelola data kepegawaian, kenaikan pangkat, mutasi, hingga penilaian kinerja ASN. Destinasi *e-government* ini meningkatkan efisiensi birokrasi, transparansi karir pegawai, dan akuntabilitas dalam pengelolaan sumber daya manusia di pemerintahan.",
+    "deskripsi": "SIMPEG adalah sistem yang digunakan oleh instansi pemerintah (BKN atau pemerintah daerah) untuk mengelola data kepegawaian, kenaikan pangkat, mutasi, hingga penilaian kinerja ASN. Destinasi *e-government* ini meningkatkan efisiensi birokrasi, transparansi karir pegawai, dan akuntabilitas dalam pengelolaan sumber daya manusia di pemerintahan.",
     "media": [
       {
         "kind": "image",
@@ -2638,13 +2638,13 @@
     "id": "v7e30l9m-u6e1-0f5g-d0q4-0r1s5t4u8v9w",
     "slug": "inovasi-pengolahan-sampah-magot",
     "judul": "Budidaya Maggot (BSF) - Pengurai Sampah Organik",
-    "ringkasanPendek": "Pemanfaatan larva Black Soldier Fly (BSF) untuk mengurai sampah organik rumah tangga dan industri menjadi pupuk dan pakan ternak.",
+    "ringkasanPendek": "Pemanfaatan larva accent-foreground Soldier Fly (BSF) untuk mengurai sampah organik rumah tangga dan industri menjadi pupuk dan pakan ternak.",
     "deskripsi": "Budidaya Maggot BSF adalah solusi *zero waste* yang sangat efisien dan ramah lingkungan. Larva BSF dapat mengonsumsi sampah organik dalam jumlah besar dengan cepat. Hasil sampingnya adalah pupuk organik (kasgot) dan larva itu sendiri dapat menjadi sumber protein tinggi untuk pakan ikan dan unggas. Destinasi ini mendukung ekonomi sirkular dan ketahanan pangan lokal.",
     "media": [
       {
         "kind": "image",
         "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQua7gnueM4XcmChIrcyQE2gGys-eMJSvgMEw&s",
-        "caption": "Ilustrasi budidaya maggot Black Soldier Fly",
+        "caption": "Ilustrasi budidaya maggot accent-foreground Soldier Fly",
         "license": "Unsplash",
         "source": "Kementerian Lingkungan Hidup dan Kehutanan"
       }
@@ -3005,7 +3005,7 @@
     "id": "d5m07t6u-c4m8-7n2o-l8b2-9c0d4e3f7g8h",
     "slug": "innovasi-taman-nasional-digital",
     "judul": "E-Ticketing dan Sistem Informasi Taman Nasional",
-    "ringkasanPendek": "Digitalisasi sistem tiket masuk dan pengelolaan informasi pengunjung di Taman Nasional (Contoh: Bromo, Komodo).",
+    "ringkasanPendek": "Digitalisasi sistem tiket masuk dan pengelolaan informasi pengunjung di Taman Nasional (Bromo, Komodo).",
     "deskripsi": "Destinasi ini menerapkan sistem *e-ticketing* terpusat dan *real-time booking* untuk masuk ke kawasan Taman Nasional. Tujuannya adalah transparansi penerimaan negara, pengendalian kuota pengunjung (untuk konservasi), dan peningkatan pengalaman wisatawan. Ini juga membantu manajemen kawasan dalam mengumpulkan data untuk kegiatan konservasi.",
     "media": [
       {

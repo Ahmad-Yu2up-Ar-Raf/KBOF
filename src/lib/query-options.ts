@@ -9,6 +9,7 @@ import { queryOptions, infiniteQueryOptions } from '@tanstack/react-query'
 
 import {
   getDestinationAggregateServerFn,
+  getDestinationAggregateAdminServerFn,
   type DestinationAggregateInput,
 } from './server/destination/destination-server-queries'
 
@@ -23,6 +24,7 @@ import {
 
 import {
   getArticleAggregateServerFn,
+  getArticleAggregateAdminServerFn,
   type ArticleAggregateInput,
 } from './server/article/article-server-queries'
 
@@ -30,6 +32,7 @@ import {
   getPublicArticlesServerFn,
   getArticleBySlugServerFn,
   getRecommendedArticlesServerFn,
+  getFeaturedArticlesServerFn,
   type ArticlePublicFilters,
 } from './server/article/article-public-queries'
 
@@ -42,6 +45,18 @@ import {
   type LeaderboardTopEntry,
   type LeaderboardEntry,
 } from './server/leaderboard/leaderboard-server-queries'
+
+import {
+  getAnalyticsAggregateServerFn,
+  type AnalyticsInput,
+  type AnalyticsAggregateResult,
+} from './server/analytics/analytics-server-queries'
+
+import {
+  getUserAggregateServerFn,
+  type UserAggregateInput,
+  type UserAggregateResult,
+} from './server/user/user-server-queries'
 
 // ============================================
 // TYPE EXPORTS
@@ -57,6 +72,10 @@ export type {
   LeaderboardResult,
   LeaderboardTopEntry,
   LeaderboardEntry,
+  AnalyticsInput,
+  AnalyticsAggregateResult,
+  UserAggregateInput,
+  UserAggregateResult,
 }
 
 // ============================================
@@ -104,6 +123,26 @@ export const getDestinationQueryOptions = (
     // ⭐ IMPORTANT: Set reasonable staleTime to prevent excessive refetches
     // Data is considered "fresh" for 30 seconds - nuqs filter changes will
     // still trigger refetch because queryKey changes (which always fetches)
+    staleTime: 30 * 1000, // 30 seconds
+    gcTime: 5 * 60 * 1000,
+  })
+
+/**
+ * Query options factory for destination aggregate data (ADMIN - ALL DATA)
+ */
+export const getDestinationAdminQueryOptions = (
+  filters: DestinationAggregateInput,
+) =>
+  queryOptions({
+    queryKey: [...destinationKeys.all, 'admin', 'aggregate', filters] as const,
+
+    queryFn: async () => {
+      const result = await getDestinationAggregateAdminServerFn({
+        data: { filters },
+      })
+      return result
+    },
+
     staleTime: 30 * 1000, // 30 seconds
     gcTime: 5 * 60 * 1000,
   })
@@ -250,10 +289,10 @@ export const articleKeys = {
   list: (filters: Omit<ArticlePublicFilters, 'cursor'>) =>
     [...articleKeys.all, 'list', filters] as const,
   detail: (id: number) => [...articleKeys.all, 'detail', id] as const,
-  detailBySlug: (slug: string) =>
-    [...articleKeys.all, 'detail', slug] as const,
+  detailBySlug: (slug: string) => [...articleKeys.all, 'detail', slug] as const,
   recommendations: (excludeSlug: string) =>
     [...articleKeys.all, 'recommendations', excludeSlug] as const,
+  featured: (limit: number) => [...articleKeys.all, 'featured', limit] as const,
 } as const
 
 // ============================================
@@ -265,6 +304,22 @@ export const getArticleQueryOptions = (filters: ArticleAggregateInput) =>
     queryKey: articleKeys.aggregate(filters),
     queryFn: async () => {
       const result = await getArticleAggregateServerFn({
+        data: { filters },
+      })
+      return result
+    },
+    staleTime: 30 * 1000,
+    gcTime: 5 * 60 * 1000,
+  })
+
+/**
+ * Query options factory for article aggregate data (ADMIN - ALL DATA)
+ */
+export const getArticleAdminQueryOptions = (filters: ArticleAggregateInput) =>
+  queryOptions({
+    queryKey: [...articleKeys.all, 'admin', 'aggregate', filters] as const,
+    queryFn: async () => {
+      const result = await getArticleAggregateAdminServerFn({
         data: { filters },
       })
       return result
@@ -333,6 +388,23 @@ export const getRecommendedArticlesQueryOptions = (
     queryFn: async () => {
       const result = await getRecommendedArticlesServerFn({
         data: { excludeSlug, limit },
+      })
+      return result
+    },
+    staleTime: 60 * 1000,
+    gcTime: 10 * 60 * 1000,
+  })
+
+/**
+ * Query options for featured articles (homepage)
+ * Returns latest published articles for homepage display
+ */
+export const getFeaturedArticlesQueryOptions = (limit: number = 4) =>
+  queryOptions({
+    queryKey: articleKeys.featured(limit),
+    queryFn: async () => {
+      const result = await getFeaturedArticlesServerFn({
+        data: { limit },
       })
       return result
     },
@@ -445,5 +517,120 @@ export const invalidateAllLeaderboardQueries = async (
 ) => {
   await queryClient.invalidateQueries({
     queryKey: leaderboardKeys.all,
+  })
+}
+
+// ============================================
+// ANALYTICS QUERY KEYS
+// ============================================
+
+export const analyticsKeys = {
+  all: ['analytics'] as const,
+  aggregate: (filters: AnalyticsInput) =>
+    [...analyticsKeys.all, 'aggregate', filters] as const,
+} as const
+
+// ============================================
+// ANALYTICS QUERY OPTIONS
+// ============================================
+
+/**
+ * Query options factory for dashboard analytics (aggregated)
+ * Uses createdAt filter for date range filtering
+ */
+export const getAnalyticsQueryOptions = (filters: AnalyticsInput) =>
+  queryOptions({
+    queryKey: analyticsKeys.aggregate(filters),
+    queryFn: async (): Promise<AnalyticsAggregateResult> => {
+      const result = await getAnalyticsAggregateServerFn({
+        data: { filters },
+      })
+      return result
+    },
+    staleTime: 30 * 1000, // 30 seconds
+    gcTime: 5 * 60 * 1000,
+  })
+
+// ============================================
+// ANALYTICS INVALIDATION HELPERS
+// ============================================
+
+/**
+ * Invalidate ALL analytics queries
+ */
+export const invalidateAllAnalyticsQueries = async (
+  queryClient: import('@tanstack/react-query').QueryClient,
+) => {
+  await queryClient.invalidateQueries({
+    queryKey: analyticsKeys.all,
+  })
+}
+
+// ============================================
+// USER MANAGEMENT QUERY KEYS
+// ============================================
+
+/**
+ * Unified query keys for user management queries (SuperAdmin only)
+ * All user-related queries MUST use these keys for proper invalidation
+ */
+export const userKeys = {
+  // Base key - invalidate this to clear ALL user queries
+  all: ['user'] as const,
+
+  // Aggregate query key - includes filters for granular caching
+  aggregate: (filters: UserAggregateInput) =>
+    [...userKeys.all, 'aggregate', filters] as const,
+
+  // Detail query key
+  detail: (id: string) => [...userKeys.all, 'detail', id] as const,
+} as const
+
+// ============================================
+// USER MANAGEMENT QUERY OPTIONS
+// ============================================
+
+/**
+ * Query options factory for user aggregate data (SuperAdmin only)
+ * Returns paginated users with role counts
+ */
+export const getUserQueryOptions = (filters: UserAggregateInput) =>
+  queryOptions({
+    queryKey: userKeys.aggregate(filters),
+    queryFn: async (): Promise<UserAggregateResult> => {
+      const result = await getUserAggregateServerFn({
+        data: { filters },
+      })
+      return result
+    },
+    staleTime: 30 * 1000, // 30 seconds
+    gcTime: 5 * 60 * 1000,
+  })
+
+// ============================================
+// USER MANAGEMENT INVALIDATION HELPERS
+// ============================================
+
+/**
+ * Invalidate ALL user queries
+ * Use after create/update/delete/ban/unban operations
+ */
+export const invalidateAllUserQueries = async (
+  queryClient: import('@tanstack/react-query').QueryClient,
+) => {
+  await queryClient.invalidateQueries({
+    queryKey: userKeys.all,
+  })
+}
+
+/**
+ * Refetch ALL user queries
+ */
+export const refetchAllUserQueries = async (
+  queryClient: import('@tanstack/react-query').QueryClient,
+) => {
+  await queryClient.refetchQueries({
+    queryKey: userKeys.all,
+    type: 'active',
   })
 }

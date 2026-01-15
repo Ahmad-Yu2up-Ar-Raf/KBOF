@@ -16,6 +16,7 @@ import type { PublicArticle } from '@/lib/server/article/article-public-queries'
 import MediaItem from '@/components/ui/fragments/custom-ui/media/media-item'
 import { cn } from '@/lib/utils'
 import { batasiHuruf } from '@/hooks/use-word'
+import { Link } from '@tanstack/react-router'
 
 interface ArticleCardProps {
   article: PublicArticle
@@ -61,10 +62,14 @@ function ArticleCard({
 
   // Corner classes for grid corners only
   const cornerClasses = cn(
-    isFirstRow && isFirstCol && 'rounded-tl-3xl',
-    isFirstRow && isLastCol && 'rounded-tr-3xl',
-    isLastRow && isFirstCol && 'rounded-bl-3xl',
-    isLastRow && isLastCol && 'rounded-br-3xl',
+    isFirstRow &&
+      isFirstCol &&
+      ' rounded-t-3xl md:rounded-t-none md:rounded-tl-3xl',
+    isFirstRow && isLastCol && 'md:rounded-tr-3xl',
+    isLastRow && isFirstCol && 'md:rounded-bl-3xl',
+    isLastRow &&
+      isLastCol &&
+      'rounded-b-3xl md:rounded-b-none md:rounded-br-3xl',
   )
 
   return (
@@ -72,7 +77,7 @@ function ArticleCard({
       onMouseEnter={() => setHovered(index)}
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        'relative group cursor-pointer w-full bg-background shadow-none border-secondary rounded-none',
+        'relative group cursor-pointer  w-full bg-background shadow-none border-secondary rounded-none',
         'transform transition-all duration-300 hover:scale-102',
         'mx-auto cursor-target content-center w-full p-0',
         'overflow-hidden hover:shadow-none flex flex-col h-full',
@@ -82,66 +87,71 @@ function ArticleCard({
         className,
       )}
       style={{ willChange: 'transform' }}
-      onClick={() => onClick?.(article)}
+      // onClick={() => onClick?.(article)}
     >
-      <CardContent className={cn(
-        'content-center justify-center gap-0 flex flex-row flex-1 relative mx-auto p-0 w-full h-full overflow-hidden',
-        cornerClasses,
-      )}>
-        {/* Text Content - 50% width */}
-        <div className="flex-1 flex flex-col gap-4 justify-between p-6">
-          {/* Header */}
-          <CardHeader className="p-0 w-full gap-2.5">
-            {/* Published Date Badge */}
-            {publishedDate && (
-              <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                <Calendar className="size-3" />
-                <span>{publishedDate}</span>
-              </div>
-            )}
+      <CardContent
+        className={cn(
+        ' p-0',
+          cornerClasses,
+        )}
+      >
+        <Link
+          to={'/artikel/$artikelId'}
+          className=' content-center  justify-center gap-0 flex flex-row flex-1 relative mx-auto   w-full h-full overflow-hidden '
+          params={{ artikelId: article.slug }}
+        >
+          <div className="flex-1 flex flex-col gap-4 justify-between py-6 px-5 ">
+            {/* Header */}
+            <CardHeader className="p-0 w-full gap-2.5">
+              {/* Published Date Badge */}
+              {publishedDate && (
+                <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                  <Calendar className="size-3" />
+                  <span>{publishedDate}</span>
+                </div>
+              )}
 
-            <CardTitle className="text-xl w-full leading-6 font-bold tracking-tighter md:leading-6 line-clamp-2">
-              {article.title}
-            </CardTitle>
+              <CardTitle className="text-xl w-full leading-6 font-bold tracking-tighter md:leading-6 line-clamp-2">
+                {article.title}
+              </CardTitle>
 
-            <CardDescription className="text-muted-foreground text-xs line-clamp-2">
-              {article.excerpt}
-            </CardDescription>
-          </CardHeader>
+              <CardDescription className="text-muted-foreground text-sm line-clamp-2">
+                {article.excerpt}
+              </CardDescription>
+            </CardHeader>
 
-          {/* Author Info */}
-          <div className="w-full">
-            <div className="flex gap-3 items-center text-xs">
-              <Avatar className="size-8">
-                {author.image && (
-                  <AvatarImage src={author.image} alt={author.name || ''} />
-                )}
-                <AvatarFallback>
-                  {(author.name || 'U').charAt(0)}
-                </AvatarFallback>
-              </Avatar>
-              <div className="flex-1">
-                <p className="font-medium truncate">
-                  {authorName}
-                </p>
+            {/* Author Info */}
+            <div className="w-full">
+              <div className="flex gap-3 items-center text-xs">
+                <Avatar className="size-8">
+                  {author.image && (
+                    <AvatarImage src={author.image} alt={author.name || ''} />
+                  )}
+                  <AvatarFallback>
+                    {(author.name || 'U').charAt(0)}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="flex-1">
+                  <p className="font-medium truncate">{authorName}</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Cover Image */}
-        {article.coverImage && (
-          <div className="flex-1 relative min-h-45 md:min-h-50 overflow-hidden">
-            <div className="absolute inset-0 bg-linear-to-r from-background via-background/30 to-transparent z-10" />
-            <MediaItem
-              webViewLink={article.coverImage}
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-            />
-          </div>
-        )}
+          {/* Cover Image */}
+          {article.coverImage && (
+            <div className="flex-1 relative min-h-45 md:min-h-50 overflow-hidden">
+              <div className="absolute inset-0 bg-linear-to-r from-background via-background/30 to-transparent z-10" />
+              <MediaItem
+                webViewLink={article.coverImage}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+              />
+            </div>
+          )}
+        </Link>
+        {/* Text Content - 50% width */}
       </CardContent>
     </Card>
-
   )
 }
 

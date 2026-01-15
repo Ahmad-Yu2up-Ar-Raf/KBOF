@@ -1,6 +1,7 @@
 import { createFileRoute, useSearch } from '@tanstack/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { MapPin } from 'lucide-react'
+import { MapPin, Map, Plus } from 'lucide-react'
+import { Suspense, useState } from 'react'
 
 import Heading from '@/components/ui/fragments/custom-ui/typography/heading'
 import { DataTableSkeleton } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-skeleton'
@@ -10,11 +11,11 @@ import CreateDestinationSheet from '@/components/ui/core/feature/data-table/dest
 import { destinationSearchSchema } from '@/lib/validations/destination-validations'
 import { getValidFilters } from '@/lib/data-table'
 import {
-  getDestinationQueryOptions,
+  getDestinationAdminQueryOptions,
   type DestinationAggregateInput,
 } from '@/lib/query-options'
 import { queryClient } from '@/components/provider/Provider'
-import { Suspense } from 'react'
+import { EmptyState } from '@/components/ui/fragments/custom-ui/empty-state'
 
 // ============================================
 // HELPER: Build filters from search params
@@ -54,7 +55,8 @@ export const Route = createFileRoute('/dashboard/destination')({
     const search = destinationSearchSchema.parse(q)
     const filters = buildFilters(search)
 
-    await queryClient.ensureQueryData(getDestinationQueryOptions(filters))
+    // Use admin query - fetches ALL destinations for admin panel
+    await queryClient.ensureQueryData(getDestinationAdminQueryOptions(filters))
 
     return { filters }
   },
@@ -81,11 +83,18 @@ function DestinationPageSkeleton() {
 function RouteComponent() {
   const search = useSearch({ from: '/dashboard/destination' })
   const filters = buildFilters(search)
+  const [sheetOpen, setSheetOpen] = useState(false)
 
-  // ⭐ useSuspenseQuery reads from cache (populated by loader)
+  // ⭐ useSuspenseQuery reads from cache (populated by loader) - ADMIN version
   const { data: destinationData } = useSuspenseQuery(
-    getDestinationQueryOptions(filters),
+    getDestinationAdminQueryOptions(filters),
   )
+
+  // Check if database is truly empty (no data at all, not just filtered)
+  const { statusCounts } = destinationData
+  const totalDataCount =
+    statusCounts.published + statusCounts.draft + statusCounts.archived
+  const isDatabaseEmpty = totalDataCount === 0
 
   return (
     <div>
@@ -96,11 +105,32 @@ function RouteComponent() {
         description="Kelola destinasi wisata dan budaya Indonesia. Tambah, edit, dan publikasikan konten destinasi."
       />
       <main>
-        <Suspense fallback={<DataTableSkeleton />}>
-          <FeatureFlagsProvider createSheet={<CreateDestinationSheet />}>
-            <DestinationTable data={destinationData} />
-          </FeatureFlagsProvider>
-        </Suspense>
+        {isDatabaseEmpty ? (
+          // Database is truly empty - show only EmptyState + Sheet
+          <>
+            <EmptyState
+              title="Belum ada destinasi"
+              description="Tambahkan destinasi wisata atau budaya Indonesia untuk memulai."
+              icons={[MapPin, Map, Plus]}
+              action={{
+                label: 'Tambah Destinasi',
+                onClick: () => setSheetOpen(true),
+              }}
+            />
+            <CreateDestinationSheet
+              className=" sr-only"
+              open={sheetOpen}
+              onOpenChange={setSheetOpen}
+            />
+          </>
+        ) : (
+          // Has data - show full DataTable with filters
+          <Suspense fallback={<DataTableSkeleton />}>
+            <FeatureFlagsProvider createSheet={<CreateDestinationSheet />}>
+              <DestinationTable data={destinationData} />
+            </FeatureFlagsProvider>
+          </Suspense>
+        )}
       </main>
     </div>
   )

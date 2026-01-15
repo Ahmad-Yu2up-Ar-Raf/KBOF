@@ -272,7 +272,7 @@
 }
 
 @utility container {
-  @apply px-2.5 sm:px-6 max-w-5xl m-auto;
+  @apply px-2.5 sm:px-6 max-w-4xl m-auto;
 }
 /* View Transition Wave Effect */
 ::view-transition-old(root),

@@ -24,16 +24,16 @@ function ReviewForm({ form, children }: ReviewFormProps) {
     >
       <main className="space-y-6">
         {/* Rating Section - Primary Focus */}
-        <FieldGroup className="border-b pb-6 pt-2 px-4 sm:px-7">
-          <div className="flex flex-col items-center gap-4">
-            <h3 className="text-lg font-semibold text-center">
+        <FieldGroup className="border-b w-full flex justify-center items-center  pb-6 pt-2 px-4 sm:px-7">
+          <div className="flex flex-col justify-center items-center gap-4">
+            <h3 className="text-lg sr-only font-semibold text-center">
               Berikan Rating Anda
             </h3>
             <form.AppField name="rating">
               {(field) => (
                 <field.Rating
                   label=""
-                  description="Klik bintang untuk memberikan rating"
+                  // description="Klik bintang untuk memberikan rating"
                   size="xl"
                 />
               )}
@@ -42,13 +42,13 @@ function ReviewForm({ form, children }: ReviewFormProps) {
         </FieldGroup>
 
         {/* Review Details */}
-        <FieldGroup className="px-4 sm:px-7 pb-6 space-y-4">
+        <FieldGroup className="px-4 sm:px-7 pb-6 ">
           <form.AppField name="title">
             {(field) => (
               <field.Input
                 label="Judul Review"
-                placeholder="Contoh: Tempat wisata yang menakjubkan!"
-                description="Opsional - ringkasan pengalaman Anda"
+                placeholder="Tempat wisata yang menakjubkan!"
+                // description="Opsional - ringkasan pengalaman Anda"
               />
             )}
           </form.AppField>
@@ -57,8 +57,8 @@ function ReviewForm({ form, children }: ReviewFormProps) {
             {(field) => (
               <field.Textarea
                 label="Ulasan Anda"
-                placeholder="Ceritakan pengalaman Anda mengunjungi destinasi ini..."
-                description="Opsional - bagikan detail pengalaman Anda"
+                placeholder="Ceritakan pengalaman Anda "
+                // description="Opsional - bagikan detail pengalaman Anda"
               />
             )}
           </form.AppField>

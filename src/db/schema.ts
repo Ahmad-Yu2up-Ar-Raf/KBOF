@@ -23,6 +23,13 @@ import {
 // ENUMS
 // =============================================================================
 
+/** User roles for multi-auth system */
+export const userRole = pgEnum('user_role', [
+  'pribumi', // Default role for registered users
+  'admin', // Can manage destinations & articles
+  'superAdmin', // Full access including user management
+])
+
 /** Status konten (published, draft, archived) */
 export const contentStatus = pgEnum('content_status', [
   'published',
@@ -108,13 +115,71 @@ export const user = pgTable(
     email: text('email').notNull().unique(),
     emailVerified: boolean('email_verified').default(false).notNull(),
     image: text('image'),
+
+    // =============================================================================
+    // ROLE & AUTHENTICATION
+    // =============================================================================
+    /** User role for access control */
+    role: userRole('role').default('pribumi').notNull(),
+    /** Whether user is banned */
+    banned: boolean('banned').default(false),
+    /** Reason for ban */
+    banReason: text('ban_reason'),
+    /** Ban expiration date */
+    banExpires: timestamp('ban_expires'),
+
+    // =============================================================================
+    // ONBOARDING STATUS & PROFILE
+    // =============================================================================
+    /** Whether user has completed onboarding */
+    hasCompletedOnboarding: boolean('has_completed_onboarding')
+      .default(false)
+      .notNull(),
+
+    // Profile Info (Onboarding Step 1 - Required)
+    /** Full name of user */
+    fullName: text('full_name'),
+    /** Unique username */
+    username: text('username'),
+    /** User avatar URL */
+    avatar: text('avatar'),
+    /** Short bio */
+    bio: text('bio'),
+
+    // Local Info (Onboarding Step 2 - Optional)
+    /** Province of origin */
+    province: text('province'),
+    /** City/Kabupaten of origin */
+    city: text('city'),
+    /** User hobbies (JSON array) */
+    hobbies: text('hobbies'), // JSON array of strings
+    /** User expertise areas (JSON array) */
+    expertise: text('expertise'), // JSON array of strings
+    /** Motivation for joining */
+    motivation: text('motivation'),
+
+    // Preferences (Onboarding Step 3 - Optional)
+    /** Favorite destination categories (JSON array) */
+    favoriteCategories: text('favorite_categories'), // JSON array
+    /** Interested destination types (JSON array) */
+    interestedTypes: text('interested_types'), // JSON array
+    /** Notification preferences (JSON object) */
+    notificationPreferences: text('notification_preferences'), // JSON object
+
+    // =============================================================================
+    // TIMESTAMPS
+    // =============================================================================
     createdAt: timestamp('created_at').defaultNow().notNull(),
     updatedAt: timestamp('updated_at')
       .defaultNow()
       .$onUpdate(() => new Date())
       .notNull(),
   },
-  (table) => [unique('user_email_key').on(table.email)],
+  (table) => [
+    unique('user_email_key').on(table.email),
+    unique('user_username_key').on(table.username),
+    index('user_role_idx').on(table.role),
+  ],
 )
 
 export const session = pgTable(
@@ -403,6 +468,7 @@ export type DestinationCategory =
   (typeof destinationCategory.enumValues)[number]
 export type DestinationStatus = (typeof contentStatus.enumValues)[number]
 export type ProvinsiIndonesia = (typeof provinsiIndonesia.enumValues)[number]
+export type UserRoleType = (typeof userRole.enumValues)[number]
 
 export type Vote = typeof vote.$inferSelect
 export type NewVote = typeof vote.$inferInsert

@@ -25,15 +25,16 @@ import { toast } from 'sonner'
 import { useCreateDestinationForm } from '@/hooks/form/use-destination-form'
 import DestinationForm from '../../form/destination-form'
 import { Spinner } from '@/components/ui/fragments/shadcn-ui/spinner'
-import { Activity, useState, useRef } from 'react'
+import React, { Activity, useState, useRef } from 'react'
 
 interface CreateDestinationSheetProps {
-  trigger?: boolean
+  children?: React.ReactNode | boolean
   open?: boolean
+  className?: string
   onOpenChange?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-function CreateDestinationSheet({ ...props }: CreateDestinationSheetProps) {
+function CreateDestinationSheet({  className ,...props }: CreateDestinationSheetProps) {
   // Internal state untuk uncontrolled mode
   const [internalOpen, setInternalOpen] = useState(false)
   const toastIdRef = useRef<string | number | undefined>(undefined)
@@ -64,20 +65,21 @@ function CreateDestinationSheet({ ...props }: CreateDestinationSheetProps) {
     },
   })
 
-  // Subscribe to isSubmitting to show loading toast
-
   if (!isMobile) {
     return (
       <Sheet open={open} onOpenChange={setOpen} modal={true}>
-        <Activity mode={props.trigger ? 'hidden' : 'visible'}>
-          <SheetTrigger asChild>
+        <SheetTrigger asChild className={className}>
+          {props.children ? (
+            props.children
+          ) : (
             <Button className="text-sm w-fit">
               <Plus className="mr-3" />
               Tambah Destinasi
             </Button>
-          </SheetTrigger>
-        </Activity>
-        <SheetContent className="flex flex-col gap-6 overflow-y-scroll">
+          )}
+        </SheetTrigger>
+
+        <SheetContent className="flex flex-col gap-6 overflow-y-auto">
           <SheetHeader className="text-left sm:px-6 space-y-1 bg-background z-30 sticky top-0 p-4 border-b">
             <SheetTitle className="text-lg">Tambah Destinasi Baru</SheetTitle>
             <SheetDescription className="sr-only">
@@ -128,16 +130,18 @@ function CreateDestinationSheet({ ...props }: CreateDestinationSheetProps) {
 
   return (
     <Drawer open={open} onOpenChange={setOpen} modal={true}>
-      <Activity mode={props.trigger ? 'hidden' : 'visible'}>
-        <DrawerTrigger asChild>
-          <Button size={'sm'} className="w-fit text-sm">
-            <Plus />
-            <span className="sr-only">Tambah Destinasi</span>
+      <DrawerTrigger asChild className={className}>
+        {props.children ? (
+          props.children
+        ) : (
+          <Button className="text-sm w-fit">
+            <Plus className="mr-3" />
+            Tambah Destinasi
           </Button>
-        </DrawerTrigger>
-      </Activity>
+        )}
+      </DrawerTrigger>
 
-      <DrawerContent className="flex flex-col">
+      <DrawerContent className="flex flex-col max-h-[85svh]">
         <DrawerHeader className="text-left sm:px-6 space-y-1 bg-background p-4 border-b">
           <DrawerTitle className="text-xl">Tambah Destinasi Baru</DrawerTitle>
           <DrawerDescription className="text-sm">
@@ -147,8 +151,23 @@ function CreateDestinationSheet({ ...props }: CreateDestinationSheetProps) {
 
         <form.Subscribe selector={(state) => state.isSubmitting}>
           {(isSubmitting) => (
-            <DestinationForm form={form}>
+            <>
+              <div className="flex-1 overflow-y-auto">
+                <DestinationForm form={form} />
+              </div>
               <DrawerFooter className="gap-3 px-3 py-4 w-full flex-row justify-end flex border-t sm:space-x-0">
+                <Button
+                  disabled={isSubmitting}
+                  type="submit"
+                  form="destination-form"
+                  className="w-full"
+                  size={'sm'}
+                >
+                  <Activity mode={isSubmitting ? 'visible' : 'hidden'}>
+                    <Spinner />
+                  </Activity>
+                  Tambahkan
+                </Button>
                 <DrawerClose
                   disabled={isSubmitting}
                   asChild
@@ -157,29 +176,15 @@ function CreateDestinationSheet({ ...props }: CreateDestinationSheetProps) {
                   <Button
                     disabled={isSubmitting}
                     type="button"
-                    className="w-fit"
+                    className="w-full"
                     size={'sm'}
                     variant="outline"
                   >
-                    <Activity mode={isSubmitting ? 'visible' : 'hidden'}>
-                      <Spinner />
-                    </Activity>
                     Batalkan
                   </Button>
                 </DrawerClose>
-                <Button
-                  disabled={isSubmitting}
-                  type="submit"
-                  className="w-fit"
-                  size={'sm'}
-                >
-                  <Activity mode={isSubmitting ? 'visible' : 'hidden'}>
-                    <Spinner />
-                  </Activity>
-                  Tambahkan
-                </Button>
               </DrawerFooter>
-            </DestinationForm>
+            </>
           )}
         </form.Subscribe>
       </DrawerContent>

@@ -34,3 +34,16 @@ export function formatCurrency(
     return `Rp ${amount.toLocaleString('id-ID')}`
   }
 }
+
+/**
+ * Formats a slug-like string into a human-readable label
+ * e.g., "wisata-alam" -> "Wisata Alam"
+ */
+export function formatLabel(slug: string | undefined | null): string {
+  if (!slug) return ''
+
+  return slug
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ')
+}

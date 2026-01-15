@@ -456,9 +456,9 @@ export function LeaderboardSkeleton() {
 
       {/* Filter toolbar skeleton */}
       <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center">
-        <Skeleton className="h-8 w-28 rounded-md" />
-        <Skeleton className="h-8 w-24 rounded-md" />
-        <Skeleton className="h-8 w-28 rounded-md" />
+        <Skeleton className="h-8 w-28 rounded-xl" />
+        <Skeleton className="h-8 w-24 rounded-xl" />
+        <Skeleton className="h-8 w-28 rounded-xl" />
       </div>
 
       {/* List skeleton */}

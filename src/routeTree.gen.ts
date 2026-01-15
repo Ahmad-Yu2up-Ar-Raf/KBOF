@@ -9,27 +9,46 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as GameRouteImport } from './routes/game'
 import { Route as SplatRouteImport } from './routes/$'
+import { Route as ProfileRouteRouteImport } from './routes/profile/route'
 import { Route as DashboardRouteRouteImport } from './routes/dashboard/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProfileIndexRouteImport } from './routes/profile/index'
+import { Route as OnboardingIndexRouteImport } from './routes/onboarding/index'
 import { Route as DestinasiIndexRouteImport } from './routes/destinasi/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as ArtikelIndexRouteImport } from './routes/artikel/index'
+import { Route as ProfileSettingsRouteImport } from './routes/profile/settings'
+import { Route as ProfileDestinasiRouteImport } from './routes/profile/destinasi'
+import { Route as ProfileArtikelRouteImport } from './routes/profile/artikel'
 import { Route as DestinasiLeaderboardRouteImport } from './routes/destinasi/leaderboard'
+import { Route as DashboardUserMenagementRouteImport } from './routes/dashboard/user-menagement'
 import { Route as DashboardDestinationRouteImport } from './routes/dashboard/destination'
 import { Route as DashboardArticlesRouteImport } from './routes/dashboard/articles'
 import { Route as ArtikelArtikelIdRouteImport } from './routes/artikel/$artikelId'
 import { Route as authRegisterRouteImport } from './routes/(auth)/register'
 import { Route as authLoginRouteImport } from './routes/(auth)/login'
+import { Route as authGet_startedRouteImport } from './routes/(auth)/get_started'
 import { Route as DashboardSettingsRouteRouteImport } from './routes/dashboard/settings/route'
 import { Route as DestinasiDestinasiIdIndexRouteImport } from './routes/destinasi/$destinasiId/index'
 import { Route as DashboardSettingsIndexRouteImport } from './routes/dashboard/settings/index'
 import { Route as DashboardSettingsPasswordRouteImport } from './routes/dashboard/settings/password'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
+const GameRoute = GameRouteImport.update({
+  id: '/game',
+  path: '/game',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SplatRoute = SplatRouteImport.update({
   id: '/$',
   path: '/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRouteRoute = ProfileRouteRouteImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRouteRoute = DashboardRouteRouteImport.update({
@@ -40,6 +59,16 @@ const DashboardRouteRoute = DashboardRouteRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileIndexRoute = ProfileIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProfileRouteRoute,
+} as any)
+const OnboardingIndexRoute = OnboardingIndexRouteImport.update({
+  id: '/onboarding/',
+  path: '/onboarding/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DestinasiIndexRoute = DestinasiIndexRouteImport.update({
@@ -57,10 +86,30 @@ const ArtikelIndexRoute = ArtikelIndexRouteImport.update({
   path: '/artikel/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfileSettingsRoute = ProfileSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => ProfileRouteRoute,
+} as any)
+const ProfileDestinasiRoute = ProfileDestinasiRouteImport.update({
+  id: '/destinasi',
+  path: '/destinasi',
+  getParentRoute: () => ProfileRouteRoute,
+} as any)
+const ProfileArtikelRoute = ProfileArtikelRouteImport.update({
+  id: '/artikel',
+  path: '/artikel',
+  getParentRoute: () => ProfileRouteRoute,
+} as any)
 const DestinasiLeaderboardRoute = DestinasiLeaderboardRouteImport.update({
   id: '/destinasi/leaderboard',
   path: '/destinasi/leaderboard',
   getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardUserMenagementRoute = DashboardUserMenagementRouteImport.update({
+  id: '/user-menagement',
+  path: '/user-menagement',
+  getParentRoute: () => DashboardRouteRoute,
 } as any)
 const DashboardDestinationRoute = DashboardDestinationRouteImport.update({
   id: '/destination',
@@ -85,6 +134,11 @@ const authRegisterRoute = authRegisterRouteImport.update({
 const authLoginRoute = authLoginRouteImport.update({
   id: '/(auth)/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const authGet_startedRoute = authGet_startedRouteImport.update({
+  id: '/(auth)/get_started',
+  path: '/get_started',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardSettingsRouteRoute = DashboardSettingsRouteRouteImport.update({
@@ -118,17 +172,26 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteRouteWithChildren
+  '/profile': typeof ProfileRouteRouteWithChildren
   '/$': typeof SplatRoute
+  '/game': typeof GameRoute
   '/dashboard/settings': typeof DashboardSettingsRouteRouteWithChildren
+  '/get_started': typeof authGet_startedRoute
   '/login': typeof authLoginRoute
   '/register': typeof authRegisterRoute
   '/artikel/$artikelId': typeof ArtikelArtikelIdRoute
   '/dashboard/articles': typeof DashboardArticlesRoute
   '/dashboard/destination': typeof DashboardDestinationRoute
+  '/dashboard/user-menagement': typeof DashboardUserMenagementRoute
   '/destinasi/leaderboard': typeof DestinasiLeaderboardRoute
+  '/profile/artikel': typeof ProfileArtikelRoute
+  '/profile/destinasi': typeof ProfileDestinasiRoute
+  '/profile/settings': typeof ProfileSettingsRoute
   '/artikel': typeof ArtikelIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/destinasi': typeof DestinasiIndexRoute
+  '/onboarding': typeof OnboardingIndexRoute
+  '/profile/': typeof ProfileIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/dashboard/settings/password': typeof DashboardSettingsPasswordRoute
   '/dashboard/settings/': typeof DashboardSettingsIndexRoute
@@ -137,15 +200,23 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/game': typeof GameRoute
+  '/get_started': typeof authGet_startedRoute
   '/login': typeof authLoginRoute
   '/register': typeof authRegisterRoute
   '/artikel/$artikelId': typeof ArtikelArtikelIdRoute
   '/dashboard/articles': typeof DashboardArticlesRoute
   '/dashboard/destination': typeof DashboardDestinationRoute
+  '/dashboard/user-menagement': typeof DashboardUserMenagementRoute
   '/destinasi/leaderboard': typeof DestinasiLeaderboardRoute
+  '/profile/artikel': typeof ProfileArtikelRoute
+  '/profile/destinasi': typeof ProfileDestinasiRoute
+  '/profile/settings': typeof ProfileSettingsRoute
   '/artikel': typeof ArtikelIndexRoute
   '/dashboard': typeof DashboardIndexRoute
   '/destinasi': typeof DestinasiIndexRoute
+  '/onboarding': typeof OnboardingIndexRoute
+  '/profile': typeof ProfileIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/dashboard/settings/password': typeof DashboardSettingsPasswordRoute
   '/dashboard/settings': typeof DashboardSettingsIndexRoute
@@ -155,17 +226,26 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteRouteWithChildren
+  '/profile': typeof ProfileRouteRouteWithChildren
   '/$': typeof SplatRoute
+  '/game': typeof GameRoute
   '/dashboard/settings': typeof DashboardSettingsRouteRouteWithChildren
+  '/(auth)/get_started': typeof authGet_startedRoute
   '/(auth)/login': typeof authLoginRoute
   '/(auth)/register': typeof authRegisterRoute
   '/artikel/$artikelId': typeof ArtikelArtikelIdRoute
   '/dashboard/articles': typeof DashboardArticlesRoute
   '/dashboard/destination': typeof DashboardDestinationRoute
+  '/dashboard/user-menagement': typeof DashboardUserMenagementRoute
   '/destinasi/leaderboard': typeof DestinasiLeaderboardRoute
+  '/profile/artikel': typeof ProfileArtikelRoute
+  '/profile/destinasi': typeof ProfileDestinasiRoute
+  '/profile/settings': typeof ProfileSettingsRoute
   '/artikel/': typeof ArtikelIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/destinasi/': typeof DestinasiIndexRoute
+  '/onboarding/': typeof OnboardingIndexRoute
+  '/profile/': typeof ProfileIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/dashboard/settings/password': typeof DashboardSettingsPasswordRoute
   '/dashboard/settings/': typeof DashboardSettingsIndexRoute
@@ -176,17 +256,26 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/dashboard'
+    | '/profile'
     | '/$'
+    | '/game'
     | '/dashboard/settings'
+    | '/get_started'
     | '/login'
     | '/register'
     | '/artikel/$artikelId'
     | '/dashboard/articles'
     | '/dashboard/destination'
+    | '/dashboard/user-menagement'
     | '/destinasi/leaderboard'
+    | '/profile/artikel'
+    | '/profile/destinasi'
+    | '/profile/settings'
     | '/artikel'
     | '/dashboard/'
     | '/destinasi'
+    | '/onboarding'
+    | '/profile/'
     | '/api/auth/$'
     | '/dashboard/settings/password'
     | '/dashboard/settings/'
@@ -195,15 +284,23 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/$'
+    | '/game'
+    | '/get_started'
     | '/login'
     | '/register'
     | '/artikel/$artikelId'
     | '/dashboard/articles'
     | '/dashboard/destination'
+    | '/dashboard/user-menagement'
     | '/destinasi/leaderboard'
+    | '/profile/artikel'
+    | '/profile/destinasi'
+    | '/profile/settings'
     | '/artikel'
     | '/dashboard'
     | '/destinasi'
+    | '/onboarding'
+    | '/profile'
     | '/api/auth/$'
     | '/dashboard/settings/password'
     | '/dashboard/settings'
@@ -212,17 +309,26 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/dashboard'
+    | '/profile'
     | '/$'
+    | '/game'
     | '/dashboard/settings'
+    | '/(auth)/get_started'
     | '/(auth)/login'
     | '/(auth)/register'
     | '/artikel/$artikelId'
     | '/dashboard/articles'
     | '/dashboard/destination'
+    | '/dashboard/user-menagement'
     | '/destinasi/leaderboard'
+    | '/profile/artikel'
+    | '/profile/destinasi'
+    | '/profile/settings'
     | '/artikel/'
     | '/dashboard/'
     | '/destinasi/'
+    | '/onboarding/'
+    | '/profile/'
     | '/api/auth/$'
     | '/dashboard/settings/password'
     | '/dashboard/settings/'
@@ -232,24 +338,42 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRouteRoute: typeof DashboardRouteRouteWithChildren
+  ProfileRouteRoute: typeof ProfileRouteRouteWithChildren
   SplatRoute: typeof SplatRoute
+  GameRoute: typeof GameRoute
+  authGet_startedRoute: typeof authGet_startedRoute
   authLoginRoute: typeof authLoginRoute
   authRegisterRoute: typeof authRegisterRoute
   ArtikelArtikelIdRoute: typeof ArtikelArtikelIdRoute
   DestinasiLeaderboardRoute: typeof DestinasiLeaderboardRoute
   ArtikelIndexRoute: typeof ArtikelIndexRoute
   DestinasiIndexRoute: typeof DestinasiIndexRoute
+  OnboardingIndexRoute: typeof OnboardingIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   DestinasiDestinasiIdIndexRoute: typeof DestinasiDestinasiIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/game': {
+      id: '/game'
+      path: '/game'
+      fullPath: '/game'
+      preLoaderRoute: typeof GameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/$': {
       id: '/$'
       path: '/$'
       fullPath: '/$'
       preLoaderRoute: typeof SplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -264,6 +388,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile/': {
+      id: '/profile/'
+      path: '/'
+      fullPath: '/profile/'
+      preLoaderRoute: typeof ProfileIndexRouteImport
+      parentRoute: typeof ProfileRouteRoute
+    }
+    '/onboarding/': {
+      id: '/onboarding/'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/destinasi/': {
@@ -287,12 +425,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArtikelIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/profile/settings': {
+      id: '/profile/settings'
+      path: '/settings'
+      fullPath: '/profile/settings'
+      preLoaderRoute: typeof ProfileSettingsRouteImport
+      parentRoute: typeof ProfileRouteRoute
+    }
+    '/profile/destinasi': {
+      id: '/profile/destinasi'
+      path: '/destinasi'
+      fullPath: '/profile/destinasi'
+      preLoaderRoute: typeof ProfileDestinasiRouteImport
+      parentRoute: typeof ProfileRouteRoute
+    }
+    '/profile/artikel': {
+      id: '/profile/artikel'
+      path: '/artikel'
+      fullPath: '/profile/artikel'
+      preLoaderRoute: typeof ProfileArtikelRouteImport
+      parentRoute: typeof ProfileRouteRoute
+    }
     '/destinasi/leaderboard': {
       id: '/destinasi/leaderboard'
       path: '/destinasi/leaderboard'
       fullPath: '/destinasi/leaderboard'
       preLoaderRoute: typeof DestinasiLeaderboardRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/user-menagement': {
+      id: '/dashboard/user-menagement'
+      path: '/user-menagement'
+      fullPath: '/dashboard/user-menagement'
+      preLoaderRoute: typeof DashboardUserMenagementRouteImport
+      parentRoute: typeof DashboardRouteRoute
     }
     '/dashboard/destination': {
       id: '/dashboard/destination'
@@ -327,6 +493,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof authLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(auth)/get_started': {
+      id: '/(auth)/get_started'
+      path: '/get_started'
+      fullPath: '/get_started'
+      preLoaderRoute: typeof authGet_startedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard/settings': {
@@ -387,6 +560,7 @@ interface DashboardRouteRouteChildren {
   DashboardSettingsRouteRoute: typeof DashboardSettingsRouteRouteWithChildren
   DashboardArticlesRoute: typeof DashboardArticlesRoute
   DashboardDestinationRoute: typeof DashboardDestinationRoute
+  DashboardUserMenagementRoute: typeof DashboardUserMenagementRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
@@ -394,6 +568,7 @@ const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
   DashboardSettingsRouteRoute: DashboardSettingsRouteRouteWithChildren,
   DashboardArticlesRoute: DashboardArticlesRoute,
   DashboardDestinationRoute: DashboardDestinationRoute,
+  DashboardUserMenagementRoute: DashboardUserMenagementRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }
 
@@ -401,16 +576,38 @@ const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(
   DashboardRouteRouteChildren,
 )
 
+interface ProfileRouteRouteChildren {
+  ProfileArtikelRoute: typeof ProfileArtikelRoute
+  ProfileDestinasiRoute: typeof ProfileDestinasiRoute
+  ProfileSettingsRoute: typeof ProfileSettingsRoute
+  ProfileIndexRoute: typeof ProfileIndexRoute
+}
+
+const ProfileRouteRouteChildren: ProfileRouteRouteChildren = {
+  ProfileArtikelRoute: ProfileArtikelRoute,
+  ProfileDestinasiRoute: ProfileDestinasiRoute,
+  ProfileSettingsRoute: ProfileSettingsRoute,
+  ProfileIndexRoute: ProfileIndexRoute,
+}
+
+const ProfileRouteRouteWithChildren = ProfileRouteRoute._addFileChildren(
+  ProfileRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRouteRoute: DashboardRouteRouteWithChildren,
+  ProfileRouteRoute: ProfileRouteRouteWithChildren,
   SplatRoute: SplatRoute,
+  GameRoute: GameRoute,
+  authGet_startedRoute: authGet_startedRoute,
   authLoginRoute: authLoginRoute,
   authRegisterRoute: authRegisterRoute,
   ArtikelArtikelIdRoute: ArtikelArtikelIdRoute,
   DestinasiLeaderboardRoute: DestinasiLeaderboardRoute,
   ArtikelIndexRoute: ArtikelIndexRoute,
   DestinasiIndexRoute: DestinasiIndexRoute,
+  OnboardingIndexRoute: OnboardingIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   DestinasiDestinasiIdIndexRoute: DestinasiDestinasiIdIndexRoute,
 }

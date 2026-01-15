@@ -2,10 +2,10 @@ import { SignInForm } from '../form/login-form'
 import { toast } from 'sonner'
 import AuthLayoutTemplate from '../../layout/auth-layout'
 import { useLoginForm } from '@/hooks/form/use-auth-form'
-import { useNavigate } from '@tanstack/react-router'
+import { authClient } from '@/lib/auth/auth-client'
+import type { UserRoleType } from '@/db/schema'
 
 export default function Login() {
-  const navigate = useNavigate()
   /**
    * ✅ Call hook di parent component
    * Sekarang isPending bisa di-share ke AuthLayoutTemplate dan SignInForm
@@ -13,7 +13,21 @@ export default function Login() {
   const form = useLoginForm({
     onSuccess: async () => {
       toast.success('Login berhasil!')
-      navigate({ to: '/dashboard' })
+      // Get fresh session to determine redirect
+      const session = await authClient.getSession()
+      const user = session?.data?.user as { role?: UserRoleType; hasCompletedOnboarding?: boolean } | undefined
+      const role = user?.role || 'pribumi'
+      
+      // Role-based redirect
+      if (role === 'pribumi') {
+        if (!user?.hasCompletedOnboarding) {
+          window.location.href = '/onboarding'
+        } else {
+          window.location.href = '/profile'
+        }
+      } else {
+        window.location.href = '/dashboard'
+      }
     },
     onError: (error: Error) => {
       toast.error(error.message)

@@ -4,8 +4,6 @@ import { Link } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
 import { ArrowRight } from 'lucide-react'
 
-import type { PublicArticle } from '@/lib/server/article/article-public-queries'
-
 import ArticleCard, {
   ArticleCardSkeleton,
 } from '@/components/ui/fragments/custom-ui/card/article-card'
@@ -23,7 +21,7 @@ export default function RecommendedArticles({
   const [hovered, setHovered] = useState<number | null>(null)
 
   const { data: recommendations, isLoading } = useQuery(
-    getRecommendedArticlesQueryOptions(currentSlug, 3),
+    getRecommendedArticlesQueryOptions(currentSlug, 4),
   )
 
   // Don't render if no recommendations
@@ -31,12 +29,8 @@ export default function RecommendedArticles({
     return null
   }
 
-  const handleArticleClick = (_article: PublicArticle) => {
-    // Navigation is handled by the Link component inside ArticleCard
-  }
-
   return (
-    <section className="max-w-3xl mx-auto py-12 space-y-8">
+    <section className="  mx-auto   space-y-8">
       {/* Section Header */}
       <div className="flex items-center justify-between">
         <div className="space-y-1">
@@ -60,7 +54,7 @@ export default function RecommendedArticles({
       </div>
 
       {/* Articles Grid */}
-      <div className="grid grid-cols-1">
+      <div className="grid grid-cols-1 md:grid-cols-2 w-full">
         {isLoading ? (
           // Loading skeleton
           <>
@@ -71,22 +65,15 @@ export default function RecommendedArticles({
         ) : (
           // Render articles
           recommendations?.map((article, index) => (
-            <Link
+            <ArticleCard
               key={article.id}
-              to="/artikel/$artikelId"
-              params={{ artikelId: article.slug }}
-              className="block"
-            >
-              <ArticleCard
-                article={article}
-                index={index}
-                hovered={hovered}
-                setHovered={setHovered}
-                onClick={() => handleArticleClick(article)}
-                totalItems={recommendations.length}
-                columns={1}
-              />
-            </Link>
+              index={index}
+              hovered={hovered}
+              setHovered={setHovered}
+              article={article}
+              totalItems={recommendations.length}
+              columns={2}
+            />
           ))
         )}
       </div>

@@ -6,9 +6,12 @@ import {
 } from '@/components/ui/fragments/shadcn-ui/sidebar'
 
 import AppLogo from '../../../../fragments/custom-ui/header/app-logo'
+import { authClient } from '@/lib/auth/auth-client'
 
 export default function SidebarHeaderLogo() {
   const appName = import.meta.env.VITE_APP_NAME
+  const { data: session } = authClient.useSession()
+
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -21,7 +24,7 @@ export default function SidebarHeaderLogo() {
           </div>
           <div className="grid flex-1 text-left text-sm leading-tight">
             <span className="truncate font-medium">{appName}</span>
-            <span className="truncate text-xs capitalize">Enterprise</span>
+            <span className="truncate text-xs capitalize">{session?.user.role}</span>
           </div>
         </SidebarMenuButton>
       </SidebarMenuItem>

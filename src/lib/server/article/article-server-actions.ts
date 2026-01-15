@@ -237,3 +237,41 @@ export const deleteBulkArticles = createServerFn({ method: 'POST' })
 
     return { success: true, count: data.ids.length }
   })
+
+// ============================================
+// GET USER ARTICLES
+// ============================================
+
+const getUserArticlesSchema = z.object({
+  status: z.enum(['published', 'draft', 'all']).optional().default('all'),
+})
+
+export const getUserArticlesByStatus = createServerFn({ method: 'GET' })
+  .middleware([authServerMiddleware])
+  .inputValidator(getUserArticlesSchema)
+  .handler(async ({ data, context }) => {
+    const db = await getDb()
+    const authorId = context.user!.id
+
+    const conditions = [eq(article.authorId, authorId)]
+
+    if (data.status && data.status !== 'all') {
+      conditions.push(eq(article.status, data.status))
+    }
+
+    const results = await db.query.article.findMany({
+      where: and(...conditions),
+      orderBy: (article, { desc }) => [desc(article.createdAt)],
+      columns: {
+        id: true,
+        title: true,
+        slug: true,
+        status: true,
+        coverImage: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    })
+
+    return results
+  })

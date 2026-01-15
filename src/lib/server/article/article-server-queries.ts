@@ -187,7 +187,136 @@ export async function fetchArticleStatusCounts(
 }
 
 // ============================================
-// AGGREGATE SERVER FUNCTION
+// ADMIN DB FUNCTIONS (NO USER FILTER)
+// ============================================
+
+export async function fetchArticleListAdmin(
+  input: ArticleAggregateInput,
+): Promise<{
+  data: ArticleAggregateResult['data']
+  pageCount: number
+}> {
+  const db = await getDb()
+  const {
+    page,
+    perPage,
+    sort,
+    title,
+    status,
+    createdAt,
+    filters,
+    filterFlag,
+    joinOperator,
+  } = input
+  const offset = (page - 1) * perPage
+
+  const advancedTable =
+    filterFlag === 'advancedFilters' || filterFlag === 'commandFilters'
+
+  const advancedWhere = filterColumns({
+    table: article,
+    filters: filters,
+    joinOperator: joinOperator,
+  })
+
+  // No user filter for admin - gets all articles
+  const where = advancedTable
+    ? advancedWhere
+    : and(
+        title ? ilike(article.title, `%${title}%`) : undefined,
+        status.length > 0 ? inArray(article.status, status) : undefined,
+        createdAt.length > 0
+          ? and(
+              createdAt[0]
+                ? gte(article.createdAt, new Date(createdAt[0]))
+                : undefined,
+              createdAt[1]
+                ? lte(article.createdAt, new Date(createdAt[1]))
+                : undefined,
+            )
+          : undefined,
+      )
+
+  // Valid column names untuk sorting
+  type ArticleColumnKey =
+    | 'id'
+    | 'title'
+    | 'createdAt'
+    | 'status'
+    | 'publishedAt'
+
+  const validColumns: ArticleColumnKey[] = [
+    'id',
+    'title',
+    'createdAt',
+    'status',
+    'publishedAt',
+  ]
+
+  const orderBy =
+    sort.length > 0
+      ? sort
+          .filter((item) => validColumns.includes(item.id as ArticleColumnKey))
+          .map((item) => {
+            const column = article[item.id as ArticleColumnKey]
+            return item.desc ? desc(column) : asc(column)
+          })
+      : [asc(article.createdAt)]
+
+  const [dataResult, countResult] = await Promise.all([
+    db.query.article.findMany({
+      where,
+      orderBy,
+      limit: perPage,
+      offset,
+    }),
+    db.select({ count: count() }).from(article).where(where),
+  ])
+
+  const total = countResult[0]?.count ?? 0
+
+  const data = dataResult.map((a) => ({
+    id: a.id,
+    authorId: a.authorId,
+    slug: a.slug,
+    title: a.title,
+    excerpt: a.excerpt,
+    content: a.content,
+    coverImage: a.coverImage,
+    status: a.status,
+    publishedAt: a.publishedAt,
+    createdAt: a.createdAt,
+    updatedAt: a.updatedAt,
+  }))
+
+  return { data, pageCount: Math.ceil(total / perPage) }
+}
+
+export async function fetchArticleStatusCountsAdmin(): Promise<
+  ArticleAggregateResult['statusCounts']
+> {
+  const db = await getDb()
+  const result = await db
+    .select({ status: article.status, count: count() })
+    .from(article)
+    .groupBy(article.status)
+    .having(gt(count(article.status), 0))
+
+  return result.reduce(
+    (acc, { status, count }) => {
+      acc[status] = count
+      return acc
+    },
+    {
+      published: 0,
+      draft: 0,
+      archived: 0,
+    } as ArticleAggregateResult['statusCounts'],
+  )
+}
+
+// ============================================
+// AGGREGATE SERVER FUNCTION (USER)
 // ============================================
 
 export const getArticleAggregateServerFn = createServerFn({
@@ -220,3 +349,36 @@ export const getArticleAggregateServerFn = createServerFn({
       }
     },
   )
+
+// ============================================
+// AGGREGATE SERVER FUNCTION (ADMIN - ALL DATA)
+// ============================================
+
+import { adminServerMiddleware } from '@/lib/middleware'
+
+export const getArticleAggregateAdminServerFn = createServerFn({
+  method: 'GET',
+})
+  .middleware([adminServerMiddleware])
+  .inputValidator(z.object({ filters: articleAggregateInputSchema }))
+  .handler(async ({ data: { filters } }): Promise<ArticleAggregateResult> => {
+    try {
+      const [listResult, statusCounts] = await Promise.all([
+        fetchArticleListAdmin(filters),
+        fetchArticleStatusCountsAdmin(),
+      ])
+
+      return {
+        data: listResult.data,
+        pageCount: listResult.pageCount,
+        statusCounts,
+      }
+    } catch (err) {
+      console.error('[Article Admin Aggregate Query Error]:', err)
+      return {
+        data: [],
+        pageCount: 0,
+        statusCounts: { published: 0, draft: 0, archived: 0 },
+      }
+    }
+  })

@@ -76,7 +76,7 @@ function RouteComponent() {
 // ============================================
 function ArtikelDetailSkeleton() {
   return (
-    <div className="container py-7 px-5 space-y-7">
+    <div className="space-y-7   py-6 sm:pt-5   container  px-6 ">
       {/* Nav skeleton */}
       <nav className="flex items-center gap-2">
         <ArrowLeft className="size-5 text-muted-foreground" />

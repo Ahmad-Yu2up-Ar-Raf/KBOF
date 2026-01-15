@@ -6,11 +6,15 @@ import { Link } from '@tanstack/react-router'
 import { useQueryState, parseAsString } from 'nuqs'
 
 import { cn } from '@/lib/utils'
-import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
+import {
+  Button,
+  buttonVariants,
+} from '@/components/ui/fragments/shadcn-ui/button'
 import { Input } from '@/components/ui/fragments/shadcn-ui/input'
 import VerticalCutReveal from '@/components/ui/fragments/custom-ui/animate-ui/vertical-cut'
 import { useDebouncedCallback } from '@/hooks/use-debounced-callback'
 import { authClient } from '@/lib/auth/auth-client'
+import CreateDestinationSheet from '../../feature/data-table/destination/create-destination-sheet'
 
 const DEBOUNCE_DELAY = 400 // ms
 
@@ -84,21 +88,22 @@ const HeaderDestinasi = () => {
                 damping: 21,
               }}
             >
-              Melocal*
+              Lokal*
             </VerticalCutReveal>
           </h1>
 
           <div className="sm:w-96 space-y-1.5 sm:pt-0 pt-2">
             <p className="text-sm font-semibold text-end">
-              Ruang Ide Anak Bangsa
+              Ruang Destinasi Suasana Lokal
             </p>
 
             <VerticalCutReveal
               splitBy="words"
+              containerClassName=" md:justify-end "
               staggerDuration={0.1}
               staggerFrom="first"
               reverse={true}
-              wordLevelClassName="text-sm text-muted-foreground lg:text-base text-justify"
+              wordLevelClassName="text-sm text-muted-foreground text-rigth lg:text-base text-justify"
               transition={{
                 type: 'spring',
                 stiffness: 250,
@@ -106,14 +111,14 @@ const HeaderDestinasi = () => {
                 delay: 0,
               }}
             >
-              Jelajahi karya kreatif generasi muda, dukung gagasan berdampak,
-              dan bantu membangun masa depan.
+              Temukan destinasi wisata unik, rasakan kehangatan budaya lokal,
+              dan jelajahi pesona tersembunyi di setiap sudut Nusantara.
             </VerticalCutReveal>
           </div>
         </header>
 
-        <div className="w-full md:flex  items-center justify-between gap-4 ">
-          <div className="relative w-full md:max-w-md">
+        <div className="w-full md:flex items-center justify-between gap-4 ">
+          <div className="relative w-full text-right md:max-w-md">
             <Input
               type="text"
               placeholder="Cari destinasi..."
@@ -126,18 +131,30 @@ const HeaderDestinasi = () => {
               className="w-full"
             />
           </div>
-
+          {session ? (
+            <CreateDestinationSheet>
+              <Button
+                className={cn(
+                  ' m-auto md:mr-0 text-sm  mt-3 w-full md:max-w-3xs ',
+                )}
+              >
+                Ajukan Destinasi Lokal
+                <PlusCircle />
+              </Button>
+            </CreateDestinationSheet>
+          ) : (
+            <Link
+              to={'/login'}
+              className={cn(
+                buttonVariants({ variant: 'default' }),
+                ' m-auto md:mr-0 text-sm  mt-3 w-full md:max-w-3xs ',
+              )}
+            >
+              Ajukan Destinasi Lokal
+              <PlusCircle />
+            </Link>
+          )}
           {/* Stats */}
-          <Link
-            to={session ? '/dashboard/destination' : '/login'}
-            className={cn(
-              buttonVariants({ variant: 'default' }),
-              ' m-auto md:mr-0 text-sm  mt-3 w-full md:max-w-3xs ',
-            )}
-          >
-            Daftarkan Destinasi
-            <PlusCircle />
-          </Link>
         </div>
       </div>
 

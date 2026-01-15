@@ -34,7 +34,6 @@ export function useLoginForm({
           {
             email: data.email,
             password: data.password,
-            callbackURL: '/dashboard',
           },
           {
             onSuccess: () => {
@@ -78,7 +77,6 @@ export function useRegisterForm({
             email: data.email,
             password: data.password,
             name: data.name,
-            callbackURL: '/dashboard',
           },
           {
             onSuccess: () => {

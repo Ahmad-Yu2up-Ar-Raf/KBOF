@@ -2,19 +2,29 @@ import { SignUpForm } from '../form/register-form'
 import { toast } from 'sonner'
 import AuthLayoutTemplate from '../../layout/auth-layout'
 import { useRegisterForm } from '@/hooks/form/use-auth-form'
-import { useNavigate } from '@tanstack/react-router'
+import { authClient } from '@/lib/auth/auth-client'
+import type { UserRoleType } from '@/db/schema'
 
 export default function Register() {
-  const navigate = useNavigate()
   /**
    * ✅ Call hook di parent component
    * Sekarang isPending bisa di-share ke AuthLayoutTemplate dan SignInForm
    */
   const form = useRegisterForm({
     onSuccess: async () => {
-      // Your register logic here
       toast.success('Register berhasil!')
-      navigate({ to: '/dashboard' })
+      // Get fresh session to determine redirect
+      const session = await authClient.getSession()
+      const user = session?.data?.user as { role?: UserRoleType; hasCompletedOnboarding?: boolean } | undefined
+      const role = user?.role || 'pribumi'
+      
+      // Role-based redirect - new users are pribumi by default
+      if (role === 'pribumi') {
+        // New users always go to onboarding first
+        window.location.href = '/onboarding'
+      } else {
+        window.location.href = '/dashboard'
+      }
     },
     onError: (error: Error) => {
       toast.error(error.message)

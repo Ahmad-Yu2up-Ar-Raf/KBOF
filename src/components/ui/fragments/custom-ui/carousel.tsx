@@ -455,7 +455,7 @@ export const SliderProgress = forwardRef<
     <div
       ref={ref}
       className={cn(
-        'bg-gray-500 relative rounded-md h-2 w-96 max-w-full overflow-hidden',
+        'bg-gray-500 relative rounded-xl h-2 w-96 max-w-full overflow-hidden',
         className,
       )}
       {...props}
@@ -656,7 +656,7 @@ export const ThumbsSlider = forwardRef<
           >
             <MediaItem
               webViewLink={src}
-              className="w-full h-full object-cover rounded-md"
+              className="w-full h-full object-cover rounded-xl"
             />
           </div>
         ))}

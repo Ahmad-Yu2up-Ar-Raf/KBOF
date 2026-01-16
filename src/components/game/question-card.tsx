@@ -12,6 +12,7 @@ import {
 } from '@/lib/game/constants'
 import {
   Card,
+  CardAction,
   CardContent,
   CardHeader,
 } from '@/components/ui/fragments/shadcn-ui/card'
@@ -111,102 +112,99 @@ export function QuestionCard({
   ])
 
   return (
-    <Card
-      gradient={false}
-      className="   max-w-md  content-start  m-auto gap-4  p-0 bg-background border-0  shadow-none"
-    >
-      {/* Header with progress and timer */}
-      <CardHeader className="   content-start h-full bg-transparent min-h-[20svh] overflow-hidden md:h-[15em]  gap-0 pb-0  p-0">
-        <TimerDisplay
-          timeRemaining={timeRemaining}
-          totalTime={config.defaultTimeLimitSec}
-          isPaused={isPaused}
-          className="w-full"
-        />
-        <FragmentReveal
-          src={question.fullImageUrl}
-          alt={question.destinationName}
-          fragments={question.fragmentConfigs}
-          isRevealed={showFullImage}
-          className="mx-auto  "
-        />
-      </CardHeader>
-
-      <CardContent
-        className={cn(
-          '  bg-background  border-0 space-y-4 shadow-none p-0',
-          // showFeedback && feedback ? '  ' : ' space-y-8   ',
-        )}
+    <>
+      <TimerDisplay
+        timeRemaining={timeRemaining}
+        totalTime={config.defaultTimeLimitSec}
+        isPaused={isPaused}
+        className="w-full"
+      />
+      <Card
+        gradient={false}
+        className="   max-w-lg  content-start   m-auto gap-4  p-0 bg-transparent border-0  shadow-none"
       >
-        {/* Image section */}
-
-        {/* Question prompt */}
-        <motion.div
-          className=" space-y-2  border-b-2 pb-5    "
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: ANIMATION_DURATION.normal, delay: 0.2 }}
-        >
-          <div className="flex items-center   gap-3">
-            <Badge variant="outline" className="text-xs">
-              Soal {questionNumber}/{totalQuestions}
-            </Badge>
-            <Badge variant="secondary" className="text-xs">
-              {question.province}
-            </Badge>
-          </div>
-          <h2 className="    md:leading-7 text-lg leading-6     font-semibold  md:text-2xl">
-            {question.prompt}
-          </h2>
-        </motion.div>
-        <AnimatePresence>
-          {showFeedback && feedback && (
-            <FeedbackDisplay
-              isCorrect={feedback.isCorrect}
-              message={feedback.message}
-              funFact={feedback.funFact}
-            />
-          )}
-        </AnimatePresence>
-
-        {/* Answer choices with RadioGroup */}
-        <div className="  space-y-3 w-full">
-          <AnswerRadioGroup
-            questionId={question.id}
-            choices={question.choices}
-            selectedIndex={selectedIndex}
-            correctIndex={question.correctIndex}
-            showFeedback={showFeedback}
-            disabled={showFeedback || isPaused}
-            onSelect={handleSelectAnswer}
+        {/* Header with progress and timer */}
+        <CardHeader className="   content-start h-full bg-transparent min-h-[20svh] overflow-hidden md:h-[15em]  gap-0 pb-0  rounded-4xl p-0">
+          <FragmentReveal
+            src={question.fullImageUrl}
+            alt={question.destinationName}
+            fragments={question.fragmentConfigs}
+            isRevealed={showFullImage}
+            className="mx-auto  "
           />
+        </CardHeader>
 
-          {/* Next Question button - only shows after feedback */}
-          <AnimatePresence>
-            {showFeedback && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: ANIMATION_DURATION.normal, delay: 0.3 }}
-                className="flex md:justify-end w-full   justify-center pt-2"
-              >
-                <Button
-                  size="lg"
-                  onClick={onNextQuestion}
-                  className="w-full    md:w-fit  md:px-8 gap-2"
+        <CardContent
+          className={cn(
+            '  bg-transparent  border-0 space-y-4 shadow-none p-0',
+            // showFeedback && feedback ? '  ' : ' space-y-8   ',
+          )}
+        >
+          {/* Image section */}
+
+          {/* Question prompt */}
+          <motion.div
+            className=" space-y-2  border-b-2 pb-5    "
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: ANIMATION_DURATION.normal, delay: 0.2 }}
+          >
+            <div className="flex items-center   gap-3">
+              <Badge variant="outline" className="text-xs">
+                Soal {questionNumber}/{totalQuestions}
+              </Badge>
+              <Badge variant="secondary" className="text-xs">
+                {question.province}
+              </Badge>
+            </div>
+            <h2 className="    md:leading-7 text-lg leading-6     font-semibold  md:text-2xl">
+              {question.prompt}
+            </h2>
+          </motion.div>
+      
+
+          {/* Answer choices with RadioGroup */}
+          <CardAction className="  space-y-3 w-full">
+            <AnswerRadioGroup
+              questionId={question.id}
+              choices={question.choices}
+              selectedIndex={selectedIndex}
+              correctIndex={question.correctIndex}
+              showFeedback={showFeedback}
+              disabled={showFeedback || isPaused}
+              onSelect={handleSelectAnswer}
+            />
+
+            {/* Next Question button - only shows after feedback */}
+            <AnimatePresence>
+              {showFeedback && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{
+                    duration: ANIMATION_DURATION.normal,
+                    delay: 0.3,
+                  }}
+                  className="flex md:justify-end w-full   justify-center pt-2"
                 >
-                  {isLastQuestion ? 'Lihat Hasil' : 'Soal Berikutnya'}
-                  <ArrowRight className="size-4" />
-                </Button>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+                  <Button
+                    size="lg"
+                    onClick={onNextQuestion}
+                    className="w-full    md:w-fit  md:px-8 gap-2"
+                  >
+                    {isLastQuestion ? 'Lihat Hasil' : 'Soal Berikutnya'}
+                    <ArrowRight className="size-4" />
+                  </Button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </CardAction>
 
-        {/* Feedback overlay */}
-      </CardContent>
-    </Card>
+          {/* Feedback overlay */}
+        </CardContent>
+      </Card>
+    </>
   )
 }
 
@@ -281,7 +279,7 @@ function AnswerRadioGroup({
                 'flex cursor-pointer items-center gap-4 rounded-2xl border-2 p-4 md:py-2.5 md:px-4 transition-all duration-200',
                 // Default state
                 state === 'default' &&
-                  'border-border bg-background hover:border-primary/50 hover:bg-muted/50',
+                  'border-border bg-background/60 hover:border-primary/50 hover:bg-muted/50',
                 // Selected state
                 state === 'selected' &&
                   'border-primary bg-primary/10 ring-2 ring-primary/20',
@@ -337,68 +335,4 @@ function AnswerRadioGroup({
   )
 }
 
-// =============================================================================
-// FEEDBACK DISPLAY
-// =============================================================================
-
-type FeedbackDisplayProps = {
-  isCorrect: boolean
-  message: string
-  funFact?: string
-}
-
-function FeedbackDisplay({
-  isCorrect,
-  message: _message,
-  funFact,
-}: FeedbackDisplayProps) {
-  return (
-    <>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: ANIMATION_DURATION.normal }}
-        className={cn(
-          'font-medium rounded-2xl    border py-2 px-3 ',
-          isCorrect
-            ? 'text-emerald-700 dark:text-emerald-300'
-            : 'text-red-700 dark:text-red-300',
-
-          isCorrect
-            ? 'bg-emerald-50 dark:bg-emerald-900/20'
-            : 'bg-red-50 dark:bg-red-900/20',
-        )}
-      >
-        <div className=" flex  gap-2  items-start   ">
-          <motion.p
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ type: 'spring', stiffness: 500, damping: 25 }}
-            className="  text-sm   "
-          >
-            {isCorrect ? '🎉' : '😔'}
-          </motion.p>{' '}
-          <p className="leading-3">
-            <span className="text-xs  md:text-sm  ">{_message}</span>
-          </p>
-        </div>
-        {funFact && (
-          <div className=" flex  gap-2  items-center   ">
-            <motion.p
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ type: 'spring', stiffness: 500, damping: 25 }}
-              className="  text-sm   "
-            >
-              💡
-            </motion.p>{' '}
-            <p className="leading-2">
-              <span className="text-xs  md:text-sm">FuntFact : {funFact}</span>
-            </p>
-          </div>
-        )}
-      </motion.div>
-    </>
-  )
-}
+ 

@@ -239,13 +239,8 @@ export function HowToPlaySheet({
   }
 
   const defaultTrigger = (
-    <Button
-      size={'lg'}
-      className={
-        '  md:has-[>svg]:px-15 w-full md:w-fit    font-semibold   has-[>svg]:px-8 rounded-full   md:text-xl  md:gap-6 md:py-7    py-6  bg-foreground '
-      }
-    >
-      Cara Main
+    <Button size={'lg'} variant={'customForeground'} className={' rounded-full'}>
+      Cara Bermain
       <Info className=" size-4.5 sm:size-6 fill-primary-foreground   text-primary" />
     </Button>
   )

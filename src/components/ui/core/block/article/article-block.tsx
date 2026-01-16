@@ -230,9 +230,9 @@ export function ArticleBlockSkeleton() {
       <section className="py-1 w-full container md:py-2 sm:px-8 px-1.5 flex-1">
         <div className="space-y-5">
           {/* Sort Options Skeleton */}
-          <div className="flex items-center gap-2 px-5 overflow-x-auto">
+          <div className="flex items-center gap-2  px-2 sm:px-0  overflow-x-auto">
             {Array.from({ length: 3 }, (_, i) => (
-              <Skeleton key={i} className="h-8 w-20 rounded-2xl" />
+              <Skeleton key={i} className="h-8 w-20 rounded-xl" />
             ))}
           </div>
 
@@ -242,7 +242,7 @@ export function ArticleBlockSkeleton() {
           </div>
 
           {/* Grid */}
-          <div className="grid gap-7 md:gap-3 px-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full auto-rows-fr">
+          <div className="grid  rounded-2xl overflow-hidden px-2 grid-cols-1 md:grid-cols-2   w-full auto-rows-fr">
             {Array.from({ length: 6 }, (_, index) => (
               <ArticleCardSkeleton key={index} />
             ))}

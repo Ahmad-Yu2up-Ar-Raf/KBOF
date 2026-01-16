@@ -134,9 +134,8 @@ function HeroCard({ onPlay }: HeroCardProps) {
           <Button
             onClick={onPlay}
             size={'lg'}
-            className={
-              ' md:has-[>svg]:px-15  w-full md:w-fit has-[>svg]:px-8 rounded-full font-semibold   md:text-xl  px-70 md:gap-6 md:py-7 md:px-18     py-6 '
-            }
+            variant={'custom'}
+            className={' rounded-full'}
           >
             Mulai Game
             <Play className=" size-4.5 fill-primary-foreground   text-primary    sm:size-6" />

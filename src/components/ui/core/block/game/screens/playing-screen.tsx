@@ -95,6 +95,7 @@ export function PlayingScreen({
       <GameHeader
         variant="column"
         // Emoji={config.emoji}
+        className='md:mb-0'
         title={`${state.timeRemaining}`}
         titleClassName={'flex text-xs'}
         // subtitle={`Soal ${state.currentIndex + 1} dari ${state.questions.length}`}
@@ -126,7 +127,7 @@ export function PlayingScreen({
         }
       />
 
-      <GameContent>
+      <GameContent className='  space-y-5'>
         <QuestionCard
           question={currentQuestion}
           level={level}

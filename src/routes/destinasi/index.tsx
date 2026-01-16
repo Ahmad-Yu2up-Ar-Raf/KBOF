@@ -8,6 +8,10 @@ import DestinasiBlock, {
 import HeaderDestinasi from '@/components/ui/core/block/destinasi/destinasi-header'
 import { queryClient } from '@/components/provider/Provider'
 import { getDestinasiInfiniteQueryOptions } from '@/lib/query-options'
+import KatalogHeader from '@/components/ui/fragments/custom-ui/typography/katalog-header'
+import CreateDestinationSheet from '@/components/ui/core/feature/data-table/destination/create-destination-sheet'
+import { Button } from '@/components/ui/fragments/shadcn-ui/button'
+import { PlusCircle } from 'lucide-react'
 
 // Route with loader for initial data prefetch
 export const Route = createFileRoute('/destinasi/')({
@@ -29,16 +33,61 @@ export const Route = createFileRoute('/destinasi/')({
     )
   },
   component: RouteComponent,
-  pendingComponent: DestinasiBlockSkeleton,
+  pendingComponent: PendingComponent,
 })
 
 function RouteComponent() {
   return (
     <div className="mx-auto container max-w-6xl space-y-4 ">
-      <HeaderDestinasi />
+      <KatalogHeader
+        titleMain="Suasana"
+        titleSecond="Lokal*"
+        linkText="Ajukan Destinasi Lokal"
+        subTitle="Ruang Destinasi Suasana Lokal"
+        deskription="Temukan destinasi wisata unik, rasakan kehangatan budaya lokal,
+              dan jelajahi pesona tersembunyi di setiap sudut."
+      >
+        <CreateDestinationSheet>
+          <Button
+            className={' m-auto md:mr-0 text-sm  mt-3 w-full md:max-w-3xs '}
+          >
+            Ajukan Destinasi Lokal
+            <PlusCircle />
+          </Button>
+        </CreateDestinationSheet>
+      </KatalogHeader>
       <Suspense fallback={<DestinasiBlockSkeleton />}>
         <DestinasiBlock />
       </Suspense>
+    </div>
+  )
+}
+
+// Pending component - Header tetap visible!
+function PendingComponent() {
+  return (
+    <div className="mx-auto container max-w-6xl space-y-4 ">
+      {/* Header tetap di-render saat pending */}
+      <KatalogHeader
+        titleMain="Suasana"
+        titleSecond="Lokal*"
+        linkText="Ajukan Destinasi Lokal"
+        subTitle="Ruang Destinasi Suasana Lokal"
+        deskription="Temukan destinasi wisata unik, rasakan kehangatan budaya lokal,
+              dan jelajahi pesona tersembunyi di setiap sudut."
+      >
+        <CreateDestinationSheet>
+          <Button
+            className={' m-auto md:mr-0 text-sm  mt-3 w-full md:max-w-3xs '}
+          >
+            Ajukan Destinasi Lokal
+            <PlusCircle />
+          </Button>
+        </CreateDestinationSheet>
+      </KatalogHeader>
+
+      {/* Hanya skeleton content */}
+      <DestinasiBlockSkeleton />
     </div>
   )
 }

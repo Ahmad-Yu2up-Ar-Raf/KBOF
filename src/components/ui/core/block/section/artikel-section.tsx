@@ -46,7 +46,7 @@ export default function ArtikelSection() {
             setHovered={setHovered}
             article={article}
             totalItems={articles.length}
-            columns={3}
+            columns={2}
           />
         ))}
       </main>

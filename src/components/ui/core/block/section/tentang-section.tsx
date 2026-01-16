@@ -58,13 +58,13 @@ function About() {
 
   return (
     <section className="container px-5 py-12 md:py-16 lg:py-20">
-      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-8 lg:gap-10">
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-8 lg:gap-10">
         {/* Teks About Us - Kiri */}
         <header className="flex flex-col w-full lg:w-[45%] gap-y-4">
           {/* Judul */}
           <div className="flex flex-col gap-y-1">
             <p className="text-xs md:text-sm text-muted-foreground tracking-[0.3em] uppercase">
-          tentang suasana
+              tentang suasana
             </p>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-primary">
               Sejarah Bertutur
@@ -81,11 +81,11 @@ function About() {
         {/* Image Container - Kanan (Flex based, controlled size) */}
         <div className="flex items-end justify-center w-full lg:w-[50%] lg:hover:gap-6 transition-all duration-300">
           {/* Gambar pendukung kiri - rotated -15deg */}
-          <div className="-mr-12 md:-mr-16 lg:-mr-20 hover:mr-0 md:translate-y-3 -rotate-6 z-[1] transition-all duration-300">
+          <div className="-mr-29 hover:mr-0 -translate-y-8 -rotate-10 z-[1] transition-all duration-300">
             <ImageCard
               src="assets/images/rendang-potongan.png"
               alt="Rendang - Kuliner Nusantara"
-              className="w-[140px] h-auto md:w-[180px] lg:w-[200px]"
+              className="w-[190px] h-auto md:w-[180px] lg:w-[200px]"
               index={0}
               hovered={hoveredImage}
               setHovered={setHoveredImage}
@@ -97,7 +97,7 @@ function About() {
             <ImageCard
               src="assets/images/gadang-potongan.png"
               alt="Rumah Gadang - Arsitektur Nusantara"
-              className="w-[160px] h-auto md:w-[220px] lg:w-[240px]"
+              className="w-[190px] h-auto md:w-[220px] lg:w-[240px]"
               index={1}
               hovered={hoveredImage}
               setHovered={setHoveredImage}
@@ -105,11 +105,11 @@ function About() {
           </div>
 
           {/* Gambar pendukung kanan - rotated 15deg */}
-          <div className="-ml-12 md:-ml-16 lg:-ml-20 hover:ml-0 md:translate-y-5 rotate-6 z-[1] transition-all duration-300">
+          <div className=" -ml-29 hover:ml-0 -translate-y-9 rotate-10 z-[1] transition-all duration-300">
             <ImageCard
               src="assets/images/batik-potongan.png"
               alt="Batik - Warisan Nusantara"
-              className="w-[140px] h-auto md:w-[180px] lg:w-[200px]"
+              className="w-[190px] h-auto md:w-[180px] lg:w-[200px]"
               index={2}
               hovered={hoveredImage}
               setHovered={setHoveredImage}

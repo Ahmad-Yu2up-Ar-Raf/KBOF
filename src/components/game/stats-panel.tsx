@@ -12,9 +12,18 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/fragments/shadcn-ui/card'
-import { Button } from '@/components/ui/fragments/shadcn-ui/button'
-import { Badge } from '@/components/ui/fragments/shadcn-ui/badge'
+import {
+  Button,
+  buttonVariants,
+} from '@/components/ui/fragments/shadcn-ui/button'
+
 import { Progress } from '@/components/ui/fragments/shadcn-ui/progress'
+import { useLottie } from 'lottie-react'
+
+import animationData from '@/assets/animations/Cute Boy Running.json'
+import { useIsMobile } from '@/hooks/use-mobile'
+import { SectionIcon } from 'lucide-react'
+import { Link } from '@tanstack/react-router'
 
 type StatsPanelProps = {
   results: QuestionResult[]
@@ -35,120 +44,147 @@ export function StatsPanel({
 }: StatsPanelProps) {
   const stats = calculateGameStats(results, level)
   const config = LEVEL_CONFIGS[level]
-  // const { message, emoji } = getResultMessage(stats.accuracy)
+  const { message, emoji } = getResultMessage(stats.accuracy)
+  const lottieOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  }
+  const isMobile = useIsMobile()
+  const style = {
+    width: isMobile ? 150 : 200,
+    height: isMobile ? 220 : 300,
+    margin: 'auto',
+  }
+  const { View } = useLottie(lottieOptions, style)
 
   return (
-    <div className="space-y-6">
-      {/* Main result card */}
-      <Card className="  max-w-md  content-start  m-auto gap-4  p-0 bg-background border-0  shadow-none  ">
-        {/* <CardHeader className="bg-gradient-to-r from-primary/10 via-primary/5 to-transparent pb-4 text-center">
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-            className="mx-auto mb-4 text-6xl"
-          >
+    <section className="space-y-6    relative   max-w-md m-auto ">
+      <header className=" w-full md:min-h-80 px-3 min-h-60 relative justify-end   flex  flex-col">
+        <div className=" absolute -top-6   -right-2 size-full text-center z-30   ">
+          {View}
+        </div>
+        <div className=" rela z-20">
+          <p>Level: {config.displayName}</p>
+          <h3 className="text-2xl font-semibold md:text-3xl">{message}</h3>
+        </div>
+      </header>
+      <main className=" flex w-full justify-start h-fit flex-col gap-8">
+        <Card className=" w-full mb-20  relative    pb-0  content-start  m-auto gap-4  px-0 bg-transparent   shadow-none  ">
+          <span className=" absolute  -right-6 rotate-9  -top-10  text-7xl">
             {emoji}
-          </motion.div>
-          <CardTitle className="text-2xl md:text-3xl">{message}</CardTitle>
-          <CardDescription>Level: {config.displayName}</CardDescription>
-
-          {isNewHighScore && (
+          </span>
+          <CardHeader className=" gap-0  ">
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="mt-2"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2 }}
+              className="mb-0     space-y-2 "
             >
-              <Badge className="bg-gradient-to-r from-amber-400 to-orange-500 text-white">
-                🏆 Skor Tertinggi Baru!
-              </Badge>
+              <div className="text-4xl font-bold md:text-6xl">
+                {stats.totalScore}{' '}
+                <span className=" text-primary text-xl ">Point</span>
+              </div>
+              <div className="text-muted-foreground text-sm">
+                Dari {stats.maxPossibleScore} poin maksimal
+              </div>
             </motion.div>
-          )}
-        </CardHeader> */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.7 }}
+              className="mt-6 px-0 border-t"
+            >
+              <div className="mb-2 flex justify-between text-sm">
+                <span className=" ">Akurasi</span>
+                <span className="font-medium">{stats.accuracy}%</span>
+              </div>
+              <Progress value={stats.accuracy} className="h-2" />
+            </motion.div>
+          </CardHeader>
 
-        <CardContent
-          className={cn(
-            '  bg-background  border-0 space-y-4 shadow-none p-0',
-            // showFeedback && feedback ? '  ' : ' space-y-8   ',
-          )}
+          <CardContent
+            className={cn(
+              '     space-y-4 shadow-none px-0',
+              // showFeedback && feedback ? '  ' : ' space-y-8   ',
+            )}
+          >
+            {/* Score highlight */}
+
+            {/* Stats grid */}
+            <div className="grid  w-full rounded-2xl  grid-cols-2">
+              <StatItem
+                className="border-r"
+                label="Jawaban Benar"
+                value={`${stats.correctCount}/${stats.totalQuestions}`}
+                delay={0.3}
+              />
+              <StatItem
+                label="Akurasi"
+                value={`${stats.accuracy}%`}
+                delay={0.4}
+              />
+              <StatItem
+                className="border-r"
+                label="Rata-rata Waktu"
+                value={`${stats.averageTimePerQuestion}s/soal`}
+                delay={0.5}
+              />
+              <StatItem
+                label="Total Poin"
+                value={`${stats.totalScore}`}
+                delay={0.6}
+              />
+            </div>
+
+            {/* Accuracy progress bar */}
+          </CardContent>
+        </Card>
+
+        {/* Question breakdown */}
+        <QuestionBreakdown results={results} level={level} />
+
+        {/* Action buttons */}
+        <motion.footer
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8 }}
+          className="flex w-full  relative z-999999  flex-col justify-center gap-3"
         >
-          {/* Score highlight */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="mb-8 text-center"
-          >
-            <div className="text-5xl font-bold tabular-nums text-primary md:text-6xl">
-              {stats.totalScore}
-            </div>
-            <div className="text-muted-foreground">
-              dari {stats.maxPossibleScore} poin maksimal
-            </div>
-          </motion.div>
-
-          {/* Stats grid */}
-          <div className="grid   grid-cols-2">
-            <StatItem
-              label="Jawaban Benar"
-              value={`${stats.correctCount}/${stats.totalQuestions}`}
-              delay={0.3}
-            />
-            <StatItem
-              label="Akurasi"
-              value={`${stats.accuracy}%`}
-              delay={0.4}
-            />
-            <StatItem
-              label="Rata-rata Waktu"
-              value={`${stats.averageTimePerQuestion}s/soal`}
-              delay={0.5}
-            />
-            <StatItem
-              label="Total Poin"
-              value={`${stats.totalScore}`}
-              delay={0.6}
-            />
+          <div className=" flex flex-col md:flex-row gap-3 w-full   ">
+            <Button
+              size="lg"
+              className=" w-full  md:w-1/2"
+              onClick={onPlayAgain}
+            >
+              Main Lagi
+            </Button>
+            <Button
+              className=" bg-foreground w-full md:w-1/2"
+              size="lg"
+              onClick={onChangeLevel}
+            >
+              Menu Utama
+            </Button>
           </div>
-
-          {/* Accuracy progress bar */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.7 }}
-            className="mt-6"
+          <Link
+            to="/"
+            className={cn(
+              buttonVariants({ variant: 'secondary', size: 'lg' }),
+              '   ',
+            )}
           >
-            <div className="mb-2 flex justify-between text-sm">
-              <span className="text-muted-foreground">Akurasi</span>
-              <span className="font-medium">{stats.accuracy}%</span>
-            </div>
-            <Progress value={stats.accuracy} className="h-3" />
-          </motion.div>
-        </CardContent>
-      </Card>
-
-      {/* Question breakdown */}
-      {/* <QuestionBreakdown results={results} level={level} /> */}
-
-      {/* Action buttons */}
-      {/* <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8 }}
-        className="flex flex-wrap justify-center gap-3"
-      >
-        <Button size="lg" onClick={onPlayAgain}>
-          🔄 Main Lagi
-        </Button>
-        <Button size="lg" variant="outline" onClick={onChangeLevel}>
-          📊 Ganti Level
-        </Button>
-        <Button size="lg" variant="ghost" onClick={onBackToMenu}>
-          🏠 Menu Utama
-        </Button>
-      </motion.div> */}
-    </div>
+            Kembali Ke Beranda
+          </Link>
+          {/* <Button size="lg" variant="ghost" onClick={onBackToMenu}>
+           Menu Utama
+        </Button> */}
+        </motion.footer>
+      </main>
+    </section>
   )
 }
 
@@ -156,18 +192,27 @@ type StatItemProps = {
   label: string
   value: string
   delay: number
+  className?: string
 }
 
-function StatItem({ label, value, delay }: StatItemProps) {
+function StatItem({ label, value, delay, className }: StatItemProps) {
   return (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay }}
-      className="rounded-lg bg-muted/50 p-4 text-left"
+      className={cn(' p-0   border-t  rounded-none', className)}
     >
-      <div className="text-2xl font-bold">{value}</div>
-      <div className="text-sm text-muted-foreground">{label}</div>
+      <div className=" relative   p-5">
+        {/* <CheckIcon className="size-5 text-green-500" /> */}
+        <div className="">
+          <CardTitle className="text-lg font-bold">{value}</CardTitle>
+          <CardDescription className="text-sm text-muted-foreground">
+            {label}
+          </CardDescription>
+        </div>
+        <span className="  absolute top-2 right-2 text-xl">🎯</span>
+      </div>
     </motion.div>
   )
 }
@@ -181,17 +226,25 @@ function QuestionBreakdown({ results, level }: QuestionBreakdownProps) {
   const config = LEVEL_CONFIGS[level]
 
   return (
-    <Card>
-      <CardHeader className="pb-3">
-        <CardTitle className="text-lg">Rincian Jawaban</CardTitle>
+    <Card className="  w-full pb-0 overflow-hidden     content-start  m-auto gap-4  px-0 bg-transparent    shadow-none   ">
+      <CardHeader className=" text-left w-full  pt-0  px-4  ">
+        <CardTitle className="  text-2xl font-bold ">
+          Rincian <span className=" text-primary">Soal</span>
+        </CardTitle>
+        <CardDescription className="  text-muted-foreground text-sm">
+          Berikut adalah rincian hasil jawabanmu.
+        </CardDescription>
       </CardHeader>
-      <CardContent>
-        <div className="space-y-2">
+      <CardContent
+        className={cn(
+          '   p-0   space-y-4 shadow-none px-0',
+          // showFeedback && feedback ? '  ' : ' space-y-8   ',
+        )}
+      >
+        <div className="">
           {results.map((result, index) => {
             const isCorrect =
               result.selectedIndex === result.correctIndex && !result.wasTimeout
-            const hasTimeBonus =
-              result.timeLeftSec > config.defaultTimeLimitSec * 0.5
 
             return (
               <motion.div
@@ -200,10 +253,10 @@ function QuestionBreakdown({ results, level }: QuestionBreakdownProps) {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
                 className={cn(
-                  'flex items-center justify-between rounded-lg p-3',
-                  isCorrect
-                    ? 'bg-emerald-50 dark:bg-emerald-900/10'
-                    : 'bg-red-50 dark:bg-red-900/10',
+                  'flex border items-center justify-between py-2  px-4',
+                  // isCorrect
+                  //   ? 'bg-emerald-50 dark:bg-emerald-900/10'
+                  //   : 'bg-red-50 dark:bg-red-900/10',
                 )}
               >
                 <div className="flex items-center gap-3">
@@ -216,18 +269,18 @@ function QuestionBreakdown({ results, level }: QuestionBreakdownProps) {
                     {isCorrect ? '✓' : result.wasTimeout ? '⏱️' : '✗'}
                   </span>
                   <span className="font-medium">Soal {index + 1}</span>
-                  {result.usedHint && (
+                  {/* {result.usedHint && (
                     <Badge variant="outline">💡 Pakai petunjuk</Badge>
                   )}
                   {hasTimeBonus && isCorrect && (
                     <Badge variant="secondary">⚡ Bonus waktu</Badge>
-                  )}
+                  )} */}
                 </div>
                 <div className="text-right">
                   <span className="font-bold tabular-nums">
                     {result.earnedPoints}
                   </span>
-                  <span className="text-muted-foreground"> poin</span>
+                  <span className="text-muted-foreground">+</span>
                   {!result.wasTimeout && (
                     <div className="text-xs text-muted-foreground">
                       Sisa {result.timeLeftSec}s

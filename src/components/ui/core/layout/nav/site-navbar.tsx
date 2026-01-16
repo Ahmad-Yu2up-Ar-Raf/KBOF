@@ -60,16 +60,16 @@ function SiteNavbar() {
       >
         <header
           className={cn(
-            ' top-0   md:rounded-b-none   rounded-b-2xl    mx-auto      border-b      items-center justify-center md:justify-between          flex    text-center w-full  px-5  max-w-[53rem] md:px-0 py-1.5 ',
+            ' top-2   md:rounded-b-none     mx-auto      md:border-b      items-center justify-center md:justify-between   pb-3    pt-6     flex    text-center w-full  px-5  max-w-[53rem] md:px-0 md:py-1.5 ',
           )}
         >
           <nav
             className={cn(
-              'z-50  hidden absolute  left-5.5 md:left-0   md:relative   bg-background/95 backdrop-blur md:flex justify-between',
+              'z-50    absolute  left-5.5 md:left-0   md:relative   bg-background/95 backdrop-blur flex justify-between',
             )}
           >
             <Button
-              variant={'ghost'}
+              variant={'link'}
               onClick={() => window.history.back()}
               size={'icon'}
               className={cn(
@@ -77,16 +77,20 @@ function SiteNavbar() {
               )}
             >
               <ArrowLeft className=" size-5 group-hover:-translate-x-1 group-hover:transform transition-all ease-out duration-300" />
-              <span className=" sr-only">Kembali</span>
+              <span className=" md:sr-only">Kembali</span>
             </Button>
           </nav>
 
-          <div className="">
-            <div className=" flex items-center text-2xl justify-center   gap-3">
-              <NavbarLogo />
-            </div>
-          </div>
-          {!isMobile && <AvatarMenu user={session?.user as User} />}
+          {!isMobile && (
+            <>
+              <div className="">
+                <div className=" flex items-center text-2xl justify-center   gap-3">
+                  <NavbarLogo />
+                </div>
+              </div>
+              <AvatarMenu user={session?.user as User} />
+            </>
+          )}
         </header>
       </motion.nav>
     )

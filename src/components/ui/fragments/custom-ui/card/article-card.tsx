@@ -156,8 +156,8 @@ export function ArticleCardSkeleton() {
   return (
     <Card
       className={cn(
-        'relative group w-full shadow-none border-secondary rounded-none',
-        'overflow-hidden flex flex-row h-full',
+        'relative p-0 group w-full shadow-none border-secondary rounded-none',
+        'overflow-hidden flex  bg-background rounded-t-2xl flex-row h-full',
       )}
     >
       <CardContent className="flex-1 flex flex-col gap-4 justify-between p-6">
@@ -187,7 +187,7 @@ export function ArticleCardSkeleton() {
       </CardContent>
 
       {/* Image Skeleton - 50% width */}
-      <div className="flex-1 relative min-h-45 md:min-h-50">
+      <div className="flex-1 relative min-h-40 md:min-h-45">
         <Skeleton className="absolute inset-0 w-full h-full rounded-none" />
       </div>
     </Card>

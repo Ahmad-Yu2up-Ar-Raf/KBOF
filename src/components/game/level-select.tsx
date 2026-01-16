@@ -26,7 +26,7 @@ export function LevelSelect({ onSelect, disabled }: LevelSelectProps) {
   const levels = Object.values(LEVEL_CONFIGS)
   const [hovered, setHovered] = useState<number | null>(null)
   return (
-    <div className="grid  sm:grid-cols-3">
+    <div className="grid gap-3  sm:grid-cols-3">
       {levels.map((config, index) => (
         <LevelCard
           hovered={hovered}
@@ -61,9 +61,9 @@ function LevelCard({
   setHovered,
 }: LevelCardProps) {
   const colorVariants: Record<string, string> = {
-    emerald: 'hover:border-emerald-500/50 hover:shadow-emerald-500/10',
-    amber: 'hover:border-amber-500/50 hover:shadow-amber-500/10',
-    red: 'hover:border-red-500/50 hover:shadow-red-500/10',
+    emerald: 'border-emerald-500/50 hover:shadow-emerald-500/10',
+    amber: 'border-amber-500/50 hover:shadow-amber-500/10',
+    red: 'border-red-500/50 hover:shadow-red-500/10',
   }
 
   const badgeVariants: Record<string, string> = {
@@ -90,14 +90,13 @@ function LevelCard({
     >
       <Card
         onClick={onSelect}
-        // gradient={false}
         className={cn(
-          ' transition-all duration-300  bg-background rounded-none   hover:shadow-lg',
+          ' transition-all rounded-2xl bg-background duration-300  ounded-none   hover:shadow-lg',
           colorVariants[config.color],
-          index === 0 &&
-            ' rounded-tr-2xl md:rounded-tr-none rounded-tl-2xl md:rounded-bl-2xl ',
-          index === 2 &&
-            ' md:rounded-tr-2xl  rounded-bl-2xl md:rounded-bl-none rounded-br-2xl ',
+          // index === 0 &&
+          //   '  md:rounded-tr-none rounded-tl-2xl md:rounded-bl-2xl ',
+          // index === 2 &&
+          //   ' md:rounded-tr-2xl  rounded-bl-2xl md:rounded-bl-none rounded-br-2xl ',
           disabled && 'pointer-events-none  opacity-50',
         )}
         role="button"

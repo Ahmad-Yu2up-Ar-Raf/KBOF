@@ -49,6 +49,7 @@ const Floating = ({
     >(),
   )
   const mousePositionRef = useMousePositionRef(containerRef)
+  const isMobile = useIsMobile()
 
   const registerElement = useCallback(
     (id: string, element: HTMLDivElement, depth: number) => {
@@ -66,7 +67,8 @@ const Floating = ({
   }, [])
 
   useAnimationFrame(() => {
-    if (!containerRef.current) return
+    // Skip animation on mobile for better performance
+    if (!containerRef.current || isMobile) return
 
     elementsMap.current.forEach((data) => {
       const strength = (data.depth * sensitivity) / 20
@@ -87,18 +89,6 @@ const Floating = ({
     })
   })
 
-  const isMobile = useIsMobile()
-
-  if (isMobile) {
-    return (
-      <div
-        className={cn('absolute top-0 left-0 w-full h-full', className)}
-        {...props}
-      >
-        {children}
-      </div>
-    )
-  }
   return (
     <FloatingContext.Provider value={{ registerElement, unregisterElement }}>
       <div
@@ -128,29 +118,18 @@ export const FloatingElement = ({
   const elementRef = useRef<HTMLDivElement>(null)
   const idRef = useRef(Math.random().toString(36).substring(7))
   const context = useContext(FloatingContext)
+  const isMobile = useIsMobile()
 
   useEffect(() => {
-    if (!elementRef.current || !context) return
+    // Skip registration on mobile
+    if (!elementRef.current || !context || isMobile) return
 
     const nonNullDepth = depth ?? 0.01
 
     context.registerElement(idRef.current, elementRef.current, nonNullDepth)
     return () => context.unregisterElement(idRef.current)
-  }, [depth])
-  const isMobile = useIsMobile()
+  }, [depth, context, isMobile])
 
-  if (isMobile) {
-    return (
-      <div
-        className={cn(
-          'absolute cursor-target will-change-transform',
-          className,
-        )}
-      >
-        {children}
-      </div>
-    )
-  }
   return (
     <div
       ref={elementRef}

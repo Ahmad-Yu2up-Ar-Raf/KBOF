@@ -48,10 +48,10 @@ const AuthLayoutTemplate = ({
       preserveAspectRatio: 'xMidYMid slice',
     },
   }
-  const [isPending, setIsPending] = React.useState(false)
-  const loadingState = loading || isPending
   const style = { width: '100%', height: '100%', margin: 'auto' } // atur sesuai kebutuhan
   const { View } = useLottie(lottieOptions, style)
+  const [isPending, setIsPending] = React.useState(false)
+  const loadingState = loading || isPending
   const signInGoogle = async () => {
     await authClient.signIn.social(
       {

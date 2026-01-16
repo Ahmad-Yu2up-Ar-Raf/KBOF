@@ -30,7 +30,7 @@ export function GameShell({ children, className }: GameShellProps) {
         repeatDelay={1}
         className={cn(
           'mask-[radial-gradient(500px_circle_at_center,white,transparent)]',
-          'inset-x-0 inset-y-[-30%] z-40   h-[200%] skew-y-12',
+          'inset-x-0 inset-y-[-30%] z-40   top-0 h-full skew-y-12',
         )}
       />
     </>
@@ -67,9 +67,9 @@ export function GameHeader({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: ANIMATION_DURATION.normal }}
       className={cn(
-        'z-40 top-0 mx-auto bg-background md:mb-3 items-center justify-center border-b  pt-0  flex text-center w-full px-10   h-full  relative md:border-0  ',
+        'z-40 top-0 mx-auto bg-transparent md:mb-3 items-center justify-center border-b  pt-0  flex text-center w-full px-10   h-full   relative    ',
         className,
-        isColumn ? 'md:border-b pb-3' : 'pb-6 mb-6',
+        isColumn ? ' pb-3' : 'border-b pb-6 mb-10',
       )}
     >
       {/* Left Action - Absolute positioned */}
@@ -107,7 +107,7 @@ export function GameHeader({
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3 }}
-                className="text-3xl  "
+                className="text-2xl  "
               >
                 {Emoji}
               </motion.span>
@@ -144,14 +144,16 @@ export function GameHeader({
               titleClassName,
             )}
           >
-            <motion.span
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="text-4xl md:text-5xl "
-            >
-              {Emoji}
-            </motion.span>
+            {Emoji && (
+              <motion.span
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className="text-4xl md:text-5xl "
+              >
+                {Emoji}
+              </motion.span>
+            )}
             <motion.h1
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -195,7 +197,7 @@ export function GameContent({ children, className }: GameContentProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: ANIMATION_DURATION.normal, delay: 0.1 }}
       className={cn(
-        'space-y-6 flex-1 w-full h-full  relative content-center    ',
+        'space-y-4 flex-1 w-full h-full  relative content-center    ',
         className,
       )}
     >

@@ -39,7 +39,7 @@ export function LevelSelectScreen({
     >
       <GameHeader
         title="Pilih Level Permainan"
-        className=" "
+        className="  "
         Emoji="🎯"
         variant="default"
         subtitle="Ketuk salah satu kartu level untuk memulai permainan"

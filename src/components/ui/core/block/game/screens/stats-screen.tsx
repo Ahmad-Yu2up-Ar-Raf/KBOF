@@ -10,6 +10,11 @@ import type { Level, QuestionResult } from '@/lib/game/types'
 import { ANIMATION_DURATION } from '@/lib/game/constants'
 import { GameHeader, GameContent, StatsPanel } from '@/components/game'
 import { useConfettiEffect } from '../../leaderboard/hooks'
+import {
+  Confetti,
+  ConfettiRef,
+} from '@/components/ui/fragments/custom-ui/animate-ui/confetti'
+import { useRef } from 'react'
 
 // =============================================================================
 // TYPES
@@ -36,31 +41,42 @@ export function StatsScreen({
   onChangeLevel,
   onBackToMenu,
 }: StatsScreenProps) {
-  useConfettiEffect()
+  const confettiRef = useRef<ConfettiRef>(null)
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: ANIMATION_DURATION.normal }}
-    >
-      <GameHeader
-        leftAction={onBackToMenu}
-        Emoji="🏆"
-        title="Permainan Selesai!"
-        subtitle="Lihat hasil permainanmu"
-      />
-
-      <GameContent>
-        <StatsPanel
-          results={results}
-          level={level}
-          isNewHighScore={isNewHighScore}
-          onPlayAgain={onPlayAgain}
-          onChangeLevel={onChangeLevel}
-          onBackToMenu={onBackToMenu}
+    <>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: ANIMATION_DURATION.normal }}
+      >
+        <GameHeader
+          leftAction={onBackToMenu}
+          // Emoji={results.length > 0 ? '🎉' : '🏆'}
+          title="Permainan Selesai!"
+          className=" mb-6"
+          // subtitle="Lihat hasil permainanmu"
+          variant="column"
         />
-      </GameContent>
-    </motion.div>
+
+        <GameContent>
+          <StatsPanel
+            results={results}
+            level={level}
+            isNewHighScore={isNewHighScore}
+            onPlayAgain={onPlayAgain}
+            onChangeLevel={onChangeLevel}
+            onBackToMenu={onBackToMenu}
+          />
+        </GameContent>
+      </motion.div>
+      <Confetti
+        ref={confettiRef}
+        className="absolute top-0 left-0 z-0 size-full"
+        // onMouseEnter={() => {
+        //   confettiRef.current?.fire({})
+        // }}
+      />
+    </>
   )
 }

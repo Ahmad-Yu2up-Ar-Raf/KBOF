@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import type { FragmentConfig } from '@/lib/game/types'
 import { ANIMATION_DURATION } from '@/lib/game/constants'
 import { generateFragmentMask } from '@/lib/game/utils'
+import { Image } from '@unpic/react'
 
 type ImageFragmentProps = {
   src: string
@@ -33,7 +34,9 @@ export function ImageFragment({
           className,
         )}
       >
-        <img
+        <Image
+          width={800}
+          height={400}
           src={src}
           alt={alt}
           className="h-full w-full object-cover"
@@ -79,7 +82,9 @@ export function ImageFragment({
           WebkitMask: maskStyle,
         }}
       >
-        <img
+        <Image
+          width={800}
+          height={400}
           src={src}
           alt={alt}
           className="h-full w-full object-cover"

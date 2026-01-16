@@ -19,16 +19,9 @@ export const QUIZ_QUESTIONS: Question[] = [
     destinationName: 'Candi Borobudur',
     province: 'Jawa Tengah',
     category: 'wisata-sejarah',
-    prompt:
-      'Candi Buddha terbesar di dunia yang terletak di Magelang ini adalah...',
-    fullImageUrl:
-      'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?w=800&q=80',
-    choices: [
-      'Candi Borobudur',
-      'Candi Prambanan',
-      'Candi Mendut',
-      'Candi Sewu',
-    ],
+    prompt: 'Candi Buddha terbesar di dunia yang terletak di Magelang ini adalah...',
+    fullImageUrl: 'https://images.unsplash.com/photo-1620549146396-9024d914cd99?w=800&q=80',
+    choices: ['Candi Borobudur', 'Candi Prambanan', 'Candi Mendut', 'Candi Sewu'],
     correctIndex: 0,
     hint: 'Dibangun pada abad ke-9 oleh dinasti Syailendra',
     funFact: 'Borobudur memiliki 2.672 panel relief dan 504 arca Buddha!',
@@ -42,10 +35,8 @@ export const QUIZ_QUESTIONS: Question[] = [
     destinationName: 'Tanah Lot',
     province: 'Bali',
     category: 'wisata-budaya',
-    prompt:
-      'Pura yang berdiri di atas batu karang di tengah laut di Bali ini bernama...',
-    fullImageUrl:
-      'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=80',
+    prompt: 'Pura yang berdiri di atas batu karang di tengah laut di Bali ini bernama...',
+    fullImageUrl: 'https://images.unsplash.com/photo-1724568834641-c083683d15ab?w=800&q=80',
     choices: ['Tanah Lot', 'Uluwatu', 'Besakih', 'Tirta Empul'],
     correctIndex: 0,
     hint: 'Terkenal dengan pemandangan sunset yang memukau',
@@ -60,10 +51,8 @@ export const QUIZ_QUESTIONS: Question[] = [
     destinationName: 'Raja Ampat',
     province: 'Papua Barat',
     category: 'wisata-alam',
-    prompt:
-      'Kepulauan dengan keanekaragaman hayati laut tertinggi di dunia ini adalah...',
-    fullImageUrl:
-      'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?w=800&q=80',
+    prompt: 'Kepulauan dengan keanekaragaman hayati laut tertinggi di dunia ini adalah...',
+    fullImageUrl: 'https://images.unsplash.com/photo-1703769605297-cc74106244d9?w=800&q=80',
     choices: ['Raja Ampat', 'Wakatobi', 'Bunaken', 'Derawan'],
     correctIndex: 0,
     hint: 'Terletak di Papua Barat dengan 4 pulau utama',
@@ -79,14 +68,8 @@ export const QUIZ_QUESTIONS: Question[] = [
     province: 'Nusa Tenggara Timur',
     category: 'wisata-alam',
     prompt: 'Habitat asli kadal terbesar di dunia, Komodo, berada di...',
-    fullImageUrl:
-      'https://images.unsplash.com/photo-1570040929370-d5c8a5c19dba?w=800&q=80',
-    choices: [
-      'Taman Nasional Komodo',
-      'Taman Nasional Lorentz',
-      'Taman Nasional Ujung Kulon',
-      'Taman Nasional Way Kambas',
-    ],
+    fullImageUrl: 'https://images.unsplash.com/photo-1660280274563-767dd6b56374?w=800&q=80',
+    choices: ['Taman Nasional Komodo', 'Taman Nasional Lorentz', 'Taman Nasional Ujung Kulon', 'Taman Nasional Way Kambas'],
     correctIndex: 0,
     hint: 'Terletak di Nusa Tenggara Timur',
     funFact: 'Komodo bisa mencapai panjang 3 meter dan berat 70 kg!',
@@ -127,10 +110,8 @@ export const QUIZ_QUESTIONS: Question[] = [
     destinationName: 'Danau Toba',
     province: 'Sumatera Utara',
     category: 'wisata-alam',
-    prompt:
-      'Danau vulkanik terbesar di dunia dengan Pulau Samosir di tengahnya adalah...',
-    fullImageUrl:
-      'https://images.unsplash.com/photo-1580619305218-8423a7ef79b4?w=800&q=80',
+    prompt: 'Danau vulkanik terbesar di dunia dengan Pulau Samosir di tengahnya adalah...',
+    fullImageUrl: 'https://images.unsplash.com/photo-1701697627581-bb7b0d127895?w=800&q=80',
     choices: ['Danau Toba', 'Danau Maninjau', 'Danau Singkarak', 'Danau Ranau'],
     correctIndex: 0,
     hint: 'Terbentuk dari letusan supervulkan 74.000 tahun lalu',
@@ -151,16 +132,9 @@ export const QUIZ_QUESTIONS: Question[] = [
     destinationName: 'Candi Prambanan',
     province: 'Jawa Tengah',
     category: 'wisata-sejarah',
-    prompt:
-      'Kompleks candi Hindu terbesar di Indonesia yang didedikasikan untuk Trimurti adalah...',
-    fullImageUrl:
-      'https://images.unsplash.com/photo-1565371557106-8e51684e0843?w=800&q=80',
-    choices: [
-      'Candi Prambanan',
-      'Candi Borobudur',
-      'Candi Gedong Songo',
-      'Candi Dieng',
-    ],
+    prompt: 'Kompleks candi Hindu terbesar di Indonesia yang didedikasikan untuk Trimurti adalah...',
+    fullImageUrl: 'https://images.unsplash.com/photo-1578469550956-0e16b69c6a3d?w=800&q=80',
+    choices: ['Candi Prambanan', 'Candi Borobudur', 'Candi Gedong Songo', 'Candi Dieng'],
     correctIndex: 0,
     hint: 'Dibangun pada abad ke-9 oleh Rakai Pikatan',
     funFact:
@@ -180,10 +154,8 @@ export const QUIZ_QUESTIONS: Question[] = [
     destinationName: 'Labuan Bajo',
     province: 'Nusa Tenggara Timur',
     category: 'wisata-alam',
-    prompt:
-      'Kota pelabuhan yang menjadi gerbang menuju Taman Nasional Komodo adalah...',
-    fullImageUrl:
-      'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=800&q=80',
+    prompt: 'Kota pelabuhan yang menjadi gerbang menuju Taman Nasional Komodo adalah...',
+    fullImageUrl: 'https://images.unsplash.com/photo-1589309736404-2e142a2acdf0?w=800&q=80',
     choices: ['Labuan Bajo', 'Maumere', 'Ende', 'Kupang'],
     correctIndex: 0,
     hint: 'Terletak di ujung barat Pulau Flores',
@@ -204,10 +176,8 @@ export const QUIZ_QUESTIONS: Question[] = [
     destinationName: 'Tana Toraja',
     province: 'Sulawesi Selatan',
     category: 'wisata-budaya',
-    prompt:
-      'Daerah dengan tradisi pemakaman unik dan rumah adat Tongkonan adalah...',
-    fullImageUrl:
-      'https://images.unsplash.com/photo-1590125234595-47c0e0b3c2b6?w=800&q=80',
+    prompt: 'Daerah dengan tradisi pemakaman unik dan rumah adat Tongkonan adalah...',
+    fullImageUrl: 'https://images.unsplash.com/photo-1727672100642-c8e8dfa7dca3?w=800&q=80',
     choices: ['Tana Toraja', 'Makassar', 'Bone', 'Gowa'],
     correctIndex: 0,
     hint: 'Terkenal dengan upacara Rambu Solo',
@@ -228,16 +198,9 @@ export const QUIZ_QUESTIONS: Question[] = [
     destinationName: 'Kawah Ijen',
     province: 'Jawa Timur',
     category: 'wisata-alam',
-    prompt:
-      'Kawah vulkanik dengan fenomena blue fire yang langka ini adalah...',
-    fullImageUrl:
-      'https://images.unsplash.com/photo-1592364395653-83e648b20cc2?w=800&q=80',
-    choices: [
-      'Kawah Ijen',
-      'Kawah Putih',
-      'Kawah Ratu',
-      'Kawah Tangkuban Perahu',
-    ],
+    prompt: 'Kawah vulkanik dengan fenomena blue fire yang langka ini adalah...',
+    fullImageUrl: 'https://images.unsplash.com/photo-1555058170-94d5f5016a2c?w=800&q=80',
+    choices: ['Kawah Ijen', 'Kawah Putih', 'Kawah Ratu', 'Kawah Tangkuban Perahu'],
     correctIndex: 0,
     hint: 'Terletak di perbatasan Banyuwangi dan Bondowoso',
     funFact: 'Blue fire di Ijen adalah salah satu dari dua yang ada di dunia!',
@@ -260,16 +223,9 @@ export const QUIZ_QUESTIONS: Question[] = [
     destinationName: 'Dataran Tinggi Dieng',
     province: 'Jawa Tengah',
     category: 'wisata-alam',
-    prompt:
-      'Dataran tinggi dengan candi-candi Hindu tertua di Jawa dan fenomena embun upas adalah...',
-    fullImageUrl:
-      'https://images.unsplash.com/photo-1609766857041-ed402ea8069a?w=800&q=80',
-    choices: [
-      'Dataran Tinggi Dieng',
-      'Dataran Tinggi Malino',
-      'Dataran Tinggi Kintamani',
-      'Dataran Tinggi Gayo',
-    ],
+    prompt: 'Dataran tinggi dengan candi-candi Hindu tertua di Jawa dan fenomena embun upas adalah...',
+    fullImageUrl: 'https://images.unsplash.com/photo-1600141133141-e9b1ceb9c2d6?w=800&q=80',
+    choices: ['Dataran Tinggi Dieng', 'Dataran Tinggi Malino', 'Dataran Tinggi Kintamani', 'Dataran Tinggi Gayo'],
     correctIndex: 0,
     funFact: 'Dieng berarti "Tempat Tinggal Para Dewa" dalam bahasa Kawi!',
     description: 'Dataran tinggi vulkanik dengan candi tertua di Jawa',
@@ -285,10 +241,8 @@ export const QUIZ_QUESTIONS: Question[] = [
     destinationName: 'Wakatobi',
     province: 'Sulawesi Tenggara',
     category: 'wisata-alam',
-    prompt:
-      'Kepulauan yang namanya adalah singkatan dari empat pulau utamanya adalah...',
-    fullImageUrl:
-      'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80',
+    prompt: 'Kepulauan yang namanya adalah singkatan dari empat pulau utamanya adalah...',
+    fullImageUrl: 'https://images.unsplash.com/photo-1602144586078-7d95c8d7808c?w=800&q=80',
     choices: ['Wakatobi', 'Togean', 'Banda', 'Kei'],
     correctIndex: 0,
     funFact:
@@ -306,10 +260,8 @@ export const QUIZ_QUESTIONS: Question[] = [
     destinationName: 'Pulau Belitung',
     province: 'Kepulauan Bangka Belitung',
     category: 'wisata-alam',
-    prompt:
-      'Pulau dengan formasi batu granit raksasa dan pantai Tanjung Tinggi adalah...',
-    fullImageUrl:
-      'https://images.unsplash.com/photo-1582639510494-c80b5de9f148?w=800&q=80',
+    prompt: 'Pulau dengan formasi batu granit raksasa dan pantai Tanjung Tinggi adalah...',
+    fullImageUrl: 'https://images.unsplash.com/photo-1551597233-14838addbcc5?w=800&q=80',
     choices: ['Pulau Belitung', 'Pulau Bangka', 'Pulau Bintan', 'Pulau Natuna'],
     correctIndex: 0,
     funFact:
@@ -327,10 +279,8 @@ export const QUIZ_QUESTIONS: Question[] = [
     destinationName: 'Wae Rebo',
     province: 'Nusa Tenggara Timur',
     category: 'wisata-budaya',
-    prompt:
-      'Desa adat dengan rumah kerucut Mbaru Niang di puncak gunung Flores adalah...',
-    fullImageUrl:
-      'https://images.unsplash.com/photo-1577717903315-1691ae25ab3f?w=800&q=80',
+    prompt: 'Desa adat dengan rumah kerucut Mbaru Niang di puncak gunung Flores adalah...',
+    fullImageUrl: 'https://images.unsplash.com/photo-1643785879506-ec3e637a9f2d?w=800&q=80',
     choices: ['Wae Rebo', 'Bena', 'Todo', 'Ruteng'],
     correctIndex: 0,
     funFact: 'Wae Rebo menerima UNESCO Award of Excellence tahun 2012!',
@@ -347,16 +297,9 @@ export const QUIZ_QUESTIONS: Question[] = [
     destinationName: 'Kepulauan Derawan',
     province: 'Kalimantan Timur',
     category: 'wisata-alam',
-    prompt:
-      'Kepulauan dengan danau ubur-ubur tidak menyengat dan penyu hijau adalah...',
-    fullImageUrl:
-      'https://images.unsplash.com/photo-1582967788606-a171c1080cb0?w=800&q=80',
-    choices: [
-      'Kepulauan Derawan',
-      'Kepulauan Seribu',
-      'Kepulauan Karimunjawa',
-      'Kepulauan Anambas',
-    ],
+    prompt: 'Kepulauan dengan danau ubur-ubur tidak menyengat dan penyu hijau adalah...',
+    fullImageUrl: 'https://images.unsplash.com/photo-1758653000057-34adac6ac623?w=800&q=80',
+    choices: ['Kepulauan Derawan', 'Kepulauan Seribu', 'Kepulauan Karimunjawa', 'Kepulauan Anambas'],
     correctIndex: 0,
     funFact:
       'Danau Kakaban di Derawan memiliki ubur-ubur yang tidak menyengat karena evolusi jutaan tahun!',

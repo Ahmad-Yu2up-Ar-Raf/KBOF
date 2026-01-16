@@ -201,7 +201,7 @@ const destinationData: Array<{
       kabupatenKota: 'Manggarai Barat',
       coverImage: 'https://images.unsplash.com/photo-1717238977683-5f06a9e60694?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Komodo dragon
       images: [
-        'https://plus.unsplash.com/premium_photo-1661898166024-7d141970335b?q=80&w=1091&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Komodo island
+        'https://images.unsplash.com/photo-1660280274563-767dd6b56374?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Komodo island
         'https://images.unsplash.com/photo-1656384778813-dd8fd7fbc785?q=80&w=435&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Padar island
         'https://images.unsplash.com/photo-1562578057-3ca1f7815237?q=80&w=902&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Pink beach Komodo
       ],
@@ -533,7 +533,7 @@ const destinationData: Array<{
       category: 'kesenian-daerah',
       provinsi: 'bali',
       kabupatenKota: 'Badung',
-      coverImage: 'https://images.unsplash.com/photo-1558005137-d9619a5c539f?w=1200&h=800&fit=crop', // Kecak dance
+      coverImage: 'https://images.unsplash.com/photo-1718631932394-dfedda3a212f?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Kecak dance
       images: [
         'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&h=600&fit=crop', // Dancers
         'https://images.unsplash.com/photo-1604999333679-b86d54738315?w=800&h=600&fit=crop', // Sunset performance
@@ -548,7 +548,7 @@ const destinationData: Array<{
       category: 'kesenian-daerah',
       provinsi: 'jawa-tengah',
       kabupatenKota: 'Surakarta',
-      coverImage: 'https://images.unsplash.com/photo-1600093112291-7e65c36c2c11?w=1200&h=800&fit=crop', // Wayang kulit
+      coverImage: 'https://images.unsplash.com/photo-1662793524504-bd11271b4b56?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Wayang kulit
       images: [
         'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&h=600&fit=crop', // Shadow puppet
         'https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800&h=600&fit=crop', // Performance
@@ -563,7 +563,7 @@ const destinationData: Array<{
       category: 'kesenian-daerah',
       provinsi: 'aceh',
       kabupatenKota: 'Gayo Lues',
-      coverImage: 'https://images.unsplash.com/photo-1558005137-d9619a5c539f?w=1200&h=800&fit=crop', // Saman dance
+      coverImage: 'https://images.unsplash.com/photo-1741272689174-f7f03b09a0ab?q=80&w=873&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Saman dance
       images: [
         'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&h=600&fit=crop', // Dancers in line
         'https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800&h=600&fit=crop', // Traditional costume
@@ -578,7 +578,7 @@ const destinationData: Array<{
       category: 'kesenian-daerah',
       provinsi: 'jawa-barat',
       kabupatenKota: 'Bandung',
-      coverImage: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=1200&h=800&fit=crop', // Angklung performance
+      coverImage: 'https://images.unsplash.com/photo-1691229219602-f3634d8ff4b0?q=80&w=388&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Angklung performance
       images: [
         'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&h=600&fit=crop', // Bamboo instruments
         'https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800&h=600&fit=crop', // Interactive show
@@ -595,9 +595,9 @@ const destinationData: Array<{
       kabupatenKota: 'Pekalongan',
       coverImage: 'https://images.unsplash.com/photo-1590736704728-f4730bb30770?w=1200&h=800&fit=crop', // Batik fabric
       images: [
-        'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&h=600&fit=crop', // Batik process
-        'https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800&h=600&fit=crop', // Batik pattern
-        'https://images.unsplash.com/photo-1584810359583-96fc3448beaa?w=800&h=600&fit=crop', // Batik workshop
+        'https://images.unsplash.com/photo-1604973104381-870c92f10343?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Batik process
+        'https://images.unsplash.com/photo-1616125162686-770bf85622b9?q=80&w=435&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Batik pattern
+        'https://plus.unsplash.com/premium_photo-1664114934715-4ee5e2526409?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Batik workshop
       ],
     },
     {
@@ -608,11 +608,11 @@ const destinationData: Array<{
       category: 'kesenian-daerah',
       provinsi: 'di-yogyakarta',
       kabupatenKota: 'Yogyakarta',
-      coverImage: 'https://images.unsplash.com/photo-1590736704728-f4730bb30770?w=1200&h=800&fit=crop', // Batik Yogya
+      coverImage: 'https://images.unsplash.com/photo-1604973104381-870c92f10343?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Batik Yogya
       images: [
-        'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&h=600&fit=crop', // Classic batik
-        'https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800&h=600&fit=crop', // Batik making
-        'https://images.unsplash.com/photo-1584810359583-96fc3448beaa?w=800&h=600&fit=crop', // Batik motif
+        'https://plus.unsplash.com/premium_photo-1664114934715-4ee5e2526409?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Classic batik
+        'https://images.unsplash.com/photo-1630929436231-91f4c6fe4884?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Batik making
+        'https://images.unsplash.com/photo-1616125162686-770bf85622b9?q=80&w=435&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Batik motif
       ],
     },
     {
@@ -623,7 +623,7 @@ const destinationData: Array<{
       category: 'kesenian-daerah',
       provinsi: 'nusa-tenggara-timur',
       kabupatenKota: 'Sikka',
-      coverImage: 'https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=1200&h=800&fit=crop', // Tenun weaving
+      coverImage: 'https://images.unsplash.com/photo-1593671186131-d58817e7dee0?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Tenun weaving
       images: [
         'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&h=600&fit=crop', // Ikat pattern
         'https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800&h=600&fit=crop', // Traditional weaving
@@ -638,7 +638,7 @@ const destinationData: Array<{
       category: 'kesenian-daerah',
       provinsi: 'sumatera-selatan',
       kabupatenKota: 'Palembang',
-      coverImage: 'https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=1200&h=800&fit=crop', // Songket
+      coverImage: 'https://images.unsplash.com/photo-1718938611659-fa97f0a87b9b?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Songket
       images: [
         'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&h=600&fit=crop', // Gold thread
         'https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800&h=600&fit=crop', // Weaving loom
@@ -653,7 +653,7 @@ const destinationData: Array<{
       category: 'kesenian-daerah',
       provinsi: 'jawa-tengah',
       kabupatenKota: 'Jepara',
-      coverImage: 'https://images.unsplash.com/photo-1615529328331-f8917597711f?w=1200&h=800&fit=crop', // Wood carving
+      coverImage: 'https://images.unsplash.com/photo-1681311370373-980633672183?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Wood carving
       images: [
         'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&h=600&fit=crop', // Carved furniture
         'https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800&h=600&fit=crop', // Carving detail
@@ -668,7 +668,7 @@ const destinationData: Array<{
       category: 'kesenian-daerah',
       provinsi: 'di-yogyakarta',
       kabupatenKota: 'Yogyakarta',
-      coverImage: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1200&h=800&fit=crop', // Silver jewelry
+      coverImage: 'https://images.unsplash.com/photo-1511253819057-5408d4d70465?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Silver jewelry
       images: [
         'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800&h=600&fit=crop', // Silver crafting
         'https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800&h=600&fit=crop', // Silver accessories
@@ -678,7 +678,7 @@ const destinationData: Array<{
     {
       name: 'Keramik Kasongan',
       description:
-        'Desa pengrajin gerabah dan keramik tradisional. Patung, guci, dan dekorasi dari tanah liat. Wisata desa dengan workshop pottery.',
+        'https://images.unsplash.com/photo-1695815870444-da67db99d7c0?q=80&w=1031&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       type: 'kerajinan',
       category: 'kesenian-daerah',
       provinsi: 'di-yogyakarta',

@@ -2,8 +2,8 @@
 import { Link } from '@tanstack/react-router'
 import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
 import { useLottie } from 'lottie-react'
-import { LayoutGroup, motion } from 'framer-motion'
-import { useQuery } from '@tanstack/react-query'
+import { motion } from 'framer-motion'
+
 import { TextRotate } from '@/components/ui/fragments/custom-ui/animate-ui/text-rotate'
 import Floating, {
   FloatingElement,
@@ -15,78 +15,40 @@ import { useIsMobile } from '@/hooks/use-mobile'
 import { cn } from '@/lib/utils'
 import animationData from '@/assets/animations/Businessman.json'
 import { authClient } from '@/lib/auth/auth-client'
-import { getLeaderboardTopQueryOptions } from '@/lib/query-options'
 
 // Fallback images when no leaderboard data
 const fallbackImages = [
   {
-    url: 'https://images.pexels.com/photos/7869139/pexels-photo-7869139.jpeg',
-    author: 'Branislav Rodman',
-    title: 'A accent-foreground and White Photo of a Woman Brushing Her Teeth',
-  },
-  {
-    url: 'https://images.pexels.com/photos/2599244/pexels-photo-2599244.jpeg',
+    url: '/assets/images/heor1.jpg',
     link: 'https://unsplash.com/photos/a-painting-of-a-palm-leaf-on-a-multicolored-background-AaNPwrSNOFE',
     title: 'Neon Palm',
     author: 'Tim Mossholder',
   },
   {
-    url: 'https://images.pexels.com/photos/26767345/pexels-photo-26767345.jpeg?_gl=1*1h7y1yx*_ga*MTM4OTcyNDc4NS4xNzYxMzUxNzQ0*_ga_8JE65Q40S6*czE3NjEzNjExMjEkbzMkZzEkdDE3NjEzNjExNDMkajM4JGwwJGgw',
+    url: '/assets/images/hero6.jpg',
     link: 'https://unsplash.com/photos/a-blurry-photo-of-a-crowd-of-people-UgbxzloNGsc',
     author: 'ANDRII SOLOK',
     title: 'A blurry photo of a crowd of people',
   },
   {
-    url: 'https://images.pexels.com/photos/6153354/pexels-photo-6153354.jpeg',
+    url: '/assets/images/hero3.jpg',
     author: 'Wesley Tingey',
     title: 'Rippling Crystal Blue Water',
   },
   {
-    url: 'https://images.pexels.com/photos/3831136/pexels-photo-3831136.jpeg',
+    url: '/assets/images/hero4.jpg',
     link: 'https://unsplash.com/de/fotos/mann-im-schwarzen-hemd-unter-blauem-himmel-m8RDNiuEXro',
     author: 'Serhii Tyaglovsky',
     title: 'Mann im schwarzen Hemd unter blauem Himmel',
-  },
-  {
-    url: 'https://images.unsplash.com/photo-1689553079282-45df1b35741b?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    link: 'https://unsplash.com/photos/a-woman-with-a-flower-crown-on-her-head-0S3muIttbsY',
-    author: 'Vladimir Yelizarov',
-    title: 'A women with a flower crown on her head',
-  },
-  {
-    url: 'https://images.unsplash.com/photo-1721968317938-cf8c60fccd1a?q=80&w=2728&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    title: 'A blurry photo of primary-foreground  flowers in a field',
-    author: 'Eugene Golovesov',
-    link: 'https://unsplash.com/photos/a-blurry-photo-of-primary-foreground -flowers-in-a-field-6qbx0lzGPyc',
-  },
-  {
-    url: 'https://images.unsplash.com/photo-1677338354108-223e807fb1bd?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    author: 'Mathilde Langevin',
-    link: 'https://unsplash.com/photos/a-table-topped-with-two-wine-glasses-and-plates-Ig0gRAHspV0',
-    title: 'A table topped with two wine glasses and plates',
   },
 ]
 
 export default function HeroSection() {
   // Fetch top destinations for floating images
-  const { data: topDestinations } = useQuery(getLeaderboardTopQueryOptions(4))
+  // const { data: topDestinations } = useQuery(getLeaderboardTopQueryOptions(4))
 
   // Merge leaderboard images with fallback images
   // Use top destinations' cover images if available, otherwise use fallback
-  const exampleImages = [...fallbackImages]
-
-  // Replace first 4 images with top destinations if available
-  if (topDestinations && topDestinations.length > 0) {
-    topDestinations.forEach((dest, index) => {
-      if (dest.coverImage && index < 4) {
-        exampleImages[index + 1] = {
-          url: dest.coverImage,
-          title: dest.name,
-          author: `🏆 #${index + 1} - ${dest.voteCount} votes`,
-        }
-      }
-    })
-  }
 
   // parameter animasi masuk di BlurFade (seconds)
 
@@ -113,10 +75,10 @@ export default function HeroSection() {
             <BlurFade
               isPreload
               delay={delay}
-              key={exampleImages[1].url}
+              key={fallbackImages[0].url}
               className="w-35 h-36 relative overflow-hidden sm:w-48 sm:h-36 md:w-56 md:h-44 lg:w-55 lg:h-67 object-cover hover:scale-105 duration-200 cursor-target transition-transform -rotate-12 shadow-2xl rounded-xl"
             >
-              <MediaItem webViewLink={exampleImages[1].url} />
+              <MediaItem webViewLink={fallbackImages[0].url} />
             </BlurFade>
           </FloatingElement>
 
@@ -127,10 +89,10 @@ export default function HeroSection() {
             <BlurFade
               isPreload
               delay={delay * 2}
-              key={exampleImages[2].url}
+              key={fallbackImages[1].url}
               className="w-40 h-40 relative overflow-hidden sm:w-48 sm:h-48 md:w-60 md:h-60 lg:w-55 lg:h-67 object-cover -rotate-[4deg] hover:scale-105 duration-200 cursor-target transition-transform shadow-2xl rounded-xl"
             >
-              <MediaItem webViewLink={exampleImages[2].url} />
+              <MediaItem webViewLink={fallbackImages[1].url} />
             </BlurFade>
           </FloatingElement>
 
@@ -141,10 +103,10 @@ export default function HeroSection() {
             <BlurFade
               isPreload
               delay={delay * 3}
-              key={exampleImages[3].url}
+              key={fallbackImages[2].url}
               className="w-40 rotate-12 h-36 overflow-hidden sm:w-48 sm:h-44 md:w-60 md:h-52 lg:w-55 lg:h-67 object-cover hover:scale-105 duration-200 cursor-target transition-transform shadow-2xl  rounded-xl"
             >
-              <MediaItem webViewLink={exampleImages[3].url} />
+              <MediaItem webViewLink={fallbackImages[2].url} />
             </BlurFade>
           </FloatingElement>
 
@@ -154,11 +116,11 @@ export default function HeroSection() {
           >
             <BlurFade
               isPreload
-              key={exampleImages[4].url}
+              key={fallbackImages[3].url}
               delay={delay * 4}
               className="w-44 overflow-hidden rotate-[4deg] h-44 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-55 lg:h-67 o object-cover hover:scale-105 duration-200 cursor-target transition-transform shadow-2xl  rounded-xl"
             >
-              <MediaItem webViewLink={exampleImages[4].url} />
+              <MediaItem webViewLink={fallbackImages[3].url} />
             </BlurFade>
           </FloatingElement>
         </Floating>

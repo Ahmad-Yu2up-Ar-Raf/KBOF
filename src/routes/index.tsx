@@ -21,7 +21,7 @@ export const Route = createFileRoute('/')({
   loader: async () => {
     // Parallel prefetch for better performance
     await Promise.all([
-      queryClient.ensureQueryData(getLeaderboardTopQueryOptions(4)),
+      queryClient.ensureQueryData(getFeaturedDestinationsQueryOptions(8)),
       queryClient.ensureQueryData(getFeaturedArticlesQueryOptions(4)),
       queryClient.ensureQueryData(getFeaturedDestinationsQueryOptions(8)),
     ])
@@ -33,7 +33,7 @@ function App() {
   return (
     <>
       <HeroSection />
-      <About/>
+      <About />
       <Suspense fallback={<DestinationSectionSkeleton />}>
         <DestinationSection />
       </Suspense>

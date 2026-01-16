@@ -64,7 +64,7 @@ function About() {
           {/* Judul */}
           <div className="flex flex-col gap-y-1">
             <p className="text-xs md:text-sm text-muted-foreground tracking-[0.3em] uppercase">
-          tentang Kami
+          tentang suasana
             </p>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-primary">
               Sejarah Bertutur

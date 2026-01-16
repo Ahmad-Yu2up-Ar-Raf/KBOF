@@ -106,7 +106,7 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
         {/* Add padding-bottom on mobile to account for fixed navbar */}
         <div
           className={cn(
-            'relative  min-h-lvh w-full ',
+            'relative  pb-10 min-h-lvh w-full ',
             // isMobile && 'pb-[12svh]', // Extra space for mobile bottom navbar
           )}
         >

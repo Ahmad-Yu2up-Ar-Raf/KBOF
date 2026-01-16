@@ -95,7 +95,6 @@ export default function GameBlock() {
           key="menu"
           onPlay={() => setScreen('level-select')}
           onShowHighScores={() => {}}
-          isMenuScreen={true}
         />
       )}
 

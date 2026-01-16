@@ -20,6 +20,7 @@ import {
   Medal,
   Newspaper,
   Telescope,
+  UserRound,
 } from 'lucide-react'
 import AvatarMenu from '@/components/ui/fragments/custom-ui/menu/avatar-menu'
 
@@ -52,9 +53,15 @@ export default function SiteHeader() {
   ]
   const navItemsMobiles = [
     {
-      name: 'Beranda',
-      link: '/',
-      icon: Home,
+      name: 'Profil',
+      link:
+        (session && session.user.role === 'admin') ||
+        (session && session.user.role === 'superAdmin')
+          ? '/dashboard'
+          : session && session.user.role === 'pribumi'
+            ? '/profile/destinasi'
+            : '/login',
+      icon: UserRound,
     },
     {
       name: 'Artikel',

@@ -31,7 +31,7 @@ export default function ArtikelDetailBlock({ article }: ArticleDetailProps) {
   const author = article.author
 
   return (
-    <article className="space-y-7   py-6 sm:pt-5     container max-w-2xl mx-auto  px-6 ">
+    <article className="space-y-7   py-6 sm:pt-5     container  px-6 ">
       {/* Header Section */}
       <header className=" space-y-4 lg:space-y-6 ">
         {/* Navigation */}

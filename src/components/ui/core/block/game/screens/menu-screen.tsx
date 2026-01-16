@@ -16,7 +16,6 @@ import {
   CardTitle,
 } from '@/components/ui/fragments/shadcn-ui/card'
 import { Gamepad2, Info, Play } from 'lucide-react'
-import SiteHeader from '../../../layout/nav/site-header'
 
 // =============================================================================
 // TYPES
@@ -25,35 +24,44 @@ import SiteHeader from '../../../layout/nav/site-header'
 export type MenuScreenProps = {
   onPlay: () => void
   onShowHighScores?: () => void
-  isMenuScreen?: boolean
 }
 
 // =============================================================================
 // COMPONENT
 // =============================================================================
 
-export function MenuScreen({ onPlay, isMenuScreen }: MenuScreenProps) {
+export function MenuScreen({ onPlay }: MenuScreenProps) {
   return (
-    <>
-      {isMenuScreen && <SiteHeader />}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: ANIMATION_DURATION.normal }}
-      >
-        <GameContent className="space-y-8">
-          {/* Hero card */}
-          <HeroCard onPlay={onPlay} />
+    
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: ANIMATION_DURATION.normal }}
+    >
+      {/* <GameHeader
+        title="🎮 Quiz Destinasi Indonesia"
+        subtitle="Uji pengetahuanmu tentang keindahan Nusantara"
+        leftAction={
+          <Link to="/">
+            <Button variant="ghost" size="icon">
+              ←
+            </Button>
+          </Link>
+        }
+      /> */}
 
-          {/* High scores section */}
-          {/* <HighScoreDisplay /> */}
+      <GameContent className="space-y-8">
+        {/* Hero card */}
+        <HeroCard onPlay={onPlay} />
 
-          {/* How to play */}
-          {/* <HowToPlay /> */}
-        </GameContent>
-      </motion.div>
-    </>
+        {/* High scores section */}
+        {/* <HighScoreDisplay /> */}
+
+        {/* How to play */}
+        {/* <HowToPlay /> */}
+      </GameContent>
+    </motion.div>
   )
 }
 

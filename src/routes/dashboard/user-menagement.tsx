@@ -1,6 +1,6 @@
 import { createFileRoute, useSearch } from '@tanstack/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { Users, Shield, UserCog } from 'lucide-react'
+import { Users, Shield, UserCog, UsersRound } from 'lucide-react'
 import { Suspense } from 'react'
 
 import Heading from '@/components/ui/fragments/custom-ui/typography/heading'
@@ -8,7 +8,10 @@ import { DataTableSkeleton } from '@/components/ui/fragments/shadcn-ui/data-tabl
 import { FeatureFlagsProvider } from '@/components/ui/core/feature/data-table/feature-flag-provider'
 import { UserTable } from '@/components/ui/core/feature/data-table/user/user-table'
 import { userSearchSchema } from '@/lib/validations/user-validations'
-import { getUserQueryOptions, type UserAggregateInput } from '@/lib/query-options'
+import {
+  getUserQueryOptions,
+  type UserAggregateInput,
+} from '@/lib/query-options'
 import { queryClient } from '@/components/provider/Provider'
 import type { UserRoleType } from '@/db/schema'
 
@@ -87,7 +90,7 @@ function RouteComponent() {
     <div>
       <Heading
         className="mb-4"
-        Icon={Users}
+        Icon={UsersRound}
         title="Manajemen Pengguna"
         description="Kelola pengguna, role, dan status akun. Fitur ini khusus untuk Super Admin."
       />
@@ -101,8 +104,8 @@ function RouteComponent() {
             </div>
             <h3 className="font-medium text-lg">Belum ada pengguna</h3>
             <p className="text-sm text-muted-foreground mt-1 max-w-md">
-              Saat ini belum ada pengguna yang terdaftar di sistem.
-              Pengguna akan muncul di sini setelah mereka mendaftar.
+              Saat ini belum ada pengguna yang terdaftar di sistem. Pengguna
+              akan muncul di sini setelah mereka mendaftar.
             </p>
           </div>
         ) : (

@@ -6,9 +6,20 @@ import { cn } from '@/lib/utils'
 import type { Level, HighScoreRecord } from '@/lib/game/types'
 import { LEVEL_CONFIGS } from '@/lib/game/constants'
 import { getHighScores } from '@/lib/game/utils'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/fragments/shadcn-ui/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/fragments/shadcn-ui/card'
 import { Badge } from '@/components/ui/fragments/shadcn-ui/badge'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/fragments/shadcn-ui/tabs'
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '@/components/ui/fragments/shadcn-ui/tabs'
 
 type HighScoreDisplayProps = {
   className?: string
@@ -23,7 +34,9 @@ export function HighScoreDisplay({ className }: HighScoreDisplayProps) {
   }, [])
 
   const getScoresForLevel = (level: Level) => {
-    return scores.filter((s) => s.level === level).sort((a, b) => b.score - a.score)
+    return scores
+      .filter((s) => s.level === level)
+      .sort((a, b) => b.score - a.score)
   }
 
   return (
@@ -35,7 +48,10 @@ export function HighScoreDisplay({ className }: HighScoreDisplayProps) {
         <CardDescription>Raih skor tertinggi di setiap level!</CardDescription>
       </CardHeader>
       <CardContent>
-        <Tabs value={activeLevel} onValueChange={(v) => setActiveLevel(v as Level)}>
+        <Tabs
+          value={activeLevel}
+          onValueChange={(v) => setActiveLevel(v as Level)}
+        >
           <TabsList className="grid w-full grid-cols-3">
             {Object.values(LEVEL_CONFIGS).map((config) => (
               <TabsTrigger key={config.id} value={config.id} className="gap-1">
@@ -54,13 +70,21 @@ export function HighScoreDisplay({ className }: HighScoreDisplayProps) {
                 {levelScores.length === 0 ? (
                   <div className="py-8 text-center text-muted-foreground">
                     <span className="text-4xl">🎮</span>
-                    <p className="mt-2">Belum ada skor untuk level {config.displayName}</p>
-                    <p className="text-sm">Mainkan untuk menjadi yang pertama!</p>
+                    <p className="mt-2">
+                      Belum ada skor untuk level {config.displayName}
+                    </p>
+                    <p className="text-sm">
+                      Mainkan untuk menjadi yang pertama!
+                    </p>
                   </div>
                 ) : (
                   <div className="space-y-2">
                     {levelScores.map((score, index) => (
-                      <ScoreRow key={score.gameId} score={score} rank={index + 1} />
+                      <ScoreRow
+                        key={score.gameId}
+                        score={score}
+                        rank={index + 1}
+                      />
                     ))}
                   </div>
                 )}
@@ -98,7 +122,7 @@ function ScoreRow({ score, rank }: ScoreRowProps) {
       transition={{ delay: rank * 0.1 }}
       className={cn(
         'flex items-center justify-between rounded-lg p-3',
-        rank === 1 && 'bg-amber-50 dark:bg-amber-900/10'
+        rank === 1 && 'bg-amber-50 dark:bg-amber-900/10',
       )}
     >
       <div className="flex items-center gap-3">
@@ -110,7 +134,9 @@ function ScoreRow({ score, rank }: ScoreRowProps) {
           </div>
         </div>
       </div>
-      <div className="text-right text-sm text-muted-foreground">{formattedDate}</div>
+      <div className="text-right text-sm text-muted-foreground">
+        {formattedDate}
+      </div>
     </motion.div>
   )
 }

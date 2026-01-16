@@ -13,7 +13,12 @@ type TimerDisplayProps = {
   className?: string
 }
 
-export function TimerDisplay({ timeRemaining, totalTime, isPaused, className }: TimerDisplayProps) {
+export function TimerDisplay({
+  timeRemaining,
+  totalTime,
+  isPaused,
+  className,
+}: TimerDisplayProps) {
   const percentage = (timeRemaining / totalTime) * 100
   const timerState = getTimerState(timeRemaining)
 
@@ -30,9 +35,11 @@ export function TimerDisplay({ timeRemaining, totalTime, isPaused, className }: 
   }
 
   return (
-    <div className={cn('space-y-2', className)}>
-      <div className="flex items-center justify-between">
-        <span className="text-sm font-medium text-muted-foreground">Waktu tersisa</span>
+    <div className={cn('space-y-2 sticky top-0', className)}>
+      {/* <div className="flex items-center justify-between">
+        <span className="text-sm font-medium text-muted-foreground">
+          Waktu tersisa
+        </span>
         <AnimatePresence mode="wait">
           <motion.span
             key={timeRemaining}
@@ -40,17 +47,24 @@ export function TimerDisplay({ timeRemaining, totalTime, isPaused, className }: 
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             transition={{ duration: ANIMATION_DURATION.fast }}
-            className={cn('text-2xl font-bold tabular-nums', stateStyles[timerState], timerState === 'critical' && 'animate-pulse')}
+            className={cn(
+              'text-2xl font-bold tabular-nums',
+              stateStyles[timerState],
+              timerState === 'critical' && 'animate-pulse',
+            )}
           >
             {formatTime(timeRemaining)}
           </motion.span>
         </AnimatePresence>
-      </div>
+      </div> */}
 
       {/* Progress bar */}
-      <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
+      <div className="h-1 w-full overflow-hidden rounded-t-full bg-muted">
         <motion.div
-          className={cn('h-full transition-colors duration-300', progressStyles[timerState])}
+          className={cn(
+            'h-full transition-colors duration-300',
+            progressStyles[timerState],
+          )}
           initial={{ width: '100%' }}
           animate={{ width: `${percentage}%` }}
           transition={{ duration: 0.3, ease: 'linear' }}
@@ -93,7 +107,11 @@ export function CompactTimer({ timeRemaining, className }: CompactTimerProps) {
 
   return (
     <span
-      className={cn('inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-medium', stateStyles[timerState], className)}
+      className={cn(
+        'inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-medium',
+        stateStyles[timerState],
+        className,
+      )}
     >
       ⏱️ {formatTime(timeRemaining)}
     </span>

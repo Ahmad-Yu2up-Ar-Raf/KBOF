@@ -77,7 +77,7 @@ export const onboardingStep1Schema = z.object({
     .max(30, 'Username maksimal 30 karakter')
     .regex(
       /^[a-zA-Z0-9_]+$/,
-      'Username hanya boleh huruf, angka, dan underscore'
+      'Username hanya boleh huruf, angka, dan underscore',
     ),
   bio: z.string().max(500, 'Bio maksimal 500 karakter').optional(),
 })
@@ -87,7 +87,10 @@ export const onboardingStep2Schema = z.object({
   city: z.string().optional(),
   hobbies: z.array(z.string()).optional(),
   expertise: z.array(z.string()).optional(),
-  motivation: z.string().max(1000, 'Motivasi maksimal 1000 karakter').optional(),
+  motivation: z
+    .string()
+    .max(1000, 'Motivasi maksimal 1000 karakter')
+    .optional(),
 })
 
 export const onboardingStep3Schema = z.object({

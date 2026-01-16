@@ -125,7 +125,10 @@ export const provinsiChartConfig: ChartConfig = {
   'kepulauan-riau': { label: 'Kepulauan Riau', color: 'var(--chart-5)' },
   jambi: { label: 'Jambi', color: 'var(--chart-1)' },
   'sumatera-selatan': { label: 'Sumatera Selatan', color: 'var(--chart-2)' },
-  'kepulauan-bangka-belitung': { label: 'Bangka Belitung', color: 'var(--chart-3)' },
+  'kepulauan-bangka-belitung': {
+    label: 'Bangka Belitung',
+    color: 'var(--chart-3)',
+  },
   bengkulu: { label: 'Bengkulu', color: 'var(--chart-4)' },
   lampung: { label: 'Lampung', color: 'var(--chart-5)' },
   'dki-jakarta': { label: 'DKI Jakarta', color: 'var(--chart-1)' },
@@ -139,7 +142,10 @@ export const provinsiChartConfig: ChartConfig = {
   'nusa-tenggara-timur': { label: 'NTT', color: 'var(--chart-4)' },
   'kalimantan-barat': { label: 'Kalimantan Barat', color: 'var(--chart-5)' },
   'kalimantan-tengah': { label: 'Kalimantan Tengah', color: 'var(--chart-1)' },
-  'kalimantan-selatan': { label: 'Kalimantan Selatan', color: 'var(--chart-2)' },
+  'kalimantan-selatan': {
+    label: 'Kalimantan Selatan',
+    color: 'var(--chart-2)',
+  },
   'kalimantan-timur': { label: 'Kalimantan Timur', color: 'var(--chart-3)' },
   'kalimantan-utara': { label: 'Kalimantan Utara', color: 'var(--chart-4)' },
   'sulawesi-utara': { label: 'Sulawesi Utara', color: 'var(--chart-5)' },

@@ -15,7 +15,6 @@ import { Route as ProfileRouteRouteImport } from './routes/profile/route'
 import { Route as DashboardRouteRouteImport } from './routes/dashboard/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProfileIndexRouteImport } from './routes/profile/index'
-import { Route as OnboardingIndexRouteImport } from './routes/onboarding/index'
 import { Route as DestinasiIndexRouteImport } from './routes/destinasi/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as ArtikelIndexRouteImport } from './routes/artikel/index'
@@ -65,11 +64,6 @@ const ProfileIndexRoute = ProfileIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => ProfileRouteRoute,
-} as any)
-const OnboardingIndexRoute = OnboardingIndexRouteImport.update({
-  id: '/onboarding/',
-  path: '/onboarding/',
-  getParentRoute: () => rootRouteImport,
 } as any)
 const DestinasiIndexRoute = DestinasiIndexRouteImport.update({
   id: '/destinasi/',
@@ -190,7 +184,6 @@ export interface FileRoutesByFullPath {
   '/artikel': typeof ArtikelIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/destinasi': typeof DestinasiIndexRoute
-  '/onboarding': typeof OnboardingIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/dashboard/settings/password': typeof DashboardSettingsPasswordRoute
@@ -215,7 +208,6 @@ export interface FileRoutesByTo {
   '/artikel': typeof ArtikelIndexRoute
   '/dashboard': typeof DashboardIndexRoute
   '/destinasi': typeof DestinasiIndexRoute
-  '/onboarding': typeof OnboardingIndexRoute
   '/profile': typeof ProfileIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/dashboard/settings/password': typeof DashboardSettingsPasswordRoute
@@ -244,7 +236,6 @@ export interface FileRoutesById {
   '/artikel/': typeof ArtikelIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/destinasi/': typeof DestinasiIndexRoute
-  '/onboarding/': typeof OnboardingIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/dashboard/settings/password': typeof DashboardSettingsPasswordRoute
@@ -274,7 +265,6 @@ export interface FileRouteTypes {
     | '/artikel'
     | '/dashboard/'
     | '/destinasi'
-    | '/onboarding'
     | '/profile/'
     | '/api/auth/$'
     | '/dashboard/settings/password'
@@ -299,7 +289,6 @@ export interface FileRouteTypes {
     | '/artikel'
     | '/dashboard'
     | '/destinasi'
-    | '/onboarding'
     | '/profile'
     | '/api/auth/$'
     | '/dashboard/settings/password'
@@ -327,7 +316,6 @@ export interface FileRouteTypes {
     | '/artikel/'
     | '/dashboard/'
     | '/destinasi/'
-    | '/onboarding/'
     | '/profile/'
     | '/api/auth/$'
     | '/dashboard/settings/password'
@@ -348,7 +336,6 @@ export interface RootRouteChildren {
   DestinasiLeaderboardRoute: typeof DestinasiLeaderboardRoute
   ArtikelIndexRoute: typeof ArtikelIndexRoute
   DestinasiIndexRoute: typeof DestinasiIndexRoute
-  OnboardingIndexRoute: typeof OnboardingIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   DestinasiDestinasiIdIndexRoute: typeof DestinasiDestinasiIdIndexRoute
 }
@@ -396,13 +383,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/profile/'
       preLoaderRoute: typeof ProfileIndexRouteImport
       parentRoute: typeof ProfileRouteRoute
-    }
-    '/onboarding/': {
-      id: '/onboarding/'
-      path: '/onboarding'
-      fullPath: '/onboarding'
-      preLoaderRoute: typeof OnboardingIndexRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/destinasi/': {
       id: '/destinasi/'
@@ -607,7 +587,6 @@ const rootRouteChildren: RootRouteChildren = {
   DestinasiLeaderboardRoute: DestinasiLeaderboardRoute,
   ArtikelIndexRoute: ArtikelIndexRoute,
   DestinasiIndexRoute: DestinasiIndexRoute,
-  OnboardingIndexRoute: OnboardingIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   DestinasiDestinasiIdIndexRoute: DestinasiDestinasiIdIndexRoute,
 }

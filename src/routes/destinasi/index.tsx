@@ -34,7 +34,7 @@ export const Route = createFileRoute('/destinasi/')({
 
 function RouteComponent() {
   return (
-    <div className="mx-auto container max-w-6xl space-y-4 pt-5">
+    <div className="mx-auto container max-w-6xl space-y-4 ">
       <HeaderDestinasi />
       <Suspense fallback={<DestinasiBlockSkeleton />}>
         <DestinasiBlock />

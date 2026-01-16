@@ -14,8 +14,6 @@ import { useNavigate } from '@tanstack/react-router'
 import React from 'react'
 import { authClient } from '@/lib/auth/auth-client'
 import { Spinner } from '@/components/ui/fragments/shadcn-ui/spinner'
-import { useQueryClient } from '@tanstack/react-query'
-import { clearAllDestinationQueries } from '@/lib/utils/destination-utils'
 
 interface UserMenuContentProps {
   user: User
@@ -24,7 +22,6 @@ interface UserMenuContentProps {
 export function UserMenuContent({ user }: UserMenuContentProps) {
   const cleanup = useMobileNavigation()
   const navigate = useNavigate()
-  const queryClient = useQueryClient()
 
   const [isPending, setIsPending] = React.useState(false)
 
@@ -33,7 +30,7 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
     setIsPending(true)
 
     // ⭐ Clear all cached queries before logout to prevent stale data
-    clearAllDestinationQueries(queryClient)
+    // clearAllDestinationQueries(queryClient)
 
     await authClient.signOut({
       fetchOptions: {
@@ -79,7 +76,7 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
       <DropdownMenuSeparator />
       <DropdownMenuItem disabled={isPending} onSelect={logoutUser}>
         {isPending ? <Spinner className="mr-2" /> : <LogOut className="mr-2" />}
-        {isPending ? 'Log out...' : 'Log out'}
+        {isPending ? 'Keluar...' : 'Keluar'}
       </DropdownMenuItem>
     </>
   )

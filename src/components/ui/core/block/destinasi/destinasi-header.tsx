@@ -49,19 +49,7 @@ const HeaderDestinasi = () => {
   }
   const { data: session } = authClient.useSession()
   return (
-    <div className=" space-y-2   pt-1 sm:pt-0   container ">
-      <nav className="z-50 top-0 bg-background/95 backdrop-blur flex items-center justify-between">
-        <Link
-          to="/"
-          className={cn(
-            buttonVariants({ variant: 'link' }),
-            'flex has-[>svg]:px-0 w-fit py-2 md:flex text-base items-center gap-2 px-0 group transition-colors',
-          )}
-        >
-          <ArrowLeft className="size-5 group-hover:-translate-x-1 group-hover:transform transition-all ease-out duration-300" />
-          <span>Kembali</span>
-        </Link>
-      </nav>
+    <div className=" space-y-2    sm:pt-0   container ">
       <div className="  flex flex-col md:gap-4  md:justify-between gap-5">
         <header className="w-full md:items-center flex-col md:flex-row flex justify-between m-auto">
           <h1 className="xl:text-[6rem] font-medium  tracking-tight lg:leading-30 lg:text-8xl text-7xl lg:-space-y-10 -space-y-6">

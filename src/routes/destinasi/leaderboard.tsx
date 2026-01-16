@@ -16,7 +16,7 @@ import {
 
 import LeaderboardPage, {
   LeaderboardSkeleton,
-} from '@/components/ui/core/block/leaderboard-block'
+} from '@/components/ui/core/block/leaderboard/leaderboard-block'
 
 // ============================================
 // ROUTE DEFINITION

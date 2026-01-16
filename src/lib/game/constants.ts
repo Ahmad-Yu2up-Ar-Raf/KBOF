@@ -49,7 +49,8 @@ export const LEVEL_CONFIGS: Record<Level, LevelConfig> = {
     id: 'easy',
     displayName: 'Mudah',
     emoji: '🌱',
-    description: 'Gambar penuh dengan petunjuk. Cocok untuk pemula!',
+    description:
+      'Gambar penuh dengan petunjuk. Cocok untuk pemula!',
     questionsPerGame: 5,
     defaultTimeLimitSec: 20,
     basePointsPerQuestion: 10,
@@ -79,7 +80,7 @@ export const LEVEL_CONFIGS: Record<Level, LevelConfig> = {
     id: 'hard',
     displayName: 'Sulit',
     emoji: '🔥',
-    description: 'Satu fragmen kecil saja. Untuk sang ahli!',
+    description: 'Satu fragmen kecil saja  yang sulit. Untuk sang ahli! ',
     questionsPerGame: 5,
     defaultTimeLimitSec: 30,
     basePointsPerQuestion: 30,
@@ -109,18 +110,45 @@ export const KEYBOARD_SHORTCUTS = {
 /**
  * Game result messages based on accuracy
  */
-export const RESULT_MESSAGES: { min: number; message: string; emoji: string }[] = [
-  { min: 100, message: 'Luar Biasa! Kamu ahli destinasi Indonesia!', emoji: '🏆' },
-  { min: 80, message: 'Hebat! Pengetahuanmu tentang Indonesia sangat baik!', emoji: '🌟' },
-  { min: 60, message: 'Bagus! Terus eksplorasi keindahan Indonesia!', emoji: '✨' },
-  { min: 40, message: 'Lumayan! Masih banyak yang bisa dipelajari.', emoji: '📚' },
-  { min: 0, message: 'Jangan menyerah! Coba lagi untuk hasil lebih baik.', emoji: '💪' },
+export const RESULT_MESSAGES: {
+  min: number
+  message: string
+  emoji: string
+}[] = [
+  {
+    min: 100,
+    message: 'Luar Biasa! Kamu ahli destinasi Indonesia!',
+    emoji: '🏆',
+  },
+  {
+    min: 80,
+    message: 'Hebat! Pengetahuanmu tentang Indonesia sangat baik!',
+    emoji: '🌟',
+  },
+  {
+    min: 60,
+    message: 'Bagus! Terus eksplorasi keindahan Indonesia!',
+    emoji: '✨',
+  },
+  {
+    min: 40,
+    message: 'Lumayan! Masih banyak yang bisa dipelajari.',
+    emoji: '📚',
+  },
+  {
+    min: 0,
+    message: 'Jangan menyerah! Coba lagi untuk hasil lebih baik.',
+    emoji: '💪',
+  },
 ]
 
 /**
  * Get result message based on accuracy percentage
  */
-export function getResultMessage(accuracy: number): { message: string; emoji: string } {
+export function getResultMessage(accuracy: number): {
+  message: string
+  emoji: string
+} {
   const result = RESULT_MESSAGES.find((r) => accuracy >= r.min)
   return result || RESULT_MESSAGES[RESULT_MESSAGES.length - 1]
 }

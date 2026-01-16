@@ -89,10 +89,10 @@ export const Navbar = ({ children, className }: NavbarProps) => {
   // Handle initial visibility when path changes
   useEffect(() => {
     // Kalau bukan di "/" dan masih di top, hide navbar
-    if (paths !== '/' && scrollYProgress.get() < 0.05) {
+    if ((paths !== '/' && scrollYProgress.get() < 0.05) || paths !== '/game') {
       setVisiblee(false)
       setDelay(false)
-    } else if (paths === '/') {
+    } else if (paths === '/' || paths !== '/game') {
       // Di homepage, selalu show navbar
       setVisiblee(true)
     }
@@ -104,15 +104,10 @@ export const Navbar = ({ children, className }: NavbarProps) => {
       const direction = current! - scrollYProgress.getPrevious()!
       setDelay(false)
 
-      if (scrollYProgress.get() < 0.05 && paths !== '/') {
-        // Di halaman selain "/" dan di top, hide navbar
-        setVisiblee(false)
+      if (direction < 0) {
+        setVisiblee(true)
       } else {
-        if (direction < 0) {
-          setVisiblee(true)
-        } else {
-          setVisiblee(false)
-        }
+        setVisiblee(false)
       }
     }
   })
@@ -165,7 +160,7 @@ export const NavbarMobile = ({ children, className }: NavbarProps) => {
         delay: 3.5,
       }}
       // Use fixed positioning to stay above footer's fixed content
-      className={cn('fixed bottom-0 left-0 right-0 w-full z-100', className)}
+      className={cn(' sticky bottom-0 left-0 right-0 w-full z-100', className)}
     >
       {children}
     </motion.nav>
@@ -210,7 +205,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
     <motion.div
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        'absolute px-0 p-0 inset-0 hidden flex-1 flex-row items-center justify-center text-xs font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex ',
+        'absolute px-0 p-0 inset-0 pointer-events-none hidden flex-1 flex-row items-center justify-center text-xs font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex ',
         className,
       )}
     >
@@ -221,7 +216,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
             onMouseEnter={() => setHovered(idx)}
             onClick={onItemClick}
             className={cn(
-              'relative px-4 py-2 cursor-target text-accent-foreground',
+              'relative px-4 py-2 cursor-target text-accent-foreground pointer-events-auto',
               isActive && '',
             )}
             key={`link-${idx}`}

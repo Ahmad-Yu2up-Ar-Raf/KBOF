@@ -51,8 +51,8 @@ export const getUsers = createServerFn({ method: 'GET' })
         or(
           ilike(schema.user.name, `%${search}%`),
           ilike(schema.user.email, `%${search}%`),
-          ilike(schema.user.username, `%${search}%`)
-        )
+          ilike(schema.user.username, `%${search}%`),
+        ),
       )
     }
 
@@ -64,8 +64,7 @@ export const getUsers = createServerFn({ method: 'GET' })
       conditions.push(eq(schema.user.banned, banned))
     }
 
-    const whereClause =
-      conditions.length > 0 ? and(...conditions) : undefined
+    const whereClause = conditions.length > 0 ? and(...conditions) : undefined
 
     // Get total count
     const totalResult = await db
@@ -435,9 +434,7 @@ export const completeOnboarding = createServerFn({ method: 'POST' })
     if (step2) {
       updateData.province = step2.province ?? null
       updateData.city = step2.city ?? null
-      updateData.hobbies = step2.hobbies
-        ? JSON.stringify(step2.hobbies)
-        : null
+      updateData.hobbies = step2.hobbies ? JSON.stringify(step2.hobbies) : null
       updateData.expertise = step2.expertise
         ? JSON.stringify(step2.expertise)
         : null
@@ -464,8 +461,8 @@ export const completeOnboarding = createServerFn({ method: 'POST' })
       .where(
         and(
           eq(schema.user.username, step1.username),
-          sql`${schema.user.id} != ${userId}`
-        )
+          sql`${schema.user.id} != ${userId}`,
+        ),
       )
       .limit(1)
 

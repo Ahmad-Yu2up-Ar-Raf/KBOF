@@ -2,12 +2,20 @@ import * as React from 'react'
 
 import { cn } from '@/lib/utils'
 
-function Card({ className, ...props }: React.ComponentProps<'div'>) {
+function Card({
+  className,
+  gradient = true,
+  ...props
+}: React.ComponentProps<'div'> & {
+  gradient?: boolean
+}) {
   return (
     <div
       data-slot="card"
       className={cn(
         'bg-card text-card-foreground flex flex-col gap-6 rounded-2xl border py-6 shadow-sm',
+        gradient && ' from-primary/5  to-card dark:bg-background bg-linear-to-t shadow-x',
+
         className,
       )}
       {...props}

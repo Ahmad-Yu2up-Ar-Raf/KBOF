@@ -1,6 +1,12 @@
 // FILE: src/lib/game/utils.ts — Utility functions for Quiz Game
 
-import type { HighScoreRecord, Level, Question, QuestionResult, FragmentConfig } from './types'
+import type {
+  HighScoreRecord,
+  Level,
+  Question,
+  QuestionResult,
+  FragmentConfig,
+} from './types'
 import { COOKIE_CONFIG, LEVEL_CONFIGS, TIME_BONUS } from './constants'
 
 /**
@@ -18,7 +24,11 @@ export function shuffleArray<T>(array: T[]): T[] {
 /**
  * Pick random questions for a game session
  */
-export function pickQuestions(allQuestions: Question[], level: Level, count: number): Question[] {
+export function pickQuestions(
+  allQuestions: Question[],
+  level: Level,
+  count: number,
+): Question[] {
   const levelQuestions = allQuestions.filter((q) => q.level === level)
   const shuffled = shuffleArray(levelQuestions)
   return shuffled.slice(0, Math.min(count, shuffled.length))
@@ -27,7 +37,10 @@ export function pickQuestions(allQuestions: Question[], level: Level, count: num
 /**
  * Shuffle choices while tracking the new correct index
  */
-export function shuffleChoices(choices: string[], correctIndex: number): { choices: string[]; correctIndex: number } {
+export function shuffleChoices(
+  choices: string[],
+  correctIndex: number,
+): { choices: string[]; correctIndex: number } {
   const correctAnswer = choices[correctIndex]
   const shuffled = shuffleArray(choices)
   const newCorrectIndex = shuffled.indexOf(correctAnswer)
@@ -43,7 +56,7 @@ export function calculatePoints(
   totalTime: number,
   isCorrect: boolean,
   usedHint: boolean,
-  hintPenalty: number
+  hintPenalty: number,
 ): number {
   if (!isCorrect) return 0
 
@@ -85,7 +98,10 @@ export function generateGameId(): string {
 /**
  * Generate random fragment configurations for a question
  */
-export function generateFragmentConfigs(count: number, sizeRange: { min: number; max: number }): FragmentConfig[] {
+export function generateFragmentConfigs(
+  count: number,
+  sizeRange: { min: number; max: number },
+): FragmentConfig[] {
   const fragments: FragmentConfig[] = []
   const usedAreas: { x: number; y: number; w: number; h: number }[] = []
 
@@ -101,7 +117,12 @@ export function generateFragmentConfigs(count: number, sizeRange: { min: number;
 
       // Check for overlaps (simple approach)
       const hasOverlap = usedAreas.some((area) => {
-        return !(x + w < area.x || x > area.x + area.w || y + h < area.y || y > area.y + area.h)
+        return !(
+          x + w < area.x ||
+          x > area.x + area.w ||
+          y + h < area.y ||
+          y > area.y + area.h
+        )
       })
 
       if (!hasOverlap) {
@@ -162,7 +183,9 @@ export function getHighScoreForLevel(level: Level): HighScoreRecord | null {
 
   if (levelScores.length === 0) return null
 
-  return levelScores.reduce((best, current) => (current.score > best.score ? current : best))
+  return levelScores.reduce((best, current) =>
+    current.score > best.score ? current : best,
+  )
 }
 
 /**
@@ -225,16 +248,22 @@ export function clearHighScores(): void {
 export function calculateGameStats(results: QuestionResult[], level: Level) {
   const config = LEVEL_CONFIGS[level]
   const totalQuestions = results.length
-  const correctCount = results.filter((r) => r.selectedIndex === r.correctIndex && !r.wasTimeout).length
+  const correctCount = results.filter(
+    (r) => r.selectedIndex === r.correctIndex && !r.wasTimeout,
+  ).length
   const totalScore = results.reduce((sum, r) => sum + r.earnedPoints, 0)
-  const maxPossibleScore = totalQuestions * Math.floor(config.basePointsPerQuestion * TIME_BONUS.multiplier)
-  const accuracy = totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0
+  const maxPossibleScore =
+    totalQuestions *
+    Math.floor(config.basePointsPerQuestion * TIME_BONUS.multiplier)
+  const accuracy =
+    totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0
 
   const totalTimeSpent = results.reduce((sum, r) => {
     const timeLimit = config.defaultTimeLimitSec
     return sum + (timeLimit - r.timeLeftSec)
   }, 0)
-  const averageTimePerQuestion = totalQuestions > 0 ? Math.round(totalTimeSpent / totalQuestions) : 0
+  const averageTimePerQuestion =
+    totalQuestions > 0 ? Math.round(totalTimeSpent / totalQuestions) : 0
 
   return {
     totalScore,

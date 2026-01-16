@@ -92,7 +92,7 @@ function ProfileNavLink({
         'flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
         isActive
           ? 'bg-primary text-primary-foreground'
-          : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+          : 'text-muted-foreground hover:text-foreground hover:bg-muted',
       )}
     >
       <item.icon className="h-4 w-4" />
@@ -121,7 +121,7 @@ function ProfileLayout({ children }: ProfileLayoutProps) {
 
   if (isPending || !session?.user) {
     return (
-      <div className="flex h-screen w-full items-center justify-center">
+      <div className="flex h-lvh w-full items-center justify-center">
         <Spinner className="h-8 w-8 border-t-transparent rounded-xl" />
       </div>
     )
@@ -130,7 +130,7 @@ function ProfileLayout({ children }: ProfileLayoutProps) {
   const user = session.user
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-lvh bg-background">
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-14 items-center justify-between px-4">
@@ -257,9 +257,7 @@ function ProfileLayout({ children }: ProfileLayoutProps) {
       </header>
 
       {/* Main content */}
-      <main className="container py-6 px-4">
-        {children}
-      </main>
+      <main className="container py-6 px-4">{children}</main>
 
       <ScrollToTop />
     </div>

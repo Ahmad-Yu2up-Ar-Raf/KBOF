@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { ArrowRight, Newspaper } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 import ArticleCard, {
   ArticleCardSkeleton,
@@ -11,6 +11,7 @@ import ArticleCard, {
 import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
 import { getFeaturedArticlesQueryOptions } from '@/lib/query-options'
 import { cn } from '@/lib/utils'
+import HeadingSection from '@/components/ui/fragments/custom-ui/typography/heading-section'
 
 export default function ArtikelSection() {
   const [hovered, setHovered] = useState<number | null>(null)
@@ -28,27 +29,12 @@ export default function ArtikelSection() {
   return (
     <section className="container px-5   space-y-8">
       {/* Section Header */}
-      <header className="flex   items-center justify-between">
-        <div className="space-y-1">
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight flex items-center gap-2">
-            <Newspaper className="size-6 md:size-7 sr-only" />
-            Artikel Terbaru
-          </h2>
-          <p className="text-muted-foreground text-base">
-            Cerita dan inspirasi dari seluruh Nusantara
-          </p>
-        </div>
-        <Link
-          to="/artikel"
-          className={cn(
-            buttonVariants({ variant: 'outline', size: 'sm' }),
-            'hidden md:flex items-center gap-2  ',
-          )}
-        >
-          Lihat Semua
-          <ArrowRight className="size-4" />
-        </Link>
-      </header>
+      <HeadingSection
+        href="/artikel"
+        title="Artikel Pilihan"
+        description="Jelajahi artikel menarik seputar destinasi wisata, tips perjalanan, dan inspirasi liburan."
+        // Icon={Newspaper} 
+      />
 
       {/* Articles Grid */}
       <main className="grid grid-cols-1 md:grid-cols-2 w-full rounded-3xl overflow-hidden border border-secondary">
@@ -70,7 +56,7 @@ export default function ArtikelSection() {
         <Link
           to="/artikel"
           className={cn(
-            buttonVariants({ variant: 'outline', size: 'lg' }),
+            buttonVariants({ variant: 'link', size: 'lg' }),
             'flex items-center gap-2   ',
           )}
         >

@@ -14,7 +14,13 @@ type ImageFragmentProps = {
   className?: string
 }
 
-export function ImageFragment({ src, alt, fragments, showFull = false, className }: ImageFragmentProps) {
+export function ImageFragment({
+  src,
+  alt,
+  fragments,
+  showFull = false,
+  className,
+}: ImageFragmentProps) {
   // Full image display (easy level or reveal on answer)
   if (showFull || !fragments || fragments.length === 0) {
     return (
@@ -22,9 +28,17 @@ export function ImageFragment({ src, alt, fragments, showFull = false, className
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: ANIMATION_DURATION.normal }}
-        className={cn('relative aspect-video overflow-hidden rounded-lg', className)}
+        className={cn(
+          'relative aspect-video overflow-hidden rounded-lg',
+          className,
+        )}
       >
-        <img src={src} alt={alt} className="h-full w-full object-cover" loading="eager" />
+        <img
+          src={src}
+          alt={alt}
+          className="h-full w-full object-cover"
+          loading="eager"
+        />
       </motion.div>
     )
   }
@@ -33,7 +47,12 @@ export function ImageFragment({ src, alt, fragments, showFull = false, className
   const maskStyle = generateFragmentMask(fragments)
 
   return (
-    <div className={cn('relative aspect-video overflow-hidden rounded-lg bg-muted', className)}>
+    <div
+      className={cn(
+        'relative aspect-video overflow-hidden rounded-lg bg-muted',
+        className,
+      )}
+    >
       {/* Background pattern to indicate hidden areas */}
       <div
         className="absolute inset-0"
@@ -60,7 +79,12 @@ export function ImageFragment({ src, alt, fragments, showFull = false, className
           WebkitMask: maskStyle,
         }}
       >
-        <img src={src} alt={alt} className="h-full w-full object-cover" loading="eager" />
+        <img
+          src={src}
+          alt={alt}
+          className="h-full w-full object-cover"
+          loading="eager"
+        />
       </motion.div>
 
       {/* Fragment indicators */}
@@ -101,11 +125,22 @@ type FragmentRevealProps = {
   className?: string
 }
 
-export function FragmentReveal({ src, alt, fragments, isRevealed, className }: FragmentRevealProps) {
+export function FragmentReveal({
+  src,
+  alt,
+  fragments,
+  isRevealed,
+  className,
+}: FragmentRevealProps) {
   return (
-    <div className={cn('relative', className)}>
-      <ImageFragment src={src} alt={alt} fragments={isRevealed ? undefined : fragments} showFull={isRevealed} />
-
+    <div className={cn('relative w-full min-h-[20dvh] ', className)}>
+      <ImageFragment
+        src={src}
+        alt={alt}
+        fragments={isRevealed ? undefined : fragments}
+        showFull={isRevealed}
+      />
+      
       {/* Reveal overlay animation */}
       {isRevealed && (
         <motion.div

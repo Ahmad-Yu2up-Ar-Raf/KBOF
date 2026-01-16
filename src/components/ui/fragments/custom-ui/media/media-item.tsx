@@ -132,7 +132,7 @@ const MediaItem = ({
 
   return (
     <div
-      className={cn(` overflow-hidden  flex justify-center h-full relative `, className)}
+      className={cn(` overflow-hidden w-full  flex justify-center h-full relative `, className)}
       style={style}
     >
       <Image

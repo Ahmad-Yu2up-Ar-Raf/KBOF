@@ -1,5 +1,6 @@
 'use client'
 import { Link } from '@tanstack/react-router'
+import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
 import { useLottie } from 'lottie-react'
 import { LayoutGroup, motion } from 'framer-motion'
 import { useQuery } from '@tanstack/react-query'
@@ -162,112 +163,95 @@ export default function HeroSection() {
           </FloatingElement>
         </Floating>
 
-        <div className="flex md:px-2 px-10 flex-col justify-center items-center w-full max-w-xl m-auto z-50 pointer-events-auto gap-7">
-          <div className=" space-y-4">
-            <BlurFade isPreload delay={delay * 5} direction="up" duration={1}>
-              {View}
-            </BlurFade>
-
-            <BlurFade isPreload delay={delay * 6} direction="up">
-              <motion.h1
-                className="text-4xl sm:text-5xl  md:text-7xl  text-center w-full justify-center items-center flex-col flex primary-foreground space-pre sm:leading-12  md:leading-16  lg:leading-20 font-bold tracking-tighter"
-                animate={{ opacity: 1, y: 0 }}
-                initial={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.2, ease: 'easeOut', delay: 0.3 }}
-              >
-                <span>Jelajahi Pesona</span>
-                <LayoutGroup>
-                  <motion.span
-                    layout
-                    className="flex primary-foreground space-pre"
-                  >
-                    <motion.span
-                      layout
-                      className="flex primary-foreground space-pre"
-                      transition={{
-                        type: 'spring',
-                        damping: 30,
-                        stiffness: 400,
-                      }}
-                    >
-                      {' '}
-                    </motion.span>
-
-                    <TextRotate
-                      texts={[
-                        'Indonesia',
-                        'Nusantara',
-                        'Budaya',
-                        'Alam',
-                        'Lokal',
-                        'Tradisi',
-                        'Warisan',
-                        'Negeri',
-                        'Khatulistiwa',
-                        'Bahari',
-                        'Sejarah',
-                        'Kuliner',
-                        'Kesenian',
-                        'Adat',
-                      ]}
-                      mainClassName="overflow-hidden bg-primary pr-3 text-primary-foreground py-0 pb-2 px-4 rounded-xl"
-                      staggerDuration={0.03}
-                      staggerFrom="last"
-                      rotationInterval={2800}
-                      transition={{
-                        type: 'spring',
-                        damping: 30,
-                        stiffness: 400,
-                      }}
-                    />
-                  </motion.span>
-                </LayoutGroup>
-              </motion.h1>
-            </BlurFade>
-
-            <BlurFade
-              isPreload
-              direction="up"
-              delay={delay * 7}
-              className=" text-base md:text-lg lg:text-2xl  leading-7  text-balance text-muted-foreground   text-center "
+        <div className="flex md:px-2  px-5   flex-col justify-center items-center w-full max-w-2xl m-auto z-50 pointer-events-auto  gap-3  md:gap-4">
+          <BlurFade isPreload delay={delay * 5} direction="up" duration={1}>
+            {View}
+          </BlurFade>
+          <BlurFade isPreload delay={delay * 6} direction="up">
+            <motion.h1
+              className=" text-4xl sm:text-5xl  leading-9 md:text-6xl  text-center w-full justify-center items-center flex-col flex primary-foreground space-pre sm:leading-12  capitalize md:leading-16  font-bold tracking-tighter"
+              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.2, ease: 'easeOut', delay: 0.3 }}
             >
-              <p>
-                Temukan destinasi wisata tersembunyi dan kekayaan budaya lokal
-                Indonesia{' '}
-                <span className=" hidden sm:inline">
-                  yang autentik dan memukau.
-                </span>
-              </p>
-            </BlurFade>
-          </div>
-
+              <span className="block">Jelajahi Pesona</span>
+              <span className="flex flex-row flex-wrap items-center justify-center gap-2">
+                <TextRotate
+                  texts={[
+                    'Indonesia',
+                    'Nusantara',
+                    'Budaya',
+                    'Alam',
+                    'Lokal',
+                    'Tradisi',
+                    'Warisan',
+                    'Negeri',
+                    'Khatulistiwa',
+                    'Bahari',
+                    'Sejarah',
+                    'Kuliner',
+                    'Kesenian',
+                    'Adat',
+                  ]}
+                  mainClassName="overflow-hidden bg-primary pr-3 text-primary-foreground py-0 pb-2 px-4 rounded-xl"
+                  staggerDuration={0.03}
+                  staggerFrom="last"
+                  rotationInterval={2800}
+                  transition={{
+                    type: 'spring',
+                    damping: 30,
+                    stiffness: 400,
+                  }}
+                />
+              </span>
+            </motion.h1>
+          </BlurFade>
+          <BlurFade
+            isPreload
+            direction="up"
+            delay={delay * 7}
+            className="text-base md:text-lg lg:text-xl leading-6 text-balance text-muted-foreground text-center max-w-xl mx-auto"
+          >
+            <p>
+              Temukan destinasi wisata tersembunyi dan kekayaan budaya lokal
+              Indonesia
+              <span className="hidden sm:inline">
+                {' '}
+                yang autentik dan memukau.
+              </span>
+            </p>
+          </BlurFade>
           <BlurFade
             isPreload
             delay={delay * 8}
             direction="up"
-            className="flex w-full flex-col md:flex-row justify-center md:space-x-4  md:space-y-0 space-y-2.5 items-center "
+            className="flex w-full flex-col md:flex-row justify-center md:space-x-4 md:space-y-0 space-y-2.5 items-center mt-2"
           >
             <Link
               className={cn(
-                ' cursor-target  hover:scale-110 transition-all duration-300 ease-out  lg:text-xl md:text-lg w-full  justify-center flex items-center  gap-5   font-semibold tracking-tight text-background bg-foreground px-4 py-3.5 sm:px-5  md:px-6 md:py-4 lg:px-8 rounded-2xl z-20 shadow-2xl  ',
+                buttonVariants({ variant: 'default', size: 'lg' }),
+                'md:has-[>svg]:px-15  w-full md:w-fit has-[>svg]:px-8 rounded-full font-semibold   md:text-xl  px-70 md:gap-6 md:py-7 md:px-18     py-6',
               )}
               to="/destinasi"
             >
-              <Telescope className=" size-4.5 sm:size-5.5" /> Jelajahi Destinasi
+              <Telescope className="size-5" /> Jelajahi Destinasi
             </Link>
             <Link
               to={
-                (session && session.user.role === 'admin' || session && session.user.role === 'superAdmin')
+                (session && session.user.role === 'admin') ||
+                (session && session.user.role === 'superAdmin')
                   ? '/dashboard'
                   : session && session.user.role === 'pribumi'
                     ? '/profile/destinasi'
                     : '/login'
               }
               className={cn(
-                'md:text-lg  cursor-target   hover:scale-110 transition-all duration-300 ease-out  lg:text-xl justify-center flex items-center py-3.5   gap-5 w-full font-semibold tracking-tight text-primary-foreground  bg-primary px-4  sm:px-5  md:px-6 md:py-4 lg:px-8  rounded-2xl z-20 shadow-2xl font-calendas',
+                buttonVariants({ variant: 'default', size: 'lg' }),
+
+                '  md:has-[>svg]:px-15 w-full md:w-fit    font-semibold   has-[>svg]:px-8 rounded-full   md:text-xl  md:gap-6 md:py-7    py-6  bg-foreground ',
               )}
             >
-              <Pen className=" size-4.5 sm:size-5.5" /> Bagikan Destinasi
+              <Pen className="size-5" /> Bagikan Destinasi
             </Link>
           </BlurFade>
         </div>

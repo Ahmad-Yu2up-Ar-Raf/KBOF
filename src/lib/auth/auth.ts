@@ -21,7 +21,7 @@ export const auth = betterAuth({
     additionalFields: {
       role: {
         type: 'string',
-        defaultValue: 'pribumi',
+        defaultValue: 'admin',
         required: false,
       },
       hasCompletedOnboarding: {
@@ -103,7 +103,7 @@ export const auth = betterAuth({
         admin: roles.admin,
         superAdmin: roles.superAdmin,
       },
-      defaultRole: 'pribumi',
+      defaultRole: 'admin',
       adminRoles: ['admin', 'superAdmin'],
     }),
     // Magic link for passwordless login

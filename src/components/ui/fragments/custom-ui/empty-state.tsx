@@ -66,8 +66,8 @@ export function EmptyState({
       <p className="text-xs  md:text-sm text-muted-foreground mt-1 lg:text-base whitespace-pre-line">
         {description}
       </p>
-      {action && (
-        React.isValidElement(action) ? (
+      {action &&
+        (React.isValidElement(action) ? (
           action
         ) : (
           <Button
@@ -81,8 +81,7 @@ export function EmptyState({
           >
             {(action as { label: string; onClick: () => void }).label}
           </Button>
-        )
-      )}
+        ))}
     </div>
   )
 }

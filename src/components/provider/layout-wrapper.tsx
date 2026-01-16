@@ -8,6 +8,7 @@ import ReactLenis, { useLenis } from 'lenis/react'
 import SiteHeader from '../ui/core/layout/nav/site-header'
 import { useShouldShowFooter } from './infinite-scroll-context'
 import { useIsMobile } from '@/hooks/use-mobile'
+import SiteNavbar from '../ui/core/layout/nav/site-navbar'
 
 interface LayoutWrapperProps {
   children: ReactNode
@@ -87,6 +88,7 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
     '/(auth)/login',
     '/(auth)/register',
     '/dashboard',
+    '/profile',
     '/$', // 404 page
   ]
 
@@ -99,16 +101,20 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
       <ReactLenis root>
         <ScrollToTop />
 
-        <SiteBorder />
-
+        {!isMobile && <SiteBorder />}
+        <SiteNavbar />
         {/* Add padding-bottom on mobile to account for fixed navbar */}
         <div
           className={cn(
-            'relative  min-h-lvh w-full pb-10',
-            isMobile && 'pb-[12svh]', // Extra space for mobile bottom navbar
+            'relative  min-h-lvh w-full ',
+            // isMobile && 'pb-[12svh]', // Extra space for mobile bottom navbar
           )}
         >
-          <div className={cn('mx-auto flex   flex-col  gap-10 sm:gap-8   h-full w-full')}>
+          <div
+            className={cn(
+              'mx-auto flex   flex-col  gap-10 sm:gap-8   h-full w-full',
+            )}
+          >
             {children}
           </div>
         </div>

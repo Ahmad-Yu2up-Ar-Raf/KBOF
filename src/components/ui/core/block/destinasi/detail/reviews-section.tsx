@@ -44,6 +44,7 @@ interface ReviewCardProps {
 function ReviewCard({ review, isLast }: ReviewCardProps) {
   return (
     <Card
+    gradient={false}
       className={cn(
         'rounded-xl border-b bg-background p-0 shadow-none border-0 space-y-3',
       )}

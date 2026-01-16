@@ -35,13 +35,13 @@ export function StatsPanel({
 }: StatsPanelProps) {
   const stats = calculateGameStats(results, level)
   const config = LEVEL_CONFIGS[level]
-  const { message, emoji } = getResultMessage(stats.accuracy)
+  // const { message, emoji } = getResultMessage(stats.accuracy)
 
   return (
     <div className="space-y-6">
       {/* Main result card */}
-      <Card className="overflow-hidden">
-        <CardHeader className="bg-gradient-to-r from-primary/10 via-primary/5 to-transparent pb-4 text-center">
+      <Card className="  max-w-md  content-start  m-auto gap-4  p-0 bg-background border-0  shadow-none  ">
+        {/* <CardHeader className="bg-gradient-to-r from-primary/10 via-primary/5 to-transparent pb-4 text-center">
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
@@ -65,9 +65,14 @@ export function StatsPanel({
               </Badge>
             </motion.div>
           )}
-        </CardHeader>
+        </CardHeader> */}
 
-        <CardContent className="p-6">
+        <CardContent
+          className={cn(
+            '  bg-background  border-0 space-y-4 shadow-none p-0',
+            // showFeedback && feedback ? '  ' : ' space-y-8   ',
+          )}
+        >
           {/* Score highlight */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -84,7 +89,7 @@ export function StatsPanel({
           </motion.div>
 
           {/* Stats grid */}
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid   grid-cols-2">
             <StatItem
               label="Jawaban Benar"
               value={`${stats.correctCount}/${stats.totalQuestions}`}
@@ -124,10 +129,10 @@ export function StatsPanel({
       </Card>
 
       {/* Question breakdown */}
-      <QuestionBreakdown results={results} level={level} />
+      {/* <QuestionBreakdown results={results} level={level} /> */}
 
       {/* Action buttons */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.8 }}
@@ -142,7 +147,7 @@ export function StatsPanel({
         <Button size="lg" variant="ghost" onClick={onBackToMenu}>
           🏠 Menu Utama
         </Button>
-      </motion.div>
+      </motion.div> */}
     </div>
   )
 }
@@ -159,10 +164,10 @@ function StatItem({ label, value, delay }: StatItemProps) {
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay }}
-      className="rounded-lg bg-muted/50 p-4 text-center"
+      className="rounded-lg bg-muted/50 p-4 text-left"
     >
-      <div className="text-sm text-muted-foreground">{label}</div>
       <div className="text-2xl font-bold">{value}</div>
+      <div className="text-sm text-muted-foreground">{label}</div>
     </motion.div>
   )
 }

@@ -106,13 +106,13 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
         {/* Add padding-bottom on mobile to account for fixed navbar */}
         <div
           className={cn(
-            'relative  pb-10 min-h-lvh w-full ',
+            'relative  overflow-hidden pb-10 min-h-lvh w-full ',
             // isMobile && 'pb-[12svh]', // Extra space for mobile bottom navbar
           )}
         >
           <div
             className={cn(
-              'mx-auto flex   flex-col  gap-10 sm:gap-8   h-full w-full',
+              'mx-auto flex  relative  flex-col  gap-10 sm:gap-8  content-center  h-full w-full',
             )}
           >
             {children}

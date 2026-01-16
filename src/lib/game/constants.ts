@@ -49,8 +49,7 @@ export const LEVEL_CONFIGS: Record<Level, LevelConfig> = {
     id: 'easy',
     displayName: 'Mudah',
     emoji: '🌱',
-    description:
-      'Gambar penuh dengan petunjuk. Cocok untuk pemula!',
+    description: 'Gambar penuh dengan petunjuk. Cocok untuk pemula!',
     questionsPerGame: 5,
     defaultTimeLimitSec: 20,
     basePointsPerQuestion: 10,
@@ -63,7 +62,7 @@ export const LEVEL_CONFIGS: Record<Level, LevelConfig> = {
   medium: {
     id: 'medium',
     displayName: 'Sedang',
-    emoji: '🌿',
+    emoji: '⚡',
     description: 'Gambar terpotong dengan beberapa fragmen. Tantang dirimu!',
     questionsPerGame: 5,
     defaultTimeLimitSec: 25,

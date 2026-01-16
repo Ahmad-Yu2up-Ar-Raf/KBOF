@@ -93,14 +93,16 @@ export function PlayingScreen({
       transition={{ duration: ANIMATION_DURATION.normal }}
     >
       <GameHeader
-        Emoji={config.emoji}
-        title={config.displayName}
+        variant="column"
+        // Emoji={config.emoji}
+        title={`${state.timeRemaining}`}
+        titleClassName={'flex text-xs'}
         // subtitle={`Soal ${state.currentIndex + 1} dari ${state.questions.length}`}
         leftAction={handleExitClick}
         rightAction={
           <Button
             onClick={handlePauseToggle}
-            variant="outline"
+            variant="ghost"
             size="sm"
             className={cn(
               'flex items-center gap-2 transition-all duration-300',
@@ -109,33 +111,17 @@ export function PlayingScreen({
                 : 'border-border',
             )}
           >
-            <AnimatePresence mode="wait" initial={false}>
-              {state.isPaused ? (
-                <motion.div
-                  key="play"
-                  initial={{ scale: 0, rotate: -180 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  exit={{ scale: 0, rotate: 180 }}
-                  transition={{ duration: 0.2 }}
-                  className="flex items-center gap-2"
-                >
-                  <Play className="size-4 fill-current" />
-                  <span className="sr-only md:not-sr-only">Lanjut</span>
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="pause"
-                  initial={{ scale: 0, rotate: 180 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  exit={{ scale: 0, rotate: -180 }}
-                  transition={{ duration: 0.2 }}
-                  className="flex items-center gap-2"
-                >
-                  <Pause className="size-4" />
-                  <span className="sr-only md:not-sr-only">Jeda</span>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {state.isPaused ? (
+              <>
+                <Play className="size-4 fill-current" />
+                <span className="sr-only  ">Lanjut</span>
+              </>
+            ) : (
+              <>
+                <Pause className="size-4" />
+                <span className="sr-only ">Jeda</span>
+              </>
+            )}
           </Button>
         }
       />

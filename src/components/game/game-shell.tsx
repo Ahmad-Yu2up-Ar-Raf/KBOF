@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils'
 import { ANIMATION_DURATION } from '@/lib/game/constants'
 import { Button } from '../ui/fragments/shadcn-ui/button'
 import { ArrowLeft } from 'lucide-react'
-
+import { AnimatedGridPattern } from '../ui/fragments/shadcn-ui/animated-grid-pattern'
 type GameShellProps = {
   children: React.ReactNode
   className?: string
@@ -14,14 +14,26 @@ type GameShellProps = {
 
 export function GameShell({ children, className }: GameShellProps) {
   return (
-    <div
-      className={cn(
-        'container   pt-0 md:pb-0 pb-8 md:pt-0 relative mi-h-lvh overflow-y-auto overflow-x-hidden flex flex-col px-5',
-        className,
-      )}
-    >
-      {children}
-    </div>
+    <>
+      <div
+        className={cn(
+          'container    z-50 pt-0 md:pb-0    relative min-h-lvh overflow-y-auto overflow-x-hidden flex flex-col px-5',
+          className,
+        )}
+      >
+        {children}
+      </div>
+      <AnimatedGridPattern
+        numSquares={30}
+        maxOpacity={0.1}
+        duration={3}
+        repeatDelay={1}
+        className={cn(
+          'mask-[radial-gradient(500px_circle_at_center,white,transparent)]',
+          'inset-x-0 inset-y-[-30%] z-40   h-[200%] skew-y-12',
+        )}
+      />
+    </>
   )
 }
 
@@ -31,80 +43,140 @@ type GameHeaderProps = {
   leftAction?: React.ReactNode | (() => void)
   rightAction?: React.ReactNode
   Emoji?: string
+  titleClassName?: string
+  variant?: 'default' | 'column'
   className?: string
 }
 
 export function GameHeader({
   title,
   subtitle,
+  titleClassName,
   leftAction,
   rightAction,
-  Emoji = '🎯',
+  Emoji,
+  variant = 'default',
   className,
 }: GameHeaderProps) {
   // Determine if leftAction is a function or ReactNode
   const isLeftActionFunction = typeof leftAction === 'function'
-
+  const isColumn = variant === 'column'
   return (
     <motion.header
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: ANIMATION_DURATION.normal }}
       className={cn(
-        'z-40 top-0 mx-auto bg-background items-center justify-center border-b   flex text-center w-full px-10 pb-6  h-full  relative md:border-0  ',
+        'z-40 top-0 mx-auto bg-background md:mb-3 items-center justify-center border-b  pt-0  flex text-center w-full px-10   h-full  relative md:border-0  ',
         className,
+        isColumn ? 'md:border-b pb-3' : 'pb-6 mb-6',
       )}
     >
       {/* Left Action - Absolute positioned */}
-      {/* <nav className="z-50 absolute left-0 top-10 -translate-y-1/2 bg-background/95 backdrop-blur">
-        {isLeftActionFunction ? (
-          <Button
-            onClick={leftAction}
-            variant="ghost"
-            size="icon"
-            className="flex w-fit py-2 text-base items-center gap-2 group transition-colors"
+      {leftAction && (
+        <nav className="z-50 absolute left-0 top-10 -translate-y-1/2 bg-background/95 backdrop-blur">
+          {isLeftActionFunction ? (
+            <Button
+              onClick={leftAction}
+              variant="ghost"
+              size="icon"
+              className="flex w-fit py-2 text-base items-center gap-2 group transition-colors"
+            >
+              <ArrowLeft className="size-4 md:size-5 group-hover:-translate-x-1 group-hover:transform transition-all ease-out duration-300" />
+              <span className="sr-only">Kembali</span>
+            </Button>
+          ) : (
+            leftAction
+          )}
+        </nav>
+      )}
+      {variant === 'column' ? (
+        <div
+          className={cn(
+            'flex pt-6 gap-2 flex-col max-w-xs m-auto items-center justify-center',
+          )}
+        >
+          <div
+            className={cn(
+              'flex flex-row items-center text-2xl    justify-center gap-2 md:gap-3',
+              titleClassName,
+            )}
           >
-            <ArrowLeft className="size-4 md:size-5 group-hover:-translate-x-1 group-hover:transform transition-all ease-out duration-300" />
-            <span className="sr-only">Kembali</span>
-          </Button>
-        ) : (
-          leftAction
-        )}
-      </nav> */}
-
-      {/* Center - Title and Subtitle */}
-      <div className="flex pt-10 gap-2 flex-col max-w-xs m-auto items-center justify-center">
-        <div className="flex items-center text-2xl   justify-center gap-2 md:gap-3">
-          <motion.span
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.3 }}
-          >
-            {Emoji}
-          </motion.span>
-          <motion.h1
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="font-bold tracking-tight md:text-3xl"
-          >
-            {title}
-          </motion.h1>
+            {Emoji && (
+              <motion.span
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className="text-3xl  "
+              >
+                {Emoji}
+              </motion.span>
+            )}
+            <motion.h1
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="font-bold tracking-tight  text-xl"
+            >
+              {title}
+            </motion.h1>
+          </div>
+          {subtitle && (
+            <motion.p
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className=" text-sm  lg:text-lg  md:text-base text-muted-foreground"
+            >
+              {subtitle}
+            </motion.p>
+          )}
         </div>
-        {subtitle && (
-          <motion.p
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className=" text-sm  lg:text-base text-muted-foreground"
+      ) : (
+        <div
+          className={cn(
+            'flex   pt-10 gap-1 flex-col max-w-xs m-auto items-center justify-center',
+          )}
+        >
+          <div
+            className={cn(
+              'flex flex-col items-center text-2xl   justify-center gap-2 md:gap-3',
+              titleClassName,
+            )}
           >
-            {subtitle}
-          </motion.p>
-        )}
-      </div>
+            <motion.span
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="text-4xl md:text-5xl "
+            >
+              {Emoji}
+            </motion.span>
+            <motion.h1
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="font-bold tracking-tight md:text-3xl"
+            >
+              {title}
+            </motion.h1>
+          </div>
+          {subtitle && (
+            <motion.p
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="   lg:text-lg  text-base text-muted-foreground"
+            >
+              {subtitle}
+            </motion.p>
+          )}
+        </div>
+      )}
+      {/* Center - Title and Subtitle */}
 
       {/* Right Action - Absolute positioned */}
-      <div className="z-50 absolute right-0 top-1/2 -translate-y-1/2 bg-background/95 backdrop-blur">
+      <div className="z-50 absolute  right-0 top-10 -translate-y-1/2 bg-background/95 backdrop-blur">
         {rightAction}
       </div>
     </motion.header>
@@ -123,7 +195,7 @@ export function GameContent({ children, className }: GameContentProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: ANIMATION_DURATION.normal, delay: 0.1 }}
       className={cn(
-        'space-y-6 flex-1 w-full relative content-center    ',
+        'space-y-6 flex-1 w-full h-full  relative content-center    ',
         className,
       )}
     >

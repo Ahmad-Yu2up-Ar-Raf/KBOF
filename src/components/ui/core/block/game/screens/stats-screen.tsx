@@ -9,6 +9,7 @@ import { motion } from 'framer-motion'
 import type { Level, QuestionResult } from '@/lib/game/types'
 import { ANIMATION_DURATION } from '@/lib/game/constants'
 import { GameHeader, GameContent, StatsPanel } from '@/components/game'
+import { useConfettiEffect } from '../../leaderboard/hooks'
 
 // =============================================================================
 // TYPES
@@ -35,6 +36,7 @@ export function StatsScreen({
   onChangeLevel,
   onBackToMenu,
 }: StatsScreenProps) {
+  useConfettiEffect()
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -42,7 +44,12 @@ export function StatsScreen({
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: ANIMATION_DURATION.normal }}
     >
-      <GameHeader title="🎉 Permainan Selesai!" subtitle="Lihat hasil permainanmu" />
+      <GameHeader
+        leftAction={onBackToMenu}
+        Emoji="🏆"
+        title="Permainan Selesai!"
+        subtitle="Lihat hasil permainanmu"
+      />
 
       <GameContent>
         <StatsPanel

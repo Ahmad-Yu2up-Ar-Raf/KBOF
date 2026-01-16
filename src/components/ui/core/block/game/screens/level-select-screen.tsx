@@ -38,8 +38,10 @@ export function LevelSelectScreen({
       transition={{ duration: ANIMATION_DURATION.normal }}
     >
       <GameHeader
-        title="Pilih Level"
-        className=' md:mb-10'
+        title="Pilih Level Permainan"
+        className=" "
+        Emoji="🎯"
+        variant="default"
         subtitle="Ketuk salah satu kartu level untuk memulai permainan"
         leftAction={onBack}
       />

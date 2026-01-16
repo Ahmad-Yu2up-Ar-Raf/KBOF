@@ -146,24 +146,24 @@ export const Navbar = ({ children, className }: NavbarProps) => {
 }
 export const NavbarMobile = ({ children, className }: NavbarProps) => {
   return (
-    <motion.nav
-      initial={{
-        opacity: 1,
-        y: 100,
-      }}
-      animate={{
-        y: 0,
-        opacity: 1,
-      }}
-      transition={{
-        duration: 0.4,
-        delay: 3.5,
-      }}
+    <nav
+      // initial={{
+      //   opacity: 1,
+      //   y: 100,
+      // }}
+      // animate={{
+      //   y: 0,
+      //   opacity: 1,
+      // }}
+      // transition={{
+      //   duration: 0.4,
+      //   delay: 3.5,
+      // }}
       // Use fixed positioning to stay above footer's fixed content
-      className={cn(' sticky bottom-0 left-0 right-0 w-full z-100', className)}
+      className={cn(' overflow-hidden sticky bottom-0 left-0 right-0 w-full z-100', className)}
     >
       {children}
-    </motion.nav>
+    </nav>
   )
 }
 
@@ -187,7 +187,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         minWidth: '650px',
       }}
       className={cn(
-        'relative z-60     transition-all duration-300 ease-out max-w-4xl   mx-auto hidden w-full container  flex-row items-center justify-between self-start rounded-2xl  px-3 py-2 lg:flex ',
+        'relative z-60    overflow-hidden  transition-all duration-300 ease-out max-w-4xl   mx-auto hidden w-full container  flex-row items-center justify-between self-start rounded-2xl  px-3 py-2 lg:flex ',
         visible && '  bg-background/80  border',
         className,
       )}

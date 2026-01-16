@@ -111,9 +111,12 @@ export function QuestionCard({
   ])
 
   return (
-    <Card className=" max-w-md   content-start  m-auto gap-4  p-0 bg-background border-0  shadow-none">
+    <Card
+      gradient={false}
+      className="   max-w-md  content-start  m-auto gap-4  p-0 bg-background border-0  shadow-none"
+    >
       {/* Header with progress and timer */}
-      <CardHeader className=" content-start h-full bg-background min-h-[20svh] overflow-hidden md:h-[15em]  gap-0 pb-0  p-0">
+      <CardHeader className="   content-start h-full bg-transparent min-h-[20svh] overflow-hidden md:h-[15em]  gap-0 pb-0  p-0">
         <TimerDisplay
           timeRemaining={timeRemaining}
           totalTime={config.defaultTimeLimitSec}
@@ -131,15 +134,15 @@ export function QuestionCard({
 
       <CardContent
         className={cn(
-          '  bg-background  border-0  shadow-none p-0',
-          showFeedback && feedback ? ' space-y-4 ' : ' space-y-8   ',
+          '  bg-background  border-0 space-y-4 shadow-none p-0',
+          // showFeedback && feedback ? '  ' : ' space-y-8   ',
         )}
       >
         {/* Image section */}
 
         {/* Question prompt */}
         <motion.div
-          className=" space-y-2  border-b-2 pb-5  max-w-md  "
+          className=" space-y-2  border-b-2 pb-5    "
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: ANIMATION_DURATION.normal, delay: 0.2 }}
@@ -152,7 +155,7 @@ export function QuestionCard({
               {question.province}
             </Badge>
           </div>
-          <h2 className="    md:leading-8 text-lg leading-6     font-semibold  md:text-2xl">
+          <h2 className="    md:leading-7 text-lg leading-6     font-semibold  md:text-2xl">
             {question.prompt}
           </h2>
         </motion.div>
@@ -186,12 +189,12 @@ export function QuestionCard({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: ANIMATION_DURATION.normal, delay: 0.3 }}
-                className="flex   justify-center pt-2"
+                className="flex md:justify-end w-full   justify-center pt-2"
               >
                 <Button
                   size="lg"
                   onClick={onNextQuestion}
-                  className="w-full     md:px-8 gap-2"
+                  className="w-full    md:w-fit  md:px-8 gap-2"
                 >
                   {isLastQuestion ? 'Lihat Hasil' : 'Soal Berikutnya'}
                   <ArrowRight className="size-4" />
@@ -357,7 +360,7 @@ function FeedbackDisplay({
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: ANIMATION_DURATION.normal }}
         className={cn(
-          'font-medium rounded-2xl max-w-md   border py-2 px-3 ',
+          'font-medium rounded-2xl    border py-2 px-3 ',
           isCorrect
             ? 'text-emerald-700 dark:text-emerald-300'
             : 'text-red-700 dark:text-red-300',

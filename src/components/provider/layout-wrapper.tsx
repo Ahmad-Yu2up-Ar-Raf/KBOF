@@ -85,8 +85,8 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
 
   // Routes yang gak butuh footer/border
   const routesWithoutChrome = [
-    '/(auth)/login',
-    '/(auth)/register',
+    // '/(auth)/login',
+    // '/(auth)/register',
     '/dashboard',
     '/profile',
     '/$', // 404 page

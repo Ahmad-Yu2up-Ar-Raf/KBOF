@@ -22,11 +22,7 @@ export default function Login() {
 
       // Role-based redirect
       if (role === 'pribumi') {
-        if (!user?.hasCompletedOnboarding) {
-          window.location.href = '/onboarding'
-        } else {
-          window.location.href = '/profile'
-        }
+        window.location.href = '/profile'
       } else {
         window.location.href = '/dashboard'
       }

@@ -34,6 +34,7 @@ type DestinationRow = DestinationAggregateResult['data'][number]
 interface DestinationTableProps {
   /** Resolved data from query */
   data: DestinationAggregateResult
+  createSheet?: React.ReactNode
 }
 
 // ============================================
@@ -42,8 +43,9 @@ interface DestinationTableProps {
 
 export function DestinationTable({
   data: destinationData,
+  createSheet,
 }: DestinationTableProps) {
-  const { enableAdvancedFilter, filterFlag } = useFeatureFlags()
+  // const { enableAdvancedFilter, filterFlag } = useFeatureFlags()
 
   // Extract data from resolved result
   const { data, pageCount, statusCounts, typeCounts, categoryCounts } =
@@ -67,7 +69,7 @@ export function DestinationTable({
     data,
     columns,
     pageCount,
-    enableAdvancedFilter,
+    // enableAdvancedFilter,
     initialState: {
       sorting: [{ id: 'createdAt', desc: true }],
       columnPinning: { right: ['actions'] },
@@ -149,7 +151,7 @@ export function DestinationTable({
           />
         }
       >
-        {enableAdvancedFilter ? (
+        {/* {enableAdvancedFilter ? (
           <DataTableAdvancedToolbar table={table}>
             <DataTableSortList table={table} align="start" />
             {filterFlag === 'advancedFilters' ? (
@@ -170,10 +172,11 @@ export function DestinationTable({
             )}
           </DataTableAdvancedToolbar>
         ) : (
-          <DataTableToolbar table={table}>
-            <DataTableSortList table={table} align="end" />
-          </DataTableToolbar>
-        )}
+        )} */}
+        <DataTableToolbar table={table}>
+          {createSheet}
+          {/* <DataTableSortList table={table} align="end" /> */}
+        </DataTableToolbar>
       </DataTable>
       {rowAction?.row.original && (
         <UpdateDestinationSheet

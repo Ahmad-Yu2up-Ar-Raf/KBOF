@@ -89,10 +89,10 @@ export const Navbar = ({ children, className }: NavbarProps) => {
   // Handle initial visibility when path changes
   useEffect(() => {
     // Kalau bukan di "/" dan masih di top, hide navbar
-    if ((paths !== '/' && scrollYProgress.get() < 0.05) || paths !== '/game') {
+    if (paths !== '/' && scrollYProgress.get() < 0.05) {
       setVisiblee(false)
       setDelay(false)
-    } else if (paths === '/' || paths !== '/game') {
+    } else if (paths === '/') {
       // Di homepage, selalu show navbar
       setVisiblee(true)
     }

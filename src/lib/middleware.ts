@@ -21,31 +21,31 @@ export const authMiddleware = createMiddleware().server(
 // GUEST MIDDLEWARE - Only for non-authenticated users
 // =============================================================================
 
-// export const guestMiddleware = createMiddleware().server(
-//   async ({ next, request }) => {
-//     const session = await auth.api.getSession({ headers: request.headers })
+export const guestMiddleware = createMiddleware().server(
+  async ({ next, request }) => {
+    const session = await auth.api.getSession({ headers: request.headers })
 
-//     if (session) {
-//       const user = session.user as {
-//         role?: UserRoleType
-//         hasCompletedOnboarding?: boolean
-//       }
-//       const role = user?.role || 'pribumi'
+    if (session) {
+      const user = session.user as {
+        role?: UserRoleType
+        hasCompletedOnboarding?: boolean
+      }
+      const role = user?.role || 'pribumi'
 
-//       // Redirect based on role
-//       if (role === 'pribumi') {
-//         // Check if onboarding is completed
-//         if (!user?.hasCompletedOnboarding) {
-//           throw redirect({ to: '/onboarding' })
-//         }
-//         throw redirect({ to: '/profile' })
-//       } else {
-//         throw redirect({ to: '/dashboard', search: { createdAt: [] } })
-//       }
-//     }
-//     return await next()
-//   },
-// )
+      // Redirect based on role
+      if (role === 'pribumi') {
+        // Check if onboarding is completed
+        // if (!user?.hasCompletedOnboarding) {
+        //   throw redirect({ to: '/onboarding' })
+        // }
+        throw redirect({ to: '/profile' })
+      } else {
+        throw redirect({ to: '/dashboard', search: { createdAt: [] } })
+      }
+    }
+    return await next()
+  },
+)
 
 // =============================================================================
 // AUTH SERVER MIDDLEWARE - For server functions, passes user context
@@ -150,33 +150,33 @@ export const superAdminMiddleware = createMiddleware().server(
  * Used for /profile routes
  * Redirects to onboarding if not completed
  */
-// export const profileMiddleware = createMiddleware().server(
-//   async ({ next, request }) => {
-//     const session = await auth.api.getSession({ headers: request.headers })
+export const profileMiddleware = createMiddleware().server(
+  async ({ next, request }) => {
+    const session = await auth.api.getSession({ headers: request.headers })
 
-//     if (!session) {
-//       throw redirect({ to: '/login' })
-//     }
+    if (!session) {
+      throw redirect({ to: '/login' })
+    }
 
-//     const user = session.user as {
-//       role?: UserRoleType
-//       hasCompletedOnboarding?: boolean
-//     }
-//     const role = user?.role || 'pribumi'
+    const user = session.user as {
+      role?: UserRoleType
+      hasCompletedOnboarding?: boolean
+    }
+    const role = user?.role || 'pribumi'
 
-//     // Only Pribumi can access profile routes
-//     if (role !== 'pribumi') {
-//       throw redirect({ to: '/dashboard', search: { createdAt: [] } })
-//     }
+    // Only Pribumi can access profile routes
+    if (role !== 'pribumi') {
+      throw redirect({ to: '/dashboard', search: { createdAt: [] } })
+    }
 
-//     // Check if onboarding is completed
-//     if (!user?.hasCompletedOnboarding) {
-//       throw redirect({ to: '/onboarding' })
-//     }
+    // // Check if onboarding is completed
+    // if (!user?.hasCompletedOnboarding) {
+    //   throw redirect({ to: '/onboarding' })
+    // }
 
-//     return next({ context: { user: session.user } })
-//   },
-// )
+    return next({ context: { user: session.user } })
+  },
+)
 
 /**
  * Onboarding middleware - Pribumi who haven't completed onboarding

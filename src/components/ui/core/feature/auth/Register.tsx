@@ -23,7 +23,7 @@ export default function Register() {
       // Role-based redirect - new users are pribumi by default
       if (role === 'pribumi') {
         // New users always go to onboarding first
-        window.location.href = '/onboarding'
+        window.location.href = '/profile'
       } else {
         window.location.href = '/dashboard'
       }

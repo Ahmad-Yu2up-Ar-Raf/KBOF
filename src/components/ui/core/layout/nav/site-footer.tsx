@@ -31,8 +31,12 @@ export default function SiteFooter({ className, ...props }: StickyFooterProps) {
   const isMobile = useIsMobile()
   const matches = useMatches()
   const paths = matches[matches.length - 1]?.routeId
-  const isActive = paths !== '/game'
-
+  const isActive =
+    paths !== '/game' &&
+    paths !== '/(auth)/login' &&
+    paths !== '/(auth)/register'
+  // '/(auth)/login',
+  // '/(auth)/register',
   if (isActive)
     return (
       <footer
@@ -56,7 +60,10 @@ export default function SiteFooter({ className, ...props }: StickyFooterProps) {
               <div className="col-span-2 lg:w-54 lg:col-span-1">
                 <div className="mb-4 md:mb-6 flex items-center space-x-2 group transition-transform">
                   {/* Logo lebih kecil dan animasi hover */}
-                  <Link to='/' className="size-10 sm:size-5 md:size-8 lg:size-10 transition-transform duration-300 group-hover:scale-105 group-hover:brightness-110">
+                  <Link
+                    to="/"
+                    className="size-10 sm:size-5 md:size-8 lg:size-10 transition-transform duration-300 group-hover:scale-105 group-hover:brightness-110"
+                  >
                     <Logo />
                   </Link>
                 </div>

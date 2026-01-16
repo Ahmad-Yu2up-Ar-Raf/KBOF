@@ -44,8 +44,8 @@ export function DataTableToolbar<TData>({
       {...props}
     >
       <div className="flex sm:order-2 justify-end  items-center gap-2">
-        {children}
         <DataTableViewOptions table={table} align="end" />
+        {children}
       </div>
       <div className="  w-full grid grid-cols-2 sm:grid-cols-3 sm:flex sm:flex-1 sm:flex-wrap items-center gap-2">
         {columns.map((column) => (

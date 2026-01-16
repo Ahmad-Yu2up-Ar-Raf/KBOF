@@ -70,14 +70,14 @@ const AuthLayoutTemplate = ({
   }
   return (
     <>
-      <div className=" relative min-h-lvh  flex items-center justify-center overflow-hidden ">
+      <div className=" relative   min-h-lvh container py-0  flex items-center justify-center overflow-hidden ">
         <div
           className={cn(
             '  w-full relative max-w-lg  overflow-hidden flex flex-col  lg:flex-row shadow-xl lg:max-w-none h-lvh',
             className,
           )}
         >
-          <nav className="z-999999  left-7  absolute  top-4 bg-background/95 backdrop-blur   flex items-center   ">
+          {/* <nav className="z-999999  left-7  absolute  top-4 bg-background/95 backdrop-blur   flex items-center   ">
             <Link
               to="/"
               className={cn(
@@ -88,14 +88,14 @@ const AuthLayoutTemplate = ({
               <ArrowLeft className=" size-5  group-hover:-translate-x-1  group-hover:transform transition-all ease-out duration-300" />
               <span className="">Kembali </span>
             </Link>
-          </nav>
+          </nav> */}
 
           <main
             className={cn(
-              'p-8 lg:w-1/2 justify-center items-center  lg:m-auto h-full content-center relative bg-background z-100 text-secondary-foreground overflow-visible ',
+              'px-8 py-0 lg:w-1/2 justify-start items-center  lg:m-auto h-full content-center relative bg-background z-100 text-secondary-foreground overflow-visible ',
             )}
           >
-            <div className=" justify-center  max-w-sm flex m-auto flex-col h-full">
+            <div className=" justify-start  pt-10  max-w-sm flex m-auto flex-col h-full">
               <div className="flex text-center flex-col   items-left mb-4">
                 <div className="  m-auto  w-50 h-42 ">{View}</div>
 

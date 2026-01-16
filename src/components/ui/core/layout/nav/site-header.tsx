@@ -1,16 +1,15 @@
 'use client'
+import { Link, useMatches } from '@tanstack/react-router'
 import { NavbarLogo } from '@/components/ui/fragments/custom-ui/header/app-logo'
 import {
   Navbar,
   NavBody,
   NavItems,
   MobileNav,
-  NavbarButton,
-  MobileNavHeader,
   MobileNavMenu,
   NavbarMobile,
 } from '@/components/ui/fragments/custom-ui/header/navbar'
-import { useIsMobile } from '@/hooks/use-mobile'
+
 import { authClient } from '@/lib/auth/auth-client'
 import {
   BookOpenText,
@@ -21,7 +20,12 @@ import {
   Medal,
   Newspaper,
   Telescope,
+  UserRound,
 } from 'lucide-react'
+import AvatarMenu from '@/components/ui/fragments/custom-ui/menu/avatar-menu'
+
+import { User } from '@/db/schema'
+import { useIsMobile } from '@/hooks/use-mobile'
 
 export default function SiteHeader() {
   const { data: session } = authClient.useSession()
@@ -49,14 +53,20 @@ export default function SiteHeader() {
   ]
   const navItemsMobiles = [
     {
-      name: 'Beranda',
-      link: '/',
-      icon: Home,
-    },
-    {
       name: 'Artikel',
       link: '/artikel/',
       icon: BookOpenText,
+    },
+    {
+      name: 'Destinasi',
+      link: '/destinasi/',
+      icon: Telescope,
+    },
+
+    {
+      name: 'Peringkat',
+      link: '/destinasi/leaderboard',
+      icon: Medal,
     },
     {
       name: 'Game',
@@ -64,74 +74,43 @@ export default function SiteHeader() {
       icon: Gamepad2,
     },
     {
-      name: 'Destinasi',
-      link: '/destinasi/',
-      icon: Telescope,
-    },
-    {
-      name: 'Peringkat',
-      link: '/destinasi/leaderboard/',
-      icon: Medal,
+      name: 'Profil',
+      link:
+        (session && session.user.role === 'admin') ||
+        (session && session.user.role === 'superAdmin')
+          ? '/dashboard'
+          : session && session.user.role === 'pribumi'
+            ? '/profile/destinasi'
+            : '/login',
+      icon: UserRound,
     },
   ]
-
   const isMobile = useIsMobile()
+  const matches = useMatches()
+  const paths = matches[matches.length - 1]?.routeId
+  const isActive = paths == '/'
+
   if (isMobile) {
     return (
-      <NavbarMobile className="     ">
+      <NavbarMobile>
         <MobileNav>
           <MobileNavMenu name={session?.user.name} items={navItemsMobiles} />
         </MobileNav>
       </NavbarMobile>
     )
   }
-  return (
-    <Navbar className=" z-999">
-      {/* Desktop Navigaion */}
-      <NavBody>
-        <NavbarLogo />
-        <NavItems items={navItems} />
-        <div className="flex items-center gap-2">
-          {session ? (
-            <NavbarButton
-              variant={'default'}
-              size={'sm'}
-              className=" rounded-xl"
-              href={
-                (session && session.user.role === 'admin') ||
-                (session && session.user.role === 'superAdmin')
-                  ? '/dashboard'
-                  : session && session.user.role === 'pribumi'
-                    ? '/profile/destinasi'
-                    : '/login'
-              }
-            >
-              Dashboard
-            </NavbarButton>
-          ) : (
-            <>
-              <NavbarButton
-                size={'sm'}
-                variant={'secondary'}
-                className=" rounded-xl"
-                href="/register"
-              >
-                Daftar
-              </NavbarButton>
-              <NavbarButton
-                variant={'default'}
-                className=" rounded-xl"
-                href="/login"
-                size={'sm'}
-              >
-                Masuk
-              </NavbarButton>
-            </>
-          )}
-        </div>
-      </NavBody>
 
-      {/* Mobile Navigation */}
-    </Navbar>
-  )
+  if (isActive)
+    return (
+      <Navbar className="z-999">
+        {/* Desktop Navigation */}
+        <NavBody>
+          <NavbarLogo />
+          <NavItems items={navItems} />
+          <AvatarMenu user={session?.user as User} isHomePage />
+        </NavBody>
+      </Navbar>
+    )
+
+  return null
 }

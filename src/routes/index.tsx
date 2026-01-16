@@ -13,13 +13,15 @@ import ArtikelSection, {
 import DestinationSection, {
   DestinationSectionSkeleton,
 } from '@/components/ui/core/block/section/destinasi-section'
+import KagetoriSection from '@/components/ui/core/block/section/kategori-section'
+import About from '@/components/ui/core/block/section/tentang-section'
 
 export const Route = createFileRoute('/')({
   // Prefetch data for hero section, artikel section, and destination section on server
   loader: async () => {
     // Parallel prefetch for better performance
     await Promise.all([
-      queryClient.ensureQueryData(getLeaderboardTopQueryOptions(4)),
+      queryClient.ensureQueryData(getFeaturedDestinationsQueryOptions(8)),
       queryClient.ensureQueryData(getFeaturedArticlesQueryOptions(4)),
       queryClient.ensureQueryData(getFeaturedDestinationsQueryOptions(8)),
     ])
@@ -31,9 +33,11 @@ function App() {
   return (
     <>
       <HeroSection />
+      <About />
       <Suspense fallback={<DestinationSectionSkeleton />}>
         <DestinationSection />
       </Suspense>
+      <KagetoriSection />
       <Suspense fallback={<ArtikelSectionSkeleton />}>
         <ArtikelSection />
       </Suspense>

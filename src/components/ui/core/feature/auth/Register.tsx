@@ -15,13 +15,15 @@ export default function Register() {
       toast.success('Register berhasil!')
       // Get fresh session to determine redirect
       const session = await authClient.getSession()
-      const user = session?.data?.user as { role?: UserRoleType; hasCompletedOnboarding?: boolean } | undefined
+      const user = session?.data?.user as
+        | { role?: UserRoleType; hasCompletedOnboarding?: boolean }
+        | undefined
       const role = user?.role || 'pribumi'
-      
+
       // Role-based redirect - new users are pribumi by default
       if (role === 'pribumi') {
         // New users always go to onboarding first
-        window.location.href = '/onboarding'
+        window.location.href = '/profile'
       } else {
         window.location.href = '/dashboard'
       }

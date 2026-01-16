@@ -41,7 +41,8 @@ export const analyticsSearchSchema = z.object({
         // Handle comma-separated string from URL
         try {
           const parsed = JSON.parse(val)
-          if (Array.isArray(parsed)) return parsed.map(Number).filter((n) => !isNaN(n))
+          if (Array.isArray(parsed))
+            return parsed.map(Number).filter((n) => !isNaN(n))
           return []
         } catch {
           // Try comma-separated

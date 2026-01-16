@@ -285,7 +285,9 @@ export async function fetchCategoryDistribution(
 
   // Get top 4 and aggregate the rest as "Lainnya"
   const top4 = allDistribution.slice(0, 4)
-  const othersCount = allDistribution.slice(4).reduce((sum, item) => sum + item.count, 0)
+  const othersCount = allDistribution
+    .slice(4)
+    .reduce((sum, item) => sum + item.count, 0)
 
   const result: CategoryDistribution[] = top4.map((item) => ({
     category: item.category ?? 'unknown',
@@ -346,7 +348,9 @@ export async function fetchTypeDistribution(
 
   // Get top 4 and aggregate the rest as "Lainnya"
   const top4 = allDistribution.slice(0, 4)
-  const othersCount = allDistribution.slice(4).reduce((sum, item) => sum + item.count, 0)
+  const othersCount = allDistribution
+    .slice(4)
+    .reduce((sum, item) => sum + item.count, 0)
 
   const result: TypeDistribution[] = top4.map((item) => ({
     type: item.type ?? 'unknown',
@@ -407,7 +411,9 @@ export async function fetchProvinsiDistribution(
 
   // Get top 4 and aggregate the rest as "Lainnya"
   const top4 = allDistribution.slice(0, 4)
-  const othersCount = allDistribution.slice(4).reduce((sum, item) => sum + item.count, 0)
+  const othersCount = allDistribution
+    .slice(4)
+    .reduce((sum, item) => sum + item.count, 0)
 
   const result: ProvinsiDistribution[] = top4.map((item) => ({
     provinsi: item.provinsi ?? 'unknown',

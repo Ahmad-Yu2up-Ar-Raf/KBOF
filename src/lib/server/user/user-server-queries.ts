@@ -108,15 +108,14 @@ export interface UserAggregateResult {
 // INTERNAL DB FUNCTIONS
 // ============================================
 
-export async function fetchUserList(
-  input: UserAggregateInput,
-): Promise<{
+export async function fetchUserList(input: UserAggregateInput): Promise<{
   data: UserTableRow[]
   pageCount: number
   totalCount: number
 }> {
   const db = await getDb()
-  const { page, perPage, sort, search, role, banned, filters, joinOperator } = input
+  const { page, perPage, sort, search, role, banned, filters, joinOperator } =
+    input
   const offset = (page - 1) * perPage
 
   // Build where conditions
@@ -142,9 +141,7 @@ export async function fetchUserList(
   if (banned === 'banned') {
     conditions.push(eq(user.banned, true))
   } else if (banned === 'active') {
-    conditions.push(
-      or(eq(user.banned, false), sql`${user.banned} IS NULL`)!,
-    )
+    conditions.push(or(eq(user.banned, false), sql`${user.banned} IS NULL`)!)
   }
 
   // Advanced filters using filterColumns helper

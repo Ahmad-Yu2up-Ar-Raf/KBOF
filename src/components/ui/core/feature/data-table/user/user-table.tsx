@@ -241,7 +241,8 @@ export function UserTable({ data: userData }: UserTableProps) {
 
   const handleBanUser = React.useCallback(
     async (reason?: string) => {
-      if (!rowAction?.row?.original || (rowAction.variant as string) !== 'ban') return
+      if (!rowAction?.row?.original || (rowAction.variant as string) !== 'ban')
+        return
       banMutation.mutate({
         userId: rowAction.row.original.id,
         reason,
@@ -251,7 +252,8 @@ export function UserTable({ data: userData }: UserTableProps) {
   )
 
   const handleUnbanUser = React.useCallback(async () => {
-    if (!rowAction?.row?.original || (rowAction.variant as string) !== 'unban') return
+    if (!rowAction?.row?.original || (rowAction.variant as string) !== 'unban')
+      return
     unbanMutation.mutate({
       userId: rowAction.row.original.id,
     })

@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { PlusCircle, XCircle } from 'lucide-react'
-
+import { useIsMobile } from '@/hooks/use-mobile'
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/fragments/shadcn-ui/badge'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
@@ -72,7 +72,7 @@ export function FacetedFilter({
 }: FacetedFilterProps) {
   const [open, setOpen] = React.useState(false)
   const selectedValues = React.useMemo(() => new Set(value), [value])
-
+  const isMobile = useIsMobile()
   const onItemSelect = React.useCallback(
     (option: FilterOption, isSelected: boolean) => {
       if (multiple) {
@@ -104,7 +104,11 @@ export function FacetedFilter({
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="outline" className={cn('border-dashed', className)}>
+        <Button
+          variant="outline"
+          size={isMobile ? 'sm' : 'default'}
+          className={cn('border-dashed text-xs  sm:text-base ', className)}
+        >
           {selectedValues.size > 0 ? (
             <div
               role="button"
@@ -119,10 +123,10 @@ export function FacetedFilter({
               }}
               className="rounded-xl opacity-70 transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
             >
-              <XCircle className="size-4" />
+              <XCircle className="size-3 sm:size-4" />
             </div>
           ) : (
-            <PlusCircle className="size-4" />
+            <PlusCircle className="size-3 sm:size-4" />
           )}
           {title}
           {selectedValues.size > 0 && (

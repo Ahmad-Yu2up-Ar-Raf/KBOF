@@ -5,7 +5,7 @@ import { Suspense, useState } from 'react'
 
 import Heading from '@/components/ui/fragments/custom-ui/typography/heading'
 import { DataTableSkeleton } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-skeleton'
-import { FeatureFlagsProvider } from '@/components/ui/core/feature/data-table/feature-flag-provider'
+// import { FeatureFlagsProvider } from '@/components/ui/core/feature/data-table/feature-flag-provider'
 import { DestinationTable } from '@/components/ui/core/feature/data-table/destination/destination-table'
 import CreateDestinationSheet from '@/components/ui/core/feature/data-table/destination/create-destination-sheet'
 import { destinationSearchSchema } from '@/lib/validations/destination-validations'
@@ -126,9 +126,12 @@ function RouteComponent() {
         ) : (
           // Has data - show full DataTable with filters
           <Suspense fallback={<DataTableSkeleton />}>
-            <FeatureFlagsProvider createSheet={<CreateDestinationSheet />}>
-              <DestinationTable data={destinationData} />
-            </FeatureFlagsProvider>
+            <DestinationTable
+              data={destinationData}
+              createSheet={<CreateDestinationSheet />}
+            />
+            {/* <FeatureFlagsProvider createSheet={<CreateDestinationSheet />}>
+            </FeatureFlagsProvider> */}
           </Suspense>
         )}
       </main>

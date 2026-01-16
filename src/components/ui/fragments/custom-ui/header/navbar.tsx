@@ -104,15 +104,10 @@ export const Navbar = ({ children, className }: NavbarProps) => {
       const direction = current! - scrollYProgress.getPrevious()!
       setDelay(false)
 
-      if (scrollYProgress.get() < 0.05 && paths !== '/') {
-        // Di halaman selain "/" dan di top, hide navbar
-        setVisiblee(false)
+      if (direction < 0) {
+        setVisiblee(true)
       } else {
-        if (direction < 0) {
-          setVisiblee(true)
-        } else {
-          setVisiblee(false)
-        }
+        setVisiblee(false)
       }
     }
   })
@@ -130,7 +125,7 @@ export const Navbar = ({ children, className }: NavbarProps) => {
       }}
       transition={{
         duration: delay ? 0.6 : 0.2,
-        delay: delay ? 2 : 0,
+        delay: delay ? 1 : 0,
       }}
       className={cn(
         '         top-7.5 md:top-4.5   fixed  z-40 w-full',
@@ -165,7 +160,7 @@ export const NavbarMobile = ({ children, className }: NavbarProps) => {
         delay: 3.5,
       }}
       // Use fixed positioning to stay above footer's fixed content
-      className={cn('fixed bottom-0 left-0 right-0 w-full z-100', className)}
+      className={cn(' sticky bottom-0 left-0 right-0 w-full z-100', className)}
     >
       {children}
     </motion.nav>
@@ -193,7 +188,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
       }}
       className={cn(
         'relative z-60     transition-all duration-300 ease-out max-w-4xl   mx-auto hidden w-full container  flex-row items-center justify-between self-start rounded-2xl  px-3 py-2 lg:flex ',
-        visible && '  bg-header/80  border',
+        visible && '  bg-background/80  border',
         className,
       )}
     >
@@ -210,7 +205,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
     <motion.div
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        'absolute px-0 p-0 inset-0 hidden flex-1 flex-row items-center justify-center text-xs font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex ',
+        'absolute px-0 p-0 inset-0 pointer-events-none hidden flex-1 flex-row items-center justify-center text-xs font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex ',
         className,
       )}
     >
@@ -221,7 +216,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
             onMouseEnter={() => setHovered(idx)}
             onClick={onItemClick}
             className={cn(
-              'relative px-4 py-2 cursor-target text-accent-foreground',
+              'relative px-4 py-2 cursor-target text-accent-foreground pointer-events-auto',
               isActive && '',
             )}
             key={`link-${idx}`}

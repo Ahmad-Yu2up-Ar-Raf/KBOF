@@ -2,67 +2,93 @@
 
 import * as React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Check, X, ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { Question, Level } from '@/lib/game/types'
-import { ANIMATION_DURATION, KEYBOARD_SHORTCUTS, LEVEL_CONFIGS } from '@/lib/game/constants'
-import { Card, CardContent, CardHeader } from '@/components/ui/fragments/shadcn-ui/card'
+import {
+  ANIMATION_DURATION,
+  KEYBOARD_SHORTCUTS,
+  LEVEL_CONFIGS,
+} from '@/lib/game/constants'
+import {
+  Card,
+  CardContent,
+  CardHeader,
+} from '@/components/ui/fragments/shadcn-ui/card'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
-import { Badge } from '@/components/ui/fragments/shadcn-ui/badge'
+import {
+  RadioGroup,
+  RadioGroupItem,
+} from '@/components/ui/fragments/shadcn-ui/radio-group'
+import { Label } from '@/components/ui/fragments/shadcn-ui/label'
 import { FragmentReveal } from './image-fragment'
+import { Badge } from '../ui/fragments/shadcn-ui/badge'
 import { TimerDisplay } from './timer-display'
 
 type QuestionCardProps = {
   question: Question
   level: Level
   timeRemaining: number
+  questionNumber: number
+  totalQuestions: number
   selectedIndex: number | null
   showFeedback: boolean
   feedback: { isCorrect: boolean; message: string; funFact?: string } | null
   usedHint: boolean
   isPaused: boolean
-  onSelectAnswer: (index: number) => void
-  onSubmit: () => void
+  isLastQuestion: boolean
+  onSubmitAnswer: (index: number) => void
+  onNextQuestion: () => void
   onUseHint: () => void
-  questionNumber: number
-  totalQuestions: number
 }
 
 export function QuestionCard({
   question,
   level,
   timeRemaining,
+  questionNumber,
+  totalQuestions,
   selectedIndex,
   showFeedback,
   feedback,
   usedHint,
   isPaused,
-  onSelectAnswer,
-  onSubmit,
+  isLastQuestion,
+  onSubmitAnswer,
+  onNextQuestion,
   onUseHint,
-  questionNumber,
-  totalQuestions,
 }: QuestionCardProps) {
   const config = LEVEL_CONFIGS[level]
   const showFullImage = config.imageDisplay === 'full' || showFeedback
 
+  // Handle answer selection - directly submits the answer
+  const handleSelectAnswer = React.useCallback(
+    (index: number) => {
+      if (showFeedback || isPaused) return
+      onSubmitAnswer(index)
+    },
+    [showFeedback, isPaused, onSubmitAnswer],
+  )
+
   // Keyboard navigation
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (showFeedback || isPaused) return
+      if (isPaused) return
 
       const key = e.key.toLowerCase()
 
-      // Number keys for answer selection
-      if (key >= '1' && key <= '4') {
+      // Number keys for answer selection (auto-submit)
+      if (!showFeedback && key >= '1' && key <= '4') {
         const index = parseInt(key) - 1
         if (index < question.choices.length) {
-          onSelectAnswer(index)
+          handleSelectAnswer(index)
         }
       }
 
-      // Enter to submit
-      if (key === 'enter' && selectedIndex !== null) {
-        onSubmit()
+      // Enter/Space to go to next question when showing feedback
+      if (showFeedback && (key === 'enter' || key === ' ')) {
+        e.preventDefault()
+        onNextQuestion()
       }
 
       // H for hint
@@ -73,152 +99,244 @@ export function QuestionCard({
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [showFeedback, isPaused, selectedIndex, question.choices.length, config.hintsEnabled, usedHint, onSelectAnswer, onSubmit, onUseHint])
+  }, [
+    showFeedback,
+    isPaused,
+    question.choices.length,
+    config.hintsEnabled,
+    usedHint,
+    handleSelectAnswer,
+    onNextQuestion,
+    onUseHint,
+  ])
 
   return (
-    <Card className="overflow-hidden">
+    <Card className=" max-w-md   content-start  m-auto gap-4  p-0 bg-background border-0  shadow-none">
       {/* Header with progress and timer */}
-      <CardHeader className="border-b bg-muted/30 pb-4">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <Badge variant="outline" className="text-sm">
-              Soal {questionNumber}/{totalQuestions}
-            </Badge>
-            <Badge variant="secondary">{question.province}</Badge>
-          </div>
-          <TimerDisplay timeRemaining={timeRemaining} totalTime={config.defaultTimeLimitSec} isPaused={isPaused} className="w-40" />
-        </div>
-      </CardHeader>
-
-      <CardContent className="space-y-6 p-6">
-        {/* Image section */}
+      <CardHeader className=" content-start h-full bg-background min-h-[20svh] overflow-hidden md:h-[15em]  gap-0 pb-0  p-0">
+        <TimerDisplay
+          timeRemaining={timeRemaining}
+          totalTime={config.defaultTimeLimitSec}
+          isPaused={isPaused}
+          className="w-full"
+        />
         <FragmentReveal
           src={question.fullImageUrl}
           alt={question.destinationName}
           fragments={question.fragmentConfigs}
           isRevealed={showFullImage}
-          className="mx-auto max-w-2xl"
+          className="mx-auto  "
         />
+      </CardHeader>
+
+      <CardContent
+        className={cn(
+          '  bg-background  border-0  shadow-none p-0',
+          showFeedback && feedback ? ' space-y-4 ' : ' space-y-8   ',
+        )}
+      >
+        {/* Image section */}
 
         {/* Question prompt */}
         <motion.div
+          className=" space-y-2  border-b-2 pb-5  max-w-md  "
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: ANIMATION_DURATION.normal, delay: 0.2 }}
         >
-          <h2 className="text-center text-xl font-semibold md:text-2xl">{question.prompt}</h2>
-        </motion.div>
-
-        {/* Hint section */}
-        {config.hintsEnabled && question.hint && (
-          <div className="mx-auto max-w-lg text-center">
-            {usedHint ? (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                className="rounded-lg bg-amber-50 p-3 text-sm text-amber-700 dark:bg-amber-900/20 dark:text-amber-300"
-              >
-                💡 {question.hint}
-              </motion.div>
-            ) : (
-              <Button variant="ghost" size="sm" onClick={onUseHint} disabled={showFeedback} className="text-muted-foreground">
-                💡 Lihat petunjuk {config.hintPenalty > 0 && `(-${config.hintPenalty} poin)`}
-              </Button>
-            )}
+          <div className="flex items-center   gap-3">
+            <Badge variant="outline" className="text-xs">
+              Soal {questionNumber}/{totalQuestions}
+            </Badge>
+            <Badge variant="secondary" className="text-xs">
+              {question.province}
+            </Badge>
           </div>
-        )}
-
-        {/* Answer choices */}
-        <div className="mx-auto grid max-w-2xl gap-3 sm:grid-cols-2">
-          {question.choices.map((choice, index) => (
-            <AnswerButton
-              key={`${question.id}-${index}`}
-              choice={choice}
-              index={index}
-              isSelected={selectedIndex === index}
-              isCorrect={index === question.correctIndex}
-              showFeedback={showFeedback}
-              disabled={showFeedback || isPaused}
-              onClick={() => onSelectAnswer(index)}
+          <h2 className="    md:leading-8 text-lg leading-6     font-semibold  md:text-2xl">
+            {question.prompt}
+          </h2>
+        </motion.div>
+        <AnimatePresence>
+          {showFeedback && feedback && (
+            <FeedbackDisplay
+              isCorrect={feedback.isCorrect}
+              message={feedback.message}
+              funFact={feedback.funFact}
             />
-          ))}
-        </div>
+          )}
+        </AnimatePresence>
 
-        {/* Submit button */}
-        <div className="flex justify-center">
-          <Button
-            size="lg"
-            onClick={onSubmit}
-            disabled={selectedIndex === null || showFeedback || isPaused}
-            className="min-w-40"
-          >
-            {showFeedback ? 'Menunggu...' : 'Jawab'}
-          </Button>
+        {/* Answer choices with RadioGroup */}
+        <div className="  space-y-3 w-full">
+          <AnswerRadioGroup
+            questionId={question.id}
+            choices={question.choices}
+            selectedIndex={selectedIndex}
+            correctIndex={question.correctIndex}
+            showFeedback={showFeedback}
+            disabled={showFeedback || isPaused}
+            onSelect={handleSelectAnswer}
+          />
+
+          {/* Next Question button - only shows after feedback */}
+          <AnimatePresence>
+            {showFeedback && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: ANIMATION_DURATION.normal, delay: 0.3 }}
+                className="flex   justify-center pt-2"
+              >
+                <Button
+                  size="lg"
+                  onClick={onNextQuestion}
+                  className="w-full     md:px-8 gap-2"
+                >
+                  {isLastQuestion ? 'Lihat Hasil' : 'Soal Berikutnya'}
+                  <ArrowRight className="size-4" />
+                </Button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Feedback overlay */}
-        <AnimatePresence>
-          {showFeedback && feedback && (
-            <FeedbackDisplay isCorrect={feedback.isCorrect} message={feedback.message} funFact={feedback.funFact} />
-          )}
-        </AnimatePresence>
       </CardContent>
     </Card>
   )
 }
 
-type AnswerButtonProps = {
-  choice: string
-  index: number
-  isSelected: boolean
-  isCorrect: boolean
+// =============================================================================
+// ANSWER RADIO GROUP
+// =============================================================================
+
+type AnswerRadioGroupProps = {
+  questionId: string
+  choices: string[]
+  selectedIndex: number | null
+  correctIndex: number
   showFeedback: boolean
   disabled: boolean
-  onClick: () => void
+  onSelect: (index: number) => void
 }
 
-function AnswerButton({ choice, index, isSelected, isCorrect, showFeedback, disabled, onClick }: AnswerButtonProps) {
-  const getVariant = () => {
-    if (showFeedback) {
-      if (isCorrect) return 'correct'
-      if (isSelected && !isCorrect) return 'incorrect'
+function AnswerRadioGroup({
+  questionId,
+  choices,
+  selectedIndex,
+  correctIndex,
+  showFeedback,
+  disabled,
+  onSelect,
+}: AnswerRadioGroupProps) {
+  const handleValueChange = (value: string) => {
+    if (disabled) return
+    const index = parseInt(value, 10)
+    if (!isNaN(index)) {
+      onSelect(index)
     }
-    if (isSelected) return 'selected'
-    return 'default'
-  }
-
-  const variant = getVariant()
-
-  const variantStyles = {
-    default: 'border-border hover:border-primary/50 hover:bg-muted/50',
-    selected: 'border-primary bg-primary/10',
-    correct: 'border-emerald-500 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300',
-    incorrect: 'border-red-500 bg-red-500/10 text-red-700 dark:text-red-300',
   }
 
   return (
-    <motion.button
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: ANIMATION_DURATION.normal,
-        delay: index * ANIMATION_DURATION.stagger + 0.3,
-      }}
-      onClick={onClick}
+    <RadioGroup
+      key={questionId}
+      value={selectedIndex !== null ? String(selectedIndex) : undefined}
+      onValueChange={handleValueChange}
       disabled={disabled}
-      className={cn(
-        'flex items-center gap-3 rounded-lg border-2 p-4 text-left transition-all',
-        variantStyles[variant],
-        disabled && !showFeedback && 'cursor-not-allowed opacity-50'
-      )}
+      className="mx-auto grid w-full md:gap-1.5 gap-3 sm:grid-cols-2"
     >
-      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted text-sm font-bold">{index + 1}</span>
-      <span className="font-medium">{choice}</span>
-      {showFeedback && isCorrect && <span className="ml-auto">✓</span>}
-      {showFeedback && isSelected && !isCorrect && <span className="ml-auto">✗</span>}
-    </motion.button>
+      {choices.map((choice, index) => {
+        const isSelected = selectedIndex === index
+        const isCorrect = index === correctIndex
+
+        // Determine visual state
+        const getState = () => {
+          if (showFeedback) {
+            if (isCorrect) return 'correct'
+            if (isSelected && !isCorrect) return 'incorrect'
+          }
+          if (isSelected) return 'selected'
+          return 'default'
+        }
+
+        const state = getState()
+
+        return (
+          <motion.div
+            key={`${questionId}-${index}`}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: ANIMATION_DURATION.normal,
+              delay: index * ANIMATION_DURATION.stagger + 0.3,
+            }}
+          >
+            <Label
+              htmlFor={`answer-${questionId}-${index}`}
+              className={cn(
+                'flex cursor-pointer items-center gap-4 rounded-2xl border-2 p-4 md:py-2.5 md:px-4 transition-all duration-200',
+                // Default state
+                state === 'default' &&
+                  'border-border bg-background hover:border-primary/50 hover:bg-muted/50',
+                // Selected state
+                state === 'selected' &&
+                  'border-primary bg-primary/10 ring-2 ring-primary/20',
+                // Correct answer feedback
+                state === 'correct' &&
+                  'border-emerald-500 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300',
+                // Incorrect answer feedback
+                state === 'incorrect' &&
+                  'border-red-500 bg-red-500/10 text-red-700 dark:text-red-300',
+                // Disabled state
+                disabled && !showFeedback && 'cursor-not-allowed opacity-50',
+              )}
+            >
+              <RadioGroupItem
+                id={`answer-${questionId}-${index}`}
+                value={String(index)}
+                disabled={disabled}
+                className={cn(
+                  'shrink-0 transition-all',
+                  state === 'selected' && 'border-primary text-primary',
+                  state === 'correct' && 'border-emerald-500 text-emerald-500',
+                  state === 'incorrect' && 'border-red-500 text-red-500',
+                )}
+              />
+              <span className="flex-1 font-medium leading-snug md:line-clamp-1">
+                {choice}
+              </span>
+
+              {/* Feedback icons */}
+              {showFeedback && isCorrect && (
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: 'spring', stiffness: 500, damping: 25 }}
+                >
+                  <Check className="size-5 text-emerald-500" />
+                </motion.div>
+              )}
+              {showFeedback && isSelected && !isCorrect && (
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: 'spring', stiffness: 500, damping: 25 }}
+                >
+                  <X className="size-5 text-red-500" />
+                </motion.div>
+              )}
+            </Label>
+          </motion.div>
+        )
+      })}
+    </RadioGroup>
   )
 }
+
+// =============================================================================
+// FEEDBACK DISPLAY
+// =============================================================================
 
 type FeedbackDisplayProps = {
   isCorrect: boolean
@@ -226,39 +344,58 @@ type FeedbackDisplayProps = {
   funFact?: string
 }
 
-function FeedbackDisplay({ isCorrect, message, funFact }: FeedbackDisplayProps) {
+function FeedbackDisplay({
+  isCorrect,
+  message: _message,
+  funFact,
+}: FeedbackDisplayProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: ANIMATION_DURATION.normal }}
-      className={cn(
-        'rounded-lg p-4 text-center',
-        isCorrect ? 'bg-emerald-50 dark:bg-emerald-900/20' : 'bg-red-50 dark:bg-red-900/20'
-      )}
-    >
+    <>
       <motion.div
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ type: 'spring', stiffness: 500, damping: 25 }}
-        className="mb-2 text-4xl"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: ANIMATION_DURATION.normal }}
+        className={cn(
+          'font-medium rounded-2xl max-w-md   border py-2 px-3 ',
+          isCorrect
+            ? 'text-emerald-700 dark:text-emerald-300'
+            : 'text-red-700 dark:text-red-300',
+
+          isCorrect
+            ? 'bg-emerald-50 dark:bg-emerald-900/20'
+            : 'bg-red-50 dark:bg-red-900/20',
+        )}
       >
-        {isCorrect ? '🎉' : '😔'}
+        <div className=" flex  gap-2  items-start   ">
+          <motion.p
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: 'spring', stiffness: 500, damping: 25 }}
+            className="  text-sm   "
+          >
+            {isCorrect ? '🎉' : '😔'}
+          </motion.p>{' '}
+          <p className="leading-3">
+            <span className="text-xs  md:text-sm  ">{_message}</span>
+          </p>
+        </div>
+        {funFact && (
+          <div className=" flex  gap-2  items-center   ">
+            <motion.p
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: 'spring', stiffness: 500, damping: 25 }}
+              className="  text-sm   "
+            >
+              💡
+            </motion.p>{' '}
+            <p className="leading-2">
+              <span className="text-xs  md:text-sm">FuntFact : {funFact}</span>
+            </p>
+          </div>
+        )}
       </motion.div>
-      <p className={cn('font-semibold', isCorrect ? 'text-emerald-700 dark:text-emerald-300' : 'text-red-700 dark:text-red-300')}>
-        {message}
-      </p>
-      {funFact && (
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="mt-2 text-sm text-muted-foreground"
-        >
-          💡 {funFact}
-        </motion.p>
-      )}
-    </motion.div>
+    </>
   )
 }

@@ -5,7 +5,13 @@ import { cn } from '@/lib/utils'
 import type { Level, QuestionResult } from '@/lib/game/types'
 import { LEVEL_CONFIGS, getResultMessage } from '@/lib/game/constants'
 import { calculateGameStats } from '@/lib/game/utils'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/fragments/shadcn-ui/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/fragments/shadcn-ui/card'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
 import { Badge } from '@/components/ui/fragments/shadcn-ui/badge'
 import { Progress } from '@/components/ui/fragments/shadcn-ui/progress'
@@ -19,7 +25,14 @@ type StatsPanelProps = {
   onBackToMenu: () => void
 }
 
-export function StatsPanel({ results, level, isNewHighScore, onPlayAgain, onChangeLevel, onBackToMenu }: StatsPanelProps) {
+export function StatsPanel({
+  results,
+  level,
+  isNewHighScore,
+  onPlayAgain,
+  onChangeLevel,
+  onBackToMenu,
+}: StatsPanelProps) {
   const stats = calculateGameStats(results, level)
   const config = LEVEL_CONFIGS[level]
   const { message, emoji } = getResultMessage(stats.accuracy)
@@ -47,7 +60,9 @@ export function StatsPanel({ results, level, isNewHighScore, onPlayAgain, onChan
               transition={{ delay: 0.3 }}
               className="mt-2"
             >
-              <Badge className="bg-gradient-to-r from-amber-400 to-orange-500 text-white">🏆 Skor Tertinggi Baru!</Badge>
+              <Badge className="bg-gradient-to-r from-amber-400 to-orange-500 text-white">
+                🏆 Skor Tertinggi Baru!
+              </Badge>
             </motion.div>
           )}
         </CardHeader>
@@ -60,20 +75,45 @@ export function StatsPanel({ results, level, isNewHighScore, onPlayAgain, onChan
             transition={{ delay: 0.2 }}
             className="mb-8 text-center"
           >
-            <div className="text-5xl font-bold tabular-nums text-primary md:text-6xl">{stats.totalScore}</div>
-            <div className="text-muted-foreground">dari {stats.maxPossibleScore} poin maksimal</div>
+            <div className="text-5xl font-bold tabular-nums text-primary md:text-6xl">
+              {stats.totalScore}
+            </div>
+            <div className="text-muted-foreground">
+              dari {stats.maxPossibleScore} poin maksimal
+            </div>
           </motion.div>
 
           {/* Stats grid */}
           <div className="grid gap-4 sm:grid-cols-2">
-            <StatItem label="Jawaban Benar" value={`${stats.correctCount}/${stats.totalQuestions}`} delay={0.3} />
-            <StatItem label="Akurasi" value={`${stats.accuracy}%`} delay={0.4} />
-            <StatItem label="Rata-rata Waktu" value={`${stats.averageTimePerQuestion}s/soal`} delay={0.5} />
-            <StatItem label="Total Poin" value={`${stats.totalScore}`} delay={0.6} />
+            <StatItem
+              label="Jawaban Benar"
+              value={`${stats.correctCount}/${stats.totalQuestions}`}
+              delay={0.3}
+            />
+            <StatItem
+              label="Akurasi"
+              value={`${stats.accuracy}%`}
+              delay={0.4}
+            />
+            <StatItem
+              label="Rata-rata Waktu"
+              value={`${stats.averageTimePerQuestion}s/soal`}
+              delay={0.5}
+            />
+            <StatItem
+              label="Total Poin"
+              value={`${stats.totalScore}`}
+              delay={0.6}
+            />
           </div>
 
           {/* Accuracy progress bar */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }} className="mt-6">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7 }}
+            className="mt-6"
+          >
             <div className="mb-2 flex justify-between text-sm">
               <span className="text-muted-foreground">Akurasi</span>
               <span className="font-medium">{stats.accuracy}%</span>
@@ -143,8 +183,10 @@ function QuestionBreakdown({ results, level }: QuestionBreakdownProps) {
       <CardContent>
         <div className="space-y-2">
           {results.map((result, index) => {
-            const isCorrect = result.selectedIndex === result.correctIndex && !result.wasTimeout
-            const hasTimeBonus = result.timeLeftSec > config.defaultTimeLimitSec * 0.5
+            const isCorrect =
+              result.selectedIndex === result.correctIndex && !result.wasTimeout
+            const hasTimeBonus =
+              result.timeLeftSec > config.defaultTimeLimitSec * 0.5
 
             return (
               <motion.div
@@ -154,22 +196,37 @@ function QuestionBreakdown({ results, level }: QuestionBreakdownProps) {
                 transition={{ delay: index * 0.1 }}
                 className={cn(
                   'flex items-center justify-between rounded-lg p-3',
-                  isCorrect ? 'bg-emerald-50 dark:bg-emerald-900/10' : 'bg-red-50 dark:bg-red-900/10'
+                  isCorrect
+                    ? 'bg-emerald-50 dark:bg-emerald-900/10'
+                    : 'bg-red-50 dark:bg-red-900/10',
                 )}
               >
                 <div className="flex items-center gap-3">
-                  <span className={cn('text-xl', isCorrect ? 'text-emerald-500' : 'text-red-500')}>
+                  <span
+                    className={cn(
+                      'text-xl',
+                      isCorrect ? 'text-emerald-500' : 'text-red-500',
+                    )}
+                  >
                     {isCorrect ? '✓' : result.wasTimeout ? '⏱️' : '✗'}
                   </span>
                   <span className="font-medium">Soal {index + 1}</span>
-                  {result.usedHint && <Badge variant="outline">💡 Pakai petunjuk</Badge>}
-                  {hasTimeBonus && isCorrect && <Badge variant="secondary">⚡ Bonus waktu</Badge>}
+                  {result.usedHint && (
+                    <Badge variant="outline">💡 Pakai petunjuk</Badge>
+                  )}
+                  {hasTimeBonus && isCorrect && (
+                    <Badge variant="secondary">⚡ Bonus waktu</Badge>
+                  )}
                 </div>
                 <div className="text-right">
-                  <span className="font-bold tabular-nums">{result.earnedPoints}</span>
+                  <span className="font-bold tabular-nums">
+                    {result.earnedPoints}
+                  </span>
                   <span className="text-muted-foreground"> poin</span>
                   {!result.wasTimeout && (
-                    <div className="text-xs text-muted-foreground">Sisa {result.timeLeftSec}s</div>
+                    <div className="text-xs text-muted-foreground">
+                      Sisa {result.timeLeftSec}s
+                    </div>
                   )}
                 </div>
               </motion.div>

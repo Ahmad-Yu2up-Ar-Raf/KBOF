@@ -47,8 +47,11 @@ function RelatedDestinationCard({
 }) {
   return (
     <Card
+      style={{
+        backgroundImage: `url(${destination?.coverImage})`,
+      }}
       className={cn(
-        'group  cursor-target  font-serif! cursor-target   rounded-xl overflow-hidden bg-background  p-0   shadow-none border-0     relative min-h-[10em]  w-full cursor-pointer transition-transform   ',
+        'group  cursor-target bg-cover bg-center bg-no-repeat  font-serif! cursor-target   rounded-xl overflow-hidden bg-background  p-0   shadow-none border-0     relative min-h-[10em]  w-full cursor-pointer transition-transform   ',
       )}
     >
       <Link
@@ -58,20 +61,18 @@ function RelatedDestinationCard({
         <div className="pointer-events-none z-30 absolute inset-x-0 bottom-0 h-5/6 bg-gradient-to-t from-accent-foreground/90 dark:from-accent-foreground" />
 
         <CardContent className=" p-0  z-20 w-full h-full absolute shadow-none">
-          <MediaItem
+          {/* <MediaItem
             webViewLink={destination?.coverImage!}
             className="    group-hover:scale-110  transition-all duration-300 ease-out      object-center  object-cover w-full h-full"
-          />
+          /> */}
         </CardContent>
 
         <CardHeader className="w-full px-3  text-muted bottom-1.5 absolute z-40    line-clamp-2  ">
-          <CardTitle className="text-lg  lg:text-xl ">
-            {destination.name}
-          </CardTitle>
           <CardDescription className=" flex items-center gap-1 text-muted">
             <MapPin className=" size-3" />
             <p>{getProvinsiLabel(destination.provinsi)}</p>
           </CardDescription>
+          <CardTitle className="text-lg    ">{destination.name}</CardTitle>
         </CardHeader>
       </Link>
     </Card>

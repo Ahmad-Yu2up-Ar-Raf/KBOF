@@ -6,10 +6,12 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from '@/components/ui/fragments/shadcn-ui/carousel'
 import { cn } from '@/lib/utils'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { Badge } from '@/components/ui/fragments/shadcn-ui/badge'
+
 import { Link } from '@tanstack/react-router'
 import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
 import { Skeleton } from '@/components/ui/fragments/shadcn-ui/skeleton'
@@ -19,6 +21,7 @@ import { getFeaturedDestinationsQueryOptions } from '@/lib/query-options'
 
 import DestinasiCard from '@/components/ui/fragments/custom-ui/card/destinasi-card'
 import Autoplay from 'embla-carousel-autoplay'
+import HeadingSection from '@/components/ui/fragments/custom-ui/typography/heading-section'
 
 type DestinationSectionProps = {
   title?: string
@@ -41,34 +44,13 @@ function DestinationSection({
   )
 
   return (
-    <section className="container px-5   space-y-8 overflow-x-hidden lg:overflow-x-visible">
-      <header className=" flex-row  px-3  w-full  flex justify-between items-end">
-        <div className="">
-          <h1 className="pr-3 text-2xl md:text-3xl lg:text-4xl lg:items-center flex-col gap-1 lg:gap-1 flex lg:flex-row font-bold">
-            {title}
-            {props.label && (
-              <Badge className="ml-3 bg-primary text-primary-foreground font-bold rounded-xl dark:text-white scale-110 -rotate-2 lg:-rotate-6 text-lg md:text-xl">
-                {props.label}
-              </Badge>
-            )}
-          </h1>
-          <p className="text-muted-foreground text-base">
-            Lihat berbagai destinasi menarik
-          </p>
-        </div>
-        {href && (
-          <Link
-            to="/destinasi"
-            className={cn(
-              buttonVariants({ variant: 'outline', size: 'sm' }),
-              'hidden md:flex items-center gap-2  ',
-            )}
-          >
-            Lihat Semua
-            <ArrowRight className="size-4" />
-          </Link>
-        )}
-      </header>
+    <section className="container px-0 sm:px-5   space-y-8 overflow-x-hidden lg:overflow-x-visible">
+      <HeadingSection
+        className=" px-5 md:px-0 "
+        href={href}
+        title={title}
+        description="Jelajahi berbagai destinasi menarik yang wajib Anda kunjungi."
+      />
 
       <Carousel
         className=""
@@ -78,6 +60,7 @@ function DestinationSection({
           }),
         ]}
         opts={{
+          // loop: true,
           align: 'start',
           breakpoints: {
             '(max-width: 768px)': {
@@ -103,14 +86,14 @@ function DestinationSection({
             </CarouselItem>
           ))}
         </CarouselContent>
-        {/* <CarouselPrevious />
-        <CarouselNext /> */}
+        <CarouselPrevious className="hidden md:flex -left-4 lg:-left-6" />
+        <CarouselNext className="hidden md:flex -right-4 lg:-right-6" />
       </Carousel>
       <footer className="md:hidden flex justify-center">
         <Link
           to="/artikel"
           className={cn(
-            buttonVariants({ variant: 'outline', size: 'lg' }),
+            buttonVariants({ variant: 'link', size: 'lg' }),
             'flex items-center gap-2   ',
           )}
         >

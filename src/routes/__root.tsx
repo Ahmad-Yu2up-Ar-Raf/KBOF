@@ -33,19 +33,14 @@ export const Route = createRootRoute({
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-  //  const routerState = useRouterState()
-
-  //  useEffect(() => {
-  //    if (routerState.isLoading) {
-  //      NProgress.start()
-  //    } else {
-  //      NProgress.done()
-  //    }
-  //  }, [routerState.isLoading])
   return (
     <html lang="en" suppressHydrationWarning>
       <head suppressHydrationWarning>
         <HeadContent />
+        <script
+          src="https://cdn.userway.org/widget.js"
+          data-account="t85cN7BOL2"
+        />
       </head>
       <body>
         <Providers>{children}</Providers>

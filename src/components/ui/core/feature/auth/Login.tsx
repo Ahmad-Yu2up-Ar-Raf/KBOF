@@ -15,16 +15,14 @@ export default function Login() {
       toast.success('Login berhasil!')
       // Get fresh session to determine redirect
       const session = await authClient.getSession()
-      const user = session?.data?.user as { role?: UserRoleType; hasCompletedOnboarding?: boolean } | undefined
+      const user = session?.data?.user as
+        | { role?: UserRoleType; hasCompletedOnboarding?: boolean }
+        | undefined
       const role = user?.role || 'pribumi'
-      
+
       // Role-based redirect
       if (role === 'pribumi') {
-        if (!user?.hasCompletedOnboarding) {
-          window.location.href = '/onboarding'
-        } else {
-          window.location.href = '/profile'
-        }
+        window.location.href = '/profile'
       } else {
         window.location.href = '/dashboard'
       }

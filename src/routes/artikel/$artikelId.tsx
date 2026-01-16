@@ -7,10 +7,16 @@ import { getArticleDetailQueryOptions } from '@/lib/query-options'
 import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
 import { Skeleton } from '@/components/ui/fragments/shadcn-ui/skeleton'
 import { cn } from '@/lib/utils'
+import { queryClient } from '@/components/provider/Provider'
 
 export const Route = createFileRoute('/artikel/$artikelId')({
   component: RouteComponent,
   // Loading state saat navigasi
+  loader: async ({ params }) => {
+    await queryClient.ensureQueryData(
+      getArticleDetailQueryOptions(params.artikelId),
+    )
+  },
   pendingComponent: ArtikelDetailSkeleton,
 })
 

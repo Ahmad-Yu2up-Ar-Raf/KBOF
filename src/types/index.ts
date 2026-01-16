@@ -21,14 +21,6 @@ export interface NavItem {
   isActive?: boolean
 }
 
-export interface ChartDataType {
-  date: string
-
-  orders?: number
-  revenue?: number
-  [key: string]: number
-}
-
 export interface TopDestination {
   nama_jurusan: string
   siswas_count: number

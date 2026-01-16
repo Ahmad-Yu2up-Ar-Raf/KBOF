@@ -1,9 +1,19 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Outlet } from '@tanstack/react-router'
+import { profileMiddleware } from '@/lib/middleware'
+import ProfileLayout from '@/components/ui/core/layout/profile/profile-layout'
 
 export const Route = createFileRoute('/profile')({
   component: RouteComponent,
+  server: {
+    middleware: [profileMiddleware],
+  },
 })
 
 function RouteComponent() {
-  return <div>Hello "/profile"!</div>
+  return (
+    
+    <ProfileLayout>
+      <Outlet />
+    </ProfileLayout>
+  )
 }

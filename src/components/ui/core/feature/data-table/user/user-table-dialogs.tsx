@@ -32,7 +32,15 @@ import { Spinner } from '@/components/ui/fragments/shadcn-ui/spinner'
 import { formatDate } from '@/lib/format'
 import { useInitials } from '@/hooks/use-initials'
 import type { UserTableRow } from './user-table-columns'
-import { Shield, ShieldCheck, User, Mail, Calendar, CheckCircle, XCircle } from 'lucide-react'
+import {
+  Shield,
+  ShieldCheck,
+  User,
+  Mail,
+  Calendar,
+  CheckCircle,
+  XCircle,
+} from 'lucide-react'
 import type { UserRoleType } from '@/db/schema'
 
 // =============================================================================
@@ -158,7 +166,11 @@ export function BanUserDialog({
           />
         </div>
         <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)} disabled={loading}>
+          <Button
+            variant="outline"
+            onClick={() => onOpenChange(false)}
+            disabled={loading}
+          >
             Batal
           </Button>
           <Button
@@ -255,7 +267,12 @@ interface UpdateRoleDialogProps {
 
 const roleConfig: Record<
   UserRoleType,
-  { label: string; icon: React.ReactNode; description: string; variant: 'default' | 'secondary' | 'outline' }
+  {
+    label: string
+    icon: React.ReactNode
+    description: string
+    variant: 'default' | 'secondary' | 'outline'
+  }
 > = {
   pribumi: {
     label: 'Pribumi',
@@ -349,7 +366,11 @@ interface ViewUserDialogProps {
   user: UserTableRow | null
 }
 
-export function ViewUserDialog({ open, onOpenChange, user }: ViewUserDialogProps) {
+export function ViewUserDialog({
+  open,
+  onOpenChange,
+  user,
+}: ViewUserDialogProps) {
   const getInitials = useInitials()
 
   if (!user) return null
@@ -402,10 +423,10 @@ export function ViewUserDialog({ open, onOpenChange, user }: ViewUserDialogProps
 
           {/* Status Badges */}
           <div className="flex flex-wrap gap-2">
-            {user.banned && (
-              <Badge variant="destructive">Banned</Badge>
-            )}
-            <Badge variant={user.hasCompletedOnboarding ? 'default' : 'secondary'}>
+            {user.banned && <Badge variant="destructive">Banned</Badge>}
+            <Badge
+              variant={user.hasCompletedOnboarding ? 'default' : 'secondary'}
+            >
               Onboarding: {user.hasCompletedOnboarding ? 'Selesai' : 'Belum'}
             </Badge>
           </div>

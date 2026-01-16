@@ -33,7 +33,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
     '/(auth)/login',
     '/(auth)/register',
     '/dashboard',
-
+    '/profile',
     '/$', // 404 page
   ]
 
@@ -99,8 +99,8 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
   if (isInitializing) {
     return (
       <div className="flex min-h-lvh w-full content-center justify-center items-center">
-        <Spinner className=' size-6' />
-       </div>
+        <Spinner className=" size-6" />
+      </div>
     )
   }
 

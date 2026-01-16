@@ -56,7 +56,7 @@ export default function DestinasiDetailBlock({
           )}
         >
           <div className="absolute inset-0 bg-linear-to-b from-background/10 via-background/50 to-background     " />
-          <nav className="z-50 absolute  top-3  w-full    ">
+          {/* <nav className="z-50 absolute  top-3  w-full    ">
             <div className=" relative  w-full     px-5 container    flex items-center justify-between ">
               <Link
                 to={'/destinasi'}
@@ -79,7 +79,7 @@ export default function DestinasiDetailBlock({
                 <span className=" sr-only ">Kembali</span>
               </Link>
             </div>
-          </nav>
+          </nav> */}
         </section>
         <div className=" relative  space-y-6 z-20 -mt-20  container content-center   px-6  ">
           <section className="  h-full     w-full md:grid grid-cols-1 lg:grid-cols-2   md:gap-10 gap-4   lg:gap-15    sm:pt-0     space-y-6">
@@ -171,7 +171,7 @@ export default function DestinasiDetailBlock({
           'relative min-h-67  bg-fixed bg-no-repeat bg-center  bg-cover  flex items-center justify-center overflow-hidden hero-parallax  ',
         )}
       >
-        <nav className="z-50 absolute px-0  container  top-3  w-full    ">
+        {/* <nav className="z-50 absolute px-0  container  top-3  w-full    ">
           <div className=" relative  w-full   max-w-5xl   px-5 container    flex items-center justify-between ">
             <Link
               to={'/destinasi'}
@@ -194,7 +194,7 @@ export default function DestinasiDetailBlock({
               <span className=" sr-only ">Kembali</span>
             </Link>
           </div>
-        </nav>
+        </nav> */}
         <div className="absolute inset-0 bg-linear-to-b from-background/10 via-background/10 to-background     " />
         <div className="absolute inset-0 bg-linear-to-r from-background/10 via-background/0 to-background     " />
         <div className="absolute inset-0 bg-linear-to-l from-background/10 via-background/0 to-background     " />

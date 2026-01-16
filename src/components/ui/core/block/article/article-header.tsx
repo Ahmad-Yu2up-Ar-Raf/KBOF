@@ -1,7 +1,8 @@
 'use client'
-
-import { useEffect, useState } from 'react'
+import { ANIMATION_DURATION } from '@/lib/game/constants'
 import { ArrowLeft, PlusCircle, Search } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { parseAsString, useQueryState } from 'nuqs'
 
@@ -15,6 +16,7 @@ import VerticalCutReveal from '@/components/ui/fragments/custom-ui/animate-ui/ve
 import { useDebouncedCallback } from '@/hooks/use-debounced-callback'
 import { authClient } from '@/lib/auth/auth-client'
 import CreateArticleSheet from '../../feature/data-table/article/create-article-sheet'
+
 
 const DEBOUNCE_DELAY = 400 // ms
 
@@ -48,20 +50,10 @@ const ArticleHeader = () => {
     void setSearchParam(null)
   }
   const { data: session } = authClient.useSession()
+
   return (
-    <div className=" space-y-2   pt-1 sm:pt-0   container ">
-      <nav className="z-50 top-0 bg-background/95 backdrop-blur flex items-center justify-between">
-        <Link
-          to="/"
-          className={cn(
-            buttonVariants({ variant: 'link' }),
-            'flex has-[>svg]:px-0 w-fit py-2 md:flex text-base items-center gap-2 px-0 group transition-colors',
-          )}
-        >
-          <ArrowLeft className="size-5 group-hover:-translate-x-1 group-hover:transform transition-all ease-out duration-300" />
-          <span>Kembali</span>
-        </Link>
-      </nav>
+    <div className="  pt-0       container ">
+     
       <div className="  flex flex-col md:gap-4  md:justify-between gap-6">
         <header className="w-full md:items-center flex-col md:flex-row flex justify-between m-auto">
           <h1 className="xl:text-[6rem] font-medium  tracking-tight lg:leading-30 lg:text-8xl text-7xl lg:-space-y-10 -space-y-6">

@@ -139,8 +139,8 @@ export const getTopDestinations = createServerFn({ method: 'GET' })
         desc(
           sql`(
           SELECT COUNT(*) FROM vote WHERE vote.destination_id = destination.id
-        )`
-        )
+        )`,
+        ),
       )
       .limit(10)
 
@@ -233,10 +233,10 @@ export const getUserStats = createServerFn({ method: 'GET' })
 
     const destinationIds = userDestinations.map((d) => d.id)
     const publishedDestinations = userDestinations.filter(
-      (d) => d.status === 'published'
+      (d) => d.status === 'published',
     ).length
     const draftDestinations = userDestinations.filter(
-      (d) => d.status === 'draft'
+      (d) => d.status === 'draft',
     ).length
 
     // Get user's articles
@@ -246,10 +246,10 @@ export const getUserStats = createServerFn({ method: 'GET' })
       .where(eq(schema.article.authorId, userId))
 
     const publishedArticles = userArticles.filter(
-      (a) => a.status === 'published'
+      (a) => a.status === 'published',
     ).length
     const draftArticles = userArticles.filter(
-      (a) => a.status === 'draft'
+      (a) => a.status === 'draft',
     ).length
 
     // Get votes, reviews, comments on user's destinations
@@ -322,8 +322,8 @@ export const getUserTopDestinations = createServerFn({ method: 'GET' })
         desc(
           sql`(
           SELECT COUNT(*) FROM vote WHERE vote.destination_id = destination.id
-        )`
-        )
+        )`,
+        ),
       )
       .limit(5)
 

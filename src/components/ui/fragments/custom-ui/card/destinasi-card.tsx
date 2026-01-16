@@ -178,7 +178,8 @@ function DestinasiCard({
               'hover:opacity-90 transition-transform w-full hover:scale-105 text-xs ',
             )}
           >
-            Lihat Detail <ArrowRight className="ml-2 w-3 h-3 md:w-4 md:h-4" />
+            Jelajahi Sekarang{' '}
+            <ArrowRight className="ml-2 w-3 h-3 md:w-4 md:h-4" />
           </Link>
         </CardFooter>
       </CardContent>

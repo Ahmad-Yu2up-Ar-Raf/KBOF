@@ -8,6 +8,8 @@ import {
   Newspaper,
   MapPin,
   Users,
+  Telescope,
+  UsersRound,
 } from 'lucide-react'
 
 import { NavMain } from './nav-main'
@@ -45,7 +47,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
     {
       title: 'Destination',
       url: '/dashboard/destination',
-      icon: MapPin,
+      icon: Telescope,
     },
     {
       title: 'Article',
@@ -58,7 +60,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
           {
             title: 'Users',
             url: '/dashboard/user-menagement',
-            icon: Users,
+            icon: UsersRound,
           },
         ]
       : []),

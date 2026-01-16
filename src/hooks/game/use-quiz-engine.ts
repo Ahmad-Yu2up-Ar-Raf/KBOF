@@ -1,7 +1,12 @@
 // FILE: src/hooks/game/use-quiz-engine.ts — Core game logic with useReducer
 
 import { useReducer, useCallback, useEffect, useRef } from 'react'
-import type { QuizState, QuizAction, QuestionResult, Level } from '@/lib/game/types'
+import type {
+  QuizState,
+  QuizAction,
+  QuestionResult,
+  Level,
+} from '@/lib/game/types'
 import {
   calculatePoints,
   shuffleChoices,
@@ -11,7 +16,7 @@ import {
   isNewHighScore,
   calculateGameStats,
 } from '@/lib/game/utils'
-import { LEVEL_CONFIGS, FEEDBACK_DELAY_MS } from '@/lib/game/constants'
+import { LEVEL_CONFIGS } from '@/lib/game/constants'
 import { QUIZ_QUESTIONS } from '@/lib/game/questions'
 
 const initialState: QuizState = {
@@ -45,7 +50,7 @@ function quizReducer(state: QuizState, action: QuizAction): QuizState {
       }
 
     case 'SUBMIT_ANSWER': {
-      if (state.showFeedback || !state.isAnswering || state.selectedIndex === null) return state
+      if (state.showFeedback || !state.isAnswering) return state
       return {
         ...state,
         isAnswering: false,
@@ -124,7 +129,10 @@ function quizReducer(state: QuizState, action: QuizAction): QuizState {
 }
 
 type UseQuizEngineProps = {
-  onGameEnd?: (stats: ReturnType<typeof calculateGameStats>, isNewHigh: boolean) => void
+  onGameEnd?: (
+    stats: ReturnType<typeof calculateGameStats>,
+    isNewHigh: boolean,
+  ) => void
 }
 
 export function useQuizEngine({ onGameEnd }: UseQuizEngineProps = {}) {
@@ -136,8 +144,14 @@ export function useQuizEngine({ onGameEnd }: UseQuizEngineProps = {}) {
 
   const config = LEVEL_CONFIGS[levelRef.current]
   const currentQuestion = state.questions[state.currentIndex]
-  const isGameOver = state.currentIndex >= state.questions.length && state.questions.length > 0 && !state.isAnswering
-  const progress = state.questions.length > 0 ? ((state.currentIndex + 1) / state.questions.length) * 100 : 0
+  const isGameOver =
+    state.currentIndex >= state.questions.length &&
+    state.questions.length > 0 &&
+    !state.isAnswering
+  const progress =
+    state.questions.length > 0
+      ? ((state.currentIndex + 1) / state.questions.length) * 100
+      : 0
 
   // Clear timer on unmount
   useEffect(() => {
@@ -178,11 +192,18 @@ export function useQuizEngine({ onGameEnd }: UseQuizEngineProps = {}) {
     gameIdRef.current = generateGameId()
 
     const levelConfig = LEVEL_CONFIGS[level]
-    const questions = pickQuestions(QUIZ_QUESTIONS, level, levelConfig.questionsPerGame)
+    const questions = pickQuestions(
+      QUIZ_QUESTIONS,
+      level,
+      levelConfig.questionsPerGame,
+    )
 
     // Shuffle choices for each question
     const shuffledQuestions = questions.map((q) => {
-      const { choices, correctIndex } = shuffleChoices(q.choices, q.correctIndex)
+      const { choices, correctIndex } = shuffleChoices(
+        q.choices,
+        q.correctIndex,
+      )
       return { ...q, choices, correctIndex }
     })
 
@@ -193,52 +214,53 @@ export function useQuizEngine({ onGameEnd }: UseQuizEngineProps = {}) {
     })
   }, [])
 
-  const selectAnswer = useCallback((index: number) => {
-    dispatch({ type: 'SELECT_ANSWER', index })
-  }, [])
+  // Submit answer - accepts index directly to avoid stale closure issues
+  const submitAnswer = useCallback(
+    (answerIndex: number) => {
+      if (!currentQuestion || state.showFeedback) return
 
-  const submitAnswer = useCallback(() => {
-    if (state.selectedIndex === null || !currentQuestion) return
+      // First select the answer (for visual feedback)
+      dispatch({ type: 'SELECT_ANSWER', index: answerIndex })
+      dispatch({ type: 'SUBMIT_ANSWER' })
 
-    dispatch({ type: 'SUBMIT_ANSWER' })
+      const isCorrect = answerIndex === currentQuestion.correctIndex
+      const levelConfig = LEVEL_CONFIGS[levelRef.current]
+      const points = calculatePoints(
+        levelConfig.basePointsPerQuestion,
+        state.timeRemaining,
+        levelConfig.defaultTimeLimitSec,
+        isCorrect,
+        state.usedHint,
+        levelConfig.hintPenalty,
+      )
 
-    const isCorrect = state.selectedIndex === currentQuestion.correctIndex
-    const levelConfig = LEVEL_CONFIGS[levelRef.current]
-    const points = calculatePoints(
-      levelConfig.basePointsPerQuestion,
-      state.timeRemaining,
-      levelConfig.defaultTimeLimitSec,
-      isCorrect,
-      state.usedHint,
-      levelConfig.hintPenalty
-    )
+      const result: QuestionResult = {
+        questionId: currentQuestion.id,
+        selectedIndex: answerIndex,
+        correctIndex: currentQuestion.correctIndex,
+        earnedPoints: points,
+        timeLeftSec: state.timeRemaining,
+        wasTimeout: false,
+        usedHint: state.usedHint,
+      }
 
-    const result: QuestionResult = {
-      questionId: currentQuestion.id,
-      selectedIndex: state.selectedIndex,
-      correctIndex: currentQuestion.correctIndex,
-      earnedPoints: points,
-      timeLeftSec: state.timeRemaining,
-      wasTimeout: false,
-      usedHint: state.usedHint,
-    }
+      resultsRef.current = [...resultsRef.current, result]
 
-    resultsRef.current = [...resultsRef.current, result]
+      const message = isCorrect
+        ? 'Benar! 🎉'
+        : `Salah! Jawaban yang benar: ${currentQuestion.choices[currentQuestion.correctIndex]}`
 
-    const message = isCorrect ? 'Benar! 🎉' : `Salah! Jawaban yang benar: ${currentQuestion.choices[currentQuestion.correctIndex]}`
+      dispatch({
+        type: 'SHOW_FEEDBACK',
+        isCorrect,
+        message,
+        funFact: isCorrect ? currentQuestion.funFact : undefined,
+      })
 
-    dispatch({
-      type: 'SHOW_FEEDBACK',
-      isCorrect,
-      message,
-      funFact: isCorrect ? currentQuestion.funFact : undefined,
-    })
-
-    // Auto advance after feedback
-    setTimeout(() => {
-      advanceToNext()
-    }, FEEDBACK_DELAY_MS)
-  }, [state.selectedIndex, state.timeRemaining, state.usedHint, currentQuestion])
+      // No auto-advance - user will click "Next" button
+    },
+    [state.timeRemaining, state.usedHint, state.showFeedback, currentQuestion],
+  )
 
   const handleTimeout = useCallback(() => {
     if (!currentQuestion) return
@@ -263,9 +285,7 @@ export function useQuizEngine({ onGameEnd }: UseQuizEngineProps = {}) {
       message: `Waktu habis! Jawaban yang benar: ${currentQuestion.choices[currentQuestion.correctIndex]}`,
     })
 
-    setTimeout(() => {
-      advanceToNext()
-    }, FEEDBACK_DELAY_MS)
+    // No auto-advance - user will click "Next" button
   }, [currentQuestion, state.usedHint])
 
   const advanceToNext = useCallback(() => {
@@ -331,8 +351,8 @@ export function useQuizEngine({ onGameEnd }: UseQuizEngineProps = {}) {
     progress,
     level: levelRef.current,
     startGame,
-    selectAnswer,
     submitAnswer,
+    nextQuestion: advanceToNext,
     useHint,
     pauseGame,
     resumeGame,

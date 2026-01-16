@@ -20,27 +20,25 @@ function AppLayout({ children }: AppSidebarProps) {
   // Handle loading state - jangan render sidebar sampai session loaded
   if (isPending || !session?.user) {
     return (
-      <div className="flex h-screen w-full items-center justify-center">
+      <div className="flex h-lvh w-full items-center justify-center">
         <Spinner className="  h-8 w-8  border-t-transparent rounded-xl" />
       </div>
     )
   }
 
   return (
-
-      <SidebarProvider>
-        <AppSidebar user={session.user as User} />
-        <SidebarInset className="flex w-full flex-col flex-1 overflow-hidden">
-          <DashboardLayoutHeader />
-          <section className="flex-1 w-full bg-background overflow-y-auto">
-            <main className="space-y-4 w-full py-6 md:px-5 px-3.5">
-              {children}
-            </main>
-          </section>
-        </SidebarInset>
-        <ScrollToTop />
-      </SidebarProvider>
- 
+    <SidebarProvider>
+      <AppSidebar user={session.user as User} />
+      <SidebarInset className="flex w-full flex-col flex-1 overflow-hidden">
+        <DashboardLayoutHeader />
+        <section className="flex-1 w-full bg-background overflow-y-auto">
+          <main className="space-y-4 w-full py-6 md:px-5 px-3.5">
+            {children}
+          </main>
+        </section>
+      </SidebarInset>
+      <ScrollToTop />
+    </SidebarProvider>
   )
 }
 

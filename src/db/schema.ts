@@ -18,7 +18,7 @@ import {
   pgEnum,
   integer,
 } from 'drizzle-orm/pg-core'
- 
+
 // =============================================================================
 // ENUMS
 // =============================================================================
@@ -274,7 +274,7 @@ export const destination = pgTable(
     coverImage: text('cover_image').notNull(),
     images: text('images').default('[]'), // JSON array of image URLs
     // Note: totalVote, totalReview, averageRating are calculated from relations (vote, review tables)
- 
+
     // Status
     status: contentStatus('status').default('published').notNull(),
     // Timestamps

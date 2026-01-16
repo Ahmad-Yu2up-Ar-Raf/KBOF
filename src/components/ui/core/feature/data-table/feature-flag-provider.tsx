@@ -79,8 +79,8 @@ export function FeatureFlagsProvider({
 
   return (
     <FeatureFlagsContext.Provider value={contextValue}>
-      <div className="w-full flex justify-between overflow-x-auto p-1">
-        <ToggleGroup
+      <div className="w-full flex justify-end overflow-x-auto p-1">
+        {/* <ToggleGroup
           type="single"
           variant="outline"
           size="sm"
@@ -113,7 +113,7 @@ export function FeatureFlagsProvider({
               </TooltipContent>
             </Tooltip>
           ))}
-        </ToggleGroup>
+        </ToggleGroup> */}
         {createSheet}
       </div>
       {children}

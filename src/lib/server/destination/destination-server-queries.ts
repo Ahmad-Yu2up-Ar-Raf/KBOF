@@ -59,8 +59,6 @@ const reviewStatsSubquery = (db: Awaited<ReturnType<typeof getDb>>) =>
     .groupBy(review.destinationId)
     .as('review_stats')
 
- 
-
 // ============================================
 // TYPE DEFINITIONS
 // ============================================

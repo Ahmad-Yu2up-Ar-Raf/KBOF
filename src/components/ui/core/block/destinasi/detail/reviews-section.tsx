@@ -20,6 +20,7 @@ import { Skeleton } from '@/components/ui/fragments/shadcn-ui/skeleton'
 import { cn } from '@/lib/utils'
 import { formatDate } from '@/lib/format'
 import type { DestinasiDetailDestination } from '@/lib/query-options'
+import { AllReviewsSheet } from './all-review-sheet'
 
 // ============================================
 // TYPES
@@ -44,6 +45,7 @@ interface ReviewCardProps {
 function ReviewCard({ review, isLast }: ReviewCardProps) {
   return (
     <Card
+      gradient={false}
       className={cn(
         'rounded-xl border-b bg-background p-0 shadow-none border-0 space-y-3',
       )}
@@ -147,7 +149,12 @@ function ReviewsSkeleton() {
 // MAIN REVIEWS SECTION COMPONENT
 // ============================================
 
-function ReviewsSection({ reviews, totalReview }: ReviewsSectionProps) {
+function ReviewsSection({
+  reviews,
+  totalReview,
+  destinationId,
+  destinationSlug,
+}: ReviewsSectionProps) {
   const displayReviews = reviews?.slice(0, 4) ?? []
   const hasMoreReviews = totalReview > 4
   if (displayReviews.length > 0)
@@ -172,16 +179,12 @@ function ReviewsSection({ reviews, totalReview }: ReviewsSectionProps) {
           </div>
 
           {hasMoreReviews && (
-            <footer className="border-b">
-              <Link
-                to="/"
-                className={cn(
-                  buttonVariants({ variant: 'ghost', size: 'sm' }),
-                  'px-0 py-0 w-full rounded-none text-xs',
-                )}
-              >
-                Lihat semua {totalReview} review
-              </Link>
+            <footer className="border-b mt-4">
+              <AllReviewsSheet
+                destinationId={destinationId}
+                destinationName={destinationSlug}
+                totalReviews={totalReview}
+              />
             </footer>
           )}
         </main>

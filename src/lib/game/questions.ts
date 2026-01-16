@@ -83,9 +83,16 @@ export const QUIZ_QUESTIONS: Question[] = [
     destinationName: 'Gunung Bromo',
     province: 'Jawa Timur',
     category: 'wisata-alam',
-    prompt: 'Gunung berapi aktif dengan lautan pasir yang terkenal ini adalah...',
-    fullImageUrl: 'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?w=800&q=80',
-    choices: ['Gunung Bromo', 'Gunung Merapi', 'Gunung Semeru', 'Gunung Rinjani'],
+    prompt:
+      'Gunung berapi aktif dengan lautan pasir yang terkenal ini adalah...',
+    fullImageUrl:
+      'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?w=800&q=80',
+    choices: [
+      'Gunung Bromo',
+      'Gunung Merapi',
+      'Gunung Semeru',
+      'Gunung Rinjani',
+    ],
     correctIndex: 0,
     hint: 'Terkenal dengan pemandangan sunrise dari Penanjakan',
     funFact: 'Nama Bromo berasal dari nama dewa Brahma!',
@@ -108,7 +115,8 @@ export const QUIZ_QUESTIONS: Question[] = [
     choices: ['Danau Toba', 'Danau Maninjau', 'Danau Singkarak', 'Danau Ranau'],
     correctIndex: 0,
     hint: 'Terbentuk dari letusan supervulkan 74.000 tahun lalu',
-    funFact: 'Danau Toba adalah danau vulkanik terbesar di dunia dengan kedalaman 505 meter!',
+    funFact:
+      'Danau Toba adalah danau vulkanik terbesar di dunia dengan kedalaman 505 meter!',
     description: 'Danau kaldera terbesar di Asia Tenggara',
     tags: ['danau', 'sumatera', 'vulkanik', 'batak'],
     fragmentConfigs: [
@@ -129,7 +137,8 @@ export const QUIZ_QUESTIONS: Question[] = [
     choices: ['Candi Prambanan', 'Candi Borobudur', 'Candi Gedong Songo', 'Candi Dieng'],
     correctIndex: 0,
     hint: 'Dibangun pada abad ke-9 oleh Rakai Pikatan',
-    funFact: 'Prambanan memiliki 240 candi dan candi utamanya setinggi 47 meter!',
+    funFact:
+      'Prambanan memiliki 240 candi dan candi utamanya setinggi 47 meter!',
     description: 'Kompleks candi Hindu terbesar di Indonesia',
     tags: ['candi', 'hindu', 'UNESCO', 'jawa-tengah'],
     fragmentConfigs: [
@@ -150,7 +159,8 @@ export const QUIZ_QUESTIONS: Question[] = [
     choices: ['Labuan Bajo', 'Maumere', 'Ende', 'Kupang'],
     correctIndex: 0,
     hint: 'Terletak di ujung barat Pulau Flores',
-    funFact: 'Labuan Bajo dulunya adalah desa nelayan kecil sebelum menjadi destinasi wisata premium!',
+    funFact:
+      'Labuan Bajo dulunya adalah desa nelayan kecil sebelum menjadi destinasi wisata premium!',
     description: 'Gerbang menuju Taman Nasional Komodo',
     tags: ['labuan-bajo', 'flores', 'ntt', 'pelabuhan'],
     fragmentConfigs: [
@@ -171,7 +181,8 @@ export const QUIZ_QUESTIONS: Question[] = [
     choices: ['Tana Toraja', 'Makassar', 'Bone', 'Gowa'],
     correctIndex: 0,
     hint: 'Terkenal dengan upacara Rambu Solo',
-    funFact: 'Di Toraja, jenazah tidak langsung dikubur dan tetap dianggap sebagai orang sakit!',
+    funFact:
+      'Di Toraja, jenazah tidak langsung dikubur dan tetap dianggap sebagai orang sakit!',
     description: 'Tanah dengan budaya pemakaman yang unik',
     tags: ['toraja', 'sulawesi', 'budaya', 'tongkonan'],
     fragmentConfigs: [
@@ -219,7 +230,9 @@ export const QUIZ_QUESTIONS: Question[] = [
     funFact: 'Dieng berarti "Tempat Tinggal Para Dewa" dalam bahasa Kawi!',
     description: 'Dataran tinggi vulkanik dengan candi tertua di Jawa',
     tags: ['dieng', 'jawa-tengah', 'candi', 'dataran-tinggi'],
-    fragmentConfigs: [{ id: 'frag_1', xPerc: 30, yPerc: 25, wPerc: 22, hPerc: 24 }],
+    fragmentConfigs: [
+      { id: 'frag_1', xPerc: 30, yPerc: 25, wPerc: 22, hPerc: 24 },
+    ],
   },
   {
     id: 'hard_2',
@@ -232,10 +245,13 @@ export const QUIZ_QUESTIONS: Question[] = [
     fullImageUrl: 'https://images.unsplash.com/photo-1602144586078-7d95c8d7808c?w=800&q=80',
     choices: ['Wakatobi', 'Togean', 'Banda', 'Kei'],
     correctIndex: 0,
-    funFact: 'Wakatobi singkatan dari Wangi-wangi, Kaledupa, Tomia, dan Binongko!',
+    funFact:
+      'Wakatobi singkatan dari Wangi-wangi, Kaledupa, Tomia, dan Binongko!',
     description: 'Taman nasional laut dengan terumbu karang pristine',
     tags: ['wakatobi', 'sulawesi', 'diving', 'karang'],
-    fragmentConfigs: [{ id: 'frag_1', xPerc: 40, yPerc: 35, wPerc: 20, hPerc: 22 }],
+    fragmentConfigs: [
+      { id: 'frag_1', xPerc: 40, yPerc: 35, wPerc: 20, hPerc: 22 },
+    ],
   },
   {
     id: 'hard_3',
@@ -248,10 +264,13 @@ export const QUIZ_QUESTIONS: Question[] = [
     fullImageUrl: 'https://images.unsplash.com/photo-1551597233-14838addbcc5?w=800&q=80',
     choices: ['Pulau Belitung', 'Pulau Bangka', 'Pulau Bintan', 'Pulau Natuna'],
     correctIndex: 0,
-    funFact: 'Belitung terkenal setelah film Laskar Pelangi yang syuting di sana!',
+    funFact:
+      'Belitung terkenal setelah film Laskar Pelangi yang syuting di sana!',
     description: 'Pulau dengan batu granit ikonik dan pantai berpasir putih',
     tags: ['belitung', 'bangka', 'pantai', 'granit'],
-    fragmentConfigs: [{ id: 'frag_1', xPerc: 25, yPerc: 40, wPerc: 18, hPerc: 20 }],
+    fragmentConfigs: [
+      { id: 'frag_1', xPerc: 25, yPerc: 40, wPerc: 18, hPerc: 20 },
+    ],
   },
   {
     id: 'hard_4',
@@ -267,7 +286,9 @@ export const QUIZ_QUESTIONS: Question[] = [
     funFact: 'Wae Rebo menerima UNESCO Award of Excellence tahun 2012!',
     description: 'Desa tradisional dengan arsitektur rumah kerucut unik',
     tags: ['wae-rebo', 'flores', 'ntt', 'UNESCO'],
-    fragmentConfigs: [{ id: 'frag_1', xPerc: 35, yPerc: 30, wPerc: 20, hPerc: 22 }],
+    fragmentConfigs: [
+      { id: 'frag_1', xPerc: 35, yPerc: 30, wPerc: 20, hPerc: 22 },
+    ],
   },
   {
     id: 'hard_5',
@@ -280,10 +301,13 @@ export const QUIZ_QUESTIONS: Question[] = [
     fullImageUrl: 'https://images.unsplash.com/photo-1758653000057-34adac6ac623?w=800&q=80',
     choices: ['Kepulauan Derawan', 'Kepulauan Seribu', 'Kepulauan Karimunjawa', 'Kepulauan Anambas'],
     correctIndex: 0,
-    funFact: 'Danau Kakaban di Derawan memiliki ubur-ubur yang tidak menyengat karena evolusi jutaan tahun!',
+    funFact:
+      'Danau Kakaban di Derawan memiliki ubur-ubur yang tidak menyengat karena evolusi jutaan tahun!',
     description: 'Surga bahari dengan ubur-ubur jinak dan penyu hijau',
     tags: ['derawan', 'kalimantan', 'diving', 'penyu'],
-    fragmentConfigs: [{ id: 'frag_1', xPerc: 45, yPerc: 38, wPerc: 18, hPerc: 20 }],
+    fragmentConfigs: [
+      { id: 'frag_1', xPerc: 45, yPerc: 38, wPerc: 18, hPerc: 20 },
+    ],
   },
 ]
 

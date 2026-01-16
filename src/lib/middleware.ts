@@ -35,9 +35,9 @@ export const guestMiddleware = createMiddleware().server(
       // Redirect based on role
       if (role === 'pribumi') {
         // Check if onboarding is completed
-        if (!user?.hasCompletedOnboarding) {
-          throw redirect({ to: '/onboarding' })
-        }
+        // if (!user?.hasCompletedOnboarding) {
+        //   throw redirect({ to: '/onboarding' })
+        // }
         throw redirect({ to: '/profile' })
       } else {
         throw redirect({ to: '/dashboard', search: { createdAt: [] } })
@@ -169,10 +169,10 @@ export const profileMiddleware = createMiddleware().server(
       throw redirect({ to: '/dashboard', search: { createdAt: [] } })
     }
 
-    // Check if onboarding is completed
-    if (!user?.hasCompletedOnboarding) {
-      throw redirect({ to: '/onboarding' })
-    }
+    // // Check if onboarding is completed
+    // if (!user?.hasCompletedOnboarding) {
+    //   throw redirect({ to: '/onboarding' })
+    // }
 
     return next({ context: { user: session.user } })
   },

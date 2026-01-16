@@ -125,7 +125,7 @@ export const Navbar = ({ children, className }: NavbarProps) => {
       }}
       transition={{
         duration: delay ? 0.6 : 0.2,
-        delay: delay ? 2 : 0,
+        delay: delay ? 1 : 0,
       }}
       className={cn(
         '         top-7.5 md:top-4.5   fixed  z-40 w-full',
@@ -188,7 +188,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
       }}
       className={cn(
         'relative z-60     transition-all duration-300 ease-out max-w-4xl   mx-auto hidden w-full container  flex-row items-center justify-between self-start rounded-2xl  px-3 py-2 lg:flex ',
-        visible && '  bg-header/80  border',
+        visible && '  bg-background/80  border',
         className,
       )}
     >

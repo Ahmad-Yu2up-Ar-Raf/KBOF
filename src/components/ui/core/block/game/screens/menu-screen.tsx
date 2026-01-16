@@ -16,7 +16,7 @@ import {
   CardTitle,
 } from '@/components/ui/fragments/shadcn-ui/card'
 import { Gamepad2, Info, Play } from 'lucide-react'
-
+import { HowToPlaySheet } from '../how-to-play-sheet'
 // =============================================================================
 // TYPES
 // =============================================================================
@@ -32,7 +32,6 @@ export type MenuScreenProps = {
 
 export function MenuScreen({ onPlay }: MenuScreenProps) {
   return (
-    
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -114,7 +113,7 @@ function HeroCard({ onPlay }: HeroCardProps) {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className=" text-4xl sm:text-5xl  leading-9 md:text-6xl  text-center w-full justify-center items-center flex-col flex primary-foreground space-pre sm:leading-12  capitalize md:leading-16  font-bold tracking-tighter"
+            className=" text-4xl sm:text-5xl  leading-9   text-center w-full justify-center items-center flex-col flex primary-foreground space-pre sm:leading-12  capitalize md:leading-14  font-bold tracking-tighter"
           >
             Seberapa baik kamu mengenal Indonesia?
           </motion.h2>
@@ -142,16 +141,7 @@ function HeroCard({ onPlay }: HeroCardProps) {
             Mulai Game
             <Play className=" size-4.5 fill-primary-foreground   text-primary    sm:size-6" />
           </Button>
-          <Button
-            onClick={onPlay}
-            size={'lg'}
-            className={
-              '  md:has-[>svg]:px-15 w-full md:w-fit    font-semibold   has-[>svg]:px-8 rounded-full   md:text-xl  md:gap-6 md:py-7    py-6  bg-foreground '
-            }
-          >
-            Cara Main
-            <Info className=" size-4.5 sm:size-6 fill-primary-foreground   text-primary" />
-          </Button>
+          <HowToPlaySheet />
         </div>
       </main>
     </section>

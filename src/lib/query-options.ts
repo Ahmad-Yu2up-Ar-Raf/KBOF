@@ -12,7 +12,14 @@ import {
   getDestinationAggregateAdminServerFn,
   type DestinationAggregateInput,
 } from './server/destination/destination-server-queries'
-
+// ... existing imports ...
+import {
+  getDestinationReviewsServerFn,
+  getDestinationReviewsPreviewServerFn,
+  type ReviewFilters,
+  type ReviewsResult,
+  type ReviewWithUser,
+} from './server/review/review-server-queries'
 import {
   getDestinasiDestinationsServerFn,
   getDestinationBySlugServerFn,
@@ -444,6 +451,12 @@ export const reviewKeys = {
     [...reviewKeys.all, 'user', destinationId] as const,
   list: (destinationId: number) =>
     [...reviewKeys.all, 'list', destinationId] as const,
+  listByFilters: (filters: ReviewFilters) =>
+    [...reviewKeys.all, 'listByFilters', filters] as const,
+  preview: (destinationId: number) =>
+    [...reviewKeys.all, 'preview', destinationId] as const,
+  byDestination: (destinationId: number) =>
+    [...reviewKeys.all, 'byDestination', destinationId] as const,
 } as const
 
 // ============================================
@@ -656,3 +669,67 @@ export const refetchAllUserQueries = async (
     type: 'active',
   })
 }
+
+// ... existing code ...
+
+// =============================================================================
+// REVIEW QUERY KEYS
+// =============================================================================
+
+// =============================================================================
+// REVIEW QUERY OPTIONS
+// =============================================================================
+
+/**
+ * Query options for paginated reviews list
+ * Used in AllReviewsSheet for fetching all reviews
+ */
+export const getReviewsQueryOptions = (filters: ReviewFilters) =>
+  queryOptions({
+    queryKey: reviewKeys.listByFilters(filters),
+    queryFn: async (): Promise<ReviewsResult> => {
+      const result = await getDestinationReviewsServerFn({
+        data: { filters },
+      })
+      return result
+    },
+    staleTime: 30 * 1000, // 30 seconds
+    gcTime: 5 * 60 * 1000, // 5 minutes
+  })
+
+/**
+ * Query options for review preview (first 4 reviews)
+ * Used in destination detail page
+ */
+export const getReviewsPreviewQueryOptions = (destinationId: number) =>
+  queryOptions({
+    queryKey: reviewKeys.preview(destinationId),
+    queryFn: async (): Promise<ReviewWithUser[]> => {
+      const result = await getDestinationReviewsPreviewServerFn({
+        data: { destinationId },
+      })
+      return result
+    },
+    staleTime: 60 * 1000, // 1 minute
+    gcTime: 10 * 60 * 1000, // 10 minutes
+  })
+
+// =============================================================================
+// REVIEW INVALIDATION HELPERS
+// =============================================================================
+
+/**
+ * Invalidate all reviews for a destination
+ * Call after posting/editing/deleting a review
+ */
+export const invalidateDestinationReviews = async (
+  queryClient: import('@tanstack/react-query').QueryClient,
+  destinationId: number,
+) => {
+  await queryClient.invalidateQueries({
+    queryKey: reviewKeys.byDestination(destinationId),
+  })
+}
+
+// Export types
+export type { ReviewFilters, ReviewsResult, ReviewWithUser }

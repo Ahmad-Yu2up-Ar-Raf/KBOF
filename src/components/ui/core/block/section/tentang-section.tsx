@@ -57,10 +57,10 @@ function About() {
   const [hoveredImage, setHoveredImage] = useState<number | null>(null)
 
   return (
-    <section className="container py-12 md:py-16 lg:py-20">
+    <section className="container px-5 py-12 md:py-16 lg:py-20">
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-8 lg:gap-10">
         {/* Teks About Us - Kiri */}
-        <div className="flex flex-col w-full lg:w-[45%] gap-y-4">
+        <header className="flex flex-col w-full lg:w-[45%] gap-y-4">
           {/* Judul */}
           <div className="flex flex-col gap-y-1">
             <p className="text-xs md:text-sm text-muted-foreground tracking-[0.3em] uppercase">
@@ -76,7 +76,7 @@ function About() {
             Platform edukasi yang mendokumentasikan budaya, bahasa, dan cerita
             dari berbagai daerah di Nusantara.
           </p>
-        </div>
+        </header>
 
         {/* Image Container - Kanan (Flex based, controlled size) */}
         <div className="flex items-end justify-center w-full lg:w-[50%] lg:hover:gap-6 transition-all duration-300">

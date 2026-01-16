@@ -40,7 +40,7 @@ export function LevelSelectScreen({
       <GameHeader
         title="Pilih Level"
         className=' md:mb-10'
-        subtitle="Ketuk tombol bermain  untuk memulai permainan"
+        subtitle="Ketuk salah satu kartu level untuk memulai permainan"
         leftAction={onBack}
       />
 

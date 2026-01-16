@@ -70,9 +70,6 @@ export function BlurFade({
   // Kalau inView = false, langsung animate
   const shouldAnimate = show && (!inView || inViewResult)
 
-  // CRITICAL FIX: Render element selalu, tapi control animationnya
-  if (isMobile && !isPreload) return <div className={className}>{children}</div>
-
   return (
     <motion.div
       ref={ref}

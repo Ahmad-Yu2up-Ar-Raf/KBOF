@@ -16,7 +16,7 @@ export function GameShell({ children, className }: GameShellProps) {
   return (
     <div
       className={cn(
-        'container md:content-center pt-0 md:pb-0 pb-8 md:pt-0 relative mi-h-lvh overflow-y-auto overflow-x-hidden flex flex-col px-5',
+        'container   pt-0 md:pb-0 pb-8 md:pt-0 relative mi-h-lvh overflow-y-auto overflow-x-hidden flex flex-col px-5',
         className,
       )}
     >
@@ -51,12 +51,12 @@ export function GameHeader({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: ANIMATION_DURATION.normal }}
       className={cn(
-        'z-40 top-0 mx-auto bg-background items-center justify-center border-b sticky flex text-center w-full px-0 py-4   md:border-0  ',
+        'z-40 top-0 mx-auto bg-background items-center justify-center border-b   flex text-center w-full px-10 pb-6  h-full  relative md:border-0  ',
         className,
       )}
     >
       {/* Left Action - Absolute positioned */}
-      <nav className="z-50 absolute left-0 top-1/2 -translate-y-1/2 bg-background/95 backdrop-blur">
+      {/* <nav className="z-50 absolute left-0 top-10 -translate-y-1/2 bg-background/95 backdrop-blur">
         {isLeftActionFunction ? (
           <Button
             onClick={leftAction}
@@ -70,11 +70,11 @@ export function GameHeader({
         ) : (
           leftAction
         )}
-      </nav>
+      </nav> */}
 
       {/* Center - Title and Subtitle */}
-      <div className="flex flex-col items-center justify-center">
-        <div className="flex items-center text-xl md:text-2xl justify-center gap-2 md:gap-3">
+      <div className="flex pt-10 gap-2 flex-col max-w-xs m-auto items-center justify-center">
+        <div className="flex items-center text-2xl   justify-center gap-2 md:gap-3">
           <motion.span
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -96,7 +96,7 @@ export function GameHeader({
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className=" text-sm lg:text-base text-muted-foreground"
+            className=" text-sm  lg:text-base text-muted-foreground"
           >
             {subtitle}
           </motion.p>
@@ -123,7 +123,7 @@ export function GameContent({ children, className }: GameContentProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: ANIMATION_DURATION.normal, delay: 0.1 }}
       className={cn(
-        'space-y-6 flex-1 w-full relative content-center pt-6 md:pt-10',
+        'space-y-6 flex-1 w-full relative content-center    ',
         className,
       )}
     >

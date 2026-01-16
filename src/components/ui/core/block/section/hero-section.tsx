@@ -44,14 +44,6 @@ const fallbackImages = [
 ]
 
 export default function HeroSection() {
-  // Fetch top destinations for floating images
-  // const { data: topDestinations } = useQuery(getLeaderboardTopQueryOptions(4))
-
-  // Merge leaderboard images with fallback images
-  // Use top destinations' cover images if available, otherwise use fallback
-
-  // parameter animasi masuk di BlurFade (seconds)
-
   const isMobile = useIsMobile()
   const lottieOptions = {
     loop: true,
@@ -68,112 +60,102 @@ export default function HeroSection() {
   const { data: session } = authClient.useSession()
 
   return (
-    <section className="w-full   h-full">
+    <BlurFade
+      duration={0.5}
+      delay={delay}
+      direction="up"
+      className="w-full   h-full"
+    >
       <main className="w-full m-auto mb-0.5   overflow-hidden md:mb-25 lg:mb-40  lg:pt-20 min-h-lvh md:overflow-visible flex flex-col items-center justify-center relative">
         <Floating sensitivity={-0.5} className="h-full">
           <FloatingElement depth={1} className="top-[0%] left-[3%]">
-            <BlurFade
-              isPreload
-              delay={delay}
+            <div
               key={fallbackImages[0].url}
               className="w-35 h-36 relative overflow-hidden sm:w-48 sm:h-36 md:w-56 md:h-44 lg:w-55 lg:h-67 object-cover hover:scale-105 duration-200 cursor-target transition-transform -rotate-12 shadow-2xl rounded-xl"
             >
               <MediaItem webViewLink={fallbackImages[0].url} />
-            </BlurFade>
+            </div>
           </FloatingElement>
 
           <FloatingElement
             depth={4}
             className="top-[90%] left-[6%] md:top-[80%] md:left-[8%]"
           >
-            <BlurFade
-              isPreload
-              delay={delay * 2}
+            <div
               key={fallbackImages[1].url}
               className="w-40 h-40 relative overflow-hidden sm:w-48 sm:h-48 md:w-60 md:h-60 lg:w-55 lg:h-67 object-cover -rotate-[4deg] hover:scale-105 duration-200 cursor-target transition-transform shadow-2xl rounded-xl"
             >
               <MediaItem webViewLink={fallbackImages[1].url} />
-            </BlurFade>
+            </div>
           </FloatingElement>
 
           <FloatingElement
             depth={2}
             className="top-[0%] left-[87%] md:top-[2%] md:left-[89%]"
           >
-            <BlurFade
-              isPreload
-              delay={delay * 3}
+            <div
               key={fallbackImages[2].url}
               className="w-40 rotate-12 h-36 overflow-hidden sm:w-48 sm:h-44 md:w-60 md:h-52 lg:w-55 lg:h-67 object-cover hover:scale-105 duration-200 cursor-target transition-transform shadow-2xl  rounded-xl"
             >
               <MediaItem webViewLink={fallbackImages[2].url} />
-            </BlurFade>
+            </div>
           </FloatingElement>
 
           <FloatingElement
             depth={1}
             className="top-[78%] left-[83%] md:top-[68%] md:left-[85%]"
           >
-            <BlurFade
-              isPreload
+            <div
               key={fallbackImages[3].url}
-              delay={delay * 4}
               className="w-44 overflow-hidden rotate-[4deg] h-44 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-55 lg:h-67 o object-cover hover:scale-105 duration-200 cursor-target transition-transform shadow-2xl  rounded-xl"
             >
               <MediaItem webViewLink={fallbackImages[3].url} />
-            </BlurFade>
+            </div>
           </FloatingElement>
         </Floating>
 
-        <div className="flex md:px-2  px-5   flex-col justify-center items-center w-full max-w-2xl m-auto z-50 pointer-events-auto  gap-3  md:gap-4">
-          <BlurFade isPreload delay={delay * 5} direction="up" duration={1}>
-            {View}
-          </BlurFade>
-          <BlurFade isPreload delay={delay * 6} direction="up">
-            <motion.h1
-              className=" text-4xl sm:text-5xl  leading-9 md:text-6xl  text-center w-full justify-center items-center flex-col flex primary-foreground space-pre sm:leading-12  capitalize md:leading-16  font-bold tracking-tighter"
-              animate={{ opacity: 1, y: 0 }}
-              initial={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.2, ease: 'easeOut', delay: 0.3 }}
-            >
-              <span className="block">Jelajahi Pesona</span>
-              <span className="flex flex-row flex-wrap items-center justify-center gap-2">
-                <TextRotate
-                  texts={[
-                    'Indonesia',
-                    'Nusantara',
-                    'Budaya',
-                    'Alam',
-                    'Lokal',
-                    'Tradisi',
-                    'Warisan',
-                    'Negeri',
-                    'Khatulistiwa',
-                    'Bahari',
-                    'Sejarah',
-                    'Kuliner',
-                    'Kesenian',
-                    'Adat',
-                  ]}
-                  mainClassName="overflow-hidden bg-primary pr-3 text-primary-foreground py-0 pb-2 px-4 rounded-xl"
-                  staggerDuration={0.03}
-                  staggerFrom="last"
-                  rotationInterval={2800}
-                  transition={{
-                    type: 'spring',
-                    damping: 30,
-                    stiffness: 400,
-                  }}
-                />
-              </span>
-            </motion.h1>
-          </BlurFade>
-          <BlurFade
-            isPreload
-            direction="up"
-            delay={delay * 7}
-            className="text-base md:text-lg lg:text-xl leading-6 text-balance text-muted-foreground text-center max-w-xl mx-auto"
+        <div className="flex md:px-8  px-5   flex-col justify-center items-center w-full max-w-2xl m-auto z-50 pointer-events-auto  gap-3  md:gap-4">
+          <div>{View}</div>
+
+          <motion.h1
+            className=" text-4xl sm:text-5xl  leading-9 md:text-6xl  text-center w-full justify-center items-center flex-col flex primary-foreground space-pre sm:leading-12  capitalize md:leading-16  font-bold tracking-tighter"
+            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.2, ease: 'easeOut', delay: 0.3 }}
           >
+            <span className="block">Jelajahi Pesona</span>
+            <span className="flex flex-row flex-wrap items-center justify-center gap-2">
+              <TextRotate
+                texts={[
+                  'Indonesia',
+                  'Nusantara',
+                  'Budaya',
+                  'Alam',
+                  'Lokal',
+                  'Tradisi',
+                  'Warisan',
+                  'Negeri',
+                  'Khatulistiwa',
+                  'Bahari',
+                  'Sejarah',
+                  'Kuliner',
+                  'Kesenian',
+                  'Adat',
+                ]}
+                mainClassName="overflow-hidden bg-primary pr-3 text-primary-foreground py-0 pb-2 px-4 rounded-xl"
+                staggerDuration={0.03}
+                staggerFrom="last"
+                rotationInterval={2800}
+                transition={{
+                  type: 'spring',
+                  damping: 30,
+                  stiffness: 400,
+                }}
+              />
+            </span>
+          </motion.h1>
+
+          <div className="text-base md:text-lg lg:text-xl leading-6 text-balance text-muted-foreground text-center max-w-xl mx-auto">
             <p>
               Temukan destinasi wisata tersembunyi dan kekayaan budaya lokal
               Indonesia
@@ -182,17 +164,12 @@ export default function HeroSection() {
                 yang autentik dan memukau.
               </span>
             </p>
-          </BlurFade>
-          <BlurFade
-            isPreload
-            delay={delay * 8}
-            direction="up"
-            className="flex w-full flex-col md:flex-row justify-center md:space-x-4 md:space-y-0 space-y-2.5 items-center mt-2"
-          >
+          </div>
+          <div className="flex  px-20 w-full flex-col md:flex-row justify-center md:space-x-4 md:space-y-0 space-y-2.5 items-center mt-2">
             <Link
               className={cn(
                 buttonVariants({ variant: 'default', size: 'lg' }),
-                'md:has-[>svg]:px-15  w-full md:w-fit has-[>svg]:px-8 rounded-full font-semibold   md:text-xl  px-70 md:gap-6 md:py-7 md:px-18     py-6',
+                'md:has-[>svg]:px-13  cursor-target  hover:scale-110 transition-all duration-300 ease-out   w-full md:w-fit has-[>svg]:px-8 rounded-full font-semibold   md:text-xl  hover:bg-foreground px-70 md:gap-6 md:py-7 md:px-13     py-6',
               )}
               to="/destinasi"
             >
@@ -210,16 +187,16 @@ export default function HeroSection() {
               className={cn(
                 buttonVariants({ variant: 'default', size: 'lg' }),
 
-                '  md:has-[>svg]:px-15 w-full md:w-fit    font-semibold   has-[>svg]:px-8 rounded-full   md:text-xl  md:gap-6 md:py-7    py-6  bg-foreground ',
+                '   cursor-target  hover:scale-110 transition-all duration-300 ease-out  md:has-[>svg]:px-13 w-full md:w-fit    font-semibold   has-[>svg]:px-8 rounded-full   md:text-xl  md:gap-6 md:py-7    py-6  bg-foreground ',
               )}
             >
               <Pen className="size-5" /> Bagikan Destinasi
             </Link>
-          </BlurFade>
+          </div>
         </div>
       </main>
       <Marque />
-    </section>
+    </BlurFade>
   )
 }
 

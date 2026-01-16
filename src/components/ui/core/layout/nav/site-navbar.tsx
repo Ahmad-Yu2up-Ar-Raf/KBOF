@@ -60,12 +60,12 @@ function SiteNavbar() {
       >
         <header
           className={cn(
-            ' top-0        mx-auto      border-b      items-center justify-center md:justify-between          flex    text-center w-full  px-5  max-w-[53rem] md:px-0 py-1.5 ',
+            ' top-0   md:rounded-b-none   rounded-b-2xl    mx-auto      border-b      items-center justify-center md:justify-between          flex    text-center w-full  px-5  max-w-[53rem] md:px-0 py-1.5 ',
           )}
         >
           <nav
             className={cn(
-              'z-50  absolute  left-5.5 md:left-0   md:relative   bg-background/95 backdrop-blur flex justify-between',
+              'z-50  hidden absolute  left-5.5 md:left-0   md:relative   bg-background/95 backdrop-blur md:flex justify-between',
             )}
           >
             <Button
@@ -76,7 +76,7 @@ function SiteNavbar() {
                 'flex w-fit  py-2 md:flex text-base items-center gap-2   group transition-colors',
               )}
             >
-              <ArrowLeft className=" size-3.5    md:size-5 group-hover:-translate-x-1 group-hover:transform transition-all ease-out duration-300" />
+              <ArrowLeft className=" size-5 group-hover:-translate-x-1 group-hover:transform transition-all ease-out duration-300" />
               <span className=" sr-only">Kembali</span>
             </Button>
           </nav>

@@ -92,7 +92,7 @@ export function PlayingScreen({
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: ANIMATION_DURATION.normal }}
     >
-      {/* <GameHeader
+      <GameHeader
         Emoji={config.emoji}
         title={config.displayName}
         // subtitle={`Soal ${state.currentIndex + 1} dari ${state.questions.length}`}
@@ -138,7 +138,7 @@ export function PlayingScreen({
             </AnimatePresence>
           </Button>
         }
-      /> */}
+      />
 
       <GameContent>
         <QuestionCard

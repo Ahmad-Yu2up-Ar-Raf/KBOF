@@ -89,6 +89,7 @@ function LevelCard({
       }}
     >
       <Card
+        onClick={onSelect}
         // gradient={false}
         className={cn(
           ' transition-all duration-300  bg-background rounded-none   hover:shadow-lg',
@@ -140,16 +141,16 @@ function LevelCard({
               </span>
             </div>
           </div>
-          <CardAction className=" flex justify-end w-fitt">
+          {/* <CardAction className=" flex  sr-only justify-end w-fitt">
             <Button
-              onClick={onSelect}
+           
               size={'icon'}
               className="mt-4  cursor-pointer  "
               disabled={disabled}
             >
               <Play className=" size-4.5 fill-primary-foreground   text-primary    sm:size-6" />
             </Button>
-          </CardAction>
+          </CardAction> */}
         </CardContent>
       </Card>
     </motion.div>

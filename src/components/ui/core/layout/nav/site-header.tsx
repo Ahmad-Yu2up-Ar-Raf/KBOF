@@ -53,17 +53,6 @@ export default function SiteHeader() {
   ]
   const navItemsMobiles = [
     {
-      name: 'Profil',
-      link:
-        (session && session.user.role === 'admin') ||
-        (session && session.user.role === 'superAdmin')
-          ? '/dashboard'
-          : session && session.user.role === 'pribumi'
-            ? '/profile/destinasi'
-            : '/login',
-      icon: UserRound,
-    },
-    {
       name: 'Artikel',
       link: '/artikel/',
       icon: BookOpenText,
@@ -83,6 +72,17 @@ export default function SiteHeader() {
       name: 'Game',
       link: '/game',
       icon: Gamepad2,
+    },
+    {
+      name: 'Profil',
+      link:
+        (session && session.user.role === 'admin') ||
+        (session && session.user.role === 'superAdmin')
+          ? '/dashboard'
+          : session && session.user.role === 'pribumi'
+            ? '/profile/destinasi'
+            : '/login',
+      icon: UserRound,
     },
   ]
   const isMobile = useIsMobile()

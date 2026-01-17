@@ -48,11 +48,11 @@ export default function SiteFooter({ className, ...props }: StickyFooterProps) {
         {...props}
       >
         <div className="fixed z-50 bottom-0 h-full w-full">
-          {/* Add padding-bottom on mobile to account for navbar height (min-h-[9svh]) */}
+          {/* Add padding-bottom on mobile to account for navbar height (min-h-[9lvh]) */}
           <div
             className={cn(
               'sticky z-50 overflow-hidden flex flex-col justify-end h-full container px-5 ',
-              isMobile && 'pb-[6svh]', // Space for mobile bottom navbar
+              isMobile && 'pb-[6lvh]', // Space for mobile bottom navbar
             )}
           >
             <div className="grid lg:flex border-b lg:justify-between  pb-6 sm:gap-8 md:pb-15 grid-cols-2 gap-5 md:grid-cols-4 lg:grid-cols-4">

@@ -29,7 +29,7 @@ function ThumnailSlider({ images }: componentProps) {
             {images.map((item, i) => (
               <Slider
                 key={i}
-                className="md:h-full h-[45dvh] w-full"
+                className="md:h-full h-[45lvh] w-full"
                 thumbnailSrc={item}
               >
                 <MediaItem

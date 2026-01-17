@@ -193,8 +193,8 @@ export function SkeletonCard() {
   return (
     <Card
       className={cn(
-        'relative group w-full m-auto md:px-4 md:py-4 shadow-none border rounded-2xl',
-        'mx-auto content-center w-full p-0  border   bg-background shadow-sm rounded-0',
+        'relative group w-full m-auto p-4 shadow-none border rounded-2xl',
+        'mx-auto content-center w-full    border   bg-background shadow-sm rounded-0',
         'overflow-hidden flex flex-col h-full',
       )}
     >

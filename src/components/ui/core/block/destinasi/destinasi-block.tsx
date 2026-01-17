@@ -174,11 +174,11 @@ export function DestinasiBlockSkeleton() {
     <section className="py-1 w-full container md:py-2 sm:px-8 px-1.5 flex-1">
       <div className="space-y-5">
         {/* Filter Toolbar Skeleton */}
-        <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center px-5 md:px-0">
-          <Skeleton className="h-8 w-28 rounded-xl" />
-          <Skeleton className="h-8 w-24 rounded-xl" />
-          <Skeleton className="h-8 w-28 rounded-xl" />
-          <Skeleton className="h-8 w-24 rounded-xl" />
+        <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap mt-1 sm:items-center px-1 md:px-0">
+          <Skeleton className="h-8 w-full md:w-28 rounded-xl" />
+          <Skeleton className="h-8 w-full md:w-28  rounded-xl" />
+          <Skeleton className="h-8 w-full md:w-28  rounded-xl" />
+          <Skeleton className="h-8 w-full md:w-28  rounded-xl" />
         </div>
 
         {/* Current Filter Info */}

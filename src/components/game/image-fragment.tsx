@@ -138,14 +138,14 @@ export function FragmentReveal({
   className,
 }: FragmentRevealProps) {
   return (
-    <div className={cn('relative w-full min-h-[20dvh] ', className)}>
+    <div className={cn('relative w-full min-h-[20lvh] ', className)}>
       <ImageFragment
         src={src}
         alt={alt}
         fragments={isRevealed ? undefined : fragments}
         showFull={isRevealed}
       />
-      
+
       {/* Reveal overlay animation */}
       {isRevealed && (
         <motion.div

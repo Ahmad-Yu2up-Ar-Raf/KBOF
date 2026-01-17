@@ -60,12 +60,12 @@ function SiteNavbar() {
       >
         <header
           className={cn(
-            ' top-2   md:rounded-b-none     mx-auto      md:border-b      items-center justify-center md:justify-between   pb-3    pt-6     flex    text-center w-full  px-5  max-w-[53rem] md:px-0 md:py-1.5 ',
+            ' top-2   md:rounded-b-none     mx-auto      md:border-b      items-center justify-center md:justify-between   pb-2    pt-6     flex    text-center w-full  px-5  max-w-[53rem] md:px-0 md:py-1.5 ',
           )}
         >
           <nav
             className={cn(
-              'z-50    absolute  left-5.5 md:left-0   md:relative   bg-background/95 backdrop-blur flex justify-between',
+              'z-50   w-full  absolute  left-5.5 md:left-0   md:relative   bg-background/95 backdrop-blur flex justify-between',
             )}
           >
             <Button

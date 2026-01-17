@@ -334,7 +334,7 @@ function DestinasiDetailSkeleton() {
 
             {/* Image Gallery Skeleton */}
             <div className="w-full space-y-2">
-              <Skeleton className="h-[45dvh] w-full rounded-xl" />
+              <Skeleton className="h-[45lvh] w-full rounded-xl" />
               <div className="flex gap-2">
                 {[1, 2, 3, 4].map((i) => (
                   <Skeleton key={i} className="h-18 flex-1 rounded-xl" />

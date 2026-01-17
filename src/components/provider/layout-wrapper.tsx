@@ -107,7 +107,7 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
         <div
           className={cn(
             'relative  overflow-hidden pb-10 min-h-lvh w-full ',
-            // isMobile && 'pb-[12svh]', // Extra space for mobile bottom navbar
+            // isMobile && 'pb-[12lvh]', // Extra space for mobile bottom navbar
           )}
         >
           <div

@@ -124,7 +124,7 @@ export function QuestionCard({
         className="   max-w-lg  content-start   m-auto gap-4  p-0 bg-transparent border-0  shadow-none"
       >
         {/* Header with progress and timer */}
-        <CardHeader className="   content-start h-full bg-transparent min-h-[20svh] overflow-hidden md:h-[15em]  gap-0 pb-0  rounded-4xl p-0">
+        <CardHeader className="   content-start h-full bg-transparent min-h-[20lvh] overflow-hidden md:h-[15em]  gap-0 pb-0  rounded-4xl p-0">
           <FragmentReveal
             src={question.fullImageUrl}
             alt={question.destinationName}
@@ -161,7 +161,6 @@ export function QuestionCard({
               {question.prompt}
             </h2>
           </motion.div>
-      
 
           {/* Answer choices with RadioGroup */}
           <CardAction className="  space-y-3 w-full">
@@ -279,7 +278,7 @@ function AnswerRadioGroup({
                 'flex cursor-pointer items-center gap-4 rounded-2xl border-2 p-4 md:py-2.5 md:px-4 transition-all duration-200',
                 // Default state
                 state === 'default' &&
-                  'border-border bg-background/60 hover:border-primary/50 hover:bg-muted/50',
+                  'border-border bg-background hover:border-primary/50 hover:bg-muted/50',
                 // Selected state
                 state === 'selected' &&
                   'border-primary bg-primary/10 ring-2 ring-primary/20',
@@ -334,5 +333,3 @@ function AnswerRadioGroup({
     </RadioGroup>
   )
 }
-
- 

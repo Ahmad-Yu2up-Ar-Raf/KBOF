@@ -34,7 +34,10 @@ interface CreateDestinationSheetProps {
   onOpenChange?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-function CreateDestinationSheet({  className ,...props }: CreateDestinationSheetProps) {
+function CreateDestinationSheet({
+  className,
+  ...props
+}: CreateDestinationSheetProps) {
   // Internal state untuk uncontrolled mode
   const [internalOpen, setInternalOpen] = useState(false)
   const toastIdRef = useRef<string | number | undefined>(undefined)
@@ -141,7 +144,7 @@ function CreateDestinationSheet({  className ,...props }: CreateDestinationSheet
         )}
       </DrawerTrigger>
 
-      <DrawerContent className="flex flex-col max-h-[85svh]">
+      <DrawerContent className="flex flex-col max-h-[85lvh]">
         <DrawerHeader className="text-left sm:px-6 space-y-1 bg-background p-4 border-b">
           <DrawerTitle className="text-xl">Tambah Destinasi Baru</DrawerTitle>
           <DrawerDescription className="text-sm">

@@ -1,21 +1,18 @@
 'use client'
 
-import {  PlusCircle, Search } from 'lucide-react'
+import { PlusCircle, Search } from 'lucide-react'
 
 import React, { useEffect, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { parseAsString, useQueryState } from 'nuqs'
 
 import { cn } from '@/lib/utils'
-import {
-
-  buttonVariants,
-} from '@/components/ui/fragments/shadcn-ui/button'
+import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
 import { Input } from '@/components/ui/fragments/shadcn-ui/input'
 import VerticalCutReveal from '@/components/ui/fragments/custom-ui/animate-ui/vertical-cut'
 import { useDebouncedCallback } from '@/hooks/use-debounced-callback'
 import { authClient } from '@/lib/auth/auth-client'
-
+import { useIsMobile } from '@/hooks/use-mobile'
 
 const DEBOUNCE_DELAY = 400 // ms
 
@@ -26,7 +23,6 @@ type componentProps = {
   deskription: string
   linkText?: string
   children: React.ReactNode
- 
 }
 
 const KatalogHeader = ({
@@ -66,58 +62,71 @@ const KatalogHeader = ({
     void setSearchParam(null)
   }
   const { data: session } = authClient.useSession()
-
+  const isMobile = useIsMobile()
   return (
     <div className="  pt-4       container ">
       <div className="  flex flex-col md:gap-4  md:justify-between gap-6">
-        <header className="w-full md:items-center flex-col md:flex-row flex justify-between m-auto">
-          <h1 className="xl:text-[6rem] font-medium  tracking-tight lg:leading-30 lg:text-8xl text-7xl lg:-space-y-10 -space-y-6">
-            <VerticalCutReveal
-              splitBy="characters"
-              staggerDuration={0.05}
-              staggerFrom="first"
-              transition={{
-                type: 'spring',
-                stiffness: 200,
-                damping: 21,
-              }}
-            >
-              {titleMain}
-            </VerticalCutReveal>
-            <VerticalCutReveal
-              splitBy="characters"
-              staggerDuration={0.05}
-              containerClassName="lg:pl-32 md:pl-16 pl-14 leading-[140%]"
-              staggerFrom="first"
-              transition={{
-                type: 'spring',
-                stiffness: 200,
-                damping: 21,
-              }}
-            >
-              {titleSecond}
-            </VerticalCutReveal>
+        <header className="w-full gap-4 md:items-center flex-col md:flex-row flex justify-between m-auto">
+          <h1 className="xl:text-[6rem] font-medium  tracking-tight lg:leading-30 lg:text-8xl text-6xl lg:-space-y-10 -space-y-6">
+            {isMobile ? (
+              <span>
+                {titleMain} <br /> {titleSecond}
+              </span>
+            ) : (
+              <>
+                <VerticalCutReveal
+                  splitBy="characters"
+                  staggerDuration={0.05}
+                  staggerFrom="first"
+                  transition={{
+                    type: 'spring',
+                    stiffness: 200,
+                    damping: 21,
+                  }}
+                >
+                  {titleMain}
+                </VerticalCutReveal>
+                <VerticalCutReveal
+                  splitBy="characters"
+                  staggerDuration={0.05}
+                  containerClassName="lg:pl-32 md:pl-16 pl-14 leading-[140%]"
+                  staggerFrom="first"
+                  transition={{
+                    type: 'spring',
+                    stiffness: 200,
+                    damping: 21,
+                  }}
+                >
+                  {titleSecond}
+                </VerticalCutReveal>
+              </>
+            )}
           </h1>
 
           <div className="sm:w-96 space-y-1.5 sm:pt-0 ">
-            <p className="text-sm font-semibold text-end">{subTitle}.</p>
-
-            <VerticalCutReveal
-              splitBy="words"
-              containerClassName=" md:justify-end "
-              staggerDuration={0.1}
-              staggerFrom="first"
-              reverse={true}
-              wordLevelClassName="text-sm text-muted-foreground lg:text-base text-justify"
-              transition={{
-                type: 'spring',
-                stiffness: 250,
-                damping: 30,
-                delay: 0,
-              }}
-            >
-              {deskription}
-            </VerticalCutReveal>
+            {/* <p className="text-sm font-semibold text-end">{subTitle}.</p> */}
+            {isMobile ? (
+              <p className="text-sm  text-muted-foreground text-justify">
+                {deskription}
+              </p>
+            ) : (
+              <VerticalCutReveal
+                splitBy="words"
+                containerClassName=" md:justify-end "
+                staggerDuration={0.1}
+                staggerFrom="first"
+                reverse={true}
+                wordLevelClassName="text-sm text-muted-foreground lg:text-base text-justify"
+                transition={{
+                  type: 'spring',
+                  stiffness: 250,
+                  damping: 30,
+                  delay: 0,
+                }}
+              >
+                {deskription}
+              </VerticalCutReveal>
+            )}
           </div>
         </header>
 

@@ -14,6 +14,7 @@ import { useIsMobile } from '@/hooks/use-mobile'
 import { cn } from '@/lib/utils'
 import animationData from '@/assets/animations/Businessman.json'
 import { authClient } from '@/lib/auth/auth-client'
+import { BlurFade } from '@/components/ui/fragments/custom-ui/animate-ui/blur-fade'
 
 const fallbackImages = [
   {
@@ -82,90 +83,218 @@ export default function HeroSection() {
     if (shouldReduceMotion) return 0
     return index * 0.15
   }
+  const delay = 0.45
 
+  // if (isMobile)
+  //   return (
+  //     <section className="w-full h-full">
+  //       <main className="w-full m-auto mb-0.5 overflow-hidden md:mb-25 lg:mb-40 lg:pt-20 min-h-lvh md:overflow-visible flex flex-col items-center justify-center relative">
+  //         {/* Floating images - visible on all devices */}
+  //         <Floating sensitivity={-0.5} className="h-full">
+  //           <FloatingElement depth={1} className="top-[0%] left-[3%]">
+  //             <BlurFade
+  //               isPreload
+  //               delay={delay}
+  //               key={fallbackImages[0].url}
+  //               className="w-35 h-36 relative overflow-hidden sm:w-48 sm:h-36 md:w-56 md:h-44 lg:w-55 lg:h-67 object-cover hover:scale-105 duration-200 cursor-target transition-transform -rotate-12 shadow-2xl rounded-xl"
+  //               // Use will-change sparingly
+  //               style={{ willChange: 'transform, opacity' }}
+  //             >
+  //               <MediaItem webViewLink={fallbackImages[0].url} />
+  //             </BlurFade>
+  //           </FloatingElement>
+
+  //           <FloatingElement
+  //             depth={4}
+  //             className="top-[90%] left-[6%] md:top-[80%] md:left-[8%]"
+  //           >
+  //             <BlurFade
+  //               isPreload
+  //               delay={delay * 2}
+  //               key={fallbackImages[1].url}
+  //               className="w-40 h-40 relative overflow-hidden sm:w-48 sm:h-48 md:w-60 md:h-60 lg:w-55 lg:h-67 object-cover -rotate-[4deg] hover:scale-105 duration-200 cursor-target transition-transform shadow-2xl rounded-xl"
+  //               style={{ willChange: 'transform, opacity' }}
+  //             >
+  //               <MediaItem webViewLink={fallbackImages[1].url} />
+  //             </BlurFade>
+  //           </FloatingElement>
+
+  //           <FloatingElement
+  //             depth={2}
+  //             className="top-[0%] left-[87%] md:top-[2%] md:left-[89%]"
+  //           >
+  //             <BlurFade
+  //               isPreload
+  //               delay={delay * 3}
+  //               key={fallbackImages[2].url}
+  //               className="w-40 rotate-12 h-36 overflow-hidden sm:w-48 sm:h-44 md:w-60 md:h-52 lg:w-55 lg:h-67 object-cover hover:scale-105 duration-200 cursor-target transition-transform shadow-2xl rounded-xl"
+  //               style={{ willChange: 'transform, opacity' }}
+  //             >
+  //               <MediaItem webViewLink={fallbackImages[2].url} />
+  //             </BlurFade>
+  //           </FloatingElement>
+
+  //           <FloatingElement
+  //             depth={1}
+  //             className="top-[78%] left-[83%] md:top-[68%] md:left-[85%]"
+  //           >
+  //             <BlurFade
+  //               isPreload
+  //               key={fallbackImages[3].url}
+  //               delay={delay * 4}
+  //               className="w-44 overflow-hidden rotate-[4deg] h-44 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-55 lg:h-67 object-cover hover:scale-105 duration-200 cursor-target transition-transform shadow-2xl rounded-xl"
+  //               style={{ willChange: 'transform, opacity' }}
+  //             >
+  //               <MediaItem webViewLink={fallbackImages[3].url} />
+  //             </BlurFade>
+  //           </FloatingElement>
+  //         </Floating>
+
+  //         <div className="flex md:px-8 px-5 flex-col justify-center items-center w-full max-w-2xl m-auto z-50 pointer-events-auto gap-3 md:gap-4">
+  //           <div>{View}</div>
+  //           <div>
+  //             <motion.h1
+  //               className="text-4xl sm:text-5xl leading-9 md:text-6xl text-center w-full justify-center items-center flex-col flex primary-foreground space-pre sm:leading-12 capitalize md:leading-16 font-bold tracking-tighter"
+  //               transition={{ ...transition, delay: getDelay(5) }}
+  //               variants={variants}
+  //             >
+  //               <span className="block">Jelajahi Pesona</span>
+  //               <span className="flex flex-row flex-wrap items-center justify-center gap-2">
+  //                 <TextRotate
+  //                   texts={[
+  //                     'Indonesia',
+  //                     'Nusantara',
+  //                     'Budaya',
+  //                     'Alam',
+  //                     'Lokal',
+  //                     'Tradisi',
+  //                     'Warisan',
+  //                     'Negeri',
+  //                     'Khatulistiwa',
+  //                     'Bahari',
+  //                     'Sejarah',
+  //                     'Kuliner',
+  //                     'Kesenian',
+  //                     'Adat',
+  //                   ]}
+  //                   mainClassName="overflow-hidden bg-primary pr-3 text-primary-foreground py-0 pb-2 px-4 rounded-xl"
+  //                   staggerDuration={0.03}
+  //                   staggerFrom="last"
+  //                   rotationInterval={2800}
+  //                   transition={{
+  //                     type: 'spring',
+  //                     damping: 30,
+  //                     stiffness: 400,
+  //                   }}
+  //                 />
+  //               </span>
+  //             </motion.h1>
+  //           </div>
+  //           <div className="text-base md:text-lg lg:text-xl leading-6 text-balance text-muted-foreground text-center max-w-xl mx-auto">
+  //             <p>
+  //               Temukan destinasi wisata tersembunyi dan kekayaan budaya lokal
+  //               Indonesia
+  //               <span className="hidden sm:inline">
+  //                 {' '}
+  //                 yang autentik dan memukau.
+  //               </span>
+  //             </p>
+  //           </div>
+
+  //           <div className="flex w-full flex-col md:flex-row justify-center md:space-x-4 md:space-y-0 space-y-2.5 items-center mt-2">
+  //             <Link
+  //               className={cn(
+  //                 buttonVariants({ variant: 'custom', size: 'lg' }),
+  //                 'rounded-full',
+  //               )}
+  //               to="/destinasi"
+  //             >
+  //               <Telescope className="size-5" /> Jelajahi Destinasi
+  //             </Link>
+  //             <Link
+  //               to={
+  //                 (session && session.user.role === 'admin') ||
+  //                 (session && session.user.role === 'superAdmin')
+  //                   ? '/dashboard'
+  //                   : session && session.user.role === 'pribumi'
+  //                     ? '/profile/destinasi'
+  //                     : '/login'
+  //               }
+  //               className={cn(
+  //                 buttonVariants({ variant: 'customForeground', size: 'lg' }),
+  //                 'rounded-full',
+  //               )}
+  //             >
+  //               <Pen className="size-5" /> Bagikan Destinasi
+  //             </Link>
+  //           </div>
+  //         </div>
+  //       </main>
+  //       <Marque />
+  //     </section>
+  //   )
   return (
-    <motion.section
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: '-100px' }} // Load earlier, only once
-      transition={{ staggerChildren: shouldReduceMotion ? 0 : 0.08 }}
-      className="w-full h-full"
-    >
-      <main className="w-full m-auto mb-0.5 overflow-hidden md:mb-25 lg:mb-40 lg:pt-20 min-h-lvh md:overflow-visible flex flex-col items-center justify-center relative">
+    <section className="w-full h-full">
+      <BlurFade duration={1} delay={1} className="w-full m-auto mb-0.5 overflow-hidden md:mb-25 lg:mb-40 lg:pt-20 min-h-lvh md:overflow-visible flex flex-col items-center justify-center relative">
         {/* Floating images - visible on all devices */}
         <Floating sensitivity={-0.5} className="h-full">
           <FloatingElement depth={1} className="top-[0%] left-[3%]">
-            <motion.div
-              transition={{ ...transition, delay: getDelay(0) }}
-              variants={variants}
-              key={fallbackImages[0].url}
+            <div
               className="w-35 h-36 relative overflow-hidden sm:w-48 sm:h-36 md:w-56 md:h-44 lg:w-55 lg:h-67 object-cover hover:scale-105 duration-200 cursor-target transition-transform -rotate-12 shadow-2xl rounded-xl"
               // Use will-change sparingly
               style={{ willChange: 'transform, opacity' }}
             >
               <MediaItem webViewLink={fallbackImages[0].url} />
-            </motion.div>
+            </div>
           </FloatingElement>
 
           <FloatingElement
             depth={4}
             className="top-[90%] left-[6%] md:top-[80%] md:left-[8%]"
           >
-            <motion.div
-              transition={{ ...transition, delay: getDelay(1) }}
-              variants={variants}
-              key={fallbackImages[1].url}
+            <div
               className="w-40 h-40 relative overflow-hidden sm:w-48 sm:h-48 md:w-60 md:h-60 lg:w-55 lg:h-67 object-cover -rotate-[4deg] hover:scale-105 duration-200 cursor-target transition-transform shadow-2xl rounded-xl"
               style={{ willChange: 'transform, opacity' }}
             >
               <MediaItem webViewLink={fallbackImages[1].url} />
-            </motion.div>
+            </div>
           </FloatingElement>
 
           <FloatingElement
             depth={2}
             className="top-[0%] left-[87%] md:top-[2%] md:left-[89%]"
           >
-            <motion.div
-              transition={{ ...transition, delay: getDelay(2) }}
-              variants={variants}
-              key={fallbackImages[2].url}
+            <div
               className="w-40 rotate-12 h-36 overflow-hidden sm:w-48 sm:h-44 md:w-60 md:h-52 lg:w-55 lg:h-67 object-cover hover:scale-105 duration-200 cursor-target transition-transform shadow-2xl rounded-xl"
               style={{ willChange: 'transform, opacity' }}
             >
               <MediaItem webViewLink={fallbackImages[2].url} />
-            </motion.div>
+            </div>
           </FloatingElement>
 
           <FloatingElement
             depth={1}
             className="top-[78%] left-[83%] md:top-[68%] md:left-[85%]"
           >
-            <motion.div
-              transition={{ ...transition, delay: getDelay(3) }}
-              variants={variants}
-              key={fallbackImages[3].url}
+            <div
               className="w-44 overflow-hidden rotate-[4deg] h-44 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-55 lg:h-67 object-cover hover:scale-105 duration-200 cursor-target transition-transform shadow-2xl rounded-xl"
               style={{ willChange: 'transform, opacity' }}
             >
               <MediaItem webViewLink={fallbackImages[3].url} />
-            </motion.div>
+            </div>
           </FloatingElement>
         </Floating>
 
         <div className="flex md:px-8 px-5 flex-col justify-center items-center w-full max-w-2xl m-auto z-50 pointer-events-auto gap-3 md:gap-4">
           <motion.div
-            transition={{ ...transition, delay: getDelay(4) }}
-            variants={variants}
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3 }}
           >
             {View}
           </motion.div>
 
-          <motion.h1
-            className="text-4xl sm:text-5xl leading-9 md:text-6xl text-center w-full justify-center items-center flex-col flex primary-foreground space-pre sm:leading-12 capitalize md:leading-16 font-bold tracking-tighter"
-            transition={{ ...transition, delay: getDelay(5) }}
-            variants={variants}
-          >
+          <h1 className="text-4xl sm:text-5xl leading-9 md:text-6xl text-center w-full justify-center items-center flex-col flex primary-foreground space-pre sm:leading-12 capitalize md:leading-16 font-bold tracking-tighter">
             <span className="block">Jelajahi Pesona</span>
             <span className="flex flex-row flex-wrap items-center justify-center gap-2">
               <TextRotate
@@ -196,27 +325,20 @@ export default function HeroSection() {
                 }}
               />
             </span>
-          </motion.h1>
+          </h1>
 
           <div className="text-base md:text-lg lg:text-xl leading-6 text-balance text-muted-foreground text-center max-w-xl mx-auto">
-            <motion.p
-              transition={{ ...transition, delay: getDelay(6) }}
-              variants={variants}
-            >
+            <p>
               Temukan destinasi wisata tersembunyi dan kekayaan budaya lokal
               Indonesia
               <span className="hidden sm:inline">
                 {' '}
                 yang autentik dan memukau.
               </span>
-            </motion.p>
+            </p>
           </div>
 
-          <motion.div
-            transition={{ ...transition, delay: getDelay(7) }}
-            variants={variants}
-            className="flex w-full flex-col md:flex-row justify-center md:space-x-4 md:space-y-0 space-y-2.5 items-center mt-2"
-          >
+          <div className="flex w-full flex-col md:flex-row justify-center md:space-x-4 md:space-y-0 space-y-2.5 items-center mt-2">
             <Link
               className={cn(
                 buttonVariants({ variant: 'custom', size: 'lg' }),
@@ -242,11 +364,11 @@ export default function HeroSection() {
             >
               <Pen className="size-5" /> Bagikan Destinasi
             </Link>
-          </motion.div>
+          </div>
         </div>
-      </main>
+      </BlurFade>
       <Marque />
-    </motion.section>
+    </section>
   )
 }
 

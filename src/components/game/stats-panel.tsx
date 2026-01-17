@@ -73,7 +73,7 @@ export function StatsPanel({
         </div>
       </header>
       <main className=" flex w-full justify-start h-fit flex-col gap-8">
-        <Card className=" w-full mb-20  relative    pb-0  content-start  m-auto gap-4  px-0 bg-transparent   shadow-none  ">
+        <Card className=" w-full mb-20  relative    pb-0  content-start  m-auto gap-4  px-0 bg-background   shadow-none  ">
           <span className=" absolute  -right-6 rotate-9  -top-10  text-7xl">
             {emoji}
           </span>
@@ -226,7 +226,7 @@ function QuestionBreakdown({ results, level }: QuestionBreakdownProps) {
   const config = LEVEL_CONFIGS[level]
 
   return (
-    <Card className="  w-full pb-0 overflow-hidden     content-start  m-auto gap-4  px-0 bg-transparent    shadow-none   ">
+    <Card className="  w-full pb-0 overflow-hidden     content-start  m-auto gap-4  px-0 bg-background    shadow-none   ">
       <CardHeader className=" text-left w-full  pt-0  px-4  ">
         <CardTitle className="  text-2xl font-bold ">
           Rincian <span className=" text-primary">Soal</span>

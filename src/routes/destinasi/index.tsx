@@ -5,7 +5,7 @@ import DestinasiBlock, {
   DestinasiBlockSkeleton,
 } from '@/components/ui/core/block/destinasi/destinasi-block'
 
-import HeaderDestinasi from '@/components/ui/core/block/destinasi/destinasi-header'
+ 
 import { queryClient } from '@/components/provider/Provider'
 import { getDestinasiInfiniteQueryOptions } from '@/lib/query-options'
 import KatalogHeader from '@/components/ui/fragments/custom-ui/typography/katalog-header'
@@ -40,7 +40,7 @@ function RouteComponent() {
   return (
     <div className="mx-auto container max-w-6xl space-y-4 ">
       <KatalogHeader
-        titleMain="Suasana"
+        titleMain="Destinasi"
         titleSecond="Lokal*"
         linkText="Ajukan Destinasi Lokal"
         subTitle="Ruang Destinasi Suasana Lokal"
@@ -56,6 +56,7 @@ function RouteComponent() {
           </Button>
         </CreateDestinationSheet>
       </KatalogHeader>
+
       <Suspense fallback={<DestinasiBlockSkeleton />}>
         <DestinasiBlock />
       </Suspense>

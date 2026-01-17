@@ -160,7 +160,10 @@ export const NavbarMobile = ({ children, className }: NavbarProps) => {
       //   delay: 3.5,
       // }}
       // Use fixed positioning to stay above footer's fixed content
-      className={cn(' overflow-hidden sticky bottom-0 left-0 right-0 w-full z-100', className)}
+      className={cn(
+        ' overflow-hidden sticky bottom-0 left-0 right-0 w-full z-100',
+        className,
+      )}
     >
       {children}
     </nav>
@@ -244,7 +247,7 @@ export const MobileNav = ({ children, className }: MobileNavProps) => {
           '0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset',
       }}
       className={cn(
-        'relative z-60  border-primary border-t min-h-[9svh] content-center  bg-header/95 backdrop-blur-md supports-backdrop-filter:bg-header/90  flex          mx-auto lg:hidden   flex-row items-center justify-between self-start   rounded-t-2xl  w-full   ',
+        'relative z-60  border-primary border-t min-h-[9lvh] content-center  bg-header/95 backdrop-blur-md supports-backdrop-filter:bg-header/90  flex          mx-auto lg:hidden   flex-row items-center justify-between self-start   rounded-t-2xl  w-full   ',
 
         className,
       )}

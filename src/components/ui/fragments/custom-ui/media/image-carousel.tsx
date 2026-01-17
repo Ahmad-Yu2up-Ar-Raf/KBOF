@@ -23,13 +23,13 @@ function ThumnailSlider({ images }: componentProps) {
       <div className="w-full md:sticky top-10     h-full   overflow-hidden rounded-xl mx-auto">
         <Carousel
           options={OPTIONS}
-          className="relative w-full md:h-[80lvh] md:flex md:gap-2 space-y-2"
+          className="relative w-full md:h-[80svh] md:flex md:gap-2 space-y-2"
         >
           <SliderContainer className="gap-2 md:order-2  md:h-full md:w-full ">
             {images.map((item, i) => (
               <Slider
                 key={i}
-                className="md:h-full h-[45lvh] w-full"
+                className="md:h-full h-[45svh] w-full"
                 thumbnailSrc={item}
               >
                 <MediaItem

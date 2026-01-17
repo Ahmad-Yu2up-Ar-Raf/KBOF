@@ -58,7 +58,7 @@ function About() {
 
   return (
     <section className="container px-5 py-12 md:py-16 lg:py-20">
-      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-8 lg:gap-10">
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-8 lg:gap-10">
         {/* Teks About Us - Kiri */}
         <header className="flex flex-col w-full lg:w-[45%] gap-y-4">
           {/* Judul */}
@@ -85,7 +85,7 @@ function About() {
             <ImageCard
               src="assets/images/rendang-potongan.png"
               alt="Rendang - Kuliner Nusantara"
-              className="w-[190px] h-auto md:w-[180px] lg:w-[200px]"
+              className="w-[190px] h-auto md:w-[180px] lg:w-[230px]"
               index={0}
               hovered={hoveredImage}
               setHovered={setHoveredImage}
@@ -97,7 +97,7 @@ function About() {
             <ImageCard
               src="assets/images/gadang-potongan.png"
               alt="Rumah Gadang - Arsitektur Nusantara"
-              className="w-[190px] h-auto md:w-[220px] lg:w-[240px]"
+              className="w-[190px] h-auto md:w-[220px] lg:w-[260px]"
               index={1}
               hovered={hoveredImage}
               setHovered={setHoveredImage}
@@ -109,7 +109,7 @@ function About() {
             <ImageCard
               src="assets/images/batik-potongan.png"
               alt="Batik - Warisan Nusantara"
-              className="w-[190px] h-auto md:w-[180px] lg:w-[200px]"
+              className="w-[190px] h-auto md:w-[180px] lg:w-[230px]"
               index={2}
               hovered={hoveredImage}
               setHovered={setHoveredImage}

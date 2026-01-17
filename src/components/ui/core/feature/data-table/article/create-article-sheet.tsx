@@ -136,7 +136,7 @@ function CreateArticleSheet({ className, ...props }: CreateArticleSheetProps) {
           </Button>
         )}
       </DrawerTrigger>
-      <DrawerContent className="flex flex-col max-h-[85lvh]">
+      <DrawerContent className="flex flex-col max-h-[85svh]">
         <DrawerHeader className="text-left sm:px-6 space-y-1 bg-background p-4 border-b">
           <DrawerTitle className="text-xl font-bold">
             Tambah Artikel

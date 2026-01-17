@@ -93,7 +93,7 @@ export function ChartBarActive({
           <CardTitle>{title}</CardTitle>
           <CardDescription>{description}</CardDescription>
         </CardHeader>
-        <CardContent className="flex-1 pb-0 flex items-center justify-center min-h-[40lvh]">
+        <CardContent className="flex-1 pb-0 flex items-center justify-center min-h-[40svh]">
           <div className="text-center text-muted-foreground">
             <LucideChartColumn className="  size-6 m-auto mb-3 " />
             <p className="text-lg font-medium">No Data found</p>

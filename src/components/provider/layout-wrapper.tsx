@@ -106,13 +106,13 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
         {/* Add padding-bottom on mobile to account for fixed navbar */}
         <div
           className={cn(
-            'relative  overflow-hidden pb-10 min-h-lvh w-full ',
-            // isMobile && 'pb-[12lvh]', // Extra space for mobile bottom navbar
+            'relative  overflow-hidden pb-10 min-h-svh w-full ',
+            // isMobile && 'pb-[12svh]', // Extra space for mobile bottom navbar
           )}
         >
           <div
             className={cn(
-              'mx-auto flex  relative  flex-col  gap-10 sm:gap-8  content-center  h-full w-full',
+              'mx-auto flex  relative overflow-x-hidden  flex-col  gap-10 sm:gap-8  content-center  h-full w-full',
             )}
           >
             {children}
@@ -127,7 +127,7 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
 
   // Layout minimal untuk auth/dashboard/404
   return (
-    <div className={cn('relative min-h-lvh w-full   content-center')}>
+    <div className={cn('relative min-h-svh w-full   content-center')}>
       <ScrollToTopNative />
       <div
         className={cn('mx-auto flex flex-col gap-13 lg:gap-25 h-full w-full')}

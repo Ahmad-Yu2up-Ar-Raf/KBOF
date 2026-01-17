@@ -98,7 +98,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
 
   if (isInitializing) {
     return (
-      <div className="flex min-h-lvh w-full content-center justify-center items-center">
+      <div className="flex min-h-svh w-full content-center justify-center items-center">
         <Spinner className=" size-6" />
       </div>
     )

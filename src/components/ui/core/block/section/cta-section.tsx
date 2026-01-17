@@ -155,7 +155,7 @@ export default function CTASection() {
         {/* CTA Content */}
         <div className="relative z-10 max-w-md  m-auto flex h-full flex-col items-center justify-center md:gap-5 gap-9   md:text-center w-full">
           <div className="flex flex-col items-center justify-center gap-3">
-            <h1 className="  text-4xl font-bold tracking-tight text-foreground   text-center ">
+            <h1 className="  text-3xl md:text-4xl font-bold tracking-tight text-foreground   text-center ">
               Siap Menjelajahi Keindahan Destinasi Lokal?
             </h1>
           </div>

@@ -108,7 +108,7 @@ export function ChartTopDestinations({
           <CardTitle>{title}</CardTitle>
           <CardDescription>{description}</CardDescription>
         </CardHeader>
-        <CardContent className="flex-1 pb-0 flex items-center justify-center min-h-[35lvh]">
+        <CardContent className="flex-1 pb-0 flex items-center justify-center min-h-[35svh]">
           <div className="text-center text-muted-foreground">
             <LucideChartColumn className="size-8 m-auto mb-3" />
             <p className="text-lg font-medium">Belum ada destinasi</p>

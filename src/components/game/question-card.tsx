@@ -124,7 +124,7 @@ export function QuestionCard({
         className="   max-w-lg  content-start   m-auto gap-4  p-0 bg-transparent border-0  shadow-none"
       >
         {/* Header with progress and timer */}
-        <CardHeader className="   content-start h-full bg-transparent min-h-[20lvh] overflow-hidden md:h-[15em]  gap-0 pb-0  rounded-4xl p-0">
+        <CardHeader className="   content-start h-full bg-transparent min-h-[20svh] overflow-hidden md:h-[15em]  gap-0 pb-0  rounded-4xl p-0">
           <FragmentReveal
             src={question.fullImageUrl}
             alt={question.destinationName}

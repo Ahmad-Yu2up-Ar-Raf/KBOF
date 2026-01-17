@@ -334,7 +334,7 @@ function DestinasiDetailSkeleton() {
 
             {/* Image Gallery Skeleton */}
             <div className="w-full space-y-2">
-              <Skeleton className="h-[45lvh] w-full rounded-xl" />
+              <Skeleton className="h-[45svh] w-full rounded-xl" />
               <div className="flex gap-2">
                 {[1, 2, 3, 4].map((i) => (
                   <Skeleton key={i} className="h-18 flex-1 rounded-xl" />
@@ -402,7 +402,7 @@ function DestinasiDetailSkeleton() {
           {/* Left: Image Gallery Skeleton (sticky) */}
           <div className="w-full md:w-auto md:sticky top-10 h-fit space-y-2">
             <div className="w-full md:w-80 lg:w-96">
-              <Skeleton className="h-[80lvh] w-full rounded-xl" />
+              <Skeleton className="h-[80svh] w-full rounded-xl" />
               <div className="flex gap-2 mt-2">
                 <Skeleton className="h-18 w-20 rounded-xl" />
               </div>

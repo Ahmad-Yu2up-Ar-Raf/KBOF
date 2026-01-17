@@ -138,7 +138,7 @@ export function FragmentReveal({
   className,
 }: FragmentRevealProps) {
   return (
-    <div className={cn('relative w-full min-h-[20lvh] ', className)}>
+    <div className={cn('relative w-full min-h-[20svh] ', className)}>
       <ImageFragment
         src={src}
         alt={alt}

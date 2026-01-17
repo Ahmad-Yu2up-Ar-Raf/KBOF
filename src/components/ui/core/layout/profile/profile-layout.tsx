@@ -121,7 +121,7 @@ function ProfileLayout({ children }: ProfileLayoutProps) {
 
   if (isPending || !session?.user) {
     return (
-      <div className="flex h-lvh w-full items-center justify-center">
+      <div className="flex h-svh w-full items-center justify-center">
         <Spinner className="h-8 w-8 border-t-transparent rounded-xl" />
       </div>
     )
@@ -130,7 +130,7 @@ function ProfileLayout({ children }: ProfileLayoutProps) {
   const user = session.user
 
   return (
-    <div className="min-h-lvh bg-background">
+    <div className="min-h-svh bg-background">
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-14 items-center justify-between px-4">

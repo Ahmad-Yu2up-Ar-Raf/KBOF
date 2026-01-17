@@ -58,37 +58,11 @@ export default function HeroSection() {
   const style = { width: isMobile ? 250 : 300, height: 150, margin: 'auto' }
   const { View } = useLottie(lottieOptions, style)
   const { data: session } = authClient.useSession()
-
-  // Optimized animation configs
-  const transition = {
-    duration: shouldReduceMotion ? 0 : 0.8,
-    ease: [0.25, 0.1, 0.25, 1] as const,
-  }
-
-  const variants = {
-    hidden: {
-      filter: shouldReduceMotion ? 'blur(0px)' : 'blur(10px)',
-      transform: shouldReduceMotion ? 'translateY(0)' : 'translateY(20%)',
-      opacity: 0,
-    },
-    visible: {
-      filter: 'blur(0)',
-      transform: 'translateY(0)',
-      opacity: 1,
-    },
-  }
-
-  // Individual delays for stagger effect
-  const getDelay = (index: number) => {
-    if (shouldReduceMotion) return 0
-    return index * 0.15
-  }
-  const delay = 0.45
-
+ 
   // if (isMobile)
   //   return (
   //     <section className="w-full h-full">
-  //       <main className="w-full m-auto mb-0.5 overflow-hidden md:mb-25 lg:mb-40 lg:pt-20 min-h-lvh md:overflow-visible flex flex-col items-center justify-center relative">
+  //       <main className="w-full m-auto mb-0.5 overflow-hidden md:mb-25 lg:mb-40 lg:pt-20 min-h-svh md:overflow-visible flex flex-col items-center justify-center relative">
   //         {/* Floating images - visible on all devices */}
   //         <Floating sensitivity={-0.5} className="h-full">
   //           <FloatingElement depth={1} className="top-[0%] left-[3%]">
@@ -235,7 +209,7 @@ export default function HeroSection() {
   //   )
   return (
     <section className="w-full h-full">
-      <BlurFade duration={1} delay={1} className="w-full m-auto mb-0.5 overflow-hidden md:mb-25 lg:mb-40 lg:pt-20 min-h-lvh md:overflow-visible flex flex-col items-center justify-center relative">
+      <BlurFade duration={isMobile ? 0.2 : 0.8} delay={1} className="w-full m-auto mb-0.5 overflow-hidden md:mb-25 lg:mb-40 lg:pt-20 min-h-svh md:overflow-visible flex flex-col items-center justify-center relative">
         {/* Floating images - visible on all devices */}
         <Floating sensitivity={-0.5} className="h-full">
           <FloatingElement depth={1} className="top-[0%] left-[3%]">

@@ -40,7 +40,7 @@ export default function Register() {
           loading={isSubmitting} // ✅ isPending bisa langsung dipake di sini!
           numberOfIterations={10}
           formType="register"
-          className="lg:max-w-none h-lvh"
+          className="lg:max-w-none h-svh"
         >
           {/* ✅ Pass form state ke SignInForm */}
           <SignUpForm form={form} isPending={isSubmitting} />

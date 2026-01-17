@@ -20,7 +20,7 @@ function AppLayout({ children }: AppSidebarProps) {
   // Handle loading state - jangan render sidebar sampai session loaded
   if (isPending || !session?.user) {
     return (
-      <div className="flex h-lvh w-full items-center justify-center">
+      <div className="flex h-svh w-full items-center justify-center">
         <Spinner className="  h-8 w-8  border-t-transparent rounded-xl" />
       </div>
     )

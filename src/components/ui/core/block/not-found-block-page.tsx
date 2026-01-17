@@ -26,7 +26,7 @@ export function NotFoundPage() {
   const style = { width: '100%', height: '100%', margin: 'auto' } // atur sesuai kebutuhan
   const { View } = useLottie(lottieOptions, style)
   return (
-    <section className="container   h-lvh flex flex-col items-center justify-center  ">
+    <section className="container   h-svh flex flex-col items-center justify-center  ">
       <Card className=" mx-auto bg-background border-0 shadow-none w-full">
         <CardContent className=" w-full   h-full flex flex-col gap-6    justify-center">
           <CardHeader className=" max-w-sm md:max-w-lg w-full m-auto     px-6 py-0 text-center md:gap-9">

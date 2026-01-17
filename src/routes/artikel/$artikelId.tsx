@@ -90,7 +90,7 @@ function ArtikelDetailSkeleton() {
       </nav>
 
       {/* Content skeleton */}
-      <section className="min-h-lvh space-y-6">
+      <section className="min-h-svh space-y-6">
         <div className="max-w-3xl h-full content-center space-y-6">
           {/* Avatar & User info */}
           <div className="flex items-center gap-3">

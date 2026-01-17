@@ -72,7 +72,7 @@ function CreateArticleSheet({ className, ...props }: CreateArticleSheetProps) {
           {props.children ? (
             props.children
           ) : (
-            <Button className="text-sm w-fit">
+                 <Button variant={'outline'} className="text-sm  h-8    w-fit">
               <Plus className="mr-3" />
               Tambah Artikel
             </Button>
@@ -130,7 +130,7 @@ function CreateArticleSheet({ className, ...props }: CreateArticleSheetProps) {
         {props.children ? (
           props.children
         ) : (
-          <Button className="text-sm w-fit">
+          <Button variant={'outline'} className="text-sm  h-8    w-fit">
             <Plus className="mr-3" />
             Tambah Artikel
           </Button>

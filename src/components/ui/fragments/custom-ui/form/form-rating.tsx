@@ -99,7 +99,7 @@ function StarRatingInput({
             disabled={disabled}
             tabIndex={disabled ? -1 : 0}
             className={cn(
-              'relative transition-all duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm',
+              'relative transition-all duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-xl',
               !disabled && 'cursor-pointer hover:scale-110 active:scale-95',
               disabled && 'cursor-not-allowed',
             )}

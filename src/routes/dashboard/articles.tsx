@@ -114,15 +114,21 @@ function RouteComponent() {
                 onClick: () => setSheetOpen(true),
               }}
             />
-            <CreateArticleSheet className=' sr-only' open={sheetOpen} onOpenChange={setSheetOpen}/>
-           
+            <CreateArticleSheet
+              className=" sr-only"
+              open={sheetOpen}
+              onOpenChange={setSheetOpen}
+            />
           </>
         ) : (
           // Has data - show full DataTable with filters
           <Suspense fallback={<DataTableSkeleton />}>
-            <FeatureFlagsProvider createSheet={<CreateArticleSheet />}>
-              <ArticleTable data={articleData} />
-            </FeatureFlagsProvider>
+            <ArticleTable
+              createSheet={<CreateArticleSheet />}
+              data={articleData}
+            />
+            {/* <FeatureFlagsProvider>
+            </FeatureFlagsProvider> */}
           </Suspense>
         )}
       </main>

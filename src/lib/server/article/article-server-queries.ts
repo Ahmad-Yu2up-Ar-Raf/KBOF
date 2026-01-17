@@ -357,7 +357,7 @@ export const getArticleAggregateServerFn = createServerFn({
 import { adminServerMiddleware } from '@/lib/middleware'
 
 export const getArticleAggregateAdminServerFn = createServerFn({
-  method: 'GET',
+  method: 'POST',
 })
   .middleware([adminServerMiddleware])
   .inputValidator(z.object({ filters: articleAggregateInputSchema }))

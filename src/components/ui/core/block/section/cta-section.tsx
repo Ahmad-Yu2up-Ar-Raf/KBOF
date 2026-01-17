@@ -160,26 +160,26 @@ export default function CTASection() {
             </h1>
           </div>
 
-          <div className="flex w-full   sm:max-w-[12em] flex-col  justify-center  gap-3 sm:flex-row">
+          <div className="flex w-full   sm:max-w-[10em] flex-col  justify-center  gap-3 sm:flex-row">
             <Link
               to="/game"
               className={cn(
-                buttonVariants({ variant: 'default', size: 'lg' }),
-                'rounded-full w-full text-sm  font-semibold  gap-3  hover:bg-background hover:text-accent-foreground    sm:px-8   py-6  cursor-target hover:scale-110 transition-all duration-300 ease-out',
+                buttonVariants({ variant: 'default', size: 'sm' }),
+                'rounded-full w-full text-sm  font-semibold  gap-3  hover:bg-background hover:text-accent-foreground    sm:px-8   py-6  cursor-target hover:scale-110 transition-all duration-300 ease-out md:py-5',
               )}
             >
-              <Gamepad2Icon className=" size-4.5     " /> Mainkan
+              <Gamepad2Icon className=" size-4.5    md:size-3.5  " /> Mainkan
               Game{' '}
             </Link>
             <Link
               to="/artikel"
               className={cn(
-                buttonVariants({ variant: 'default', size: 'lg' }),
-                '  bg-background font-semibold text-accent-foreground rounded-full w-full text-sm   gap-3     sm:px-8    py-6 hover:bg-primary/90 cursor-target hover:scale-110 transition-all duration-300 ease-out hover:text-primary-foreground',
+                buttonVariants({ variant: 'default', size: 'sm' }),
+                '  bg-background font-semibold text-accent-foreground rounded-full w-full text-sm   gap-3     sm:px-8    py-6 hover:bg-primary/90 cursor-target hover:scale-110 transition-all duration-300 ease-out hover:text-primary-foreground md:py-5',
               )}
             >
-              <BookOpenText className="  size-4.5      " />
-              Baca Artikel{' '}
+              <BookOpenText className="  size-4.5  md:size-3.5     " />
+              Jelajahi Artikel{' '}
             </Link>
           </div>
         </div>

@@ -147,7 +147,7 @@ export function RelatedDestinationsSection({
           search={{ categories: [category] }}
           className={cn(
             buttonVariants({ variant: 'link', size: 'lg' }),
-            ' text-muted-foreground hover:text-primary gap-1',
+            ' hidden md:flex text-muted-foreground hover:text-primary gap-1',
           )}
         >
           Lihat Semua

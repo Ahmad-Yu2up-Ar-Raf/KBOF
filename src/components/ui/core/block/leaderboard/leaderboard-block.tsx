@@ -9,7 +9,10 @@ import { useState } from 'react'
 import { useSuspenseQuery } from '@tanstack/react-query'
 
 import type { LeaderboardFilters } from '@/lib/query-options'
-import { getLeaderboardPodiumQueryOptions, getLeaderboardQueryOptions } from '@/lib/query-options'
+import {
+  getLeaderboardPodiumQueryOptions,
+  getLeaderboardQueryOptions,
+} from '@/lib/query-options'
 
 import {
   LeaderboardHeader,
@@ -52,8 +55,12 @@ export default function LeaderboardPage() {
   useConfettiEffect()
 
   // Fetch data - always get global top 10
-  const { data: podium } = useSuspenseQuery(getLeaderboardPodiumQueryOptions(PODIUM_FILTERS))
-  const { data: leaderboardData } = useSuspenseQuery(getLeaderboardQueryOptions(GLOBAL_QUERY_FILTERS))
+  const { data: podium } = useSuspenseQuery(
+    getLeaderboardPodiumQueryOptions(PODIUM_FILTERS),
+  )
+  const { data: leaderboardData } = useSuspenseQuery(
+    getLeaderboardQueryOptions(GLOBAL_QUERY_FILTERS),
+  )
 
   // Filter management
   const {

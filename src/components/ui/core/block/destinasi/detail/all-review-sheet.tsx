@@ -331,7 +331,7 @@ export function AllReviewsSheet({
   const setOpen = controlledOnOpenChange || setInternalOpen
 
   const defaultTrigger = (
-    <Button variant="ghost" size="sm" className="w-full">
+    <Button variant="ghost" size="sm" className="w-full text-xs">
       Lihat semua {totalReviews} review
       {isMobile ? (
         <ChevronDown className="ml-2 h-4 w-4" />
@@ -371,7 +371,9 @@ export function AllReviewsSheet({
               className=" w-full"
               size={'lg'}
               onClick={() => {
-                ;(setOpen(false), setOpenAddReview(true))
+                // Close this sheet, then open the AddReviewSheet after animation
+                setOpen(false)
+                setTimeout(() => setOpenAddReview(true), 320)
               }}
             >
               Bagi Pengalaman <Plus className=" fill-background" />
@@ -404,7 +406,7 @@ export function AllReviewsSheet({
           />
         </div>
 
-        <SheetFooter className="gap-3 sticky bottom-0 bg-background px-3 py-4 w-full flex-row justify-end flex border-t sm:space-x-0">
+        <SheetFooter className="gap-3 sr-only sticky bottom-0 bg-background px-3 py-4 w-full flex-row justify-end flex border-t sm:space-x-0">
           {/* <SheetClose asChild>
                     <Button type="button" variant="outline">
                       Batal
@@ -414,7 +416,9 @@ export function AllReviewsSheet({
             className=" w-full"
             size={'lg'}
             onClick={() => {
-              ;(setOpen(false), setOpenAddReview(true))
+              // Close this sheet, then open the AddReviewSheet after animation
+              setOpen(false)
+              setTimeout(() => setOpenAddReview(true), 320)
             }}
           >
             Bagi Pengalaman <Plus className="fill-background" />

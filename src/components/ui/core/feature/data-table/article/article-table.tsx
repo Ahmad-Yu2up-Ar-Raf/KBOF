@@ -34,14 +34,18 @@ type ArticleRow = ArticleAggregateResult['data'][number]
 interface ArticleTableProps {
   /** Resolved data from query */
   data: ArticleAggregateResult
+  createSheet?: React.ReactNode
 }
 
 // ============================================
 // MAIN COMPONENT
 // ============================================
 
-export function ArticleTable({ data: articleData }: ArticleTableProps) {
-  const { enableAdvancedFilter, filterFlag } = useFeatureFlags()
+export function ArticleTable({
+  data: articleData,
+  createSheet,
+}: ArticleTableProps) {
+  // const { enableAdvancedFilter, filterFlag } = useFeatureFlags()
 
   // Extract data from resolved result
   const { data, pageCount, statusCounts } = articleData
@@ -62,7 +66,7 @@ export function ArticleTable({ data: articleData }: ArticleTableProps) {
     data,
     columns,
     pageCount,
-    enableAdvancedFilter,
+    // enableAdvancedFilter,
     initialState: {
       sorting: [{ id: 'createdAt', desc: true }],
       columnPinning: { right: ['actions'] },
@@ -145,7 +149,7 @@ export function ArticleTable({ data: articleData }: ArticleTableProps) {
           />
         }
       >
-        {enableAdvancedFilter ? (
+        {/* {enableAdvancedFilter ? (
           <DataTableAdvancedToolbar table={table}>
             <DataTableSortList table={table} align="start" />
             {filterFlag === 'advancedFilters' ? (
@@ -167,9 +171,14 @@ export function ArticleTable({ data: articleData }: ArticleTableProps) {
           </DataTableAdvancedToolbar>
         ) : (
           <DataTableToolbar table={table}>
+            {createSheet}
             <DataTableSortList table={table} align="end" />
           </DataTableToolbar>
-        )}
+        )} */}
+        <DataTableToolbar table={table}>
+          {createSheet}
+          {/* <DataTableSortList table={table} align="end" /> */}
+        </DataTableToolbar>
       </DataTable>
       {rowAction?.row.original && (
         <UpdateArticleSheet

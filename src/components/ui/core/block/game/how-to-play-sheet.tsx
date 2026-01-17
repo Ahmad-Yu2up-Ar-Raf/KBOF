@@ -203,7 +203,7 @@ function HowToPlayContent({ onStartGame }: { onStartGame: () => void }) {
             <span className="text-muted-foreground">🔥 Sulit:</span>
             <span className="font-medium">30 poin</span>
           </div>
-          {/* <div className="mt-3 rounded-md bg-background p-2 text-xs">
+          {/* <div className="mt-3 rounded-xl bg-background p-2 text-xs">
             💡 <strong>Bonus:</strong> Jawab dengan sisa waktu &gt;50% = +25%
             poin!
           </div> */}

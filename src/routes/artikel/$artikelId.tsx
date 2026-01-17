@@ -84,10 +84,10 @@ function ArtikelDetailSkeleton() {
   return (
     <div className="space-y-7   py-6 sm:pt-5   container  px-6 ">
       {/* Nav skeleton */}
-      <nav className="flex items-center gap-2">
+      {/* <nav className="flex items-center gap-2">
         <ArrowLeft className="size-5 text-muted-foreground" />
         <Skeleton className="h-5 w-16" />
-      </nav>
+      </nav> */}
 
       {/* Content skeleton */}
       <section className="min-h-svh space-y-6">

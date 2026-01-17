@@ -40,8 +40,8 @@ function RouteComponent() {
   return (
     <div className="mx-auto container max-w-6xl space-y-4 ">
       <KatalogHeader
-        titleMain="Destinasi"
-        titleSecond="Indonesia"
+        titleMain="Ruang"
+        titleSecond="Destinasi"
         linkText="Ajukan Destinasi Lokal"
         subTitle="Ruang Destinasi Suasana Lokal"
         deskription="Temukan destinasi wisata unik, rasakan kehangatan budaya lokal."

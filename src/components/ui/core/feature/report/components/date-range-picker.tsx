@@ -49,7 +49,7 @@ export function CalendarDateRangePicker({
                 aria-label="Clear date filter"
                 tabIndex={0}
                 onClick={handleClearFilter}
-                className="rounded-sm opacity-70 transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring mr-2"
+                className="rounded-xl opacity-70 transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring mr-2"
               >
                 <XCircle className="h-4 w-4" />
               </div>

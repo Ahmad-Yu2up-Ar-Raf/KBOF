@@ -10,6 +10,10 @@ import {
   Users,
   Telescope,
   UsersRound,
+  BookOpenText,
+  Gamepad2,
+  Medal,
+  Home,
 } from 'lucide-react'
 
 import { NavMain } from './nav-main'
@@ -26,6 +30,7 @@ import { NavSecondary } from './nav-secondary'
 import { useIsMobile } from '@/hooks/use-mobile'
 import type { User, UserRoleType } from '@/db/schema'
 import SidebarHeaderLogo from './app-sidebar-header'
+import { NavProjects } from './nav-project'
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
   user: User
@@ -40,19 +45,48 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
 
   const navMain = [
     {
+      title: 'Beranda',
+      url: '/',
+      icon: Home,
+    },
+    {
+      title: 'Destinasi',
+      url: '/destinasi',
+      icon: Telescope,
+    },
+    {
+      title: 'Artikel',
+      url: '/artikel',
+      icon: BookOpenText,
+    },
+    {
+      title: 'Game',
+      url: '/game',
+      icon: Gamepad2,
+    },
+    {
+      title: 'Peringkat',
+      url: '/destinasi/leaderboard',
+      icon: Medal,
+    },
+    // Only show for SuperAdmin
+  ]
+  const projects = [
+    {
       title: 'Dashboard',
       url: '/dashboard',
       icon: LayoutDashboardIcon,
     },
+
     {
-      title: 'Destination',
+      title: 'Kelola Destinasi',
       url: '/dashboard/destination',
       icon: Telescope,
     },
     {
-      title: 'Article',
+      title: 'Kelola Artikel',
       url: '/dashboard/articles',
-      icon: Newspaper,
+      icon: BookOpenText,
     },
     // Only show for SuperAdmin
     ...(isSuperAdmin
@@ -68,6 +102,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
 
   const data = {
     navMain,
+    projects,
     navSecondary: [
       {
         title: 'Support',
@@ -90,8 +125,8 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
         <SidebarHeaderLogo />
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-
+        <NavMain items={data.projects} />
+        <NavProjects items={data.navMain} />
         <NavSecondary
           isMobile={isMob}
           items={data.navSecondary}

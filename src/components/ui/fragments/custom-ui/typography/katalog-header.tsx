@@ -71,7 +71,7 @@ const KatalogHeader = ({
             {isMobile ? (
               <span>
                 {titleMain} <br />{' '}
-                <span className="pl-17 ">{titleSecond}</span>{' '}
+                <span className="pl-13 ">{titleSecond}</span>{' '}
               </span>
             ) : (
               <>
@@ -90,7 +90,7 @@ const KatalogHeader = ({
                 <VerticalCutReveal
                   splitBy="characters"
                   staggerDuration={0.05}
-                  containerClassName="lg:pl-32 md:pl-16 pl-14 leading-[140%]"
+                  containerClassName={'lg:pl-32 md:pl-16 pl-24 leading-[140%]'}
                   staggerFrom="first"
                   transition={{
                     type: 'spring',
@@ -104,7 +104,7 @@ const KatalogHeader = ({
             )}
           </h1>
 
-          <div className="sm:w-96 space-y-1.5 sm:pt-0 ">
+          <div className="sm:w-96 space-y-1.5 sm:pt-0 pt-3 ">
             <p className="text-sm font-semibold text-end">{subTitle}.</p>
             {isMobile ? (
               <p className=" text-muted-foreground text-justify">
@@ -117,7 +117,7 @@ const KatalogHeader = ({
                 staggerDuration={0.1}
                 staggerFrom="first"
                 reverse={true}
-                wordLevelClassName="text-sm text-muted-foreground lg:text-base text-justify"
+                wordLevelClassName="text-sm line-clamp-2 text-muted-foreground lg:text-base text-justify"
                 transition={{
                   type: 'spring',
                   stiffness: 250,

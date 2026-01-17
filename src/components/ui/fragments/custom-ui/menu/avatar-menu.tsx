@@ -164,19 +164,19 @@ const listItemsRole: groupItems[] = [
         role: ['admin', 'superAdmin'],
       },
       {
-        label: 'Pengelolaan Destinasi  ',
+        label: 'Kelola Destinasi  ',
         icon: Telescope,
         href: `/dashboard/destination`,
         role: ['admin', 'superAdmin'],
       },
       {
-        label: 'Pengelolaan Artikel  ',
+        label: 'Kelola Artikel  ',
         icon: Newspaper,
         href: `/dashboard/articles`,
         role: ['admin', 'superAdmin'],
       },
       {
-        label: 'Pengelolaan Users  ',
+        label: 'Kelola Users  ',
         icon: UsersRound,
         role: ['admin'],
         href: `/dashboard/user-menagement`,

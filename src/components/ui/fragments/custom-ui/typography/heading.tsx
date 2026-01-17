@@ -5,11 +5,13 @@ export default function Heading({
   title,
   description,
   Icon,
+  children,
   className,
 }: {
   title: string
   description?: string
   Icon?: LucideIcon
+  children?: React.ReactNode
   className?: string
 }) {
   return (
@@ -28,6 +30,7 @@ export default function Heading({
         </h1>
         <p className="text-muted-foreground ">{description}</p>
       </div>
+      {children}
     </header>
   )
 }

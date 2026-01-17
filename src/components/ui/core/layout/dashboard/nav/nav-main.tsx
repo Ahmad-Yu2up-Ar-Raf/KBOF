@@ -26,7 +26,7 @@ export function NavMain({ items }: sidebarType) {
 
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarGroupLabel>Projects</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => {
           const isActive = paths == item.url

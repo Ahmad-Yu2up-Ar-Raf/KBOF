@@ -58,7 +58,6 @@ export default function DestinasiDetailBlock({
           )}
         >
           <div className="absolute inset-0 bg-linear-to-b from-background/10 via-background/50 to-background     " />
-        
         </section>
         <div className=" relative  space-y-6 z-20 -mt-20  container content-center   px-6  ">
           <section className="  h-full     w-full md:grid grid-cols-1 lg:grid-cols-2   md:gap-10 gap-4   lg:gap-15    sm:pt-0     space-y-6">
@@ -120,7 +119,10 @@ export default function DestinasiDetailBlock({
               key={`gallery-${destination.id}`}
               images={imagesGallery}
             />
-            <DestinationMap />
+            <DestinationMap
+              destinationName={destination.name}
+              address={`${destination.alamat ?? ''} ${destination.kabupatenKota ?? ''} ${destination.provinsi ?? ''}`.trim()}
+            />
           </section>
 
           <section className="    space-y-6">
@@ -154,7 +156,6 @@ export default function DestinasiDetailBlock({
           'relative min-h-67  bg-fixed bg-no-repeat bg-center  bg-cover  flex items-center justify-center overflow-hidden hero-parallax  ',
         )}
       >
-       
         <div className="absolute inset-0 bg-linear-to-b from-background/10 via-background/10 to-background     " />
         <div className="absolute inset-0 bg-linear-to-r from-background/10 via-background/0 to-background     " />
         <div className="absolute inset-0 bg-linear-to-l from-background/10 via-background/0 to-background     " />
@@ -218,7 +219,10 @@ export default function DestinasiDetailBlock({
                 <VoteButton destination={destination} />
               </div>
             </div>
-            <DestinationMap />
+            <DestinationMap
+              destinationName={destination.name}
+              address={`${destination.alamat ?? ''} ${destination.kabupatenKota ?? ''} ${destination.provinsi ?? ''}`.trim()}
+            />
             <section>
               <ReviewsSection
                 setOpenAddReview={setOpenAddReview}
@@ -253,12 +257,6 @@ function DestinasiDetailSkeleton() {
         <section className="relative min-h-50 bg-muted">
           <div className="absolute inset-0 bg-linear-to-b from-background/10 via-background/50 to-background" />
           {/* Navigation */}
-          <nav className="z-50 absolute top-3 w-full">
-            <div className="relative w-full px-5 container flex items-center justify-between">
-              <ArrowLeft className="size-5 text-muted-foreground/50" />
-              <MoreVertical className="size-5 text-muted-foreground/50" />
-            </div>
-          </nav>
         </section>
 
         {/* Content Container - matches -mt-20 and space-y-6 */}
@@ -349,12 +347,6 @@ function DestinasiDetailSkeleton() {
       <section className="relative min-h-67 bg-muted">
         <div className="absolute inset-0 bg-linear-to-b from-background/10 via-background/50 to-background" />
         {/* Navigation */}
-        <nav className="z-50 absolute top-3 w-full">
-          <div className="relative w-full max-w-5xl px-5 container flex items-center justify-between">
-            <ArrowLeft className="size-5 text-muted-foreground/50" />
-            <MoreVertical className="size-5 text-muted-foreground/50" />
-          </div>
-        </nav>
       </section>
 
       {/* Content Container - matches container space-y-4 -mt-10 */}

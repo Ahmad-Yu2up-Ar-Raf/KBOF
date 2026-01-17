@@ -100,7 +100,7 @@ function GridPatternDashed() {
 export default function CTASection() {
   return (
     <section className="container px-6  py-12 md:py-16 lg:py-20">
-      <div className="relative w-fullcontainer m-auto   h-[500px] md:h-[400px] overflow-hidden rounded-3xl border border-primary/20 bg-accent px-7">
+      <div className="relative w-fullcontainer m-auto   h-[500px] md:h-[350px] overflow-hidden rounded-3xl border border-primary/20 bg-accent px-7">
         {/* /* Grid Background */}
         <GridPatternDashed />
 
@@ -160,25 +160,25 @@ export default function CTASection() {
             </h1>
           </div>
 
-          <div className="flex w-full   sm:max-w-[10em] flex-col  justify-center  gap-3 sm:flex-row">
+          <div className="flex w-full   sm:max-w-[12em] flex-col  justify-center  gap-3 sm:flex-row">
             <Link
               to="/game"
               className={cn(
                 buttonVariants({ variant: 'default', size: 'lg' }),
-                'rounded-full w-full text-sm  font-semibold  gap-3  hover:bg-background hover:text-accent-foreground    sm:px-8   py-4  cursor-target hover:scale-110 transition-all duration-300 ease-out',
+                'rounded-full w-full text-sm  font-semibold  gap-3  hover:bg-background hover:text-accent-foreground    sm:px-8   py-6  cursor-target hover:scale-110 transition-all duration-300 ease-out',
               )}
             >
-              <Gamepad2Icon className=" size-4.5       sm:size-3.5" /> Coba
+              <Gamepad2Icon className=" size-4.5     " /> Mainkan
               Game{' '}
             </Link>
             <Link
               to="/artikel"
               className={cn(
                 buttonVariants({ variant: 'default', size: 'lg' }),
-                '  bg-background font-semibold text-accent-foreground rounded-full w-full text-sm   gap-3     sm:px-8   py-4 hover:bg-primary/90 cursor-target hover:scale-110 transition-all duration-300 ease-out hover:text-primary-foreground',
+                '  bg-background font-semibold text-accent-foreground rounded-full w-full text-sm   gap-3     sm:px-8    py-6 hover:bg-primary/90 cursor-target hover:scale-110 transition-all duration-300 ease-out hover:text-primary-foreground',
               )}
             >
-              <BookOpenText className="  size-4.5       sm:size-3.5" />
+              <BookOpenText className="  size-4.5      " />
               Baca Artikel{' '}
             </Link>
           </div>

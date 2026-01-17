@@ -29,6 +29,8 @@ import { AllReviewsSheet } from './all-review-sheet'
 interface ReviewsSectionProps {
   destinationId: number
   destinationSlug: string
+  setOpenAddReview: (open: boolean) => void
+  OpenAddReview: boolean
   reviews?: DestinasiDetailDestination['reviews']
   totalReview: number
 }
@@ -153,6 +155,8 @@ function ReviewsSection({
   reviews,
   totalReview,
   destinationId,
+  setOpenAddReview,
+  OpenAddReview,
   destinationSlug,
 }: ReviewsSectionProps) {
   const displayReviews = reviews?.slice(0, 4) ?? []
@@ -179,8 +183,10 @@ function ReviewsSection({
           </div>
 
           {hasMoreReviews && (
-            <footer className="border-b mt-4">
+            <footer className="border-b  ">
               <AllReviewsSheet
+                setOpenAddReview={setOpenAddReview}
+                OpenAddReview={OpenAddReview}
                 destinationId={destinationId}
                 destinationName={destinationSlug}
                 totalReviews={totalReview}

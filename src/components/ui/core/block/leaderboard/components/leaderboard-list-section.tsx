@@ -72,6 +72,7 @@ export function LeaderboardListSection({
 
       {/* Filters */}
       <FilterBar
+        
         filters={filters}
         onFiltersChange={onFiltersChange}
         categoryOptions={categoryOptions}
@@ -82,7 +83,7 @@ export function LeaderboardListSection({
       />
 
       {/* List */}
-      <div>
+      <div className=' mt-10'>
         {data.map((entry, index) => (
           <LeaderboardRow
             key={entry.destinationId}

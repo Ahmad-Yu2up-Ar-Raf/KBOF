@@ -22,7 +22,13 @@ import { useLottie } from 'lottie-react'
 
 import animationData from '@/assets/animations/Cute Boy Running.json'
 import { useIsMobile } from '@/hooks/use-mobile'
-import { SectionIcon } from 'lucide-react'
+import {
+  ArrowLeft,
+  Gamepad2,
+  HomeIcon,
+  RotateCcw,
+  SectionIcon,
+} from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 
 type StatsPanelProps = {
@@ -63,11 +69,11 @@ export function StatsPanel({
 
   return (
     <section className="space-y-6    relative   max-w-md m-auto ">
-      <header className=" w-full md:min-h-80 px-3 min-h-60 relative justify-end   flex  flex-col">
-        <div className=" absolute -top-6   -right-2 size-full text-center z-30   ">
+      <header className="  w-full md:min-h-80 px-3 min-h-62 relative justify-end   flex  flex-col">
+        <div className="  relative   -mb-24  ml-2 size-full text-center z-30   ">
           {View}
         </div>
-        <div className=" rela z-20">
+        <div className=" mt-20   z-20">
           <p>Level: {config.displayName}</p>
           <h3 className="text-2xl font-semibold md:text-3xl">{message}</h3>
         </div>
@@ -160,25 +166,27 @@ export function StatsPanel({
               className=" w-full  md:w-1/2"
               onClick={onPlayAgain}
             >
-              Main Lagi
+              <RotateCcw /> Main Lagi
             </Button>
             <Button
               className=" bg-foreground w-full md:w-1/2"
               size="lg"
               onClick={onChangeLevel}
             >
-              Menu Utama
+              <Gamepad2 /> Menu Utama
             </Button>
           </div>
-          <Link
-            to="/"
-            className={cn(
-              buttonVariants({ variant: 'secondary', size: 'lg' }),
-              '   ',
-            )}
-          >
-            Kembali Ke Beranda
-          </Link>
+          {!isMobile && (
+            <Link
+              to="/"
+              className={cn(
+                buttonVariants({ variant: 'secondary', size: 'lg' }),
+                '      ',
+              )}
+            >
+              <ArrowLeft /> Kembali Ke Beranda
+            </Link>
+          )}
           {/* <Button size="lg" variant="ghost" onClick={onBackToMenu}>
            Menu Utama
         </Button> */}

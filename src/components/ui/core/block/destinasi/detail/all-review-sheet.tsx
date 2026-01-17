@@ -9,7 +9,15 @@
 
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { Star, MessageCircle, ChevronDown, Filter } from 'lucide-react'
+import {
+  Star,
+  MessageCircle,
+  ChevronDown,
+  Filter,
+  Plus,
+  PlusCircle,
+  ChevronRight,
+} from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 import {
@@ -17,6 +25,7 @@ import {
   SheetClose,
   SheetContent,
   SheetDescription,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -26,6 +35,7 @@ import {
   DrawerClose,
   DrawerContent,
   DrawerDescription,
+  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -66,6 +76,8 @@ export type AllReviewsSheetProps = {
   initialData?: ReviewWithUser[]
   trigger?: React.ReactNode
   open?: boolean
+  setOpenAddReview: (open: boolean) => void
+  OpenAddReview: boolean
   onOpenChange?: (open: boolean) => void
 }
 
@@ -246,7 +258,7 @@ function AllReviewsContent({
           value={sortBy}
           onValueChange={(v) => setSortBy(v as ReviewFilters['sort'])}
         >
-          <SelectTrigger className="w-[140px] h-8">
+          <SelectTrigger className="w-[140px] border-0 shadow-none text-xs h-4">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -305,6 +317,8 @@ export function AllReviewsSheet({
   destinationId,
   destinationName,
   totalReviews,
+  OpenAddReview,
+  setOpenAddReview,
   trigger,
   open: controlledOpen,
   onOpenChange: controlledOnOpenChange,
@@ -319,7 +333,11 @@ export function AllReviewsSheet({
   const defaultTrigger = (
     <Button variant="ghost" size="sm" className="w-full">
       Lihat semua {totalReviews} review
-      <ChevronDown className="ml-2 h-4 w-4" />
+      {isMobile ? (
+        <ChevronDown className="ml-2 h-4 w-4" />
+      ) : (
+        <ChevronRight className="ml-2 h-4 w-4" />
+      )}
     </Button>
   )
 
@@ -330,7 +348,11 @@ export function AllReviewsSheet({
         <DrawerTrigger asChild>{trigger || defaultTrigger}</DrawerTrigger>
         <DrawerContent className="max-h-[90vh]">
           <DrawerHeader className="text-left border-b">
-            <DrawerTitle>Review {destinationName}</DrawerTitle>
+            <DrawerTitle>
+              {' '}
+              <MessageCircle className="inline mr-2 mb-1 size-5" />
+              Review {destinationName}
+            </DrawerTitle>
             <DrawerDescription>
               {totalReviews} ulasan dari pengunjung
             </DrawerDescription>
@@ -344,13 +366,17 @@ export function AllReviewsSheet({
             />
           </div>
 
-          <div className="border-t p-4">
-            <DrawerClose asChild>
-              <Button variant="outline" className="w-full">
-                Tutup
-              </Button>
-            </DrawerClose>
-          </div>
+          <DrawerFooter className="border-t p-4">
+            <Button
+              className=" w-full"
+              size={'lg'}
+              onClick={() => {
+                ;(setOpen(false), setOpenAddReview(true))
+              }}
+            >
+              Bagi Pengalaman <Plus className=" fill-background" />
+            </Button>
+          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     )
@@ -360,21 +386,40 @@ export function AllReviewsSheet({
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>{trigger || defaultTrigger}</SheetTrigger>
-      <SheetContent className="overflow-y-auto sm:max-w-lg">
-        <SheetHeader className="border-b pb-4">
-          <SheetTitle>Review {destinationName}</SheetTitle>
-          <SheetDescription>
+      <SheetContent className="flex flex-col gap-0 overflow-y-auto">
+        <SheetHeader className="text-left sm:px-6  bg-background z-30 sticky top-0 p-4 border-b">
+          <SheetTitle className="text-lg">
+            <MessageCircle className="inline mr-2 mb-1 h-6 w-6" />
+            Review {destinationName}
+          </SheetTitle>
+          <SheetDescription className=" ">
             {totalReviews} ulasan dari pengunjung
           </SheetDescription>
         </SheetHeader>
-
-        <div className="mt-6">
+        <div className="py-5 px-8">
           <AllReviewsContent
             destinationId={destinationId}
             destinationName={destinationName}
             totalReviews={totalReviews}
           />
         </div>
+
+        <SheetFooter className="gap-3 sticky bottom-0 bg-background px-3 py-4 w-full flex-row justify-end flex border-t sm:space-x-0">
+          {/* <SheetClose asChild>
+                    <Button type="button" variant="outline">
+                      Batal
+                    </Button>
+                  </SheetClose> */}
+          <Button
+            className=" w-full"
+            size={'lg'}
+            onClick={() => {
+              ;(setOpen(false), setOpenAddReview(true))
+            }}
+          >
+            Bagi Pengalaman <Plus className="fill-background" />
+          </Button>
+        </SheetFooter>
       </SheetContent>
     </Sheet>
   )

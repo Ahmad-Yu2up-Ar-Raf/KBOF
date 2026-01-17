@@ -67,10 +67,11 @@ const KatalogHeader = ({
     <div className="  pt-4       container ">
       <div className="  flex flex-col md:gap-4  md:justify-between gap-6">
         <header className="w-full gap-4 md:items-center flex-col md:flex-row flex justify-between m-auto">
-          <h1 className="xl:text-[6rem] font-medium  tracking-tight lg:leading-30 lg:text-8xl text-5xl lg:-space-y-10 -space-y-6">
+          <h1 className="xl:text-[6rem] font-medium  tracking-tight lg:leading-30 lg:text-8xl text-7xl lg:-space-y-10 -space-y-6">
             {isMobile ? (
               <span>
-                {titleMain} <br /> {titleSecond}
+                {titleMain} <br />{' '}
+                <span className="pl-17 ">{titleSecond}</span>{' '}
               </span>
             ) : (
               <>
@@ -104,9 +105,9 @@ const KatalogHeader = ({
           </h1>
 
           <div className="sm:w-96 space-y-1.5 sm:pt-0 ">
-            {/* <p className="text-sm font-semibold text-end">{subTitle}.</p> */}
+            <p className="text-sm font-semibold text-end">{subTitle}.</p>
             {isMobile ? (
-              <p className="text-sm  text-muted-foreground text-justify">
+              <p className=" text-muted-foreground text-justify">
                 {deskription}
               </p>
             ) : (

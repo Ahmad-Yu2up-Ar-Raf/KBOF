@@ -35,7 +35,7 @@ function RouteComponent() {
   return (
     <div className="mx-auto container max-w-6xl space-y-4  ">
       <KatalogHeader
-        titleMain="Suara"
+        titleMain="Kisah"
         titleSecond="Lokal*"
         linkText="Suarakan Ceritamu"
         subTitle="Setiap tempat punya cerita"

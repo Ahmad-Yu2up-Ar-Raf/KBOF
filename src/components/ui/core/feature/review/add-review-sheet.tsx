@@ -139,7 +139,7 @@ function AddReviewSheet({
   // Desktop: Sheet
   if (!isMobile) {
     return (
-      <Sheet open={open} onOpenChange={setOpen} modal={true}>
+      <Sheet open={props.open} onOpenChange={props.onOpenChange} modal={true}>
         <Activity mode={props.trigger ? 'hidden' : 'visible'}>
           <SheetTrigger asChild>{TriggerButton}</SheetTrigger>
         </Activity>
@@ -203,7 +203,7 @@ function AddReviewSheet({
         <DrawerHeader className=" text-center sm:px-6 space-y-1 bg-background p-4 border-b">
           <DrawerTitle className="text-xl  gap-2">
             {/* <Star className="size-5 text-primary fill-primary" /> */}
-            Berikan Review
+            Berikan Review & pengalamanmu 
           </DrawerTitle>
           <DrawerDescription className="text-sm">
             Bagikan pengalaman Anda mengunjungi destinasi ini

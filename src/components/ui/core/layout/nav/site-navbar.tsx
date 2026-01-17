@@ -45,6 +45,28 @@ function SiteNavbar() {
   const isActive = paths !== '/' && paths !== '/game'
   // setOpen((prevState) => !prevState)
   const isMobile = useIsMobile()
+  if (isActive && isMobile)
+    return (
+      <nav className=" relative top-0  z-40  bg-transparent  rounded-b-2xl     w-full">
+        <header
+          className={cn(
+            ' top-1   md:rounded-b-none     mx-auto      md:border-b      items-center justify-start    pb-1    pt-2     flex    text-center w-full  px-5  max-w-[53rem] md:px-0 md:py-1.5 ',
+          )}
+        >
+          <Button
+            variant={'link'}
+            onClick={() => window.history.back()}
+            size={'icon'}
+            className={cn(
+              'flex w-fit  py-2 md:flex text-base items-center gap-2   group transition-colors',
+            )}
+          >
+            <ArrowLeft className=" size-5 group-hover:-translate-x-1 group-hover:transform transition-all ease-out duration-300" />
+            <span className=" md:sr-only">Kembali</span>
+          </Button>
+        </header>
+      </nav>
+    )
   if (isActive)
     return (
       <motion.nav
@@ -56,41 +78,37 @@ function SiteNavbar() {
           duration: 0.2,
           delay: 0,
         }}
-        className="sticky top-0  z-40  bg-background    w-full"
+        className="sticky top-0   z-40  bg-background    w-full"
       >
         <header
           className={cn(
             ' top-2   md:rounded-b-none     mx-auto      md:border-b      items-center justify-center md:justify-between   pb-3    pt-6     flex    text-center w-full  px-5  max-w-[53rem] md:px-0 md:py-1.5 ',
           )}
         >
-          <nav
+          <div
             className={cn(
-              'z-50  w-full md:w-fit    absolute  left-5.5 md:left-0   md:relative   bg-background/95 backdrop-blur flex justify-between',
+              'z-50  w-fit    absolute  left-5.5 md:left-0   md:relative   bg-background/95 backdrop-blur flex justify-between',
             )}
           >
             <Button
-              variant={'link'}
+              variant={'ghost'}
               onClick={() => window.history.back()}
               size={'icon'}
               className={cn(
-                'flex w-fit  py-2 md:flex text-base items-center gap-2   group transition-colors',
+                'flex w-fit  py-2 md:flex text-base items-center gap-2    group transition-colors',
               )}
             >
               <ArrowLeft className=" size-5 group-hover:-translate-x-1 group-hover:transform transition-all ease-out duration-300" />
               <span className=" md:sr-only">Kembali</span>
             </Button>
-          </nav>
+          </div>
 
-          {!isMobile && (
-            <>
-              <div className="">
-                <div className=" flex items-center text-2xl justify-center   gap-3">
-                  <NavbarLogo />
-                </div>
-              </div>
-              <AvatarMenu user={session?.user as User} />
-            </>
-          )}
+          <div className="">
+            <div className=" flex items-center text-2xl justify-center   gap-3">
+              <NavbarLogo />
+            </div>
+          </div>
+          <AvatarMenu user={session?.user as User} />
         </header>
       </motion.nav>
     )

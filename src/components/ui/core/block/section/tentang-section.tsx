@@ -81,7 +81,7 @@ function About() {
         {/* Image Container - Kanan (Flex based, controlled size) */}
         <div className="flex items-end justify-center w-full lg:w-[50%] lg:hover:gap-6 transition-all duration-300">
           {/* Gambar pendukung kiri - rotated -15deg */}
-          <div className="-mr-29 hover:mr-0 -translate-y-8 -rotate-10 z-[1] transition-all duration-300">
+          <div className="-mr-29 hover:mr-0 -translate-y-3.5 -rotate-10 z-[1] transition-all duration-300">
             <ImageCard
               src="assets/images/rendang-potongan.png"
               alt="Rendang - Kuliner Nusantara"
@@ -105,7 +105,7 @@ function About() {
           </div>
 
           {/* Gambar pendukung kanan - rotated 15deg */}
-          <div className=" -ml-29 hover:ml-0 -translate-y-9 rotate-10 z-[1] transition-all duration-300">
+          <div className=" -ml-29 hover:ml-0 -translate-y-4.5 rotate-10 z-[1] transition-all duration-300">
             <ImageCard
               src="assets/images/batik-potongan.png"
               alt="Batik - Warisan Nusantara"

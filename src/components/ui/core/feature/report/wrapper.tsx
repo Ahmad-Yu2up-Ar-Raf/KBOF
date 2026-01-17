@@ -16,7 +16,7 @@ function Wrapper({ children, title = 'Dashboard' }: WrapperProps) {
           <h1 className="text-3xl lg:text-4xl font-bold tracking-tight">{title}</h1>
           <p>
             {' '}
-            Selamat datang admin berikut ini rangkuman dari keseluruhan
+            Selamat datang pengguna berikut ini rangkuman dari keseluruhan
             data{' '}
           </p>
         </div>

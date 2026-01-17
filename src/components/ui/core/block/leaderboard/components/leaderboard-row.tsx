@@ -198,7 +198,7 @@ function RowInfo({ entry }: RowInfoProps) {
           {/* Rating */}
           <Badge
             variant="outline"
-            className="text-[10px] md:text-xs border-0 p-0 flex items-center gap-0.5 shrink-0"
+            className="text-[10px] sr-only md:text-xs border-0 p-0 flex items-center gap-0.5 shrink-0"
           >
             <StarIcon className="size-3 md:size-3.5 fill-primary text-primary" />
             <span className="font-semibold">
@@ -227,7 +227,7 @@ function RowInfo({ entry }: RowInfoProps) {
       </p>
 
       {/* Tags */}
-      <div className="mt-0.5 md:mt-1">
+      <div className="mt-0.5 hidden md:block md:mt-1">
         <div className="flex items-center gap-1 md:gap-1.5 flex-wrap">
           <Badge className="px-1.5 py-0 bg-primary/10 text-primary rounded-xl text-[10px] md:text-xs font-medium">
             # {entry.category.replace(/-/g, ' ')}

@@ -9,8 +9,7 @@ import { motion } from 'framer-motion'
 import type { Level } from '@/lib/game/types'
 import { ANIMATION_DURATION } from '@/lib/game/constants'
 import { GameHeader, GameContent, LevelSelect } from '@/components/game'
-import { Button } from '@/components/ui/fragments/shadcn-ui/button'
-import { ArrowLeft } from 'lucide-react'
+ 
 
 // =============================================================================
 // TYPES

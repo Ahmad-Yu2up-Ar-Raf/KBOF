@@ -321,11 +321,7 @@ function AvatarMenu({ user, isHomePage = false }: componentProps) {
     return (
       <Link to="/login">
         <Avatar className="cursor-pointer">
-          <AvatarImage
-            src="/assets/images/default-avaatarjpg.jpg"
-            alt="Guest"
-          />
-          <AvatarFallback>G</AvatarFallback>
+          <AvatarFallback>S</AvatarFallback>
         </Avatar>
       </Link>
     )

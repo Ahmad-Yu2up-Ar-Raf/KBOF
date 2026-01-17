@@ -95,7 +95,7 @@ export default function SiteFooter({ className, ...props }: StickyFooterProps) {
 
             {/* Judul besar tengah */}
             <div className="w-full h-fit flex items-center justify-center  ">
-              <h1 className="text-center lg:h-80 relative text-[20dvw] lg:text-[16em] font-bold bg-clip-text tracking-tighter   bg-linear-to-b to-background text-transparent from-yellow-950/50 select-none">
+              <h1 className="text-center lg:h-80 relative text-[25lvw] lg:text-[16em] font-bold bg-clip-text tracking-tighter   bg-linear-to-b to-background text-transparent from-yellow-950/50 select-none">
                 Suasana.
               </h1>
             </div>

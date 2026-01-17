@@ -28,6 +28,7 @@ import { ReviewsSection } from './reviews-section'
 import { RelatedDestinationsSection } from './related-destinations-section'
 import { Skeleton } from '@/components/ui/fragments/shadcn-ui/skeleton'
 import { DestinationMap } from '@/components/ui/fragments/custom-ui/destination-map'
+import React from 'react'
 // ==================================================
 // MAIN COMPONENT
 // ==================================================
@@ -44,6 +45,7 @@ export default function DestinasiDetailBlock({
     ...destination.images,
     destination.coverImage!,
   ]
+  const [OpenAddReview, setOpenAddReview] = React.useState(false)
   if (isMobile)
     return (
       <div className="   ">
@@ -56,30 +58,7 @@ export default function DestinasiDetailBlock({
           )}
         >
           <div className="absolute inset-0 bg-linear-to-b from-background/10 via-background/50 to-background     " />
-          {/* <nav className="z-50 absolute  top-3  w-full    ">
-            <div className=" relative  w-full     px-5 container    flex items-center justify-between ">
-              <Link
-                to={'/destinasi'}
-                className={cn(
-                  buttonVariants({ variant: 'link', size: 'lg' }),
-                  'flex has-[>svg]:px-0 text-sm  text-background w-fit py-2 md:flex items-center gap-2 px-0 group transition-colors',
-                )}
-              >
-                <ArrowLeft className="size-5 group-hover:-translate-x-1  group-hover:transform transition-all ease-out duration-300" />
-                <span className=" sr-only ">Kembali</span>
-              </Link>
-              <Link
-                to={'/destinasi'}
-                className={cn(
-                  buttonVariants({ variant: 'link', size: 'lg' }),
-                  'flex has-[>svg]:px-0 text-sm  text-background w-fit py-2 md:flex items-center gap-2 px-0 group transition-colors',
-                )}
-              >
-                <MoreVertical className="size-5 group-hover:-translate-x-1  group-hover:transform transition-all ease-out duration-300" />
-                <span className=" sr-only ">Kembali</span>
-              </Link>
-            </div>
-          </nav> */}
+        
         </section>
         <div className=" relative  space-y-6 z-20 -mt-20  container content-center   px-6  ">
           <section className="  h-full     w-full md:grid grid-cols-1 lg:grid-cols-2   md:gap-10 gap-4   lg:gap-15    sm:pt-0     space-y-6">
@@ -127,6 +106,8 @@ export default function DestinasiDetailBlock({
               {/* Tombol Voting */}
               <div className="flex flex-col sm:flex-row gap-3 mt-6">
                 <AddReviewSheet
+                  open={OpenAddReview}
+                  onOpenChange={setOpenAddReview}
                   destinationId={destination.id}
                   destinationSlug={destination.slug}
                 />
@@ -144,6 +125,8 @@ export default function DestinasiDetailBlock({
 
           <section className="    space-y-6">
             <ReviewsSection
+              setOpenAddReview={setOpenAddReview}
+              OpenAddReview={OpenAddReview}
               destinationId={destination.id}
               destinationSlug={destination.slug}
               reviews={destination.reviews}
@@ -171,41 +154,18 @@ export default function DestinasiDetailBlock({
           'relative min-h-67  bg-fixed bg-no-repeat bg-center  bg-cover  flex items-center justify-center overflow-hidden hero-parallax  ',
         )}
       >
-        {/* <nav className="z-50 absolute px-0  container  top-3  w-full    ">
-          <div className=" relative  w-full   max-w-5xl   px-5 container    flex items-center justify-between ">
-            <Link
-              to={'/destinasi'}
-              className={cn(
-                buttonVariants({ variant: 'link', size: 'lg' }),
-                'flex has-[>svg]:px-0 text-sm text-primary   w-fit py-2 md:flex items-center gap-2 px-0 group transition-colors',
-              )}
-            >
-              <ArrowLeft className="size-5 group-hover:-translate-x-1  group-hover:transform transition-all ease-out duration-300" />
-              <span className="  y ">Kembali</span>
-            </Link>
-            <Link
-              to={'/destinasi'}
-              className={cn(
-                buttonVariants({ variant: 'link', size: 'lg' }),
-                'flex has-[>svg]:px-0 text-sm  text-background w-fit py-2 md:flex items-center gap-2 px-0 group transition-colors',
-              )}
-            >
-              <MoreVertical className="size-5 group-hover:-translate-x-1  group-hover:transform transition-all ease-out duration-300" />
-              <span className=" sr-only ">Kembali</span>
-            </Link>
-          </div>
-        </nav> */}
+       
         <div className="absolute inset-0 bg-linear-to-b from-background/10 via-background/10 to-background     " />
         <div className="absolute inset-0 bg-linear-to-r from-background/10 via-background/0 to-background     " />
         <div className="absolute inset-0 bg-linear-to-l from-background/10 via-background/0 to-background     " />
       </section>
-      <div className="container space-y-4 -mt-15 h-full  relative ">
+      <div className="container space-y-4 -mt-13 h-full  relative ">
         <div className="        md:flex    gap-4    sm:gap-20            relative  space-y-6">
-          {/* Key prop forces remount when destination changes */}
           <ThumnailSlider
             key={`gallery-${destination.id}`}
             images={imagesGallery}
           />
+          {/* Key prop forces remount when destination changes */}
 
           {/* Judul & Deskripsi Singkat */}
           <div className=" max-w-6xl  w-full  space-y-10">
@@ -261,6 +221,8 @@ export default function DestinasiDetailBlock({
             <DestinationMap />
             <section>
               <ReviewsSection
+                setOpenAddReview={setOpenAddReview}
+                OpenAddReview={OpenAddReview}
                 destinationId={destination.id}
                 destinationSlug={destination.slug}
                 reviews={destination.reviews}

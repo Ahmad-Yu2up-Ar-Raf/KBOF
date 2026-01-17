@@ -136,7 +136,7 @@ export function RelatedDestinationsSection({
       <header className="flex border-b pb-7  items-center justify-between">
         <div className="space-y-1">
           <h2 className="text-2xl font-bold tracking-tight">
-            Destinasi Serupa
+            Destinasi <span className=' text-primary'>Serupa</span>
           </h2>
           <p className="text-muted-foreground">
             Destinasi lainnya yang mungkin Anda suka

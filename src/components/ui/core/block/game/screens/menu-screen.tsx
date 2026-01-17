@@ -140,7 +140,7 @@ function HeroCard({ onPlay }: HeroCardProps) {
             Mulai Game
             <Play className=" size-4.5 fill-primary-foreground   text-primary    sm:size-6" />
           </Button>
-          <HowToPlaySheet />
+          <HowToPlaySheet handleStartGame={onPlay} />
         </div>
       </main>
     </section>

@@ -81,75 +81,80 @@ function VoteButton({ destination }: DestinasiDetailBlockProps) {
   }
 
   return (
-    <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-      <AlertDialogTrigger asChild>
-        <Button
-          variant={hasVoted ? 'default' : 'outline'}
-          className={cn(
-            'w-full sm:w-fit transition-all duration-200',
-            hasVoted && 'bg-primary text-primary-foreground',
-          )}
-          onClick={handleVoteClick}
-          disabled={isVoting}
-        >
-          {isVoting ? (
-            <Loader2 className="size-4 animate-spin" />
-          ) : hasVoted ? (
-            <Check className="size-4" />
-          ) : (
-            <ThumbsUp className="size-4" />
-          )}
-          {hasVoted ? 'Sudah Divote' : 'Vote Sekarang'}
-        </Button>
-      </AlertDialogTrigger>
+    <>
+      <Button
+        variant={hasVoted ? 'default' : 'outline'}
+        className={cn(
+          'w-full sm:w-fit transition-all duration-200',
+          hasVoted && 'bg-primary text-primary-foreground',
+        )}
+        onClick={handleVoteClick}
+        disabled={isVoting}
+      >
+        {isVoting ? (
+          <Loader2 className="size-4 animate-spin" />
+        ) : hasVoted ? (
+          <Check className="size-4" />
+        ) : (
+          <ThumbsUp className="size-4" />
+        )}
+        {hasVoted ? 'Sudah Divote' : 'Vote Sekarang'}
+      </Button>
 
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>
-            {hasVoted ? 'Batalkan Vote?' : `Vote untuk "${destination.name}"?`}
-          </AlertDialogTitle>
-          <AlertDialogDescription>
-            {hasVoted ? (
-              <>
-                Anda sudah memberikan vote untuk destinasi ini. Apakah Anda
-                yakin ingin membatalkan vote Anda?
-              </>
-            ) : (
-              <>
-                Dengan memberikan vote, Anda mendukung destinasi{' '}
-                <strong>{destination.name}</strong> agar lebih dikenal oleh
-                publik. Setiap user hanya dapat memberikan 1 vote per destinasi.
-              </>
-            )}
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel disabled={isVoting}>Batal</AlertDialogCancel>
-          <AlertDialogAction
-            onClick={handleConfirmVote}
-            disabled={isVoting}
-            className={cn(
-              hasVoted &&
-                'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-            )}
-          >
-            {isVoting ? (
-              <>
-                <Loader2 className="size-4 animate-spin mr-2" />
-                Memproses...
-              </>
-            ) : hasVoted ? (
-              'Batalkan Vote'
-            ) : (
-              <>
-                <ThumbsUp className="size-4 mr-2" />
-                Vote Sekarang
-              </>
-            )}
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+      <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        {/* <AlertDialogTrigger asChild></AlertDialogTrigger> */}
+
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              {hasVoted
+                ? 'Batalkan Vote?'
+                : `Vote untuk "${destination.name}"?`}
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              {hasVoted ? (
+                <>
+                  Anda sudah memberikan vote untuk destinasi ini. Apakah Anda
+                  yakin ingin membatalkan vote Anda?
+                </>
+              ) : (
+                <>
+                  Dengan memberikan vote, Anda mendukung destinasi{' '}
+                  <strong>{destination.name}</strong> agar lebih dikenal oleh
+                  publik. Setiap user hanya dapat memberikan 1 vote per
+                  destinasi.
+                </>
+              )}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isVoting}>Batal</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleConfirmVote}
+              disabled={isVoting}
+              className={cn(
+                hasVoted &&
+                  'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+              )}
+            >
+              {isVoting ? (
+                <>
+                  <Loader2 className="size-4 animate-spin mr-2" />
+                  Memproses...
+                </>
+              ) : hasVoted ? (
+                'Batalkan Vote'
+              ) : (
+                <>
+                  <ThumbsUp className="size-4 mr-2" />
+                  Vote Sekarang
+                </>
+              )}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   )
 }
 

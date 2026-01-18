@@ -28,7 +28,7 @@ const getDb = async () => {
   return db
 }
 
-const article = schema.article
+const { article, user } = schema
 
 // ============================================
 // TYPE DEFINITIONS
@@ -134,12 +134,28 @@ export async function fetchArticleList(
       : [asc(article.createdAt)]
 
   const [dataResult, countResult] = await Promise.all([
-    db.query.article.findMany({
-      where,
-      orderBy,
-      limit: perPage,
-      offset,
-    }),
+    db
+      .select({
+        id: article.id,
+        authorId: article.authorId,
+        authorName: user.name,
+        authorAvatar: user.avatar,
+        slug: article.slug,
+        title: article.title,
+        excerpt: article.excerpt,
+        content: article.content,
+        coverImage: article.coverImage,
+        status: article.status,
+        publishedAt: article.publishedAt,
+        createdAt: article.createdAt,
+        updatedAt: article.updatedAt,
+      })
+      .from(article)
+      .leftJoin(user, eq(article.authorId, user.id))
+      .where(where)
+      .orderBy(...orderBy)
+      .limit(perPage)
+      .offset(offset),
     db.select({ count: count() }).from(article).where(where),
   ])
 
@@ -148,6 +164,8 @@ export async function fetchArticleList(
   const data = dataResult.map((a) => ({
     id: a.id,
     authorId: a.authorId,
+    authorName: a.authorName ?? null,
+    authorAvatar: a.authorAvatar ?? null,
     slug: a.slug,
     title: a.title,
     excerpt: a.excerpt,
@@ -264,12 +282,28 @@ export async function fetchArticleListAdmin(
       : [asc(article.createdAt)]
 
   const [dataResult, countResult] = await Promise.all([
-    db.query.article.findMany({
-      where,
-      orderBy,
-      limit: perPage,
-      offset,
-    }),
+    db
+      .select({
+        id: article.id,
+        authorId: article.authorId,
+        authorName: user.name,
+        authorAvatar: user.avatar,
+        slug: article.slug,
+        title: article.title,
+        excerpt: article.excerpt,
+        content: article.content,
+        coverImage: article.coverImage,
+        status: article.status,
+        publishedAt: article.publishedAt,
+        createdAt: article.createdAt,
+        updatedAt: article.updatedAt,
+      })
+      .from(article)
+      .leftJoin(user, eq(article.authorId, user.id))
+      .where(where)
+      .orderBy(...orderBy)
+      .limit(perPage)
+      .offset(offset),
     db.select({ count: count() }).from(article).where(where),
   ])
 
@@ -278,6 +312,8 @@ export async function fetchArticleListAdmin(
   const data = dataResult.map((a) => ({
     id: a.id,
     authorId: a.authorId,
+    authorName: a.authorName ?? null,
+    authorAvatar: a.authorAvatar ?? null,
     slug: a.slug,
     title: a.title,
     excerpt: a.excerpt,

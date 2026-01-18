@@ -77,7 +77,7 @@ function LevelCard({
       onMouseEnter={() => setHovered(index)}
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        'transform transition-all  duration-300 hover:scale-105 hover:rotate-1 ',
+        'transform transition-all  cursor-pointer duration-300 hover:scale-105 hover:rotate-1 ',
 
         hovered !== null && hovered !== index && 'lg:blur-sm   lg:scale-[0.98]',
       )}

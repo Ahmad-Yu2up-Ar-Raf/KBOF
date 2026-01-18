@@ -17,7 +17,7 @@ export function GameShell({ children, className }: GameShellProps) {
     <>
       <div
         className={cn(
-          'container    z-50 pt-0 md:pb-0    relative min-h-svh overflow-y-auto overflow-x-hidden flex flex-col px-5',
+          'container    z-50 pt-0 md:pb-0    relative min-h-svh overflow-y-visible overflow-x-hidden flex flex-col px-5',
           className,
         )}
       >
@@ -52,7 +52,7 @@ export function GameHeader({
   title,
   subtitle,
   titleClassName,
-  leftAction,
+  leftAction, 
   rightAction,
   Emoji,
   variant = 'default',

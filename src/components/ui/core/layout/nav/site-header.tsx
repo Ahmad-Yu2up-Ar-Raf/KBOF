@@ -21,14 +21,14 @@ import {
   Medal,
   Newspaper,
   Telescope,
-  UserRound,
 } from 'lucide-react'
 import AvatarMenu from '@/components/ui/fragments/custom-ui/menu/avatar-menu'
 
 import { User } from '@/db/schema'
 import { useIsMobile } from '@/hooks/use-mobile'
+import { cn } from '@/lib/utils'
 
-export default function SiteHeader() {
+export function SiteHeader({ className }: { className?: string }) {
   const { data: session } = authClient.useSession()
   const navItems = [
     {
@@ -52,6 +52,30 @@ export default function SiteHeader() {
       icon: Gamepad,
     },
   ]
+
+  const isMobile = useIsMobile()
+  const matches = useMatches()
+  const paths = matches[matches.length - 1]?.routeId
+  const isActive = paths == '/game' || paths == '/'
+
+  if (isActive && !isMobile)
+    return (
+      <Navbar className={cn('z-999', className)}>
+        {/* Desktop Navigation */}
+        <NavBody>
+          <NavbarLogo />
+          <NavItems items={navItems} />
+          <AvatarMenu user={session?.user as User} isHomePage />
+        </NavBody>
+      </Navbar>
+    )
+
+  return null
+}
+
+export function SiteHeaderMobile() {
+  const { data: session } = authClient.useSession()
+
   const navItemsMobiles = [
     {
       name: 'Beranda',
@@ -82,8 +106,6 @@ export default function SiteHeader() {
   ]
   const isMobile = useIsMobile()
   const matches = useMatches()
-  const paths = matches[matches.length - 1]?.routeId
-  const isActive = paths == '/'
 
   if (isMobile) {
     return (
@@ -94,18 +116,4 @@ export default function SiteHeader() {
       </NavbarMobile>
     )
   }
-
-  if (isActive)
-    return (
-      <Navbar className="z-999">
-        {/* Desktop Navigation */}
-        <NavBody>
-          <NavbarLogo />
-          <NavItems items={navItems} />
-          <AvatarMenu user={session?.user as User} isHomePage />
-        </NavBody>
-      </Navbar>
-    )
-
-  return null
 }

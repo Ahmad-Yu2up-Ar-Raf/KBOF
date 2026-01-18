@@ -87,16 +87,6 @@ export const Navbar = ({ children, className }: NavbarProps) => {
   const [delay, setDelay] = useState(true)
 
   // Handle initial visibility when path changes
-  useEffect(() => {
-    // Kalau bukan di "/" dan masih di top, hide navbar
-    if (paths !== '/' && scrollYProgress.get() < 0.05) {
-      setVisiblee(false)
-      setDelay(false)
-    } else if (paths === '/') {
-      // Di homepage, selalu show navbar
-      setVisiblee(true)
-    }
-  }, [paths, scrollYProgress])
 
   useMotionValueEvent(scrollYProgress, 'change', (current) => {
     // Check if current is not undefined and is a number
@@ -115,7 +105,7 @@ export const Navbar = ({ children, className }: NavbarProps) => {
   return (
     <motion.nav
       ref={ref}
-      initial={{
+      initial={ paths == '/game' ? 'hidden' : {
         opacity: 1,
         y: -100,
       }}

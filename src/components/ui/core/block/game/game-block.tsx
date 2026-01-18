@@ -18,6 +18,7 @@ import {
   PlayingScreen,
   StatsScreen,
 } from './screens'
+import { SiteHeader } from '../../layout/nav/site-header'
 
 // =============================================================================
 // COMPONENT
@@ -89,42 +90,46 @@ export default function GameBlock() {
   // ==========================================================================
 
   return (
-    <GameShell>
-      {screen === 'menu' && (
-        <MenuScreen
-          key="menu"
-          onPlay={() => setScreen('level-select')}
-          onShowHighScores={() => {}}
-        />
-      )}
+    <>
+      {screen === 'menu' && <SiteHeader  />}
 
-      {screen === 'level-select' && (
-        <LevelSelectScreen
-          key="level-select"
-          onSelect={handleStartGame}
-          onBack={() => setScreen('menu')}
-        />
-      )}
+      <GameShell>
+        {screen === 'menu' && (
+          <MenuScreen
+            key="menu"
+            onPlay={() => setScreen('level-select')}
+            onShowHighScores={() => {}}
+          />
+        )}
 
-      {screen === 'playing' && quizEngine.currentQuestion && (
-        <PlayingScreen
-          key="playing"
-          quizEngine={quizEngine}
-          onExitToLevelSelect={handleChangeLevel}
-        />
-      )}
+        {screen === 'level-select' && (
+          <LevelSelectScreen
+            key="level-select"
+            onSelect={handleStartGame}
+            onBack={() => setScreen('menu')}
+          />
+        )}
 
-      {screen === 'stats' && selectedLevel && (
-        <StatsScreen
-          key="stats"
-          results={quizEngine.getResults()}
-          level={selectedLevel}
-          isNewHighScore={isNewHighScore}
-          onPlayAgain={handlePlayAgain}
-          onChangeLevel={handleChangeLevel}
-          onBackToMenu={handleBackToMenu}
-        />
-      )}
-    </GameShell>
+        {screen === 'playing' && quizEngine.currentQuestion && (
+          <PlayingScreen
+            key="playing"
+            quizEngine={quizEngine}
+            onExitToLevelSelect={handleChangeLevel}
+          />
+        )}
+
+        {screen === 'stats' && selectedLevel && (
+          <StatsScreen
+            key="stats"
+            results={quizEngine.getResults()}
+            level={selectedLevel}
+            isNewHighScore={isNewHighScore}
+            onPlayAgain={handlePlayAgain}
+            onChangeLevel={handleChangeLevel}
+            onBackToMenu={handleBackToMenu}
+          />
+        )}
+      </GameShell>
+    </>
   )
 }

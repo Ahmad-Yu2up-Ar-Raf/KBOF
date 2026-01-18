@@ -8,6 +8,7 @@ import {
   Ellipsis,
   FileText,
   Settings,
+  UserRound,
 } from 'lucide-react'
 import * as React from 'react'
 import { toast } from 'sonner'
@@ -143,6 +144,38 @@ export function getArticleTableColumns({
         icon: FileText,
       },
       enableColumnFilter: true,
+    },
+    {
+      id: 'createdBy',
+      accessorKey: 'authorName',
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} label="Diciptakan Oleh" />
+      ),
+      cell: ({ row }) => {
+        const name = row.original.authorName || '-'
+        const avatar = row.original.authorAvatar || undefined
+        const getInitial = useInitials()
+
+        return (
+          <div className="flex items-center gap-3 max-w-40 truncate">
+            <Avatar className="size-8">
+              {avatar ? (
+                <AvatarImage src={avatar} alt={String(name)} />
+              ) : (
+                <AvatarFallback>{getInitial(String(name))}</AvatarFallback>
+              )}
+            </Avatar>
+            <span className="truncate">{name}</span>
+          </div>
+        )
+      },
+      meta: {
+        label: 'Diciptakan Oleh',
+        variant: 'text',
+        icon: UserRound,
+      },
+      // enableColumnFilter: true,
+      enableHiding: true,
     },
     {
       id: 'status',

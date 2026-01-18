@@ -16,6 +16,7 @@ import DestinationSection, {
 import KagetoriSection from '@/components/ui/core/block/section/kategori-section'
 import About from '@/components/ui/core/block/section/tentang-section'
 import CTASection from '@/components/ui/core/block/section/cta-section'
+import { SiteHeader } from '@/components/ui/core/layout/nav/site-header'
 
 export const Route = createFileRoute('/')({
   // Prefetch data for hero section, artikel section, and destination section on server
@@ -33,6 +34,7 @@ export const Route = createFileRoute('/')({
 function App() {
   return (
     <>
+      <SiteHeader />
       <HeroSection />
       <About />
       <Suspense fallback={<DestinationSectionSkeleton />}>

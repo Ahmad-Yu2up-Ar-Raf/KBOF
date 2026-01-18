@@ -15,6 +15,10 @@ import {
   ConfettiRef,
 } from '@/components/ui/fragments/custom-ui/animate-ui/confetti'
 import { useRef } from 'react'
+import { Link } from '@tanstack/react-router'
+import { cn } from '@/lib/utils'
+import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
+import { Home, Share, Share2 } from 'lucide-react'
 
 // =============================================================================
 // TYPES
@@ -52,9 +56,21 @@ export function StatsScreen({
       >
         <GameHeader
           leftAction={onBackToMenu}
-          // Emoji={results.length > 0 ? '🎉' : '🏆'}
+          Emoji={results.length > 0 ? '🎉' : '🏆'}
           title="Permainan Selesai!"
           className=" mb-6"
+          rightAction={
+            <Link
+              to="/"
+              className={cn(
+                buttonVariants({ variant: 'ghost', size: 'sm' }),
+                'flex items-center gap-2 transition-all duration-300',
+              )}
+            >
+              <Share2 className="size-4" />
+              <span className="sr-only ">Jeda</span>
+            </Link>
+          }
           // subtitle="Lihat hasil permainanmu"
           variant="column"
         />

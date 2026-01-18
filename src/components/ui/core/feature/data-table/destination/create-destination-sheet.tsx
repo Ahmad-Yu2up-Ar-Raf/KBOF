@@ -77,14 +77,14 @@ function CreateDestinationSheet({
           ) : (
             <Button variant={'outline'} className="text-sm  h-8    w-fit">
               <Plus className="mr-3" />
-              Tambah Destinasi
+              Ajukan Destinasi Lokal
             </Button>
           )}
         </SheetTrigger>
 
         <SheetContent className="flex flex-col gap-6 overflow-y-auto">
           <SheetHeader className="text-left sm:px-6 space-y-1 bg-background z-30 sticky top-0 p-4 border-b">
-            <SheetTitle className="text-lg">Tambah Destinasi Baru</SheetTitle>
+            <SheetTitle className="text-lg">Ajukan Destinasi Lokal Baru</SheetTitle>
             <SheetDescription className="sr-only">
               Isi rincian di bawah ini untuk menambah destinasi baru
             </SheetDescription>
@@ -139,14 +139,14 @@ function CreateDestinationSheet({
         ) : (
           <Button variant={'outline'} className="text-sm  h-8    w-fit">
             <Plus className="mr-3" />
-            Tambah Destinasi
+            Ajukan Destinasi Lokal
           </Button>
         )}
       </DrawerTrigger>
 
       <DrawerContent className="flex flex-col max-h-[85svh]">
         <DrawerHeader className="text-left sm:px-6 space-y-1 bg-background p-4 border-b">
-          <DrawerTitle className="text-xl">Tambah Destinasi Baru</DrawerTitle>
+          <DrawerTitle className="text-xl">Ajukan Destinasi Lokal Baru</DrawerTitle>
           <DrawerDescription className="text-sm">
             Isi rincian di bawah ini untuk menambah destinasi baru
           </DrawerDescription>
@@ -158,32 +158,30 @@ function CreateDestinationSheet({
               <div className="flex-1 overflow-y-auto">
                 <DestinationForm form={form} />
               </div>
-              <DrawerFooter className="gap-3 px-3 py-4 w-full flex-row justify-end flex border-t sm:space-x-0">
+              <DrawerFooter className="sticky bottom-0 bg-background border-t p-4">
                 <Button
-                  disabled={isSubmitting}
                   type="submit"
                   form="destination-form"
-                  className="w-full"
-                  size={'sm'}
-                >
-                  <Activity mode={isSubmitting ? 'visible' : 'hidden'}>
-                    <Spinner />
-                  </Activity>
-                  Tambahkan
-                </Button>
-                <DrawerClose
                   disabled={isSubmitting}
-                  asChild
-                  onClick={() => form.reset()}
+                  className="w-full"
                 >
+                  {isSubmitting ? (
+                    <>
+                      <Spinner className="size-4" />
+                      Menyimpan...
+                    </>
+                  ) : (
+                    'Simpan'
+                  )}
+                </Button>
+                <DrawerClose asChild>
                   <Button
-                    disabled={isSubmitting}
                     type="button"
-                    className="w-full"
-                    size={'sm'}
                     variant="outline"
+                    disabled={isSubmitting}
+                    className="w-full"
                   >
-                    Batalkan
+                    Batal
                   </Button>
                 </DrawerClose>
               </DrawerFooter>

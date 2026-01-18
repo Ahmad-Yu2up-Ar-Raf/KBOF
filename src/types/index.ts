@@ -153,6 +153,8 @@ export interface DestinationAggregateResult {
   data: {
     id: number
     userId: string
+    creatorName?: string | null
+    creatorAvatar?: string | null
     slug: string
     name: string
     description: string
@@ -219,6 +221,8 @@ export interface ArticleAggregateResult {
   data: {
     id: number
     authorId: string
+    authorName?: string | null
+    authorAvatar?: string | null
     slug: string
     title: string
     excerpt: string | null

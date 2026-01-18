@@ -32,16 +32,53 @@ const { destination, user, review, vote } = schema
 // TYPE DEFINITIONS
 // ============================================
 
+// Helper to coerce various incoming query formats into an array
+const coerceToArray = (v: unknown) => {
+  if (Array.isArray(v)) return v
+  if (typeof v === 'string') {
+    // Accept JSON-encoded arrays or single values
+    try {
+      const parsed = JSON.parse(v)
+      if (Array.isArray(parsed)) return parsed
+    } catch {
+      // not JSON
+    }
+    return v === '' ? [] : [v]
+  }
+  if (v == null) return []
+  return [v]
+}
+
 export const DestinasiFiltersSchema = z.object({
-  cursor: z.number().int().nonnegative().optional(), // For infinite scroll
-  limit: z.number().int().positive().default(12),
-  search: z.string().default(''),
-  categories: z
-    .array(z.enum(schema.destinationCategory.enumValues))
-    .default([]), // Multiple categories
-  types: z.array(z.enum(schema.destinationType.enumValues)).default([]), // Multiple types
-  provinces: z.array(z.enum(schema.provinsiIndonesia.enumValues)).default([]), // Multiple provinces
-  sortBy: z.enum(['newest', 'popular', 'rating', 'name']).default('popular'),
+  cursor: z.preprocess((v) => {
+    if (v === undefined || v === null) return undefined
+    const n = Number(v)
+    return Number.isFinite(n) ? n : undefined
+  }, z.number().int().nonnegative().optional()), // For infinite scroll
+  limit: z.preprocess(
+    (v) => (v == null ? undefined : Number(v)),
+    z.number().int().positive().default(12),
+  ),
+  search: z.preprocess(
+    (v) => (v == null ? '' : String(v)),
+    z.string().default(''),
+  ),
+  categories: z.preprocess(
+    coerceToArray,
+    z.array(z.enum(schema.destinationCategory.enumValues)).default([]),
+  ), // Multiple categories
+  types: z.preprocess(
+    coerceToArray,
+    z.array(z.enum(schema.destinationType.enumValues)).default([]),
+  ), // Multiple types
+  provinces: z.preprocess(
+    coerceToArray,
+    z.array(z.enum(schema.provinsiIndonesia.enumValues)).default([]),
+  ), // Multiple provinces
+  sortBy: z.preprocess(
+    (v) => (v == null ? undefined : String(v)),
+    z.enum(['newest', 'popular', 'rating', 'name']).default('popular'),
+  ),
 })
 
 export type DestinasiFilters = z.infer<typeof DestinasiFiltersSchema>
@@ -337,7 +374,7 @@ async function fetchCategoryCounts(): Promise<Record<string, number>> {
 // ============================================
 
 export const getDestinasiDestinationsServerFn = createServerFn({
-  method: 'GET',
+  method: 'POST',
 })
   .inputValidator(z.object({ filters: DestinasiFiltersSchema }))
   .handler(async ({ data: { filters } }): Promise<DestinasiResult> => {

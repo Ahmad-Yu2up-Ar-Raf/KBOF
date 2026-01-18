@@ -30,7 +30,7 @@ const getDb = async () => {
   return db
 }
 
-const { destination, vote, review } = schema
+const { destination, vote, review, user } = schema
 
 // ============================================
 // SUBQUERIES FOR COMPUTED AGGREGATES
@@ -215,6 +215,9 @@ export async function fetchDestinationList(
       .select({
         id: destination.id,
         userId: destination.userId,
+        // Creator info (user)
+        creatorName: user.name,
+        creatorAvatar: user.avatar,
         slug: destination.slug,
         name: destination.name,
         description: destination.description,
@@ -237,6 +240,7 @@ export async function fetchDestinationList(
       .from(destination)
       .leftJoin(voteCounts, eq(destination.id, voteCounts.destinationId))
       .leftJoin(reviewStats, eq(destination.id, reviewStats.destinationId))
+      .leftJoin(user, eq(destination.userId, user.id))
 
       .where(where)
       .orderBy(...orderBy)
@@ -250,6 +254,8 @@ export async function fetchDestinationList(
   const data = dataResult.map((d) => ({
     id: d.id,
     userId: d.userId,
+    creatorName: d.creatorName ?? null,
+    creatorAvatar: d.creatorAvatar ?? null,
     slug: d.slug,
     name: d.name,
     description: d.description,
@@ -453,6 +459,9 @@ export async function fetchDestinationListAdmin(
       .select({
         id: destination.id,
         userId: destination.userId,
+        // Creator info
+        creatorName: user.name,
+        creatorAvatar: user.avatar,
         slug: destination.slug,
         name: destination.name,
         description: destination.description,
@@ -475,6 +484,7 @@ export async function fetchDestinationListAdmin(
       .from(destination)
       .leftJoin(voteCounts, eq(destination.id, voteCounts.destinationId))
       .leftJoin(reviewStats, eq(destination.id, reviewStats.destinationId))
+      .leftJoin(user, eq(destination.userId, user.id))
 
       .where(where)
       .orderBy(...orderBy)
@@ -488,6 +498,8 @@ export async function fetchDestinationListAdmin(
   const data = dataResult.map((d) => ({
     id: d.id,
     userId: d.userId,
+    creatorName: d.creatorName ?? null,
+    creatorAvatar: d.creatorAvatar ?? null,
     slug: d.slug,
     name: d.name,
     description: d.description,

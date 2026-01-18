@@ -229,10 +229,16 @@ export const deleteDestination = createServerFn({ method: 'POST' })
     const destinationsToDelete = await db.query.destination.findMany({
       where: and(inArray(destination.id, ids), eq(destination.userId, userId)),
       columns: {
+        id: true,
         coverImage: true,
         images: true,
       },
     })
+
+    // If some requested IDs are not owned by the user, reject
+    if (destinationsToDelete.length !== ids.length) {
+      throw new Error('Anda tidak memiliki izin untuk mengedit data ini.')
+    }
 
     // Delete images from Cloudinary for each destination
     for (const dest of destinationsToDelete) {
@@ -259,6 +265,16 @@ export const updateBulkDestinationStatus = createServerFn({ method: 'POST' })
     const userId = context.user!.id
 
     const ids = Array.isArray(data.id) ? data.id : [data.id]
+
+    // Verify ownership of all destinations
+    const owned = await db.query.destination.findMany({
+      where: and(inArray(destination.id, ids), eq(destination.userId, userId)),
+      columns: { id: true },
+    })
+
+    if (owned.length !== ids.length) {
+      throw new Error('Anda tidak memiliki izin untuk mengedit data ini.')
+    }
 
     await db
       .update(destination)

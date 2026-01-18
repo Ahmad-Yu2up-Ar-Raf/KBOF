@@ -10,6 +10,7 @@ import {
   MapPin,
   Settings,
   Text,
+  UsersRound,
   Vote,
 } from 'lucide-react'
 import * as React from 'react'
@@ -157,6 +158,38 @@ export function getDestinationTableColumns({
         icon: Text,
       },
       enableColumnFilter: true,
+    },
+    {
+      id: 'createdBy',
+      accessorKey: 'creatorName',
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} label="Diajukan Oleh" />
+      ),
+      cell: ({ row }) => {
+        const name = row.original.creatorName || '-'
+        const avatar = row.original.creatorAvatar || undefined
+        const getInitial = useInitials()
+
+        return (
+          <div className="flex items-center gap-3 max-w-40 truncate">
+            <Avatar className="size-8">
+              {avatar ? (
+                <AvatarImage src={avatar} alt={String(name)} />
+              ) : (
+                <AvatarFallback>{getInitial(String(name))}</AvatarFallback>
+              )}
+            </Avatar>
+            <span className="truncate">{name}</span>
+          </div>
+        )
+      },
+      meta: {
+        label: 'Diajukan Oleh',
+        variant: 'text',
+        icon: UsersRound,
+      },
+      // enableColumnFilter: true,
+      enableHiding: true,
     },
     {
       id: 'provinsi',

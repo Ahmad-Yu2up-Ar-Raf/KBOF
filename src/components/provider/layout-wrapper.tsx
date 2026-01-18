@@ -5,7 +5,7 @@ import SiteBorder from '../ui/core/layout/nav/site-border'
 import { cn } from '@/lib/utils'
 import { ReactNode } from 'react'
 import ReactLenis, { useLenis } from 'lenis/react'
-import SiteHeader from '../ui/core/layout/nav/site-header'
+import {SiteHeader , SiteHeaderMobile} from '../ui/core/layout/nav/site-header'
 import { useShouldShowFooter } from './infinite-scroll-context'
 import { useIsMobile } from '@/hooks/use-mobile'
 import SiteNavbar from '../ui/core/layout/nav/site-navbar'
@@ -106,21 +106,21 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
         {/* Add padding-bottom on mobile to account for fixed navbar */}
         <div
           className={cn(
-            'relative  pb-10 overflow-hidden min-h-svh w-full ',
-            
+            'relative  pb-10 md:overflow-visible overflow-hidden min-h-svh w-full ',
           )}
         >
           <div
             className={cn(
-              'mx-auto flex  relative overflow-x-hidden  flex-col  gap-10 sm:gap-8  content-center  h-full w-full',
+              'mx-auto flex  relative overflow-x-hidden   md:overflow-visible  flex-col  gap-10 sm:gap-8  content-center  h-full w-full',
             )}
           >
+       
             {children}
           </div>
         </div>
         {/* Footer only shows when shouldShowFooter is true */}
         {shouldShowFooter && <SiteFooter />}
-        <SiteHeader />
+        <SiteHeaderMobile />
       </ReactLenis>
     )
   }

@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/fragments/shadcn-ui/card'
 import { Gamepad2, Info, Play } from 'lucide-react'
 import { HowToPlaySheet } from '../how-to-play-sheet'
+import { SiteHeader } from '../../../layout/nav/site-header'
 // =============================================================================
 // TYPES
 // =============================================================================
@@ -32,13 +33,15 @@ export type MenuScreenProps = {
 
 export function MenuScreen({ onPlay }: MenuScreenProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: ANIMATION_DURATION.normal }}
-    >
-      {/* <GameHeader
+    <>
+     
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: ANIMATION_DURATION.normal }}
+      >
+        {/* <GameHeader
         title="🎮 Quiz Destinasi Indonesia"
         subtitle="Uji pengetahuanmu tentang keindahan Nusantara"
         leftAction={
@@ -50,17 +53,18 @@ export function MenuScreen({ onPlay }: MenuScreenProps) {
         }
       /> */}
 
-      <GameContent className="space-y-8">
-        {/* Hero card */}
-        <HeroCard onPlay={onPlay} />
+        <GameContent className="space-y-8">
+          {/* Hero card */}
+          <HeroCard onPlay={onPlay} />
 
-        {/* High scores section */}
-        {/* <HighScoreDisplay /> */}
+          {/* High scores section */}
+          {/* <HighScoreDisplay /> */}
 
-        {/* How to play */}
-        {/* <HowToPlay /> */}
-      </GameContent>
-    </motion.div>
+          {/* How to play */}
+          {/* <HowToPlay /> */}
+        </GameContent>
+      </motion.div>
+    </>
   )
 }
 
@@ -101,7 +105,7 @@ function HeroCard({ onPlay }: HeroCardProps) {
   ]
 
   return (
-    <section className="flex md:px-2    flex-col justify-center items-center w-full max-w-2xl m-auto z-50 pointer-events-auto   md:gap-4">
+    <section className="flex md:px-2  md:pt-10   flex-col justify-center items-center w-full max-w-2xl m-auto z-50 pointer-events-auto   md:gap-4">
       <AnimatedRoadmap
         milestones={milestonesData}
         mapImageSrc="/assets/images/map.webp"

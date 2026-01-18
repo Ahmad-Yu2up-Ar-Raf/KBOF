@@ -77,19 +77,6 @@ const AuthLayoutTemplate = ({
             className,
           )}
         >
-          {/* <nav className="z-999999  left-7  absolute  top-4 bg-background/95 backdrop-blur   flex items-center   ">
-            <Link
-              to="/"
-              className={cn(
-                buttonVariants({ variant: 'link' }),
-                '  flex   has-[>svg]:px-0   w-fit py-2 md:flex  text-base items-center gap-3 px-0  group transition-colors',
-              )}
-            >
-              <ArrowLeft className=" size-5  group-hover:-translate-x-1  group-hover:transform transition-all ease-out duration-300" />
-              <span className="">Kembali </span>
-            </Link>
-          </nav> */}
-
           <main
             className={cn(
               'px-8 py-0 lg:w-1/2 justify-start items-center  lg:m-auto h-full content-center relative bg-background z-100 text-secondary-foreground overflow-visible ',

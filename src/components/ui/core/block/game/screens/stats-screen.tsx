@@ -14,11 +14,14 @@ import {
   Confetti,
   ConfettiRef,
 } from '@/components/ui/fragments/custom-ui/animate-ui/confetti'
-import { useRef } from 'react'
+import { useId, useRef, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { cn } from '@/lib/utils'
-import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
-import { Home, Share, Share2 } from 'lucide-react'
+import {
+  Button,
+  buttonVariants,
+} from '@/components/ui/fragments/shadcn-ui/button'
+import { Check, Copy, Home, Share, Share2 } from 'lucide-react'
 
 // =============================================================================
 // TYPES
@@ -59,18 +62,7 @@ export function StatsScreen({
           Emoji={results.length > 0 ? '🎉' : '🏆'}
           title="Permainan Selesai!"
           className=" mb-6"
-          rightAction={
-            <Link
-              to="/"
-              className={cn(
-                buttonVariants({ variant: 'ghost', size: 'sm' }),
-                'flex items-center gap-2 transition-all duration-300',
-              )}
-            >
-              <Share2 className="size-4" />
-              <span className="sr-only ">Jeda</span>
-            </Link>
-          }
+          rightAction={<ShareComponent />}
           // subtitle="Lihat hasil permainanmu"
           variant="column"
         />
@@ -94,5 +86,197 @@ export function StatsScreen({
         // }}
       />
     </>
+  )
+}
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from '@/components/ui/fragments/shadcn-ui/popover'
+import {
+  Tooltip,
+  TooltipProvider,
+  TooltipTrigger,
+  TooltipContent,
+} from '@/components/ui/fragments/shadcn-ui/tooltip'
+import { Input } from '@/components/ui/fragments/shadcn-ui/input'
+import { Icons } from '@/components/icons/brand-icons'
+import { toast } from 'sonner'
+import { useIsMobile } from '@/hooks/use-mobile'
+function ShareComponent() {
+  const id = useId()
+  const [copied, setCopied] = useState<boolean>(false)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const isMobile = useIsMobile()
+  const handleCopy = () => {
+    navigator.clipboard.writeText('https://suasana.vercel.app/game')
+    setCopied(true)
+    toast.success('Link disalin ke clipboard!')
+    setTimeout(() => setCopied(false), 1500)
+  }
+
+  if (isMobile)
+    return (
+      <Button
+        onClick={handleCopy}
+        variant={'ghost'}
+        size={'sm'}
+        className={cn('flex items-center gap-2 transition-all duration-300')}
+      >
+        <div
+          className={cn(
+            'transition-all',
+            copied ? 'scale-100 opacity-100' : 'scale-0 opacity-0',
+          )}
+        >
+          <Check
+            className="stroke-emerald-500"
+            size={16}
+            strokeWidth={2}
+            aria-hidden="true"
+          />
+        </div>
+        <div
+          className={cn(
+            'absolute transition-all',
+            copied ? 'scale-0 opacity-0' : 'scale-100 opacity-100',
+          )}
+        >
+          <Share2 size={16} strokeWidth={2} aria-hidden="true" />
+        </div>
+        <span className="sr-only ">Share</span>
+      </Button>
+    )
+  return (
+    <div className="flex flex-col gap-4">
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button
+            variant={'ghost'}
+            size={'sm'}
+            className={cn(
+              'flex items-center gap-2 transition-all duration-300',
+            )}
+          >
+            <Share2 className="size-4" />
+            <span className="sr-only ">Share</span>
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-72">
+          <div className="flex flex-col gap-3 text-center">
+            <div className="text-sm font-medium">
+              🎮 Ayo tantang yang lain !
+            </div>
+            <div className="flex flex-wrap sr-only justify-center gap-2">
+              {/* <Button size="icon" variant="outline" aria-label="Embed">
+                <RiCodeFill size={16} strokeWidth={2} aria-hidden="true" />
+              </Button> */}
+              <Button
+                size="icon"
+                variant="outline"
+                aria-label="Share on Github"
+              >
+                <Icons.gitHub
+                  className={' size-4 stroke-2'}
+                  aria-hidden="true"
+                />
+              </Button>
+              <Button
+                size="icon"
+                variant="outline"
+                className=" flex justify-center p-0  content-center items-center overflow-visible"
+                aria-label="Share on whatsapp"
+              >
+                <div className=" size-full p-2">
+                  <Icons.whatsapp
+                    className={' size-full  m-auto  stroke-2'}
+                    aria-hidden="true"
+                  />
+                </div>
+              </Button>
+              <Button
+                size="icon"
+                variant="outline"
+                aria-label="Share on Twitter"
+              >
+                <Icons.gitHub
+                  className={' size-4 stroke-2'}
+                  aria-hidden="true"
+                />
+              </Button>
+              {/* <Button
+                size="icon"
+                variant="outline"
+                aria-label="Share on Facebook"
+              >
+                <RiFacebookFill size={16} strokeWidth={2} aria-hidden="true" />
+              </Button>
+              <Button
+                size="icon"
+                variant="outline"
+                aria-label="Share via email"
+              >
+                <RiMailLine size={16} strokeWidth={2} aria-hidden="true" />
+              </Button> */}
+            </div>
+            <div className="space-y-2">
+              <div className="relative">
+                <Input
+                  ref={inputRef}
+                  id={id}
+                  className=""
+                  type="text"
+                  defaultValue={'https://suasana.vercel.app/game'}
+                  aria-label="Share link"
+                  readOnly
+                />
+                <TooltipProvider delayDuration={0}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant={'ghost'}
+                        onClick={handleCopy}
+                        className="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-lg border border-transparent text-muted-foreground/80 outline-offset-2 transition-colors hover:text-foreground focus-visible:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring/70 disabled:pointer-events-none disabled:cursor-not-allowed"
+                        aria-label={copied ? 'Copied' : 'Copy to clipboard'}
+                        disabled={copied}
+                      >
+                        <div
+                          className={cn(
+                            'transition-all',
+                            copied
+                              ? 'scale-100 opacity-100'
+                              : 'scale-0 opacity-0',
+                          )}
+                        >
+                          <Check
+                            className="stroke-emerald-500"
+                            size={16}
+                            strokeWidth={2}
+                            aria-hidden="true"
+                          />
+                        </div>
+                        <div
+                          className={cn(
+                            'absolute transition-all',
+                            copied
+                              ? 'scale-0 opacity-0'
+                              : 'scale-100 opacity-100',
+                          )}
+                        >
+                          <Copy size={16} strokeWidth={2} aria-hidden="true" />
+                        </div>
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent className="px-2 py-1 text-xs">
+                      Copy to clipboard
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
+            </div>
+          </div>
+        </PopoverContent>
+      </Popover>
+    </div>
   )
 }

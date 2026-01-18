@@ -1,12 +1,12 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { Link, createFileRoute } from '@tanstack/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
 
+import { ArrowLeft, MoreVertical } from 'lucide-react'
 import DestinasiDetailBlock from '@/components/ui/core/block/destinasi/detail/destinasi-detail-block'
 import { getDestinasiDetailQueryOptions } from '@/lib/query-options'
 import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
 import { Skeleton } from '@/components/ui/fragments/shadcn-ui/skeleton'
 import { cn } from '@/lib/utils'
-import { ArrowLeft, MoreVertical } from 'lucide-react'
 import { useIsMobile } from '@/hooks/use-mobile'
 import { queryClient } from '@/components/provider/Provider'
 

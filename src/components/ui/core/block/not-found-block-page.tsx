@@ -1,8 +1,8 @@
-import { cn } from '@/lib/utils'
 import { Link } from '@tanstack/react-router'
-import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
 import { ArrowLeft } from 'lucide-react'
 import { useLottie } from 'lottie-react'
+import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
+import { cn } from '@/lib/utils'
 import animationData from '@/assets/animations/404.json'
 import {
   Card,

@@ -1,8 +1,9 @@
-import { LucideIcon } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
-import { ArrowRight } from 'lucide-react'
+import {  ArrowRightIcon  } from 'lucide-react'
+import type {ArrowRight, LucideIcon} from 'lucide-react';
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
+
 type componentProps = {
   title: string
   description: string
@@ -48,7 +49,7 @@ export default function HeadingSection({
           )}
         >
           Lihat Semua
-          <ArrowRight className="size-4" />
+          <ArrowRightIcon className="size-4" />
         </Link>
       )}
     </header>

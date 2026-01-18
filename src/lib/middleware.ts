@@ -1,6 +1,6 @@
 import { createMiddleware } from '@tanstack/react-start'
-import { auth } from './auth/auth'
 import { redirect } from '@tanstack/react-router'
+import { auth } from './auth/auth'
 import type { UserRoleType } from '@/db/schema'
 
 // =============================================================================
@@ -69,7 +69,7 @@ export const authServerMiddleware = createMiddleware().server(
  * Creates a middleware that checks if user has one of the allowed roles
  * @param allowedRoles - Array of roles that can access the route
  */
-export function createRoleMiddleware(allowedRoles: UserRoleType[]) {
+export function createRoleMiddleware(allowedRoles: Array<UserRoleType>) {
   return createMiddleware().server(async ({ next, request }) => {
     const session = await auth.api.getSession({ headers: request.headers })
 
@@ -214,7 +214,7 @@ export const onboardingMiddleware = createMiddleware().server(
  * For server functions that need role-based access
  */
 export function createAuthServerMiddlewareWithRole(
-  allowedRoles: UserRoleType[],
+  allowedRoles: Array<UserRoleType>,
 ) {
   return createMiddleware().server(async ({ next, request }) => {
     const session = await auth.api.getSession({ headers: request.headers })

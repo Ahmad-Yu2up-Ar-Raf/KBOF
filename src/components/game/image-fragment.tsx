@@ -1,16 +1,16 @@
 // FILE: src/components/game/image-fragment.tsx — Fragment display component for quiz images
 
 import { motion } from 'framer-motion'
-import { cn } from '@/lib/utils'
+import { Image } from '@unpic/react'
 import type { FragmentConfig } from '@/lib/game/types'
+import { cn } from '@/lib/utils'
 import { ANIMATION_DURATION } from '@/lib/game/constants'
 import { generateFragmentMask } from '@/lib/game/utils'
-import { Image } from '@unpic/react'
 
 type ImageFragmentProps = {
   src: string
   alt: string
-  fragments?: FragmentConfig[]
+  fragments?: Array<FragmentConfig>
   showFull?: boolean
   className?: string
 }
@@ -125,7 +125,7 @@ export function ImageFragment({
 type FragmentRevealProps = {
   src: string
   alt: string
-  fragments?: FragmentConfig[]
+  fragments?: Array<FragmentConfig>
   isRevealed: boolean
   className?: string
 }

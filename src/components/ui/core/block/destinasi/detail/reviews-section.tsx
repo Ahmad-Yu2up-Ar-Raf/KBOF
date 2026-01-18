@@ -1,8 +1,10 @@
 'use client'
 
 import { Link } from '@tanstack/react-router'
-import { Star, MessageCircle } from 'lucide-react'
+import { MessageCircle, Star } from 'lucide-react'
 
+import { AllReviewsSheet } from './all-review-sheet'
+import type { DestinasiDetailDestination } from '@/lib/query-options'
 import {
   Avatar,
   AvatarFallback,
@@ -19,8 +21,6 @@ import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
 import { Skeleton } from '@/components/ui/fragments/shadcn-ui/skeleton'
 import { cn } from '@/lib/utils'
 import { formatDate } from '@/lib/format'
-import type { DestinasiDetailDestination } from '@/lib/query-options'
-import { AllReviewsSheet } from './all-review-sheet'
 
 // ============================================
 // TYPES

@@ -1,20 +1,20 @@
 // FILE: src/hooks/game/use-quiz-engine.ts — Core game logic with useReducer
 
-import { useReducer, useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useReducer, useRef } from 'react'
 import type {
-  QuizState,
-  QuizAction,
-  QuestionResult,
   Level,
+  QuestionResult,
+  QuizAction,
+  QuizState,
 } from '@/lib/game/types'
 import {
-  calculatePoints,
-  shuffleChoices,
-  pickQuestions,
-  generateGameId,
-  saveHighScore,
-  isNewHighScore,
   calculateGameStats,
+  calculatePoints,
+  generateGameId,
+  isNewHighScore,
+  pickQuestions,
+  saveHighScore,
+  shuffleChoices,
 } from '@/lib/game/utils'
 import { LEVEL_CONFIGS } from '@/lib/game/constants'
 import { QUIZ_QUESTIONS } from '@/lib/game/questions'
@@ -138,7 +138,7 @@ type UseQuizEngineProps = {
 export function useQuizEngine({ onGameEnd }: UseQuizEngineProps = {}) {
   const [state, dispatch] = useReducer(quizReducer, initialState)
   const levelRef = useRef<Level>('easy')
-  const resultsRef = useRef<QuestionResult[]>([])
+  const resultsRef = useRef<Array<QuestionResult>>([])
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const gameIdRef = useRef<string>('')
 

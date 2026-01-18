@@ -1,4 +1,4 @@
-import { createFileRoute, Outlet } from '@tanstack/react-router'
+import { Outlet, createFileRoute } from '@tanstack/react-router'
 import { dashboardMiddleware } from '@/lib/middleware'
 import AppLayout from '@/components/ui/core/layout/dashboard/app-layout'
 

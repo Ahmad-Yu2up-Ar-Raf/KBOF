@@ -38,11 +38,11 @@ export interface FacetedFilterProps {
   /** Filter title/label displayed on button */
   title: string
   /** Available options to select from */
-  options: FilterOption[]
+  options: Array<FilterOption>
   /** Currently selected values */
-  value: string[]
+  value: Array<string>
   /** Callback when selection changes */
-  onChange: (values: string[]) => void
+  onChange: (values: Array<string>) => void
   /** Allow multiple selection (default: true) */
   multiple?: boolean
   /** Placeholder text for search input */

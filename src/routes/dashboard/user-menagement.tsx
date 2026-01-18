@@ -1,19 +1,17 @@
 import { createFileRoute, useSearch } from '@tanstack/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { Users, Shield, UserCog, UsersRound } from 'lucide-react'
+import { Shield, UserCog, Users, UsersRound } from 'lucide-react'
 import { Suspense } from 'react'
 
+import type { UserRoleType } from '@/db/schema'
+import type { UserAggregateInput } from '@/lib/query-options'
 import Heading from '@/components/ui/fragments/custom-ui/typography/heading'
 import { DataTableSkeleton } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-skeleton'
 import { FeatureFlagsProvider } from '@/components/ui/core/feature/data-table/feature-flag-provider'
 import { UserTable } from '@/components/ui/core/feature/data-table/user/user-table'
 import { userSearchSchema } from '@/lib/validations/user-validations'
-import {
-  getUserQueryOptions,
-  type UserAggregateInput,
-} from '@/lib/query-options'
+import { getUserQueryOptions } from '@/lib/query-options'
 import { queryClient } from '@/components/provider/Provider'
-import type { UserRoleType } from '@/db/schema'
 
 // ============================================
 // HELPER: Build filters from search params
@@ -28,8 +26,8 @@ function buildFilters(
     perPage: search.perPage ?? 10,
     sort: search.sort ?? [{ id: 'createdAt', desc: true }],
     search: search.search ?? '',
-    role: (search.role ?? 'all') as UserRoleType | 'all',
-    banned: (search.banned ?? 'all') as 'all' | 'banned' | 'active',
+    role: search.role ?? 'all',
+    banned: search.banned ?? 'all',
     filters: search.filters ?? [],
     joinOperator: search.joinOperator ?? 'and',
   }

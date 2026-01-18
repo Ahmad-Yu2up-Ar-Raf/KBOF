@@ -3,7 +3,7 @@
 // =============================================================================
 // Chart configuration for dashboard analytics charts
 
-import { ChartConfig } from '@/components/ui/fragments/shadcn-ui/chart'
+import type { ChartConfig } from '@/components/ui/fragments/shadcn-ui/chart'
 
 // ============================================
 // DISTRIBUTION CHART COLORS (Top 5)

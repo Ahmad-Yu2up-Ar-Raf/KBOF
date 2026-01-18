@@ -2,21 +2,24 @@
 
 import { Link } from '@tanstack/react-router'
 
-import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
 import {
   ArrowLeft,
-  ThumbsUp,
-  Star,
-  MapPin,
   Calendar,
-  StarIcon,
+  MapPin,
   MoreVertical,
+  Star,
+  StarIcon,
+  ThumbsUp,
 } from 'lucide-react'
+import React from 'react'
+import { ReviewsSection } from './reviews-section'
+import { RelatedDestinationsSection } from './related-destinations-section'
+import type { DestinasiDetailDestination } from '@/lib/query-options'
+import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
 
 import { cn } from '@/lib/utils'
 
 import MediaItem from '@/components/ui/fragments/custom-ui/media/media-item'
-import type { DestinasiDetailDestination } from '@/lib/query-options'
 import { formatDate } from '@/lib/format'
 import { Badge } from '@/components/ui/fragments/shadcn-ui/badge'
 import { getProvinsiLabel } from '@/lib/utils/destination-utils'
@@ -24,11 +27,8 @@ import { useIsMobile } from '@/hooks/use-mobile'
 import ThumnailSlider from '@/components/ui/fragments/custom-ui/media/image-carousel'
 import VoteButton from '@/components/ui/fragments/custom-ui/button/vote-button'
 import AddReviewSheet from '@/components/ui/core/feature/review/add-review-sheet'
-import { ReviewsSection } from './reviews-section'
-import { RelatedDestinationsSection } from './related-destinations-section'
 import { Skeleton } from '@/components/ui/fragments/shadcn-ui/skeleton'
 import { DestinationMap } from '@/components/ui/fragments/custom-ui/destination-map'
-import React from 'react'
 // ==================================================
 // MAIN COMPONENT
 // ==================================================
@@ -41,7 +41,7 @@ export default function DestinasiDetailBlock({
 }: DestinasiDetailBlockProps) {
   // Format date helper
   const isMobile = useIsMobile()
-  const imagesGallery: string[] = [
+  const imagesGallery: Array<string> = [
     ...destination.images,
     destination.coverImage!,
   ]

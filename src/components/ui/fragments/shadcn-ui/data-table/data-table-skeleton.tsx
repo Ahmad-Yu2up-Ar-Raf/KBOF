@@ -13,7 +13,7 @@ interface DataTableSkeletonProps extends React.ComponentProps<'div'> {
   columnCount?: number
   rowCount?: number
   filterCount?: number
-  cellWidths?: string[]
+  cellWidths?: Array<string>
   withViewOptions?: boolean
   withPagination?: boolean
   shrinkZero?: boolean

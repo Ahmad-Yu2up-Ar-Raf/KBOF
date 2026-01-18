@@ -21,7 +21,7 @@ import {
 import { cn } from '@/lib/utils'
 
 type FacetedValue<Multiple extends boolean> = Multiple extends true
-  ? string[]
+  ? Array<string>
   : string
 
 interface FacetedContextValue<Multiple extends boolean = boolean> {
@@ -83,7 +83,7 @@ function Faceted<Multiple extends boolean = false>(
       if (!onValueChange) return
 
       if (multiple) {
-        const currentValue = (Array.isArray(value) ? value : []) as string[]
+        const currentValue = Array.isArray(value) ? value : []
         const newValue = currentValue.includes(selectedValue)
           ? currentValue.filter((v) => v !== selectedValue)
           : [...currentValue, selectedValue]
@@ -129,7 +129,7 @@ function FacetedTrigger(props: React.ComponentProps<typeof PopoverTrigger>) {
 }
 
 interface FacetedBadgeListProps extends React.ComponentProps<'div'> {
-  options?: { label: string; value: string }[]
+  options?: Array<{ label: string; value: string }>
   max?: number
   badgeClassName?: string
   placeholder?: string
@@ -148,7 +148,7 @@ function FacetedBadgeList(props: FacetedBadgeListProps) {
   const context = useFacetedContext('FacetedBadgeList')
   const values = Array.isArray(context.value)
     ? context.value
-    : ([context.value].filter(Boolean) as string[])
+    : ([context.value].filter(Boolean) as Array<string>)
 
   const getLabel = React.useCallback(
     (value: string) => {

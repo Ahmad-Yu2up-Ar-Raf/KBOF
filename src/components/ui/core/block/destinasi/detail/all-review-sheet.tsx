@@ -10,16 +10,17 @@
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import {
-  Star,
-  MessageCircle,
   ChevronDown,
+  ChevronRight,
   Filter,
+  MessageCircle,
   Plus,
   PlusCircle,
-  ChevronRight,
+  Star,
 } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
+import type { ReviewFilters, ReviewWithUser } from '@/lib/query-options'
 import {
   Sheet,
   SheetClose,
@@ -59,11 +60,7 @@ import {
 import { useIsMobile } from '@/hooks/use-mobile'
 import { formatDate } from '@/lib/format'
 import { cn } from '@/lib/utils'
-import {
-  getReviewsQueryOptions,
-  type ReviewWithUser,
-  type ReviewFilters,
-} from '@/lib/query-options'
+import { getReviewsQueryOptions } from '@/lib/query-options'
 
 // =============================================================================
 // TYPES
@@ -73,7 +70,7 @@ export type AllReviewsSheetProps = {
   destinationId: number
   destinationName: string
   totalReviews: number
-  initialData?: ReviewWithUser[]
+  initialData?: Array<ReviewWithUser>
   trigger?: React.ReactNode
   open?: boolean
   setOpenAddReview: (open: boolean) => void

@@ -1,18 +1,18 @@
 'use client'
 
-import { MapPin, Users, FileText, Vote } from 'lucide-react'
+import { FileText, MapPin, Users, Vote } from 'lucide-react'
 
+import type { DataCard } from '@/types'
+import type { AnalyticsAggregateResult } from '@/lib/query-options'
 import { SectionCards } from '@/components/ui/fragments/custom-ui/card/section-card'
 import { ChartActivityTrends } from '@/components/ui/fragments/custom-ui/charts/chart-activity-trends'
 import { ChartDistribution } from '@/components/ui/fragments/custom-ui/charts/chart-distribution'
 import { ChartTopDestinations } from '@/components/ui/fragments/custom-ui/charts/chart-top-destinations'
 import {
   categoryChartConfig,
-  typeChartConfig,
   provinsiChartConfig,
+  typeChartConfig,
 } from '@/config/chart/analytics-chart-config'
-import type { DataCard } from '@/types'
-import type { AnalyticsAggregateResult } from '@/lib/query-options'
 
 // ============================================
 // TYPES
@@ -37,7 +37,7 @@ function Overview({ data }: OverviewProps) {
   } = data
 
   // Stats cards data (max 4)
-  const dataCards: DataCard[] = [
+  const dataCards: Array<DataCard> = [
     {
       title: 'Total Destinasi',
       description: 'Destinasi wisata & budaya',

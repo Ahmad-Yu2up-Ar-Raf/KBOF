@@ -1,18 +1,18 @@
 // FILE: src/lib/game/utils.ts — Utility functions for Quiz Game
 
+import { COOKIE_CONFIG, LEVEL_CONFIGS, TIME_BONUS } from './constants'
 import type {
+  FragmentConfig,
   HighScoreRecord,
   Level,
   Question,
   QuestionResult,
-  FragmentConfig,
 } from './types'
-import { COOKIE_CONFIG, LEVEL_CONFIGS, TIME_BONUS } from './constants'
 
 /**
  * Fisher-Yates shuffle algorithm for arrays
  */
-export function shuffleArray<T>(array: T[]): T[] {
+export function shuffleArray<T>(array: Array<T>): Array<T> {
   const shuffled = [...array]
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
@@ -25,10 +25,10 @@ export function shuffleArray<T>(array: T[]): T[] {
  * Pick random questions for a game session
  */
 export function pickQuestions(
-  allQuestions: Question[],
+  allQuestions: Array<Question>,
   level: Level,
   count: number,
-): Question[] {
+): Array<Question> {
   const levelQuestions = allQuestions.filter((q) => q.level === level)
   const shuffled = shuffleArray(levelQuestions)
   return shuffled.slice(0, Math.min(count, shuffled.length))
@@ -38,9 +38,9 @@ export function pickQuestions(
  * Shuffle choices while tracking the new correct index
  */
 export function shuffleChoices(
-  choices: string[],
+  choices: Array<string>,
   correctIndex: number,
-): { choices: string[]; correctIndex: number } {
+): { choices: Array<string>; correctIndex: number } {
   const correctAnswer = choices[correctIndex]
   const shuffled = shuffleArray(choices)
   const newCorrectIndex = shuffled.indexOf(correctAnswer)
@@ -101,9 +101,9 @@ export function generateGameId(): string {
 export function generateFragmentConfigs(
   count: number,
   sizeRange: { min: number; max: number },
-): FragmentConfig[] {
-  const fragments: FragmentConfig[] = []
-  const usedAreas: { x: number; y: number; w: number; h: number }[] = []
+): Array<FragmentConfig> {
+  const fragments: Array<FragmentConfig> = []
+  const usedAreas: Array<{ x: number; y: number; w: number; h: number }> = []
 
   for (let i = 0; i < count; i++) {
     let attempts = 0
@@ -152,7 +152,7 @@ export function generateFragmentConfigs(
 /**
  * Get high scores from cookies
  */
-export function getHighScores(): HighScoreRecord[] {
+export function getHighScores(): Array<HighScoreRecord> {
   if (typeof document === 'undefined') return []
 
   try {
@@ -168,7 +168,7 @@ export function getHighScores(): HighScoreRecord[] {
 
     if (!Array.isArray(parsed)) return []
 
-    return parsed as HighScoreRecord[]
+    return parsed as Array<HighScoreRecord>
   } catch {
     return []
   }
@@ -199,7 +199,7 @@ export function saveHighScore(record: HighScoreRecord): void {
     const updated = [...existing, record]
 
     // Keep only top 3 scores per level
-    const grouped: Record<Level, HighScoreRecord[]> = {
+    const grouped: Record<Level, Array<HighScoreRecord>> = {
       easy: [],
       medium: [],
       hard: [],
@@ -209,8 +209,8 @@ export function saveHighScore(record: HighScoreRecord): void {
       grouped[score.level].push(score)
     })
 
-    const trimmed: HighScoreRecord[] = []
-    for (const level of Object.keys(grouped) as Level[]) {
+    const trimmed: Array<HighScoreRecord> = []
+    for (const level of Object.keys(grouped) as Array<Level>) {
       const sorted = grouped[level].sort((a, b) => b.score - a.score)
       trimmed.push(...sorted.slice(0, 3))
     }
@@ -245,7 +245,10 @@ export function clearHighScores(): void {
 /**
  * Calculate game statistics from results
  */
-export function calculateGameStats(results: QuestionResult[], level: Level) {
+export function calculateGameStats(
+  results: Array<QuestionResult>,
+  level: Level,
+) {
   const config = LEVEL_CONFIGS[level]
   const totalQuestions = results.length
   const correctCount = results.filter(
@@ -295,7 +298,7 @@ export function generateClipPath(config: FragmentConfig): string {
 /**
  * Generate CSS for fragment mask (multiple fragments)
  */
-export function generateFragmentMask(configs: FragmentConfig[]): string {
+export function generateFragmentMask(configs: Array<FragmentConfig>): string {
   const gradients = configs.map((config) => {
     const { xPerc, yPerc, wPerc, hPerc } = config
     return `linear-gradient(black, black) ${xPerc}% ${yPerc}% / ${wPerc}% ${hPerc}% no-repeat`

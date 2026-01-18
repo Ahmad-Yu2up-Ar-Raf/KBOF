@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import animationData from '@/assets/animations/Preload.json'
 import { useLottie } from 'lottie-react'
 import { BlurFade } from './blur-fade'
+import animationData from '@/assets/animations/Preload.json'
 
 /**
  * Props untuk Preload Component

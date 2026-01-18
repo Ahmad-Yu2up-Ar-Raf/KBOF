@@ -12,8 +12,8 @@ import {
 } from 'nuqs/server'
 import * as z from 'zod'
 
-import { getSortingStateParser } from '@/lib/parsers'
 import type { User } from '@/db/schema'
+import { getSortingStateParser } from '@/lib/parsers'
 
 // ============================================
 // USER ROLE ENUM

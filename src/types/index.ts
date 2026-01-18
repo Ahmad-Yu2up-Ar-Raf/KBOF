@@ -1,17 +1,24 @@
-import { LinkProps } from '@tanstack/react-router'
-import { LucideIcon } from 'lucide-react'
+import type { LinkProps } from '@tanstack/react-router'
+import type { LucideIcon } from 'lucide-react'
+
+import type {
+  DestinationCategory,
+  DestinationStatus,
+  DestinationType,
+  ProvinsiIndonesia,
+} from '@/db/schema'
 
 export interface sidebarType {
-  items: {
+  items: Array<{
     title: string
     url: string
     icon: LucideIcon
     isActive?: boolean
-    items?: {
+    items?: Array<{
       title: string
       url: string
-    }[]
-  }[]
+    }>
+  }>
 }
 
 export interface NavItem {
@@ -44,18 +51,18 @@ export interface Destinasi {
   judul: string
   ringkasanPendek: string
   deskripsi: string
-  media: Media[]
+  media: Array<Media>
   pembuat: Pembuat
   kategori: string
   subKategori: string
-  tag: string[]
+  tag: Array<string>
   lokasi: Lokasi
   dibuatPada: Date
   diupdatePada: Date
   totalVote: number
   status: Status
   impactMetrics: ImpactMetrics
-  sumber: Sumber[]
+  sumber: Array<Sumber>
   confidence: Confidence
 }
 
@@ -127,30 +134,23 @@ export type {
   ProvinsiIndonesia,
 } from '@/db/schema'
 
-import type {
-  DestinationType,
-  DestinationStatus,
-  DestinationCategory,
-  ProvinsiIndonesia,
-} from '@/db/schema'
-
 export interface DestinationAggregateInput {
   filterFlag?: 'advancedFilters' | 'commandFilters' | null
   page?: number
   perPage?: number
-  sort?: { id: string; desc: boolean }[]
+  sort?: Array<{ id: string; desc: boolean }>
   name?: string
-  status?: DestinationStatus[]
-  type?: DestinationType[]
-  category?: DestinationCategory[]
+  status?: Array<DestinationStatus>
+  type?: Array<DestinationType>
+  category?: Array<DestinationCategory>
   provinsi?: string
-  createdAt?: number[]
-  filters?: unknown[]
+  createdAt?: Array<number>
+  filters?: Array<unknown>
   joinOperator?: 'and' | 'or'
 }
 
 export interface DestinationAggregateResult {
-  data: {
+  data: Array<{
     id: number
     userId: string
     creatorName?: string | null
@@ -172,12 +172,15 @@ export interface DestinationAggregateResult {
     status: DestinationStatus
     createdAt: Date
     updatedAt: Date
-  }[]
+    publishedAt?: Date | null
+  }>
   pageCount: number
   statusCounts: {
     published: number
     draft: number
     archived: number
+    pending: number
+    cancel: number
   }
   categoryCounts: {
     'lokasi-budaya': number
@@ -209,16 +212,16 @@ export interface ArticleAggregateInput {
   filterFlag?: 'advancedFilters' | 'commandFilters' | null
   page?: number
   perPage?: number
-  sort?: { id: string; desc: boolean }[]
+  sort?: Array<{ id: string; desc: boolean }>
   title?: string
-  status?: DestinationStatus[]
-  createdAt?: number[]
-  filters?: unknown[]
+  status?: Array<DestinationStatus>
+  createdAt?: Array<number>
+  filters?: Array<unknown>
   joinOperator?: 'and' | 'or'
 }
 
 export interface ArticleAggregateResult {
-  data: {
+  data: Array<{
     id: number
     authorId: string
     authorName?: string | null
@@ -232,8 +235,8 @@ export interface ArticleAggregateResult {
     publishedAt: Date | null
     createdAt: Date
     updatedAt: Date
-  }[]
-  pageCount: number
+  }>
+  geCount: number
   statusCounts: {
     published: number
     draft: number

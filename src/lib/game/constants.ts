@@ -109,11 +109,11 @@ export const KEYBOARD_SHORTCUTS = {
 /**
  * Game result messages based on accuracy
  */
-export const RESULT_MESSAGES: {
+export const RESULT_MESSAGES: Array<{
   min: number
   message: string
   emoji: string
-}[] = [
+}> = [
   {
     min: 100,
     message: 'Luar Biasa! Kamu ahli destinasi Indonesia!',

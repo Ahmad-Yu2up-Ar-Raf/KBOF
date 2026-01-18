@@ -8,14 +8,16 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useServerFn } from '@tanstack/react-start'
 
+import type {
+  CreateReviewInput,
+  UpdateReviewInput,
+} from '@/lib/server/review/review-server-actions'
 import {
   addReview,
-  updateReview,
-  deleteReview,
   checkUserReview,
+  deleteReview,
   getDestinationReviews,
-  type CreateReviewInput,
-  type UpdateReviewInput,
+  updateReview,
 } from '@/lib/server/review/review-server-actions'
 import { DestinasiKeys } from '@/lib/query-options'
 

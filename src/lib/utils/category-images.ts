@@ -97,8 +97,8 @@ export interface CategoryData {
 /**
  * Get all categories with their images for carousel
  */
-export function getAllCategoriesWithImages(): CategoryData[] {
-  const categories: DestinationCategory[] = [
+export function getAllCategoriesWithImages(): Array<CategoryData> {
+  const categories: Array<DestinationCategory> = [
     'lokasi-budaya',
     'pariwisata',
     'adat-istiadat',

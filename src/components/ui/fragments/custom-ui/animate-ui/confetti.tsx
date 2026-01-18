@@ -1,6 +1,5 @@
 'use client'
 
-import type { ReactNode } from 'react'
 import React, {
   createContext,
   forwardRef,
@@ -10,14 +9,15 @@ import React, {
   useMemo,
   useRef,
 } from 'react'
+import confetti from 'canvas-confetti'
+
+import { Button } from '../../shadcn-ui/button'
 import type {
   GlobalOptions as ConfettiGlobalOptions,
   CreateTypes as ConfettiInstance,
   Options as ConfettiOptions,
 } from 'canvas-confetti'
-import confetti from 'canvas-confetti'
-
-import { Button } from '../../shadcn-ui/button'
+import type { ReactNode } from 'react'
 
 type Api = {
   fire: (options?: ConfettiOptions) => void

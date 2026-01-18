@@ -10,9 +10,9 @@ import { useServerFn } from '@tanstack/react-start'
 
 import {
   addVote,
-  removeVote,
   checkUserVote,
   getVoteCount,
+  removeVote,
 } from '@/lib/server/vote/vote-server-actions'
 import { DestinasiKeys, leaderboardKeys } from '@/lib/query-options'
 

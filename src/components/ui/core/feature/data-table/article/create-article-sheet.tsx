@@ -1,3 +1,7 @@
+import { toast } from 'sonner'
+import React, { useRef, useState } from 'react'
+import { Plus } from 'lucide-react'
+import ArticleForm from '../../form/article-form'
 import {
   Sheet,
   SheetClose,
@@ -20,12 +24,8 @@ import {
   DrawerTrigger,
 } from '@/components/ui/fragments/shadcn-ui/drawer'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
-import { toast } from 'sonner'
 import { useCreateArticleForm } from '@/hooks/form/use-article-form'
-import ArticleForm from '../../form/article-form'
 import { Spinner } from '@/components/ui/fragments/shadcn-ui/spinner'
-import React, { useState, useRef } from 'react'
-import { Plus } from 'lucide-react'
 
 interface CreateArticleSheetProps {
   className?: string
@@ -72,7 +72,7 @@ function CreateArticleSheet({ className, ...props }: CreateArticleSheetProps) {
           {props.children ? (
             props.children
           ) : (
-                 <Button variant={'outline'} className="text-sm  h-8    w-fit">
+            <Button variant={'outline'} className="text-sm  h-8    w-fit">
               <Plus className="mr-3" />
               Tambah Artikel
             </Button>
@@ -149,7 +149,7 @@ function CreateArticleSheet({ className, ...props }: CreateArticleSheetProps) {
         <form.Subscribe selector={(state) => state.isSubmitting}>
           {(isSubmitting) => (
             <>
-              <div className="flex-1 overflow-y-auto px-4">
+              <div className="flex-1 overflow-y-auto px-2">
                 <ArticleForm form={form} />
               </div>
               <DrawerFooter className="sticky bottom-0 bg-background border-t p-4">
@@ -165,7 +165,7 @@ function CreateArticleSheet({ className, ...props }: CreateArticleSheetProps) {
                       Menyimpan...
                     </>
                   ) : (
-                    'Simpan'
+                    'Bagikan'
                   )}
                 </Button>
                 <DrawerClose asChild>

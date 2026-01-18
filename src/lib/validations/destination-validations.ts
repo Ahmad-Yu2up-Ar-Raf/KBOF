@@ -4,12 +4,6 @@
 // Zod schemas untuk destination entity dengan nuqs integration
 
 import {
-  contentStatus,
-  destinationType,
-  provinsiIndonesia,
-  destinationCategory,
-} from '@/db/schema'
-import {
   createSearchParamsCache,
   parseAsArrayOf,
   parseAsInteger,
@@ -17,10 +11,16 @@ import {
   parseAsStringEnum,
 } from 'nuqs/server'
 import * as z from 'zod'
+import type { Destination } from '@/db/schema'
+import {
+  contentStatus,
+  destinationCategory,
+  destinationType,
+  provinsiIndonesia,
+} from '@/db/schema'
 
 import { flagConfig } from '@/config/flag'
 import { getFiltersStateParser, getSortingStateParser } from '@/lib/parsers'
-import type { Destination } from '@/db/schema'
 
 // ============================================
 // NUQS SEARCH PARAMS CACHE
@@ -67,7 +67,7 @@ export const createDestinationSchema = z.object({
   description: z.string().min(10, 'Deskripsi minimal 10 karakter'),
   type: z.enum(destinationType.enumValues).optional(),
   category: z.enum(destinationCategory.enumValues).optional(),
-  provinsi: z.enum(provinsiIndonesia.enumValues),
+  provinsi: z.enum(provinsiIndonesia.enumValues, 'Provinsi tidak valid'),
   kabupatenKota: z.string().optional(),
   alamat: z.string().optional(),
   coverImage: fileOrUrlSchema,
@@ -100,7 +100,7 @@ export const updateDestinationPartialSchema = z.object({
 // PREPROCESS HELPERS
 // ============================================
 
-const csvToArray = (val: unknown): string[] => {
+const csvToArray = (val: unknown): Array<string> => {
   if (Array.isArray(val)) return val.filter(Boolean)
   if (typeof val === 'string' && val.length > 0) {
     return val

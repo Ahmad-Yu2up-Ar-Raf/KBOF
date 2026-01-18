@@ -7,14 +7,14 @@
 
 import { Link } from '@tanstack/react-router'
 
+import type { CategoryData } from '@/lib/utils/category-images'
 import {
   Card,
+  CardDescription,
   CardHeader,
   CardTitle,
-  CardDescription,
 } from '@/components/ui/fragments/shadcn-ui/card'
 import { cn } from '@/lib/utils'
-import type { CategoryData } from '@/lib/utils/category-images'
 
 // ============================================
 // TYPES

@@ -1,4 +1,4 @@
-import { type AnimationOptions, motion } from 'motion/react'
+import { motion } from 'motion/react'
 import {
   forwardRef,
   useCallback,
@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
 } from 'react'
+import type { AnimationOptions } from 'motion/react'
 
 import { cn } from '@/lib/utils'
 
@@ -34,7 +35,7 @@ export interface VerticalCutRevealRef {
 }
 
 interface WordObject {
-  characters: string[]
+  characters: Array<string>
   needsSpace: boolean
 }
 
@@ -69,7 +70,7 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
     const [isAnimating, setIsAnimating] = useState(false)
 
     // handy function to split text into characters with support for unicode and emojis
-    const splitIntoCharacters = (text: string): string[] => {
+    const splitIntoCharacters = (text: string): Array<string> => {
       if (typeof Intl !== 'undefined' && 'Segmenter' in Intl) {
         const segmenter = new Intl.Segmenter('en', { granularity: 'grapheme' })
         return Array.from(segmenter.segment(text), ({ segment }) => segment)
@@ -166,8 +167,8 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
         <span className="sr-only">{text}</span>
 
         {(splitBy === 'characters'
-          ? (elements as WordObject[])
-          : (elements as string[]).map((el, i) => ({
+          ? (elements as Array<WordObject>)
+          : (elements as Array<string>).map((el, i) => ({
               characters: [el],
               needsSpace: i !== elements.length - 1,
             }))

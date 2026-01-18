@@ -2,6 +2,10 @@
 
 import { useState } from 'react'
 
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { Link } from '@tanstack/react-router'
+import { ArrowRight, ChevronRight } from 'lucide-react'
+import Autoplay from 'embla-carousel-autoplay'
 import {
   Carousel,
   CarouselContent,
@@ -10,17 +14,13 @@ import {
   CarouselPrevious,
 } from '@/components/ui/fragments/shadcn-ui/carousel'
 import { cn } from '@/lib/utils'
-import { useSuspenseQuery } from '@tanstack/react-query'
 
-import { Link } from '@tanstack/react-router'
 import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
 import { Skeleton } from '@/components/ui/fragments/shadcn-ui/skeleton'
-import { ArrowRight, ChevronRight } from 'lucide-react'
 
 import { getFeaturedDestinationsQueryOptions } from '@/lib/query-options'
 
 import DestinasiCard from '@/components/ui/fragments/custom-ui/card/destinasi-card'
-import Autoplay from 'embla-carousel-autoplay'
 import HeadingSection from '@/components/ui/fragments/custom-ui/typography/heading-section'
 
 type DestinationSectionProps = {

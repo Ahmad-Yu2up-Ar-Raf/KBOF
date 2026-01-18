@@ -1,5 +1,5 @@
+import type { LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { LucideIcon } from 'lucide-react'
 
 export default function Heading({
   title,
@@ -24,11 +24,11 @@ export default function Heading({
       {Icon && (
         <Icon className=" bg-primary  hidden md:flex text-primary-foreground content-center p-2 t rounded-xl size-10" />
       )}
-      <div className="  m-auto w-full items-center content-center md:gap-2 ">
+      <div className=" max-w-md  w-full items-center content-center md:gap-2 ">
         <h1 className=" text-accent-foreground  m-auto w-full text-3xl font-bold   gap-5 tracking-tighter ">
           {title}
         </h1>
-        <p className="text-muted-foreground ">{description}</p>
+        <p className="text-muted-foreground lg:text-base ">{description}</p>
       </div>
       {children}
     </header>

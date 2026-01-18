@@ -5,6 +5,7 @@ import { ChartPieIcon } from 'lucide-react'
 import { Label, Pie, PieChart, Sector } from 'recharts'
 import type { PieSectorDataItem } from 'recharts/types/polar/Pie'
 
+import type { ChartConfig } from '@/components/ui/fragments/shadcn-ui/chart'
 import {
   Card,
   CardContent,
@@ -14,7 +15,6 @@ import {
   CardTitle,
 } from '@/components/ui/fragments/shadcn-ui/card'
 import {
-  ChartConfig,
   ChartContainer,
   ChartLegend,
   ChartLegendContent,
@@ -34,7 +34,7 @@ export interface DistributionData {
 }
 
 interface ChartDistributionProps {
-  data: DistributionData[]
+  data: Array<DistributionData>
   chartConfig: ChartConfig
   title?: string
   description?: string

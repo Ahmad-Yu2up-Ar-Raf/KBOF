@@ -90,7 +90,7 @@ export async function deleteFromCloudinary(
  * Delete multiple files from Cloudinary by public_ids
  */
 export async function deleteMultipleFromCloudinary(
-  publicIds: string[],
+  publicIds: Array<string>,
   resourceType: 'image' | 'video' | 'raw' = 'image',
 ): Promise<{ deleted: Record<string, string> }> {
   try {
@@ -151,7 +151,7 @@ export function getOptimizedUrl(
     format = 'auto',
   } = options
 
-  const transformations: string[] = []
+  const transformations: Array<string> = []
 
   if (width) transformations.push(`w_${width}`)
   if (height) transformations.push(`h_${height}`)

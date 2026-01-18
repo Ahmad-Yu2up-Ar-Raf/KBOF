@@ -1,6 +1,6 @@
 'use client'
 
-import { useQueryStates, parseAsArrayOf, parseAsInteger } from 'nuqs'
+import { parseAsArrayOf, parseAsInteger, useQueryStates } from 'nuqs'
 import { useCallback } from 'react'
 import type { DateRange } from 'react-day-picker'
 
@@ -42,7 +42,7 @@ export function useDashboardFilters() {
         return
       }
 
-      const timestamps: number[] = []
+      const timestamps: Array<number> = []
 
       // Set time to start of day for 'from' date
       if (dateRange.from) {

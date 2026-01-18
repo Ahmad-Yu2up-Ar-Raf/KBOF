@@ -1,7 +1,8 @@
-import { Input } from '@/components/ui/fragments/shadcn-ui/input'
-import { FormBase, FormControlProps } from './form-base'
-import { useFieldContext } from '@/hooks/form/use-form'
 import { useStore } from '@tanstack/react-store'
+import { FormBase } from './form-base'
+import type { FormControlProps } from './form-base'
+import { Input } from '@/components/ui/fragments/shadcn-ui/input'
+import { useFieldContext } from '@/hooks/form/use-form'
 
 export function FormInput(props: FormControlProps) {
   const field = useFieldContext<string | number>()

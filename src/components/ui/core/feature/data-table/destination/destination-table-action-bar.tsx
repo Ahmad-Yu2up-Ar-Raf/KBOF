@@ -1,8 +1,11 @@
 'use client'
 
 import { SelectTrigger } from '@radix-ui/react-select'
+import { CheckCircle2, Download, Settings, Trash2 } from 'lucide-react'
 import type { Table } from '@tanstack/react-table'
-import { CheckCircle2, Download, Trash2 } from 'lucide-react'
+import type { DestinationAggregateResult, DestinationStatus } from '@/types'
+import { useSession } from '@/lib/auth/auth-client'
+import { TYPE_OPTIONS } from '@/lib/utils/destination-utils'
 
 import {
   DataTableActionBar,
@@ -16,7 +19,6 @@ import {
   SelectItem,
 } from '@/components/ui/fragments/shadcn-ui/select'
 import { Separator } from '@/components/ui/fragments/shadcn-ui/separator'
-import type { DestinationAggregateResult, DestinationStatus } from '@/types'
 
 const actions = ['update-status', 'export', 'delete'] as const
 
@@ -25,7 +27,13 @@ type Action = (typeof actions)[number]
 type DestinationRow = DestinationAggregateResult['data'][number]
 
 // Status enum values
-const statusEnumValues: DestinationStatus[] = ['published', 'draft', 'archived']
+const statusEnumValues: Array<DestinationStatus> = [
+  'published',
+  'draft',
+  'archived',
+  'pending',
+  'cancel',
+]
 
 interface DestinationTableActionBarProps {
   table: Table<DestinationRow>
@@ -33,12 +41,14 @@ interface DestinationTableActionBarProps {
   onDelete: () => void
   onExport: () => void
   onStatusUpdate: (status: DestinationStatus) => void
+  onTypeUpdate?: (type: string) => void
 }
 
 export function DestinationTableActionBar({
   table,
   onDelete,
   onStatusUpdate,
+  onTypeUpdate,
   onExport,
   getIsActionPending,
 }: DestinationTableActionBarProps) {
@@ -56,23 +66,65 @@ export function DestinationTableActionBar({
         className="hidden data-[orientation=vertical]:h-5 sm:block"
       />
       <div className="flex items-center gap-1.5">
-        <Select
-          onValueChange={(value) => onStatusUpdate(value as DestinationStatus)}
-        >
+        {/* Only superAdmin may update status in bulk */}
+        {(() => {
+          const session = useSession()
+          const role = session?.data?.user.role
+          if (role === 'superAdmin') {
+            return (
+              <Select
+                onValueChange={(value) =>
+                  onStatusUpdate(value as DestinationStatus)
+                }
+              >
+                <SelectTrigger asChild>
+                  <DataTableActionBarAction
+                    size="icon"
+                    tooltip="Update status"
+                    isPending={isPending}
+                  >
+                    <CheckCircle2 />
+                  </DataTableActionBarAction>
+                </SelectTrigger>
+                <SelectContent align="center">
+                  <SelectGroup>
+                    {statusEnumValues.map((status) => (
+                      <SelectItem
+                        key={status}
+                        value={status}
+                        className="capitalize"
+                      >
+                        {status}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            )
+          }
+          return null
+        })()}
+
+        {/* Bulk update type - available to admin & superAdmin (ownership enforced server-side) */}
+        <Select onValueChange={(value) => onTypeUpdate?.(value)}>
           <SelectTrigger asChild>
             <DataTableActionBarAction
               size="icon"
-              tooltip="Update status"
+              tooltip="Update type"
               isPending={isPending}
             >
-              <CheckCircle2 />
+              <Settings />
             </DataTableActionBarAction>
           </SelectTrigger>
           <SelectContent align="center">
             <SelectGroup>
-              {statusEnumValues.map((status) => (
-                <SelectItem key={status} value={status} className="capitalize">
-                  {status}
+              {TYPE_OPTIONS.map((t) => (
+                <SelectItem
+                  key={t.value}
+                  value={t.value}
+                  className="capitalize"
+                >
+                  {t.label}
                 </SelectItem>
               ))}
             </SelectGroup>

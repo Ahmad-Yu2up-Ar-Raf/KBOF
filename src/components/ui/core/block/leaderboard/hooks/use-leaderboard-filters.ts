@@ -22,7 +22,7 @@ import {
 // =============================================================================
 
 type LeaderboardData = {
-  data: LeaderboardEntry[]
+  data: Array<LeaderboardEntry>
   categoryCounts: Record<string, number>
   typeCounts: Record<string, number>
   provinceCounts: Record<string, number>
@@ -97,7 +97,7 @@ export function useLeaderboardFilters(leaderboardData: LeaderboardData) {
 
   const handleFiltersChange = (
     key: 'categories' | 'types' | 'provinces',
-    values: string[] | null,
+    values: Array<string> | null,
   ) => {
     void setFilters({ [key]: values })
   }

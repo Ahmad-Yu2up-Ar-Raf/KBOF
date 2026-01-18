@@ -1,5 +1,7 @@
 import * as React from 'react'
 
+import { Link } from '@tanstack/react-router'
+import type { LucideIcon } from 'lucide-react'
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -7,8 +9,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/fragments/shadcn-ui/sidebar'
-import { Link } from '@tanstack/react-router'
-import { LucideIcon } from 'lucide-react'
 
 export function NavSecondary({
   isMobile,
@@ -17,11 +17,11 @@ export function NavSecondary({
   ...props
 }: {
   isMobile: boolean
-  items: {
+  items: Array<{
     title: string
     url: string
     icon: LucideIcon
-  }[]
+  }>
 } & React.ComponentPropsWithoutRef<typeof SidebarGroup>) {
   return (
     <>

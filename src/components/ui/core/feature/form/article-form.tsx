@@ -1,5 +1,5 @@
+import type { CreateArticleFormReturn } from '@/hooks/form/use-article-form'
 import { FieldGroup } from '@/components/ui/fragments/shadcn-ui/field'
-import { CreateArticleFormReturn } from '@/hooks/form/use-article-form'
 
 const STATUS_OPTIONS = [
   { value: 'draft', label: 'Draf' },

@@ -33,7 +33,7 @@ export default function ArtikelSection() {
         href="/artikel"
         title="Artikel Pilihan"
         description="Jelajahi artikel menarik seputar destinasi wisata, tips perjalanan, dan inspirasi liburan."
-        // Icon={Newspaper} 
+        // Icon={Newspaper}
       />
 
       {/* Articles Grid */}

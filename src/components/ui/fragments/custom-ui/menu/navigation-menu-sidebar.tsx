@@ -1,21 +1,15 @@
 'use client'
 
+import { forwardRef } from 'react'
+import type { ComponentPropsWithoutRef } from 'react'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
-import { forwardRef, ComponentPropsWithoutRef } from 'react'
 
 type ButtonAnimationProps = ComponentPropsWithoutRef<typeof Button>
 
 const ButtonAnimation = forwardRef<HTMLButtonElement, ButtonAnimationProps>(
   (props, ref) => {
     return (
-      <Button
-        ref={ref}
-        variant="ghost"
-            size="icon"
-        
-        {...props}
-        
-      >
+      <Button ref={ref} variant="ghost" size="icon" {...props}>
         <svg
           className="pointer-events-none"
           width={16}

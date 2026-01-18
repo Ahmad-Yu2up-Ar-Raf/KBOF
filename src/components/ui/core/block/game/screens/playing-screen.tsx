@@ -5,17 +5,16 @@
 // =============================================================================
 
 import * as React from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowLeft, Pause, Play } from 'lucide-react'
 
+import { PauseOverlay } from './pause-overlay'
+import { ExitConfirmationDialog } from './exit-confirmation-dialog'
 import type { useQuizEngine } from '@/hooks/game/use-quiz-engine'
 import { ANIMATION_DURATION } from '@/lib/game/constants'
 import { cn } from '@/lib/utils'
 import { GameContent, GameHeader, QuestionCard } from '@/components/game'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
-
-import { PauseOverlay } from './pause-overlay'
-import { ExitConfirmationDialog } from './exit-confirmation-dialog'
 
 // =============================================================================
 // TYPES
@@ -51,7 +50,58 @@ export function PlayingScreen({
   if (!currentQuestion) return null
 
   const isLastQuestion = state.currentIndex >= state.questions.length - 1
+  const playSound = '/assets/audio/quiz-audio.mp3'
+  const bgAudioRef = React.useRef<HTMLAudioElement | null>(null)
 
+  // Create background audio on mount
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (!bgAudioRef.current) {
+      const a = new Audio(playSound)
+      a.loop = true
+      a.preload = 'auto'
+      a.volume = 0.69
+      bgAudioRef.current = a
+    }
+
+    // play if not paused
+    const tryPlay = async () => {
+      try {
+        if (!state.isPaused) {
+          await bgAudioRef.current?.play()
+        }
+      } catch (e) {
+        // ignore autoplay policy errors
+      }
+    }
+
+    void tryPlay()
+
+    return () => {
+      // stop and cleanup on unmount
+      try {
+        bgAudioRef.current?.pause()
+        if (bgAudioRef.current) bgAudioRef.current.currentTime = 0
+      } catch (e) {}
+      bgAudioRef.current = null
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // Pause/resume background audio when game is paused/resumed
+  React.useEffect(() => {
+    const a = bgAudioRef.current
+    if (!a) return
+    if (state.isPaused) {
+      try {
+        a.pause()
+      } catch {}
+    } else {
+      try {
+        void a.play().catch(() => {})
+      } catch {}
+    }
+  }, [state.isPaused])
   // Handle exit button click - show confirmation
   const handleExitClick = () => {
     // Pause the game when showing exit dialog
@@ -95,7 +145,7 @@ export function PlayingScreen({
       <GameHeader
         variant="column"
         // Emoji={config.emoji}
-        className='md:mb-0'
+        className="md:mb-0"
         title={`${state.timeRemaining}`}
         titleClassName={'flex text-xs'}
         // subtitle={`Soal ${state.currentIndex + 1} dari ${state.questions.length}`}
@@ -127,7 +177,7 @@ export function PlayingScreen({
         }
       />
 
-      <GameContent className='  space-y-5'>
+      <GameContent className="  space-y-5">
         <QuestionCard
           question={currentQuestion}
           level={level}

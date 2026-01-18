@@ -3,6 +3,7 @@
 import { useQueryState } from 'nuqs'
 import * as React from 'react'
 
+import type { FlagConfig } from '@/config/flag'
 import {
   ToggleGroup,
   ToggleGroupItem,
@@ -12,7 +13,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/fragments/shadcn-ui/tooltip'
-import { type FlagConfig, flagConfig } from '@/config/flag'
+import { flagConfig } from '@/config/flag'
 
 type FilterFlag = FlagConfig['featureFlags'][number]['value']
 

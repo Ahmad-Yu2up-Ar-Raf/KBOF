@@ -1,9 +1,9 @@
 // FILE: src/components/game/timer-display.tsx — Timer component with visual states
 
-import { motion, AnimatePresence } from 'framer-motion'
-import { cn } from '@/lib/utils'
-import { TIMER_THRESHOLDS, ANIMATION_DURATION } from '@/lib/game/constants'
+import { AnimatePresence, motion } from 'framer-motion'
 import type { TimerState } from '@/lib/game/types'
+import { cn } from '@/lib/utils'
+import { ANIMATION_DURATION, TIMER_THRESHOLDS } from '@/lib/game/constants'
 import { formatTime } from '@/lib/game/utils'
 
 type TimerDisplayProps = {

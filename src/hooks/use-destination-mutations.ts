@@ -8,18 +8,19 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from '@tanstack/react-router'
 import { useServerFn } from '@tanstack/react-start'
 
-import {
-  addDestination,
-  updateDestination,
-  deleteDestination,
-  updateBulkDestinationStatus,
-} from '@/lib/server/destination/destination-server-actions'
-import { invalidateDestinationQueries } from '@/lib/utils/destination-utils'
 import type {
   CreateDestinationSchema,
   UpdateDestinationSchema,
 } from '@/lib/validations/destination-validations'
 import type { DestinationStatus } from '@/types'
+import {
+  addDestination,
+  deleteDestination,
+  updateBulkDestinationStatus,
+  updateBulkDestinationType,
+  updateDestination,
+} from '@/lib/server/destination/destination-server-actions'
+import { invalidateDestinationQueries } from '@/lib/utils/destination-utils'
 
 // ============================================
 // CREATE DESTINATION MUTATION
@@ -100,7 +101,7 @@ export function useUpdateDestinationMutation(
 // ============================================
 
 interface BulkUpdateStatusData {
-  id: number | number[]
+  id: number | Array<number>
   status: DestinationStatus
 }
 
@@ -152,7 +153,7 @@ export function useDeleteDestinationMutation(
   const deleteDestinationFn = useServerFn(deleteDestination)
 
   return useMutation({
-    mutationFn: async (ids: number | number[]) => {
+    mutationFn: async (ids: number | Array<number>) => {
       const result = await deleteDestinationFn({
         data: { id: Array.isArray(ids) ? ids : [ids] },
       })
@@ -167,6 +168,41 @@ export function useDeleteDestinationMutation(
 
     onError: (error: Error) => {
       console.error('Delete destination error:', error.message)
+      options?.onError?.(error)
+    },
+  })
+}
+
+// ============================================
+// BULK UPDATE TYPE MUTATION
+// ============================================
+
+interface BulkUpdateTypeData {
+  ids: Array<number>
+  type: string
+}
+
+export function useBulkUpdateDestinationTypeMutation(
+  options?: UseBulkUpdateDestinationStatusMutationOptions,
+) {
+  const queryClient = useQueryClient()
+  const router = useRouter()
+  const updateBulkTypeFn = useServerFn(updateBulkDestinationType)
+
+  return useMutation({
+    mutationFn: async (data: BulkUpdateTypeData) => {
+      const result = await updateBulkTypeFn({ data })
+      return result
+    },
+
+    onSuccess: async () => {
+      await invalidateDestinationQueries(queryClient)
+      await router.invalidate()
+      await options?.onSuccess?.()
+    },
+
+    onError: (error: Error) => {
+      console.error('Bulk update destination type error:', error.message)
       options?.onError?.(error)
     },
   })

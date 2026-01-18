@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { SquareArrowOutUpRight } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 import MediaItem from './ui/fragments/custom-ui/media/media-item'
@@ -21,7 +21,7 @@ export type CardStackItem = {
 }
 
 export type CardStackProps<T extends CardStackItem> = {
-  items: T[]
+  items: Array<T>
 
   /** Selected index on mount */
   initialIndex?: number
@@ -131,7 +131,7 @@ export function CardStack<T extends CardStackItem>({
 
   React.useEffect(() => {
     if (!len) return
-    onChangeIndex?.(active, items[active]!)
+    onChangeIndex?.(active, items[active])
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active])
 
@@ -190,7 +190,7 @@ export function CardStack<T extends CardStackItem>({
 
   if (!len) return null
 
-  const activeItem = items[active]!
+  const activeItem = items[active]
 
   return (
     <div

@@ -6,7 +6,7 @@
 
 import { createServerFn } from '@tanstack/react-start'
 import { z } from 'zod'
-import { and, desc, eq, count, sql } from 'drizzle-orm'
+import { and, count, desc, eq, sql } from 'drizzle-orm'
 import * as schema from '@/db/schema'
 
 const getDb = async () => {
@@ -50,7 +50,7 @@ export type ReviewWithUser = {
 }
 
 export type ReviewsResult = {
-  data: ReviewWithUser[]
+  data: Array<ReviewWithUser>
   pagination: {
     page: number
     perPage: number
@@ -148,33 +148,35 @@ export const getDestinationReviewsPreviewServerFn = createServerFn({
   method: 'GET',
 })
   .inputValidator(z.object({ destinationId: z.number().int().positive() }))
-  .handler(async ({ data: { destinationId } }): Promise<ReviewWithUser[]> => {
-    const db = await getDb()
+  .handler(
+    async ({ data: { destinationId } }): Promise<Array<ReviewWithUser>> => {
+      const db = await getDb()
 
-    const results = await db
-      .select({
-        id: review.id,
-        userId: review.userId,
-        destinationId: review.destinationId,
-        rating: review.rating,
-        title: review.title,
-        content: review.content,
-        visitDate: review.visitDate,
-        createdAt: review.createdAt,
-        user: {
-          id: user.id,
-          name: user.name,
-          image: user.image,
-        },
-      })
-      .from(review)
-      .leftJoin(user, eq(review.userId, user.id))
-      .where(eq(review.destinationId, destinationId))
-      .orderBy(desc(review.createdAt))
-      .limit(4)
+      const results = await db
+        .select({
+          id: review.id,
+          userId: review.userId,
+          destinationId: review.destinationId,
+          rating: review.rating,
+          title: review.title,
+          content: review.content,
+          visitDate: review.visitDate,
+          createdAt: review.createdAt,
+          user: {
+            id: user.id,
+            name: user.name,
+            image: user.image,
+          },
+        })
+        .from(review)
+        .leftJoin(user, eq(review.userId, user.id))
+        .where(eq(review.destinationId, destinationId))
+        .orderBy(desc(review.createdAt))
+        .limit(4)
 
-    return results.map((r) => ({
-      ...r,
-      user: r.user ?? { id: '', name: 'Unknown', image: null },
-    }))
-  })
+      return results.map((r) => ({
+        ...r,
+        user: r.user ?? { id: '', name: 'Unknown', image: null },
+      }))
+    },
+  )

@@ -1,9 +1,10 @@
 'use client'
 
-import type { Row } from '@tanstack/react-table'
 import * as React from 'react'
 import { toast } from 'sonner'
+import type { Row } from '@tanstack/react-table'
 
+import type { ArticleAggregateResult } from '@/types'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
 import {
   Dialog,
@@ -27,14 +28,13 @@ import {
 import { useIsMobile } from '@/hooks/use-mobile'
 import { useDeleteArticleMutation } from '@/hooks/use-article-mutations'
 import { Spinner } from '@/components/ui/fragments/shadcn-ui/spinner'
-import type { ArticleAggregateResult } from '@/types'
 
 type ArticleRow = ArticleAggregateResult['data'][number]
 
 interface DeleteArticleDialogProps extends React.ComponentPropsWithoutRef<
   typeof Dialog
 > {
-  articles: Row<ArticleRow>['original'][]
+  articles: Array<Row<ArticleRow>['original']>
   showTrigger?: boolean
   onSuccess?: () => void
 }

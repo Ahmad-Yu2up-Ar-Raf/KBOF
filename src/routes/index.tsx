@@ -2,9 +2,9 @@ import { Suspense } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { queryClient } from '@/components/provider/Provider'
 import {
-  getLeaderboardTopQueryOptions,
   getFeaturedArticlesQueryOptions,
   getFeaturedDestinationsQueryOptions,
+  getLeaderboardTopQueryOptions,
 } from '@/lib/query-options'
 import HeroSection from '@/components/ui/core/block/section/hero-section'
 import ArtikelSection, {

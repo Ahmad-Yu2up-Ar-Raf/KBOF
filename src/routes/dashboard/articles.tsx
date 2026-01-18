@@ -1,8 +1,9 @@
 import { createFileRoute, useSearch } from '@tanstack/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { Newspaper, FileText, Plus } from 'lucide-react'
+import { BookOpen, BookOpenText, FileText, Newspaper, Plus } from 'lucide-react'
 import { Suspense, useState } from 'react'
 
+import type { ArticleAggregateInput } from '@/lib/query-options'
 import Heading from '@/components/ui/fragments/custom-ui/typography/heading'
 import { DataTableSkeleton } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-skeleton'
 import { FeatureFlagsProvider } from '@/components/ui/core/feature/data-table/feature-flag-provider'
@@ -10,10 +11,7 @@ import { ArticleTable } from '@/components/ui/core/feature/data-table/article/ar
 import CreateArticleSheet from '@/components/ui/core/feature/data-table/article/create-article-sheet'
 import { articleSearchSchema } from '@/lib/validations/article-validations'
 import { getValidFilters } from '@/lib/data-table'
-import {
-  getArticleAdminQueryOptions,
-  type ArticleAggregateInput,
-} from '@/lib/query-options'
+import { getArticleAdminQueryOptions } from '@/lib/query-options'
 import { queryClient } from '@/components/provider/Provider'
 import { EmptyState } from '@/components/ui/fragments/custom-ui/empty-state'
 
@@ -67,8 +65,8 @@ function ArticlePageSkeleton() {
   return (
     <div className="space-y-3">
       <Heading
-        Icon={Newspaper}
-        title="Artikel"
+        Icon={BookOpenText}
+        title="Artikel Saya"
         description="Kelola artikel dan konten edukasi."
       />
 
@@ -97,9 +95,9 @@ function RouteComponent() {
     <div>
       <Heading
         className="mb-4"
-        Icon={Newspaper}
-        title="Artikel"
-        description="Kelola artikel dan konten edukasi tentang wisata dan budaya Indonesia."
+        Icon={BookOpenText}
+        title="Artikel Saya"
+        description="Kelola artikel dan konten edukasi kamu di sini, agar dapat di kenal oleh publik luas."
       />
       <main>
         {isDatabaseEmpty ? (

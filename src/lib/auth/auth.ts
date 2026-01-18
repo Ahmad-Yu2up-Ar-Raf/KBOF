@@ -1,10 +1,10 @@
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
-import { db } from '@/db' // your drizzle instance
-import * as schema from '@/db/schema'
-import { magicLink, admin } from 'better-auth/plugins'
+import { admin, magicLink } from 'better-auth/plugins'
 import { Resend } from 'resend'
 import { ac, roles } from './permissions'
+import * as schema from '@/db/schema'
+import { db } from '@/db' // your drizzle instance
 
 const resend = new Resend(process.env.RESEND_API_KEY as string)
 
@@ -84,7 +84,7 @@ export const auth = betterAuth({
     provider: 'pg',
     schema,
   }),
-  //...other options
+  // ...other options
   socialProviders: {
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID as string,

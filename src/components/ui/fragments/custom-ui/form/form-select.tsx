@@ -1,13 +1,14 @@
+import { useStore } from '@tanstack/react-store'
+import { FormBase } from './form-base'
+import type { FormControlProps } from './form-base'
+import type { ReactNode } from 'react'
 import { useFieldContext } from '@/hooks/form/use-form'
-import { FormBase, FormControlProps } from './form-base'
-import { ReactNode } from 'react'
 import {
   Select,
   SelectContent,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/fragments/shadcn-ui/select'
-import { useStore } from '@tanstack/react-store'
 
 export function FormSelect({
   children,

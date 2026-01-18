@@ -1,4 +1,4 @@
-import { magicLinkClient, adminClient } from 'better-auth/client/plugins'
+import { adminClient, magicLinkClient } from 'better-auth/client/plugins'
 import { createAuthClient } from 'better-auth/react'
 import { ac, roles } from './permissions'
 

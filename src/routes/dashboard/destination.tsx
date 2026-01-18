@@ -1,8 +1,9 @@
 import { createFileRoute, useSearch } from '@tanstack/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { MapPin, Map, Plus } from 'lucide-react'
+import { Map, MapPin, Plus, Telescope } from 'lucide-react'
 import { Suspense, useState } from 'react'
 
+import type { DestinationAggregateInput } from '@/lib/query-options'
 import Heading from '@/components/ui/fragments/custom-ui/typography/heading'
 import { DataTableSkeleton } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-skeleton'
 // import { FeatureFlagsProvider } from '@/components/ui/core/feature/data-table/feature-flag-provider'
@@ -10,10 +11,7 @@ import { DestinationTable } from '@/components/ui/core/feature/data-table/destin
 import CreateDestinationSheet from '@/components/ui/core/feature/data-table/destination/create-destination-sheet'
 import { destinationSearchSchema } from '@/lib/validations/destination-validations'
 import { getValidFilters } from '@/lib/data-table'
-import {
-  getDestinationAdminQueryOptions,
-  type DestinationAggregateInput,
-} from '@/lib/query-options'
+import { getDestinationAdminQueryOptions } from '@/lib/query-options'
 import { queryClient } from '@/components/provider/Provider'
 import { EmptyState } from '@/components/ui/fragments/custom-ui/empty-state'
 
@@ -70,9 +68,10 @@ function DestinationPageSkeleton() {
   return (
     <div className="space-y-3">
       <Heading
-        Icon={MapPin}
-        title="Destinasi"
-        description="Kelola destinasi wisata dan budaya Indonesia."
+        className="mb-4 lg:mb-6"
+        Icon={Telescope}
+        title="Destinasi Lokal"
+        description="Ajukan dan kelola destinasi wisata dan budaya Indonesia local mu di sini. agar dapat di kenal oleh publik luas."
       />
 
       <DataTableSkeleton />
@@ -93,16 +92,19 @@ function RouteComponent() {
   // Check if database is truly empty (no data at all, not just filtered)
   const { statusCounts } = destinationData
   const totalDataCount =
-    statusCounts.published + statusCounts.draft + statusCounts.archived
+    statusCounts.published +
+    statusCounts.draft +
+    statusCounts.archived +
+    statusCounts.pending
   const isDatabaseEmpty = totalDataCount === 0
 
   return (
     <div>
       <Heading
-        className="mb-4"
-        Icon={MapPin}
-        title="Destinasi"
-        description="Kelola destinasi wisata dan budaya Indonesia. Tambah, edit, dan publikasikan konten destinasi."
+        className="mb-4 lg:mb-6"
+        Icon={Telescope}
+        title="Destinasi Lokal"
+        description="Ajukan dan kelola destinasi wisata dan budaya Indonesia local mu di sini. agar dapat di kenal oleh publik luas."
       />
       <main>
         {isDatabaseEmpty ? (
@@ -111,7 +113,7 @@ function RouteComponent() {
             <EmptyState
               title="Belum ada destinasi"
               description="Tambahkan destinasi wisata atau budaya Indonesia untuk memulai."
-              icons={[MapPin, Map, Plus]}
+              icons={[MapPin, Telescope, Plus]}
               action={{
                 label: 'Tambah Destinasi',
                 onClick: () => setSheetOpen(true),

@@ -1,10 +1,10 @@
+import type { User } from '@/db/schema'
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from '@/components/ui/fragments/shadcn-ui/avatar'
 import { useInitials } from '@/hooks/use-initials'
-import { User } from '@/db/schema'
 
 export function UserInfo({ user }: { user: User }) {
   const getInitials = useInitials()

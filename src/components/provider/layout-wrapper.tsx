@@ -1,14 +1,14 @@
 import { useMatches, useRouter } from '@tanstack/react-router'
 import { Activity, useEffect, useRef } from 'react'
+import ReactLenis, { useLenis } from 'lenis/react'
 import SiteFooter from '../ui/core/layout/nav/site-footer'
 import SiteBorder from '../ui/core/layout/nav/site-border'
-import { cn } from '@/lib/utils'
-import { ReactNode } from 'react'
-import ReactLenis, { useLenis } from 'lenis/react'
-import {SiteHeader , SiteHeaderMobile} from '../ui/core/layout/nav/site-header'
-import { useShouldShowFooter } from './infinite-scroll-context'
-import { useIsMobile } from '@/hooks/use-mobile'
+import { SiteHeader, SiteHeaderMobile } from '../ui/core/layout/nav/site-header'
 import SiteNavbar from '../ui/core/layout/nav/site-navbar'
+import { useShouldShowFooter } from './infinite-scroll-context'
+import type { ReactNode } from 'react'
+import { useIsMobile } from '@/hooks/use-mobile'
+import { cn } from '@/lib/utils'
 
 interface LayoutWrapperProps {
   children: ReactNode
@@ -114,7 +114,6 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
               'mx-auto flex  relative overflow-x-hidden   md:overflow-visible  flex-col  gap-10 sm:gap-8  content-center  h-full w-full',
             )}
           >
-       
             {children}
           </div>
         </div>

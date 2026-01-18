@@ -1,5 +1,6 @@
 // ModalContext.js
-import React, { createContext, useState, useContext } from 'react'
+import React, { createContext, useContext, useState } from 'react'
+
 type ModalPayload = { redirectTo?: string } | null
 interface ModalContextValue {
   isOpen: boolean

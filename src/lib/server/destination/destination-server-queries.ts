@@ -6,23 +6,27 @@
 import { createServerFn } from '@tanstack/react-start'
 import {
   and,
+  asc,
+  avg,
   count,
+  desc,
   eq,
   gt,
+  gte,
   ilike,
   inArray,
-  asc,
-  desc,
-  gte,
   lte,
   sql,
-  avg,
 } from 'drizzle-orm'
-import * as schema from '@/db/schema'
-import { authServerMiddleware } from '@/lib/middleware'
 import * as z from 'zod'
-import { filterColumns } from '@/lib/filter-columns'
 import type { DestinationAggregateResult } from '@/types'
+import * as schema from '@/db/schema'
+import { adminServerMiddleware, authServerMiddleware } from '@/lib/middleware'
+import { filterColumns } from '@/lib/filter-columns'
+
+// ============================================
+// AGGREGATE SERVER FUNCTION (ADMIN - ALL DATA)
+// ============================================
 
 // Dynamic import to prevent db from being bundled in client
 const getDb = async () => {
@@ -188,7 +192,7 @@ export async function fetchDestinationList(
     | 'type'
     | 'provinsi'
 
-  const validColumns: DestinationColumnKey[] = [
+  const validColumns: Array<DestinationColumnKey> = [
     'id',
     'name',
     'createdAt',
@@ -228,6 +232,7 @@ export async function fetchDestinationList(
         alamat: destination.alamat,
         coverImage: destination.coverImage,
         images: destination.images,
+        publishedAt: destination.publishedAt,
         // Computed from relations
         totalVote: sql<number>`COALESCE(${voteCounts.totalVote}, 0)`,
         totalReview: sql<number>`COALESCE(${reviewStats.totalReview}, 0)`,
@@ -272,6 +277,7 @@ export async function fetchDestinationList(
 
     status: d.status,
     createdAt: d.createdAt,
+    publishedAt: d.publishedAt,
     updatedAt: d.updatedAt,
   }))
 
@@ -298,6 +304,8 @@ export async function fetchStatusCounts(
       published: 0,
       draft: 0,
       archived: 0,
+      pending: 0,
+      cancel: 0,
     } as DestinationAggregateResult['statusCounts'],
   )
 }
@@ -432,7 +440,7 @@ export async function fetchDestinationListAdmin(
     | 'type'
     | 'provinsi'
 
-  const validColumns: DestinationColumnKey[] = [
+  const validColumns: Array<DestinationColumnKey> = [
     'id',
     'name',
     'createdAt',
@@ -472,6 +480,7 @@ export async function fetchDestinationListAdmin(
         alamat: destination.alamat,
         coverImage: destination.coverImage,
         images: destination.images,
+        publishedAt: destination.publishedAt,
         // Computed from relations
         totalVote: sql<number>`COALESCE(${voteCounts.totalVote}, 0)`,
         totalReview: sql<number>`COALESCE(${reviewStats.totalReview}, 0)`,
@@ -516,6 +525,7 @@ export async function fetchDestinationListAdmin(
 
     status: d.status,
     createdAt: d.createdAt,
+    publishedAt: d.publishedAt,
     updatedAt: d.updatedAt,
   }))
 
@@ -541,6 +551,8 @@ export async function fetchStatusCountsAdmin(): Promise<
       published: 0,
       draft: 0,
       archived: 0,
+      pending: 0,
+      cancel: 0,
     } as DestinationAggregateResult['statusCounts'],
   )
 }
@@ -615,7 +627,7 @@ export const getDestinationAggregateServerFn = createServerFn({
       data: { filters },
       context,
     }): Promise<DestinationAggregateResult> => {
-      const userId = context.user!.id
+      const userId = context.user.id
 
       try {
         const [listResult, statusCounts, categoryCounts, typeCounts] =
@@ -646,7 +658,13 @@ export const getDestinationAggregateServerFn = createServerFn({
             'kesenian-daerah': 0,
             'situs-sejarah': 0,
           },
-          statusCounts: { published: 0, draft: 0, archived: 0 },
+          statusCounts: {
+            published: 0,
+            draft: 0,
+            archived: 0,
+            pending: 0,
+            cancel: 0,
+          },
           typeCounts: {
             'wisata-alam': 0,
             'wisata-budaya': 0,
@@ -664,26 +682,44 @@ export const getDestinationAggregateServerFn = createServerFn({
     },
   )
 
-// ============================================
-// AGGREGATE SERVER FUNCTION (ADMIN - ALL DATA)
-// ============================================
-
-import { adminServerMiddleware } from '@/lib/middleware'
-
 export const getDestinationAggregateAdminServerFn = createServerFn({
   method: 'POST',
 })
   .middleware([adminServerMiddleware])
   .inputValidator(z.object({ filters: destinationAggregateInputSchema }))
   .handler(
-    async ({ data: { filters } }): Promise<DestinationAggregateResult> => {
+    async ({
+      data: { filters },
+      context,
+    }): Promise<DestinationAggregateResult> => {
       try {
+        const role = context.user?.role
+        const userId = context.user?.id
+
+        if (role === 'superAdmin') {
+          const [listResult, statusCounts, categoryCounts, typeCounts] =
+            await Promise.all([
+              fetchDestinationListAdmin(filters),
+              fetchStatusCountsAdmin(),
+              fetchCategoryCountsAdmin(),
+              fetchTypeCountsAdmin(),
+            ])
+
+          return {
+            data: listResult.data,
+            pageCount: listResult.pageCount,
+            statusCounts,
+            categoryCounts,
+            typeCounts,
+          }
+        }
+
         const [listResult, statusCounts, categoryCounts, typeCounts] =
           await Promise.all([
-            fetchDestinationListAdmin(filters),
-            fetchStatusCountsAdmin(),
-            fetchCategoryCountsAdmin(),
-            fetchTypeCountsAdmin(),
+            fetchDestinationList(userId, filters),
+            fetchStatusCounts(userId),
+            fetchCategoryCounts(userId),
+            fetchTypeCounts(userId),
           ])
 
         return {
@@ -706,7 +742,13 @@ export const getDestinationAggregateAdminServerFn = createServerFn({
             'kesenian-daerah': 0,
             'situs-sejarah': 0,
           },
-          statusCounts: { published: 0, draft: 0, archived: 0 },
+          statusCounts: {
+            published: 0,
+            draft: 0,
+            archived: 0,
+            pending: 0,
+            cancel: 0,
+          },
           typeCounts: {
             'wisata-alam': 0,
             'wisata-budaya': 0,

@@ -40,15 +40,15 @@ export type Question = {
   category: QuestionCategory
   prompt: string
   fullImageUrl: string
-  choices: string[]
+  choices: Array<string>
   correctIndex: number
   hint?: string
-  fragmentConfigs?: FragmentConfig[]
+  fragmentConfigs?: Array<FragmentConfig>
   timeLimitSec?: number
   funFact?: string
   description?: string
   imageCredit?: string
-  tags?: string[]
+  tags?: Array<string>
 }
 
 /**
@@ -76,7 +76,7 @@ export type GameResult = {
   averageTimePerQuestion: number
   level: Level
   timestamp: string
-  questionResults: QuestionResult[]
+  questionResults: Array<QuestionResult>
 }
 
 /**
@@ -115,15 +115,20 @@ export type LevelConfig = {
 /**
  * Game screen states
  */
-export type GameScreen = 'menu' | 'level-select' | 'loading' | 'playing' | 'stats'
+export type GameScreen =
+  | 'menu'
+  | 'level-select'
+  | 'loading'
+  | 'playing'
+  | 'stats'
 
 /**
  * Quiz engine state managed by useReducer
  */
 export type QuizState = {
-  questions: Question[]
+  questions: Array<Question>
   currentIndex: number
-  results: QuestionResult[]
+  results: Array<QuestionResult>
   timeRemaining: number
   isAnswering: boolean
   showFeedback: boolean
@@ -137,13 +142,18 @@ export type QuizState = {
  * Quiz engine actions
  */
 export type QuizAction =
-  | { type: 'START'; questions: Question[]; timeLimit: number }
+  | { type: 'START'; questions: Array<Question>; timeLimit: number }
   | { type: 'SELECT_ANSWER'; index: number }
   | { type: 'SUBMIT_ANSWER' }
   | { type: 'TIMEOUT' }
   | { type: 'NEXT_QUESTION'; timeLimit: number }
   | { type: 'TICK' }
-  | { type: 'SHOW_FEEDBACK'; isCorrect: boolean; message: string; funFact?: string }
+  | {
+      type: 'SHOW_FEEDBACK'
+      isCorrect: boolean
+      message: string
+      funFact?: string
+    }
   | { type: 'HIDE_FEEDBACK' }
   | { type: 'USE_HINT' }
   | { type: 'PAUSE' }

@@ -3,14 +3,14 @@
 import * as React from 'react'
 import { Link, useRouter } from '@tanstack/react-router'
 import {
-  MapPin,
-  Newspaper,
-  User,
-  Home,
-  Settings,
   ChevronLeft,
+  Home,
   LogOut,
+  MapPin,
   Menu,
+  Newspaper,
+  Settings,
+  User,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { authClient } from '@/lib/auth/auth-client'

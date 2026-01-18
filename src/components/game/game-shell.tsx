@@ -2,11 +2,12 @@
 
 import * as React from 'react'
 import { motion } from 'framer-motion'
+import { ArrowLeft } from 'lucide-react'
+import { Button } from '../ui/fragments/shadcn-ui/button'
+import { AnimatedGridPattern } from '../ui/fragments/shadcn-ui/animated-grid-pattern'
 import { cn } from '@/lib/utils'
 import { ANIMATION_DURATION } from '@/lib/game/constants'
-import { Button } from '../ui/fragments/shadcn-ui/button'
-import { ArrowLeft } from 'lucide-react'
-import { AnimatedGridPattern } from '../ui/fragments/shadcn-ui/animated-grid-pattern'
+
 type GameShellProps = {
   children: React.ReactNode
   className?: string
@@ -52,7 +53,7 @@ export function GameHeader({
   title,
   subtitle,
   titleClassName,
-  leftAction, 
+  leftAction,
   rightAction,
   Emoji,
   variant = 'default',

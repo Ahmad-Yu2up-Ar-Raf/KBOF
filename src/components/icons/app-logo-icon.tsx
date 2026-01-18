@@ -1,4 +1,4 @@
-import { SVGProps } from 'react'
+import type { SVGProps } from 'react'
 
 interface LogoProps extends SVGProps<SVGSVGElement> {
   /** Custom fill color - use camelCase in code, rendered as data attribute */

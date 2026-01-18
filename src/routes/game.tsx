@@ -2,6 +2,7 @@
 
 import { createFileRoute } from '@tanstack/react-router'
 import GameBlock from '@/components/ui/core/block/game/game-block'
+
 export const Route = createFileRoute('/game')({
   component: GameBlock,
   head: () => ({

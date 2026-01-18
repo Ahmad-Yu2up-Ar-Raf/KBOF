@@ -1,27 +1,27 @@
 'use client'
 
-import type { DataTableRowAction } from '@/types/data-table'
 import * as React from 'react'
+import { toast } from 'sonner'
+import { useFeatureFlags } from '../feature-flag-provider'
+import { DeleteArticleDialog } from './delete-article-dialog'
+import { ArticleTableActionBar } from './article-table-action-bar'
+import { getArticleTableColumns } from './article-table-columns'
+import UpdateArticleSheet from './update-article-sheet'
+import type { DataTableRowAction } from '@/types/data-table'
 
+import type { ArticleAggregateResult, DestinationStatus } from '@/types'
+import type { ColumnDef } from '@tanstack/react-table'
 import { DataTable } from '@/components/ui/fragments/shadcn-ui/data-table/data-table'
 import { useDataTable } from '@/hooks/use-data-table'
 import { DataTableAdvancedToolbar } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-advanced-toolbar'
 import { DataTableFilterList } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-filter-list'
 import { DataTableSortList } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-sort-list'
 import { DataTableToolbar } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-toolbar'
-import type { ArticleAggregateResult, DestinationStatus } from '@/types'
 
-import { DeleteArticleDialog } from './delete-article-dialog'
-import { useFeatureFlags } from '../feature-flag-provider'
-import { ArticleTableActionBar } from './article-table-action-bar'
-import { getArticleTableColumns } from './article-table-columns'
-import UpdateArticleSheet from './update-article-sheet'
-import { toast } from 'sonner'
 import { exportTableToCSV } from '@/lib/export'
-import { ColumnDef } from '@tanstack/react-table'
 import {
-  useBulkUpdateArticleStatusMutation,
   useBulkDeleteArticlesMutation,
+  useBulkUpdateArticleStatusMutation,
 } from '@/hooks/use-article-mutations'
 import { DataTableFilterMenu } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-filter-menu'
 
@@ -58,7 +58,7 @@ export function ArticleTable({
       getArticleTableColumns({
         statusCounts,
         setRowAction,
-      }) as ColumnDef<ArticleRow>[],
+      }),
     [statusCounts],
   )
 

@@ -1,7 +1,5 @@
 'use client'
 
-import type { DataTableRowAction } from '@/types/data-table'
-import type { ColumnDef } from '@tanstack/react-table'
 import {
   CalendarIcon,
   CheckCircle2,
@@ -15,7 +13,16 @@ import {
 } from 'lucide-react'
 import * as React from 'react'
 import { toast } from 'sonner'
+import { Link } from '@tanstack/react-router'
+import type { DataTableRowAction } from '@/types/data-table'
+import type { ColumnDef } from '@tanstack/react-table'
 
+import type {
+  DestinationAggregateResult,
+  DestinationCategory,
+  DestinationStatus,
+  DestinationType,
+} from '@/types'
 import { DataTableColumnHeader } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-column-header'
 import { Badge } from '@/components/ui/fragments/shadcn-ui/badge'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
@@ -34,25 +41,22 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/fragments/shadcn-ui/dropdown-menu'
 import { formatDate } from '@/lib/format'
+import { useSession } from '@/lib/auth/auth-client'
 
 import {
-  getTypeIcon,
-  getTypeLabel,
-  getStatusIcon,
+  CATEGORY_OPTIONS,
   getCategoryIcon,
   getCategoryLabel,
-  CATEGORY_OPTIONS,
+  getStatusIcon,
+  getStatusLabel,
+  getTypeIcon,
+  getTypeLabel,
 } from '@/lib/utils/destination-utils'
 
-import { Link } from '@tanstack/react-router'
-
-import type {
-  DestinationAggregateResult,
-  DestinationCategory,
-  DestinationStatus,
-  DestinationType,
-} from '@/types'
-import { useBulkUpdateDestinationStatusMutation } from '@/hooks/use-destination-mutations'
+import {
+  useBulkUpdateDestinationStatusMutation,
+  useBulkUpdateDestinationTypeMutation,
+} from '@/hooks/use-destination-mutations'
 import {
   Avatar,
   AvatarFallback,
@@ -62,10 +66,16 @@ import { useInitials } from '@/hooks/use-initials'
 import { batasiKata } from '@/hooks/use-word'
 import { destinationCategory } from '@/db/schema'
 // Status enum values
-const statusEnumValues: DestinationStatus[] = ['published', 'draft', 'archived']
+const statusEnumValues: Array<DestinationStatus> = [
+  'published',
+  'draft',
+  'archived',
+  'pending',
+  'cancel',
+]
 
 // Type enum values
-const typeEnumValues: DestinationType[] = [
+const typeEnumValues: Array<DestinationType> = [
   'wisata-alam',
   'wisata-budaya',
   'wisata-sejarah',
@@ -94,7 +104,7 @@ export function getDestinationTableColumns({
   typeCounts,
   categoriesCounts,
   setRowAction,
-}: GetDestinationTableColumnsProps): ColumnDef<DestinationRow>[] {
+}: GetDestinationTableColumnsProps): Array<ColumnDef<DestinationRow>> {
   return [
     {
       id: 'select',
@@ -253,7 +263,7 @@ export function getDestinationTableColumns({
         <DataTableColumnHeader column={column} label="kategori" />
       ),
       cell: ({ cell, row }) => {
-        const kategori = row.original.category as DestinationCategory
+        const kategori = row.original.category
         if (!kategori) return null
 
         const Icon = getCategoryIcon(kategori)
@@ -314,7 +324,7 @@ export function getDestinationTableColumns({
         return (
           <Badge variant="outline" className="py-1 [&>svg]:size-3.5">
             <Icon />
-            <span className="capitalize">{status}</span>
+            <span className="capitalize">{getStatusLabel(status)}</span>
           </Badge>
         )
       },
@@ -322,7 +332,7 @@ export function getDestinationTableColumns({
         label: 'Status',
         variant: 'multiSelect',
         options: statusEnumValues.map((status) => ({
-          label: status.charAt(0).toUpperCase() + status.slice(1),
+          label: getStatusLabel(status),
           value: status,
           count: statusCounts[status],
           icon: getStatusIcon(status),
@@ -346,19 +356,59 @@ export function getDestinationTableColumns({
       enableColumnFilter: true,
     },
     {
+      id: 'publishedAt',
+      accessorKey: 'publishedAt',
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} label="Dipublikasikan" />
+      ),
+      cell: ({ cell }) => {
+        const v = cell.getValue<Date | null | undefined>()
+        return v ? formatDate(v) : '-'
+      },
+      meta: {
+        label: 'Dipublikasikan',
+        variant: 'dateRange',
+        icon: CalendarIcon,
+      },
+      enableColumnFilter: true,
+      enableHiding: true,
+    },
+    {
       id: 'actions',
       cell: function Cell({ row }) {
         const [isUpdatePending, startUpdateTransition] = React.useTransition()
         const updateMutation = useBulkUpdateDestinationStatusMutation({
           onSuccess: () => {
-            toast.success('Status updated', {
+            toast.success('Status berhasil diperbarui', {
               id: 'update-destination-success',
             })
           },
           onError: (error) => {
-            toast.error(error.message || 'Failed to update destination', {
+            toast.error(
+              error && error.message && error.message.includes('izin')
+                ? 'Anda tidak memiliki izin untuk tindakan ini.'
+                : 'Gagal memperbarui status',
+              {
+                id: 'update-destination-success',
+              },
+            )
+          },
+        })
+        const updateMutationType = useBulkUpdateDestinationTypeMutation({
+          onSuccess: () => {
+            toast.success('Tipe berhasil diperbarui', {
               id: 'update-destination-success',
             })
+          },
+          onError: (error) => {
+            toast.error(
+              error && error.message && error.message.includes('izin')
+                ? 'Anda tidak memiliki izin untuk tindakan ini.'
+                : 'Gagal memperbarui status',
+              {
+                id: 'update-destination-success',
+              },
+            )
           },
         })
 
@@ -388,24 +438,63 @@ export function getDestinationTableColumns({
                 Edit
               </DropdownMenuItem>
 
+              {(() => {
+                const session = useSession()
+                const role = session?.data?.user?.role
+                if (role !== 'superAdmin') return null
+
+                return (
+                  <DropdownMenuSub>
+                    <DropdownMenuSubTrigger>Status</DropdownMenuSubTrigger>
+                    <DropdownMenuSubContent>
+                      <DropdownMenuRadioGroup
+                        value={row.original.status}
+                        onValueChange={(value) => {
+                          toast.loading('Memperbarui status...', {
+                            id: 'update-destination-success',
+                          })
+                          startUpdateTransition(async () => {
+                            await updateMutation.mutateAsync({
+                              id: row.original.id,
+                              status: value as DestinationStatus,
+                            })
+                          })
+                        }}
+                      >
+                        {statusEnumValues.map((label) => (
+                          <DropdownMenuRadioItem
+                            key={label}
+                            value={label}
+                            className="capitalize"
+                            disabled={isUpdatePending}
+                          >
+                            {label}
+                          </DropdownMenuRadioItem>
+                        ))}
+                      </DropdownMenuRadioGroup>
+                    </DropdownMenuSubContent>
+                  </DropdownMenuSub>
+                )
+              })()}
+
               <DropdownMenuSub>
-                <DropdownMenuSubTrigger>Status</DropdownMenuSubTrigger>
+                <DropdownMenuSubTrigger>Tipe</DropdownMenuSubTrigger>
                 <DropdownMenuSubContent>
                   <DropdownMenuRadioGroup
-                    value={row.original.status}
+                    value={row.original.type}
                     onValueChange={(value) => {
-                      toast.loading('Updating...', {
+                      toast.loading('Memperbarui tipe...', {
                         id: 'update-destination-success',
                       })
                       startUpdateTransition(async () => {
-                        await updateMutation.mutateAsync({
-                          id: row.original.id,
-                          status: value as DestinationStatus,
+                        await updateMutationType.mutateAsync({
+                          ids: [row.original.id],
+                          type: value as DestinationStatus,
                         })
                       })
                     }}
                   >
-                    {statusEnumValues.map((label) => (
+                    {typeEnumValues.map((label) => (
                       <DropdownMenuRadioItem
                         key={label}
                         value={label}

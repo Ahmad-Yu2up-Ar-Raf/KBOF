@@ -4,7 +4,7 @@
 // Server-side queries for dashboard analytics
 
 import { createServerFn } from '@tanstack/react-start'
-import { eq, sql, desc, count, gte } from 'drizzle-orm'
+import { count, desc, eq, gte, sql } from 'drizzle-orm'
 import * as schema from '@/db/schema'
 import { adminServerMiddleware, authServerMiddleware } from '@/lib/middleware'
 
@@ -144,7 +144,7 @@ export const getTopDestinations = createServerFn({ method: 'GET' })
       )
       .limit(10)
 
-    return destinations as TopDestination[]
+    return destinations as Array<TopDestination>
   })
 
 /**
@@ -165,7 +165,7 @@ export const getCategoryDistribution = createServerFn({ method: 'GET' })
       .groupBy(schema.destination.category)
       .orderBy(desc(count()))
 
-    return distribution as CategoryDistribution[]
+    return distribution as Array<CategoryDistribution>
   })
 
 /**
@@ -187,7 +187,7 @@ export const getProvinsiDistribution = createServerFn({ method: 'GET' })
       .orderBy(desc(count()))
       .limit(10)
 
-    return distribution as ProvinsiDistribution[]
+    return distribution as Array<ProvinsiDistribution>
   })
 
 // ============================================
@@ -223,7 +223,7 @@ export const getUserStats = createServerFn({ method: 'GET' })
   .middleware([authServerMiddleware])
   .handler(async ({ context }) => {
     const db = await getDb()
-    const userId = context.user!.id
+    const userId = context.user.id
 
     // Get user's destinations
     const userDestinations = await db
@@ -300,7 +300,7 @@ export const getUserTopDestinations = createServerFn({ method: 'GET' })
   .middleware([authServerMiddleware])
   .handler(async ({ context }) => {
     const db = await getDb()
-    const userId = context.user!.id
+    const userId = context.user.id
 
     const destinations = await db
       .select({
@@ -327,5 +327,5 @@ export const getUserTopDestinations = createServerFn({ method: 'GET' })
       )
       .limit(5)
 
-    return destinations as UserTopDestination[]
+    return destinations as Array<UserTopDestination>
   })

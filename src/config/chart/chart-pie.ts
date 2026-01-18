@@ -1,4 +1,4 @@
-import { ChartConfig } from '@/components/ui/fragments/shadcn-ui/chart'
+import type { ChartConfig } from '@/components/ui/fragments/shadcn-ui/chart'
 
 export const chartConfig = {
   count: {

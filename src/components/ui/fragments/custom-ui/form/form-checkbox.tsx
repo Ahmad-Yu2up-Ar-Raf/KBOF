@@ -1,7 +1,8 @@
-import { useFieldContext } from '@/hooks/form/use-form'
-import { FormBase, FormControlProps } from './form-base'
-import { Checkbox } from '@/components/ui/fragments/shadcn-ui/checkbox'
 import { useStore } from '@tanstack/react-store'
+import { FormBase } from './form-base'
+import type { FormControlProps } from './form-base'
+import { useFieldContext } from '@/hooks/form/use-form'
+import { Checkbox } from '@/components/ui/fragments/shadcn-ui/checkbox'
 
 export function FormCheckbox(props: FormControlProps) {
   const field = useFieldContext<boolean>()

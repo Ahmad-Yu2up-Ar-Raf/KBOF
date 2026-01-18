@@ -10,13 +10,13 @@ import { z } from 'zod'
 import {
   and,
   asc,
+  avg,
   count,
   desc,
   eq,
   ilike,
   inArray,
   sql,
-  avg,
 } from 'drizzle-orm'
 import * as schema from '@/db/schema'
 
@@ -105,7 +105,7 @@ export type DestinasiDestination = {
 }
 
 export type DestinasiResult = {
-  data: DestinasiDestination[]
+  data: Array<DestinasiDestination>
   nextCursor: number | null
   hasNextPage: boolean
   totalCount: number
@@ -124,7 +124,7 @@ export type DestinasiDetailDestination = {
   kabupatenKota: string | null
   alamat: string | null
   coverImage: string | null
-  images: string[] // Parsed from JSON
+  images: Array<string> // Parsed from JSON
   status: schema.DestinationStatus
   totalVote: number
   totalReview: number
@@ -137,7 +137,7 @@ export type DestinasiDetailDestination = {
     email: string
     image: string | null
   }
-  votes: {
+  votes: Array<{
     id: number
     userId: string
     createdAt: Date
@@ -146,8 +146,8 @@ export type DestinasiDetailDestination = {
       name: string
       image: string | null
     }
-  }[]
-  reviews?: {
+  }>
+  reviews?: Array<{
     id: number
     userId: string
     rating: number
@@ -160,7 +160,7 @@ export type DestinasiDetailDestination = {
       name: string
       image: string | null
     }
-  }[]
+  }>
 }
 
 // ============================================
@@ -191,7 +191,7 @@ const reviewStatsSubquery = (db: Awaited<ReturnType<typeof getDb>>) =>
     .as('review_stats')
 
 async function fetchDestinasiDestinations(filters: DestinasiFilters): Promise<{
-  data: DestinasiDestination[]
+  data: Array<DestinasiDestination>
   nextCursor: number | null
   hasNextPage: boolean
   totalCount: number
@@ -213,23 +213,17 @@ async function fetchDestinasiDestinations(filters: DestinasiFilters): Promise<{
 
   // Multiple categories filter
   if (categories.length > 0) {
-    whereConditions.push(
-      inArray(destination.category, categories as schema.DestinationCategory[]),
-    )
+    whereConditions.push(inArray(destination.category, categories))
   }
 
   // Multiple types filter
   if (types.length > 0) {
-    whereConditions.push(
-      inArray(destination.type, types as schema.DestinationType[]),
-    )
+    whereConditions.push(inArray(destination.type, types))
   }
 
   // Multiple provinces filter
   if (provinces.length > 0) {
-    whereConditions.push(
-      inArray(destination.provinsi, provinces as schema.ProvinsiIndonesia[]),
-    )
+    whereConditions.push(inArray(destination.provinsi, provinces))
   }
 
   // Build order by with cursor-based pagination support
@@ -269,19 +263,13 @@ async function fetchDestinasiDestinations(filters: DestinasiFilters): Promise<{
     baseConditions.push(ilike(destination.name, `%${search}%`))
   }
   if (categories.length > 0) {
-    baseConditions.push(
-      inArray(destination.category, categories as schema.DestinationCategory[]),
-    )
+    baseConditions.push(inArray(destination.category, categories))
   }
   if (types.length > 0) {
-    baseConditions.push(
-      inArray(destination.type, types as schema.DestinationType[]),
-    )
+    baseConditions.push(inArray(destination.type, types))
   }
   if (provinces.length > 0) {
-    baseConditions.push(
-      inArray(destination.provinsi, provinces as schema.ProvinsiIndonesia[]),
-    )
+    baseConditions.push(inArray(destination.provinsi, provinces))
   }
 
   const [countResult] = await db
@@ -435,7 +423,7 @@ export const getDestinationBySlugServerFn = createServerFn({
       }
 
       // Parse images from JSON string to array
-      let parsedImages: string[] = []
+      let parsedImages: Array<string> = []
       try {
         parsedImages = result.images ? JSON.parse(result.images) : []
       } catch {
@@ -524,7 +512,7 @@ export const getRelatedDestinationsServerFn = createServerFn({
   .handler(
     async ({
       data: { destinationId, category, provinsi, limit },
-    }): Promise<RelatedDestination[]> => {
+    }): Promise<Array<RelatedDestination>> => {
       const db = await getDb()
 
       // Build subqueries for aggregates
@@ -606,66 +594,68 @@ export const getFeaturedDestinationsServerFn = createServerFn({
   method: 'GET',
 })
   .inputValidator(z.object({ limit: z.number().int().positive().default(8) }))
-  .handler(async ({ data: { limit } }): Promise<DestinasiDestination[]> => {
-    const db = await getDb()
+  .handler(
+    async ({ data: { limit } }): Promise<Array<DestinasiDestination>> => {
+      const db = await getDb()
 
-    // Subquery for vote counts
-    const voteCounts = db
-      .select({
-        destinationId: vote.destinationId,
-        totalVote: count(vote.id).as('totalVote'),
-      })
-      .from(vote)
-      .groupBy(vote.destinationId)
-      .as('voteCounts')
+      // Subquery for vote counts
+      const voteCounts = db
+        .select({
+          destinationId: vote.destinationId,
+          totalVote: count(vote.id).as('totalVote'),
+        })
+        .from(vote)
+        .groupBy(vote.destinationId)
+        .as('voteCounts')
 
-    // Subquery for review stats
-    const reviewStats = db
-      .select({
-        destinationId: review.destinationId,
-        totalReview: count(review.id).as('totalReview'),
-        averageRating: avg(review.rating).as('averageRating'),
-      })
-      .from(review)
-      .groupBy(review.destinationId)
-      .as('reviewStats')
+      // Subquery for review stats
+      const reviewStats = db
+        .select({
+          destinationId: review.destinationId,
+          totalReview: count(review.id).as('totalReview'),
+          averageRating: avg(review.rating).as('averageRating'),
+        })
+        .from(review)
+        .groupBy(review.destinationId)
+        .as('reviewStats')
 
-    const results = await db
-      .select({
-        id: destination.id,
-        slug: destination.slug,
-        name: destination.name,
-        description: destination.description,
-        type: destination.type,
-        category: destination.category,
-        provinsi: destination.provinsi,
-        kabupatenKota: destination.kabupatenKota,
-        coverImage: destination.coverImage,
-        totalVote: sql<number>`COALESCE(${voteCounts.totalVote}, 0)`,
-        totalReview: sql<number>`COALESCE(${reviewStats.totalReview}, 0)`,
-        averageRating: sql<number>`COALESCE(${reviewStats.averageRating}, 0)::numeric`,
-        createdAt: destination.createdAt,
-      })
-      .from(destination)
-      .leftJoin(voteCounts, eq(destination.id, voteCounts.destinationId))
-      .leftJoin(reviewStats, eq(destination.id, reviewStats.destinationId))
-      .where(eq(destination.status, 'published'))
-      .orderBy(desc(destination.createdAt))
-      .limit(limit)
+      const results = await db
+        .select({
+          id: destination.id,
+          slug: destination.slug,
+          name: destination.name,
+          description: destination.description,
+          type: destination.type,
+          category: destination.category,
+          provinsi: destination.provinsi,
+          kabupatenKota: destination.kabupatenKota,
+          coverImage: destination.coverImage,
+          totalVote: sql<number>`COALESCE(${voteCounts.totalVote}, 0)`,
+          totalReview: sql<number>`COALESCE(${reviewStats.totalReview}, 0)`,
+          averageRating: sql<number>`COALESCE(${reviewStats.averageRating}, 0)::numeric`,
+          createdAt: destination.createdAt,
+        })
+        .from(destination)
+        .leftJoin(voteCounts, eq(destination.id, voteCounts.destinationId))
+        .leftJoin(reviewStats, eq(destination.id, reviewStats.destinationId))
+        .where(eq(destination.status, 'published'))
+        .orderBy(desc(destination.createdAt))
+        .limit(limit)
 
-    return results.map((r) => ({
-      id: r.id,
-      slug: r.slug,
-      name: r.name,
-      description: r.description,
-      type: r.type,
-      category: r.category,
-      provinsi: r.provinsi,
-      kabupatenKota: r.kabupatenKota,
-      coverImage: r.coverImage,
-      totalVote: r.totalVote,
-      totalReview: r.totalReview,
-      averageRating: Math.round(r.averageRating * 10) / 10,
-      createdAt: r.createdAt,
-    }))
-  })
+      return results.map((r) => ({
+        id: r.id,
+        slug: r.slug,
+        name: r.name,
+        description: r.description,
+        type: r.type,
+        category: r.category,
+        provinsi: r.provinsi,
+        kabupatenKota: r.kabupatenKota,
+        coverImage: r.coverImage,
+        totalVote: r.totalVote,
+        totalReview: r.totalReview,
+        averageRating: Math.round(r.averageRating * 10) / 10,
+        createdAt: r.createdAt,
+      }))
+    },
+  )

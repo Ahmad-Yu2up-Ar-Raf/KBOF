@@ -4,23 +4,23 @@
 // Server-side actions for user management (SuperAdmin only)
 
 import { createServerFn } from '@tanstack/react-start'
-import { eq, sql, desc, asc, ilike, and, or, count } from 'drizzle-orm'
+import { and, asc, count, desc, eq, ilike, or, sql } from 'drizzle-orm'
 import * as schema from '@/db/schema'
 import {
-  superAdminServerMiddleware,
   authServerMiddleware,
+  superAdminServerMiddleware,
 } from '@/lib/middleware'
 import {
-  updateUserRoleSchema,
   banUserSchema,
-  unbanUserSchema,
-  deleteUserSchema,
-  bulkDeleteUsersSchema,
-  bulkUpdateUserRoleSchema,
   bulkBanUsersSchema,
+  bulkDeleteUsersSchema,
   bulkUnbanUsersSchema,
-  searchUsersSchema,
+  bulkUpdateUserRoleSchema,
   completeOnboardingSchema,
+  deleteUserSchema,
+  searchUsersSchema,
+  unbanUserSchema,
+  updateUserRoleSchema,
 } from '@/lib/validations/user-validations'
 
 // Dynamic import to prevent db from being bundled in client
@@ -172,7 +172,7 @@ export const updateUserRole = createServerFn({ method: 'POST' })
     const db = await getDb()
 
     // Prevent self-role change
-    if (data.userId === context.user!.id) {
+    if (data.userId === context.user.id) {
       throw new Error('You cannot change your own role')
     }
 
@@ -195,7 +195,7 @@ export const banUser = createServerFn({ method: 'POST' })
     const db = await getDb()
 
     // Prevent self-ban
-    if (data.userId === context.user!.id) {
+    if (data.userId === context.user.id) {
       throw new Error('You cannot ban yourself')
     }
 
@@ -255,7 +255,7 @@ export const deleteUser = createServerFn({ method: 'POST' })
     const db = await getDb()
 
     // Prevent self-delete
-    if (data.userId === context.user!.id) {
+    if (data.userId === context.user.id) {
       throw new Error('You cannot delete yourself')
     }
 
@@ -292,7 +292,7 @@ export const bulkDeleteUsers = createServerFn({ method: 'POST' })
       .where(sql`${schema.user.id} = ANY(${data.userIds})`)
 
     const deletableIds = targetUsers
-      .filter((u) => u.id !== context.user!.id && u.role !== 'superAdmin')
+      .filter((u) => u.id !== context.user.id && u.role !== 'superAdmin')
       .map((u) => u.id)
 
     if (deletableIds.length === 0) {
@@ -327,7 +327,7 @@ export const bulkUpdateUserRole = createServerFn({ method: 'POST' })
       .where(sql`${schema.user.id} = ANY(${data.userIds})`)
 
     const updatableIds = targetUsers
-      .filter((u) => u.id !== context.user!.id && u.role !== 'superAdmin')
+      .filter((u) => u.id !== context.user.id && u.role !== 'superAdmin')
       .map((u) => u.id)
 
     if (updatableIds.length === 0) {
@@ -363,7 +363,7 @@ export const bulkBanUsers = createServerFn({ method: 'POST' })
       .where(sql`${schema.user.id} = ANY(${data.userIds})`)
 
     const bannableIds = targetUsers
-      .filter((u) => u.id !== context.user!.id && u.role !== 'superAdmin')
+      .filter((u) => u.id !== context.user.id && u.role !== 'superAdmin')
       .map((u) => u.id)
 
     if (bannableIds.length === 0) {
@@ -419,7 +419,7 @@ export const completeOnboarding = createServerFn({ method: 'POST' })
   .inputValidator(completeOnboardingSchema)
   .handler(async ({ data, context }) => {
     const db = await getDb()
-    const userId = context.user!.id
+    const userId = context.user.id
 
     const { step1, step2, step3 } = data
 

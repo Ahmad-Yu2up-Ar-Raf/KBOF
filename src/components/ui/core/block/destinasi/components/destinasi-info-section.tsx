@@ -4,8 +4,8 @@
 
 import {
   categoryLabels,
-  typeLabels,
   provinsiLabels,
+  typeLabels,
 } from '@/lib/utils/destination-labels'
 
 // ============================================
@@ -16,9 +16,9 @@ interface DestinasiInfoSectionProps {
   currentCount: number
   totalCount: number
   search: string
-  categories: string[]
-  types: string[]
-  provinces: string[]
+  categories: Array<string>
+  types: Array<string>
+  provinces: Array<string>
 }
 
 // ============================================

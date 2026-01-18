@@ -1,9 +1,9 @@
-import { SignInForm } from '../form/login-form'
 import { toast } from 'sonner'
+import { SignInForm } from '../form/login-form'
 import AuthLayoutTemplate from '../../layout/auth-layout'
+import type { UserRoleType } from '@/db/schema'
 import { useLoginForm } from '@/hooks/form/use-auth-form'
 import { authClient } from '@/lib/auth/auth-client'
-import type { UserRoleType } from '@/db/schema'
 
 export default function Login() {
   /**

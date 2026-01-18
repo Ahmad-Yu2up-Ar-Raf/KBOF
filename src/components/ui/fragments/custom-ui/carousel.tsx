@@ -2,24 +2,24 @@
 
 import React, {
   createContext,
+  forwardRef,
   useCallback,
   useContext,
   useEffect,
   useId,
   useRef,
   useState,
-  forwardRef,
 } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { AnimatePresence, motion } from 'motion/react'
+import useEmblaCarousel from 'embla-carousel-react'
+import { Button } from '../shadcn-ui/button'
+import MediaItem from './media/media-item'
 import type {
   EmblaCarouselType,
   EmblaEventType,
   EmblaOptionsType,
 } from 'embla-carousel'
-import useEmblaCarousel from 'embla-carousel-react'
 import { cn } from '@/lib/utils'
-import MediaItem from './media/media-item'
-import { Button } from '../shadcn-ui/button'
 
 // ============= TYPES =============
 interface CarouselProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -38,14 +38,14 @@ interface CarouselContextType {
   onPrevButtonClick: () => void
   onNextButtonClick: () => void
   selectedIndex: number
-  scrollSnaps: number[]
+  scrollSnaps: Array<number>
   onDotButtonClick: (index: number) => void
   scrollProgress: number
   selectedSnap: number
   snapCount: number
   isScale: boolean
-  slidesArr: string[]
-  setSlidesArr: React.Dispatch<React.SetStateAction<string[]>>
+  slidesArr: Array<string>
+  setSlidesArr: React.Dispatch<React.SetStateAction<Array<string>>>
   onThumbClick: (index: number) => void
   carouselId: string
   orientation: 'vertical' | 'horizontal'
@@ -86,7 +86,7 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
     ref,
   ) => {
     const carouselId = useId()
-    const [slidesArr, setSlidesArr] = useState<string[]>([])
+    const [slidesArr, setSlidesArr] = useState<Array<string>>([])
 
     const orientation = options.axis === 'y' ? 'vertical' : 'horizontal'
     const direction = options.direction ?? (dir as 'ltr' | 'rtl' | undefined)
@@ -113,7 +113,7 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
     const [prevBtnDisabled, setPrevBtnDisabled] = useState(true)
     const [nextBtnDisabled, setNextBtnDisabled] = useState(true)
     const [selectedIndex, setSelectedIndex] = useState(0)
-    const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
+    const [scrollSnaps, setScrollSnaps] = useState<Array<number>>([])
     const [scrollProgress, setScrollProgress] = useState(0)
     const [snapCount, setSnapCount] = useState(0)
 
@@ -188,7 +188,7 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
 
     // Scale animation for isScale mode
     const tweenFactor = useRef(0)
-    const tweenNodes = useRef<HTMLElement[]>([])
+    const tweenNodes = useRef<Array<HTMLElement>>([])
 
     const setTweenNodes = useCallback(
       (emblaApi: EmblaCarouselType): void => {
@@ -197,7 +197,7 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
           .slideNodes()
           .map((slideNode) =>
             slideNode.querySelector('.slider_content'),
-          ) as HTMLElement[]
+          ) as Array<HTMLElement>
       },
       [isScale],
     )

@@ -1,13 +1,12 @@
+import { Link, useLocation } from '@tanstack/react-router'
+import type { PropsWithChildren } from 'react'
+import type { NavItem } from '@/types'
 import Heading from '@/components/ui/fragments/custom-ui/typography/heading'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
 import { Separator } from '@/components/ui/fragments/shadcn-ui/separator'
 import { cn, isSameUrl, resolveUrl } from '@/lib/utils'
-import { type NavItem } from '@/types'
-import { Link } from '@tanstack/react-router'
-import { useLocation } from '@tanstack/react-router'
-import { type PropsWithChildren } from 'react'
 
-const sidebarNavItems: NavItem[] = [
+const sidebarNavItems: Array<NavItem> = [
   {
     title: 'Profile',
     href: '/dashboard/settings',

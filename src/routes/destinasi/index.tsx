@@ -1,17 +1,16 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Suspense } from 'react'
 
+import { PlusCircle } from 'lucide-react'
 import DestinasiBlock, {
   DestinasiBlockSkeleton,
 } from '@/components/ui/core/block/destinasi/destinasi-block'
 
- 
 import { queryClient } from '@/components/provider/Provider'
 import { getDestinasiInfiniteQueryOptions } from '@/lib/query-options'
 import KatalogHeader from '@/components/ui/fragments/custom-ui/typography/katalog-header'
 import CreateDestinationSheet from '@/components/ui/core/feature/data-table/destination/create-destination-sheet'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
-import { PlusCircle } from 'lucide-react'
 
 // Route with loader for initial data prefetch
 export const Route = createFileRoute('/destinasi/')({

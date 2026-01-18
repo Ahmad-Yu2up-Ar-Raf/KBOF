@@ -2,6 +2,7 @@
 import { Link } from '@tanstack/react-router'
 import { ArrowLeft } from 'lucide-react'
 
+import { useMemo } from 'react'
 import RecommendedArticles from './recommended-articles'
 import type { Article } from '@/db/schema'
 import {
@@ -12,7 +13,6 @@ import {
 
 import { cn } from '@/lib/utils'
 import { formatDate } from '@/lib/format'
-import { useMemo } from 'react'
 
 interface ArticleDetailProps {
   article: Article & {

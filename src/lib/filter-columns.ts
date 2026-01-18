@@ -1,6 +1,5 @@
 import { addDays, endOfDay, startOfDay } from 'date-fns'
 import {
-  type AnyColumn,
   and,
   eq,
   gt,
@@ -14,11 +13,10 @@ import {
   notIlike,
   notInArray,
   or,
-  type SQL,
-  type Table,
 } from 'drizzle-orm'
-import { isEmpty } from '@/db/utils'
+import type { AnyColumn, SQL, Table } from 'drizzle-orm'
 import type { ExtendedColumnFilter, JoinOperator } from '@/types/data-table'
+import { isEmpty } from '@/db/utils'
 
 export function filterColumns<T extends Table>({
   table,
@@ -26,7 +24,7 @@ export function filterColumns<T extends Table>({
   joinOperator,
 }: {
   table: T
-  filters: ExtendedColumnFilter<T>[]
+  filters: Array<ExtendedColumnFilter<T>>
   joinOperator: JoinOperator
 }): SQL | undefined {
   const joinFn = joinOperator === 'and' ? and : or

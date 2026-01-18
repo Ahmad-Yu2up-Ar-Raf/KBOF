@@ -6,18 +6,18 @@
 
 import { useCallback } from 'react'
 import {
-  useQueryState,
-  parseAsString,
   parseAsArrayOf,
+  parseAsString,
   parseAsStringLiteral,
+  useQueryState,
 } from 'nuqs'
 
+import type { SortBy } from '@/lib/utils/destination-labels'
 import {
   categoryList,
-  typeList,
   provinsiList,
   sortOptions,
-  type SortBy,
+  typeList,
 } from '@/lib/utils/destination-labels'
 
 // ============================================
@@ -31,9 +31,9 @@ type Provinsi = (typeof provinsiList)[number]
 export interface DestinasiFilters {
   limit: number
   search: string
-  categories: Category[]
-  types: DestinationType[]
-  provinces: Provinsi[]
+  categories: Array<Category>
+  types: Array<DestinationType>
+  provinces: Array<Provinsi>
   sortBy: SortBy
 }
 
@@ -65,17 +65,19 @@ export function useDestinasiFilters() {
 
   const [sortBy, setSortBy] = useQueryState(
     'sortBy',
-    parseAsStringLiteral(sortOptions.map((o) => o.value)).withDefault('popular'),
+    parseAsStringLiteral(sortOptions.map((o) => o.value)).withDefault(
+      'popular',
+    ),
   )
 
   // Build filters for query
   const filters: DestinasiFilters = {
     limit: 12,
     search,
-    categories: categories as Category[],
-    types: types as DestinationType[],
-    provinces: provinces as Provinsi[],
-    sortBy: sortBy as SortBy,
+    categories: categories,
+    types: types,
+    provinces: provinces,
+    sortBy: sortBy,
   }
 
   // Check if any filters are active
@@ -97,22 +99,24 @@ export function useDestinasiFilters() {
 
   // Individual setters with proper type handling
   const handleCategoriesChange = useCallback(
-    (values: string[]) => {
-      void setCategories(values.length > 0 ? (values as Category[]) : null)
+    (values: Array<string>) => {
+      void setCategories(values.length > 0 ? (values as Array<Category>) : null)
     },
     [setCategories],
   )
 
   const handleTypesChange = useCallback(
-    (values: string[]) => {
-      void setTypes(values.length > 0 ? (values as DestinationType[]) : null)
+    (values: Array<string>) => {
+      void setTypes(
+        values.length > 0 ? (values as Array<DestinationType>) : null,
+      )
     },
     [setTypes],
   )
 
   const handleProvincesChange = useCallback(
-    (values: string[]) => {
-      void setProvinces(values.length > 0 ? (values as Provinsi[]) : null)
+    (values: Array<string>) => {
+      void setProvinces(values.length > 0 ? (values as Array<Provinsi>) : null)
     },
     [setProvinces],
   )

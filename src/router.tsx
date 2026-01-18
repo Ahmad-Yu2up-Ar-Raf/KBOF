@@ -1,8 +1,8 @@
 import { createRouter } from '@tanstack/react-router'
+import { routeTree } from './routeTree.gen'
 import { NotFoundPage } from '@/components/ui/core/block/not-found-block-page'
 
 // Import the generated route tree
-import { routeTree } from './routeTree.gen'
 
 // ============================================
 // ROUTER FACTORY

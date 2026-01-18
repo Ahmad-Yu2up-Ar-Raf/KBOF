@@ -1,26 +1,27 @@
 'use client'
 
-import type { DataTableRowAction } from '@/types/data-table'
 import * as React from 'react'
+import { toast } from 'sonner'
+import { useFeatureFlags } from '../feature-flag-provider'
+import { DeleteDestinationDialog } from './delete-destination-dialog'
+import { DestinationTableActionBar } from './destination-table-action-bar'
+import { getDestinationTableColumns } from './destination-table-columns'
+import UpdateDestinationSheet from './update-destination-sheet'
+import type { DataTableRowAction } from '@/types/data-table'
 
+import type { DestinationAggregateResult, DestinationStatus } from '@/types'
+import type { ColumnDef } from '@tanstack/react-table'
 import { DataTable } from '@/components/ui/fragments/shadcn-ui/data-table/data-table'
 import { useDataTable } from '@/hooks/use-data-table'
 import { DataTableAdvancedToolbar } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-advanced-toolbar'
 import { DataTableFilterList } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-filter-list'
 import { DataTableSortList } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-sort-list'
 import { DataTableToolbar } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-toolbar'
-import type { DestinationAggregateResult, DestinationStatus } from '@/types'
 
-import { DeleteDestinationDialog } from './delete-destination-dialog'
-import { useFeatureFlags } from '../feature-flag-provider'
-import { DestinationTableActionBar } from './destination-table-action-bar'
-import { getDestinationTableColumns } from './destination-table-columns'
-import UpdateDestinationSheet from './update-destination-sheet'
-import { toast } from 'sonner'
 import { exportTableToCSV } from '@/lib/export'
-import { ColumnDef } from '@tanstack/react-table'
 import {
   useBulkUpdateDestinationStatusMutation,
+  useBulkUpdateDestinationTypeMutation,
   useDeleteDestinationMutation,
 } from '@/hooks/use-destination-mutations'
 import { DataTableFilterMenu } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-filter-menu'
@@ -61,7 +62,7 @@ export function DestinationTable({
         categoriesCounts: categoryCounts,
         setRowAction,
         typeCounts,
-      }) as ColumnDef<DestinationRow>[],
+      }),
     [statusCounts, typeCounts, categoryCounts],
   )
 
@@ -82,6 +83,7 @@ export function DestinationTable({
   // Use mutation hooks for proper cache invalidation
   const bulkUpdateMutation = useBulkUpdateDestinationStatusMutation()
   const deleteMutation = useDeleteDestinationMutation()
+  const bulkUpdateTypeMutation = useBulkUpdateDestinationTypeMutation()
 
   const rows = table.getFilteredSelectedRowModel().rows
   const selectedIds = React.useMemo(
@@ -93,14 +95,14 @@ export function DestinationTable({
   const onStatusUpdate = React.useCallback(
     (value: DestinationStatus) => {
       toast.promise(
-        bulkUpdateMutation.mutateAsync({
-          id: selectedIds,
-          status: value,
-        }),
+        bulkUpdateMutation.mutateAsync({ id: selectedIds, status: value }),
         {
-          loading: 'Updating status...',
-          success: 'Status updated successfully',
-          error: (err) => err.message || 'Failed to update status',
+          loading: 'Memperbarui status...',
+          success: 'Status berhasil diperbarui',
+          error: (err) =>
+            err && err.message && err.message.includes('izin')
+              ? 'Anda tidak memiliki izin untuk tindakan ini.'
+              : 'Gagal memperbarui status',
         },
       )
     },
@@ -120,12 +122,29 @@ export function DestinationTable({
         table.toggleAllRowsSelected(false)
       }),
       {
-        loading: 'Deleting items...',
-        success: 'Items deleted successfully',
-        error: (err) => err.message || 'Failed to delete items',
+        loading: 'Menghapus item...',
+        success: 'Item berhasil dihapus',
+        error: (err) =>
+          err && err.message && err.message.includes('izin')
+            ? 'Anda tidak memiliki izin untuk tindakan ini.'
+            : 'Gagal menghapus item',
       },
     )
   }, [selectedIds, deleteMutation, table])
+
+  const onTypeUpdate = React.useCallback(
+    (value: string) => {
+      toast.promise(
+        bulkUpdateTypeMutation.mutateAsync({ ids: selectedIds, type: value }),
+        {
+          loading: 'Memperbarui tipe...',
+          success: 'Tipe berhasil diperbarui',
+          error: (err) => err.message || 'Gagal memperbarui tipe',
+        },
+      )
+    },
+    [selectedIds, bulkUpdateTypeMutation],
+  )
 
   // Determine if any action is pending
   const getIsActionPending = React.useCallback(
@@ -146,6 +165,7 @@ export function DestinationTable({
             onDelete={onDelete}
             onStatusUpdate={onStatusUpdate}
             onExport={onExport}
+            onTypeUpdate={onTypeUpdate}
             table={table}
             getIsActionPending={getIsActionPending}
           />

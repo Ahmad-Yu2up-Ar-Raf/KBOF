@@ -1,11 +1,11 @@
 'use client'
-import type { EmblaOptionsType } from 'embla-carousel'
 import { Carousel, Slider, SliderContainer, ThumbsSlider } from './../carousel'
 import MediaItem from './media-item'
+import type { EmblaOptionsType } from 'embla-carousel'
 import { useIsMobile } from '@/hooks/use-mobile'
 
 type componentProps = {
-  images: string[]
+  images: Array<string>
 }
 
 function ThumnailSlider({ images }: componentProps) {

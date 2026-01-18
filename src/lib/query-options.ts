@@ -5,66 +5,72 @@
 // This file provides query options for TanStack Query integration.
 // Uses consistent query keys for proper cache invalidation.
 
-import { queryOptions, infiniteQueryOptions } from '@tanstack/react-query'
+import { infiniteQueryOptions, queryOptions } from '@tanstack/react-query'
 
 import {
-  getDestinationAggregateServerFn,
   getDestinationAggregateAdminServerFn,
-  type DestinationAggregateInput,
+  getDestinationAggregateServerFn,
 } from './server/destination/destination-server-queries'
-// ... existing imports ...
 import {
-  getDestinationReviewsServerFn,
   getDestinationReviewsPreviewServerFn,
-  type ReviewFilters,
-  type ReviewsResult,
-  type ReviewWithUser,
+  getDestinationReviewsServerFn,
 } from './server/review/review-server-queries'
 import {
   getDestinasiDestinationsServerFn,
   getDestinationBySlugServerFn,
-  getRelatedDestinationsServerFn,
   getFeaturedDestinationsServerFn,
-  type DestinasiFilters,
-  type DestinasiDetailDestination,
-  type DestinasiDestination,
-  type RelatedDestination,
+  getRelatedDestinationsServerFn,
 } from './server/explore/destinasi-server-queries'
-
 import {
-  getArticleAggregateServerFn,
   getArticleAggregateAdminServerFn,
-  type ArticleAggregateInput,
+  getArticleAggregateServerFn,
 } from './server/article/article-server-queries'
-
 import {
-  getPublicArticlesServerFn,
   getArticleBySlugServerFn,
-  getRecommendedArticlesServerFn,
   getFeaturedArticlesServerFn,
-  type ArticlePublicFilters,
+  getPublicArticlesServerFn,
+  getRecommendedArticlesServerFn,
 } from './server/article/article-public-queries'
-
 import {
+  getLeaderboardPodiumServerFn,
   getLeaderboardServerFn,
   getLeaderboardTopServerFn,
-  getLeaderboardPodiumServerFn,
-  type LeaderboardFilters,
-  type LeaderboardResult,
-  type LeaderboardTopEntry,
-  type LeaderboardEntry,
+} from './server/leaderboard/leaderboard-server-queries'
+import { getAnalyticsAggregateServerFn } from './server/analytics/analytics-server-queries'
+import { getUserAggregateServerFn } from './server/user/user-server-queries'
+import type { DestinationAggregateInput } from './server/destination/destination-server-queries'
+// ... existing imports ...
+import type {
+  ReviewFilters,
+  ReviewWithUser,
+  ReviewsResult,
+} from './server/review/review-server-queries'
+import type {
+  DestinasiDestination,
+  DestinasiDetailDestination,
+  DestinasiFilters,
+  RelatedDestination,
+} from './server/explore/destinasi-server-queries'
+
+import type { ArticleAggregateInput } from './server/article/article-server-queries'
+
+import type { ArticlePublicFilters } from './server/article/article-public-queries'
+
+import type {
+  LeaderboardEntry,
+  LeaderboardFilters,
+  LeaderboardResult,
+  LeaderboardTopEntry,
 } from './server/leaderboard/leaderboard-server-queries'
 
-import {
-  getAnalyticsAggregateServerFn,
-  type AnalyticsInput,
-  type AnalyticsAggregateResult,
+import type {
+  AnalyticsAggregateResult,
+  AnalyticsInput,
 } from './server/analytics/analytics-server-queries'
 
-import {
-  getUserAggregateServerFn,
-  type UserAggregateInput,
-  type UserAggregateResult,
+import type {
+  UserAggregateInput,
+  UserAggregateResult,
 } from './server/user/user-server-queries'
 
 // ============================================
@@ -269,7 +275,7 @@ export const getRelatedDestinationsQueryOptions = ({
 }: RelatedDestinationsInput) =>
   queryOptions({
     queryKey: DestinasiKeys.related(destinationId),
-    queryFn: async (): Promise<RelatedDestination[]> => {
+    queryFn: async (): Promise<Array<RelatedDestination>> => {
       const result = await getRelatedDestinationsServerFn({
         data: {
           destinationId,
@@ -297,7 +303,7 @@ export const getRelatedDestinationsQueryOptions = ({
 export const getFeaturedDestinationsQueryOptions = (limit: number = 8) =>
   queryOptions({
     queryKey: DestinasiKeys.featured(limit),
-    queryFn: async (): Promise<DestinasiDestination[]> => {
+    queryFn: async (): Promise<Array<DestinasiDestination>> => {
       const result = await getFeaturedDestinationsServerFn({
         data: { limit },
       })
@@ -511,7 +517,7 @@ export const getLeaderboardQueryOptions = (filters: LeaderboardFilters) =>
 export const getLeaderboardTopQueryOptions = (limit: number = 4) =>
   queryOptions({
     queryKey: leaderboardKeys.top(limit),
-    queryFn: async (): Promise<LeaderboardTopEntry[]> => {
+    queryFn: async (): Promise<Array<LeaderboardTopEntry>> => {
       const result = await getLeaderboardTopServerFn({
         data: { limit },
       })
@@ -529,7 +535,7 @@ export const getLeaderboardPodiumQueryOptions = (
 ) =>
   queryOptions({
     queryKey: leaderboardKeys.podium(filters),
-    queryFn: async (): Promise<LeaderboardEntry[]> => {
+    queryFn: async (): Promise<Array<LeaderboardEntry>> => {
       const result = await getLeaderboardPodiumServerFn({
         data: { filters },
       })
@@ -704,7 +710,7 @@ export const getReviewsQueryOptions = (filters: ReviewFilters) =>
 export const getReviewsPreviewQueryOptions = (destinationId: number) =>
   queryOptions({
     queryKey: reviewKeys.preview(destinationId),
-    queryFn: async (): Promise<ReviewWithUser[]> => {
+    queryFn: async (): Promise<Array<ReviewWithUser>> => {
       const result = await getDestinationReviewsPreviewServerFn({
         data: { destinationId },
       })

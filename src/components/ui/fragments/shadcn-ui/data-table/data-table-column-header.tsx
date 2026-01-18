@@ -1,7 +1,7 @@
 'use client'
 
+import { ChevronDown, ChevronUp, ChevronsUpDown, EyeOff, X } from 'lucide-react'
 import type { Column } from '@tanstack/react-table'
-import { ChevronDown, ChevronsUpDown, ChevronUp, EyeOff, X } from 'lucide-react'
 
 import {
   DropdownMenu,

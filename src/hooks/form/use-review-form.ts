@@ -6,10 +6,8 @@
 // =============================================================================
 
 import { useAppForm } from './use-form'
-import {
-  createReviewFormSchema,
-  type CreateReviewFormSchema,
-} from '@/lib/validations/review-validations'
+import type { CreateReviewFormSchema } from '@/lib/validations/review-validations'
+import { createReviewFormSchema } from '@/lib/validations/review-validations'
 import { useAddReviewMutation } from '@/hooks/use-review-mutations'
 
 // ============================================

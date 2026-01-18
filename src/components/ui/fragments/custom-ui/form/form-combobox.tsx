@@ -1,9 +1,12 @@
 'use client'
 
-import { useFieldContext } from '@/hooks/form/use-form'
-import { FormBase, FormControlProps } from './form-base'
 import { useState } from 'react'
 import { useStore } from '@tanstack/react-store'
+import { Check, ChevronsUpDown } from 'lucide-react'
+import { Button } from '../../shadcn-ui/button'
+import { FormBase } from './form-base'
+import type { FormControlProps } from './form-base'
+import { useFieldContext } from '@/hooks/form/use-form'
 import {
   Popover,
   PopoverContent,
@@ -17,8 +20,6 @@ import {
   CommandItem,
   CommandList,
 } from '@/components/ui/fragments/shadcn-ui/command'
-import { Button } from '../../shadcn-ui/button'
-import { Check, ChevronsUpDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export interface ComboboxOption {
@@ -27,7 +28,7 @@ export interface ComboboxOption {
 }
 
 interface FormComboboxProps extends FormControlProps {
-  options: readonly ComboboxOption[]
+  options: ReadonlyArray<ComboboxOption>
   searchPlaceholder?: string
   emptyMessage?: string
 }
@@ -68,11 +69,16 @@ export function FormCombobox({
               isInvalid && 'border-destructive focus:ring-destructive',
             )}
           >
-            {selectedOption?.label ?? props.placeholder ?? `Pilih ${props.label}...`}
+            {selectedOption?.label ??
+              props.placeholder ??
+              `Pilih ${props.label}...`}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[--radix-popover-trigger-width] p-0" align="start">
+        <PopoverContent
+          className="w-[--radix-popover-trigger-width] p-0"
+          align="start"
+        >
           <Command>
             <CommandInput placeholder={searchPlaceholder} />
             <CommandList>

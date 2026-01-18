@@ -4,15 +4,18 @@
 // Server-side mutations (CRUD) untuk destination entity
 
 import { createServerFn } from '@tanstack/react-start'
-import { eq, inArray, and } from 'drizzle-orm'
-import * as schema from '@/db/schema'
-import { authServerMiddleware } from '@/lib/middleware'
+import { and, eq, inArray } from 'drizzle-orm'
 import * as z from 'zod'
+import * as schema from '@/db/schema'
 import {
-  createDestinationSchema,
-  updateDestinationSchema,
+  authServerMiddleware,
+  superAdminServerMiddleware,
+} from '@/lib/middleware'
+import {
   IdSchema,
   UpdateDestinationBulkSchema,
+  createDestinationSchema,
+  updateDestinationSchema,
 } from '@/lib/validations/destination-validations'
 import { generateSlug } from '@/lib/utils/destination-utils'
 import {
@@ -37,7 +40,7 @@ async function cleanupCloudinaryImages(
   coverImage: string | null | undefined,
   images: string | null | undefined,
 ) {
-  const publicIdsToDelete: string[] = []
+  const publicIdsToDelete: Array<string> = []
 
   // Extract public_id from cover image
   if (coverImage) {
@@ -48,7 +51,7 @@ async function cleanupCloudinaryImages(
   // Extract public_ids from gallery images
   if (images) {
     try {
-      const imageArray = JSON.parse(images) as string[]
+      const imageArray = JSON.parse(images) as Array<string>
       for (const url of imageArray) {
         const publicId = extractPublicIdFromUrl(url)
         if (publicId) publicIdsToDelete.push(publicId)
@@ -79,7 +82,8 @@ export const addDestination = createServerFn({ method: 'POST' })
   .inputValidator(createDestinationSchema)
   .handler(async ({ data, context }) => {
     const db = await getDb()
-    const userId = context.user!.id
+    const userId = context.user.id
+    const role = context.user?.role
 
     const slug = generateSlug(data.name)
 
@@ -100,7 +104,19 @@ export const addDestination = createServerFn({ method: 'POST' })
       alamat: data.alamat ?? '',
       coverImage: coverImageValue,
       images: JSON.stringify(data.images ?? []),
-      status: data.status ?? 'draft',
+      status: data.status ?? 'pending',
+    }
+
+    // Non-superAdmin users cannot publish directly; force pending (request)
+    if (role !== 'superAdmin') {
+      newDestination.status = 'pending'
+    }
+
+    // If superAdmin created as published, set publishedAt; otherwise ensure null
+    if (role === 'superAdmin' && newDestination.status === 'published') {
+      ;(newDestination as any).publishedAt = new Date()
+    } else {
+      ;(newDestination as any).publishedAt = null
     }
 
     const result = await db
@@ -120,12 +136,21 @@ export const updateDestination = createServerFn({ method: 'POST' })
   .inputValidator(updateDestinationSchema)
   .handler(async ({ data, context }) => {
     const db = await getDb()
-    const userId = context.user!.id
+    const userId = context.user.id
+    const role = context.user?.role
 
-    // Check ownership
-    const existing = await db.query.destination.findFirst({
-      where: and(eq(destination.id, data.id), eq(destination.userId, userId)),
-    })
+    // Check ownership (superAdmin can edit any)
+    const existing =
+      role === 'superAdmin'
+        ? await db.query.destination.findFirst({
+            where: eq(destination.id, data.id),
+          })
+        : await db.query.destination.findFirst({
+            where: and(
+              eq(destination.id, data.id),
+              eq(destination.userId, userId),
+            ),
+          })
 
     if (!existing) {
       throw new Error('Destination not found or access denied')
@@ -155,10 +180,10 @@ export const updateDestination = createServerFn({ method: 'POST' })
 
     // Check if gallery images changed - delete removed ones
     if (data.images !== undefined) {
-      const oldImages: string[] = existing.images
-        ? JSON.parse(existing.images as string)
+      const oldImages: Array<string> = existing.images
+        ? JSON.parse(existing.images)
         : []
-      const newImages: string[] = (data.images || []).filter(
+      const newImages: Array<string> = (data.images || []).filter(
         (img): img is string => typeof img === 'string',
       )
 
@@ -197,13 +222,32 @@ export const updateDestination = createServerFn({ method: 'POST' })
       updateData.slug = generateSlug(data.name)
     }
 
+    // Prevent non-superAdmin from changing status
+    if (role !== 'superAdmin' && 'status' in updateData) {
+      delete updateData.status
+    }
+
+    // If superAdmin sets status to published, record publishedAt
+    if (role === 'superAdmin' && (updateData as any).status === 'published') {
+      ;(updateData as any).publishedAt = new Date()
+    } else if (
+      role === 'superAdmin' &&
+      (updateData as any).status &&
+      (updateData as any).status !== 'published'
+    ) {
+      // If superAdmin changes status away from published, clear publishedAt
+      ;(updateData as any).publishedAt = null
+    }
+
     // Remove id from update data
     delete updateData.id
 
-    await db
-      .update(destination)
-      .set(updateData)
-      .where(and(eq(destination.id, data.id), eq(destination.userId, userId)))
+    const whereClause =
+      role === 'superAdmin'
+        ? eq(destination.id, data.id)
+        : and(eq(destination.id, data.id), eq(destination.userId, userId))
+
+    await db.update(destination).set(updateData).where(whereClause)
 
     return { success: true }
   })
@@ -217,37 +261,42 @@ export const deleteDestination = createServerFn({ method: 'POST' })
   .inputValidator(IdSchema)
   .handler(async ({ data, context }) => {
     const db = await getDb()
-    const userId = context.user!.id
+    const userId = context.user.id
+    const role = context.user?.role
 
     // Single or array of IDs
     const ids = Array.isArray(data.id) ? data.id : [data.id]
 
-    // ============================================
-    // CLOUDINARY CLEANUP: Fetch destinations to delete their images
-    // ============================================
+    // Super admin: hard delete (cleanup images)
+    if (role === 'superAdmin') {
+      const destinationsToDelete = await db.query.destination.findMany({
+        where: inArray(destination.id, ids),
+        columns: { id: true, coverImage: true, images: true },
+      })
 
-    const destinationsToDelete = await db.query.destination.findMany({
+      // Delete images from Cloudinary for each destination
+      for (const dest of destinationsToDelete) {
+        await cleanupCloudinaryImages(dest.coverImage, dest.images)
+      }
+
+      await db.delete(destination).where(inArray(destination.id, ids))
+
+      return { success: true }
+    }
+
+    // Non-superAdmin: only allow owner to mark as 'cancel' (soft-cancel)
+    const owned = await db.query.destination.findMany({
       where: and(inArray(destination.id, ids), eq(destination.userId, userId)),
-      columns: {
-        id: true,
-        coverImage: true,
-        images: true,
-      },
+      columns: { id: true },
     })
 
-    // If some requested IDs are not owned by the user, reject
-    if (destinationsToDelete.length !== ids.length) {
-      throw new Error('Anda tidak memiliki izin untuk mengedit data ini.')
+    if (owned.length !== ids.length) {
+      throw new Error('Anda tidak memiliki izin untuk menghapus data ini.')
     }
 
-    // Delete images from Cloudinary for each destination
-    for (const dest of destinationsToDelete) {
-      await cleanupCloudinaryImages(dest.coverImage, dest.images)
-    }
-
-    // Delete destinations from database
     await db
-      .delete(destination)
+      .update(destination)
+      .set({ status: 'cancel', updatedAt: new Date() })
       .where(and(inArray(destination.id, ids), eq(destination.userId, userId)))
 
     return { success: true }
@@ -258,15 +307,59 @@ export const deleteDestination = createServerFn({ method: 'POST' })
 // ============================================
 
 export const updateBulkDestinationStatus = createServerFn({ method: 'POST' })
-  .middleware([authServerMiddleware])
+  .middleware([superAdminServerMiddleware])
   .inputValidator(UpdateDestinationBulkSchema)
   .handler(async ({ data, context }) => {
     const db = await getDb()
-    const userId = context.user!.id
-
     const ids = Array.isArray(data.id) ? data.id : [data.id]
 
-    // Verify ownership of all destinations
+    const updateData: Record<string, unknown> = {
+      status: data.status,
+      updatedAt: new Date(),
+    }
+    if (data.status === 'published') {
+      updateData.publishedAt = new Date()
+    } else {
+      // clearing publishedAt when not published
+      updateData.publishedAt = null
+    }
+
+    await db
+      .update(destination)
+      .set(updateData)
+      .where(inArray(destination.id, ids))
+
+    return { success: true }
+  })
+
+// ============================================
+// BULK UPDATE TYPE
+// ============================================
+
+export const updateBulkDestinationType = createServerFn({ method: 'POST' })
+  .middleware([authServerMiddleware])
+  .inputValidator(
+    z.object({
+      ids: z.array(z.number()),
+      type: z.enum(schema.destinationType.enumValues),
+    }),
+  )
+  .handler(async ({ data, context }) => {
+    const db = await getDb()
+    const userId = context.user.id
+    const role = context.user?.role
+
+    const ids = data.ids
+
+    if (role === 'superAdmin') {
+      await db
+        .update(destination)
+        .set({ type: data.type, updatedAt: new Date() })
+        .where(inArray(destination.id, ids))
+      return { success: true }
+    }
+
+    // For non-superAdmin, verify ownership first
     const owned = await db.query.destination.findMany({
       where: and(inArray(destination.id, ids), eq(destination.userId, userId)),
       columns: { id: true },
@@ -278,39 +371,10 @@ export const updateBulkDestinationStatus = createServerFn({ method: 'POST' })
 
     await db
       .update(destination)
-      .set({
-        status: data.status,
-        updatedAt: new Date(),
-      })
+      .set({ type: data.type, updatedAt: new Date() })
       .where(and(inArray(destination.id, ids), eq(destination.userId, userId)))
 
     return { success: true }
-  })
-
-// ============================================
-// GET SINGLE DESTINATION
-// ============================================
-
-const getSingleDestinationSchema = z.object({
-  id: z.number(),
-})
-
-export const getDestinationById = createServerFn({ method: 'GET' })
-  .middleware([authServerMiddleware])
-  .inputValidator(getSingleDestinationSchema)
-  .handler(async ({ data, context }) => {
-    const db = await getDb()
-    const userId = context.user!.id
-
-    const result = await db.query.destination.findFirst({
-      where: and(eq(destination.id, data.id), eq(destination.userId, userId)),
-    })
-
-    if (!result) {
-      throw new Error('Destination not found or access denied')
-    }
-
-    return result
   })
 
 // ============================================
@@ -326,7 +390,7 @@ export const getUserDestinationsByStatus = createServerFn({ method: 'GET' })
   .inputValidator(getUserDestinationsSchema)
   .handler(async ({ data, context }) => {
     const db = await getDb()
-    const userId = context.user!.id
+    const userId = context.user.id
 
     const conditions = [eq(destination.userId, userId)]
 
@@ -344,6 +408,7 @@ export const getUserDestinationsByStatus = createServerFn({ method: 'GET' })
         category: true,
         provinsi: true,
         status: true,
+        publishedAt: true,
         coverImage: true,
         createdAt: true,
         updatedAt: true,

@@ -2,6 +2,17 @@
 
 import * as React from 'react'
 import {
+  Calendar,
+  CheckCircle,
+  Mail,
+  Shield,
+  ShieldCheck,
+  User,
+  XCircle,
+} from 'lucide-react'
+import type { UserTableRow } from './user-table-columns'
+import type { UserRoleType } from '@/db/schema'
+import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -31,17 +42,6 @@ import { Badge } from '@/components/ui/fragments/shadcn-ui/badge'
 import { Spinner } from '@/components/ui/fragments/shadcn-ui/spinner'
 import { formatDate } from '@/lib/format'
 import { useInitials } from '@/hooks/use-initials'
-import type { UserTableRow } from './user-table-columns'
-import {
-  Shield,
-  ShieldCheck,
-  User,
-  Mail,
-  Calendar,
-  CheckCircle,
-  XCircle,
-} from 'lucide-react'
-import type { UserRoleType } from '@/db/schema'
 
 // =============================================================================
 // DELETE USER DIALOG

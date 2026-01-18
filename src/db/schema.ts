@@ -7,16 +7,16 @@
 // =============================================================================
 
 import {
-  pgTable,
-  boolean,
-  index,
-  foreignKey,
-  unique,
   bigint,
+  boolean,
+  foreignKey,
+  index,
+  integer,
+  pgEnum,
+  pgTable,
   text,
   timestamp,
-  pgEnum,
-  integer,
+  unique,
 } from 'drizzle-orm/pg-core'
 
 // =============================================================================
@@ -35,6 +35,8 @@ export const contentStatus = pgEnum('content_status', [
   'published',
   'draft',
   'archived',
+  'pending',
+  'cancel',
 ])
 
 /** Tipe destinasi wisata/budaya */
@@ -276,7 +278,9 @@ export const destination = pgTable(
     // Note: totalVote, totalReview, averageRating are calculated from relations (vote, review tables)
 
     // Status
-    status: contentStatus('status').default('published').notNull(),
+    status: contentStatus('status').default('pending').notNull(),
+    // Published timestamp - set when superAdmin publishes
+    publishedAt: timestamp('published_at', { withTimezone: true }),
     // Timestamps
     createdAt: timestamp('created_at', { withTimezone: true })
       .defaultNow()

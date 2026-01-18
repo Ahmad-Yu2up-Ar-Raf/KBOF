@@ -1,7 +1,5 @@
 'use client'
 
-import type { DataTableRowAction } from '@/types/data-table'
-import type { ColumnDef } from '@tanstack/react-table'
 import {
   CalendarIcon,
   CheckCircle2,
@@ -12,7 +10,10 @@ import {
 } from 'lucide-react'
 import * as React from 'react'
 import { toast } from 'sonner'
+import type { DataTableRowAction } from '@/types/data-table'
+import type { ColumnDef } from '@tanstack/react-table'
 
+import type { ArticleAggregateResult, DestinationStatus } from '@/types'
 import { DataTableColumnHeader } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-column-header'
 import { Badge } from '@/components/ui/fragments/shadcn-ui/badge'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
@@ -32,7 +33,6 @@ import {
 } from '@/components/ui/fragments/shadcn-ui/dropdown-menu'
 import { formatDate } from '@/lib/format'
 
-import type { ArticleAggregateResult, DestinationStatus } from '@/types'
 import { useBulkUpdateArticleStatusMutation } from '@/hooks/use-article-mutations'
 import {
   Avatar,
@@ -43,7 +43,11 @@ import { useInitials } from '@/hooks/use-initials'
 import { batasiKata } from '@/hooks/use-word'
 
 // Status enum values
-const statusEnumValues: DestinationStatus[] = ['published', 'draft', 'archived']
+const statusEnumValues: Array<DestinationStatus> = [
+  'published',
+  'draft',
+  'archived',
+]
 
 type ArticleRow = ArticleAggregateResult['data'][number]
 
@@ -84,7 +88,7 @@ interface GetArticleTableColumnsProps {
 export function getArticleTableColumns({
   statusCounts,
   setRowAction,
-}: GetArticleTableColumnsProps): ColumnDef<ArticleRow>[] {
+}: GetArticleTableColumnsProps): Array<ColumnDef<ArticleRow>> {
   return [
     {
       id: 'select',
@@ -184,7 +188,7 @@ export function getArticleTableColumns({
         <DataTableColumnHeader column={column} label="Status" />
       ),
       cell: ({ row }) => {
-        const status = row.getValue('status') as DestinationStatus
+        const status = row.getValue('status')
         const Icon = getStatusIcon(status)
         return (
           <Badge variant={'outline'} className="gap-1">
@@ -205,7 +209,7 @@ export function getArticleTableColumns({
         icon: Settings,
       },
       filterFn: (row, id, value) =>
-        (value as string[]).includes(row.getValue(id)),
+        (value as Array<string>).includes(row.getValue(id)),
       enableColumnFilter: true,
     },
     {
@@ -229,7 +233,7 @@ export function getArticleTableColumns({
         <DataTableColumnHeader column={column} label="Tanggal Publikasi" />
       ),
       cell: ({ row }) => {
-        const publishedAt = row.getValue('publishedAt') as Date | null
+        const publishedAt = row.getValue('publishedAt')
         return publishedAt ? formatDate(publishedAt) : '-'
       },
     },

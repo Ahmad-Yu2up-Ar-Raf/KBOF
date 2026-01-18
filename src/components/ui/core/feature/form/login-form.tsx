@@ -1,7 +1,7 @@
 'use client'
+import type { LoginFormReturn } from '@/hooks/form/use-auth-form'
 import { FieldGroup } from '@/components/ui/fragments/shadcn-ui/field'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
-import type { LoginFormReturn } from '@/hooks/form/use-auth-form'
 import { Spinner } from '@/components/ui/fragments/shadcn-ui/spinner'
 
 /**

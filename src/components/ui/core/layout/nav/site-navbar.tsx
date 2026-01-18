@@ -1,23 +1,23 @@
 'use client'
 import { Link, useMatches } from '@tanstack/react-router'
+import { ArrowLeft } from 'lucide-react'
+import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
+import { useState } from 'react'
+import type { User } from '@/db/schema'
 import { NavbarLogo } from '@/components/ui/fragments/custom-ui/header/app-logo'
 
 import { ANIMATION_DURATION } from '@/lib/game/constants'
-import { ArrowLeft } from 'lucide-react'
-import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
 
 import { authClient } from '@/lib/auth/auth-client'
 
 import AvatarMenu from '@/components/ui/fragments/custom-ui/menu/avatar-menu'
 import { useIsMobile } from '@/hooks/use-mobile'
-import { User } from '@/db/schema'
 
 import { cn } from '@/lib/utils'
 import {
   Button,
   buttonVariants,
 } from '@/components/ui/fragments/shadcn-ui/button'
-import { useState } from 'react'
 
 function SiteNavbar() {
   const { data: session } = authClient.useSession()
@@ -30,7 +30,7 @@ function SiteNavbar() {
   useMotionValueEvent(scrollYProgress, 'change', (current) => {
     // Check if current is not undefined and is a number
     if (typeof current === 'number') {
-      const direction = current! - scrollYProgress.getPrevious()!
+      const direction = current - scrollYProgress.getPrevious()!
 
       if (direction < 0) {
         setVisiblee(true)

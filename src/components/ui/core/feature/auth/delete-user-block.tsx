@@ -1,3 +1,6 @@
+import React from 'react'
+import { toast } from 'sonner'
+import { useNavigate } from '@tanstack/react-router'
 import {
   Button,
   buttonVariants,
@@ -15,11 +18,8 @@ import {
 } from '@/components/ui/fragments/shadcn-ui/alert-dialog'
 import HeadingSmall from '@/components/ui/fragments/custom-ui/typography/heading-small'
 import { authClient } from '@/lib/auth/auth-client'
-import React from 'react'
-import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { Spinner } from '@/components/ui/fragments/shadcn-ui/spinner'
-import { useNavigate } from '@tanstack/react-router'
 
 export default function DeleteUser() {
   const [isPending, setIsPending] = React.useState(false)

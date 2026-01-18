@@ -1,15 +1,15 @@
+import { useCallback } from 'react'
+import { toast } from 'sonner'
 import { useAppForm } from './use-form'
-import {
-  type CreateDestinationSchema,
-  createDestinationSchema,
-} from '@/lib/validations/destination-validations'
+import type { Destination } from '@/db/schema'
+import type { CreateDestinationSchema } from '@/lib/validations/destination-validations'
+import { createDestinationSchema } from '@/lib/validations/destination-validations'
 import {
   useCreateDestinationMutation,
   useUpdateDestinationMutation,
 } from '@/hooks/use-destination-mutations'
-import type { Destination } from '@/db/schema'
 import { useCloudinaryUpload } from '@/hooks/use-cloudinary-upload'
-import { useCallback } from 'react'
+import { useSession } from '@/lib/auth/auth-client'
 
 // =============================================================================
 // DESTINATION FORM HOOKS - SUASANA
@@ -46,6 +46,8 @@ export function useCreateDestinationForm({
   const galleryUpload = useCloudinaryUpload({
     folder: 'suasana/destinations/gallery',
   })
+  // Session for role-aware behavior (call hook at top-level)
+  const session = useSession()
 
   // Process files before submit
   const processFilesAndSubmit = useCallback(
@@ -63,7 +65,7 @@ export function useCreateDestinationForm({
 
       // Upload gallery images if any are Files
       if (data.images && data.images.length > 0) {
-        const uploadedImages: string[] = []
+        const uploadedImages: Array<string> = []
         for (const item of data.images) {
           if (isFile(item)) {
             const result = await galleryUpload.upload(item)
@@ -81,10 +83,20 @@ export function useCreateDestinationForm({
       const finalData = {
         ...data,
         coverImage: finalCoverImage ?? '',
-        images: finalImages as string[],
+        images: finalImages as Array<string>,
       }
 
-      await createMutation.mutateAsync(finalData)
+      const result = await createMutation.mutateAsync(finalData)
+
+      // Show role-aware toast
+      const role = session?.data?.user?.role
+
+      if (role === 'admin') {
+        toast.success('Destinasi telah berhasil diajukan')
+      } else {
+        toast.success('Destinasi berhasil dibuat')
+      }
+
       await onSuccess?.(finalData)
     },
     [coverUpload, galleryUpload, createMutation, onSuccess],
@@ -104,7 +116,7 @@ export function useCreateDestinationForm({
       alamat: '',
       coverImage: undefined,
       images: [],
-      status: 'draft',
+      status: 'pending',
     } as unknown as CreateDestinationSchema,
     onSubmit: async ({ value: data }) => {
       await processFilesAndSubmit(data)
@@ -135,8 +147,8 @@ export function useUpdateDestinationForm({
 
   // Parse images from JSON string to array
   const parseImages = (
-    images: string | string[] | null | undefined,
-  ): string[] => {
+    images: string | Array<string> | null | undefined,
+  ): Array<string> => {
     if (!images) return []
     if (Array.isArray(images)) return images
     try {
@@ -163,7 +175,7 @@ export function useUpdateDestinationForm({
 
       // Upload gallery images if any are Files
       if (data.images && data.images.length > 0) {
-        const uploadedImages: string[] = []
+        const uploadedImages: Array<string> = []
         for (const item of data.images) {
           if (isFile(item)) {
             const result = await galleryUpload.upload(item)
@@ -181,7 +193,7 @@ export function useUpdateDestinationForm({
       const finalData = {
         ...data,
         coverImage: finalCoverImage ?? '',
-        images: finalImages as string[],
+        images: finalImages as Array<string>,
       }
 
       await updateMutation.mutateAsync({ ...finalData, id: destinationData.id })
@@ -204,7 +216,7 @@ export function useUpdateDestinationForm({
       alamat: destinationData.alamat ?? '',
       coverImage: destinationData.coverImage ?? undefined,
       images: parseImages(destinationData.images),
-      status: destinationData.status ?? 'draft',
+      status: destinationData.status ?? 'pending',
     } as unknown as CreateDestinationSchema,
     onSubmit: async ({ value: data }) => {
       await processFilesAndSubmit(data)

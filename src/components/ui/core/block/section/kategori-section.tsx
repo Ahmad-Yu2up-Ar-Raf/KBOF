@@ -17,8 +17,8 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselPrevious,
   CarouselNext,
+  CarouselPrevious,
 } from '@/components/ui/fragments/shadcn-ui/carousel'
 import { getAllCategoriesWithImages } from '@/lib/utils/category-images'
 import { cn } from '@/lib/utils'
@@ -34,7 +34,7 @@ export default function KategoriSection() {
     <section className="container px-0 sm:px-5 py-10 space-y-8">
       {/* Section Header */}
       <HeadingSection
-        className=' px-5 md:px-0 '
+        className=" px-5 md:px-0 "
         title="Kategori Wisata"
         description="Jelajahi berbagai kategori wisata yang sesuai dengan minat Anda."
         href="/destinasi"

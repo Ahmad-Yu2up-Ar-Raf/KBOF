@@ -1,4 +1,3 @@
-import type { Table } from '@tanstack/react-table'
 import {
   ChevronLeft,
   ChevronRight,
@@ -14,11 +13,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../select'
+import type { Table } from '@tanstack/react-table'
 import { cn } from '@/lib/utils'
 
 interface DataTablePaginationProps<TData> extends React.ComponentProps<'div'> {
   table: Table<TData>
-  pageSizeOptions?: number[]
+  pageSizeOptions?: Array<number>
 }
 
 export function DataTablePagination<TData>({

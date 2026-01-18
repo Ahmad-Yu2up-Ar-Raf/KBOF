@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Suspense } from 'react'
+import { PlusCircle } from 'lucide-react'
 import ArticleBlock, {
   ArticleBlockSkeleton,
 } from '@/components/ui/core/block/article/article-block'
@@ -9,7 +10,6 @@ import { getArticleInfiniteQueryOptions } from '@/lib/query-options'
 import KatalogHeader from '@/components/ui/fragments/custom-ui/typography/katalog-header'
 import CreateArticleSheet from '@/components/ui/core/feature/data-table/article/create-article-sheet'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
-import { PlusCircle } from 'lucide-react'
 
 // Route with loader for initial data prefetch
 export const Route = createFileRoute('/artikel/')({

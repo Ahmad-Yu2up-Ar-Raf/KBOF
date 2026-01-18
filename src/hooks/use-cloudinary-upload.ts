@@ -3,7 +3,7 @@
 // =============================================================================
 // Custom hook for client-side direct upload to Cloudinary with signed URLs.
 
-import { useState, useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { useServerFn } from '@tanstack/react-start'
 import { generateCloudinarySignature } from '@/lib/cloudinary/cloudinary-actions'
 
@@ -36,12 +36,12 @@ export interface UseCloudinaryUploadOptions {
   onSuccess?: (result: CloudinaryUploadResult) => void
   onError?: (error: Error) => void
   maxFileSize?: number // in bytes (default: 10MB)
-  acceptedTypes?: string[] // e.g., ['image/jpeg', 'image/png']
+  acceptedTypes?: Array<string> // e.g., ['image/jpeg', 'image/png']
 }
 
 export interface UseCloudinaryUploadReturn {
   upload: (file: File) => Promise<CloudinaryUploadResult | null>
-  uploadMultiple: (files: File[]) => Promise<CloudinaryUploadResult[]>
+  uploadMultiple: (files: Array<File>) => Promise<Array<CloudinaryUploadResult>>
   isUploading: boolean
   progress: UploadProgress | null
   error: Error | null
@@ -224,8 +224,8 @@ export function useCloudinaryUpload(
    * Upload multiple files to Cloudinary
    */
   const uploadMultiple = useCallback(
-    async (files: File[]): Promise<CloudinaryUploadResult[]> => {
-      const results: CloudinaryUploadResult[] = []
+    async (files: Array<File>): Promise<Array<CloudinaryUploadResult>> => {
+      const results: Array<CloudinaryUploadResult> = []
 
       for (const file of files) {
         const result = await upload(file)

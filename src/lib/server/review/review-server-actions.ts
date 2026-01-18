@@ -7,7 +7,7 @@
 
 import { createServerFn } from '@tanstack/react-start'
 import { z } from 'zod'
-import { and, eq, desc } from 'drizzle-orm'
+import { and, desc, eq } from 'drizzle-orm'
 import { authServerMiddleware } from '@/lib/middleware'
 
 // Dynamic import to prevent db from being bundled in client

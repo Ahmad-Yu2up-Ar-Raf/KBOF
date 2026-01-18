@@ -1,3 +1,7 @@
+import { ChevronsUpDown } from 'lucide-react'
+import { UserInfo } from './user-info'
+import { UserMenuContent } from './user-menu-content'
+import type { User } from '@/db/schema'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,12 +13,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/fragments/shadcn-ui/sidebar'
-import { UserInfo } from './user-info'
-import { UserMenuContent } from './user-menu-content'
 import { useIsMobile } from '@/hooks/use-mobile'
-
-import { ChevronsUpDown } from 'lucide-react'
-import { User } from '@/db/schema'
 
 export function NavUser({ user }: { user: User }) {
   const { state } = useSidebar()

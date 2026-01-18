@@ -3,8 +3,8 @@
 
 import * as React from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { cn } from '@/lib/utils' // Assuming you have a `cn` utility from shadcn
 import { Image } from '@unpic/react'
+import { cn } from '@/lib/utils' // Assuming you have a `cn` utility from shadcn
 
 // Define the type for a single milestone
 export interface Milestone {
@@ -21,7 +21,7 @@ export interface Milestone {
 
 // Define the props for the AnimatedRoadmap component
 interface AnimatedRoadmapProps extends React.HTMLAttributes<HTMLDivElement> {
-  milestones: Milestone[]
+  milestones: Array<Milestone>
   mapImageSrc: string // Add a prop for the map background image
 }
 

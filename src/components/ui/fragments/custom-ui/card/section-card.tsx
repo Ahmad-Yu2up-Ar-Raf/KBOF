@@ -1,4 +1,5 @@
 import { Badge } from '../../shadcn-ui/badge'
+import type { DataCard } from '@/types'
 import {
   Card,
   CardAction,
@@ -8,10 +9,9 @@ import {
   CardTitle,
 } from '@/components/ui/fragments/shadcn-ui/card'
 import { cn } from '@/lib/utils'
-import { DataCard } from '@/types'
 
 type componentsProps = {
-  dataCards: DataCard[]
+  dataCards: Array<DataCard>
 }
 
 export function SectionCards({ dataCards }: componentsProps) {

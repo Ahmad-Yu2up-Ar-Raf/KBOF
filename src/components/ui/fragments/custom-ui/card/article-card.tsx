@@ -1,6 +1,7 @@
 import React from 'react'
 import { Calendar } from 'lucide-react'
 
+import { Link } from '@tanstack/react-router'
 import { Avatar, AvatarFallback, AvatarImage } from '../../shadcn-ui/avatar'
 import {
   Card,
@@ -16,7 +17,6 @@ import type { PublicArticle } from '@/lib/server/article/article-public-queries'
 import MediaItem from '@/components/ui/fragments/custom-ui/media/media-item'
 import { cn } from '@/lib/utils'
 import { batasiHuruf } from '@/hooks/use-word'
-import { Link } from '@tanstack/react-router'
 
 interface ArticleCardProps {
   article: PublicArticle

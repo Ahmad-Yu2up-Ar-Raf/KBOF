@@ -1,9 +1,10 @@
 'use client'
 
 import { SelectTrigger } from '@radix-ui/react-select'
-import type { Table } from '@tanstack/react-table'
 import { CheckCircle2, Download, Trash2 } from 'lucide-react'
+import type { Table } from '@tanstack/react-table'
 
+import type { ArticleAggregateResult, DestinationStatus } from '@/types'
 import {
   DataTableActionBar,
   DataTableActionBarAction,
@@ -16,7 +17,6 @@ import {
   SelectItem,
 } from '@/components/ui/fragments/shadcn-ui/select'
 import { Separator } from '@/components/ui/fragments/shadcn-ui/separator'
-import type { ArticleAggregateResult, DestinationStatus } from '@/types'
 
 const actions = ['update-status', 'export', 'delete'] as const
 
@@ -25,7 +25,11 @@ type Action = (typeof actions)[number]
 type ArticleRow = ArticleAggregateResult['data'][number]
 
 // Status enum values
-const statusEnumValues: DestinationStatus[] = ['published', 'draft', 'archived']
+const statusEnumValues: Array<DestinationStatus> = [
+  'published',
+  'draft',
+  'archived',
+]
 
 interface ArticleTableActionBarProps {
   table: Table<ArticleRow>

@@ -6,21 +6,25 @@
 import { createServerFn } from '@tanstack/react-start'
 import {
   and,
+  asc,
   count,
+  desc,
   eq,
   gt,
+  gte,
   ilike,
   inArray,
-  asc,
-  desc,
-  gte,
   lte,
 } from 'drizzle-orm'
-import * as schema from '@/db/schema'
-import { authServerMiddleware } from '@/lib/middleware'
 import * as z from 'zod'
-import { filterColumns } from '@/lib/filter-columns'
 import type { ArticleAggregateResult } from '@/types'
+import * as schema from '@/db/schema'
+import { adminServerMiddleware, authServerMiddleware } from '@/lib/middleware'
+import { filterColumns } from '@/lib/filter-columns'
+
+// ============================================
+// AGGREGATE SERVER FUNCTION (ADMIN - ALL DATA)
+// ============================================
 
 // Dynamic import to prevent db from being bundled in client
 const getDb = async () => {
@@ -115,7 +119,7 @@ export async function fetchArticleList(
     | 'status'
     | 'publishedAt'
 
-  const validColumns: ArticleColumnKey[] = [
+  const validColumns: Array<ArticleColumnKey> = [
     'id',
     'title',
     'createdAt',
@@ -263,7 +267,7 @@ export async function fetchArticleListAdmin(
     | 'status'
     | 'publishedAt'
 
-  const validColumns: ArticleColumnKey[] = [
+  const validColumns: Array<ArticleColumnKey> = [
     'id',
     'title',
     'createdAt',
@@ -362,7 +366,7 @@ export const getArticleAggregateServerFn = createServerFn({
   .inputValidator(z.object({ filters: articleAggregateInputSchema }))
   .handler(
     async ({ data: { filters }, context }): Promise<ArticleAggregateResult> => {
-      const userId = context.user!.id
+      const userId = context.user.id
 
       try {
         const [listResult, statusCounts] = await Promise.all([
@@ -386,35 +390,48 @@ export const getArticleAggregateServerFn = createServerFn({
     },
   )
 
-// ============================================
-// AGGREGATE SERVER FUNCTION (ADMIN - ALL DATA)
-// ============================================
-
-import { adminServerMiddleware } from '@/lib/middleware'
-
 export const getArticleAggregateAdminServerFn = createServerFn({
   method: 'POST',
 })
   .middleware([adminServerMiddleware])
   .inputValidator(z.object({ filters: articleAggregateInputSchema }))
-  .handler(async ({ data: { filters } }): Promise<ArticleAggregateResult> => {
-    try {
-      const [listResult, statusCounts] = await Promise.all([
-        fetchArticleListAdmin(filters),
-        fetchArticleStatusCountsAdmin(),
-      ])
+  .handler(
+    async ({ data: { filters }, context }): Promise<ArticleAggregateResult> => {
+      try {
+        const role = context.user?.role
+        const userId = context.user?.id
 
-      return {
-        data: listResult.data,
-        pageCount: listResult.pageCount,
-        statusCounts,
+        if (role === 'superAdmin') {
+          const [listResult, statusCounts] = await Promise.all([
+            fetchArticleListAdmin(filters),
+            fetchArticleStatusCountsAdmin(),
+          ])
+
+          return {
+            data: listResult.data,
+            pageCount: listResult.pageCount,
+            statusCounts,
+          }
+        }
+
+        // Non-super admins should only see their own data
+        const [listResult, statusCounts] = await Promise.all([
+          fetchArticleList(userId, filters),
+          fetchArticleStatusCounts(userId),
+        ])
+
+        return {
+          data: listResult.data,
+          pageCount: listResult.pageCount,
+          statusCounts,
+        }
+      } catch (err) {
+        console.error('[Article Admin Aggregate Query Error]:', err)
+        return {
+          data: [],
+          pageCount: 0,
+          statusCounts: { published: 0, draft: 0, archived: 0 },
+        }
       }
-    } catch (err) {
-      console.error('[Article Admin Aggregate Query Error]:', err)
-      return {
-        data: [],
-        pageCount: 0,
-        statusCounts: { published: 0, draft: 0, archived: 0 },
-      }
-    }
-  })
+    },
+  )

@@ -8,12 +8,6 @@
 import { useState } from 'react'
 import { useSuspenseQuery } from '@tanstack/react-query'
 
-import type { LeaderboardFilters } from '@/lib/query-options'
-import {
-  getLeaderboardPodiumQueryOptions,
-  getLeaderboardQueryOptions,
-} from '@/lib/query-options'
-
 import {
   LeaderboardHeader,
   LeaderboardListSection,
@@ -21,6 +15,11 @@ import {
   PodiumSection,
 } from './components'
 import { useConfettiEffect, useLeaderboardFilters } from './hooks'
+import type { LeaderboardFilters } from '@/lib/query-options'
+import {
+  getLeaderboardPodiumQueryOptions,
+  getLeaderboardQueryOptions,
+} from '@/lib/query-options'
 
 // =============================================================================
 // CONSTANTS

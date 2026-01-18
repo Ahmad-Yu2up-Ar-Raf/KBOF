@@ -5,7 +5,7 @@
 // Footer will only show when all data is loaded (hasNextPage = false)
 // =============================================================================
 
-import React, { createContext, useContext, useState, useCallback } from 'react'
+import React, { createContext, useCallback, useContext, useState } from 'react'
 
 interface InfiniteScrollContextValue {
   /** Whether there's more data to load */

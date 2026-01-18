@@ -1,10 +1,10 @@
 import type { Column } from '@tanstack/react-table'
-import { dataTableConfig } from '@/config/data-table'
 import type {
   ExtendedColumnFilter,
   FilterOperator,
   FilterVariant,
 } from '@/types/data-table'
+import { dataTableConfig } from '@/config/data-table'
 
 export function getCommonPinningStyles<TData>({
   column,
@@ -40,7 +40,7 @@ export function getCommonPinningStyles<TData>({
 export function getFilterOperators(filterVariant: FilterVariant) {
   const operatorMap: Record<
     FilterVariant,
-    { label: string; value: FilterOperator }[]
+    Array<{ label: string; value: FilterOperator }>
   > = {
     text: dataTableConfig.textOperators,
     number: dataTableConfig.numericOperators,
@@ -62,8 +62,8 @@ export function getDefaultFilterOperator(filterVariant: FilterVariant) {
 }
 
 export function getValidFilters<TData>(
-  filters: ExtendedColumnFilter<TData>[],
-): ExtendedColumnFilter<TData>[] {
+  filters: Array<ExtendedColumnFilter<TData>>,
+): Array<ExtendedColumnFilter<TData>> {
   return filters.filter(
     (filter) =>
       filter.operator === 'isEmpty' ||

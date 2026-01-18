@@ -1,18 +1,16 @@
 import * as React from 'react'
-import { cn } from '@/lib/utils'
 import { Button } from '../shadcn-ui/button'
-import { LucideIcon } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 interface EmptyStateProps {
   title: string
   description: string
-  icons?: LucideIcon[]
-  action?:
-    | {
-        label: string
-        onClick: () => void
-      }
-    | React.ReactNode
+  icons?: Array<LucideIcon>
+  action?: {
+    label: string
+    onClick: () => void
+  }
   className?: string
 }
 
@@ -66,22 +64,19 @@ export function EmptyState({
       <p className="text-xs  md:text-sm text-muted-foreground mt-1 lg:text-base whitespace-pre-line">
         {description}
       </p>
-      {action &&
-        (React.isValidElement(action) ? (
-          action
-        ) : (
-          <Button
-            size={'sm'}
-            onClick={(action as { label: string; onClick: () => void }).onClick}
-            variant="outline"
-            className={cn(
-              'mt-4',
-              'shadow-sm  text-xs cursor-pointer active:shadow-none',
-            )}
-          >
-            {(action as { label: string; onClick: () => void }).label}
-          </Button>
-        ))}
+      {action && (
+        <Button
+          size={'sm'}
+          onClick={action.onClick}
+          variant="outline"
+          className={cn(
+            'mt-4',
+            'shadow-sm  text-xs cursor-pointer active:shadow-none',
+          )}
+        >
+          {action.label}
+        </Button>
+      )}
     </div>
   )
 }

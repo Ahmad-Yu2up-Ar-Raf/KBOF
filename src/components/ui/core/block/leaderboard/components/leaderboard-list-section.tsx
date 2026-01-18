@@ -4,14 +4,13 @@
 // List of destinations with filtering and ranking
 // =============================================================================
 
+import { LeaderboardRow } from './leaderboard-row'
 import type { LeaderboardEntry } from '@/lib/query-options'
 import { cn } from '@/lib/utils'
 import {
   FacetedFilter,
   FilterToolbar,
 } from '@/components/ui/fragments/custom-ui/filter'
-
-import { LeaderboardRow } from './leaderboard-row'
 
 // =============================================================================
 // TYPES
@@ -24,23 +23,23 @@ type FilterOption = {
 }
 
 export type LeaderboardListSectionProps = {
-  data: LeaderboardEntry[]
+  data: Array<LeaderboardEntry>
   hasActiveFilters: boolean
   onResetFilters: () => void
   // Filter state
   filters: {
-    categories: string[]
-    types: string[]
-    provinces: string[]
+    categories: Array<string>
+    types: Array<string>
+    provinces: Array<string>
   }
   onFiltersChange: (
     key: 'categories' | 'types' | 'provinces',
-    values: string[] | null,
+    values: Array<string> | null,
   ) => void
   // Filter options
-  categoryOptions: FilterOption[]
-  typeOptions: FilterOption[]
-  provinsiOptions: FilterOption[]
+  categoryOptions: Array<FilterOption>
+  typeOptions: Array<FilterOption>
+  provinsiOptions: Array<FilterOption>
   // Hover state
   hoveredRow: number | null
   setHoveredRow: React.Dispatch<React.SetStateAction<number | null>>
@@ -72,7 +71,6 @@ export function LeaderboardListSection({
 
       {/* Filters */}
       <FilterBar
-        
         filters={filters}
         onFiltersChange={onFiltersChange}
         categoryOptions={categoryOptions}
@@ -83,7 +81,7 @@ export function LeaderboardListSection({
       />
 
       {/* List */}
-      <div className=' mt-10'>
+      <div className=" mt-10">
         {data.map((entry, index) => (
           <LeaderboardRow
             key={entry.destinationId}
@@ -113,17 +111,17 @@ export function LeaderboardListSection({
 
 type FilterBarProps = {
   filters: {
-    categories: string[]
-    types: string[]
-    provinces: string[]
+    categories: Array<string>
+    types: Array<string>
+    provinces: Array<string>
   }
   onFiltersChange: (
     key: 'categories' | 'types' | 'provinces',
-    values: string[] | null,
+    values: Array<string> | null,
   ) => void
-  categoryOptions: FilterOption[]
-  typeOptions: FilterOption[]
-  provinsiOptions: FilterOption[]
+  categoryOptions: Array<FilterOption>
+  typeOptions: Array<FilterOption>
+  provinsiOptions: Array<FilterOption>
   hasActiveFilters: boolean
   onResetFilters: () => void
 }
@@ -145,7 +143,6 @@ function FilterBar({
         onReset={onResetFilters}
       >
         <FacetedFilter
-          
           title="Kategori"
           options={categoryOptions}
           value={filters.categories}

@@ -4,16 +4,15 @@
 // Top 3 destinations display section
 // =============================================================================
 
-import type { LeaderboardEntry } from '@/lib/query-options'
-
 import { PodiumCard } from './podium-card'
+import type { LeaderboardEntry } from '@/lib/query-options'
 
 // =============================================================================
 // TYPES
 // =============================================================================
 
 export type PodiumSectionProps = {
-  podium: LeaderboardEntry[]
+  podium: Array<LeaderboardEntry>
   hoveredPodium: number | null
   setHoveredPodium: React.Dispatch<React.SetStateAction<number | null>>
 }
@@ -22,7 +21,11 @@ export type PodiumSectionProps = {
 // COMPONENT
 // =============================================================================
 
-export function PodiumSection({ podium, hoveredPodium, setHoveredPodium }: PodiumSectionProps) {
+export function PodiumSection({
+  podium,
+  hoveredPodium,
+  setHoveredPodium,
+}: PodiumSectionProps) {
   if (podium.length === 0) return null
 
   return (

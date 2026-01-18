@@ -5,9 +5,9 @@
 
 import { z } from 'zod'
 import {
+  createSearchParamsCache,
   parseAsArrayOf,
   parseAsInteger,
-  createSearchParamsCache,
 } from 'nuqs/server'
 
 // ============================================
@@ -19,7 +19,7 @@ import {
  * Uses nuqs for URL state management
  */
 export const analyticsSearchParamsCache = createSearchParamsCache({
-  createdAt: parseAsArrayOf(parseAsInteger).withDefault([]),
+  createdAt: parseAsArrayOf(parseAsInteger),
 })
 
 // ============================================
@@ -36,16 +36,13 @@ export const analyticsSearchSchema = z.object({
     .union([
       z.array(z.number()),
       z.string().transform((val) => {
-        // Handle empty string
         if (!val || val === '') return []
-        // Handle comma-separated string from URL
         try {
           const parsed = JSON.parse(val)
           if (Array.isArray(parsed))
             return parsed.map(Number).filter((n) => !isNaN(n))
           return []
         } catch {
-          // Try comma-separated
           return val
             .split(',')
             .map(Number)
@@ -53,7 +50,7 @@ export const analyticsSearchSchema = z.object({
         }
       }),
     ])
-    .default([]),
+    .optional(),
 })
 
 export type AnalyticsSearchParams = z.infer<typeof analyticsSearchSchema>

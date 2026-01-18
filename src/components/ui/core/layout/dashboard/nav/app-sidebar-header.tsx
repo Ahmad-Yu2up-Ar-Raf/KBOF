@@ -1,11 +1,11 @@
 'use client'
+import AppLogo from '../../../../fragments/custom-ui/header/app-logo'
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/fragments/shadcn-ui/sidebar'
 
-import AppLogo from '../../../../fragments/custom-ui/header/app-logo'
 import { authClient } from '@/lib/auth/auth-client'
 
 export default function SidebarHeaderLogo() {
@@ -24,7 +24,9 @@ export default function SidebarHeaderLogo() {
           </div>
           <div className="grid flex-1 text-left text-sm leading-tight">
             <span className="truncate font-medium">{appName}</span>
-            <span className="truncate text-xs capitalize">{session?.user.role}</span>
+            <span className="truncate text-xs capitalize">
+              {session?.user.role}
+            </span>
           </div>
         </SidebarMenuButton>
       </SidebarMenuItem>

@@ -4,6 +4,7 @@
 
 'use client'
 
+import type { FilterOption } from '@/components/ui/fragments/custom-ui/filter'
 import {
   Select,
   SelectContent,
@@ -15,7 +16,6 @@ import {
   FacetedFilter,
   FilterToolbar,
 } from '@/components/ui/fragments/custom-ui/filter'
-import type { FilterOption } from '@/components/ui/fragments/custom-ui/filter'
 import { sortOptions } from '@/lib/utils/destination-labels'
 
 // ============================================
@@ -24,20 +24,20 @@ import { sortOptions } from '@/lib/utils/destination-labels'
 
 interface DestinasiFilterSectionProps {
   // Filter values
-  categories: string[]
-  types: string[]
-  provinces: string[]
+  categories: Array<string>
+  types: Array<string>
+  provinces: Array<string>
   sortBy: string
 
   // Filter options
-  categoryOptions: FilterOption[]
-  typeOptions: FilterOption[]
-  provinsiOptions: FilterOption[]
+  categoryOptions: Array<FilterOption>
+  typeOptions: Array<FilterOption>
+  provinsiOptions: Array<FilterOption>
 
   // Handlers
-  onCategoriesChange: (values: string[]) => void
-  onTypesChange: (values: string[]) => void
-  onProvincesChange: (values: string[]) => void
+  onCategoriesChange: (values: Array<string>) => void
+  onTypesChange: (values: Array<string>) => void
+  onProvincesChange: (values: Array<string>) => void
   onSortByChange: (value: string) => void
   onReset: () => void
 

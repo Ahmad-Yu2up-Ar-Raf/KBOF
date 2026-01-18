@@ -2,27 +2,27 @@
 
 import { useState } from 'react'
 import { toast } from 'sonner'
-import { ThumbsUp, Check, Loader2 } from 'lucide-react'
+import { Check, Loader2, ThumbsUp } from 'lucide-react'
 
-import { DestinasiDetailBlockProps } from '@/components/ui/core/block/destinasi/detail/destinasi-detail-block'
-import {
-  AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogContent,
-  AlertDialogCancel,
-  AlertDialogAction,
-} from '@/components/ui/fragments/shadcn-ui/alert-dialog'
+import { useNavigate } from '@tanstack/react-router'
 import { Button } from '../../shadcn-ui/button'
 import { Spinner } from '../../shadcn-ui/spinner'
+import type { DestinasiDetailBlockProps } from '@/components/ui/core/block/destinasi/detail/destinasi-detail-block'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/fragments/shadcn-ui/alert-dialog'
 
 import { useSession } from '@/lib/auth/auth-client'
 import { useCheckUserVote, useToggleVote } from '@/hooks/use-vote-mutations'
 import { cn } from '@/lib/utils'
-import { useNavigate } from '@tanstack/react-router'
 
 function VoteButton({ destination }: DestinasiDetailBlockProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false)

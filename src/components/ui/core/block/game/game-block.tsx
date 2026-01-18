@@ -7,18 +7,17 @@
 import * as React from 'react'
 import { AnimatePresence } from 'framer-motion'
 
-import type { Level, GameScreen } from '@/lib/game/types'
-import { calculateGameStats } from '@/lib/game/utils'
-import { useQuizEngine } from '@/hooks/game/use-quiz-engine'
-import { GameShell } from '@/components/game'
-
+import { SiteHeader } from '../../layout/nav/site-header'
 import {
-  MenuScreen,
   LevelSelectScreen,
+  MenuScreen,
   PlayingScreen,
   StatsScreen,
 } from './screens'
-import { SiteHeader } from '../../layout/nav/site-header'
+import type { GameScreen, Level } from '@/lib/game/types'
+import type { calculateGameStats } from '@/lib/game/utils'
+import { useQuizEngine } from '@/hooks/game/use-quiz-engine'
+import { GameShell } from '@/components/game'
 
 // =============================================================================
 // COMPONENT
@@ -91,7 +90,7 @@ export default function GameBlock() {
 
   return (
     <>
-      {screen === 'menu' && <SiteHeader  />}
+      {screen === 'menu' && <SiteHeader />}
 
       <GameShell>
         {screen === 'menu' && (

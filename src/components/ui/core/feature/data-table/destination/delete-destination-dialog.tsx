@@ -1,10 +1,11 @@
 'use client'
 
-import type { Row } from '@tanstack/react-table'
 import * as React from 'react'
 import { Activity } from 'react'
 import { toast } from 'sonner'
+import type { Row } from '@tanstack/react-table'
 
+import type { DestinationAggregateResult } from '@/types'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
 import {
   Dialog,
@@ -28,14 +29,13 @@ import {
 import { useIsMobile } from '@/hooks/use-mobile'
 import { useDeleteDestinationMutation } from '@/hooks/use-destination-mutations'
 import { Spinner } from '@/components/ui/fragments/shadcn-ui/spinner'
-import type { DestinationAggregateResult } from '@/types'
 
 type DestinationRow = DestinationAggregateResult['data'][number]
 
 interface DeleteDestinationDialogProps extends React.ComponentPropsWithoutRef<
   typeof Dialog
 > {
-  destinations: Row<DestinationRow>['original'][]
+  destinations: Array<Row<DestinationRow>['original']>
   showTrigger?: boolean
   onSuccess?: () => void
 }

@@ -1,9 +1,11 @@
 'use client'
 
 import { SelectTrigger } from '@radix-ui/react-select'
-import type { Table } from '@tanstack/react-table'
 import { Ban, Download, ShieldCheck, Trash2, UserCog } from 'lucide-react'
+import type { Table } from '@tanstack/react-table'
 
+import type { UserRoleType } from '@/db/schema'
+import type { UserTableRow } from './user-table-columns'
 import {
   DataTableActionBar,
   DataTableActionBarAction,
@@ -16,15 +18,13 @@ import {
   SelectItem,
 } from '@/components/ui/fragments/shadcn-ui/select'
 import { Separator } from '@/components/ui/fragments/shadcn-ui/separator'
-import type { UserRoleType } from '@/db/schema'
-import type { UserTableRow } from './user-table-columns'
 
 const actions = ['update-role', 'ban', 'unban', 'export', 'delete'] as const
 
 type Action = (typeof actions)[number]
 
 // Role enum values (excluding superAdmin for bulk operations)
-const roleEnumValues: UserRoleType[] = ['pribumi', 'admin']
+const roleEnumValues: Array<UserRoleType> = ['pribumi', 'admin']
 
 interface UserTableActionBarProps {
   table: Table<UserTableRow>

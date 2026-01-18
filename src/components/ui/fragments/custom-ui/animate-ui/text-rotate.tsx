@@ -8,10 +8,9 @@ import {
   useMemo,
   useState,
 } from 'react'
-import {
-  AnimatePresence,
+import { AnimatePresence, motion } from 'motion/react'
+import type {
   AnimatePresenceProps,
-  motion,
   MotionProps,
   Transition,
 } from 'motion/react'
@@ -19,7 +18,7 @@ import {
 import { cn } from '@/lib/utils'
 
 interface TextRotateProps {
-  texts: string[]
+  texts: Array<string>
   rotationInterval?: number
   initial?: MotionProps['initial']
   animate?: MotionProps['animate']
@@ -46,7 +45,7 @@ export interface TextRotateRef {
 }
 
 interface WordObject {
-  characters: string[]
+  characters: Array<string>
   needsSpace: boolean
 }
 
@@ -77,7 +76,7 @@ const TextRotate = forwardRef<TextRotateRef, TextRotateProps>(
     const [currentTextIndex, setCurrentTextIndex] = useState(0)
 
     // handy function to split text into characters with support for unicode and emojis
-    const splitIntoCharacters = (text: string): string[] => {
+    const splitIntoCharacters = (text: string): Array<string> => {
       if (typeof Intl !== 'undefined' && 'Segmenter' in Intl) {
         const segmenter = new Intl.Segmenter('en', { granularity: 'grapheme' })
         return Array.from(segmenter.segment(text), ({ segment }) => segment)
@@ -215,8 +214,8 @@ const TextRotate = forwardRef<TextRotateRef, TextRotateProps>(
             aria-hidden="true"
           >
             {(splitBy === 'characters'
-              ? (elements as WordObject[])
-              : (elements as string[]).map((el, i) => ({
+              ? (elements as Array<WordObject>)
+              : (elements as Array<string>).map((el, i) => ({
                   characters: [el],
                   needsSpace: i !== elements.length - 1,
                 }))

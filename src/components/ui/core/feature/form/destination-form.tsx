@@ -1,11 +1,12 @@
+import type { CreateDestinationFormReturn } from '@/hooks/form/use-destination-form'
 import { FieldGroup } from '@/components/ui/fragments/shadcn-ui/field'
-import { CreateDestinationFormReturn } from '@/hooks/form/use-destination-form'
 import {
-  PROVINSI_OPTIONS,
-  TYPE_OPTIONS,
-  STATUS_OPTIONS,
   CATEGORY_OPTIONS,
+  PROVINSI_OPTIONS,
+  STATUS_OPTIONS,
+  TYPE_OPTIONS,
 } from '@/lib/utils/destination-utils'
+import { useSession } from '@/lib/auth/auth-client'
 
 interface DestinationFormProps {
   // CreateDestinationFormReturn works for both create & update forms
@@ -106,16 +107,26 @@ function DestinationForm({ form, children }: DestinationFormProps) {
             )}
           </form.AppField>
 
-          <form.AppField name="status">
-            {(field) => (
-              <field.Combobox
-                label="Status Publikasi"
-                options={STATUS_OPTIONS}
-                searchPlaceholder="Cari status..."
-                emptyMessage="Status tidak ditemukan."
-              />
-            )}
-          </form.AppField>
+          {/* Status should only be editable by superAdmin */}
+          {(() => {
+            const session = useSession()
+            const role = session?.data?.user?.role
+            if (role === 'superAdmin') {
+              return (
+                <form.AppField name="status">
+                  {(field) => (
+                    <field.Combobox
+                      label="Status Publikasi"
+                      options={STATUS_OPTIONS}
+                      searchPlaceholder="Cari status..."
+                      emptyMessage="Status tidak ditemukan."
+                    />
+                  )}
+                </form.AppField>
+              )
+            }
+            return null
+          })()}
         </FieldGroup>
 
         {/* Image Upload Section */}
@@ -140,7 +151,7 @@ function DestinationForm({ form, children }: DestinationFormProps) {
 
           <form.AppField name="images">
             {(field) => (
-              <field.MultiFileUpload
+              <field.ImagesUpload
                 label="Galeri Foto"
                 description="Foto-foto tambahan destinasi (Maksimal 10 foto)"
                 folder="destinations/gallery"

@@ -1,9 +1,8 @@
 'use client'
 
-import type { Option } from '@/types/data-table'
-import type { Column } from '@tanstack/react-table'
 import { Check, PlusCircle, XCircle } from 'lucide-react'
 
+import * as React from 'react'
 import { Badge } from '../badge'
 import { Button } from '../button'
 import {
@@ -18,13 +17,14 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from '../popover'
 import { Separator } from '../separator'
 
-import * as React from 'react'
 import { Checkbox } from '../checkbox'
+import type { Column } from '@tanstack/react-table'
+import type { Option } from '@/types/data-table'
 
 interface DataTableFacetedFilterProps<TData, TValue> {
   column?: Column<TData, TValue>
   title?: string
-  options: Option[]
+  options: Array<Option>
   multiple?: boolean
 }
 

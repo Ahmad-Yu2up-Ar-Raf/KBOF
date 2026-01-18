@@ -4,15 +4,18 @@
 // Server-side mutations (CRUD) untuk article entity
 
 import { createServerFn } from '@tanstack/react-start'
-import { eq, inArray, and } from 'drizzle-orm'
-import * as schema from '@/db/schema'
-import { authServerMiddleware } from '@/lib/middleware'
+import { and, eq, inArray } from 'drizzle-orm'
 import * as z from 'zod'
+import * as schema from '@/db/schema'
 import {
-  createArticleServerSchema,
-  updateArticleServerSchema,
+  authServerMiddleware,
+  superAdminServerMiddleware,
+} from '@/lib/middleware'
+import {
   ArticleIdSchema,
   UpdateArticleBulkSchema,
+  createArticleServerSchema,
+  updateArticleServerSchema,
 } from '@/lib/validations/article-validations'
 import { generateSlug } from '@/lib/utils/destination-utils'
 import {
@@ -55,7 +58,7 @@ export const addArticle = createServerFn({ method: 'POST' })
   .inputValidator(createArticleServerSchema)
   .handler(async ({ data, context }) => {
     const db = await getDb()
-    const authorId = context.user!.id
+    const authorId = context.user.id
 
     const slug = generateSlug(data.title)
 
@@ -92,12 +95,16 @@ export const updateArticle = createServerFn({ method: 'POST' })
   .inputValidator(updateArticleServerSchema)
   .handler(async ({ data, context }) => {
     const db = await getDb()
-    const authorId = context.user!.id
+    const authorId = context.user.id
+    const role = context.user?.role
 
-    // Check ownership
-    const existing = await db.query.article.findFirst({
-      where: and(eq(article.id, data.id), eq(article.authorId, authorId)),
-    })
+    // Check ownership (superAdmin can edit any)
+    const existing =
+      role === 'superAdmin'
+        ? await db.query.article.findFirst({ where: eq(article.id, data.id) })
+        : await db.query.article.findFirst({
+            where: and(eq(article.id, data.id), eq(article.authorId, authorId)),
+          })
 
     if (!existing) {
       throw new Error('Article not found or access denied')
@@ -126,14 +133,19 @@ export const updateArticle = createServerFn({ method: 'POST' })
     }
 
     // Set publishedAt when status changes to published
-    if (data.status === 'published' && existing.status !== 'published') {
-      updateData.publishedAt = new Date()
-    }
+    // if (data.status === 'published' && existing.status !== 'published') {
+    //   updateData.publishedAt = new Date()
+    // }
 
     // Remove id from update data
     delete updateData.id
 
-    await db.update(article).set(updateData).where(eq(article.id, data.id))
+    const whereClause =
+      role === 'superAdmin'
+        ? eq(article.id, data.id)
+        : and(eq(article.id, data.id), eq(article.authorId, authorId))
+
+    await db.update(article).set(updateData).where(whereClause)
 
     return { success: true }
   })
@@ -147,12 +159,16 @@ export const deleteArticle = createServerFn({ method: 'POST' })
   .inputValidator(ArticleIdSchema)
   .handler(async ({ data, context }) => {
     const db = await getDb()
-    const authorId = context.user!.id
+    const authorId = context.user.id
+    const role = context.user?.role
 
-    // Check ownership and get article data for cleanup
-    const existing = await db.query.article.findFirst({
-      where: and(eq(article.id, data.id), eq(article.authorId, authorId)),
-    })
+    // Check ownership (superAdmin can delete any)
+    const existing =
+      role === 'superAdmin'
+        ? await db.query.article.findFirst({ where: eq(article.id, data.id) })
+        : await db.query.article.findFirst({
+            where: and(eq(article.id, data.id), eq(article.authorId, authorId)),
+          })
 
     if (!existing) {
       throw new Error('Article not found or access denied')
@@ -176,14 +192,32 @@ export const updateBulkArticleStatus = createServerFn({ method: 'POST' })
   .inputValidator(UpdateArticleBulkSchema)
   .handler(async ({ data, context }) => {
     const db = await getDb()
-    const authorId = context.user!.id
+    const authorId = context.user.id
+    const role = context.user?.role
 
-    // Verify ownership of all articles
+    const ids = data.ids
+
+    if (role === 'superAdmin') {
+      const updateData: Record<string, unknown> = {
+        status: data.status,
+        updatedAt: new Date(),
+      }
+      if (data.status === 'published') {
+        updateData.publishedAt = new Date()
+      } else {
+        // clearing publishedAt when not published
+        updateData.publishedAt = null
+      }
+      await db.update(article).set(updateData).where(inArray(article.id, ids))
+      return { success: true, count: ids.length }
+    }
+
+    // Verify ownership for admin
     const articles = await db.query.article.findMany({
-      where: and(inArray(article.id, data.ids), eq(article.authorId, authorId)),
+      where: and(inArray(article.id, ids), eq(article.authorId, authorId)),
     })
 
-    if (articles.length !== data.ids.length) {
+    if (articles.length !== ids.length) {
       throw new Error('Some articles not found or access denied')
     }
 
@@ -191,18 +225,18 @@ export const updateBulkArticleStatus = createServerFn({ method: 'POST' })
       status: data.status,
       updatedAt: new Date(),
     }
-
-    // Set publishedAt for newly published articles
     if (data.status === 'published') {
       updateData.publishedAt = new Date()
+    } else {
+      // clearing publishedAt when not published
+      updateData.publishedAt = null
     }
-
     await db
       .update(article)
       .set(updateData)
-      .where(and(inArray(article.id, data.ids), eq(article.authorId, authorId)))
+      .where(and(inArray(article.id, ids), eq(article.authorId, authorId)))
 
-    return { success: true, count: data.ids.length }
+    return { success: true, count: ids.length }
   })
 
 // ============================================
@@ -214,26 +248,38 @@ export const deleteBulkArticles = createServerFn({ method: 'POST' })
   .inputValidator(z.object({ ids: z.array(z.number()) }))
   .handler(async ({ data, context }) => {
     const db = await getDb()
-    const authorId = context.user!.id
+    const authorId = context.user.id
+    const role = context.user?.role
 
-    // Get articles for Cloudinary cleanup
+    const ids = data.ids
+
+    if (role === 'superAdmin') {
+      const articlesToDelete = await db.query.article.findMany({
+        where: inArray(article.id, ids),
+      })
+      for (const a of articlesToDelete) {
+        await cleanupArticleCoverImage(a.coverImage)
+      }
+      await db.delete(article).where(inArray(article.id, ids))
+      return { success: true, count: ids.length }
+    }
+
+    // Non-superAdmin: only delete owned
     const articlesToDelete = await db.query.article.findMany({
-      where: and(inArray(article.id, data.ids), eq(article.authorId, authorId)),
+      where: and(inArray(article.id, ids), eq(article.authorId, authorId)),
     })
 
-    if (articlesToDelete.length !== data.ids.length) {
+    if (articlesToDelete.length !== ids.length) {
       throw new Error('Some articles not found or access denied')
     }
 
-    // Cleanup cover images from Cloudinary
     for (const a of articlesToDelete) {
       await cleanupArticleCoverImage(a.coverImage)
     }
 
-    // Delete from database
     await db
       .delete(article)
-      .where(and(inArray(article.id, data.ids), eq(article.authorId, authorId)))
+      .where(and(inArray(article.id, ids), eq(article.authorId, authorId)))
 
     return { success: true, count: data.ids.length }
   })
@@ -251,7 +297,7 @@ export const getUserArticlesByStatus = createServerFn({ method: 'GET' })
   .inputValidator(getUserArticlesSchema)
   .handler(async ({ data, context }) => {
     const db = await getDb()
-    const authorId = context.user!.id
+    const authorId = context.user.id
 
     const conditions = [eq(article.authorId, authorId)]
 

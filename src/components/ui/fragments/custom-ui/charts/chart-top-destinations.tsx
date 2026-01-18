@@ -4,6 +4,7 @@ import { LucideChartColumn, TrendingUp } from 'lucide-react'
 import { Bar, BarChart, CartesianGrid, Rectangle, XAxis } from 'recharts'
 import { useMemo } from 'react'
 
+import type { ChartConfig } from '@/components/ui/fragments/shadcn-ui/chart'
 import {
   Card,
   CardContent,
@@ -13,7 +14,6 @@ import {
   CardTitle,
 } from '@/components/ui/fragments/shadcn-ui/card'
 import {
-  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
@@ -34,7 +34,7 @@ export interface TopDestinationData {
 }
 
 interface ChartTopDestinationsProps {
-  data: TopDestinationData[]
+  data: Array<TopDestinationData>
   title?: string
   description?: string
   footerText?: string

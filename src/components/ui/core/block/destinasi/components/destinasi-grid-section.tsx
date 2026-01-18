@@ -5,15 +5,15 @@
 'use client'
 
 import type { Dispatch, SetStateAction } from 'react'
-import DestinasiCard from '@/components/ui/fragments/custom-ui/card/destinasi-card'
 import type { DestinasiDestination } from '@/lib/server/explore/destinasi-server-queries'
+import DestinasiCard from '@/components/ui/fragments/custom-ui/card/destinasi-card'
 
 // ============================================
 // TYPES
 // ============================================
 
 interface DestinasiGridSectionProps {
-  destinations: DestinasiDestination[]
+  destinations: Array<DestinasiDestination>
   hovered: number | null
   setHovered: Dispatch<SetStateAction<number | null>>
   search: string

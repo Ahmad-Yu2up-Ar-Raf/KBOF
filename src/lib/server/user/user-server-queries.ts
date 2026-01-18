@@ -5,23 +5,14 @@
 // Uses aggregated pattern similar to destination-server-queries
 
 import { createServerFn } from '@tanstack/react-start'
-import {
-  and,
-  count,
-  eq,
-  or,
-  ilike,
-  asc,
-  desc,
-  sql,
-  type SQL,
-} from 'drizzle-orm'
+import { and, asc, count, desc, eq, ilike, or, sql } from 'drizzle-orm'
+import * as z from 'zod'
+import type { SQL } from 'drizzle-orm'
+import type { UserRoleType } from '@/db/schema'
+import type { ExtendedColumnFilter, JoinOperator } from '@/types/data-table'
 import * as schema from '@/db/schema'
 import { superAdminServerMiddleware } from '@/lib/middleware'
-import * as z from 'zod'
-import type { UserRoleType } from '@/db/schema'
 import { filterColumns } from '@/lib/filter-columns'
-import type { ExtendedColumnFilter, JoinOperator } from '@/types/data-table'
 
 // Dynamic import to prevent db from being bundled in client
 const getDb = async () => {
@@ -98,7 +89,7 @@ export interface UserTableRow {
 
 // Aggregate result type
 export interface UserAggregateResult {
-  data: UserTableRow[]
+  data: Array<UserTableRow>
   pageCount: number
   totalCount: number
   roleCounts: Record<UserRoleType, number>
@@ -109,7 +100,7 @@ export interface UserAggregateResult {
 // ============================================
 
 export async function fetchUserList(input: UserAggregateInput): Promise<{
-  data: UserTableRow[]
+  data: Array<UserTableRow>
   pageCount: number
   totalCount: number
 }> {
@@ -119,7 +110,7 @@ export async function fetchUserList(input: UserAggregateInput): Promise<{
   const offset = (page - 1) * perPage
 
   // Build where conditions
-  const conditions: SQL<unknown>[] = []
+  const conditions: Array<SQL<unknown>> = []
 
   // Search filter
   if (search) {
@@ -147,8 +138,8 @@ export async function fetchUserList(input: UserAggregateInput): Promise<{
   // Advanced filters using filterColumns helper
   const advancedConditions = filterColumns({
     table: user,
-    filters: filters as ExtendedColumnFilter<typeof user>[],
-    joinOperator: joinOperator as JoinOperator,
+    filters: filters as Array<ExtendedColumnFilter<typeof user>>,
+    joinOperator: joinOperator,
   })
 
   if (advancedConditions) {
@@ -205,7 +196,7 @@ export async function fetchUserList(input: UserAggregateInput): Promise<{
     .offset(offset)
 
   return {
-    data: users as UserTableRow[],
+    data: users as Array<UserTableRow>,
     pageCount,
     totalCount,
   }
@@ -230,7 +221,7 @@ export async function fetchRoleCounts(): Promise<Record<UserRoleType, number>> {
 
   counts.forEach((c) => {
     if (c.role in roleCounts) {
-      roleCounts[c.role as UserRoleType] = c.count
+      roleCounts[c.role] = c.count
     }
   })
 

@@ -1,8 +1,8 @@
 'use client'
 
-import type { Column, Table } from '@tanstack/react-table'
 import { X } from 'lucide-react'
 import * as React from 'react'
+import type { Column, Table } from '@tanstack/react-table'
 
 import { DataTableDateFilter } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-date-filter'
 import { DataTableFacetedFilter } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-faceted-filter'

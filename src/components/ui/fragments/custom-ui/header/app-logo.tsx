@@ -1,5 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import { Logo } from '../../../../icons/app-logo-icon'
+
 const appName = import.meta.env.VITE_APP_NAME
 
 export default function AppLogo() {

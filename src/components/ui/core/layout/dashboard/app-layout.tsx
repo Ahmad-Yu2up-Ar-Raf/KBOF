@@ -1,13 +1,13 @@
 import DashboardLayoutHeader from './nav/app-sideheader'
+import { AppSidebar } from './nav/app-sidebar'
+import type { User } from '@/db/schema'
 import {
   SidebarInset,
   SidebarProvider,
 } from '@/components/ui/fragments/shadcn-ui/sidebar'
 import ScrollToTop from '@/components/ui/fragments/custom-ui/button/scroll-to-top-button'
 
-import { AppSidebar } from './nav/app-sidebar'
 import { authClient } from '@/lib/auth/auth-client'
-import { User } from '@/db/schema'
 import { Spinner } from '@/components/ui/fragments/shadcn-ui/spinner'
 
 interface AppSidebarProps {

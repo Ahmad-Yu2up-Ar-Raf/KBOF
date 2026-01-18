@@ -1,9 +1,9 @@
-import { SignUpForm } from '../form/register-form'
 import { toast } from 'sonner'
+import { SignUpForm } from '../form/register-form'
 import AuthLayoutTemplate from '../../layout/auth-layout'
+import type { UserRoleType } from '@/db/schema'
 import { useRegisterForm } from '@/hooks/form/use-auth-form'
 import { authClient } from '@/lib/auth/auth-client'
-import type { UserRoleType } from '@/db/schema'
 
 export default function Register() {
   /**

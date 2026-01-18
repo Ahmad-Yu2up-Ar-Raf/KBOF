@@ -1,7 +1,7 @@
 'use client'
-import { SidebarTrigger } from '@/components/ui/fragments/shadcn-ui/sidebar'
-
 import React, { Activity } from 'react'
+import { useLocation } from '@tanstack/react-router'
+import { SidebarTrigger } from '@/components/ui/fragments/shadcn-ui/sidebar'
 
 import {
   Breadcrumb,
@@ -12,7 +12,6 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/fragments/shadcn-ui/breadcrumb'
 import { Separator } from '@/components/ui/fragments/shadcn-ui/separator'
-import { useLocation } from '@tanstack/react-router'
 
 type TBreadCrumbProps = {
   capitalizeLinks?: boolean

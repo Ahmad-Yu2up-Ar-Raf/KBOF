@@ -4,8 +4,8 @@
 // Loading skeleton for leaderboard page
 // =============================================================================
 
-import { Skeleton } from '@/components/ui/fragments/shadcn-ui/skeleton'
 import { LeaderboardHeader } from './leaderboard-header'
+import { Skeleton } from '@/components/ui/fragments/shadcn-ui/skeleton'
 
 // =============================================================================
 // COMPONENT

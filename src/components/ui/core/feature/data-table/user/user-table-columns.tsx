@@ -1,23 +1,25 @@
 'use client'
 
-import type { DataTableRowAction } from '@/types/data-table'
-import type { ColumnDef } from '@tanstack/react-table'
 import * as React from 'react'
 import {
+  Ban,
   CalendarIcon,
+  CheckCircle2,
   Ellipsis,
+  Eye,
   Shield,
   ShieldCheck,
-  User,
-  Ban,
-  Trash2,
-  Eye,
-  UserCog,
   Text,
-  CheckCircle2,
+  Trash2,
+  User,
+  UserCog,
   XCircle,
 } from 'lucide-react'
+import type { DataTableRowAction } from '@/types/data-table'
+import type { ColumnDef } from '@tanstack/react-table'
 
+import type { UserRoleType } from '@/db/schema'
+import type { UserAggregateResult } from '@/lib/server/user/user-server-queries'
 import { DataTableColumnHeader } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-column-header'
 import { Badge } from '@/components/ui/fragments/shadcn-ui/badge'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
@@ -41,8 +43,6 @@ import {
 } from '@/components/ui/fragments/shadcn-ui/avatar'
 import { formatDate } from '@/lib/format'
 import { useInitials } from '@/hooks/use-initials'
-import type { UserRoleType } from '@/db/schema'
-import type { UserAggregateResult } from '@/lib/server/user/user-server-queries'
 
 // =============================================================================
 // TYPE DEFINITIONS
@@ -62,7 +62,7 @@ interface GetUserTableColumnsProps {
 // ROLE ENUM VALUES
 // =============================================================================
 
-const roleEnumValues: UserRoleType[] = ['pribumi', 'admin', 'superAdmin']
+const roleEnumValues: Array<UserRoleType> = ['pribumi', 'admin', 'superAdmin']
 
 // =============================================================================
 // ROLE CONFIG
@@ -101,7 +101,7 @@ export function getUserTableColumns({
   roleCounts,
   setRowAction,
   currentUserId,
-}: GetUserTableColumnsProps): ColumnDef<UserTableRow>[] {
+}: GetUserTableColumnsProps): Array<ColumnDef<UserTableRow>> {
   return [
     {
       id: 'select',

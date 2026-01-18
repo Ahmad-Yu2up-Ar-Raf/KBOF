@@ -1,10 +1,23 @@
 'use client'
 
-import type { DataTableRowAction } from '@/types/data-table'
 import * as React from 'react'
 import { toast } from 'sonner'
+import { useFeatureFlags } from '../feature-flag-provider'
+import { getUserTableColumns } from './user-table-columns'
+import { UserTableActionBar } from './user-table-action-bar'
+import {
+  BanUserDialog,
+  DeleteUserDialog,
+  UnbanUserDialog,
+  UpdateRoleDialog,
+  ViewUserDialog,
+} from './user-table-dialogs'
+import type { DataTableRowAction } from '@/types/data-table'
 import type { ColumnDef } from '@tanstack/react-table'
 
+import type { UserAggregateResult } from '@/lib/server/user/user-server-queries'
+import type { UserRoleType } from '@/db/schema'
+import type { UserTableRow } from './user-table-columns'
 import { authClient } from '@/lib/auth/auth-client'
 import { DataTable } from '@/components/ui/fragments/shadcn-ui/data-table/data-table'
 import { DataTableAdvancedToolbar } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-advanced-toolbar'
@@ -14,29 +27,17 @@ import { DataTableToolbar } from '@/components/ui/fragments/shadcn-ui/data-table
 import { DataTableFilterMenu } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-filter-menu'
 
 import { useDataTable } from '@/hooks/use-data-table'
-import { useFeatureFlags } from '../feature-flag-provider'
 import { exportTableToCSV } from '@/lib/export'
-import type { UserAggregateResult } from '@/lib/server/user/user-server-queries'
-import type { UserRoleType } from '@/db/schema'
 
-import { getUserTableColumns, type UserTableRow } from './user-table-columns'
-import { UserTableActionBar } from './user-table-action-bar'
 import {
-  DeleteUserDialog,
-  BanUserDialog,
-  UnbanUserDialog,
-  UpdateRoleDialog,
-  ViewUserDialog,
-} from './user-table-dialogs'
-import {
-  useUpdateUserRoleMutation,
   useBanUserMutation,
-  useUnbanUserMutation,
-  useDeleteUserMutation,
-  useBulkDeleteUsersMutation,
-  useBulkUpdateUserRoleMutation,
   useBulkBanUsersMutation,
+  useBulkDeleteUsersMutation,
   useBulkUnbanUsersMutation,
+  useBulkUpdateUserRoleMutation,
+  useDeleteUserMutation,
+  useUnbanUserMutation,
+  useUpdateUserRoleMutation,
 } from '@/hooks/use-user-mutations'
 
 // =============================================================================
@@ -71,7 +72,7 @@ export function UserTable({ data: userData }: UserTableProps) {
         roleCounts,
         setRowAction,
         currentUserId,
-      }) as ColumnDef<UserTableRow>[],
+      }),
     [roleCounts, currentUserId],
   )
 

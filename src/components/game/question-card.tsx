@@ -1,10 +1,13 @@
 // FILE: src/components/game/question-card.tsx — Question display component
 
 import * as React from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Check, X, ArrowRight } from 'lucide-react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { ArrowRight, Check, X } from 'lucide-react'
+import { Badge } from '../ui/fragments/shadcn-ui/badge'
+import { FragmentReveal } from './image-fragment'
+import { TimerDisplay } from './timer-display'
+import type { Level, Question } from '@/lib/game/types'
 import { cn } from '@/lib/utils'
-import type { Question, Level } from '@/lib/game/types'
 import {
   ANIMATION_DURATION,
   KEYBOARD_SHORTCUTS,
@@ -22,9 +25,6 @@ import {
   RadioGroupItem,
 } from '@/components/ui/fragments/shadcn-ui/radio-group'
 import { Label } from '@/components/ui/fragments/shadcn-ui/label'
-import { FragmentReveal } from './image-fragment'
-import { Badge } from '../ui/fragments/shadcn-ui/badge'
-import { TimerDisplay } from './timer-display'
 
 type QuestionCardProps = {
   question: Question
@@ -70,7 +70,39 @@ export function QuestionCard({
     },
     [showFeedback, isPaused, onSubmitAnswer],
   )
+  // Audio management: preload two Audio objects (correct / incorrect)
+  // Note: existing file in public is named `corect.mp3` (typo), keep compatibility
+  const correctSoundUrl = '/assets/audio/corect.mp3'
+  const incorrectSoundUrl = '/assets/audio/incorrect.mp3'
+  const audioRef = React.useRef<{
+    correct: HTMLAudioElement
+    incorrect: HTMLAudioElement
+  } | null>(null)
 
+  // Create & preload audio elements once on mount
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (!audioRef.current) {
+      const correct = new Audio(correctSoundUrl)
+      const incorrect = new Audio(incorrectSoundUrl)
+      // preload and sensible defaults
+      correct.preload = 'auto'
+      incorrect.preload = 'auto'
+      correct.volume = 0.8
+      incorrect.volume = 0.8
+      audioRef.current = { correct, incorrect }
+    }
+
+    return () => {
+      if (audioRef.current) {
+        try {
+          audioRef.current.correct.pause()
+          audioRef.current.incorrect.pause()
+        } catch {}
+        audioRef.current = null
+      }
+    }
+  }, [])
   // Keyboard navigation
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -110,6 +142,26 @@ export function QuestionCard({
     onNextQuestion,
     onUseHint,
   ])
+  // Play feedback sound when `showFeedback` becomes true
+  React.useEffect(() => {
+    if (!showFeedback || !feedback) return
+    const a = audioRef.current
+    if (!a) return
+    const player = feedback.isCorrect ? a.correct : a.incorrect
+    try {
+      player.currentTime = 0
+      void player.play().catch(() => {
+        // fallback: if selected player fails, try the other one
+        try {
+          const other = feedback.isCorrect ? a.incorrect : a.correct
+          other.currentTime = 0
+          void other.play()
+        } catch (e) {}
+      })
+    } catch (e) {
+      // ignore synchronous errors
+    }
+  }, [showFeedback, feedback])
 
   return (
     <>
@@ -213,7 +265,7 @@ export function QuestionCard({
 
 type AnswerRadioGroupProps = {
   questionId: string
-  choices: string[]
+  choices: Array<string>
   selectedIndex: number | null
   correctIndex: number
   showFeedback: boolean
@@ -238,98 +290,115 @@ function AnswerRadioGroup({
     }
   }
 
+  // const [play, setPlay] = React.useState(false)
+
   return (
-    <RadioGroup
-      key={questionId}
-      value={selectedIndex !== null ? String(selectedIndex) : undefined}
-      onValueChange={handleValueChange}
-      disabled={disabled}
-      className="mx-auto grid w-full md:gap-1.5 gap-3 sm:grid-cols-2"
-    >
-      {choices.map((choice, index) => {
-        const isSelected = selectedIndex === index
-        const isCorrect = index === correctIndex
+    <>
+      <RadioGroup
+        key={questionId}
+        value={selectedIndex !== null ? String(selectedIndex) : undefined}
+        onValueChange={handleValueChange}
+        disabled={disabled}
+        className="mx-auto grid w-full md:gap-1.5 gap-3 sm:grid-cols-2"
+      >
+        {choices.map((choice, index) => {
+          const isSelected = selectedIndex === index
+          const isCorrect = index === correctIndex
 
-        // Determine visual state
-        const getState = () => {
-          if (showFeedback) {
-            if (isCorrect) return 'correct'
-            if (isSelected && !isCorrect) return 'incorrect'
+          // Determine visual state
+          const getState = () => {
+            if (showFeedback) {
+              if (isCorrect) return 'correct'
+              if (isSelected && !isCorrect) return 'incorrect'
+            }
+            if (isSelected) return 'selected'
+            return 'default'
           }
-          if (isSelected) return 'selected'
-          return 'default'
-        }
 
-        const state = getState()
+          const state = getState()
 
-        return (
-          <motion.div
-            key={`${questionId}-${index}`}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: ANIMATION_DURATION.normal,
-              delay: index * ANIMATION_DURATION.stagger + 0.3,
-            }}
-          >
-            <Label
-              htmlFor={`answer-${questionId}-${index}`}
-              className={cn(
-                'flex cursor-pointer items-center gap-4 rounded-2xl border-2 p-4 md:py-2.5 md:px-4 transition-all duration-200',
-                // Default state
-                state === 'default' &&
-                  'border-border bg-background hover:border-primary/50 hover:bg-muted/50',
-                // Selected state
-                state === 'selected' &&
-                  'border-primary bg-primary/10 ring-2 ring-primary/20',
-                // Correct answer feedback
-                state === 'correct' &&
-                  'border-emerald-500 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300',
-                // Incorrect answer feedback
-                state === 'incorrect' &&
-                  'border-red-500 bg-red-500/10 text-red-700 dark:text-red-300',
-                // Disabled state
-                disabled && !showFeedback && 'cursor-not-allowed opacity-50',
-              )}
-            >
-              <RadioGroupItem
-                id={`answer-${questionId}-${index}`}
-                value={String(index)}
-                disabled={disabled}
-                className={cn(
-                  'shrink-0 transition-all',
-                  state === 'selected' && 'border-primary text-primary',
-                  state === 'correct' && 'border-emerald-500 text-emerald-500',
-                  state === 'incorrect' && 'border-red-500 text-red-500',
-                )}
-              />
-              <span className="flex-1 font-medium leading-snug md:line-clamp-1">
-                {choice}
-              </span>
-
-              {/* Feedback icons */}
-              {showFeedback && isCorrect && (
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: 'spring', stiffness: 500, damping: 25 }}
+          return (
+            <>
+              <motion.div
+                key={`${questionId}-${index}`}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: ANIMATION_DURATION.normal,
+                  delay: index * ANIMATION_DURATION.stagger + 0.3,
+                }}
+              >
+                <Label
+                  htmlFor={`answer-${questionId}-${index}`}
+                  className={cn(
+                    'flex cursor-pointer items-center gap-4 rounded-2xl border-2 p-4 md:py-2.5 md:px-4 transition-all duration-200',
+                    // Default state
+                    state === 'default' &&
+                      'border-border bg-background hover:border-primary/50 hover:bg-muted/50',
+                    // Selected state
+                    state === 'selected' &&
+                      'border-primary bg-primary/10 ring-2 ring-primary/20',
+                    // Correct answer feedback
+                    state === 'correct' &&
+                      'border-emerald-500 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300',
+                    // Incorrect answer feedback
+                    state === 'incorrect' &&
+                      'border-red-500 bg-red-500/10 text-red-700 dark:text-red-300',
+                    // Disabled state
+                    disabled &&
+                      !showFeedback &&
+                      'cursor-not-allowed opacity-50',
+                  )}
                 >
-                  <Check className="size-5 text-emerald-500" />
-                </motion.div>
-              )}
-              {showFeedback && isSelected && !isCorrect && (
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: 'spring', stiffness: 500, damping: 25 }}
-                >
-                  <X className="size-5 text-red-500" />
-                </motion.div>
-              )}
-            </Label>
-          </motion.div>
-        )
-      })}
-    </RadioGroup>
+                  <RadioGroupItem
+                    id={`answer-${questionId}-${index}`}
+                    value={String(index)}
+                    disabled={disabled}
+                    className={cn(
+                      'shrink-0 transition-all',
+                      state === 'selected' && 'border-primary text-primary',
+                      state === 'correct' &&
+                        'border-emerald-500 text-emerald-500',
+                      state === 'incorrect' && 'border-red-500 text-red-500',
+                    )}
+                  />
+                  <span className="flex-1 font-medium leading-snug md:line-clamp-1">
+                    {choice}
+                  </span>
+
+                  {/* Feedback icons */}
+                  {showFeedback && isCorrect && (
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{
+                        type: 'spring',
+                        stiffness: 500,
+                        damping: 25,
+                      }}
+                    >
+                      <Check className="size-5 text-emerald-500" />
+                    </motion.div>
+                  )}
+                  {showFeedback && isSelected && !isCorrect && (
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{
+                        type: 'spring',
+                        stiffness: 500,
+                        damping: 25,
+                      }}
+                    >
+                      <X className="size-5 text-red-500" />
+                    </motion.div>
+                  )}
+                </Label>
+              </motion.div>
+            </>
+          )
+        })}
+      </RadioGroup>
+    </>
   )
 }

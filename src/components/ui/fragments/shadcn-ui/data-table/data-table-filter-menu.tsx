@@ -1,6 +1,5 @@
 'use client'
 
-import type { Column, Table } from '@tanstack/react-table'
 import {
   BadgeCheck,
   CalendarIcon,
@@ -13,6 +12,8 @@ import { useQueryState } from 'nuqs'
 import * as React from 'react'
 
 import { DataTableRangeFilter } from './data-table-range-filter'
+import type { Column, Table } from '@tanstack/react-table'
+import type { ExtendedColumnFilter, FilterOperator } from '@/types/data-table'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
 import { Calendar } from '@/components/ui/fragments/shadcn-ui/calendar'
 import {
@@ -42,7 +43,6 @@ import { formatDate } from '@/lib/format'
 import { generateId } from '@/lib/id'
 import { getFiltersStateParser } from '@/lib/parsers'
 import { cn } from '@/lib/utils'
-import type { ExtendedColumnFilter, FilterOperator } from '@/types/data-table'
 
 const DEBOUNCE_MS = 300
 const THROTTLE_MS = 50
@@ -326,7 +326,7 @@ export function DataTableFilterMenu<TData>({
 interface DataTableFilterItemProps<TData> {
   filter: ExtendedColumnFilter<TData>
   filterItemId: string
-  columns: Column<TData>[]
+  columns: Array<Column<TData>>
   onFilterUpdate: (
     filterId: string,
     updates: Partial<Omit<ExtendedColumnFilter<TData>, 'filterId'>>,

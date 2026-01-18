@@ -6,29 +6,42 @@
 
 import { motion } from 'framer-motion'
 
-import type { Level, QuestionResult } from '@/lib/game/types'
-import { ANIMATION_DURATION } from '@/lib/game/constants'
-import { GameHeader, GameContent, StatsPanel } from '@/components/game'
-import { useConfettiEffect } from '../../leaderboard/hooks'
-import {
-  Confetti,
-  ConfettiRef,
-} from '@/components/ui/fragments/custom-ui/animate-ui/confetti'
-import { useId, useRef, useState } from 'react'
+import { useId, useRef, useState, useEffect } from 'react'
 import { Link } from '@tanstack/react-router'
+import { Check, Copy, Home, Share, Share2 } from 'lucide-react'
+import { toast } from 'sonner'
+import { useConfettiEffect } from '../../leaderboard/hooks'
+import type { Level, QuestionResult } from '@/lib/game/types'
+import type { ConfettiRef } from '@/components/ui/fragments/custom-ui/animate-ui/confetti'
+import { ANIMATION_DURATION } from '@/lib/game/constants'
+import { GameContent, GameHeader, StatsPanel } from '@/components/game'
+import { Confetti } from '@/components/ui/fragments/custom-ui/animate-ui/confetti'
 import { cn } from '@/lib/utils'
 import {
   Button,
   buttonVariants,
 } from '@/components/ui/fragments/shadcn-ui/button'
-import { Check, Copy, Home, Share, Share2 } from 'lucide-react'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/fragments/shadcn-ui/popover'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/fragments/shadcn-ui/tooltip'
+import { Input } from '@/components/ui/fragments/shadcn-ui/input'
+import { Icons } from '@/components/icons/brand-icons'
+import { useIsMobile } from '@/hooks/use-mobile'
 
 // =============================================================================
 // TYPES
 // =============================================================================
 
 export type StatsScreenProps = {
-  results: QuestionResult[]
+  results: Array<QuestionResult>
   level: Level
   isNewHighScore: boolean
   onPlayAgain: () => void
@@ -49,8 +62,41 @@ export function StatsScreen({
   onBackToMenu,
 }: StatsScreenProps) {
   const confettiRef = useRef<ConfettiRef>(null)
+  const winAudio = '/assets/audio/result.mp3'
+  const resultAudioRef = useRef<HTMLAudioElement | null>(null)
+
+  // Play result audio on mount (stop background audio by relying on PlayingScreen cleanup)
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (!resultAudioRef.current) {
+      const a = new Audio(winAudio)
+      a.preload = 'auto'
+      a.volume = 0.9
+      resultAudioRef.current = a
+    }
+
+    const tryPlay = async () => {
+      try {
+        await resultAudioRef.current?.play()
+      } catch (e) {
+        // ignore autoplay policy errors
+      }
+    }
+
+    void tryPlay()
+
+    return () => {
+      try {
+        resultAudioRef.current?.pause()
+        if (resultAudioRef.current) resultAudioRef.current.currentTime = 0
+      } catch {}
+      resultAudioRef.current = null
+    }
+  }, [])
+
   return (
     <>
+      <audio id="audio_tag_win" src={winAudio} />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -81,28 +127,10 @@ export function StatsScreen({
       <Confetti
         ref={confettiRef}
         className="absolute top-0 left-0 z-0 size-full"
-        // onMouseEnter={() => {
-        //   confettiRef.current?.fire({})
-        // }}
       />
     </>
   )
 }
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-} from '@/components/ui/fragments/shadcn-ui/popover'
-import {
-  Tooltip,
-  TooltipProvider,
-  TooltipTrigger,
-  TooltipContent,
-} from '@/components/ui/fragments/shadcn-ui/tooltip'
-import { Input } from '@/components/ui/fragments/shadcn-ui/input'
-import { Icons } from '@/components/icons/brand-icons'
-import { toast } from 'sonner'
-import { useIsMobile } from '@/hooks/use-mobile'
 function ShareComponent() {
   const id = useId()
   const [copied, setCopied] = useState<boolean>(false)

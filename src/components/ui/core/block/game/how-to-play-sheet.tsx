@@ -10,14 +10,14 @@
 import { useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import {
-  Gamepad2,
   Clock,
-  Star,
+  Gamepad2,
   Image as ImageIcon,
-  Keyboard,
-  Trophy,
   Info,
+  Keyboard,
   Play,
+  Star,
+  Trophy,
 } from 'lucide-react'
 
 import {
@@ -76,7 +76,7 @@ type GameStep = {
 // DATA
 // =============================================================================
 
-const gameSteps: GameStep[] = [
+const gameSteps: Array<GameStep> = [
   {
     number: 1,
     icon: Gamepad2,

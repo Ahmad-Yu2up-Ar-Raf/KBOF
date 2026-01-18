@@ -1,9 +1,8 @@
+import { createFileRoute } from '@tanstack/react-router'
 import DeleteUser from '@/components/ui/core/feature/auth/delete-user-block'
 import { UpdateForm } from '@/components/ui/core/feature/form/update-profile-form'
 
 import HeadingSmall from '@/components/ui/fragments/custom-ui/typography/heading-small'
-
-import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/dashboard/settings/')({
   component: RouteComponent,

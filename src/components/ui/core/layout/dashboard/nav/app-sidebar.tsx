@@ -2,23 +2,28 @@
 
 import * as React from 'react'
 import {
-  Send,
-  LifeBuoy,
-  LayoutDashboardIcon,
-  Newspaper,
-  MapPin,
-  Users,
-  Telescope,
-  UsersRound,
   BookOpenText,
   Gamepad2,
-  Medal,
   Home,
+  LayoutDashboardIcon,
+  LifeBuoy,
+  MapPin,
+  Medal,
+  Newspaper,
+  Send,
+  Telescope,
+  Users,
+  UsersRound,
 } from 'lucide-react'
 
 import { NavMain } from './nav-main'
 import { NavUser } from './nav-user'
 
+import { NavSecondary } from './nav-secondary'
+import SidebarHeaderLogo from './app-sidebar-header'
+import { NavProjects } from './nav-project'
+import type { User, UserRoleType } from '@/db/schema'
+import { useIsMobile } from '@/hooks/use-mobile'
 import {
   Sidebar,
   SidebarContent,
@@ -26,22 +31,17 @@ import {
   SidebarHeader,
   SidebarRail,
 } from '@/components/ui/fragments/shadcn-ui/sidebar'
-import { NavSecondary } from './nav-secondary'
-import { useIsMobile } from '@/hooks/use-mobile'
-import type { User, UserRoleType } from '@/db/schema'
-import SidebarHeaderLogo from './app-sidebar-header'
-import { NavProjects } from './nav-project'
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
   user: User
 }
 
 export function AppSidebar({ user, ...props }: AppSidebarProps) {
-  const number: string = '628999069933'
-  const massage: string = 'Hi Yusuf, I want to discuss a project with you!'
-  const link: string = `https://api.whatsapp.com/send?phone=${number}&text=${massage}&type=phone_number&app_absent=0`
+  const number = '628999069933'
+  const massage = 'Hi Yusuf, I want to discuss a project with you!'
+  const link = `https://api.whatsapp.com/send?phone=${number}&text=${massage}&type=phone_number&app_absent=0`
 
-  const isSuperAdmin = (user.role as UserRoleType) === 'superAdmin'
+  const isSuperAdmin = user.role === 'superAdmin'
 
   const navMain = [
     {

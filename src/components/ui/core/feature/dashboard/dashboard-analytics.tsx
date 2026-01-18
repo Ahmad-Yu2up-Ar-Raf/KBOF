@@ -2,15 +2,22 @@
 
 import * as React from 'react'
 import {
-  Users,
-  MapPin,
-  Newspaper,
-  ThumbsUp,
-  Star,
-  MessageSquare,
-  TrendingUp,
   BarChart3,
+  MapPin,
+  MessageSquare,
+  Newspaper,
+  Star,
+  ThumbsUp,
+  TrendingUp,
+  Users,
 } from 'lucide-react'
+import { Link } from '@tanstack/react-router'
+import type {
+  CategoryDistribution,
+  DashboardStats,
+  ProvinsiDistribution,
+  TopDestination,
+} from '@/lib/server/analytics/analytics-server-actions'
 import {
   Card,
   CardContent,
@@ -21,13 +28,6 @@ import {
 import { Skeleton } from '@/components/ui/fragments/shadcn-ui/skeleton'
 import { Badge } from '@/components/ui/fragments/shadcn-ui/badge'
 import { formatLabel } from '@/lib/format'
-import { Link } from '@tanstack/react-router'
-import type {
-  DashboardStats,
-  TopDestination,
-  CategoryDistribution,
-  ProvinsiDistribution,
-} from '@/lib/server/analytics/analytics-server-actions'
 
 // =============================================================================
 // STATS CARD COMPONENT
@@ -180,7 +180,7 @@ export function StatsGrid({ stats, loading }: StatsGridProps) {
 // =============================================================================
 
 interface TopDestinationsListProps {
-  destinations: TopDestination[]
+  destinations: Array<TopDestination>
   loading?: boolean
 }
 
@@ -292,7 +292,7 @@ export function TopDestinationsList({
 // =============================================================================
 
 interface DistributionChartProps {
-  data: CategoryDistribution[] | ProvinsiDistribution[]
+  data: Array<CategoryDistribution> | Array<ProvinsiDistribution>
   title: string
   description: string
   loading?: boolean
@@ -412,7 +412,7 @@ interface QuickAction {
 }
 
 interface QuickActionsProps {
-  actions: QuickAction[]
+  actions: Array<QuickAction>
 }
 
 export function QuickActions({ actions }: QuickActionsProps) {

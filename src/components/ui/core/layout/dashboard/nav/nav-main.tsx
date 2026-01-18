@@ -1,5 +1,7 @@
 import { ChevronRight } from 'lucide-react'
 
+import { Link, useLocation } from '@tanstack/react-router'
+import type { sidebarType } from '@/types'
 import {
   Collapsible,
   CollapsibleContent,
@@ -17,8 +19,6 @@ import {
   SidebarMenuSubItem,
 } from '@/components/ui/fragments/shadcn-ui/sidebar'
 
-import { sidebarType } from '@/types'
-import { Link, useLocation } from '@tanstack/react-router'
 import { cn } from '@/lib/utils'
 
 export function NavMain({ items }: sidebarType) {

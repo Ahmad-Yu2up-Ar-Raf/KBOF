@@ -1,9 +1,5 @@
 import { Link } from '@tanstack/react-router'
 import {
-  Button,
-  buttonVariants,
-} from '@/components/ui/fragments/shadcn-ui/button'
-import {
   BookOpen,
   BookOpenText,
   Compass,
@@ -11,11 +7,16 @@ import {
   Gamepad2Icon,
   Play,
 } from 'lucide-react'
+import {
+  Button,
+  buttonVariants,
+} from '@/components/ui/fragments/shadcn-ui/button'
 import Floating, {
   FloatingElement,
 } from '@/components/ui/fragments/custom-ui/animate-ui/paralax-floating'
 import MediaItem from '@/components/ui/fragments/custom-ui/media/media-item'
 import { cn } from '@/lib/utils'
+import { authClient } from '@/lib/auth/auth-client'
 
 const ctaImages = [
   {
@@ -98,9 +99,10 @@ function GridPatternDashed() {
 }
 
 export default function CTASection() {
+  const { data: session } = authClient.useSession()
   return (
     <section className="container px-6  py-12 md:py-16 lg:py-20">
-      <div className="relative w-fullcontainer m-auto   h-[500px] md:h-[330px] overflow-hidden rounded-3xl border border-primary/20 bg-accent px-7">
+      <div className="relative w-fullcontainer m-auto   h-[500px] md:h-[300px] overflow-hidden rounded-3xl border border-primary/20 bg-accent px-7">
         {/* /* Grid Background */}
         <GridPatternDashed />
 
@@ -108,7 +110,7 @@ export default function CTASection() {
         <Floating sensitivity={-0.3} className="h-full">
           <FloatingElement
             depth={1}
-            className="top-[-2%] md:top-[-10%] left-[0%]"
+            className="top-[-2%] md:top-[-25%] left-[0%]"
           >
             <div className="bg-white px-2 md:px-3 pb-5 md:pb-8 pt-2 md:pt-3 rotate-8 shadow-md">
               <div className="w-[clamp(90px,22vw,140px)] h-[clamp(90px,22vw,140px)] relative overflow-hidden shadow-xl  opacity-80 hover:opacity-100 transition-opacity">
@@ -142,7 +144,7 @@ export default function CTASection() {
 
           <FloatingElement
             depth={2.5}
-            className="bottom-0 md:bottom-[-30%]  right-[0%]"
+            className="bottom-0 md:bottom-[-40%]  right-[0%]"
           >
             <div className="bg-white px-2 md:px-3 pb-5 md:pb-8 pt-2 md:pt-3 rotate-4 shadow-md">
               <div className="w-[clamp(100px,24vw,150px)] h-[clamp(100px,24vw,150px)]  relative overflow-hidden shadow-xl  opacity-80 hover:opacity-100 transition-opacity">
@@ -160,26 +162,30 @@ export default function CTASection() {
             </h1>
           </div>
 
-          <div className="flex w-full   sm:max-w-[10em] flex-col  justify-center  gap-3 sm:flex-row">
+          <div className="flex w-full   sm:max-w-[9em] flex-col  justify-center  gap-3 sm:flex-row">
             <Link
               to="/game"
               className={cn(
                 buttonVariants({ variant: 'default', size: 'sm' }),
-                'rounded-full w-full text-xs  font-semibold  gap-3  hover:bg-background hover:text-accent-foreground    sm:px-8   py-6  cursor-target hover:scale-110 transition-all duration-300 ease-out md:py-4.5',
+                'rounded-full w-full text-xs  font-semibold  gap-3  hover:bg-background hover:text-accent-foreground    sm:px-8   py-6  cursor-target hover:scale-110 transition-all duration-300 ease-out lg:px-4 md:py-4.5',
               )}
             >
-              <Gamepad2Icon className=" size-4.5    md:size-3.5  " /> Mainkan
+              <Gamepad2Icon className=" size-4.5  md:size-3.5  " /> Mainkan
               Game{' '}
             </Link>
             <Link
-              to="/artikel"
+              to={
+                session && session.user.role === 'admin'
+                  ? '/dashboard/destination'
+                  : '/login'
+              }
               className={cn(
                 buttonVariants({ variant: 'default', size: 'sm' }),
-                '  bg-background font-semibold text-accent-foreground rounded-full w-full text-xs   gap-3     sm:px-8    py-6 hover:bg-primary/90 cursor-target hover:scale-110 transition-all duration-300 ease-out hover:text-primary-foreground md:py-4.5',
+                '  bg-background font-semibold text-accent-foreground rounded-full w-full text-xs   gap-3     sm:px-8    py-6 hover:bg-primary/90 cursor-target hover:scale-110 transition-all duration-300 ease-out lg:px-4   hover:text-primary-foreground md:py-4.5',
               )}
             >
-              <BookOpenText className="  size-4.5  md:size-3.5     " />
-              Jelajahi Artikel{' '}
+              <BookOpenText className="  size-4.5  y md:size-3.5     " />
+              Ajukan Artikel{' '}
             </Link>
           </div>
         </div>

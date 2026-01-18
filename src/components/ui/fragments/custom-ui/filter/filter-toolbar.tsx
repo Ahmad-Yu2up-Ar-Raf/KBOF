@@ -61,10 +61,13 @@ export function FilterToolbar({
       {...props}
     >
       {/* Filter items container */}
-      <div className={cn("grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center",
+      <div
+        className={cn(
+          'grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center',
 
-        layoutClassName
-      )}>
+          layoutClassName,
+        )}
+      >
         {children}
 
         {/* Reset button - shown when there are active filters */}

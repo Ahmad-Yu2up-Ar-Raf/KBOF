@@ -9,6 +9,7 @@ import {
   FormFileUpload,
   FormMultiFileUpload,
 } from '@/components/ui/fragments/custom-ui/form/form-file-upload'
+import { FormImagesUpload } from '@/components/ui/fragments/custom-ui/form/form-images-upload'
 
 const { fieldContext, formContext, useFieldContext, useFormContext } =
   createFormHookContexts()
@@ -23,6 +24,7 @@ const { useAppForm } = createFormHook({
     Rating: FormRating,
     FileUpload: FormFileUpload,
     MultiFileUpload: FormMultiFileUpload,
+    ImagesUpload: FormImagesUpload,
   },
   formComponents: {},
   fieldContext,

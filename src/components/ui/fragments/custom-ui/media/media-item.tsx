@@ -1,8 +1,8 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
-import { cn } from '@/lib/utils'
-import { Spinner } from '../../shadcn-ui/spinner'
 import { Image } from '@unpic/react'
+import { Spinner } from '../../shadcn-ui/spinner'
+import { cn } from '@/lib/utils'
 
 const MediaItem = ({
   webViewLink,
@@ -132,7 +132,10 @@ const MediaItem = ({
 
   return (
     <div
-      className={cn(` overflow-hidden w-full  flex justify-center h-full relative `, className)}
+      className={cn(
+        ` overflow-hidden w-full  flex justify-center h-full relative `,
+        className,
+      )}
       style={style}
     >
       <Image

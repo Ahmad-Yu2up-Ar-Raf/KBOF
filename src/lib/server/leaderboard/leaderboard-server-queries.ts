@@ -7,7 +7,7 @@
 
 import { createServerFn } from '@tanstack/react-start'
 import { z } from 'zod'
-import { and, count, desc, eq, inArray, sql, avg } from 'drizzle-orm'
+import { and, avg, count, desc, eq, inArray, sql } from 'drizzle-orm'
 import * as schema from '@/db/schema'
 
 // Dynamic import to prevent db from being bundled in client
@@ -72,7 +72,7 @@ export type LeaderboardEntry = {
  * Leaderboard result with metadata
  */
 export type LeaderboardResult = {
-  data: LeaderboardEntry[]
+  data: Array<LeaderboardEntry>
   totalCount: number
   hasMore: boolean
   // Category/type/province counts for filter UI
@@ -102,7 +102,7 @@ export type LeaderboardTopEntry = {
  */
 async function fetchLeaderboardData(
   filters: LeaderboardFilters,
-): Promise<{ data: LeaderboardEntry[]; totalCount: number }> {
+): Promise<{ data: Array<LeaderboardEntry>; totalCount: number }> {
   const db = await getDb()
   const { categories, types, provinces, limit, offset } = filters
 
@@ -111,23 +111,17 @@ async function fetchLeaderboardData(
 
   // Add category filter (OR semantics for multiple values)
   if (categories.length > 0) {
-    whereConditions.push(
-      inArray(destination.category, categories as schema.DestinationCategory[]),
-    )
+    whereConditions.push(inArray(destination.category, categories))
   }
 
   // Add type filter (OR semantics for multiple values)
   if (types.length > 0) {
-    whereConditions.push(
-      inArray(destination.type, types as schema.DestinationType[]),
-    )
+    whereConditions.push(inArray(destination.type, types))
   }
 
   // Add province filter (OR semantics for multiple values)
   if (provinces.length > 0) {
-    whereConditions.push(
-      inArray(destination.provinsi, provinces as schema.ProvinsiIndonesia[]),
-    )
+    whereConditions.push(inArray(destination.provinsi, provinces))
   }
 
   // Get total count for pagination
@@ -199,7 +193,7 @@ async function fetchLeaderboardData(
     .offset(offset)
 
   // Map results with rank
-  const data: LeaderboardEntry[] = results.map((row, index) => ({
+  const data: Array<LeaderboardEntry> = results.map((row, index) => ({
     rank: offset + index + 1,
     destinationId: row.destinationId,
     slug: row.slug,
@@ -317,7 +311,7 @@ export const getLeaderboardTopServerFn = createServerFn({
       limit: z.number().int().positive().max(10).default(4),
     }),
   )
-  .handler(async ({ data: { limit } }): Promise<LeaderboardTopEntry[]> => {
+  .handler(async ({ data: { limit } }): Promise<Array<LeaderboardTopEntry>> => {
     const db = await getDb()
 
     // Vote counts subquery
@@ -370,7 +364,7 @@ export const getLeaderboardPodiumServerFn = createServerFn({
       filters: LeaderboardFiltersSchema.omit({ limit: true, offset: true }),
     }),
   )
-  .handler(async ({ data: { filters } }): Promise<LeaderboardEntry[]> => {
+  .handler(async ({ data: { filters } }): Promise<Array<LeaderboardEntry>> => {
     const result = await fetchLeaderboardData({
       ...filters,
       limit: 3,

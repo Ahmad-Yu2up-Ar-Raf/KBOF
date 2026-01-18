@@ -5,13 +5,13 @@
 // Icons, Labels, Colors, Options for Forms
 // =============================================================================
 
-import type { Destination } from '@/db/schema'
-import type { LucideIcon } from 'lucide-react'
 import {
   // Status icons
   CheckCircle2,
   FileText,
   Archive,
+  Clock,
+  XCircle,
   CircleIcon,
   // Destination Type icons
   Palmtree,
@@ -31,17 +31,23 @@ import {
   ChefHat,
   Theater,
   Castle,
- 
 
   // General
   Map,
 } from 'lucide-react'
+import type { Destination } from '@/db/schema'
+import type { LucideIcon } from 'lucide-react'
 
 // =============================================================================
 // TYPE DEFINITIONS
 // =============================================================================
 
-export type ContentStatus = 'published' | 'draft' | 'archived'
+export type ContentStatus =
+  | 'published'
+  | 'draft'
+  | 'archived'
+  | 'pending'
+  | 'cancel'
 
 export type DestinationType = Destination['type']
 export type DestinationCategory = Destination['category']
@@ -82,6 +88,20 @@ export const contentStatusConfig: Record<
     bgColor: 'bg-slate-100',
     borderColor: 'border-slate-200',
   },
+  pending: {
+    label: 'Pending',
+    icon: Clock,
+    color: 'text-yellow-700',
+    bgColor: 'bg-yellow-100',
+    borderColor: 'border-yellow-200',
+  },
+  cancel: {
+    label: 'Canceled',
+    icon: XCircle,
+    color: 'text-rose-700',
+    bgColor: 'bg-rose-100',
+    borderColor: 'border-rose-200',
+  },
 }
 
 export function getStatusIcon(status: ContentStatus): LucideIcon {
@@ -104,6 +124,8 @@ export const STATUS_OPTIONS = [
   { value: 'published', label: 'Published' },
   { value: 'draft', label: 'Draft' },
   { value: 'archived', label: 'Archived' },
+  { value: 'pending', label: 'Pending' },
+  { value: 'cancel', label: 'Canceled' },
 ] as const
 
 // =============================================================================

@@ -1,9 +1,9 @@
 'use client'
+import { toast } from 'sonner'
 import { FieldGroup } from '@/components/ui/fragments/shadcn-ui/field'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
 import { useUpdateForm } from '@/hooks/form/use-auth-form'
 import { Spinner } from '@/components/ui/fragments/shadcn-ui/spinner'
-import { toast } from 'sonner'
 
 /**
  * ✅ SignUpForm sekarang terima props dari parent

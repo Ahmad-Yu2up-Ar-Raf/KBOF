@@ -24,7 +24,7 @@ function setRef<T>(ref: PossibleRef<T>, value: T) {
  * A utility to compose multiple refs together
  * Accepts callback refs and RefObject(s)
  */
-function composeRefs<T>(...refs: PossibleRef<T>[]): React.RefCallback<T> {
+function composeRefs<T>(...refs: Array<PossibleRef<T>>): React.RefCallback<T> {
   return (node) => {
     let hasCleanup = false
     const cleanups = refs.map((ref) => {
@@ -58,7 +58,9 @@ function composeRefs<T>(...refs: PossibleRef<T>[]): React.RefCallback<T> {
  * A custom hook that composes multiple refs
  * Accepts callback refs and RefObject(s)
  */
-function useComposedRefs<T>(...refs: PossibleRef<T>[]): React.RefCallback<T> {
+function useComposedRefs<T>(
+  ...refs: Array<PossibleRef<T>>
+): React.RefCallback<T> {
   // biome-ignore lint/correctness/useExhaustiveDependencies: we don't want to re-run this callback when the refs change
   return React.useCallback(composeRefs(...refs), refs)
 }

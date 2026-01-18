@@ -2,8 +2,9 @@
  * @see https://gist.github.com/rphlmr/0d1722a794ed5a16da0fdf6652902b15
  */
 
-import { type AnyColumn, sql } from 'drizzle-orm'
+import { sql } from 'drizzle-orm'
 import { pgTableCreator } from 'drizzle-orm/pg-core'
+import type { AnyColumn } from 'drizzle-orm'
 
 import { databasePrefix } from '@/lib/contans'
 
@@ -13,11 +14,14 @@ import { databasePrefix } from '@/lib/contans'
  */
 export const pgTable = pgTableCreator((name) => `${databasePrefix}_${name}`)
 
-export function takeFirstOrNull<TData>(data: TData[]) {
+export function takeFirstOrNull<TData>(data: Array<TData>) {
   return data[0] ?? null
 }
 
-export function takeFirstOrThrow<TData>(data: TData[], errorMessage?: string) {
+export function takeFirstOrThrow<TData>(
+  data: Array<TData>,
+  errorMessage?: string,
+) {
   const first = takeFirstOrNull(data)
 
   if (!first) {

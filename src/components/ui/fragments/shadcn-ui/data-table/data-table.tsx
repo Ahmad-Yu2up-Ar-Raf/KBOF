@@ -1,4 +1,5 @@
-import { flexRender, type Table as TanstackTable } from '@tanstack/react-table'
+import { flexRender } from '@tanstack/react-table'
+import type { Table as TanstackTable } from '@tanstack/react-table'
 import type * as React from 'react'
 
 import { DataTablePagination } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-pagination'

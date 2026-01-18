@@ -1,3 +1,9 @@
+import { toast } from 'sonner'
+import { Activity, useEffect, useRef, useState } from 'react'
+import { useStore } from '@tanstack/react-store'
+import DestinationForm from '../../form/destination-form'
+import type { DestinationAggregateResult } from '@/types'
+import type { Destination } from '@/db/schema'
 import {
   Sheet,
   SheetClose,
@@ -18,15 +24,8 @@ import {
   DrawerTitle,
 } from '@/components/ui/fragments/shadcn-ui/drawer'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
-import { toast } from 'sonner'
 import { useUpdateDestinationForm } from '@/hooks/form/use-destination-form'
-import DestinationForm from '../../form/destination-form'
 import { Spinner } from '@/components/ui/fragments/shadcn-ui/spinner'
-import { Activity, useState, useEffect, useRef } from 'react'
-import { useStore } from '@tanstack/react-store'
-
-import type { DestinationAggregateResult } from '@/types'
-import type { Destination } from '@/db/schema'
 
 type DestinationRow = DestinationAggregateResult['data'][number]
 

@@ -1,13 +1,8 @@
 'use client'
 
 import React, { useRef } from 'react'
-import {
-  motion,
-  MotionProps,
-  useInView,
-  UseInViewOptions,
-  Variants,
-} from 'motion/react'
+import { motion, useInView } from 'motion/react'
+import type { MotionProps, UseInViewOptions, Variants } from 'motion/react'
 import { useIsMobile } from '@/hooks/use-mobile'
 
 type MarginType = UseInViewOptions['margin']

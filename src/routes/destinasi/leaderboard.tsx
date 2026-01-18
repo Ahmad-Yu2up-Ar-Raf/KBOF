@@ -7,11 +7,11 @@
 
 import { createFileRoute } from '@tanstack/react-router'
 
+import type { LeaderboardFilters } from '@/lib/query-options'
 import { queryClient } from '@/components/provider/Provider'
 import {
-  getLeaderboardQueryOptions,
   getLeaderboardPodiumQueryOptions,
-  type LeaderboardFilters,
+  getLeaderboardQueryOptions,
 } from '@/lib/query-options'
 
 import LeaderboardPage, {

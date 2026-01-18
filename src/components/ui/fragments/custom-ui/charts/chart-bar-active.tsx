@@ -4,6 +4,8 @@ import { DoorOpen, LucideChartColumn, TrendingUp } from 'lucide-react'
 import { Bar, BarChart, CartesianGrid, Rectangle, XAxis } from 'recharts'
 import { useMemo } from 'react'
 
+import type { ChartConfig } from '@/components/ui/fragments/shadcn-ui/chart'
+import type { TopDestination } from '@/types'
 import {
   Card,
   CardContent,
@@ -13,17 +15,15 @@ import {
   CardTitle,
 } from '@/components/ui/fragments/shadcn-ui/card'
 import {
-  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/fragments/shadcn-ui/chart'
 import { cn } from '@/lib/utils'
-import { TopDestination } from '@/types'
 
 // Interface untuk props komponen
 interface DynamicBarChartProps {
-  data: TopDestination[]
+  data: Array<TopDestination>
   title?: string
   description?: string
   footerText?: string
@@ -33,7 +33,7 @@ interface DynamicBarChartProps {
 }
 
 // Fungsi untuk generate warna dinamis
-const generateColors = (length: number): string[] => {
+const generateColors = (length: number): Array<string> => {
   const baseColors = [
     'var(--chart-1)',
     'var(--chart-2)',

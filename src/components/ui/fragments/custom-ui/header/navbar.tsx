@@ -1,5 +1,17 @@
 'use client'
-import { cn } from '@/lib/utils'
+import { MenuIcon } from 'lucide-react'
+import { motion, useMotionValueEvent, useScroll } from 'motion/react'
+import { Link, useMatches } from '@tanstack/react-router'
+
+import React, { useEffect, useRef, useState } from 'react'
+
+import type { VariantProps } from 'class-variance-authority'
+import type { LucideIcon } from 'lucide-react'
+import {
+  Button,
+  buttonVariants,
+} from '@/components/ui/fragments/shadcn-ui/button'
+
 import {
   Drawer,
   DrawerContent,
@@ -9,18 +21,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/fragments/shadcn-ui/drawer'
-import { LucideIcon, MenuIcon } from 'lucide-react'
-import { motion, useScroll, useMotionValueEvent } from 'motion/react'
-import { Link, useMatches } from '@tanstack/react-router'
-
-import React, { useEffect, useRef, useState } from 'react'
-
-import {
-  Button,
-  buttonVariants,
-} from '@/components/ui/fragments/shadcn-ui/button'
-
-import { VariantProps } from 'class-variance-authority'
+import { cn } from '@/lib/utils'
 
 interface NavbarProps {
   children: React.ReactNode
@@ -34,11 +35,11 @@ interface NavBodyProps {
 }
 
 interface NavItemsProps {
-  items: {
+  items: Array<{
     name: string
     link: string
     icon?: LucideIcon
-  }[]
+  }>
   visible?: boolean
   className?: string
   onItemClick?: () => void
@@ -56,11 +57,11 @@ interface MobileNavHeaderProps {
 }
 
 interface MobileNavMenuProps {
-  items: {
+  items: Array<{
     name: string
     link: string
     icon: LucideIcon
-  }[]
+  }>
   name?: string
 }
 
@@ -91,7 +92,7 @@ export const Navbar = ({ children, className }: NavbarProps) => {
   useMotionValueEvent(scrollYProgress, 'change', (current) => {
     // Check if current is not undefined and is a number
     if (typeof current === 'number') {
-      const direction = current! - scrollYProgress.getPrevious()!
+      const direction = current - scrollYProgress.getPrevious()!
       setDelay(false)
 
       if (direction < 0) {
@@ -105,17 +106,21 @@ export const Navbar = ({ children, className }: NavbarProps) => {
   return (
     <motion.nav
       ref={ref}
-      initial={ paths == '/game' ? 'hidden' : {
-        opacity: 1,
-        y: -100,
-      }}
+      initial={
+        paths == '/game'
+          ? 'hidden'
+          : {
+              opacity: 1,
+              y: -100,
+            }
+      }
       animate={{
         y: visiblee ? 0 : -100,
         opacity: visiblee ? 1 : 0,
       }}
       transition={{
         duration: delay ? 0.6 : 0.2,
-        delay: delay ? 1 : 0,
+        delay: delay ? 4 : 0,
       }}
       className={cn(
         '         top-7.5 md:top-4.5   fixed  z-40 w-full',

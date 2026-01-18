@@ -1,9 +1,12 @@
 // FILE: src/components/game/level-select.tsx — Level selection component
 
 import { motion } from 'framer-motion'
-import { cn } from '@/lib/utils'
-import { LEVEL_CONFIGS, ANIMATION_DURATION } from '@/lib/game/constants'
+import { useState } from 'react'
+import { Play } from 'lucide-react'
+import { Button } from '../ui/fragments/shadcn-ui/button'
 import type { Level, LevelConfig } from '@/lib/game/types'
+import { cn } from '@/lib/utils'
+import { ANIMATION_DURATION, LEVEL_CONFIGS } from '@/lib/game/constants'
 import {
   Card,
   CardAction,
@@ -13,9 +16,6 @@ import {
   CardTitle,
 } from '@/components/ui/fragments/shadcn-ui/card'
 import { Badge } from '@/components/ui/fragments/shadcn-ui/badge'
-import { useState } from 'react'
-import { Button } from '../ui/fragments/shadcn-ui/button'
-import { Play } from 'lucide-react'
 
 type LevelSelectProps = {
   onSelect: (level: Level) => void

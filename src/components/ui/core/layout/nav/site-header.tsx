@@ -1,16 +1,5 @@
 'use client'
 import { Link, useMatches } from '@tanstack/react-router'
-import { NavbarLogo } from '@/components/ui/fragments/custom-ui/header/app-logo'
-import {
-  Navbar,
-  NavBody,
-  NavItems,
-  MobileNav,
-  MobileNavMenu,
-  NavbarMobile,
-} from '@/components/ui/fragments/custom-ui/header/navbar'
-
-import { authClient } from '@/lib/auth/auth-client'
 import {
   BookOpenText,
   Gamepad,
@@ -22,9 +11,20 @@ import {
   Newspaper,
   Telescope,
 } from 'lucide-react'
+import type { User } from '@/db/schema'
+import { NavbarLogo } from '@/components/ui/fragments/custom-ui/header/app-logo'
+import {
+  MobileNav,
+  MobileNavMenu,
+  NavBody,
+  NavItems,
+  Navbar,
+  NavbarMobile,
+} from '@/components/ui/fragments/custom-ui/header/navbar'
+
+import { authClient } from '@/lib/auth/auth-client'
 import AvatarMenu from '@/components/ui/fragments/custom-ui/menu/avatar-menu'
 
-import { User } from '@/db/schema'
 import { useIsMobile } from '@/hooks/use-mobile'
 import { cn } from '@/lib/utils'
 

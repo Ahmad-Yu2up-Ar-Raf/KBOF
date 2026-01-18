@@ -1,3 +1,7 @@
+import { Plus } from 'lucide-react'
+import { toast } from 'sonner'
+import React, { Activity, useRef, useState } from 'react'
+import DestinationForm from '../../form/destination-form'
 import {
   Sheet,
   SheetClose,
@@ -20,12 +24,8 @@ import {
   DrawerTrigger,
 } from '@/components/ui/fragments/shadcn-ui/drawer'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
-import { Plus } from 'lucide-react'
-import { toast } from 'sonner'
 import { useCreateDestinationForm } from '@/hooks/form/use-destination-form'
-import DestinationForm from '../../form/destination-form'
 import { Spinner } from '@/components/ui/fragments/shadcn-ui/spinner'
-import React, { Activity, useState, useRef } from 'react'
 
 interface CreateDestinationSheetProps {
   children?: React.ReactNode | boolean
@@ -55,7 +55,7 @@ function CreateDestinationSheet({
       if (toastIdRef.current) {
         toast.dismiss(toastIdRef.current)
       }
-      toast.success('Destinasi berhasil ditambahkan!')
+      // toast.success('Destinasi berhasil ditambahkan!')
       form.reset()
       setOpen?.(false)
     },
@@ -84,7 +84,9 @@ function CreateDestinationSheet({
 
         <SheetContent className="flex flex-col gap-6 overflow-y-auto">
           <SheetHeader className="text-left sm:px-6 space-y-1 bg-background z-30 sticky top-0 p-4 border-b">
-            <SheetTitle className="text-lg">Ajukan Destinasi Lokal Baru</SheetTitle>
+            <SheetTitle className="text-lg">
+              Ajukan Destinasi Lokal Baru
+            </SheetTitle>
             <SheetDescription className="sr-only">
               Isi rincian di bawah ini untuk menambah destinasi baru
             </SheetDescription>
@@ -120,7 +122,7 @@ function CreateDestinationSheet({
                     <Activity mode={isSubmitting ? 'visible' : 'hidden'}>
                       <Spinner />
                     </Activity>
-                    Tambahkan
+                    Ajukan
                   </Button>
                 </SheetFooter>
               </DestinationForm>
@@ -146,7 +148,9 @@ function CreateDestinationSheet({
 
       <DrawerContent className="flex flex-col max-h-[85svh]">
         <DrawerHeader className="text-left sm:px-6 space-y-1 bg-background p-4 border-b">
-          <DrawerTitle className="text-xl">Ajukan Destinasi Lokal Baru</DrawerTitle>
+          <DrawerTitle className="text-xl">
+            Ajukan Destinasi Lokal Baru
+          </DrawerTitle>
           <DrawerDescription className="text-sm">
             Isi rincian di bawah ini untuk menambah destinasi baru
           </DrawerDescription>
@@ -171,7 +175,7 @@ function CreateDestinationSheet({
                       Menyimpan...
                     </>
                   ) : (
-                    'Simpan'
+                    'Ajukan'
                   )}
                 </Button>
                 <DrawerClose asChild>

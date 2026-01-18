@@ -1,15 +1,15 @@
 'use client'
 
 import { useState } from 'react'
+import { MapIcon, MapPin } from 'lucide-react'
+import { buttonVariants } from '../shadcn-ui/button'
 import {
   Map,
   MapMarker,
   MarkerContent,
   MarkerPopup,
 } from '@/components/ui/fragments/shadcn-ui/map'
-import { MapIcon, MapPin } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { buttonVariants } from '../shadcn-ui/button'
 
 type DestinationMapProps = {
   destinationName?: string
@@ -29,7 +29,6 @@ export function DestinationMap({
     lng: 106.79941662468647,
   })
 
- 
   const markerPos = coordinates
     ? { lng: coordinates.lng, lat: coordinates.lat }
     : draggableMarker

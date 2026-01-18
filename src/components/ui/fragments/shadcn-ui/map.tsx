@@ -1,6 +1,7 @@
 'use client'
 
-import MapLibreGL, { type PopupOptions, type MarkerOptions } from 'maplibre-gl'
+import MapLibreGL from 'maplibre-gl'
+import type { MarkerOptions, PopupOptions } from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { useTheme } from 'next-themes'
 import {
@@ -14,10 +15,10 @@ import {
   useMemo,
   useRef,
   useState,
-  type ReactNode,
 } from 'react'
 import { createPortal } from 'react-dom'
-import { X, Minus, Plus, Locate, Maximize, Loader2 } from 'lucide-react'
+import { Loader2, Locate, Maximize, Minus, Plus, X } from 'lucide-react'
+import type { ReactNode } from 'react'
 
 import { cn } from '@/lib/utils'
 
@@ -853,7 +854,7 @@ type MapRouteProps = {
   /** Optional unique identifier for the route layer */
   id?: string
   /** Array of [longitude, latitude] coordinate pairs defining the route */
-  coordinates: [number, number][]
+  coordinates: Array<[number, number]>
   /** Line color as CSS color value (default: "#4285F4") */
   color?: string
   /** Line width in pixels (default: 3) */
@@ -1182,7 +1183,7 @@ function MapClusterLayer<
     // Cluster click handler - zoom into cluster
     const handleClusterClick = async (
       e: MapLibreGL.MapMouseEvent & {
-        features?: MapLibreGL.MapGeoJSONFeature[]
+        features?: Array<MapLibreGL.MapGeoJSONFeature>
       },
     ) => {
       const features = map.queryRenderedFeatures(e.point, {
@@ -1214,7 +1215,7 @@ function MapClusterLayer<
     // Unclustered point click handler
     const handlePointClick = (
       e: MapLibreGL.MapMouseEvent & {
-        features?: MapLibreGL.MapGeoJSONFeature[]
+        features?: Array<MapLibreGL.MapGeoJSONFeature>
       },
     ) => {
       if (!onPointClick || !e.features?.length) return

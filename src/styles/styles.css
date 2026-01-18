@@ -205,6 +205,8 @@
   --shadow-2xl: var(--shadow-2xl);
   --animate-infinite-scroll: infiniteScroll 25s linear infinite;
   --animate-infinite-scroll-rigth: infiniteScrollRigth 25s linear infinite;
+  --animate-songket-scroll: songketScroll 25s linear infinite;
+  --animate-songket-scroll-right: songketScrollRight 25s linear infinite;
 
   @keyframes infiniteScroll {
     from {
@@ -221,6 +223,24 @@
     }
     to {
       transform: translateX(0);
+    }
+  }
+
+  @keyframes songketScroll {
+    from {
+      background-position: 0% 50%;
+    }
+    to {
+      background-position: -100% 50%;
+    }
+  }
+
+  @keyframes songketScrollRight {
+    from {
+      background-position: -100% 50%;
+    }
+    to {
+      background-position: 0% 50%;
     }
   }
 }

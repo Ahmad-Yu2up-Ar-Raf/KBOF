@@ -5,9 +5,13 @@
 // =============================================================================
 
 import { motion } from 'framer-motion'
-import { AnimatedRoadmap, Milestone } from './map-hero'
+import { Gamepad2, Info, Play } from 'lucide-react'
+import { HowToPlaySheet } from '../how-to-play-sheet'
+import { SiteHeader } from '../../../layout/nav/site-header'
+import { AnimatedRoadmap } from './map-hero'
+import type { Milestone } from './map-hero'
 import { ANIMATION_DURATION } from '@/lib/game/constants'
-import { GameHeader, GameContent, HighScoreDisplay } from '@/components/game'
+import { GameContent, GameHeader, HighScoreDisplay } from '@/components/game'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
 import {
   Card,
@@ -15,9 +19,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/fragments/shadcn-ui/card'
-import { Gamepad2, Info, Play } from 'lucide-react'
-import { HowToPlaySheet } from '../how-to-play-sheet'
-import { SiteHeader } from '../../../layout/nav/site-header'
 // =============================================================================
 // TYPES
 // =============================================================================
@@ -34,7 +35,6 @@ export type MenuScreenProps = {
 export function MenuScreen({ onPlay }: MenuScreenProps) {
   return (
     <>
-     
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -77,7 +77,7 @@ type HeroCardProps = {
 }
 
 function HeroCard({ onPlay }: HeroCardProps) {
-  const milestonesData: Milestone[] = [
+  const milestonesData: Array<Milestone> = [
     {
       id: 1,
       name: 'Jawa',
@@ -105,7 +105,7 @@ function HeroCard({ onPlay }: HeroCardProps) {
   ]
 
   return (
-    <section className="flex md:px-2  md:pt-10   flex-col justify-center items-center w-full max-w-2xl m-auto z-50 pointer-events-auto   md:gap-4">
+    <section className="flex md:px-2  md:pt-15   flex-col justify-center items-center w-full max-w-2xl m-auto z-50 pointer-events-auto   md:gap-4">
       <AnimatedRoadmap
         milestones={milestonesData}
         mapImageSrc="/assets/images/map.webp"

@@ -8,27 +8,27 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from '@tanstack/react-router'
 import { useServerFn } from '@tanstack/react-start'
 
+import type {
+  BanUserInput,
+  BulkBanUsersInput,
+  BulkDeleteUsersInput,
+  BulkUnbanUsersInput,
+  BulkUpdateUserRoleInput,
+  DeleteUserInput,
+  UnbanUserInput,
+  UpdateUserRoleInput,
+} from '@/lib/validations/user-validations'
 import {
-  updateUserRole,
   banUser,
-  unbanUser,
-  deleteUser,
-  bulkDeleteUsers,
-  bulkUpdateUserRole,
   bulkBanUsers,
+  bulkDeleteUsers,
   bulkUnbanUsers,
+  bulkUpdateUserRole,
+  deleteUser,
+  unbanUser,
+  updateUserRole,
 } from '@/lib/server/user/user-server-actions'
 import { invalidateAllUserQueries } from '@/lib/query-options'
-import type {
-  UpdateUserRoleInput,
-  BanUserInput,
-  UnbanUserInput,
-  DeleteUserInput,
-  BulkDeleteUsersInput,
-  BulkUpdateUserRoleInput,
-  BulkBanUsersInput,
-  BulkUnbanUsersInput,
-} from '@/lib/validations/user-validations'
 
 // ============================================
 // UPDATE USER ROLE MUTATION

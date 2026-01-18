@@ -1,7 +1,7 @@
 import React from 'react'
+import { Link, useMatches } from '@tanstack/react-router'
 import { cn } from '@/lib/utils'
 import { Logo } from '@/components/icons/app-logo-icon'
-import { Link, useMatches } from '@tanstack/react-router'
 import { useIsMobile } from '@/hooks/use-mobile'
 
 type StickyFooterProps = React.ComponentProps<'footer'>

@@ -1,23 +1,28 @@
-import { User } from '@/db/schema'
+import {
+  Gamepad2,
+  LayoutDashboard,
+  LogIn,
+  LogOut,
+  Medal,
+  Newspaper,
+  SettingsIcon,
+  Telescope,
+  UserIcon,
+  UserRoundIcon,
+  UsersRound,
+} from 'lucide-react'
+import { Link, useNavigate } from '@tanstack/react-router'
+import React from 'react'
+import { toast } from 'sonner'
+import { Spinner } from '../../shadcn-ui/spinner'
+import { ButtonAnimation } from './navigation-menu-sidebar'
+import type { LucideIcon } from 'lucide-react'
+import type { User } from '@/db/schema'
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from '@/components/ui/fragments/shadcn-ui/avatar'
-import {
-  UserIcon,
-  SettingsIcon,
-  LucideIcon,
-  LogOut,
-  UserRoundIcon,
-  Newspaper,
-  Telescope,
-  UsersRound,
-  Medal,
-  Gamepad2,
-  LayoutDashboard,
-  LogIn,
-} from 'lucide-react'
 
 import {
   DropdownMenu,
@@ -30,20 +35,15 @@ import {
 } from '@/components/ui/fragments/shadcn-ui/dropdown-menu'
 import { useInitials } from '@/hooks/use-initials'
 
-import { Link, useNavigate } from '@tanstack/react-router'
-import React from 'react'
 import { authClient } from '@/lib/auth/auth-client'
-import { toast } from 'sonner'
-import { Spinner } from '../../shadcn-ui/spinner'
 import { useIsMobile } from '@/hooks/use-mobile'
-import { ButtonAnimation } from './navigation-menu-sidebar'
 
 interface DropdownMenuUserMenuDemoProps {
   label: string
   icon: LucideIcon
   auth?: boolean
   href?: string
-  role?: string[]
+  role?: Array<string>
   onSelect?: () => void
 }
 
@@ -52,7 +52,7 @@ interface groupItems {
   default?: boolean
 
   isMobile?: boolean
-  dataGroup?: DropdownMenuUserMenuDemoProps[]
+  dataGroup?: Array<DropdownMenuUserMenuDemoProps>
 }
 type componentProps = {
   user?: User | null
@@ -60,7 +60,7 @@ type componentProps = {
   isHomePage?: boolean
 }
 
-const listItemsRole: groupItems[] = [
+const listItemsRole: Array<groupItems> = [
   {
     name: 'page-user',
     isMobile: false, // Hide on mobile (mobile has bottom nav), show on desktop for guests
@@ -178,7 +178,7 @@ const listItemsRole: groupItems[] = [
       {
         label: 'Kelola Users  ',
         icon: UsersRound,
-        role: ['admin'],
+        role: ['superAdmin'],
         href: `/dashboard/user-menagement`,
       },
     ],

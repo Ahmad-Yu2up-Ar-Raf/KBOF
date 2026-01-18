@@ -3,7 +3,6 @@
 // =============================================================================
 // Zod schemas untuk article entity dengan nuqs integration
 
-import { contentStatus } from '@/db/schema'
 import {
   createSearchParamsCache,
   parseAsArrayOf,
@@ -12,10 +11,11 @@ import {
   parseAsStringEnum,
 } from 'nuqs/server'
 import * as z from 'zod'
+import type { Article } from '@/db/schema'
+import { contentStatus } from '@/db/schema'
 
 import { flagConfig } from '@/config/flag'
 import { getFiltersStateParser, getSortingStateParser } from '@/lib/parsers'
-import type { Article } from '@/db/schema'
 
 // ============================================
 // NUQS SEARCH PARAMS CACHE
@@ -89,7 +89,7 @@ export const UpdateArticleBulkSchema = z.object({
 // PREPROCESS HELPERS
 // ============================================
 
-const csvToArray = (val: unknown): string[] => {
+const csvToArray = (val: unknown): Array<string> => {
   if (Array.isArray(val)) return val.filter(Boolean)
   if (typeof val === 'string' && val.length > 0) {
     return val

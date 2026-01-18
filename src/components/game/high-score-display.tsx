@@ -2,8 +2,8 @@
 
 import * as React from 'react'
 import { motion } from 'framer-motion'
+import type { HighScoreRecord, Level } from '@/lib/game/types'
 import { cn } from '@/lib/utils'
-import type { Level, HighScoreRecord } from '@/lib/game/types'
 import { LEVEL_CONFIGS } from '@/lib/game/constants'
 import { getHighScores } from '@/lib/game/utils'
 import {
@@ -26,7 +26,7 @@ type HighScoreDisplayProps = {
 }
 
 export function HighScoreDisplay({ className }: HighScoreDisplayProps) {
-  const [scores, setScores] = React.useState<HighScoreRecord[]>([])
+  const [scores, setScores] = React.useState<Array<HighScoreRecord>>([])
   const [activeLevel, setActiveLevel] = React.useState<Level>('easy')
 
   React.useEffect(() => {

@@ -1,7 +1,8 @@
-import { Textarea } from '@/components/ui/fragments/shadcn-ui/textarea'
-import { FormBase, FormControlProps } from './form-base'
-import { useFieldContext } from '@/hooks/form/use-form'
 import { useStore } from '@tanstack/react-store'
+import { FormBase } from './form-base'
+import type { FormControlProps } from './form-base'
+import { Textarea } from '@/components/ui/fragments/shadcn-ui/textarea'
+import { useFieldContext } from '@/hooks/form/use-form'
 
 export function FormTextarea(props: FormControlProps) {
   const field = useFieldContext<string>()

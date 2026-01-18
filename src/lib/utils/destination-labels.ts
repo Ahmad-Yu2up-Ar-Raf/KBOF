@@ -104,7 +104,7 @@ export const provinsiList = provinsiIndonesia.enumValues
  */
 export function buildCategoryOptions(
   counts?: Record<string, number>,
-): FilterOption[] {
+): Array<FilterOption> {
   return categoryList.map((value) => ({
     value,
     label: categoryLabels[value] ?? value.replace(/-/g, ' '),
@@ -117,7 +117,7 @@ export function buildCategoryOptions(
  */
 export function buildTypeOptions(
   counts?: Record<string, number>,
-): FilterOption[] {
+): Array<FilterOption> {
   return typeList.map((value) => ({
     value,
     label: typeLabels[value] ?? value.replace(/-/g, ' '),
@@ -130,7 +130,7 @@ export function buildTypeOptions(
  */
 export function buildProvinsiOptions(
   counts?: Record<string, number>,
-): FilterOption[] {
+): Array<FilterOption> {
   return provinsiList.map((value) => ({
     value,
     label: provinsiLabels[value] ?? value.replace(/-/g, ' '),

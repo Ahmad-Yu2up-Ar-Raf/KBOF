@@ -1,6 +1,6 @@
-import { cn } from '@/lib/utils'
 import { Image } from '@unpic/react'
 import React, { useState } from 'react'
+import { cn } from '@/lib/utils'
 
 // =============================================================================
 // IMAGE CARD COMPONENT - with hover/blur effects like Podium
@@ -85,7 +85,7 @@ function About() {
             <ImageCard
               src="assets/images/rendang-potongan.png"
               alt="Rendang - Kuliner Nusantara"
-              className="w-[190px] h-auto md:w-[180px] lg:w-[230px]"
+              className="w-[190px] h-auto md:w-[180px] lg:w-[210px]"
               index={0}
               hovered={hoveredImage}
               setHovered={setHoveredImage}
@@ -97,7 +97,7 @@ function About() {
             <ImageCard
               src="assets/images/gadang-potongan.png"
               alt="Rumah Gadang - Arsitektur Nusantara"
-              className="w-[190px] h-auto md:w-[220px] lg:w-[260px]"
+              className="w-[190px] h-auto md:w-[220px] lg:w-[220px]"
               index={1}
               hovered={hoveredImage}
               setHovered={setHoveredImage}
@@ -109,7 +109,7 @@ function About() {
             <ImageCard
               src="assets/images/batik-potongan.png"
               alt="Batik - Warisan Nusantara"
-              className="w-[190px] h-auto md:w-[180px] lg:w-[230px]"
+              className="w-[190px] h-auto md:w-[180px] lg:w-[210px]"
               index={2}
               hovered={hoveredImage}
               setHovered={setHoveredImage}

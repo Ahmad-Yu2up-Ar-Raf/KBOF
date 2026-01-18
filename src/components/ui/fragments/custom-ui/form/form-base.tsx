@@ -1,4 +1,6 @@
-import { ReactNode, useRef, useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import type { InputProps } from '../../shadcn-ui/input'
+import type { ReactNode } from 'react'
 import { useFieldContext } from '@/hooks/form/use-form'
 import {
   Field,
@@ -7,7 +9,6 @@ import {
   FieldError,
   FieldLabel,
 } from '@/components/ui/fragments/shadcn-ui/field'
-import { InputProps } from '../../shadcn-ui/input'
 
 export type FormControlProps = {
   label: string

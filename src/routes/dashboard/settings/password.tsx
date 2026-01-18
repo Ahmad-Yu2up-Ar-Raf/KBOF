@@ -1,6 +1,6 @@
+import { createFileRoute } from '@tanstack/react-router'
 import { UpdatePassword } from '@/components/ui/core/feature/form/update-password-form'
 import HeadingSmall from '@/components/ui/fragments/custom-ui/typography/heading-small'
-import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/dashboard/settings/password')({
   component: RouteComponent,

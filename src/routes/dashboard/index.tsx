@@ -3,13 +3,11 @@
 import { createFileRoute, useSearch } from '@tanstack/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
 
+import type { AnalyticsInput } from '@/lib/query-options'
 import Wrapper from '@/components/ui/core/feature/report/wrapper'
 import Overview from '@/components/ui/core/feature/report/overview'
 import { analyticsSearchSchema } from '@/lib/validations/analytics-validations'
-import {
-  getAnalyticsQueryOptions,
-  type AnalyticsInput,
-} from '@/lib/query-options'
+import { getAnalyticsQueryOptions } from '@/lib/query-options'
 import { queryClient } from '@/components/provider/Provider'
 import { Skeleton } from '@/components/ui/fragments/shadcn-ui/skeleton'
 

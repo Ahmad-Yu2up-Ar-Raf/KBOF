@@ -1,14 +1,17 @@
-import { authClient } from '@/lib/auth/auth-client'
 import { useAppForm } from './use-form'
+import type {
+  ChangePassword,
+  LoginSchema,
+  RegisterSchema,
+  UpdateSchema,
+} from '@/lib/validations/auth-validations'
+import { authClient } from '@/lib/auth/auth-client'
 import {
   changePassword,
-  ChangePassword,
   loginSchema,
   registerCreateSchema,
-  UpdateSchema,
   updateSchema,
 } from '@/lib/validations/auth-validations'
-import { LoginSchema, RegisterSchema } from '@/lib/validations/auth-validations'
 
 export type LoginFormReturn = ReturnType<typeof useLoginForm>
 export type RegisterFormReturn = ReturnType<typeof useRegisterForm>

@@ -1,8 +1,17 @@
 // FILE: src/components/game/stats-panel.tsx — Game results display component
 
 import { motion } from 'framer-motion'
-import { cn } from '@/lib/utils'
+import { useLottie } from 'lottie-react'
+import {
+  ArrowLeft,
+  Gamepad2,
+  HomeIcon,
+  RotateCcw,
+  SectionIcon,
+} from 'lucide-react'
+import { Link } from '@tanstack/react-router'
 import type { Level, QuestionResult } from '@/lib/game/types'
+import { cn } from '@/lib/utils'
 import { LEVEL_CONFIGS, getResultMessage } from '@/lib/game/constants'
 import { calculateGameStats } from '@/lib/game/utils'
 import {
@@ -18,21 +27,12 @@ import {
 } from '@/components/ui/fragments/shadcn-ui/button'
 
 import { Progress } from '@/components/ui/fragments/shadcn-ui/progress'
-import { useLottie } from 'lottie-react'
 
 import animationData from '@/assets/animations/Cute Boy Running.json'
 import { useIsMobile } from '@/hooks/use-mobile'
-import {
-  ArrowLeft,
-  Gamepad2,
-  HomeIcon,
-  RotateCcw,
-  SectionIcon,
-} from 'lucide-react'
-import { Link } from '@tanstack/react-router'
 
 type StatsPanelProps = {
-  results: QuestionResult[]
+  results: Array<QuestionResult>
   level: Level
   isNewHighScore?: boolean
   onPlayAgain: () => void
@@ -226,7 +226,7 @@ function StatItem({ label, value, delay, className }: StatItemProps) {
 }
 
 type QuestionBreakdownProps = {
-  results: QuestionResult[]
+  results: Array<QuestionResult>
   level: Level
 }
 

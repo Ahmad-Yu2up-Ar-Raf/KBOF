@@ -1,5 +1,6 @@
 import React from 'react'
 import { ArrowRight, MapPin, StarIcon, Tag, ThumbsUp } from 'lucide-react'
+import { Link } from '@tanstack/react-router'
 import { Badge } from '../../shadcn-ui/badge'
 import {
   Card,
@@ -10,14 +11,16 @@ import {
   CardTitle,
 } from '../../shadcn-ui/card'
 import { buttonVariants } from '../../shadcn-ui/button'
+import { Skeleton } from '../../shadcn-ui/skeleton'
+import type { DestinasiDestination } from '@/lib/server/explore/destinasi-server-queries'
 import MediaItem from '@/components/ui/fragments/custom-ui/media/media-item'
 import { cn } from '@/lib/utils'
 
-import { Link } from '@tanstack/react-router'
-
-import type { DestinasiDestination } from '@/lib/server/explore/destinasi-server-queries'
-import { Skeleton } from '../../shadcn-ui/skeleton'
-import { getProvinsiLabel } from '@/lib/utils/destination-utils'
+import {
+  getCategoryIcon,
+  getCategoryLabel,
+  getProvinsiLabel,
+} from '@/lib/utils/destination-utils'
 
 interface DestinasiCardProps {
   destination: DestinasiDestination
@@ -81,6 +84,8 @@ function DestinasiCard({
       !isFirstItem && !isLastItem && 'rounded-none',
     ],
   )
+  const categoriLabel = getCategoryLabel(destination.category)
+  const CategoriIcon = getCategoryIcon(destination.category)
   return (
     <Card
       onMouseEnter={() => setHovered(index)}
@@ -107,8 +112,8 @@ function DestinasiCard({
             variant="secondary"
             className={cn('text-xs  font-semibold w-fit')}
           >
-            <Tag className="mr-1 size-3 " />
-            {destination.category}
+            <CategoriIcon className="mr-1 size-3 " />
+            {categoriLabel}
           </Badge>
           <CardTitle className="text-xl  w-full  leading-6 font-bold tracking-tighter md:leading-6 line-clamp-1">
             {destination.name}

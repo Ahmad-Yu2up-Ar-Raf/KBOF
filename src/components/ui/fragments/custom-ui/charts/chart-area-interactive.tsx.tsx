@@ -3,6 +3,9 @@
 import * as React from 'react'
 import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts'
 
+import { LucideChartNoAxesCombined } from 'lucide-react'
+import type { ChartDataType } from '@/types'
+import type { ChartConfig } from '@/components/ui/fragments/shadcn-ui/chart'
 import {
   Card,
   CardAction,
@@ -12,7 +15,6 @@ import {
   CardTitle,
 } from '@/components/ui/fragments/shadcn-ui/card'
 import {
-  ChartConfig,
   ChartContainer,
   ChartLegend,
   ChartLegendContent,
@@ -26,9 +28,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/fragments/shadcn-ui/select'
-import { LucideChartNoAxesCombined } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { ChartDataType } from '@/types'
 
 export const description = 'An interactive area chart'
 
@@ -56,7 +56,7 @@ const chartConfig = {
 } satisfies ChartConfig
 
 type ChartAreaInteractiveProps = {
-  chartData: ChartDataType[]
+  chartData: Array<ChartDataType>
   className?: string
   isShowGallery?: boolean
   isShowMerchandise?: boolean

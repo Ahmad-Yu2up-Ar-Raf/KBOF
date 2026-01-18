@@ -2,10 +2,11 @@
 
 import * as React from 'react'
 import { Star } from 'lucide-react'
+import { useStore } from '@tanstack/react-store'
+import { FormBase } from './form-base'
+import type { FormControlProps } from './form-base'
 import { cn } from '@/lib/utils'
 import { useFieldContext } from '@/hooks/form/use-form'
-import { FormBase, type FormControlProps } from './form-base'
-import { useStore } from '@tanstack/react-store'
 
 // ============================================
 // INTERACTIVE STAR RATING COMPONENT

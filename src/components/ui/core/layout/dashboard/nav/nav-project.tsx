@@ -1,13 +1,10 @@
 'use client'
 
-import {
-  Folder,
-  MoreHorizontal,
-  Share,
-  Trash2,
-  type LucideIcon,
-} from 'lucide-react'
+import { Folder, MoreHorizontal, Share, Trash2 } from 'lucide-react'
+import { Link } from '@tanstack/react-router'
+import type { LucideIcon } from 'lucide-react'
 
+import type { sidebarType } from '@/types'
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -16,8 +13,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/fragments/shadcn-ui/sidebar'
-import { Link } from '@tanstack/react-router'
-import { NavItem, sidebarType } from '@/types'
+import { NavItem } from '@/types'
 
 export function NavProjects({ items }: sidebarType) {
   return (

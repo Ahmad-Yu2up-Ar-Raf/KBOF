@@ -2,8 +2,9 @@
 
 import { Link } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
-import { Star, ThumbsUp, MapPin, ChevronRight } from 'lucide-react'
+import { ChevronRight, MapPin, Star, ThumbsUp } from 'lucide-react'
 
+import type { RelatedDestination } from '@/lib/query-options'
 import {
   Card,
   CardContent,
@@ -15,10 +16,7 @@ import { Badge } from '@/components/ui/fragments/shadcn-ui/badge'
 import { Skeleton } from '@/components/ui/fragments/shadcn-ui/skeleton'
 import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
 import { cn } from '@/lib/utils'
-import {
-  getRelatedDestinationsQueryOptions,
-  type RelatedDestination,
-} from '@/lib/query-options'
+import { getRelatedDestinationsQueryOptions } from '@/lib/query-options'
 import {
   getCategoryLabel,
   getProvinsiLabel,
@@ -136,7 +134,7 @@ export function RelatedDestinationsSection({
       <header className="flex border-b pb-7  items-center justify-between">
         <div className="space-y-1">
           <h2 className="text-2xl font-bold tracking-tight">
-            Destinasi <span className=' text-primary'>Serupa</span>
+            Destinasi <span className=" text-primary">Serupa</span>
           </h2>
           <p className="text-muted-foreground">
             Destinasi lainnya yang mungkin Anda suka

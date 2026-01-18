@@ -1,15 +1,15 @@
 'use client'
-import { cn } from '@/lib/utils'
 import { useLottie } from 'lottie-react'
 import * as React from 'react'
+import { ArrowLeft } from 'lucide-react'
+import { Link } from '@tanstack/react-router'
+import { cn } from '@/lib/utils'
 import { Logo } from '@/components/icons/app-logo-icon'
 import animationData from '@/assets/animations/Phoenix.json'
-import { ArrowLeft } from 'lucide-react'
 import {
   Button,
   buttonVariants,
 } from '@/components/ui/fragments/shadcn-ui/button'
-import { Link } from '@tanstack/react-router'
 import { Spinner } from '@/components/ui/fragments/shadcn-ui/spinner'
 import { Icons } from '@/components/icons/brand-icons'
 import { authClient } from '@/lib/auth/auth-client'
@@ -73,7 +73,7 @@ const AuthLayoutTemplate = ({
       <div className=" relative   min-h-svh container py-0  flex items-center justify-center overflow-hidden ">
         <div
           className={cn(
-            '  w-full relative max-w-lg  overflow-hidden flex flex-col  lg:flex-row shadow-xl lg:max-w-none h-svh',
+            '  w-full relative max-w-lg  overflow-hidden flex flex-col  lg:flex-row   border-r border-l lg:max-w-none h-svh',
             className,
           )}
         >

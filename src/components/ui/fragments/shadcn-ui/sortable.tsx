@@ -1,23 +1,14 @@
 'use client'
 
 import {
-  type Announcements,
-  closestCenter,
-  closestCorners,
   DndContext,
-  type DndContextProps,
-  type DragEndEvent,
-  type DraggableAttributes,
-  type DraggableSyntheticListeners,
   DragOverlay,
-  type DragStartEvent,
-  type DropAnimation,
-  defaultDropAnimationSideEffects,
   KeyboardSensor,
   MouseSensor,
-  type ScreenReaderInstructions,
   TouchSensor,
-  type UniqueIdentifier,
+  closestCenter,
+  closestCorners,
+  defaultDropAnimationSideEffects,
   useSensor,
   useSensors,
 } from '@dnd-kit/core'
@@ -27,10 +18,9 @@ import {
   restrictToVerticalAxis,
 } from '@dnd-kit/modifiers'
 import {
+  SortableContext,
   arrayMove,
   horizontalListSortingStrategy,
-  SortableContext,
-  type SortableContextProps,
   sortableKeyboardCoordinates,
   useSortable,
   verticalListSortingStrategy,
@@ -39,6 +29,18 @@ import { CSS } from '@dnd-kit/utilities'
 import { Slot } from '@radix-ui/react-slot'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
+import type { SortableContextProps } from '@dnd-kit/sortable'
+import type {
+  Announcements,
+  DndContextProps,
+  DragEndEvent,
+  DragStartEvent,
+  DraggableAttributes,
+  DraggableSyntheticListeners,
+  DropAnimation,
+  ScreenReaderInstructions,
+  UniqueIdentifier,
+} from '@dnd-kit/core'
 import { useComposedRefs } from '@/lib/compose-refs'
 import { cn } from '@/lib/utils'
 
@@ -68,7 +70,7 @@ const OVERLAY_NAME = 'SortableOverlay'
 
 interface SortableRootContextValue<T> {
   id: string
-  items: UniqueIdentifier[]
+  items: Array<UniqueIdentifier>
   modifiers: DndContextProps['modifiers']
   strategy: SortableContextProps['strategy']
   activeId: UniqueIdentifier | null
@@ -98,8 +100,8 @@ interface GetItemValue<T> {
 
 type SortableRootProps<T> = DndContextProps &
   (T extends object ? GetItemValue<T> : Partial<GetItemValue<T>>) & {
-    value: T[]
-    onValueChange?: (items: T[]) => void
+    value: Array<T>
+    onValueChange?: (items: Array<T>) => void
     onMove?: (
       event: DragEndEvent & { activeIndex: number; overIndex: number },
     ) => void

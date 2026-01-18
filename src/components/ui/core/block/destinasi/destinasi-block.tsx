@@ -6,9 +6,17 @@
 
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useInfiniteQuery } from '@tanstack/react-query'
 
+import {
+  DestinasiErrorState,
+  DestinasiFilterSection,
+  DestinasiGridSection,
+  DestinasiInfoSection,
+  DestinasiLoadMore,
+} from './components'
+import { useDestinasiFilters, useInfiniteScroll } from './hooks'
 import { Skeleton } from '@/components/ui/fragments/shadcn-ui/skeleton'
 import { SkeletonCard } from '@/components/ui/fragments/custom-ui/card/destinasi-card'
 
@@ -16,21 +24,13 @@ import { getDestinasiInfiniteQueryOptions } from '@/lib/query-options'
 import { useInfiniteScrollContext } from '@/components/provider/infinite-scroll-context'
 import {
   buildCategoryOptions,
-  buildTypeOptions,
   buildProvinsiOptions,
+  buildTypeOptions,
 } from '@/lib/utils/destination-labels'
 
 // Local components
-import {
-  DestinasiFilterSection,
-  DestinasiInfoSection,
-  DestinasiGridSection,
-  DestinasiLoadMore,
-  DestinasiErrorState,
-} from './components'
 
 // Local hooks
-import { useDestinasiFilters, useInfiniteScroll } from './hooks'
 
 // =============================================================================
 // MAIN COMPONENT

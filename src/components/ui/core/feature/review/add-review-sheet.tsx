@@ -1,9 +1,11 @@
 'use client'
 
-import React, { useState, useRef, Activity } from 'react'
+import React, { Activity, useRef, useState } from 'react'
 import { toast } from 'sonner'
 import { Plus, Star } from 'lucide-react'
 
+import { useNavigate } from '@tanstack/react-router'
+import ReviewForm from '../form/review-form'
 import {
   Sheet,
   SheetClose,
@@ -31,8 +33,6 @@ import { useIsMobile } from '@/hooks/use-mobile'
 import { useCreateReviewForm } from '@/hooks/form/use-review-form'
 import { useCheckUserReview } from '@/hooks/use-review-mutations'
 import { useSession } from '@/lib/auth/auth-client'
-import ReviewForm from '../form/review-form'
-import { useNavigate } from '@tanstack/react-router'
 
 // ============================================
 // TYPES
@@ -203,7 +203,7 @@ function AddReviewSheet({
         <DrawerHeader className=" text-center sm:px-6 space-y-1 bg-background p-4 border-b">
           <DrawerTitle className="text-xl  gap-2">
             {/* <Star className="size-5 text-primary fill-primary" /> */}
-            Berikan Review & pengalamanmu 
+            Berikan Review & pengalamanmu
           </DrawerTitle>
           <DrawerDescription className="text-sm">
             Bagikan pengalaman Anda mengunjungi destinasi ini

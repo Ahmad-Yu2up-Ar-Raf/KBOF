@@ -1,8 +1,8 @@
 'use client'
 
-import type { Column } from '@tanstack/react-table'
 import { PlusCircle, XCircle } from 'lucide-react'
 import * as React from 'react'
+import type { Column } from '@tanstack/react-table'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
 import { Input } from '@/components/ui/fragments/shadcn-ui/input'
 import { Label } from '@/components/ui/fragments/shadcn-ui/label'

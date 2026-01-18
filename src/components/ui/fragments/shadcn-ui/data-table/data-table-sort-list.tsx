@@ -1,8 +1,8 @@
 'use client'
 
-import type { ColumnSort, SortDirection, Table } from '@tanstack/react-table'
 import { ArrowDownUp, ChevronsUpDown, GripVertical, Trash2 } from 'lucide-react'
 import * as React from 'react'
+import type { ColumnSort, SortDirection, Table } from '@tanstack/react-table'
 
 import { Badge } from '@/components/ui/fragments/shadcn-ui/badge'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
@@ -63,7 +63,7 @@ export function DataTableSortList<TData>({
   const { columnLabels, columns } = React.useMemo(() => {
     const labels = new Map<string, string>()
     const sortingIds = new Set(sorting.map((s) => s.id))
-    const availableColumns: { id: string; label: string }[] = []
+    const availableColumns: Array<{ id: string; label: string }> = []
 
     for (const column of table.getAllColumns()) {
       if (!column.getCanSort()) continue
@@ -263,7 +263,7 @@ export function DataTableSortList<TData>({
 interface DataTableSortItemProps {
   sort: ColumnSort
   sortItemId: string
-  columns: { id: string; label: string }[]
+  columns: Array<{ id: string; label: string }>
   columnLabels: Map<string, string>
   onSortUpdate: (sortId: string, updates: Partial<ColumnSort>) => void
   onSortRemove: (sortId: string) => void

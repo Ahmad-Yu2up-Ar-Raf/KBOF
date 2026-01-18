@@ -1,15 +1,16 @@
 'use client'
 
 import * as React from 'react'
-import { useCallback, useState, useId, useEffect, useRef } from 'react'
-import { useFieldContext } from '@/hooks/form/use-form'
-import { FormBase, type FormControlProps } from './form-base'
+import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import { useStore } from '@tanstack/react-store'
-import type { CloudinaryUploadResult } from '@/hooks/use-cloudinary-upload'
-import { cn } from '@/lib/utils'
-import { X, Upload, AlertCircle } from 'lucide-react'
+import { AlertCircle, ImageIcon, Upload, X } from 'lucide-react'
 import MediaItem from '../media/media-item'
 import { Spinner } from '../../shadcn-ui/spinner'
+import { FormBase } from './form-base'
+import type { FormControlProps } from './form-base'
+import type { CloudinaryUploadResult } from '@/hooks/use-cloudinary-upload'
+import { cn } from '@/lib/utils'
+import { useFieldContext } from '@/hooks/form/use-form'
 
 // ============================================
 // TYPES
@@ -29,7 +30,7 @@ interface FormFileUploadProps extends FormControlProps {
   /** Maximum file size in bytes (default: 10MB) */
   maxFileSize?: number
   /** Accepted file types */
-  acceptedTypes?: string[]
+  acceptedTypes?: Array<string>
   /** Whether to allow multiple files */
   multiple?: boolean
   /** Aspect ratio for preview (e.g., '16/9', '1/1') */
@@ -117,7 +118,7 @@ interface UploadDropZoneProps {
   onFilesSelect: (files: FileList) => void
   isUploading: boolean
   multiple?: boolean
-  acceptedTypes?: string[]
+  acceptedTypes?: Array<string>
   disabled?: boolean
   error?: string | null
   inputId: string
@@ -194,7 +195,7 @@ function UploadDropZone({
       onDrop={handleDrop}
       className={cn(
         'relative flex flex-col items-center justify-center gap-2',
-        'rounded-lg border-2 border-dashed p-6 cursor-pointer',
+        'rounded-xl border-2 border-dashed p-6 cursor-pointer',
         'transition-colors duration-200',
         isDragOver && 'border-primary bg-primary/5',
         !isDragOver && 'border-muted-foreground/25 hover:border-primary/50',
@@ -226,14 +227,17 @@ function UploadDropZone({
         </>
       ) : (
         <>
-          <div className="flex items-center justify-center rounded-full bg-muted p-3">
-            <Upload className="h-6 w-6 text-muted-foreground" />
+          <div
+            aria-hidden="true"
+            className="mb-2 flex size-11 shrink-0 items-center justify-center rounded-full border bg-background"
+          >
+            <ImageIcon className="size-4 opacity-60" />
           </div>
           <div className="text-center">
             <p className="text-sm font-medium text-foreground">
               {isDragOver
-                ? 'Drop file here'
-                : 'Click to upload or drag and drop'}
+                ? 'Letakkan file di sini'
+                : 'Klik untuk mengunggah atau seret dan lepas'}
             </p>
             <p className="text-xs text-muted-foreground mt-1">
               PNG, JPG, WEBP up to 10MB
@@ -250,12 +254,11 @@ function UploadDropZone({
 // ============================================
 
 export function FormFileUpload({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   folder = 'destinations',
   maxFileSize = 10 * 1024 * 1024, // 10MB
   acceptedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'],
   aspectRatio,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   onUpload,
   onRemove,
   ...props
@@ -355,10 +358,10 @@ export type MultiFileValue = Array<string | File>
 interface FormMultiFileUploadProps extends FormControlProps {
   folder?: string
   maxFileSize?: number
-  acceptedTypes?: string[]
+  acceptedTypes?: Array<string>
   maxFiles?: number
   aspectRatio?: string
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   onUpload?: (result: CloudinaryUploadResult) => void
   onRemove?: (url: string, index: number) => void
 }
@@ -370,20 +373,19 @@ interface PreviewItem {
 }
 
 export function FormMultiFileUpload({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   folder = 'destinations',
   maxFileSize = 10 * 1024 * 1024, // 10MB
   acceptedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'],
   maxFiles = 10,
   aspectRatio,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   onUpload,
   onRemove,
   ...props
 }: FormMultiFileUploadProps) {
   const field = useFieldContext<MultiFileValue>()
   const inputId = useId()
-  const [previews, setPreviews] = useState<PreviewItem[]>([])
+  const [previews, setPreviews] = useState<Array<PreviewItem>>([])
   const [localError, setLocalError] = useState<string | null>(null)
 
   const isSubmitting = useStore(
@@ -410,8 +412,8 @@ export function FormMultiFileUpload({
 
   // Generate preview URLs for all items
   useEffect(() => {
-    const newPreviews: PreviewItem[] = []
-    const objectUrls: string[] = []
+    const newPreviews: Array<PreviewItem> = []
+    const objectUrls: Array<string> = []
 
     currentValues.forEach((item, index) => {
       if (isFile(item)) {

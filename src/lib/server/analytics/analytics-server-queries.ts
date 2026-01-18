@@ -5,7 +5,7 @@
 // Following the same pattern as destination-server-queries.ts
 
 import { createServerFn } from '@tanstack/react-start'
-import { eq, sql, desc, count, gte, lte, and } from 'drizzle-orm'
+import { and, count, desc, eq, gte, lte, sql } from 'drizzle-orm'
 import { z } from 'zod'
 import * as schema from '@/db/schema'
 import { adminServerMiddleware } from '@/lib/middleware'
@@ -75,18 +75,18 @@ export interface ActivityTrend {
 
 export interface AnalyticsAggregateResult {
   stats: DashboardStats
-  topDestinations: TopDestinationVotes[]
-  categoryDistribution: CategoryDistribution[]
-  typeDistribution: TypeDistribution[]
-  provinsiDistribution: ProvinsiDistribution[]
-  activityTrends: ActivityTrend[]
+  topDestinations: Array<TopDestinationVotes>
+  categoryDistribution: Array<CategoryDistribution>
+  typeDistribution: Array<TypeDistribution>
+  provinsiDistribution: Array<ProvinsiDistribution>
+  activityTrends: Array<ActivityTrend>
 }
 
 // ============================================
 // HELPER: Build date filter conditions
 // ============================================
 
-function buildDateFilter(createdAt: number[]) {
+function buildDateFilter(createdAt: Array<number>) {
   if (!createdAt || createdAt.length === 0) {
     return undefined
   }
@@ -108,6 +108,7 @@ function buildDateFilter(createdAt: number[]) {
  */
 export async function fetchDashboardStats(
   input: AnalyticsInput,
+  userId?: string,
 ): Promise<DashboardStats> {
   const db = await getDb()
 
@@ -166,6 +167,48 @@ export async function fetchDashboardStats(
           : undefined
     : undefined
 
+  if (userId) {
+    const [destinationsResult, articlesResult, votesResult] = await Promise.all(
+      [
+        db
+          .select({ count: count() })
+          .from(schema.destination)
+          .where(
+            destinationWhere
+              ? and(destinationWhere, eq(schema.destination.userId, userId))
+              : eq(schema.destination.userId, userId),
+          ),
+        db
+          .select({ count: count() })
+          .from(schema.article)
+          .where(
+            articleWhere
+              ? and(articleWhere, eq(schema.article.authorId, userId))
+              : eq(schema.article.authorId, userId),
+          ),
+        db
+          .select({ count: count() })
+          .from(schema.vote)
+          .leftJoin(
+            schema.destination,
+            eq(schema.destination.id, schema.vote.destinationId),
+          )
+          .where(
+            voteWhere
+              ? and(voteWhere, eq(schema.destination.userId, userId))
+              : eq(schema.destination.userId, userId),
+          ),
+      ],
+    )
+
+    return {
+      totalUsers: 1,
+      totalDestinations: destinationsResult[0]?.count ?? 0,
+      totalArticles: articlesResult[0]?.count ?? 0,
+      totalVotes: votesResult[0]?.count ?? 0,
+    }
+  }
+
   const [usersResult, destinationsResult, articlesResult, votesResult] =
     await Promise.all([
       db.select({ count: count() }).from(schema.user).where(userWhere),
@@ -190,7 +233,8 @@ export async function fetchDashboardStats(
  */
 export async function fetchTopDestinations(
   input: AnalyticsInput,
-): Promise<TopDestinationVotes[]> {
+  userId?: string,
+): Promise<Array<TopDestinationVotes>> {
   const db = await getDb()
 
   const dateRange = buildDateFilter(input.createdAt)
@@ -214,6 +258,17 @@ export async function fetchTopDestinations(
         eq(schema.destination.status, 'published'),
         lte(schema.destination.createdAt, dateRange.to),
       )!
+    }
+  }
+
+  if (userId) {
+    if (whereConditions) {
+      whereConditions = and(
+        whereConditions,
+        eq(schema.destination.userId, userId),
+      )!
+    } else {
+      whereConditions = eq(schema.destination.userId, userId)!
     }
   }
 
@@ -238,7 +293,7 @@ export async function fetchTopDestinations(
     )
     .limit(10)
 
-  return destinations as TopDestinationVotes[]
+  return destinations as Array<TopDestinationVotes>
 }
 
 /**
@@ -246,7 +301,8 @@ export async function fetchTopDestinations(
  */
 export async function fetchCategoryDistribution(
   input: AnalyticsInput,
-): Promise<CategoryDistribution[]> {
+  userId?: string,
+): Promise<Array<CategoryDistribution>> {
   const db = await getDb()
 
   const dateRange = buildDateFilter(input.createdAt)
@@ -270,6 +326,16 @@ export async function fetchCategoryDistribution(
         eq(schema.destination.status, 'published'),
         lte(schema.destination.createdAt, dateRange.to),
       )!
+    }
+  }
+  if (userId) {
+    if (whereConditions) {
+      whereConditions = and(
+        whereConditions,
+        eq(schema.destination.userId, userId),
+      )!
+    } else {
+      whereConditions = eq(schema.destination.userId, userId)!
     }
   }
 
@@ -289,7 +355,7 @@ export async function fetchCategoryDistribution(
     .slice(4)
     .reduce((sum, item) => sum + item.count, 0)
 
-  const result: CategoryDistribution[] = top4.map((item) => ({
+  const result: Array<CategoryDistribution> = top4.map((item) => ({
     category: item.category ?? 'unknown',
     count: item.count,
   }))
@@ -309,7 +375,8 @@ export async function fetchCategoryDistribution(
  */
 export async function fetchTypeDistribution(
   input: AnalyticsInput,
-): Promise<TypeDistribution[]> {
+  userId?: string,
+): Promise<Array<TypeDistribution>> {
   const db = await getDb()
 
   const dateRange = buildDateFilter(input.createdAt)
@@ -333,6 +400,16 @@ export async function fetchTypeDistribution(
         eq(schema.destination.status, 'published'),
         lte(schema.destination.createdAt, dateRange.to),
       )!
+    }
+  }
+  if (userId) {
+    if (whereConditions) {
+      whereConditions = and(
+        whereConditions,
+        eq(schema.destination.userId, userId),
+      )!
+    } else {
+      whereConditions = eq(schema.destination.userId, userId)!
     }
   }
 
@@ -352,7 +429,7 @@ export async function fetchTypeDistribution(
     .slice(4)
     .reduce((sum, item) => sum + item.count, 0)
 
-  const result: TypeDistribution[] = top4.map((item) => ({
+  const result: Array<TypeDistribution> = top4.map((item) => ({
     type: item.type ?? 'unknown',
     count: item.count,
   }))
@@ -372,7 +449,8 @@ export async function fetchTypeDistribution(
  */
 export async function fetchProvinsiDistribution(
   input: AnalyticsInput,
-): Promise<ProvinsiDistribution[]> {
+  userId?: string,
+): Promise<Array<ProvinsiDistribution>> {
   const db = await getDb()
 
   const dateRange = buildDateFilter(input.createdAt)
@@ -398,6 +476,16 @@ export async function fetchProvinsiDistribution(
       )!
     }
   }
+  if (userId) {
+    if (whereConditions) {
+      whereConditions = and(
+        whereConditions,
+        eq(schema.destination.userId, userId),
+      )!
+    } else {
+      whereConditions = eq(schema.destination.userId, userId)!
+    }
+  }
 
   const allDistribution = await db
     .select({
@@ -415,7 +503,7 @@ export async function fetchProvinsiDistribution(
     .slice(4)
     .reduce((sum, item) => sum + item.count, 0)
 
-  const result: ProvinsiDistribution[] = top4.map((item) => ({
+  const result: Array<ProvinsiDistribution> = top4.map((item) => ({
     provinsi: item.provinsi ?? 'unknown',
     count: item.count,
   }))
@@ -436,7 +524,8 @@ export async function fetchProvinsiDistribution(
  */
 export async function fetchActivityTrends(
   input: AnalyticsInput,
-): Promise<ActivityTrend[]> {
+  userId?: string,
+): Promise<Array<ActivityTrend>> {
   const db = await getDb()
 
   // Default to last 90 days if no filter provided
@@ -456,54 +545,117 @@ export async function fetchActivityTrends(
   }
 
   // Query votes grouped by date
-  const voteTrends = await db
-    .select({
-      date: sql<string>`DATE(${schema.vote.createdAt})::text`,
-      count: count(),
-    })
-    .from(schema.vote)
-    .where(
-      and(
-        gte(schema.vote.createdAt, startDate),
-        lte(schema.vote.createdAt, endDate),
-      ),
-    )
-    .groupBy(sql`DATE(${schema.vote.createdAt})`)
-    .orderBy(sql`DATE(${schema.vote.createdAt})`)
+  let voteTrends
+  if (userId) {
+    voteTrends = await db
+      .select({
+        date: sql<string>`DATE(${schema.vote.createdAt})::text`,
+        count: count(),
+      })
+      .from(schema.vote)
+      .leftJoin(
+        schema.destination,
+        eq(schema.destination.id, schema.vote.destinationId),
+      )
+      .where(
+        and(
+          gte(schema.vote.createdAt, startDate),
+          lte(schema.vote.createdAt, endDate),
+          eq(schema.destination.userId, userId),
+        ),
+      )
+      .groupBy(sql`DATE(${schema.vote.createdAt})`)
+      .orderBy(sql`DATE(${schema.vote.createdAt})`)
+  } else {
+    voteTrends = await db
+      .select({
+        date: sql<string>`DATE(${schema.vote.createdAt})::text`,
+        count: count(),
+      })
+      .from(schema.vote)
+      .where(
+        and(
+          gte(schema.vote.createdAt, startDate),
+          lte(schema.vote.createdAt, endDate),
+        ),
+      )
+      .groupBy(sql`DATE(${schema.vote.createdAt})`)
+      .orderBy(sql`DATE(${schema.vote.createdAt})`)
+  }
 
   // Query destinations grouped by date
-  const destinationTrends = await db
-    .select({
-      date: sql<string>`DATE(${schema.destination.createdAt})::text`,
-      count: count(),
-    })
-    .from(schema.destination)
-    .where(
-      and(
-        eq(schema.destination.status, 'published'),
-        gte(schema.destination.createdAt, startDate),
-        lte(schema.destination.createdAt, endDate),
-      ),
-    )
-    .groupBy(sql`DATE(${schema.destination.createdAt})`)
-    .orderBy(sql`DATE(${schema.destination.createdAt})`)
+  let destinationTrends
+  if (userId) {
+    destinationTrends = await db
+      .select({
+        date: sql<string>`DATE(${schema.destination.createdAt})::text`,
+        count: count(),
+      })
+      .from(schema.destination)
+      .where(
+        and(
+          eq(schema.destination.status, 'published'),
+          gte(schema.destination.createdAt, startDate),
+          lte(schema.destination.createdAt, endDate),
+          eq(schema.destination.userId, userId),
+        ),
+      )
+      .groupBy(sql`DATE(${schema.destination.createdAt})`)
+      .orderBy(sql`DATE(${schema.destination.createdAt})`)
+  } else {
+    destinationTrends = await db
+      .select({
+        date: sql<string>`DATE(${schema.destination.createdAt})::text`,
+        count: count(),
+      })
+      .from(schema.destination)
+      .where(
+        and(
+          eq(schema.destination.status, 'published'),
+          gte(schema.destination.createdAt, startDate),
+          lte(schema.destination.createdAt, endDate),
+        ),
+      )
+      .groupBy(sql`DATE(${schema.destination.createdAt})`)
+      .orderBy(sql`DATE(${schema.destination.createdAt})`)
+  }
 
   // Query articles grouped by date
-  const articleTrends = await db
-    .select({
-      date: sql<string>`DATE(${schema.article.createdAt})::text`,
-      count: count(),
-    })
-    .from(schema.article)
-    .where(
-      and(
-        eq(schema.article.status, 'published'),
-        gte(schema.article.createdAt, startDate),
-        lte(schema.article.createdAt, endDate),
-      ),
-    )
-    .groupBy(sql`DATE(${schema.article.createdAt})`)
-    .orderBy(sql`DATE(${schema.article.createdAt})`)
+  let articleTrends
+  if (userId) {
+    articleTrends = await db
+      .select({
+        date: sql<string>`DATE(${schema.article.createdAt})::text`,
+        count: count(),
+      })
+      .from(schema.article)
+      .where(
+        and(
+          eq(schema.article.status, 'published'),
+          gte(schema.article.createdAt, startDate),
+          lte(schema.article.createdAt, endDate),
+          eq(schema.article.authorId, userId),
+        ),
+      )
+      .groupBy(sql`DATE(${schema.article.createdAt})`)
+      .orderBy(sql`DATE(${schema.article.createdAt})`)
+  } else {
+    articleTrends = await db
+      .select({
+        date: sql<string>`DATE(${schema.article.createdAt})::text`,
+        count: count(),
+      })
+      .from(schema.article)
+      .where(
+        and(
+          eq(schema.article.status, 'published'),
+          gte(schema.article.createdAt, startDate),
+          lte(schema.article.createdAt, endDate),
+        ),
+      )
+      .groupBy(sql`DATE(${schema.article.createdAt})`)
+      .orderBy(sql`DATE(${schema.article.createdAt})`)
+  }
 
   // Merge all data by date
   const trendsMap = new Map<string, ActivityTrend>()
@@ -574,49 +726,59 @@ const analyticsAggregateInputSchema = z.object({
 export const getAnalyticsAggregateServerFn = createServerFn({ method: 'GET' })
   .middleware([adminServerMiddleware])
   .inputValidator(analyticsAggregateInputSchema)
-  .handler(async ({ data: { filters } }): Promise<AnalyticsAggregateResult> => {
-    try {
-      const input: AnalyticsInput = filters ?? { createdAt: [] }
+  .handler(
+    async ({
+      data: { filters },
+      context,
+    }): Promise<AnalyticsAggregateResult> => {
+      try {
+        const input: AnalyticsInput = filters ?? { createdAt: [] }
 
-      // Run all queries in parallel for better performance
-      const [
-        stats,
-        topDestinations,
-        categoryDistribution,
-        typeDistribution,
-        provinsiDistribution,
-        activityTrends,
-      ] = await Promise.all([
-        fetchDashboardStats(input),
-        fetchTopDestinations(input),
-        fetchCategoryDistribution(input),
-        fetchTypeDistribution(input),
-        fetchProvinsiDistribution(input),
-        fetchActivityTrends(input),
-      ])
+        const role = context.user?.role
+        const userId = context.user?.id
 
-      return {
-        stats,
-        topDestinations,
-        categoryDistribution,
-        typeDistribution,
-        provinsiDistribution,
-        activityTrends,
+        const isSuper = role === 'superAdmin'
+
+        // If superAdmin, run global queries; otherwise scope to user's data
+        const [
+          stats,
+          topDestinations,
+          categoryDistribution,
+          typeDistribution,
+          provinsiDistribution,
+          activityTrends,
+        ] = await Promise.all([
+          fetchDashboardStats(input, isSuper ? undefined : userId),
+          fetchTopDestinations(input, isSuper ? undefined : userId),
+          fetchCategoryDistribution(input, isSuper ? undefined : userId),
+          fetchTypeDistribution(input, isSuper ? undefined : userId),
+          fetchProvinsiDistribution(input, isSuper ? undefined : userId),
+          fetchActivityTrends(input, isSuper ? undefined : userId),
+        ])
+
+        return {
+          stats,
+          topDestinations,
+          categoryDistribution,
+          typeDistribution,
+          provinsiDistribution,
+          activityTrends,
+        }
+      } catch (err) {
+        console.error('[Analytics Aggregate Query Error]:', err)
+        return {
+          stats: {
+            totalUsers: 0,
+            totalDestinations: 0,
+            totalArticles: 0,
+            totalVotes: 0,
+          },
+          topDestinations: [],
+          categoryDistribution: [],
+          typeDistribution: [],
+          provinsiDistribution: [],
+          activityTrends: [],
+        }
       }
-    } catch (err) {
-      console.error('[Analytics Aggregate Query Error]:', err)
-      return {
-        stats: {
-          totalUsers: 0,
-          totalDestinations: 0,
-          totalArticles: 0,
-          totalVotes: 0,
-        },
-        topDestinations: [],
-        categoryDistribution: [],
-        typeDistribution: [],
-        provinsiDistribution: [],
-        activityTrends: [],
-      }
-    }
-  })
+    },
+  )

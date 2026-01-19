@@ -247,7 +247,7 @@ export const MobileNav = ({ children, className }: MobileNavProps) => {
         className,
       )}
     >
-      <div className="flex  overflow-hidden items-center w-full justify-between px-3 lg:px-15 mx-auto py-3.5">
+      <div className="flex  overflow-hidden items-center w-full justify-between px-3 lg:px-15 mx-auto py-3">
         <div className="flex items-center w-full">
           <ul className="flex   justify-between  w-full items-center">
             {children}
@@ -294,14 +294,14 @@ export const MobileNavMenu = ({ items }: MobileNavMenuProps) => {
             >
               <item.icon
                 className={cn(
-                  ' not-odd: text-accent-foreground size-4.5',
+                  ' not-odd: text-accent-foreground size-5',
                   isActive && 'fill-primary-foreground   text-primary',
                 )}
               />
 
               <span
                 className={cn(
-                  '      tracking-tightest text-[11px] transition-all duration-300 ease-out',
+                  '     sr-only  tracking-tightest text-[11px] transition-all duration-300 ease-out',
                   !isActive && '  text-muted-foreground ',
                 )}
               >

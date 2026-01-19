@@ -158,10 +158,10 @@ export function StatsPanel({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          className="     md:grid-cols-2 grid gap-3 w-full   relative z-999999  flex-col justify-center gap-3"
+          className="    flex flex-col  md:grid-cols-2 md:grid gap-3 w-full   relative z-999999   justify-center "
         >
-       
-            <Button size="lg" className=" w-ful px-0   " onClick={onPlayAgain}>
+
+            <Button size="lg" className=" w-full px-0   " onClick={onPlayAgain}>
               <RotateCcw /> Main Lagi
             </Button>
             <Button

@@ -155,7 +155,7 @@ function HowToPlayContent({ onStartGame }: { onStartGame: () => void }) {
                   {!isLastStep && (
                     <div
                       className={cn(
-                        'absolute bg-muted  top-5 h-[999999dvh] w-0.5',
+                        'absolute bg-muted  top-5 h-[999999svh] w-0.5',
                         // lineClassName,
                       )}
                     />

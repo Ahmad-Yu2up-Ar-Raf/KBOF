@@ -4,7 +4,7 @@ import { PlusCircle } from 'lucide-react'
 import ArticleBlock, {
   ArticleBlockSkeleton,
 } from '@/components/ui/core/block/article/article-block'
-import ArticleHeader from '@/components/ui/fragments/custom-ui/typography/katalog-header'
+
 import { queryClient } from '@/components/provider/Provider'
 import { getArticleInfiniteQueryOptions } from '@/lib/query-options'
 import KatalogHeader from '@/components/ui/fragments/custom-ui/typography/katalog-header'
@@ -39,8 +39,7 @@ function RouteComponent() {
         titleSecond="Lokal*"
         linkText="Suarakan Ceritamu"
         subTitle="Setiap tempat punya cerita"
-        deskription="   Dengarkan suara hati lokal melalui artikel-artikel inspiratif yang
-              menghubungkan budaya, cerita."
+        deskription="Dengarkan suara hati lokal melalui artikel-artikel inspiratif yang menghubungkan budaya, cerita."
       >
         <CreateArticleSheet>
           <Button

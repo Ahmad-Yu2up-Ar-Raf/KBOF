@@ -77,16 +77,16 @@ export function SiteHeaderMobile() {
   const { data: session } = authClient.useSession()
 
   const navItemsMobiles = [
-    {
-      name: 'Beranda',
-      link: '/',
-      icon: House,
-    },
-    {
-      name: 'Artikel',
-      link: '/artikel/',
-      icon: BookOpenText,
-    },
+    // {
+    //   name: 'Beranda',
+    //   link: '/',
+    //   icon: House,
+    // },
+    // {
+    //   name: 'Artikel',
+    //   link: '/artikel/',
+    //   icon: BookOpenText,
+    // },
     {
       name: 'Destinasi',
       link: '/destinasi/',
@@ -98,14 +98,14 @@ export function SiteHeaderMobile() {
       link: '/destinasi/leaderboard',
       icon: Medal,
     },
-    {
-      name: 'Game',
-      link: '/game',
-      icon: Gamepad2,
-    },
+    // {
+    //   name: 'Game',
+    //   link: '/game',
+    //   icon: Gamepad2,
+    // },
   ]
   const isMobile = useIsMobile()
-  const matches = useMatches()
+ 
 
   if (isMobile) {
     return (

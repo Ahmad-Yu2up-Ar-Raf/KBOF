@@ -172,7 +172,7 @@ export default function CTASection() {
                 'rounded-full w-full text-xs  font-semibold  gap-3  hover:bg-background hover:text-accent-foreground    sm:px-8   py-6  cursor-target hover:scale-110 transition-all duration-300 ease-out lg:px-4 md:py-4.5',
               )}
             >
-              Mulai Permainan{' '}
+              Coba Game{' '}
               <Play className=" size-4.5 fill-primary-foreground   text-primary    sm:size-3.5" />
               {'  '}
             </Link>
@@ -188,7 +188,7 @@ export default function CTASection() {
               )}
             >
               Ajukan Destinasi{' '}
-              <Send className="  size-4.5 fill-primary    text-primary    sm:size-3.5    " />
+              <Send className="  size-4.5      text-primary    sm:size-3.5    " />
             </Link>
           </div>
         </div>

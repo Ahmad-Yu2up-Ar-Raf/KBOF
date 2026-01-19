@@ -71,16 +71,16 @@ export function GameHeader({
       className={cn(
         'z-40  relative   mx-auto bg-transparent   pt-5   items-center justify-center      flex text-center w-full px-10   h-fit        ',
         className,
-        isColumn ? ' pb-3' : '   mb-3',
+        isColumn && ' pb-3',
       )}
     >
       {/* Left Action - Absolute positioned */}
       {leftAction && (
         <nav
           className={cn(
-            'z-50 absolute left-0 -translate-y-1/2 bg-background/95 backdrop-blur',
+            'z-50 absolute left-0  bg-background/95 backdrop-blur',
 
-            isColumn ? ' top-1/2  ' : '  top-0 ',
+            isColumn ? ' top-1/2   -translate-y-1/2' : ' top-5  md:top-0 ',
           )}
         >
           {isLeftActionFunction ? (
@@ -90,7 +90,7 @@ export function GameHeader({
               size="icon"
               className="flex w-fit py-0 text-base items-center gap-2 group transition-colors"
             >
-              <ArrowLeft className="size-4 md:size-5 group-hover:-translate-x-1 group-hover:transform transition-all ease-out duration-300" />
+              <ArrowLeft className="size-5 group-hover:-translate-x-1 group-hover:transform transition-all ease-out duration-300" />
               <span className="sr-only">Kembali</span>
             </Button>
           ) : (

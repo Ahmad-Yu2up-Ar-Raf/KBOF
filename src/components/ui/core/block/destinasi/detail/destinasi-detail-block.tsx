@@ -153,7 +153,7 @@ export default function DestinasiDetailBlock({
           backgroundImage: `url(${destination.coverImage})`,
         }}
         className={cn(
-          'relative min-h-67  bg-fixed bg-no-repeat bg-center  bg-cover  flex items-center justify-center overflow-hidden hero-parallax  ',
+          'relative min-h-97  bg-fixed bg-no-repeat bg-center  bg-cover  flex items-center justify-center overflow-hidden hero-parallax  ',
         )}
       >
         <div className="absolute inset-0 bg-linear-to-b from-background/10 via-background/10 to-background     " />

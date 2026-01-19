@@ -28,6 +28,7 @@ import {
 import { Skeleton } from '@/components/ui/fragments/shadcn-ui/skeleton'
 import { Badge } from '@/components/ui/fragments/shadcn-ui/badge'
 import { formatLabel } from '@/lib/format'
+import MediaItem from '@/components/ui/fragments/custom-ui/media/media-item'
 
 // =============================================================================
 // STATS CARD COMPONENT
@@ -248,9 +249,8 @@ export function TopDestinationsList({
               <div className="relative flex-shrink-0">
                 <div className="w-10 h-10 rounded overflow-hidden bg-muted">
                   {destination.coverImage ? (
-                    <img
-                      src={destination.coverImage}
-                      alt={destination.name}
+                    <MediaItem
+                      webViewLink={destination.coverImage}
                       className="w-full h-full object-cover"
                     />
                   ) : (

@@ -141,7 +141,7 @@ const MediaItem = ({
       <Image
         src={webViewLink}
         alt={webViewLink}
-        className="object-cover  w-full h-full  cursor-pointer"
+        className="object-cover overflow-hidden w-full rounded-2xl  h-full"
         onClick={onClick}
         width={800}
         height={600}

@@ -70,7 +70,7 @@ const AuthLayoutTemplate = ({
   }
   return (
     <>
-      <div className=" relative   min-h-svh container py-0  flex items-center justify-center overflow-hidden ">
+      <div className=" relative   min-h-svh container py-6  flex items-center justify-center overflow-hidden ">
         <div
           className={cn(
             '  w-full relative max-w-lg  overflow-hidden flex flex-col  lg:flex-row   border-r border-l lg:max-w-none h-svh',

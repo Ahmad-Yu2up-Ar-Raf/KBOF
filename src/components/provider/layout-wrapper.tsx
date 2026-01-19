@@ -115,6 +115,8 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
             )}
           >
             {children}
+            <div className=" fixed top-0 h-50 inset-0 bg-linear-to-t from-background/0 via-background/0 to-background     " />
+            {/* <div className=" fixed bottom-0 h-full inset-0 bg-linear-to-b from-background/30 via-background/0 to-background     " /> */}
           </div>
         </div>
         {/* Footer only shows when shouldShowFooter is true */}

@@ -28,7 +28,6 @@ export function LevelSelectScreen({
   onBack,
 }: LevelSelectScreenProps) {
   return (
-    
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -38,7 +37,7 @@ export function LevelSelectScreen({
     >
       <GameHeader
         title="Pilih Level Permainan"
-        className="   "
+        className=" pt-10  mb-10  "
         Emoji="🎯"
         variant="default"
         subtitle="Ketuk salah satu kartu level untuk memulai permainan"

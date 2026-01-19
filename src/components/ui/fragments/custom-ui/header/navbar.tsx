@@ -277,8 +277,64 @@ export const MobileNavHeader = ({
 export const MobileNavMenu = ({ items }: MobileNavMenuProps) => {
   const matches = useMatches()
   const paths = matches[matches.length - 1]?.routeId
+  const isActiveHome = paths === '/'
+  const isActiveArtikel = paths === '/artikel/'
+  const isActiveGame = paths === '/game'
   return (
     <>
+      <li>
+        <Link
+          to={'/'}
+          className={cn(
+            buttonVariants({ variant: 'ghost' }),
+            'gap-0.5  cursor-pointer    flex flex-col items-center   ',
+            isActiveHome && '  bg-accent   text-primary ',
+          )}
+        >
+          <HomeSvg
+            className={cn(
+              '   pl-1.5 text-accent-foreground size-full ',
+              isActiveHome && 'fill-primary-foreground   text-primary',
+            )}
+          />
+
+          <span
+            className={cn(
+              '    tracking-tightest text-xs transition-all duration-300 ease-out',
+              !isActiveHome && '  text-muted-foreground ',
+            )}
+          >
+            Beranda
+          </span>
+        </Link>
+      </li>
+      <li>
+        <Link
+          to={'/artikel'}
+          className={cn(
+            buttonVariants({ variant: 'ghost' }),
+            'gap-0.5  cursor-pointer justify-center     flex flex-col items-center   ',
+            isActiveArtikel && '  bg-accent   text-primary ',
+          )}
+        >
+          <BookOpen
+            className={cn(
+              '   pl-1 text-accent-foreground size-full ',
+              isActiveArtikel && 'fill-primary-foreground   text-primary',
+            )}
+          />
+
+          <span
+            className={cn(
+              '    tracking-tightest text-xs transition-all duration-300 ease-out',
+              !isActiveArtikel && '  text-muted-foreground ',
+            )}
+          >
+            Artikel
+          </span>
+        </Link>
+      </li>
+
       {items.map((item, index) => {
         const isActive = item.link == paths
         return (
@@ -310,6 +366,32 @@ export const MobileNavMenu = ({ items }: MobileNavMenuProps) => {
           </li>
         )
       })}
+      <li>
+        <Link
+          to={'/game'}
+          className={cn(
+            buttonVariants({ variant: 'ghost' }),
+            'gap-0.5  cursor-pointer    overflow-visible flex flex-col items-center   ',
+            isActiveGame && '  bg-accent   text-primary ',
+          )}
+        >
+          <Game
+            className={cn(
+              '  pl-0.5  text-accent-foreground size-full',
+              isActiveGame && 'fill-primary-foreground   text-primary',
+            )}
+          />
+
+          <span
+            className={cn(
+              '    tracking-tightest text-xs transition-all duration-300 ease-out',
+              !isActiveGame && '  text-muted-foreground ',
+            )}
+          >
+            Game
+          </span>
+        </Link>
+      </li>
     </>
   )
 }
@@ -340,3 +422,56 @@ export const NavbarButton = ({
     </Link>
   )
 }
+
+import { SVGProps } from 'react'
+const HomeSvg = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    fill="none"
+    stroke="currentColor"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth={2}
+    className="lucide lucide-house-icon lucide-house"
+    {...props}
+  >
+    <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+    <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+  </svg>
+)
+
+const Game = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    fill="none"
+    stroke="currentColor"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth={2}
+    className="lucide lucide-gamepad2-icon lucide-gamepad-2"
+    {...props}
+  >
+    <path d="M6 11h4M8 9v4M15 12h.01M18 10h.01M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" />
+  </svg>
+)
+
+const BookOpen = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    fill="none"
+    stroke="currentColor"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth={2}
+    className="lucide lucide-book-open-text-icon lucide-book-open-text"
+    {...props}
+  >
+    <path d="M12 7v14M16 12h2M16 8h2M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3zM6 12h2M6 8h2" />
+  </svg>
+)

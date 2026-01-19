@@ -37,7 +37,7 @@ export function LeaderboardHeader() {
           Leaderboard Destinasi
         </h1>
         <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto px-2">
-          Destinasi dengan dukungan terbanyak dari komunitas. Vote destinasi
+          Destinasi dengan dukungan terbanyak. Vote destinasi
           favoritmu untuk membantu mereka naik peringkat!
         </p>
       </header>

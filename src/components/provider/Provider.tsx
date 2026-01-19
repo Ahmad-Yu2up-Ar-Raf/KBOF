@@ -12,6 +12,7 @@ import { InfiniteScrollProvider } from './infinite-scroll-context'
 import { ModalProvider } from './context-provider'
 import Preload from '@/components/ui/fragments/custom-ui/animate-ui/preload-animation'
 import { Toaster } from '@/components/ui/fragments/shadcn-ui/sonner'
+import { SiteHeaderMobile } from '../ui/core/layout/nav/site-header'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -121,6 +122,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
               </InfiniteScrollProvider>
             </ModalProvider>
           ) : null}
+                <SiteHeaderMobile />
         </AnimatePresence>
       </NuqsAdapter>
     </QueryClientProvider>

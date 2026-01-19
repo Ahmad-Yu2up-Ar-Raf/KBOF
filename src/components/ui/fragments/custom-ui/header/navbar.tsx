@@ -282,7 +282,7 @@ export const MobileNavMenu = ({ items }: MobileNavMenuProps) => {
   const isActiveGame = paths === '/game'
   return (
     <>
-      <li>
+      {/* <li>
         <Link
           to={'/'}
           className={cn(
@@ -333,7 +333,7 @@ export const MobileNavMenu = ({ items }: MobileNavMenuProps) => {
             Artikel
           </span>
         </Link>
-      </li>
+      </li> */}
 
       {items.map((item, index) => {
         const isActive = item.link == paths
@@ -349,14 +349,14 @@ export const MobileNavMenu = ({ items }: MobileNavMenuProps) => {
             >
               <item.icon
                 className={cn(
-                  ' not-odd: text-accent-foreground size-5.5',
+                  ' not-odd: text-accent-foreground size-4',
                   isActive && 'fill-primary-foreground   text-primary',
                 )}
               />
 
               <span
                 className={cn(
-                  '    tracking-tightest text-xs transition-all duration-300 ease-out',
+                  '      tracking-tightest text-[10px] transition-all duration-300 ease-out',
                   !isActive && '  text-muted-foreground ',
                 )}
               >
@@ -366,7 +366,7 @@ export const MobileNavMenu = ({ items }: MobileNavMenuProps) => {
           </li>
         )
       })}
-      <li>
+      {/* <li>
         <Link
           to={'/game'}
           className={cn(
@@ -391,7 +391,7 @@ export const MobileNavMenu = ({ items }: MobileNavMenuProps) => {
             Game
           </span>
         </Link>
-      </li>
+      </li> */}
     </>
   )
 }
@@ -424,23 +424,7 @@ export const NavbarButton = ({
 }
 
 import { SVGProps } from 'react'
-const HomeSvg = (props: SVGProps<SVGSVGElement>) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={24}
-    height={24}
-    fill="none"
-    stroke="currentColor"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    strokeWidth={2}
-    className="lucide lucide-house-icon lucide-house"
-    {...props}
-  >
-    <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-    <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
-  </svg>
-)
+
 
 const Game = (props: SVGProps<SVGSVGElement>) => (
   <svg

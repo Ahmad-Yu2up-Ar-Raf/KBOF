@@ -211,7 +211,7 @@ function PodiumContent({ entry, position }: PodiumContentProps) {
     <CardContent
       className={cn(
         'bg-background  p-1.5 sm:p-2 md:p-4',
-        'space-y-3   md:space-y-4',
+        'space-y-3  overflow-hidden  md:space-y-4',
         '-mt-6 sm:-mt-7 md:-mt-8 relative z-10',
         '  sm:rounded-b-2xl ',
       )}

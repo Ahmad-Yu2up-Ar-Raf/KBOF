@@ -1,6 +1,7 @@
 import { createRouter } from '@tanstack/react-router'
 import { routeTree } from './routeTree.gen'
 import { NotFoundPage } from '@/components/ui/core/block/not-found-block-page'
+import { Spinner } from './components/ui/fragments/shadcn-ui/spinner'
 
 // Import the generated route tree
 
@@ -35,7 +36,7 @@ export const getRouter = () => {
     // 👇 Tambahan: Handle SSR errors
     defaultPendingComponent: () => (
       <div className="flex items-center justify-center min-h-screen">
-        <p>Loading...</p>
+        <Spinner className="h-8 w-8 animate-spin text-primary" />
       </div>
     ),
   })

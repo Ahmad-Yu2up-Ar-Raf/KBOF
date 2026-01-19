@@ -19,7 +19,7 @@ export function GameShell({ children, className }: GameShellProps) {
     <>
       <div
         className={cn(
-          'container  md:content-center      z-50 pt-0 md:pb-0  justify-center   relative min-h-[90svh] overflow-y-visible overflow-x-hidden flex flex-col px-5',
+          'container  content-center      z-50 pt-0 md:pb-0  justify-center   relative min-h-[90svh] overflow-y-visible overflow-x-hidden flex flex-col px-5',
           className,
         )}
       >

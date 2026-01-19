@@ -99,7 +99,7 @@ function DashboardPage() {
   )
 
   return (
-    <Wrapper title="Dashboard">
+    <Wrapper title="Hi Warga Local!" >
       <Overview data={analyticsData} />
     </Wrapper>
   )

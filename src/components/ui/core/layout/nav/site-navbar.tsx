@@ -43,7 +43,10 @@ function SiteNavbar() {
   const matches = useMatches()
   const paths = matches[matches.length - 1]?.routeId
   const isActive = paths !== '/' && paths !== '/game'
-  const isActiveFixed = paths == '/destinasi/$destinasiId/'
+  const isActiveFixed =
+    paths == '/destinasi/$destinasiId/' ||
+    paths == '/(auth)/login' ||
+    paths == '/(auth)/register'
   // setOpen((prevState) => !prevState)
   const isMobile = useIsMobile()
   if (isActive && isMobile)
@@ -85,7 +88,7 @@ function SiteNavbar() {
           delay: 0,
         }}
         className={cn(
-          ' top-0   z-40     w-full',
+          ' top-0   z-50     w-full',
           isActiveFixed ? 'fixed  ' : '    sticky',
         )}
       >

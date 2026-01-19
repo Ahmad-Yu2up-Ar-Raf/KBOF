@@ -105,7 +105,7 @@ function HeroCard({ onPlay }: HeroCardProps) {
   ]
 
   return (
-    <section className="flex md:px-2  md:pt-0 content-center min-h-dvh   flex-col justify-center items-center w-full max-w-2xl m-auto z-50 pointer-events-auto   md:gap-4">
+    <section className="flex md:px-2  pt-6 md:pt-0 content-center min-h-dvh   flex-col md:justify-center items-center w-full max-w-2xl m-auto z-50 pointer-events-auto   md:gap-4">
       <AnimatedRoadmap
         milestones={milestonesData}
         mapImageSrc="/assets/images/map.webp"

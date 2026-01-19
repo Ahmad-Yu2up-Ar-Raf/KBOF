@@ -355,24 +355,24 @@ export function getDestinationTableColumns({
       },
       enableColumnFilter: true,
     },
-    {
-      id: 'publishedAt',
-      accessorKey: 'publishedAt',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} label="Dipublikasikan" />
-      ),
-      cell: ({ cell }) => {
-        const v = cell.getValue<Date | null | undefined>()
-        return v ? formatDate(v) : '-'
-      },
-      meta: {
-        label: 'Dipublikasikan',
-        variant: 'dateRange',
-        icon: CalendarIcon,
-      },
-      enableColumnFilter: true,
-      enableHiding: true,
-    },
+    // {
+    //   id: 'publishedAt',
+    //   accessorKey: 'publishedAt',
+    //   header: ({ column }) => (
+    //     <DataTableColumnHeader column={column} label="Dipublikasikan" />
+    //   ),
+    //   cell: ({ cell }) => {
+    //     const v = cell.getValue<Date | null | undefined>()
+    //     return v ? formatDate(v) : '-'
+    //   },
+    //   meta: {
+    //     label: 'Dipublikasikan',
+    //     variant: 'dateRange',
+    //     icon: CalendarIcon,
+    //   },
+    //   enableColumnFilter: true,
+    //   enableHiding: true,
+    // },
     {
       id: 'actions',
       cell: function Cell({ row }) {

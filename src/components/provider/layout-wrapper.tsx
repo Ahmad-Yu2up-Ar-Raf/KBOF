@@ -111,7 +111,7 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
         >
           <div
             className={cn(
-              'mx-auto flex  relative overflow-x-hidden   md:overflow-visible  flex-col  gap-10 sm:gap-8  content-center  h-full w-full',
+              'mx-auto flex  lg:gap-30 relative overflow-x-hidden   md:overflow-visible  flex-col  gap-10 sm:gap-8  content-center  h-full w-full',
             )}
           >
             {children}

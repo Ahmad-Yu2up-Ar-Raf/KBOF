@@ -20,6 +20,8 @@ import {
   getCategoryIcon,
   getCategoryLabel,
   getProvinsiLabel,
+  getTypeIcon,
+  getTypeLabel,
 } from '@/lib/utils/destination-utils'
 
 interface DestinasiCardProps {
@@ -86,6 +88,8 @@ function DestinasiCard({
   )
   const categoriLabel = getCategoryLabel(destination.category)
   const CategoriIcon = getCategoryIcon(destination.category)
+  const typeLabel = getTypeLabel(destination.type)
+  const TypeIcon = getTypeIcon(destination.type)
   return (
     <Card
       onMouseEnter={() => setHovered(index)}
@@ -110,7 +114,7 @@ function DestinasiCard({
         <CardHeader className="p-0 w-full max-w-[15em] gap-2">
           <Badge
             variant="secondary"
-            className={cn('text-xs  font-semibold w-fit')}
+            className={cn('text-xs my-1.5  font-semibold w-fit')}
           >
             <CategoriIcon className="mr-1 size-3 " />
             {categoriLabel}
@@ -161,14 +165,14 @@ function DestinasiCard({
           </div>
           <div className="flex flex-wrap gap-1.5">
             <Badge className="px-2 py-0.5 bg-primary/10 text-primary rounded-full text-xs font-medium">
-              # {destination.type}
+              <TypeIcon /> {typeLabel}
             </Badge>
             <Badge
               variant={'outline'}
               className="px-2 py-0 bg-background text-primary rounded-full text-xs font-medium"
             >
               <StarIcon className=" fill-primary" />
-              {(destination.averageRating ?? 0).toLocaleString('id-ID')}
+              {(destination.averageRating ?? 0).toFixed(1)}
             </Badge>
           </div>
         </div>

@@ -181,14 +181,14 @@ export interface FileRoutesByFullPath {
   '/profile/artikel': typeof ProfileArtikelRoute
   '/profile/destinasi': typeof ProfileDestinasiRoute
   '/profile/settings': typeof ProfileSettingsRoute
-  '/artikel': typeof ArtikelIndexRoute
+  '/artikel/': typeof ArtikelIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
-  '/destinasi': typeof DestinasiIndexRoute
+  '/destinasi/': typeof DestinasiIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/dashboard/settings/password': typeof DashboardSettingsPasswordRoute
   '/dashboard/settings/': typeof DashboardSettingsIndexRoute
-  '/destinasi/$destinasiId': typeof DestinasiDestinasiIdIndexRoute
+  '/destinasi/$destinasiId/': typeof DestinasiDestinasiIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -262,14 +262,14 @@ export interface FileRouteTypes {
     | '/profile/artikel'
     | '/profile/destinasi'
     | '/profile/settings'
-    | '/artikel'
+    | '/artikel/'
     | '/dashboard/'
-    | '/destinasi'
+    | '/destinasi/'
     | '/profile/'
     | '/api/auth/$'
     | '/dashboard/settings/password'
     | '/dashboard/settings/'
-    | '/destinasi/$destinasiId'
+    | '/destinasi/$destinasiId/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -387,7 +387,7 @@ declare module '@tanstack/react-router' {
     '/destinasi/': {
       id: '/destinasi/'
       path: '/destinasi'
-      fullPath: '/destinasi'
+      fullPath: '/destinasi/'
       preLoaderRoute: typeof DestinasiIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -401,7 +401,7 @@ declare module '@tanstack/react-router' {
     '/artikel/': {
       id: '/artikel/'
       path: '/artikel'
-      fullPath: '/artikel'
+      fullPath: '/artikel/'
       preLoaderRoute: typeof ArtikelIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -492,7 +492,7 @@ declare module '@tanstack/react-router' {
     '/destinasi/$destinasiId/': {
       id: '/destinasi/$destinasiId/'
       path: '/destinasi/$destinasiId'
-      fullPath: '/destinasi/$destinasiId'
+      fullPath: '/destinasi/$destinasiId/'
       preLoaderRoute: typeof DestinasiDestinasiIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }

@@ -41,6 +41,7 @@ function RouteComponent() {
       <KatalogHeader
         titleMain="Ruang"
         titleSecond="Destinasi"
+        placholder='Cari destinasi...'
         linkText="Ajukan Destinasi Lokal"
         subTitle="Ruang Destinasi Suasana Lokal"
         deskription="Temukan destinasi wisata unik, rasakan kehangatan budaya lokal."
@@ -68,12 +69,12 @@ function PendingComponent() {
     <div className="mx-auto container max-w-6xl space-y-4 ">
       {/* Header tetap di-render saat pending */}
       <KatalogHeader
-        titleMain="Suasana"
-        titleSecond="Lokal*"
+        titleMain="Ruang"
+        titleSecond="Destinasi"
+        placholder="Cari destinasi..."
         linkText="Ajukan Destinasi Lokal"
         subTitle="Ruang Destinasi Suasana Lokal"
-        deskription="Temukan destinasi wisata unik, rasakan kehangatan budaya lokal,
-              dan jelajahi pesona tersembunyi di setiap sudut."
+        deskription="Temukan destinasi wisata unik, rasakan kehangatan budaya lokal."
       >
         <CreateDestinationSheet>
           <Button

@@ -20,7 +20,7 @@ function ThumnailSlider({ images }: componentProps) {
 
   return (
     <>
-      <div className="w-full md:sticky top-10     h-full   overflow-hidden rounded-xl mx-auto">
+      <div className="w-full md:sticky top-15     h-full   overflow-hidden rounded-xl mx-auto">
         <Carousel
           options={OPTIONS}
           className="relative w-full md:h-[80svh] md:flex md:gap-2 space-y-2"

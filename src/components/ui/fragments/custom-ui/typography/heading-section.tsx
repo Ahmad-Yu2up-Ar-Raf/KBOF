@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
-import {  ArrowRightIcon  } from 'lucide-react'
-import type {ArrowRight, LucideIcon} from 'lucide-react';
+import { ArrowRightIcon } from 'lucide-react'
+import type { ArrowRight, LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
 
@@ -31,8 +31,8 @@ export default function HeadingSection({
       )}
     >
       <div className="space-y-1 max-w-full">
-        <h2 className="text-2xl md:text-3xl font-bold tracking-tight flex flex-wrap items-center gap-2 leading-tight max-w-2xl line-clamp-2">
-          {Icon && <Icon className="size-6 md:size-7" />}
+        <h2 className="text-2xl md:text-3xl font-bold tracking-tight flex flex-wrap items-center gap-0 leading-tight max-w-2xl line-clamp-2">
+          {/* {Icon && <Icon className="size-6 md:size-7" />} */}
           {firstWords && <span>{firstWords}&nbsp;</span>}
           <span className="text-primary">{lastWord}</span>
         </h2>

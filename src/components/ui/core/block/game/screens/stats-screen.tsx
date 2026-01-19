@@ -107,7 +107,7 @@ export function StatsScreen({
           leftAction={onBackToMenu}
           Emoji={results.length > 0 ? '🎉' : '🏆'}
           title="Permainan Selesai!"
-          className=" mb-6"
+          className=" border-b  mb-6"
           rightAction={<ShareComponent />}
           // subtitle="Lihat hasil permainanmu"
           variant="column"

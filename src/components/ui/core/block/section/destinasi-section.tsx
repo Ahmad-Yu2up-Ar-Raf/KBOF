@@ -53,7 +53,7 @@ function DestinationSection({
       />
 
       <Carousel
-        className=""
+        className=" lg:mb-0"
         plugins={[
           Autoplay({
             delay: 2000,

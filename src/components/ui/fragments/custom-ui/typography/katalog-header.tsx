@@ -22,6 +22,7 @@ type componentProps = {
   subTitle: string
   deskription: string
   linkText?: string
+  placholder?: string
   children: React.ReactNode
 }
 
@@ -31,6 +32,7 @@ const KatalogHeader = ({
   subTitle,
   deskription,
   children,
+  placholder,
   linkText,
 }: componentProps) => {
   // URL state with nuqs - clean URLs (no default values in URL)
@@ -135,7 +137,7 @@ const KatalogHeader = ({
           <div className="relative w-full md:max-w-md">
             <Input
               type="text"
-              placeholder="Cari artikel..."
+              placeholder={placholder || 'Cari artikel...'}
               value={inputValue}
               onChange={(e) => handleSearchChange(e.target.value)}
               leftIcon={<Search />}

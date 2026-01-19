@@ -15,6 +15,7 @@ import { cn } from '@/lib/utils'
 import animationData from '@/assets/animations/Businessman.json'
 import { authClient } from '@/lib/auth/auth-client'
 import { BlurFade } from '@/components/ui/fragments/custom-ui/animate-ui/blur-fade'
+import { Image } from '@unpic/react'
 
 const fallbackImages = [
   {
@@ -71,7 +72,13 @@ export default function HeroSection() {
               // Use will-change sparingly
               style={{ willChange: 'transform, opacity' }}
             >
-              <MediaItem webViewLink={fallbackImages[0].url} />
+              <Image
+                className=" w-full h-full object-cover object-center "
+                width={800}
+                height={400}
+                alt={fallbackImages[0].url}
+                src={fallbackImages[0].url}
+              />
             </BlurFade>
           </FloatingElement>
 
@@ -85,7 +92,13 @@ export default function HeroSection() {
               className="w-40 h-40 relative overflow-hidden sm:w-48 sm:h-48 md:w-60 md:h-60 lg:w-55 lg:h-67 object-cover -rotate-[4deg] hover:scale-105 duration-200 cursor-target transition-transform shadow-2xl rounded-xl"
               style={{ willChange: 'transform, opacity' }}
             >
-              <MediaItem webViewLink={fallbackImages[1].url} />
+              <Image
+                className=" w-full h-full object-cover object-center "
+                width={800}
+                height={400}
+                alt={fallbackImages[1].url}
+                src={fallbackImages[1].url}
+              />
             </BlurFade>
           </FloatingElement>
 
@@ -99,7 +112,13 @@ export default function HeroSection() {
               className="w-40 rotate-12 h-36 overflow-hidden sm:w-48 sm:h-44 md:w-60 md:h-52 lg:w-55 lg:h-67 object-cover hover:scale-105 duration-200 cursor-target transition-transform shadow-2xl rounded-xl"
               style={{ willChange: 'transform, opacity' }}
             >
-              <MediaItem webViewLink={fallbackImages[2].url} />
+              <Image
+                className=" w-full h-full object-cover object-center "
+                width={800}
+                height={400}
+                alt={fallbackImages[2].url}
+                src={fallbackImages[2].url}
+              />
             </BlurFade>
           </FloatingElement>
 
@@ -113,7 +132,13 @@ export default function HeroSection() {
               className="w-44 overflow-hidden rotate-[4deg] h-44 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-55 lg:h-67 object-cover hover:scale-105 duration-200 cursor-target transition-transform shadow-2xl rounded-xl"
               style={{ willChange: 'transform, opacity' }}
             >
-              <MediaItem webViewLink={fallbackImages[3].url} />
+              <Image
+                className=" w-full h-full object-cover objec "
+                width={800}
+                height={400}
+                alt={fallbackImages[3].url}
+                src={fallbackImages[3].url}
+              />
             </BlurFade>
           </FloatingElement>
         </Floating>
@@ -231,7 +256,7 @@ export function Marque() {
         <div
           className="h-12 md:h-16 lg:h-20 w-[240dvw] bg-repeat-x animate-songket-scroll-right will-change-transform"
           style={{
-            backgroundImage: "url('/assets/images/287.jpg')",
+            backgroundImage: "url('/assets/images/songket.jpg')",
             backgroundRepeat: 'repeat-x',
             backgroundSize: 'auto 100%',
             backgroundPosition: '0 50%',

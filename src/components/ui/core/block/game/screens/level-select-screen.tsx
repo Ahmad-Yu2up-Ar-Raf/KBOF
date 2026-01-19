@@ -28,10 +28,11 @@ export function LevelSelectScreen({
   onBack,
 }: LevelSelectScreenProps) {
   return (
+    
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="h-full gap-0 flex flex-col md:gap-5 w-full"
+      className="h-full gap-0 flex flex-col md:gap-8 w-full"
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: ANIMATION_DURATION.normal }}
     >

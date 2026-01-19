@@ -173,10 +173,10 @@ export function QuestionCard({
       />
       <Card
         gradient={false}
-        className="   max-w-lg  content-start   m-auto gap-4  p-0 bg-transparent border-0  shadow-none"
+        className="   max-w-lg  content-start   m-auto gap-6 p-0 bg-transparent border-0  shadow-none"
       >
         {/* Header with progress and timer */}
-        <CardHeader className="   content-start h-full bg-transparent min-h-[20svh] overflow-hidden md:h-[15em]  gap-0 pb-0  rounded-4xl p-0">
+        <CardHeader className="  mb-0  content-start h-full bg-transparent min-h-[20svh] overflow-hidden md:h-fit  gap-0 pb-0   p-0">
           <FragmentReveal
             src={question.fullImageUrl}
             alt={question.destinationName}
@@ -228,27 +228,26 @@ export function QuestionCard({
 
             {/* Next Question button - only shows after feedback */}
             <AnimatePresence>
-              {showFeedback && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{
-                    duration: ANIMATION_DURATION.normal,
-                    delay: 0.3,
-                  }}
-                  className="flex md:justify-end w-full   justify-center pt-2"
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{
+                  duration: ANIMATION_DURATION.normal,
+                  delay: 0.3,
+                }}
+                className="flex md:justify-end w-full   justify-center pt-2"
+              >
+                <Button
+                  size="lg"
+                  disabled={!showFeedback}
+                  onClick={onNextQuestion}
+                  className="w-full   md:px-8 gap-2"
                 >
-                  <Button
-                    size="lg"
-                    onClick={onNextQuestion}
-                    className="w-full    md:w-fit  md:px-8 gap-2"
-                  >
-                    {isLastQuestion ? 'Lihat Hasil' : 'Soal Berikutnya'}
-                    <ArrowRight className="size-4" />
-                  </Button>
-                </motion.div>
-              )}
+                  {isLastQuestion ? 'Lihat Hasil' : 'Soal Berikutnya'}
+                  <ArrowRight className="size-4" />
+                </Button>
+              </motion.div>
             </AnimatePresence>
           </CardAction>
 

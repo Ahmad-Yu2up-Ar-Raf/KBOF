@@ -31,7 +31,7 @@ export default function KategoriSection() {
   const categories = getAllCategoriesWithImages()
 
   return (
-    <section className="container px-0 sm:px-5 py-10 space-y-8">
+    <section className="container px-0 sm:px-5 py-10 lg:py-0 space-y-8">
       {/* Section Header */}
       <HeadingSection
         className=" px-5 md:px-0 "

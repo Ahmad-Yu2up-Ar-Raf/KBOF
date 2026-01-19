@@ -6,6 +6,8 @@ import {
   Gamepad,
   Gamepad2Icon,
   Play,
+  Send,
+  Telescope,
 } from 'lucide-react'
 import {
   Button,
@@ -101,7 +103,7 @@ function GridPatternDashed() {
 export default function CTASection() {
   const { data: session } = authClient.useSession()
   return (
-    <section className="container px-6  py-12 md:py-16 lg:py-20">
+    <section className="container px-6  py-12 md:py-16 lg:py-0">
       <div className="relative w-fullcontainer m-auto   h-[500px] md:h-[300px] overflow-hidden rounded-3xl border border-primary/20 bg-accent px-7">
         {/* /* Grid Background */}
         <GridPatternDashed />
@@ -170,8 +172,9 @@ export default function CTASection() {
                 'rounded-full w-full text-xs  font-semibold  gap-3  hover:bg-background hover:text-accent-foreground    sm:px-8   py-6  cursor-target hover:scale-110 transition-all duration-300 ease-out lg:px-4 md:py-4.5',
               )}
             >
-              <Gamepad2Icon className=" size-4.5  md:size-3.5  " /> Mainkan
-              Game{' '}
+              Mulai Permainan{' '}
+              <Play className=" size-4.5 fill-primary-foreground   text-primary    sm:size-3.5" />
+              {'  '}
             </Link>
             <Link
               to={
@@ -184,8 +187,8 @@ export default function CTASection() {
                 '  bg-background font-semibold text-accent-foreground rounded-full w-full text-xs   gap-3     sm:px-8    py-6 hover:bg-primary/90 cursor-target hover:scale-110 transition-all duration-300 ease-out lg:px-4   hover:text-primary-foreground md:py-4.5',
               )}
             >
-              <BookOpenText className="  size-4.5  y md:size-3.5     " />
-              Ajukan Artikel{' '}
+              Ajukan Destinasi{' '}
+              <Send className="  size-4.5 fill-primary    text-primary    sm:size-3.5    " />
             </Link>
           </div>
         </div>

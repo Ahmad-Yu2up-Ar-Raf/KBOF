@@ -76,22 +76,22 @@ export default function DestinasiDetailBlock({
 
               {/* Stats badges */}
               <div className="flex flex-wrap gap-2 text-sm">
-                <Badge variant={'outline'}>
+                {/* <Badge variant={'outline'}>
                   <StarIcon className="size-3.5 fill-amber-200" />
-                  {destination.totalVote} Rating
-                </Badge>
+                  {destination.averageRating} Rating
+                </Badge> */}
+                {destination.averageRating > 0 && (
+                  <Badge variant={'outline'}>
+                    <Star className="size-3.5 fill-amber-200" />
+                    {destination.averageRating} ({destination.totalReview}{' '}
+                    ulasan)
+                  </Badge>
+                )}
                 <Badge variant={'outline'}>
                   <ThumbsUp className="size-3.5" />
                   {destination.totalVote} votes
                 </Badge>
 
-                {destination.averageRating > 0 && (
-                  <Badge variant={'outline'}>
-                    <Star className="size-3.5 fill-current" />
-                    {destination.averageRating} ({destination.totalReview}{' '}
-                    ulasan)
-                  </Badge>
-                )}
                 <Badge variant={'outline'}>
                   <Calendar className="size-3.5" />
                   {formatDate(destination.createdAt)}
@@ -184,22 +184,18 @@ export default function DestinasiDetailBlock({
 
               {/* Stats badges */}
               <div className="flex flex-wrap gap-2 text-sm">
-                <Badge variant={'outline'}>
-                  <StarIcon className="size-3.5 fill-amber-200" />
-                  {destination.totalVote} Rating
-                </Badge>
+                {destination.averageRating > 0 && (
+                  <Badge variant={'outline'}>
+                    <Star className="size-3.5 fill-amber-200" />
+                    {destination.averageRating} ({destination.totalReview}{' '}
+                    ulasan)
+                  </Badge>
+                )}
                 <Badge variant={'outline'}>
                   <ThumbsUp className="size-3.5" />
                   {destination.totalVote} votes
                 </Badge>
 
-                {destination.averageRating > 0 && (
-                  <Badge variant={'outline'}>
-                    <Star className="size-3.5 fill-current" />
-                    {destination.averageRating} ({destination.totalReview}{' '}
-                    ulasan)
-                  </Badge>
-                )}
                 <Badge variant={'outline'}>
                   <Calendar className="size-3.5" />
                   {formatDate(destination.createdAt)}

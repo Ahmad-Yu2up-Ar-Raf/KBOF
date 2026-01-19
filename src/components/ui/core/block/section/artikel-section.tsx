@@ -37,7 +37,7 @@ export default function ArtikelSection() {
       />
 
       {/* Articles Grid */}
-      <main className="grid grid-cols-1 md:grid-cols-2 w-full rounded-3xl overflow-hidden border border-secondary">
+      <main className="grid grid-cols-1 md:grid-cols-2 lg:mb-0 w-full rounded-3xl overflow-hidden border border-secondary">
         {articles.map((article, index) => (
           <ArticleCard
             key={article.id}

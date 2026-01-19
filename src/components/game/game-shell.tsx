@@ -7,6 +7,7 @@ import { Button } from '../ui/fragments/shadcn-ui/button'
 import { AnimatedGridPattern } from '../ui/fragments/shadcn-ui/animated-grid-pattern'
 import { cn } from '@/lib/utils'
 import { ANIMATION_DURATION } from '@/lib/game/constants'
+import { is } from 'drizzle-orm'
 
 type GameShellProps = {
   children: React.ReactNode
@@ -18,7 +19,7 @@ export function GameShell({ children, className }: GameShellProps) {
     <>
       <div
         className={cn(
-          'container    z-50 pt-0 md:pb-0    relative min-h-svh overflow-y-visible overflow-x-hidden flex flex-col px-5',
+          'container  md:content-center      z-50 pt-0 md:pb-0  justify-center   relative min-h-[90svh] overflow-y-visible overflow-x-hidden flex flex-col px-5',
           className,
         )}
       >
@@ -30,8 +31,8 @@ export function GameShell({ children, className }: GameShellProps) {
         duration={3}
         repeatDelay={1}
         className={cn(
-          'mask-[radial-gradient(500px_circle_at_center,white,transparent)]',
-          'inset-x-0 inset-y-[-30%] z-40   top-0 h-full skew-y-12',
+          'mask-[radial-gradient(900px_circle_at_center,white,transparent)]',
+          'inset-x-0 inset-y-[-30%] z-40   -top-60 h-full skew-y-12',
         )}
       />
     </>
@@ -68,20 +69,26 @@ export function GameHeader({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: ANIMATION_DURATION.normal }}
       className={cn(
-        'z-40 top-0 mx-auto bg-transparent md:mb-3 items-center justify-center border-b  pt-0  flex text-center w-full px-10   h-full   relative    ',
+        'z-40  relative   mx-auto bg-transparent   pt-5   items-center justify-center      flex text-center w-full px-10   h-fit        ',
         className,
-        isColumn ? ' pb-3' : 'border-b pb-6 mb-10',
+        isColumn ? ' pb-3' : '   mb-3',
       )}
     >
       {/* Left Action - Absolute positioned */}
       {leftAction && (
-        <nav className="z-50 absolute left-0 top-10 -translate-y-1/2 bg-background/95 backdrop-blur">
+        <nav
+          className={cn(
+            'z-50 absolute left-0 -translate-y-1/2 bg-background/95 backdrop-blur',
+
+            isColumn ? ' top-1/2  ' : '  top-0 ',
+          )}
+        >
           {isLeftActionFunction ? (
             <Button
               onClick={leftAction}
               variant="ghost"
               size="icon"
-              className="flex w-fit py-2 text-base items-center gap-2 group transition-colors"
+              className="flex w-fit py-0 text-base items-center gap-2 group transition-colors"
             >
               <ArrowLeft className="size-4 md:size-5 group-hover:-translate-x-1 group-hover:transform transition-all ease-out duration-300" />
               <span className="sr-only">Kembali</span>
@@ -94,7 +101,7 @@ export function GameHeader({
       {variant === 'column' ? (
         <div
           className={cn(
-            'flex pt-6 gap-2 flex-col max-w-xs m-auto items-center justify-center',
+            'flex gap-2 flex-col max-w-xs m-auto items-center justify-center',
           )}
         >
           <div
@@ -136,7 +143,7 @@ export function GameHeader({
       ) : (
         <div
           className={cn(
-            'flex   pt-10 gap-1 flex-col max-w-xs m-auto items-center justify-center',
+            'flex    gap-1 flex-col max-w-xs m-auto items-center justify-center',
           )}
         >
           <div
@@ -179,7 +186,7 @@ export function GameHeader({
       {/* Center - Title and Subtitle */}
 
       {/* Right Action - Absolute positioned */}
-      <div className="z-50 absolute  right-0 top-10 -translate-y-1/2 bg-background/95 backdrop-blur">
+      <div className="z-50 absolute  right-0 top-1/2 -translate-y-1/2 bg-background/95 backdrop-blur">
         {rightAction}
       </div>
     </motion.header>

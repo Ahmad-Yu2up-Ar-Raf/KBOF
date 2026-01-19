@@ -59,7 +59,7 @@ export function TimerDisplay({
       </div> */}
 
       {/* Progress bar */}
-      <div className="h-1 w-full overflow-hidden rounded-t-full bg-muted">
+      <div className="h-0.5 w-full overflow-hidden   bg-muted">
         <motion.div
           className={cn(
             'h-full transition-colors duration-300',

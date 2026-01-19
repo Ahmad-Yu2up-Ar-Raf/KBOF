@@ -57,7 +57,7 @@ function About() {
   const [hoveredImage, setHoveredImage] = useState<number | null>(null)
 
   return (
-    <section className="container px-5 py-12 md:py-16 lg:py-20">
+    <section className="container px-5 py-12 md:py-16 lg:py-0">
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-8 lg:gap-10">
         {/* Teks About Us - Kiri */}
         <header className="flex flex-col w-full lg:w-[45%] gap-y-4">

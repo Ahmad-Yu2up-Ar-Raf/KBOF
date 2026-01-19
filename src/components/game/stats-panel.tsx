@@ -68,7 +68,7 @@ export function StatsPanel({
   const { View } = useLottie(lottieOptions, style)
 
   return (
-    <section className="space-y-6    relative   max-w-md m-auto ">
+    <section className="space-y-6     relative   max-w-md m-auto ">
       <header className="  w-full md:min-h-80 px-3 min-h-62 relative justify-end   flex  flex-col">
         <div className="  relative   -mb-24  ml-2 size-full text-center z-30   ">
           {View}
@@ -158,30 +158,26 @@ export function StatsPanel({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          className="flex w-full  relative z-999999  flex-col justify-center gap-3"
+          className="     md:grid-cols-2 grid gap-3 w-full   relative z-999999  flex-col justify-center gap-3"
         >
-          <div className=" flex flex-col md:flex-row gap-3 w-full   ">
-            <Button
-              size="lg"
-              className=" w-full  md:w-1/2"
-              onClick={onPlayAgain}
-            >
+       
+            <Button size="lg" className=" w-ful px-0   " onClick={onPlayAgain}>
               <RotateCcw /> Main Lagi
             </Button>
             <Button
-              className=" bg-foreground w-full md:w-1/2"
+              className=" px-0 bg-foreground w-full "
               size="lg"
               onClick={onChangeLevel}
             >
               <Gamepad2 /> Menu Utama
             </Button>
-          </div>
+      
           {!isMobile && (
             <Link
               to="/"
               className={cn(
                 buttonVariants({ variant: 'secondary', size: 'lg' }),
-                '      ',
+                '    md:col-span-2   ',
               )}
             >
               <ArrowLeft /> Kembali Ke Beranda

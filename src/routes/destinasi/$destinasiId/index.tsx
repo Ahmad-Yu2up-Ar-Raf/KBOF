@@ -66,14 +66,14 @@ function DestinasiDetailSkeleton() {
         <Skeleton className="h-[12em] w-full" />
 
         {/* Navigation Skeleton */}
-        <nav className="z-50 absolute top-3 w-full">
+        {/* <nav className="z-50 absolute top-3 w-full">
           <div className="relative w-full px-5 container flex items-center justify-between">
             <div className="flex items-center gap-2">
               <ArrowLeft className="size-5 text-muted-foreground/50" />
             </div>
             <MoreVertical className="size-5 text-muted-foreground/50" />
           </div>
-        </nav>
+        </nav> */}
 
         <div className="space-y-2">
           <section className="min-h-svh space-y-6">
@@ -153,7 +153,7 @@ function DestinasiDetailSkeleton() {
   return (
     <div className="max-w-5xl m-auto w-full">
       {/* Navigation Skeleton */}
-      <nav className="z-50 absolute max-w-6xl m-auto top-3 w-full">
+      {/* <nav className="z-50 absolute max-w-6xl m-auto top-3 w-full">
         <div className="relative w-full px-10 container flex items-center justify-between">
           <div className="flex items-center gap-2">
             <ArrowLeft className="size-5 text-muted-foreground/50" />
@@ -161,7 +161,7 @@ function DestinasiDetailSkeleton() {
           </div>
           <MoreVertical className="size-5 text-muted-foreground/50" />
         </div>
-      </nav>
+      </nav> */}
 
       {/* Cover Image Skeleton */}
       <Skeleton className="h-[17em] w-full" />
@@ -170,6 +170,16 @@ function DestinasiDetailSkeleton() {
         <section className="min-h-svh space-y-6">
           <section className="h-full sm:px-10 pt-4 w-full md:flex md:justify-between md:gap-10 lg:gap-25 container content-center sm:pt-0 px-6 relative space-y-6">
             {/* Left Content */}
+
+            {/* Right: Image Gallery Skeleton */}
+            <div className="w-full md:w-[28em] h-full sticky top-2 space-y-2">
+              <Skeleton className="md:h-[27em] h-[45svh] w-full rounded-xl" />
+              <div className="flex gap-2">
+                {[1, 2, 3, 4].map((i) => (
+                  <Skeleton key={i} className="h-18 flex-1 rounded-xl" />
+                ))}
+              </div>
+            </div>
             <div className="space-y-10 flex-1">
               <div className="space-y-4">
                 {/* Title & Location */}
@@ -220,16 +230,6 @@ function DestinasiDetailSkeleton() {
                   ))}
                 </div>
               </section>
-            </div>
-
-            {/* Right: Image Gallery Skeleton */}
-            <div className="w-full md:w-[28em] h-full sticky top-2 space-y-2">
-              <Skeleton className="md:h-[27em] h-[45svh] w-full rounded-xl" />
-              <div className="flex gap-2">
-                {[1, 2, 3, 4].map((i) => (
-                  <Skeleton key={i} className="h-18 flex-1 rounded-xl" />
-                ))}
-              </div>
             </div>
           </section>
         </section>

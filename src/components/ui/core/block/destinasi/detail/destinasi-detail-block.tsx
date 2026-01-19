@@ -350,14 +350,14 @@ function DestinasiDetailSkeleton() {
         {/* Main Flex Layout - matches md:flex gap-4 sm:gap-20 */}
         <div className="md:flex gap-4 sm:gap-20 relative space-y-6">
           {/* Left: Image Gallery Skeleton (sticky) */}
-          <div className="w-full md:w-auto md:sticky top-10 h-fit space-y-2">
+          {/* <div className="w-full md:w-auto md:sticky top-10 h-fit space-y-2">
             <div className="w-full md:w-80 lg:w-96">
               <Skeleton className="h-[80svh] w-full rounded-xl" />
               <div className="flex gap-2 mt-2">
                 <Skeleton className="h-18 w-20 rounded-xl" />
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Right: Content - matches max-w-6xl w-full space-y-10 */}
           <div className="max-w-6xl w-full space-y-10">

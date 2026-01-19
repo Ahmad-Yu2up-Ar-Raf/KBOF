@@ -349,7 +349,7 @@ export const MobileNavMenu = ({ items }: MobileNavMenuProps) => {
             >
               <item.icon
                 className={cn(
-                  ' not-odd: text-accent-foreground size-5',
+                  ' not-odd: text-accent-foreground size-5.5',
                   isActive && 'fill-primary-foreground   text-primary',
                 )}
               />

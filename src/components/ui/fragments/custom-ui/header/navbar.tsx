@@ -277,64 +277,9 @@ export const MobileNavHeader = ({
 export const MobileNavMenu = ({ items }: MobileNavMenuProps) => {
   const matches = useMatches()
   const paths = matches[matches.length - 1]?.routeId
-  const isActiveHome = paths === '/'
-  const isActiveArtikel = paths === '/artikel/'
-  const isActiveGame = paths === '/game'
+
   return (
     <>
-      {/* <li>
-        <Link
-          to={'/'}
-          className={cn(
-            buttonVariants({ variant: 'ghost' }),
-            'gap-0.5  cursor-pointer    flex flex-col items-center   ',
-            isActiveHome && '  bg-accent   text-primary ',
-          )}
-        >
-          <HomeSvg
-            className={cn(
-              '   pl-1.5 text-accent-foreground size-full ',
-              isActiveHome && 'fill-primary-foreground   text-primary',
-            )}
-          />
-
-          <span
-            className={cn(
-              '    tracking-tightest text-xs transition-all duration-300 ease-out',
-              !isActiveHome && '  text-muted-foreground ',
-            )}
-          >
-            Beranda
-          </span>
-        </Link>
-      </li>
-      <li>
-        <Link
-          to={'/artikel'}
-          className={cn(
-            buttonVariants({ variant: 'ghost' }),
-            'gap-0.5  cursor-pointer justify-center     flex flex-col items-center   ',
-            isActiveArtikel && '  bg-accent   text-primary ',
-          )}
-        >
-          <BookOpen
-            className={cn(
-              '   pl-1 text-accent-foreground size-full ',
-              isActiveArtikel && 'fill-primary-foreground   text-primary',
-            )}
-          />
-
-          <span
-            className={cn(
-              '    tracking-tightest text-xs transition-all duration-300 ease-out',
-              !isActiveArtikel && '  text-muted-foreground ',
-            )}
-          >
-            Artikel
-          </span>
-        </Link>
-      </li> */}
-
       {items.map((item, index) => {
         const isActive = item.link == paths
         return (
@@ -349,14 +294,14 @@ export const MobileNavMenu = ({ items }: MobileNavMenuProps) => {
             >
               <item.icon
                 className={cn(
-                  ' not-odd: text-accent-foreground size-4',
+                  ' not-odd: text-accent-foreground size-4.5',
                   isActive && 'fill-primary-foreground   text-primary',
                 )}
               />
 
               <span
                 className={cn(
-                  '      tracking-tightest text-[10px] transition-all duration-300 ease-out',
+                  '      tracking-tightest text-[11px] transition-all duration-300 ease-out',
                   !isActive && '  text-muted-foreground ',
                 )}
               >
@@ -366,32 +311,6 @@ export const MobileNavMenu = ({ items }: MobileNavMenuProps) => {
           </li>
         )
       })}
-      {/* <li>
-        <Link
-          to={'/game'}
-          className={cn(
-            buttonVariants({ variant: 'ghost' }),
-            'gap-0.5  cursor-pointer    overflow-visible flex flex-col items-center   ',
-            isActiveGame && '  bg-accent   text-primary ',
-          )}
-        >
-          <Game
-            className={cn(
-              '  pl-0.5  text-accent-foreground size-full',
-              isActiveGame && 'fill-primary-foreground   text-primary',
-            )}
-          />
-
-          <span
-            className={cn(
-              '    tracking-tightest text-xs transition-all duration-300 ease-out',
-              !isActiveGame && '  text-muted-foreground ',
-            )}
-          >
-            Game
-          </span>
-        </Link>
-      </li> */}
     </>
   )
 }
@@ -424,7 +343,6 @@ export const NavbarButton = ({
 }
 
 import { SVGProps } from 'react'
-
 
 const Game = (props: SVGProps<SVGSVGElement>) => (
   <svg

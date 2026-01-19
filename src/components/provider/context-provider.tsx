@@ -94,7 +94,6 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
               className="relative rounded-2xl overflow-hidden w-full max-w-4xl p-4"
-              onClick={(e) => e.stopPropagation()}
             >
               <MediaItem
                 webViewLink={imageSrc}
@@ -104,7 +103,8 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
 
             <Button
               onClick={closeImage}
-              className="absolute right-4 top-4 text-accent/80 transition-colors hover:text-accent"
+              variant={'default'}
+              className="absolute right-4 top-4    "
               aria-label="Close image view"
             >
               <X size={24} />

@@ -72,7 +72,7 @@ Menyatukan masyarakat, wisatawan, dan pelaku lokal dalam satu ekosistem digital.
 
 |            Fitur            | Deskripsi                                                                                                                                                    |
 | :-------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|  🗺️ **Eksplorasi Budaya**   | Jelajahi 80+ destinasi ekowisata dan Destinasi lokal dari seluruh Indonesia dengan tampilan visual yang menarik, terstruktur berdasarkan kategori dan lokasi |
+|  🗺️ **Eksplorasi Budaya**   | Jelajahi 60+ destinasi ekowisata dan Destinasi lokal dari seluruh Indonesia dengan tampilan visual yang menarik, terstruktur berdasarkan kategori dan lokasi |
 | 🗳️ **Voting & Leaderboard** | Berikan dukungan (vote) untuk destinasi favorit Anda. Sistem leaderboard dinamis menampilkan destinasi dengan dukungan terbanyak secara real-time            |
 |    💝 **Sistem Donasi**     | Dukung pelestarian budaya dan destinasi lokal secara langsung melalui fitur donasi yang terintegrasi                                                         |
 |  💬 **Komentar & Diskusi**  | Bagikan pengalaman, pendapat, dan tips tentang destinasi atau budaya tertentu bersama komunitas                                                              |
@@ -92,28 +92,28 @@ Menyatukan masyarakat, wisatawan, dan pelaku lokal dalam satu ekosistem digital.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                        FRONTEND                              │
+│                        FRONTEND                             │
 ├─────────────────────────────────────────────────────────────┤
-│  React 19  │  TanStack Router  │  TanStack Form  │  NUQS   │
-│            │  (File-based)     │  (Type-safe)    │  (URL)  │
+│  React 19  │  TanStack Router  │  TanStack Form  │  NUQS    │
+│            │  (File-based)     │  (Type-safe)    │  (URL)   │
 ├─────────────────────────────────────────────────────────────┤
-│                     UI COMPONENTS                            │
+│                     UI COMPONENTS                           │
 ├─────────────────────────────────────────────────────────────┤
 │        shadcn/ui (New York Style)  │  Tailwind CSS v4       │
 ├─────────────────────────────────────────────────────────────┤
-│                       FRAMEWORK                              │
+│                       FRAMEWORK                             │
 ├─────────────────────────────────────────────────────────────┤
-│                    TanStack Start                            │
-│              (Full-stack React + Nitro Server)               │
+│                    TanStack Start                           │
+│              (Full-stack React + Nitro Server)              │
 ├─────────────────────────────────────────────────────────────┤
-│                        BACKEND                               │
+│                        BACKEND                              │
 ├─────────────────────────────────────────────────────────────┤
 │   Drizzle ORM   │   Better Auth   │   Server Functions      │
 │   (Type-safe)   │   (Auth Layer)  │   (createServerFn)      │
 ├─────────────────────────────────────────────────────────────┤
-│                       DATABASE                               │
+│                       DATABASE                              │
 ├─────────────────────────────────────────────────────────────┤
-│              Neon PostgreSQL (Serverless)                    │
+│              Neon PostgreSQL (Serverless)                   │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -145,7 +145,7 @@ src/
 │   ├── 📂 (auth)/          # Auth routes (login, register)
 │   ├── 📂 api/             # API routes
 │   ├── 📂 dashboard/       # Protected dashboard routes
-│   └── 📂 Destinasi/         # Destinasi pages
+│   └── 📂 Destinasi/       # Destinasi pages
 ├── 📂 db/                  # Database layer
 │   ├── schema.ts           # Drizzle schema definitions
 │   ├── relations.ts        # Table relations
@@ -178,11 +178,11 @@ src/
 | Entitas    | Deskripsi                                                |
 | ---------- | -------------------------------------------------------- |
 | `user`     | Data pengguna (terintegrasi dengan Better Auth)          |
-| `Destinasi`  | Destinasi, wisata, dan budaya lokal Indonesia              |
+| `Destinasi`  | Destinasi, wisata, dan budaya lokal Indonesia          |
 | `category` | Kategori konten (Kesehatan, Pendidikan, Lingkungan, dll) |
-| `vote`     | Vote/dukungan pengguna untuk Destinasi                     |
-| `comment` | Komentar dan diskusi pada Destinasi |
-| `article` | Artikel edukatif tentang budaya & wisata |
+| `vote`     | Vote/dukungan pengguna untuk Destinasi                   |
+| `comment` | Komentar dan diskusi pada Destinasi                       |
+| `article` | Artikel edukatif tentang budaya & wisata                  |
 
 ---
 
@@ -198,8 +198,8 @@ src/
 
 ```bash
 # Clone repository
-git clone https://github.com/Ahmad-Yu2up-Ar-Raf/KBOF.git
-cd KBOF
+git clone https://github.com/Ahmad-Yu2up-Ar-Raf/Suasana.git
+cd Suasana
 
 # Install dependencies
 pnpm install

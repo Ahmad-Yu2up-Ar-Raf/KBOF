@@ -626,11 +626,11 @@ const destinationData: Array<{
     provinsi: 'jawa-tengah',
     kabupatenKota: 'Pekalongan',
     coverImage:
-      'https://images.unsplash.com/photo-1590736704728-f4730bb30770?w=1200&h=800&fit=crop', // Batik fabric
+      'https://images.unsplash.com/photo-1616125162686-770bf85622b9?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Batik fabric
     images: [
       'https://images.unsplash.com/photo-1604973104381-870c92f10343?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Batik process
       'https://images.unsplash.com/photo-1616125162686-770bf85622b9?q=80&w=435&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Batik pattern
-      'https://plus.unsplash.com/premium_photo-1664114934715-4ee5e2526409?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Batik workshop
+      'https://images.unsplash.com/photo-1609407683391-7d127a00b3e1?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Batik workshop
     ],
   },
   {
@@ -644,7 +644,7 @@ const destinationData: Array<{
     coverImage:
       'https://images.unsplash.com/photo-1604973104381-870c92f10343?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Batik Yogya
     images: [
-      'https://plus.unsplash.com/premium_photo-1664114934715-4ee5e2526409?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Classic batik
+      'https://images.unsplash.com/photo-1609407683391-7d127a00b3e1?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Classic batik
       'https://images.unsplash.com/photo-1630929436231-91f4c6fe4884?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Batik making
       'https://images.unsplash.com/photo-1616125162686-770bf85622b9?q=80&w=435&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Batik motif
     ],
@@ -740,7 +740,7 @@ const destinationData: Array<{
     provinsi: 'jawa-timur',
     kabupatenKota: 'Probolinggo',
     coverImage:
-      'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?w=1200&h=800&fit=crop', // Bromo ceremony
+      'https://images.unsplash.com/photo-1565619109666-b8bfe0e95ceb?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Bromo ceremony
     images: [
       'https://images.unsplash.com/photo-1589308078059-be1415eab4c3?w=800&h=600&fit=crop', // Tengger tribe
       'https://images.unsplash.com/photo-1602158123419-c1c4d0e6e554?w=800&h=600&fit=crop', // Ritual offerings
@@ -756,43 +756,11 @@ const destinationData: Array<{
     provinsi: 'bali',
     kabupatenKota: 'Denpasar',
     coverImage:
-      'https://images.unsplash.com/photo-1604999333679-b86d54738315?w=1200&h=800&fit=crop', // Nyepi Bali
+      'https://images.unsplash.com/photo-1648172751305-2e0994739f1e?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Nyepi Bali
     images: [
-      'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&h=600&fit=crop', // Ogoh-ogoh
-      'https://images.unsplash.com/photo-1558005137-d9619a5c539f?w=800&h=600&fit=crop', // Balinese ceremony
-      'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&h=600&fit=crop', // Silent day
-    ],
-  },
-  {
-    name: 'Sekaten Solo',
-    description:
-      'Perayaan Maulid Nabi dengan gamelan sakral Keraton. Pasar malam dan kirab budaya. Perpaduan Islam dan tradisi Jawa yang harmonis.',
-    type: 'festival',
-    category: 'adat-istiadat',
-    provinsi: 'jawa-tengah',
-    kabupatenKota: 'Surakarta',
-    coverImage:
-      'https://images.unsplash.com/photo-1600093112291-7e65c36c2c11?w=1200&h=800&fit=crop', // Sekaten festival
-    images: [
-      'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&h=600&fit=crop', // Gamelan
-      'https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800&h=600&fit=crop', // Night market
-      'https://images.unsplash.com/photo-1584810359583-96fc3448beaa?w=800&h=600&fit=crop', // Cultural parade
-    ],
-  },
-  {
-    name: 'Festival Lembah Baliem',
-    description:
-      'Festival budaya suku Dani dengan atraksi perang-perangan. Tarian tradisional dan ritual bakar batu. Kekayaan budaya Papua yang eksotis.',
-    type: 'festival',
-    category: 'adat-istiadat',
-    provinsi: 'papua',
-    kabupatenKota: 'Jayawijaya',
-    coverImage:
-      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop', // Baliem valley
-    images: [
-      'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&h=600&fit=crop', // Dani tribe
-      'https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800&h=600&fit=crop', // Traditional dance
-      'https://images.unsplash.com/photo-1570789210967-2cac24557701?w=800&h=600&fit=crop', // Papua culture
+      'https://images.unsplash.com/photo-1709614530058-275dcb257bf6?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://plus.unsplash.com/premium_photo-1678304639537-d347f2aebc92?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1648172761966-6883c3a9897e?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     ],
   },
   {
@@ -804,11 +772,11 @@ const destinationData: Array<{
     provinsi: 'jawa-timur',
     kabupatenKota: 'Jember',
     coverImage:
-      'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1200&h=800&fit=crop', // Fashion carnival
+      'https://images.unsplash.com/photo-1756694915765-8c8271ceaff5?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Fashion carnival
     images: [
-      'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&h=600&fit=crop', // Costume parade
-      'https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800&h=600&fit=crop', // Street festival
-      'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&h=600&fit=crop', // Creative costumes
+      'https://images.unsplash.com/photo-1597242668604-7542df663f4c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1684716091108-70c2b19db377?q=80&w=1175&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1674845566580-cfa4e699a6fd?q=80&w=685&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     ],
   },
   {
@@ -828,22 +796,6 @@ const destinationData: Array<{
     ],
   },
   {
-    name: 'Erau Kutai Kartanegara',
-    description:
-      'Festival adat Kesultanan Kutai dengan ritual sakral. Prosesi adat Melayu Kalimantan yang megah. Pesta rakyat dengan berbagai atraksi.',
-    type: 'festival',
-    category: 'adat-istiadat',
-    provinsi: 'kalimantan-timur',
-    kabupatenKota: 'Kutai Kartanegara',
-    coverImage:
-      'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1200&h=800&fit=crop', // Erau festival
-    images: [
-      'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&h=600&fit=crop', // Malay ceremony
-      'https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800&h=600&fit=crop', // Cultural parade
-      'https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=800&h=600&fit=crop', // River festival
-    ],
-  },
-  {
     name: 'Pasola Sumba',
     description:
       'Ritual perang berkuda dengan lembing dari suku Sumba. Tradisi panen dan kesuburan tanah. Atraksi budaya yang mendebarkan dan sakral.',
@@ -854,25 +806,7 @@ const destinationData: Array<{
     coverImage:
       'https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=1200&h=800&fit=crop', // Horse riding
     images: [
-      'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&h=600&fit=crop', // Sumba culture
-      'https://images.unsplash.com/photo-1570789210967-2cac24557701?w=800&h=600&fit=crop', // Traditional ritual
-      'https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800&h=600&fit=crop', // Spear throwing
-    ],
-  },
-  {
-    name: 'Tabuik Pariaman',
-    description:
-      'Festival mengenang Husein dengan prosesi Tabuik ke laut. Perpaduan Islam dan tradisi Minangkabau. Ritual yang khidmat dan meriah.',
-    type: 'festival',
-    category: 'adat-istiadat',
-    provinsi: 'sumatera-barat',
-    kabupatenKota: 'Pariaman',
-    coverImage:
-      'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1200&h=800&fit=crop', // Tabuik festival
-    images: [
-      'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&h=600&fit=crop', // Procession
-      'https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800&h=600&fit=crop', // Sea ceremony
-      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop', // Festival crowd
+      'https://images.unsplash.com/photo-1620268835770-1e9c62832a49?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Spear throwing
     ],
   },
 
@@ -1000,7 +934,7 @@ const destinationData: Array<{
     provinsi: 'aceh',
     kabupatenKota: 'Sabang',
     coverImage:
-      'https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=1200&h=800&fit=crop', // Tropical island
+      'https://images.unsplash.com/photo-1683955045034-232d69e67f15?q=80&w=1106&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Tropical island
     images: [
       'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop', // Underwater
       'https://images.unsplash.com/photo-1582967788606-a171c1080cb0?w=800&h=600&fit=crop', // Beach
@@ -1032,7 +966,7 @@ const destinationData: Array<{
     provinsi: 'sulawesi-tenggara',
     kabupatenKota: 'Wakatobi',
     coverImage:
-      'https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=1200&h=800&fit=crop', // Coral reef
+      'https://images.unsplash.com/photo-1602144586078-7d95c8d7808c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Coral reef
     images: [
       'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop', // Underwater
       'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=800&h=600&fit=crop', // Marine life
@@ -1112,7 +1046,7 @@ const destinationData: Array<{
     provinsi: 'aceh',
     kabupatenKota: 'Aceh Tenggara',
     coverImage:
-      'https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=1200&h=800&fit=crop', // Orangutan
+      'https://images.unsplash.com/photo-1583753341245-5175f6acfe38?q=80&w=736&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Orangutan
     images: [
       'https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&h=600&fit=crop', // Rainforest
       'https://images.unsplash.com/photo-1507041957456-9c397ce39c97?w=800&h=600&fit=crop', // Jungle
@@ -1128,7 +1062,7 @@ const destinationData: Array<{
     provinsi: 'sumatera-utara',
     kabupatenKota: 'Langkat',
     coverImage:
-      'https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=1200&h=800&fit=crop', // Orangutan habitat
+      'https://images.unsplash.com/photo-1727004135367-05ca2ad5cad0?q=80&w=2081&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Orangutan habitat
     images: [
       'https://images.unsplash.com/photo-1597953601374-1ff2d5640c85?w=800&h=600&fit=crop', // Primate
       'https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&h=600&fit=crop', // Forest
@@ -1144,7 +1078,7 @@ const destinationData: Array<{
     provinsi: 'nusa-tenggara-timur',
     kabupatenKota: 'Manggarai Barat',
     coverImage:
-      'https://images.unsplash.com/photo-1577632905708-68fec7ac27d3?w=1200&h=800&fit=crop', // Padar island
+      'https://images.unsplash.com/photo-1554205163-e7049e5c39c0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Padar island
     images: [
       'https://images.unsplash.com/photo-1570789210967-2cac24557701?w=800&h=600&fit=crop', // Sunset view
       'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&h=600&fit=crop', // Hills
@@ -1162,11 +1096,11 @@ const destinationData: Array<{
     provinsi: 'bali',
     kabupatenKota: 'Gianyar',
     coverImage:
-      'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1200&h=800&fit=crop', // Ubud rice terrace
+      'https://images.unsplash.com/photo-1565970141934-339d18ee310d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Ubud rice terrace
     images: [
-      'https://images.unsplash.com/photo-1558005137-d9619a5c539f?w=800&h=600&fit=crop', // Monkey forest
-      'https://images.unsplash.com/photo-1604999333679-b86d54738315?w=800&h=600&fit=crop', // Temple
-      'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&h=600&fit=crop', // Art gallery
+      'https://images.unsplash.com/photo-1652451160984-f3d710e92cb3?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Monkey forest
+      'https://images.unsplash.com/photo-1557093793-d149a38a1be8?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Temple
+      'https://images.unsplash.com/photo-1672128558406-91187c94b33b?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Art gallery
     ],
   },
   {
@@ -1178,11 +1112,11 @@ const destinationData: Array<{
     provinsi: 'bali',
     kabupatenKota: 'Gianyar',
     coverImage:
-      'https://images.unsplash.com/photo-1531761535209-180857e963b9?w=1200&h=800&fit=crop', // Tegallalang rice terrace
+      'https://images.unsplash.com/photo-1480996408299-fc0e830b5db1?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Tegallalang rice terrace
     images: [
-      'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&h=600&fit=crop', // Rice paddies
-      'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&h=600&fit=crop', // Terrace view
-      'https://images.unsplash.com/photo-1604999333679-b86d54738315?w=800&h=600&fit=crop', // Palm trees
+      'https://images.unsplash.com/photo-1609412058473-c199497c3c5d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Rice paddies
+      'https://images.unsplash.com/photo-1559628233-100c798642d4?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Terrace view
+      'https://images.unsplash.com/photo-1559628233-e9eb5d83882f?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Palm trees
     ],
   },
   {
@@ -1242,7 +1176,7 @@ const destinationData: Array<{
     provinsi: 'kalimantan-tengah',
     kabupatenKota: 'Kotawaringin Barat',
     coverImage:
-      'https://plus.unsplash.com/premium_photo-1661821205919-aa973dad0529?q=80&w=643&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Orangutan
+      'https://images.unsplash.com/photo-1573986923130-7c80bc543b35?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Orangutan
     images: [
       'https://images.unsplash.com/photo-1612368195523-19e00a05b1cf?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Wildlife
       'https://images.unsplash.com/photo-1583753341245-5175f6acfe38?q=80&w=436&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // River cruise
@@ -1258,7 +1192,7 @@ const destinationData: Array<{
     provinsi: 'maluku-utara',
     kabupatenKota: 'Pulau Morotai',
     coverImage:
-      'https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=1200&h=800&fit=crop', // Tropical island
+      'https://images.unsplash.com/photo-1542163846-abf6a9fe52e2?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Tropical island
     images: [
       'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=600&fit=crop', // Beach
       'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop', // Underwater wreck
@@ -2403,7 +2337,7 @@ function generateSlug(name: string, index: number): string {
     .replace(/[^a-z0-9\s-]/g, '')
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-')
-    .trim()}-${index + 1}`
+    .trim()}-${index + 1}-${nanoid(6)}`
 }
 
 function getRandomInt(min: number, max: number): number {
@@ -2542,39 +2476,35 @@ async function main() {
       const dest = destinationData[i]
       const owner = getRandomElement(createdUsers)
       const slug = generateSlug(dest.name, i)
-
-      const [created] = await db
-        .insert(destination)
-        .values({
-          userId: owner.id,
-          slug,
-          name: dest.name,
-          description: dest.description,
-          type: dest.type,
-          category: dest.category,
-          provinsi: dest.provinsi,
-          kabupatenKota: dest.kabupatenKota ?? null,
-          alamat: `Jl. ${dest.name} No. ${getRandomInt(1, 100)}`,
-          coverImage: normalizeUnsplashUrl(dest.coverImage, 1200),
-          images: JSON.stringify(
-            dest.images.map((img) => normalizeUnsplashUrl(img, 800)),
-          ),
-
-          status: 'published',
-          createdAt: new Date(
-            Date.now() - getRandomInt(0, 365 * 24 * 60 * 60 * 1000),
-          ),
-          publishedAt: new Date(
-            Date.now() - getRandomInt(0, 365 * 24 * 60 * 60 * 1000),
-          ),
-          updatedAt: new Date(),
-        })
-        .returning({ id: destination.id })
-
-      if (created) {
-        createdDestinations.push({ id: created.id, name: dest.name })
+      try {
+        const [created] = await db
+          .insert(destination)
+          .values({
+            userId: owner.id,
+            slug,
+            name: dest.name,
+            description: dest.description,
+            type: dest.type,
+            category: dest.category,
+            provinsi: dest.provinsi,
+            kabupatenKota: dest.kabupatenKota ?? null,
+            alamat: `Jl. ${dest.name} No. ${getRandomInt(1, 100)}`,
+            coverImage: normalizeUnsplashUrl(dest.coverImage, 1200),
+            images: JSON.stringify(
+              dest.images.map((img) => normalizeUnsplashUrl(img, 800)),
+            ),
+            status: 'published',
+            createdAt: new Date(Date.now() - getRandomInt(0, 365 * 24 * 60 * 60 * 1000)),
+            publishedAt: new Date(), // Selalu waktu sekarang
+            updatedAt: new Date(),
+          })
+          .returning({ id: destination.id })
+        if (created) {
+          createdDestinations.push({ id: created.id, name: dest.name })
+        }
+      } catch (e) {
+        console.error(`   ⚠ Destination error: ${dest.name} -`, e)
       }
-
       // Progress indicator
       if ((i + 1) % 10 === 0) {
         console.log(
@@ -2779,13 +2709,7 @@ Untuk menjaga kelestarian lingkungan dan budaya, kunjungan ke Wae Rebo diatur ol
     for (const art of articleData) {
       const author = getRandomElement(createdUsers)
       const slug = generateSlug(art.title, articleCount)
-      const status = getRandomElement([
-        'published',
-        'published',
-        'published',
-        'draft',
-      ])
-
+      const status = 'published'
       try {
         await db.insert(article).values({
           authorId: author.id,
@@ -2795,20 +2719,13 @@ Untuk menjaga kelestarian lingkungan dan budaya, kunjungan ke Wae Rebo diatur ol
           content: art.content,
           coverImage: normalizeUnsplashUrl(art.coverImage, 1200),
           status,
-          publishedAt:
-            status === 'published'
-              ? new Date(
-                  Date.now() - getRandomInt(0, 180 * 24 * 60 * 60 * 1000),
-                )
-              : null,
-          createdAt: new Date(
-            Date.now() - getRandomInt(0, 365 * 24 * 60 * 60 * 1000),
-          ),
+          publishedAt: new Date(), // Selalu waktu sekarang
+          createdAt: new Date(Date.now() - getRandomInt(0, 365 * 24 * 60 * 60 * 1000)),
           updatedAt: new Date(),
         })
         articleCount++
       } catch (e) {
-        console.log(`   ⚠ Article exists or error: ${art.title}`)
+        console.error(`   ⚠ Article error: ${art.title} -`, e)
       }
     }
 

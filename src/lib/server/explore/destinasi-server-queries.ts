@@ -50,11 +50,36 @@ const coerceToArray = (v: unknown) => {
 }
 
 export const DestinasiFiltersSchema = z.object({
+  // Cursor can be a number (legacy id) or a JSON-encoded string containing
+  // composite cursor fields depending on sort (id, voteCount, averageRating, createdAt)
   cursor: z.preprocess((v) => {
     if (v === undefined || v === null) return undefined
-    const n = Number(v)
-    return Number.isFinite(n) ? n : undefined
-  }, z.number().int().nonnegative().optional()), // For infinite scroll
+    // numeric cursor (legacy)
+    if (typeof v === 'number') return { id: v }
+    if (typeof v === 'string') {
+      // try parse JSON first
+      try {
+        const parsed = JSON.parse(v)
+        if (parsed && typeof parsed === 'object') return parsed
+      } catch {
+        // not JSON - fall back to numeric parse
+        const n = Number(v)
+        if (Number.isFinite(n)) return { id: n }
+      }
+    }
+    // if object already
+    if (typeof v === 'object') return v
+    return undefined
+  },
+  z
+    .object({
+      id: z.number().int().nonnegative(),
+      voteCount: z.number().optional(),
+      averageRating: z.number().optional(),
+      createdAt: z.string().optional(),
+      name: z.string().optional(),
+    })
+    .optional()), // For infinite scroll
   limit: z.preprocess(
     (v) => (v == null ? undefined : Number(v)),
     z.number().int().positive().default(12),
@@ -106,7 +131,7 @@ export type DestinasiDestination = {
 
 export type DestinasiResult = {
   data: Array<DestinasiDestination>
-  nextCursor: number | null
+  nextCursor: string | null
   hasNextPage: boolean
   totalCount: number
   categoryCounts: Record<string, number>
@@ -192,13 +217,24 @@ const reviewStatsSubquery = (db: Awaited<ReturnType<typeof getDb>>) =>
 
 async function fetchDestinasiDestinations(filters: DestinasiFilters): Promise<{
   data: Array<DestinasiDestination>
-  nextCursor: number | null
+  nextCursor: string | null
   hasNextPage: boolean
   totalCount: number
 }> {
   const db = await getDb()
   const { cursor, limit, search, categories, types, provinces, sortBy } =
     filters
+
+  // cursor may be an object parsed by schema preprocess: { id, voteCount, averageRating, createdAt, name }
+  const cursorObj = cursor as
+    | {
+        id: number
+        voteCount?: number
+        averageRating?: number
+        createdAt?: string
+        name?: string
+      }
+    | undefined
 
   // Build subqueries
   const voteCounts = voteCountSubquery(db)
@@ -252,9 +288,53 @@ async function fetchDestinasiDestinations(filters: DestinasiFilters): Promise<{
     }
   })()
 
-  // Add cursor condition for infinite scroll
-  if (cursor !== undefined && cursor > 0) {
-    whereConditions.push(sql`${destination.id} < ${cursor}`)
+  // Add cursor condition for infinite scroll.
+  // When sorting by different fields we must use a composite cursor to preserve ordering.
+  if (cursorObj !== undefined) {
+    const cid = cursorObj.id
+    switch (sortBy) {
+      case 'popular':
+        if (typeof cursorObj.voteCount === 'number') {
+          // Fetch items with voteCount < cursorVote OR equal voteCount but smaller id
+          whereConditions.push(
+            sql`(COALESCE(${voteCounts.totalVote}, 0) < ${cursorObj.voteCount} OR (COALESCE(${voteCounts.totalVote}, 0) = ${cursorObj.voteCount} AND ${destination.id} < ${cid}))`,
+          )
+        } else {
+          whereConditions.push(sql`${destination.id} < ${cid}`)
+        }
+        break
+      case 'rating':
+        if (typeof cursorObj.averageRating === 'number') {
+          whereConditions.push(
+            sql`(COALESCE(${reviewStats.averageRating}, 0) < ${cursorObj.averageRating} OR (COALESCE(${reviewStats.averageRating}, 0) = ${cursorObj.averageRating} AND ${destination.id} < ${cid}))`,
+          )
+        } else {
+          whereConditions.push(sql`${destination.id} < ${cid}`)
+        }
+        break
+      case 'newest':
+        if (cursorObj.createdAt) {
+          const dt = new Date(cursorObj.createdAt)
+          whereConditions.push(
+            sql`(${destination.createdAt} < ${dt} OR (${destination.createdAt} = ${dt} AND ${destination.id} < ${cid}))`,
+          )
+        } else {
+          whereConditions.push(sql`${destination.id} < ${cid}`)
+        }
+        break
+      case 'name':
+        if (cursorObj.name) {
+          // name ASC: fetch names greater than cursor name, or equal name with greater id
+          whereConditions.push(
+            sql`(${destination.name} > ${cursorObj.name} OR (${destination.name} = ${cursorObj.name} AND ${destination.id} > ${cid}))`,
+          )
+        } else {
+          whereConditions.push(sql`${destination.id} < ${cid}`)
+        }
+        break
+      default:
+        whereConditions.push(sql`${destination.id} < ${cid}`)
+    }
   }
 
   // Get total count (without cursor)
@@ -313,7 +393,28 @@ async function fetchDestinasiDestinations(filters: DestinasiFilters): Promise<{
   const hasNextPage = data.length > limit
   const items = hasNextPage ? data.slice(0, limit) : data
   const lastItem = items[items.length - 1]
-  const nextCursor = hasNextPage && lastItem ? lastItem.id : null
+
+  // Build composite nextCursor depending on sort order (encoded as JSON string)
+  let nextCursor: string | null = null
+  if (hasNextPage && lastItem) {
+    const base = { id: lastItem.id }
+    switch (sortBy) {
+      case 'popular':
+        nextCursor = JSON.stringify({ ...base, voteCount: Number(lastItem.totalVote) || 0 })
+        break
+      case 'rating':
+        nextCursor = JSON.stringify({ ...base, averageRating: Number(lastItem.averageRating) || 0 })
+        break
+      case 'newest':
+        nextCursor = JSON.stringify({ ...base, createdAt: lastItem.createdAt?.toISOString() })
+        break
+      case 'name':
+        nextCursor = JSON.stringify({ ...base, name: lastItem.name })
+        break
+      default:
+        nextCursor = JSON.stringify(base)
+    }
+  }
 
   return {
     data: items.map((item) => ({
@@ -323,7 +424,7 @@ async function fetchDestinasiDestinations(filters: DestinasiFilters): Promise<{
       averageRating: Number(item.averageRating) || 0,
       user: item.user ?? { id: '', name: 'Unknown', image: null },
     })),
-    nextCursor,
+  nextCursor,
     hasNextPage,
     totalCount,
   }

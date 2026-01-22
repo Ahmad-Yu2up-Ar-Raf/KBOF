@@ -273,7 +273,7 @@ export function Marque() {
         <div
           className="h-12 md:h-16 lg:h-20 w-[240dvw] bg-repeat-x animate-songket-scroll will-change-transform"
           style={{
-            backgroundImage: "url('/assets/images/800.jpg')",
+            backgroundImage: "url('/assets/images/patern/songket2.jpg')",
             backgroundRepeat: 'repeat-x',
             backgroundSize: 'auto 100%',
             backgroundPosition: '0 50%',
@@ -286,7 +286,7 @@ export function Marque() {
         <div
           className="h-12 md:h-16 lg:h-20 w-[240dvw] bg-repeat-x animate-songket-scroll-right will-change-transform"
           style={{
-            backgroundImage: "url('/assets/images/songket.jpg')",
+            backgroundImage: "url('/assets/images/patern/songket.jpg')",
             backgroundRepeat: 'repeat-x',
             backgroundSize: 'auto 100%',
             backgroundPosition: '0 50%',

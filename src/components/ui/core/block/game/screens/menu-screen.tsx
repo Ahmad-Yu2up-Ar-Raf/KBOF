@@ -5,15 +5,15 @@
 // =============================================================================
 
 import { motion } from 'framer-motion'
-import {  Play } from 'lucide-react'
+import { Play } from 'lucide-react'
 import { HowToPlaySheet } from '../how-to-play-sheet'
- 
+
 import { AnimatedRoadmap } from './map-hero'
 import type { Milestone } from './map-hero'
 import { ANIMATION_DURATION } from '@/lib/game/constants'
-import { GameContent,   } from '@/components/game'
+import { GameContent } from '@/components/game'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
- 
+
 // =============================================================================
 // TYPES
 // =============================================================================
@@ -118,7 +118,7 @@ function HeroCard({ onPlay }: HeroCardProps) {
             className={' rounded-full'}
           >
             Mulai Game
-            <Play className=" size-4.5 fill-primary-foreground   text-primary    sm:size-6" />
+            <Play className=" size-4.5 fill-primary-foreground       sm:size-6" />
           </Button>
           <HowToPlaySheet handleStartGame={onPlay} />
         </div>

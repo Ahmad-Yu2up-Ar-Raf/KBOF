@@ -15,6 +15,7 @@ import ArticleCard, {
 } from '@/components/ui/fragments/custom-ui/card/article-card'
 import { getArticleInfiniteQueryOptions } from '@/lib/query-options'
 import { useInfiniteScrollContext } from '@/components/provider/infinite-scroll-context'
+import { Spinner } from '@/components/ui/fragments/shadcn-ui/spinner'
 
 // Sort options for articles
 const sortOptions = [
@@ -209,7 +210,7 @@ export default function ArticleBlock() {
         <div ref={loadMoreRef} className="flex justify-center py-8">
           {isFetchingNextPage && (
             <div className="flex items-center gap-2 text-muted-foreground">
-              <Loader2 className="h-5 w-5 animate-spin" />
+              <Spinner className="h-5 w-5  " />
               <span>Memuat lebih banyak...</span>
             </div>
           )}

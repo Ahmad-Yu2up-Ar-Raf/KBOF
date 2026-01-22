@@ -5,8 +5,10 @@ import {
   Compass,
   Gamepad,
   Gamepad2Icon,
+  MapPinPen,
   Play,
   Send,
+  SquarePen,
   Telescope,
 } from 'lucide-react'
 import {
@@ -160,21 +162,25 @@ export default function CTASection() {
         <div className="relative z-10 max-w-md  m-auto flex h-full flex-col items-center justify-center md:gap-5 gap-9   md:text-center w-full">
           <div className="flex flex-col items-center justify-center gap-3">
             <h1 className="  text-3xl md:text-4xl font-bold tracking-tight text-foreground   text-center ">
-              Siap Menjelajahi Keindahan Destinasi Lokal?
+              Ingin destinasi Anda dapat{' '}
+              <span className="text-primary">diterbitkan</span> di Suasana?
             </h1>
           </div>
 
-          <div className="flex w-full   sm:max-w-[8em] flex-col  justify-center  gap-3 sm:flex-row">
+          <div className="flex w-full   sm:max-w-[10em] flex-col  justify-center  gap-3 sm:flex-row">
             <Link
-              to="/game"
+              to={
+                session && session.user.role === 'admin'
+                  ? '/dashboard/articles'
+                  : '/login'
+              }
               className={cn(
                 buttonVariants({ variant: 'default', size: 'sm' }),
-                'rounded-full w-full text-xs  font-semibold  gap-3  hover:bg-background hover:text-accent-foreground    sm:px-8   py-6  cursor-target hover:scale-110 transition-all duration-300 ease-out lg:px-4 md:py-4.5',
+                '  bg-background font-semibold text-accent-foreground rounded-full w-full text-xs   gap-3     sm:px-8   group  py-6 hover:bg-primary/90 cursor-target hover:scale-110 transition-all duration-300 ease-out lg:px-4   hover:text-primary-foreground md:py-4.5',
               )}
             >
-              Coba Game{' '}
-              <Play className=" sr-only size-4.5 fill-primary-foreground   text-primary    sm:size-3.5" />
-              {'  '}
+              Bagikan Cerita
+              <SquarePen className="  size-4.5    group-hover:text-primary-foreground transition-all duration-300 ease-out       text-primary    sm:size-3.5    " />
             </Link>
             <Link
               to={
@@ -184,11 +190,12 @@ export default function CTASection() {
               }
               className={cn(
                 buttonVariants({ variant: 'default', size: 'sm' }),
-                '  bg-background font-semibold text-accent-foreground rounded-full w-full text-xs   gap-3     sm:px-8    py-6 hover:bg-primary/90 cursor-target hover:scale-110 transition-all duration-300 ease-out lg:px-4   hover:text-primary-foreground md:py-4.5',
+                'rounded-full w-full text-xs  font-semibold  gap-3  hover:bg-background hover:text-accent-foreground group    sm:px-8   py-6  cursor-target hover:scale-110 transition-all duration-300 ease-out lg:px-4 md:py-4.5',
               )}
             >
               Ajukan Destinasi{' '}
-              <Send className="  size-4.5   sr-only    text-primary    sm:size-3.5    " />
+              <MapPinPen className="  size-4.5    group-hover:text-primary transition-all duration-300 ease-out  text-primary-foreground    sm:size-3.5" />
+              {'  '}
             </Link>
           </div>
         </div>

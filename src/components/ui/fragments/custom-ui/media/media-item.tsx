@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils'
 const MediaItem = ({
   webViewLink,
   className,
+  imageClassName,
   mediaType = 'image',
   onClick,
   style,
@@ -14,6 +15,7 @@ const MediaItem = ({
   webViewLink: string
   mediaType?: 'image' | 'video'
   className?: string
+  imageClassName?: string
   onClick?: () => void
   style?: React.CSSProperties
 }) => {
@@ -106,6 +108,7 @@ const MediaItem = ({
           className={cn(
             'h-full   relative   object-cover  object-top inset-0  w-full ',
             // Disable hover effects on iOS
+            imageClassName,
           )}
           onClick={onClick}
           playsInline
@@ -123,7 +126,7 @@ const MediaItem = ({
         </video>
         {isBuffering && (
           <div className="absolute inset-0 flex items-center justify-center bg-accent-foreground/10">
-            <Spinner className="w-6 h-6  text-accent rounded-xl animate-spin" />
+            <Spinner className="w-6 h-6  text-accent rounded-xl  " />
           </div>
         )}
       </div>
@@ -141,7 +144,10 @@ const MediaItem = ({
       <Image
         src={webViewLink}
         alt={webViewLink}
-        className="object-cover overflow-hidden w-full   h-full"
+        className={cn(
+          'object-cover overflow-hidden w-full   h-full',
+          imageClassName,
+        )}
         onClick={onClick}
         width={800}
         height={600}
@@ -152,7 +158,7 @@ const MediaItem = ({
       />
       {!imageLoaded && (
         <div className="absolute inset-0 flex items-center justify-center bg-accent-foreground">
-          <Spinner className="w-6 h-6 text-accent rounded-xl animate-spin" />
+          <Spinner className="w-6 h-6 text-accent rounded-xl " />
         </div>
       )}
     </div>

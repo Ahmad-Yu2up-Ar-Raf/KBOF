@@ -1,6 +1,6 @@
 'use client'
 
-import { Loader, X } from 'lucide-react'
+import { X } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
@@ -9,7 +9,7 @@ import { Separator } from '../separator'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../tooltip'
 import type { Table } from '@tanstack/react-table'
 import { cn } from '@/lib/utils'
-
+import { Spinner } from '@/components/ui/fragments/shadcn-ui/spinner'
 interface DataTableActionBarProps<TData> extends React.ComponentProps<
   typeof motion.div
 > {
@@ -103,7 +103,7 @@ function DataTableActionBarAction({
       disabled={disabled || isPending}
       {...props}
     >
-      {isPending ? <Loader className="animate-spin" /> : children}
+      {isPending ? <Spinner className="" /> : children}
     </Button>
   )
 

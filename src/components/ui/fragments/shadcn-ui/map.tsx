@@ -17,9 +17,9 @@ import {
   useState,
 } from 'react'
 import { createPortal } from 'react-dom'
-import { Loader2, Locate, Maximize, Minus, Plus, X } from 'lucide-react'
+import { Locate, Maximize, Minus, Plus, X } from 'lucide-react'
 import type { ReactNode } from 'react'
-
+import { Spinner } from '@/components/ui/fragments/shadcn-ui/spinner'
 import { cn } from '@/lib/utils'
 
 type MapContextValue = {
@@ -683,7 +683,7 @@ function MapControls({
             disabled={waitingForLocation}
           >
             {waitingForLocation ? (
-              <Loader2 className="size-4 animate-spin" />
+              <Spinner className="size-4  " />
             ) : (
               <Locate className="size-4" />
             )}

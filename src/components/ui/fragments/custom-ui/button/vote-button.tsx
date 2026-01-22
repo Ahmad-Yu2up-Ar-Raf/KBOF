@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { toast } from 'sonner'
-import { Check, Loader2, ThumbsUp } from 'lucide-react'
+import { Check,  ThumbsUp } from 'lucide-react'
 
 import { useNavigate } from '@tanstack/react-router'
 import { Button } from '../../shadcn-ui/button'
@@ -92,7 +92,7 @@ function VoteButton({ destination }: DestinasiDetailBlockProps) {
         disabled={isVoting}
       >
         {isVoting ? (
-          <Loader2 className="size-4 animate-spin" />
+          <Spinner className="size-4  " />
         ) : hasVoted ? (
           <Check className="size-4" />
         ) : (
@@ -139,7 +139,7 @@ function VoteButton({ destination }: DestinasiDetailBlockProps) {
             >
               {isVoting ? (
                 <>
-                  <Loader2 className="size-4 animate-spin mr-2" />
+                  <Spinner className="size-4  mr-2" />
                   Memproses...
                 </>
               ) : hasVoted ? (

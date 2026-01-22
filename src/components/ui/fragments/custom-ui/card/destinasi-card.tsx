@@ -29,8 +29,8 @@ interface DestinasiCardProps {
   className?: string
   index: number
   hovered: number | null
-  totalItems?: number
   setHovered: React.Dispatch<React.SetStateAction<number | null>>
+  totalItems?: number
   /**
    * Layout variant:
    * - 'grid' (default): For vertical grid layout (3 columns), rounded corners on grid corners

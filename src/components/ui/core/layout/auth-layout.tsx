@@ -108,7 +108,7 @@ const AuthLayoutTemplate = ({
                   disabled={loadingState}
                 >
                   {loadingState ? (
-                    <Spinner className="mr-2 h-4 w-4 animate-spin" />
+                    <Spinner className="mr-2 h-4 w-4  " />
                   ) : (
                     <Icons.google className="mr-2 h-4 w-4" />
                   )}{' '}

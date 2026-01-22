@@ -83,7 +83,7 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0  cursor-zoom-out z-9999 flex items-center justify-center bg-accent-foreground/80 backdrop-blur-md"
+            className="fixed inset-0  rounded-xl cursor-zoom-out z-9999 flex items-center justify-center bg-accent-foreground/80 backdrop-blur-md"
             onClick={closeImage}
             role="dialog"
             aria-modal="true"
@@ -93,11 +93,12 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
               initial={{ scale: 0.95, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
-              className="relative rounded-2xl overflow-hidden w-full max-w-4xl p-4"
+              className="relative    w-full max-w-4xl p-4"
             >
               <MediaItem
                 webViewLink={imageSrc}
-                className="h-auto max-h-[80vh] w-full object-contain"
+                 
+                className="h-auto max-h-[80vh] rounded-xl w-full object-contain"
               />
             </motion.div>
 

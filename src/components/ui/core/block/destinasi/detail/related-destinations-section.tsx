@@ -1,5 +1,5 @@
 'use client'
-
+import * as React from 'react'
 import { Link } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
 import { ChevronRight, MapPin, Star, ThumbsUp } from 'lucide-react'
@@ -40,16 +40,26 @@ interface RelatedDestinationsSectionProps {
 
 function RelatedDestinationCard({
   destination,
+  index,
+  hovered,
+  setHovered,
 }: {
   destination: RelatedDestination
+  index: number
+  hovered: number | null
+  setHovered: React.Dispatch<React.SetStateAction<number | null>>
 }) {
   return (
     <Card
+      onMouseEnter={() => setHovered(index)}
+      onMouseLeave={() => setHovered(null)}
       style={{
         backgroundImage: `url(${destination?.coverImage})`,
       }}
       className={cn(
+        'transform transition-all duration-300 hover:scale-105 hover:rotate-1 ',
         'group  cursor-target bg-cover bg-center bg-no-repeat  font-serif! cursor-target   rounded-xl overflow-hidden bg-background  p-0   shadow-none border-0     relative min-h-[10em]  w-full cursor-pointer transition-transform   ',
+        hovered !== null && hovered !== index && 'lg:blur-sm   lg:scale-[0.98]',
       )}
     >
       <Link
@@ -127,7 +137,7 @@ export function RelatedDestinationsSection({
   ) {
     return null
   }
-
+  const [hovered, setHovered] = React.useState<number | null>(null)
   return (
     <section className="space-y-4">
       {/* Header */}
@@ -158,9 +168,12 @@ export function RelatedDestinationsSection({
         <RelatedDestinationsSkeleton />
       ) : (
         <div className="grid sm:grid-cols-2  md:grid-cols-3   gap-3">
-          {relatedDestinations?.map((destination) => (
+          {relatedDestinations?.map((destination, i) => (
             <RelatedDestinationCard
-              key={destination.id}
+              hovered={hovered}
+              setHovered={setHovered}
+              index={i}
+              key={i}
               destination={destination}
             />
           ))}

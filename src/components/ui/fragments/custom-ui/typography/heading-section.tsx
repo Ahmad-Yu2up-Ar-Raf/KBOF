@@ -31,12 +31,12 @@ export default function HeadingSection({
       )}
     >
       <div className="space-y-1 max-w-full">
-        <h2 className="text-2xl md:text-3xl font-bold tracking-tight flex flex-wrap items-center gap-0 leading-tight max-w-2xl line-clamp-2">
+        <h2 className="text-3xl md:text-3xl font-bold tracking-tight flex flex-wrap items-center gap-0 leading-tight max-w-2xl line-clamp-2">
           {/* {Icon && <Icon className="size-6 md:size-7" />} */}
           {firstWords && <span>{firstWords}&nbsp;</span>}
           <span className="text-primary">{lastWord}</span>
         </h2>
-        <p className="text-muted-foreground text-base max-w-xl md:max-w-2xl line-clamp-2">
+        <p className="text-muted-foreground  md:text-lg text-base max-w-xl md:max-w-2x line-clamp-1 md:line-clamp-2">
           {description}
         </p>
       </div>

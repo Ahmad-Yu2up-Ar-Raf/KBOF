@@ -41,10 +41,21 @@ export function useCreateArticleForm({
     async (data: CreateArticleSchema) => {
       let finalCoverImage: string | null = null
 
+      // Debug info: help trace why cover image may be missing
+      // eslint-disable-next-line no-console
+      console.debug('Submitting article - coverImage value:', data.coverImage)
+
       // Handle cover image
       if (isFile(data.coverImage)) {
+        // Try uploading to Cloudinary and throw if upload fails so caller can show error
         const result = await coverUpload.upload(data.coverImage)
-        finalCoverImage = result?.secure_url || null
+        if (!result) {
+          const err = new Error('Upload failed: could not upload cover image')
+          // eslint-disable-next-line no-console
+          console.error(err)
+          throw err
+        }
+        finalCoverImage = result.secure_url || null
       } else if (typeof data.coverImage === 'string' && data.coverImage) {
         finalCoverImage = data.coverImage
       }
@@ -103,10 +114,20 @@ export function useUpdateArticleForm({
     async (data: CreateArticleSchema) => {
       let finalCoverImage: string | null = null
 
+      // Debug info: help trace why cover image may be missing
+      // eslint-disable-next-line no-console
+      console.debug('Updating article - coverImage value:', data.coverImage)
+
       // Handle cover image
       if (isFile(data.coverImage)) {
         const result = await coverUpload.upload(data.coverImage)
-        finalCoverImage = result?.secure_url || null
+        if (!result) {
+          const err = new Error('Upload failed: could not upload cover image')
+          // eslint-disable-next-line no-console
+          console.error(err)
+          throw err
+        }
+        finalCoverImage = result.secure_url || null
       } else if (typeof data.coverImage === 'string' && data.coverImage) {
         finalCoverImage = data.coverImage
       }

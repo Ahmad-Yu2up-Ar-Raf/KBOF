@@ -41,6 +41,7 @@ import {
 } from '@/components/ui/fragments/shadcn-ui/avatar'
 import { useInitials } from '@/hooks/use-initials'
 import { batasiKata } from '@/hooks/use-word'
+import { useModal } from '@/components/provider/context-provider'
 
 // Status enum values
 const statusEnumValues: Array<DestinationStatus> = [
@@ -89,6 +90,7 @@ export function getArticleTableColumns({
   statusCounts,
   setRowAction,
 }: GetArticleTableColumnsProps): Array<ColumnDef<ArticleRow>> {
+  const { openImage } = useModal()
   return [
     {
       id: 'select',
@@ -126,7 +128,10 @@ export function getArticleTableColumns({
         const batasiHurufJudul = batasiKata(row.original.title, 5)
         return (
           <div className="max-w-60 truncate flex items-center gap-3">
-            <Avatar className="rounded-xl relative flex size-10 shrink-0 overflow-hidden">
+            <Avatar
+              onClick={() => openImage(`${row.original.coverImage}`)}
+              className="rounded-xl cursor-zoom-in relative flex size-10 shrink-0 overflow-hidden"
+            >
               <AvatarImage
                 src={`${row.original.coverImage}`}
                 alt={row.original.title}

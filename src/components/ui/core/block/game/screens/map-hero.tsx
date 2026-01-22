@@ -73,7 +73,7 @@ const AnimatedRoadmap = React.forwardRef<HTMLDivElement, AnimatedRoadmapProps>(
     return (
       <div
         ref={targetRef}
-        className={cn('relative w-full   mx-auto py-32 ', className)}
+        className={cn('relative w-full   mx-aut   py-32 ', className)}
         {...props}
       >
         {/* Background map image */}

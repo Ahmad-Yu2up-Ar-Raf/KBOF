@@ -49,7 +49,7 @@ function DestinationSection({
         className=" px-5 md:px-0 "
         href={href}
         title={title}
-        description="Jelajahi berbagai destinasi menarik yang wajib Anda kunjungi."
+        description="Jelajahi berbagai destinasi menarik."
       />
 
       <Carousel

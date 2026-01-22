@@ -1,6 +1,7 @@
 'use client'
 import { Link, useMatches } from '@tanstack/react-router'
 import {
+  BookOpen,
   BookOpenText,
   Gamepad,
   Gamepad2,
@@ -87,7 +88,7 @@ export function SiteHeaderMobile() {
     {
       name: 'Artikel',
       link: '/artikel/',
-      icon: BookOpenText,
+      icon: BookOpen,
     },
     {
       name: 'Destinasi',

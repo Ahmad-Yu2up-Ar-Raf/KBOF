@@ -122,7 +122,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
               </InfiniteScrollProvider>
             </ModalProvider>
           ) : null}
-                <SiteHeaderMobile />
+   
         </AnimatePresence>
       </NuqsAdapter>
     </QueryClientProvider>

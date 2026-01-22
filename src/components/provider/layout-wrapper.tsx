@@ -106,7 +106,8 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
         {/* Add padding-bottom on mobile to account for fixed navbar */}
         <div
           className={cn(
-            'relative  pb-10 md:overflow-visible overflow-hidden min-h-svh w-full ',
+            'relative   md:overflow-visible overflow-hidden  w-full ',
+            // currentRouteId != '/game' && '   min-h-svh',
           )}
         >
           <div
@@ -121,7 +122,7 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
         </div>
         {/* Footer only shows when shouldShowFooter is true */}
         {shouldShowFooter && <SiteFooter />}
-  
+        <SiteHeaderMobile />
       </ReactLenis>
     )
   }

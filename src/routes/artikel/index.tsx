@@ -37,7 +37,7 @@ function RouteComponent() {
       <KatalogHeader
         titleMain="Cerita"
         titleSecond="Lokal*"
-        linkText="Suarakan Ceritamu"
+        linkText="Bagikan Kisahmu"
         subTitle="Setiap tempat punya cerita"
         deskription="Dengarkan suara hati lokal melalui artikel-artikel inspiratif yang menghubungkan budaya, cerita."
       >
@@ -45,7 +45,7 @@ function RouteComponent() {
           <Button
             className={' m-auto md:mr-0 text-sm  mt-3 w-full md:max-w-3xs '}
           >
-            Suarakan Ceritamu
+            Bagikan Kisahmu
             <PlusCircle />
           </Button>
         </CreateArticleSheet>

@@ -13,6 +13,7 @@ import {
 
 import { cn } from '@/lib/utils'
 import { formatDate } from '@/lib/format'
+import { useModal } from '@/components/provider/context-provider'
 
 interface ArticleDetailProps {
   article: Article & {
@@ -78,7 +79,7 @@ function formatArticleContent(content: string): string {
 
 export default function ArtikelDetailBlock({ article }: ArticleDetailProps) {
   const author = article.author
-
+  const { openImage } = useModal()
   // Memoize formatted content for performance
   const formattedContent = useMemo(() => {
     if (!article.content) return ''
@@ -137,18 +138,25 @@ export default function ArtikelDetailBlock({ article }: ArticleDetailProps) {
 
       <div className="border-b-2 pb-10 mb-10 space-y-5">
         {/* Cover Image */}
-        {article.coverImage && (
-          <section
-            style={{
-              backgroundImage: `url(${article.coverImage})`,
-            }}
-            className={cn(
-              'relative min-h-67 md:min-h-90 rounded-t-2xl bg-fixed bg-no-repeat bg-center bg-cover flex items-center justify-center overflow-hidden hero-parallax',
-            )}
-          >
-            <div className="absolute inset-0 bg-linear-to-b from-background/10 via-background/50 to-background" />
-          </section>
-        )}
+
+        <section
+          onClick={() =>
+            openImage(
+              article.coverImage ??
+                '/assets/images/placeholder/placeholder-artikel.jpg',
+            )
+          }
+          style={{
+            backgroundImage: article.coverImage
+              ? `url(${article.coverImage})`
+              : `url(/assets/images/placeholder/placeholder-artikel.jpg)`,
+          }}
+          className={cn(
+            'relative min-h-67 cursor-zoom-in md:min-h-90 rounded-t-2xl bg-fixed bg-no-repeat bg-center bg-cover flex items-center justify-center overflow-hidden hero-parallax',
+          )}
+        >
+          <div className="absolute inset-0 bg-linear-to-b from-background/10 via-background/50 to-background" />
+        </section>
 
         {/* Article Content - Formatted with proper spacing and typography */}
         {formattedContent && (

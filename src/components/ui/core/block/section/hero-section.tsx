@@ -1,7 +1,7 @@
 'use client'
 import { Link } from '@tanstack/react-router'
 import { useLottie } from 'lottie-react'
-import { motion, useReducedMotion } from 'framer-motion'
+
 import { Medal, Pen, Telescope } from 'lucide-react'
 import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
 
@@ -9,39 +9,23 @@ import { TextRotate } from '@/components/ui/fragments/custom-ui/animate-ui/text-
 import Floating, {
   FloatingElement,
 } from '@/components/ui/fragments/custom-ui/animate-ui/paralax-floating'
-import MediaItem from '@/components/ui/fragments/custom-ui/media/media-item'
+
 import { useModal } from '@/components/provider/context-provider'
 import { useIsMobile } from '@/hooks/use-mobile'
 import { cn } from '@/lib/utils'
 import animationData from '@/assets/animations/Businessman.json'
-import { authClient } from '@/lib/auth/auth-client'
+
 import { BlurFade } from '@/components/ui/fragments/custom-ui/animate-ui/blur-fade'
 import { Image } from '@unpic/react'
 
 const fallbackImages = [
-  {
-    url: '/assets/images/heor1.jpg',
-    link: 'https://unsplash.com/photos/a-painting-of-a-palm-leaf-on-a-multicolored-background-AaNPwrSNOFE',
-    title: 'Neon Palm',
-    author: 'Tim Mossholder',
-  },
-  {
-    url: '/assets/images/hero6.jpg',
-    link: 'https://unsplash.com/photos/a-blurry-photo-of-a-crowd-of-people-UgbxzloNGsc',
-    author: 'ANDRII SOLOK',
-    title: 'A blurry photo of a crowd of people',
-  },
-  {
-    url: '/assets/images/hero3.jpg',
-    author: 'Wesley Tingey',
-    title: 'Rippling Crystal Blue Water',
-  },
-  {
-    url: '/assets/images/hero4.jpg',
-    link: 'https://unsplash.com/de/fotos/mann-im-schwarzen-hemd-unter-blauem-himmel-m8RDNiuEXro',
-    author: 'Serhii Tyaglovsky',
-    title: 'Mann im schwarzen Hemd unter blauem Himmel',
-  },
+  'assets/images/hero/hero1.jpg',
+
+  'assets/images/hero/hero2.jpg',
+
+  'assets/images/hero/hero3.jpg',
+
+  'assets/images/hero/hero4.jpg',
 ]
 
 export default function HeroSection() {
@@ -69,7 +53,7 @@ export default function HeroSection() {
           <FloatingElement depth={1} className="top-[0%] left-[3%]">
             <BlurFade
               delay={delay}
-              key={fallbackImages[0].url}
+              key={fallbackImages[0]}
               className="w-35 h-36 relative overflow-hidden sm:w-48 sm:h-36 md:w-56 md:h-44 lg:w-55 lg:h-67 object-cover hover:scale-105 duration-200 transition-transform -rotate-12 shadow-2xl rounded-xl"
               // Use will-change sparingly
               style={{ willChange: 'transform, opacity' }}
@@ -78,18 +62,18 @@ export default function HeroSection() {
                 role="button"
                 tabIndex={0}
                 className="w-full h-full cursor-zoom-in"
-                onClick={() => openImage(fallbackImages[0].url)}
+                onClick={() => openImage(fallbackImages[0])}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ')
-                    openImage(fallbackImages[0].url)
+                    openImage(fallbackImages[0])
                 }}
               >
                 <Image
                   className=" w-full h-full object-cover object-center "
                   width={800}
                   height={400}
-                  alt={fallbackImages[0].url}
-                  src={fallbackImages[0].url}
+                  alt={fallbackImages[0]}
+                  src={fallbackImages[0]}
                 />
               </div>
             </BlurFade>
@@ -101,7 +85,7 @@ export default function HeroSection() {
           >
             <BlurFade
               delay={delay * 2}
-              key={fallbackImages[2].url}
+              key={fallbackImages[2]}
               className="w-40 h-40 relative overflow-hidden sm:w-48 sm:h-48 md:w-60 md:h-60 lg:w-55 lg:h-67 object-cover -rotate-[4deg] hover:scale-105 duration-200 transition-transform shadow-2xl rounded-xl"
               style={{ willChange: 'transform, opacity' }}
             >
@@ -109,18 +93,18 @@ export default function HeroSection() {
                 role="button"
                 tabIndex={0}
                 className="w-full h-full  cursor-zoom-in"
-                onClick={() => openImage(fallbackImages[1].url)}
+                onClick={() => openImage(fallbackImages[1])}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ')
-                    openImage(fallbackImages[1].url)
+                    openImage(fallbackImages[1])
                 }}
               >
                 <Image
                   className=" w-full h-full object-cover object-center "
                   width={800}
                   height={400}
-                  alt={fallbackImages[1].url}
-                  src={fallbackImages[1].url}
+                  alt={fallbackImages[1]}
+                  src={fallbackImages[1]}
                 />
               </div>
             </BlurFade>
@@ -132,7 +116,7 @@ export default function HeroSection() {
           >
             <BlurFade
               delay={delay * 3}
-              key={fallbackImages[2].url}
+              key={fallbackImages[2]}
               className="w-40 rotate-12 h-36 overflow-hidden sm:w-48 sm:h-44 md:w-60 md:h-52 lg:w-55 lg:h-67 object-cover hover:scale-105 duration-200 transition-transform shadow-2xl rounded-xl"
               style={{ willChange: 'transform, opacity' }}
             >
@@ -140,18 +124,18 @@ export default function HeroSection() {
                 role="button"
                 tabIndex={0}
                 className="w-full h-full  cursor-zoom-in"
-                onClick={() => openImage(fallbackImages[2].url)}
+                onClick={() => openImage(fallbackImages[2])}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ')
-                    openImage(fallbackImages[2].url)
+                    openImage(fallbackImages[2])
                 }}
               >
                 <Image
                   className=" w-full h-full object-cover object-center "
                   width={800}
                   height={400}
-                  alt={fallbackImages[2].url}
-                  src={fallbackImages[2].url}
+                  alt={fallbackImages[2]}
+                  src={fallbackImages[2]}
                 />
               </div>
             </BlurFade>
@@ -162,7 +146,7 @@ export default function HeroSection() {
             className="top-[80%] left-[70%] md:top-[68%] md:left-[85%]"
           >
             <BlurFade
-              key={fallbackImages[3].url}
+              key={fallbackImages[3]}
               delay={delay * 4}
               className="w-44 overflow-hidden rotate-[4deg] h-44 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-55 lg:h-67 object-cover hover:scale-105 duration-200 transition-transform shadow-2xl rounded-xl"
               style={{ willChange: 'transform, opacity' }}
@@ -171,18 +155,18 @@ export default function HeroSection() {
                 role="button"
                 tabIndex={0}
                 className="w-full h-full cursor-zoom-in"
-                onClick={() => openImage(fallbackImages[3].url)}
+                onClick={() => openImage(fallbackImages[3])}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ')
-                    openImage(fallbackImages[3].url)
+                    openImage(fallbackImages[3])
                 }}
               >
                 <Image
                   className=" w-full h-full object-cover objec "
                   width={800}
                   height={400}
-                  alt={fallbackImages[3].url}
-                  src={fallbackImages[3].url}
+                  alt={fallbackImages[3]}
+                  src={fallbackImages[3]}
                 />
               </div>
             </BlurFade>
@@ -283,7 +267,7 @@ export function Marque() {
         - The inner bar is made very wide so the existing translate animation
           (`animate-infinite-scroll` / `animate-infinite-scroll-rigth`) creates
           a continuous moving fabric effect without many <img> nodes.
-        - Ensure the asset exists at `/assets/images/songket-repeat.png` (seamless tile).
+        - Ensure the asset exists at `/assets/images/songket-repeat.jpg` (seamless tile).
       */}
       <div className="w-[120dvw] absolute top-0 -right-1 -rotate-7 md:-rotate-3 overflow-hidden">
         <div

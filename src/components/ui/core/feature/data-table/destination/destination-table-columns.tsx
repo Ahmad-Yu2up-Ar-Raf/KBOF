@@ -65,6 +65,7 @@ import {
 import { useInitials } from '@/hooks/use-initials'
 import { batasiKata } from '@/hooks/use-word'
 import { destinationCategory } from '@/db/schema'
+import { useModal } from '@/components/provider/context-provider'
 // Status enum values
 const statusEnumValues: Array<DestinationStatus> = [
   'published',
@@ -105,6 +106,7 @@ export function getDestinationTableColumns({
   categoriesCounts,
   setRowAction,
 }: GetDestinationTableColumnsProps): Array<ColumnDef<DestinationRow>> {
+  const { openImage } = useModal()
   return [
     {
       id: 'select',
@@ -142,7 +144,10 @@ export function getDestinationTableColumns({
         const batasiHurufNama = batasiKata(row.original.name, 2)
         return (
           <div className="max-w-50 truncate  flex items-center gap-3">
-            <Avatar className=" rounded-xl  relative flex size-10 shrink-0 overflow-hidden">
+            <Avatar
+              onClick={() => openImage(`${row.original.coverImage}`)}
+              className=" rounded-xl  cursor-zoom-in relative flex size-10 shrink-0 overflow-hidden"
+            >
               <AvatarImage
                 src={`${row.original.coverImage}`}
                 alt={row.original.name}

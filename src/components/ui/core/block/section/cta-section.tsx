@@ -22,16 +22,16 @@ import { authClient } from '@/lib/auth/auth-client'
 
 const ctaImages = [
   {
-    url: 'https://images.unsplash.com/photo-1560103104-4623c14a473b?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    url: 'assets/images/cta/cta1.jpg',
   },
   {
-    url: 'https://images.unsplash.com/photo-1680345575909-99633d4b6f46?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    url: 'assets/images/cta/cta2.jpg',
   },
   {
-    url: 'https://images.unsplash.com/photo-1680345576151-bbc497ba969e?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    url: 'assets/images/cta/cta3.jpg',
   },
   {
-    url: 'https://images.unsplash.com/photo-1571738318198-fda6afce5348?q=80&w=464&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    url: 'assets/images/cta/cta4.jpg',
   },
 ]
 
@@ -103,8 +103,8 @@ function GridPatternDashed() {
 export default function CTASection() {
   const { data: session } = authClient.useSession()
   return (
-    <section className="container px-6  py-12 md:py-16 lg:py-0">
-      <div className="relative w-fullcontainer m-auto   h-[500px] md:h-[300px] overflow-hidden rounded-3xl border border-primary/20 bg-accent px-7">
+    <section className="container px-6  py-12 md:py-16 lg:pt-0 lg:pb-6">
+      <div className="relative w-full container m-auto   h-[500px] md:h-[300px] overflow-hidden rounded-3xl border border-primary/20 bg-accent px-7">
         {/* /* Grid Background */}
         <GridPatternDashed />
 
@@ -164,7 +164,7 @@ export default function CTASection() {
             </h1>
           </div>
 
-          <div className="flex w-full   sm:max-w-[9em] flex-col  justify-center  gap-3 sm:flex-row">
+          <div className="flex w-full   sm:max-w-[8em] flex-col  justify-center  gap-3 sm:flex-row">
             <Link
               to="/game"
               className={cn(
@@ -173,7 +173,7 @@ export default function CTASection() {
               )}
             >
               Coba Game{' '}
-              <Play className=" size-4.5 fill-primary-foreground   text-primary    sm:size-3.5" />
+              <Play className=" sr-only size-4.5 fill-primary-foreground   text-primary    sm:size-3.5" />
               {'  '}
             </Link>
             <Link
@@ -188,7 +188,7 @@ export default function CTASection() {
               )}
             >
               Ajukan Destinasi{' '}
-              <Send className="  size-4.5      text-primary    sm:size-3.5    " />
+              <Send className="  size-4.5   sr-only    text-primary    sm:size-3.5    " />
             </Link>
           </div>
         </div>

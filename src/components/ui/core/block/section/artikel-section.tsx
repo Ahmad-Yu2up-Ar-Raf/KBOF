@@ -32,7 +32,7 @@ export default function ArtikelSection() {
       <HeadingSection
         href="/artikel"
         title="Artikel Pilihan"
-        description="Jelajahi artikel menarik seputar destinasi wisata, tips perjalanan, dan inspirasi liburan."
+        description="Jelajahi artikel menarik destinasi wisata."
         // Icon={Newspaper}
       />
 

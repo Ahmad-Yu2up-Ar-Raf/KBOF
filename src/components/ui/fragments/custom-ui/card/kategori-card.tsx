@@ -41,7 +41,7 @@ export default function KategoriCard({
       className={cn(
         'group cursor-pointer bg-cover bg-center bg-no-repeat',
         'rounded-xl overflow-hidden bg-background p-0 shadow-none border-0',
-        'relative min-h-48 w-full transition-all duration-300',
+        'relative min-h-38 w-full transition-all duration-300',
         'hover:shadow-lg hover:scale-[1.02]',
         className,
       )}
@@ -61,7 +61,7 @@ export default function KategoriCard({
         />
 
         {/* Content */}
-        <CardHeader className="absolute gap-0    bottom-0 left-0 right-0 z-20 p-4 text-white">
+        <CardHeader className="absolute gap-0    pb-2  bottom-0 left-0 right-0 z-20 px-4 text-white">
           <CardDescription className="text-white/70      line-clamp-1">
             {category.description}
           </CardDescription>

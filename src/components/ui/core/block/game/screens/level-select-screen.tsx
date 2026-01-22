@@ -31,13 +31,13 @@ export function LevelSelectScreen({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="h-full gap-0 flex flex-col md:gap-8 w-full"
+      className="h-full gap-0 md:pb-0 pb-5 flex flex-col md:gap-8 w-full"
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: ANIMATION_DURATION.normal }}
     >
       <GameHeader
         title="Pilih Level Permainan"
-        className=" pt-10   md:mb-5 mb-10  "
+        className=" pt-10  sticky bg-transparent  [&_nav]:left-0 md:mb-5 mb-10  "
         Emoji="🎯"
         variant="default"
         subtitle="Ketuk salah satu kartu level untuk memulai permainan"

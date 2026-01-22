@@ -36,29 +36,6 @@ export function TimerDisplay({
 
   return (
     <div className={cn('space-y-2 sticky top-0', className)}>
-      {/* <div className="flex items-center justify-between">
-        <span className="text-sm font-medium text-muted-foreground">
-          Waktu tersisa
-        </span>
-        <AnimatePresence mode="wait">
-          <motion.span
-            key={timeRemaining}
-            initial={{ scale: 1.2, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
-            transition={{ duration: ANIMATION_DURATION.fast }}
-            className={cn(
-              'text-2xl font-bold tabular-nums',
-              stateStyles[timerState],
-              timerState === 'critical' && 'animate-pulse',
-            )}
-          >
-            {formatTime(timeRemaining)}
-          </motion.span>
-        </AnimatePresence>
-      </div> */}
-
-      {/* Progress bar */}
       <div className="h-0.5 w-full overflow-hidden   bg-muted">
         <motion.div
           className={cn(
@@ -76,7 +53,7 @@ export function TimerDisplay({
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center text-sm font-medium text-muted-foreground"
+          className="text-center sr-only text-sm font-medium text-muted-foreground"
         >
           ⏸️ Dijeda
         </motion.div>

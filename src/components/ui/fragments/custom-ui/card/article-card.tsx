@@ -89,10 +89,10 @@ function ArticleCard({
       style={{ willChange: 'transform' }}
       // onClick={() => onClick?.(article)}
     >
-      <CardContent className={cn(' p-0', cornerClasses)}>
+      <CardContent className={cn(' h-full p-0', cornerClasses)}>
         <Link
           to={'/artikel/$artikelId'}
-          className=" content-center  justify-center gap-0 flex flex-row flex-1 relative mx-auto   w-full h-full overflow-hidden "
+          className=" content-center   justify-center gap-0 flex flex-row flex-1 relative mx-auto   w-full h-full overflow-hidden "
           params={{ artikelId: article.slug }}
         >
           <div className="flex-1 flex flex-col gap-4 justify-between py-6 px-5 ">
@@ -134,15 +134,18 @@ function ArticleCard({
           </div>
 
           {/* Cover Image */}
-          {article.coverImage && (
-            <div className="flex-1 relative min-h-45 md:min-h-50 overflow-hidden">
-              <div className="absolute inset-0 bg-linear-to-r from-background via-background/30 to-transparent z-10" />
-              <MediaItem
-                webViewLink={article.coverImage}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-              />
-            </div>
-          )}
+
+          <div className="flex-1 relative  h-full overflow-hidden">
+            <div className="absolute inset-0 bg-linear-to-r from-background via-background/30 to-transparent z-10" />
+            <MediaItem
+              webViewLink={
+                article.coverImage != null
+                  ? article.coverImage
+                  : '/assets/images/placeholder/placeholder-artikel.jpg'
+              }
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+            />
+          </div>
         </Link>
         {/* Text Content - 50% width */}
       </CardContent>

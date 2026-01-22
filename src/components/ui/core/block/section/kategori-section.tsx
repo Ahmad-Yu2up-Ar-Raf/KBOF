@@ -36,7 +36,7 @@ export default function KategoriSection() {
       <HeadingSection
         className=" px-5 md:px-0 "
         title="Kategori Wisata"
-        description="Jelajahi berbagai kategori wisata yang sesuai dengan minat Anda."
+        description="Jelajahi berbagai kategori wisata."
         href="/destinasi"
       />
 
@@ -52,7 +52,7 @@ export default function KategoriSection() {
           ]}
           opts={{
             align: 'start',
-            // loop: true,
+            loop: true,
             skipSnaps: false,
             breakpoints: {
               '(max-width: 768px)': {

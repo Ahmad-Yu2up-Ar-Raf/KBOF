@@ -8,9 +8,11 @@ import {
   LayoutDashboardIcon,
   LifeBuoy,
   MapPin,
+  MapPinPen,
   Medal,
   Newspaper,
   Send,
+  SquarePen,
   Telescope,
   Users,
   UsersRound,
@@ -81,12 +83,12 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
     {
       title: 'Kelola Destinasi',
       url: '/dashboard/destination',
-      icon: Telescope,
+      icon: MapPinPen,
     },
     {
       title: 'Kelola Artikel',
       url: '/dashboard/articles',
-      icon: BookOpenText,
+      icon: SquarePen,
     },
     // Only show for SuperAdmin
     ...(isSuperAdmin

@@ -141,6 +141,7 @@ export function PlayingScreen({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: ANIMATION_DURATION.normal }}
+      className=" w-full md:pb-0 pb-5  h-full relative"
     >
       <GameHeader
         variant="column"
@@ -156,7 +157,7 @@ export function PlayingScreen({
             variant="ghost"
             size="sm"
             className={cn(
-              'flex items-center gap-2 transition-all duration-300',
+              'flex bg-none bg-transparent items-center gap-2 transition-all duration-300',
               state.isPaused
                 ? 'border-primary text-primary hover:bg-primary/10'
                 : 'border-border',

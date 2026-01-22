@@ -1,6 +1,6 @@
 'use client'
 
-import { forwardRef } from 'react'
+import { forwardRef, useState } from 'react'
 import type { ComponentPropsWithoutRef } from 'react'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
 
@@ -8,8 +8,18 @@ type ButtonAnimationProps = ComponentPropsWithoutRef<typeof Button>
 
 const ButtonAnimation = forwardRef<HTMLButtonElement, ButtonAnimationProps>(
   (props, ref) => {
+    const [open, setOpen] = useState<boolean>(false)
     return (
-      <Button ref={ref} variant="ghost" size="icon" {...props}>
+      <Button
+        className="group"
+        variant="ghost"
+        ref={ref}
+        size="icon"
+        onClick={() => setOpen((prevState) => !prevState)}
+        aria-expanded={open}
+        aria-label={open ? 'Close menu' : 'Open menu'}
+        {...props}
+      >
         <svg
           className="pointer-events-none"
           width={16}
@@ -24,7 +34,7 @@ const ButtonAnimation = forwardRef<HTMLButtonElement, ButtonAnimationProps>(
         >
           <path
             d="M4 12L20 12"
-            className="origin-center -translate-y-1.75 transition-all duration-300 [transition-timing-function:cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-x-0 group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[315deg]"
+            className="origin-center -translate-y-[7px] transition-all duration-300 [transition-timing-function:cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-x-0 group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[315deg]"
           />
           <path
             d="M4 12H20"

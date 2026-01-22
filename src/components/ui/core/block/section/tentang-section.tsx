@@ -58,9 +58,9 @@ function About() {
 
   return (
     <section className="container px-5 py-12 md:py-16 lg:py-0">
-      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-8 lg:gap-10">
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-18 lg:gap-10">
         {/* Teks About Us - Kiri */}
-        <header className="flex flex-col w-full lg:w-[45%] gap-y-4">
+        <header className="flex flex-col w-full gap-y-2 lg:w-[45%] md:gap-y-4">
           {/* Judul */}
           <div className="flex flex-col gap-y-1">
             <p className="text-xs md:text-sm text-muted-foreground tracking-[0.3em] uppercase">
@@ -83,7 +83,7 @@ function About() {
           {/* Gambar pendukung kiri - rotated -15deg */}
           <div className="-mr-29 hover:mr-0 -translate-y-3.5 -rotate-10 z-[1] transition-all duration-300">
             <ImageCard
-              src="assets/images/rendang-potongan.png"
+              src="assets/images/about/about1.png"
               alt="Rendang - Kuliner Nusantara"
               className="w-[190px] h-auto md:w-[180px] lg:w-[210px]"
               index={0}
@@ -95,7 +95,7 @@ function About() {
           {/* Gambar utama tengah - larger */}
           <div className="-translate-y-2 md:-translate-y-4 z-[3] hover:mx-2 transition-all duration-300">
             <ImageCard
-              src="assets/images/gadang-potongan.png"
+              src="assets/images/about/about2.png"
               alt="Rumah Gadang - Arsitektur Nusantara"
               className="w-[190px] h-auto md:w-[220px] lg:w-[220px]"
               index={1}
@@ -107,7 +107,7 @@ function About() {
           {/* Gambar pendukung kanan - rotated 15deg */}
           <div className=" -ml-29 hover:ml-0 -translate-y-4.5 rotate-10 z-[1] transition-all duration-300">
             <ImageCard
-              src="assets/images/batik-potongan.png"
+              src="assets/images/about/about3.png"
               alt="Batik - Warisan Nusantara"
               className="w-[190px] h-auto md:w-[180px] lg:w-[210px]"
               index={2}

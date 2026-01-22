@@ -169,25 +169,7 @@ export default function CTASection() {
 
           <div className="flex w-full   sm:max-w-[10em] flex-col  justify-center  gap-3 sm:flex-row">
             <Link
-              to={
-                session && session.user.role === 'admin'
-                  ? '/dashboard/articles'
-                  : '/login'
-              }
-              className={cn(
-                buttonVariants({ variant: 'default', size: 'sm' }),
-                '  bg-background font-semibold text-accent-foreground rounded-full w-full text-xs   gap-3     sm:px-8   group  py-6 hover:bg-primary/90 cursor-target hover:scale-110 transition-all duration-300 ease-out lg:px-4   hover:text-primary-foreground md:py-4.5',
-              )}
-            >
-              Bagikan Cerita
-              <SquarePen className="  size-4.5    group-hover:text-primary-foreground transition-all duration-300 ease-out       text-primary    sm:size-3.5    " />
-            </Link>
-            <Link
-              to={
-                session && session.user.role === 'admin'
-                  ? '/dashboard/destination'
-                  : '/login'
-              }
+              to={session ? '/dashboard/destination' : '/login'}
               className={cn(
                 buttonVariants({ variant: 'default', size: 'sm' }),
                 'rounded-full w-full text-xs  font-semibold  gap-3  hover:bg-background hover:text-accent-foreground group    sm:px-8   py-6  cursor-target hover:scale-110 transition-all duration-300 ease-out lg:px-4 md:py-4.5',
@@ -196,6 +178,16 @@ export default function CTASection() {
               Ajukan Destinasi{' '}
               <MapPinPen className="  size-4.5    group-hover:text-primary transition-all duration-300 ease-out  text-primary-foreground    sm:size-3.5" />
               {'  '}
+            </Link>
+            <Link
+              to={session ? '/dashboard/articles' : '/login'}
+              className={cn(
+                buttonVariants({ variant: 'default', size: 'sm' }),
+                '  bg-background font-semibold text-accent-foreground rounded-full w-full text-xs   gap-3     sm:px-8   group  py-6 hover:bg-primary/90 cursor-target hover:scale-110 transition-all duration-300 ease-out lg:px-4   hover:text-primary-foreground md:py-4.5',
+              )}
+            >
+              Bagikan Cerita
+              <SquarePen className="  size-4.5    group-hover:text-primary-foreground transition-all duration-300 ease-out       text-primary    sm:size-3.5    " />
             </Link>
           </div>
         </div>

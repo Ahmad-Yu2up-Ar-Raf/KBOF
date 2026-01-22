@@ -282,21 +282,21 @@ export const MobileNavMenu = ({ items }: MobileNavMenuProps) => {
               {item.name == 'Game' ? (
                 <Game
                   className={cn(
-                    '  overflow-visible   text-accent-foreground size-5',
+                    '  overflow-visible  ml-[-3px] mt-[-3px]   text-accent-foreground size-5',
                     isActive && '  fill-background  text-primary',
                   )}
                 />
               ) : item.name == 'Beranda' ? (
                 <Home
                   className={cn(
-                    '  overflow-visible    text-accent-foreground size-5',
+                    '  overflow-visible  ml-[-3px] mt-[-3px]    text-accent-foreground size-5',
                     isActive && '  fill-background  text-primary',
                   )}
                 />
               ) : item.name == 'Artikel' ? (
                 <BookText
                   className={cn(
-                    '   overflow-visible    text-accent-foreground size-5',
+                    '   overflow-visible   ml-[-2.5px] mt-[-2px]    text-accent-foreground size-5',
                     isActive && '  fill-background  text-primary',
                   )}
                 />

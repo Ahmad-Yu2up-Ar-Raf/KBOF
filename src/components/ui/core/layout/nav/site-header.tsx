@@ -108,7 +108,7 @@ export function SiteHeaderMobile() {
     },
     {
       name: 'Akun',
-      link: session && session.user.role === 'admin' ? '/dashboard' : '/login',
+      link: session ? '/dashboard' : '/login',
       icon: UserRound,
     },
   ]

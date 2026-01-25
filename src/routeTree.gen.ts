@@ -25,7 +25,6 @@ import { Route as ArtikelArtikelIdRouteImport } from './routes/artikel/$artikelI
 import { Route as DashboardSettingsRouteRouteImport } from './routes/dashboard/settings/route'
 import { Route as DestinasiDestinasiIdIndexRouteImport } from './routes/destinasi/$destinasiId/index'
 import { Route as DashboardSettingsIndexRouteImport } from './routes/dashboard/settings/index'
-import { Route as ApiCloudinaryDeleteByUrlRouteImport } from './routes/api/cloudinary/delete-by-url'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
 const GameRoute = GameRouteImport.update({
@@ -109,12 +108,6 @@ const DashboardSettingsIndexRoute = DashboardSettingsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardSettingsRouteRoute,
 } as any)
-const ApiCloudinaryDeleteByUrlRoute =
-  ApiCloudinaryDeleteByUrlRouteImport.update({
-    id: '/api/cloudinary/delete-by-url',
-    path: '/api/cloudinary/delete-by-url',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -137,7 +130,6 @@ export interface FileRoutesByFullPath {
   '/dashboard/': typeof DashboardIndexRoute
   '/destinasi/': typeof DestinasiIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/api/cloudinary/delete-by-url': typeof ApiCloudinaryDeleteByUrlRoute
   '/dashboard/settings/': typeof DashboardSettingsIndexRoute
   '/destinasi/$destinasiId/': typeof DestinasiDestinasiIdIndexRoute
 }
@@ -155,7 +147,6 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardIndexRoute
   '/destinasi': typeof DestinasiIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/api/cloudinary/delete-by-url': typeof ApiCloudinaryDeleteByUrlRoute
   '/dashboard/settings': typeof DashboardSettingsIndexRoute
   '/destinasi/$destinasiId': typeof DestinasiDestinasiIdIndexRoute
 }
@@ -176,7 +167,6 @@ export interface FileRoutesById {
   '/dashboard/': typeof DashboardIndexRoute
   '/destinasi/': typeof DestinasiIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/api/cloudinary/delete-by-url': typeof ApiCloudinaryDeleteByUrlRoute
   '/dashboard/settings/': typeof DashboardSettingsIndexRoute
   '/destinasi/$destinasiId/': typeof DestinasiDestinasiIdIndexRoute
 }
@@ -198,7 +188,6 @@ export interface FileRouteTypes {
     | '/dashboard/'
     | '/destinasi/'
     | '/api/auth/$'
-    | '/api/cloudinary/delete-by-url'
     | '/dashboard/settings/'
     | '/destinasi/$destinasiId/'
   fileRoutesByTo: FileRoutesByTo
@@ -216,7 +205,6 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/destinasi'
     | '/api/auth/$'
-    | '/api/cloudinary/delete-by-url'
     | '/dashboard/settings'
     | '/destinasi/$destinasiId'
   id:
@@ -236,7 +224,6 @@ export interface FileRouteTypes {
     | '/dashboard/'
     | '/destinasi/'
     | '/api/auth/$'
-    | '/api/cloudinary/delete-by-url'
     | '/dashboard/settings/'
     | '/destinasi/$destinasiId/'
   fileRoutesById: FileRoutesById
@@ -252,7 +239,6 @@ export interface RootRouteChildren {
   AuthIndexRoute: typeof AuthIndexRoute
   DestinasiIndexRoute: typeof DestinasiIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
-  ApiCloudinaryDeleteByUrlRoute: typeof ApiCloudinaryDeleteByUrlRoute
   DestinasiDestinasiIdIndexRoute: typeof DestinasiDestinasiIdIndexRoute
 }
 
@@ -370,13 +356,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardSettingsIndexRouteImport
       parentRoute: typeof DashboardSettingsRouteRoute
     }
-    '/api/cloudinary/delete-by-url': {
-      id: '/api/cloudinary/delete-by-url'
-      path: '/api/cloudinary/delete-by-url'
-      fullPath: '/api/cloudinary/delete-by-url'
-      preLoaderRoute: typeof ApiCloudinaryDeleteByUrlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -432,7 +411,6 @@ const rootRouteChildren: RootRouteChildren = {
   AuthIndexRoute: AuthIndexRoute,
   DestinasiIndexRoute: DestinasiIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
-  ApiCloudinaryDeleteByUrlRoute: ApiCloudinaryDeleteByUrlRoute,
   DestinasiDestinasiIdIndexRoute: DestinasiDestinasiIdIndexRoute,
 }
 export const routeTree = rootRouteImport

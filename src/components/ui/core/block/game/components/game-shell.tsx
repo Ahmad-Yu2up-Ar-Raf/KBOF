@@ -3,8 +3,8 @@
 import * as React from 'react'
 import { motion } from 'framer-motion'
 import { ArrowLeft } from 'lucide-react'
-import { Button } from '../ui/fragments/shadcn-ui/button'
-import { AnimatedGridPattern } from '../ui/fragments/shadcn-ui/animated-grid-pattern'
+import { Button } from '../../../../fragments/shadcn-ui/button'
+import { AnimatedGridPattern } from '../../../../fragments/shadcn-ui/animated-grid-pattern'
 import { cn } from '@/lib/utils'
 import { ANIMATION_DURATION } from '@/lib/game/constants'
 

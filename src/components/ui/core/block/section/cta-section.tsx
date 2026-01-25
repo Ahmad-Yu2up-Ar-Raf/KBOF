@@ -165,7 +165,7 @@ export default function CTASection() {
 
           <div className="flex w-full   sm:max-w-[10em] flex-col  justify-center  gap-3 sm:flex-row">
             <Link
-              to={session ? '/dashboard/destination' : '/login'}
+              to={session ? '/dashboard/destination' : '/auth'}
               className={cn(
                 buttonVariants({ variant: 'default', size: 'sm' }),
                 'rounded-full w-full text-xs  font-semibold  gap-3     sm:px-8   py-6  cursor-target hover:scale-110 transition-all duration-300 ease-out lg:px-4 md:py-4.5',
@@ -176,7 +176,7 @@ export default function CTASection() {
               {'  '}
             </Link>
             <Link
-              to={session ? '/dashboard/articles' : '/login'}
+              to={session ? '/dashboard/articles' : '/auth'}
               className={cn(
                 buttonVariants({ variant: 'default', size: 'sm' }),
                 '  bg-foreground font-semibold text-primary-foreground  rounded-full w-full text-xs   gap-3     sm:px-8   group  py-6 cursor-target hover:scale-110 transition-all duration-300 ease-out lg:px-4    md:py-4.5',

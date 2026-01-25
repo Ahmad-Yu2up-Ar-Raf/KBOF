@@ -14,7 +14,11 @@ import { useConfettiEffect } from '../../leaderboard/hooks'
 import type { Level, QuestionResult } from '@/lib/game/types'
 import type { ConfettiRef } from '@/components/ui/fragments/custom-ui/animate-ui/confetti'
 import { ANIMATION_DURATION } from '@/lib/game/constants'
-import { GameContent, GameHeader, StatsPanel } from '@/components/game'
+import {
+  GameContent,
+  GameHeader,
+  StatsPanel,
+} from '@/components/ui/core/block/game/components'
 import { Confetti } from '@/components/ui/fragments/custom-ui/animate-ui/confetti'
 import { cn } from '@/lib/utils'
 import {

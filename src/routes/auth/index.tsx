@@ -1,8 +1,9 @@
+// src/routes/(auth)/auth.tsx
 import { createFileRoute } from '@tanstack/react-router'
-import Login from '@/components/ui/core/feature/auth/Login'
+import MagicLink from '@/components/ui/core/feature/auth/magic-link'
 import { guestMiddleware } from '@/lib/middleware'
 
-export const Route = createFileRoute('/(auth)/login')({
+export const Route = createFileRoute('/auth/')({
   component: RouteComponent,
   server: {
     middleware: [guestMiddleware],
@@ -10,5 +11,5 @@ export const Route = createFileRoute('/(auth)/login')({
 })
 
 function RouteComponent() {
-  return <Login />
+  return <MagicLink />
 }

@@ -17,7 +17,7 @@ import {
 import type { GameScreen, Level } from '@/lib/game/types'
 import type { calculateGameStats } from '@/lib/game/utils'
 import { useQuizEngine } from '@/hooks/game/use-quiz-engine'
-import { GameShell } from '@/components/game'
+import { GameShell } from '@/components/ui/core/block/game/components'
 
 // =============================================================================
 // COMPONENT

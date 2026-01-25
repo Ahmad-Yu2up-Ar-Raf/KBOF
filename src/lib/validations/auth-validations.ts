@@ -1,27 +1,26 @@
-import * as z from 'zod'
+// src/lib/validations/auth-validations.ts
+import { z } from 'zod'
 
-export const loginSchema = z.object({
-  email: z.string().min(1),
-  password: z.string().min(8),
+// ✅ Magic Link Schema - email only
+export const magicLinkSchema = z.object({
+  email: z
+    .string()
+    .min(1, 'Email is required')
+    .email('Please enter a valid email address'),
 })
 
+export type MagicLinkSchema = z.infer<typeof magicLinkSchema>
+
+// Keep other schemas if needed (changePassword, updateSchema, etc.)
 export const changePassword = z.object({
-  current_password: z.string().min(8),
-  password: z.string().min(8),
+  current_password: z.string().min(1, 'Current password is required'),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
 })
 
-export const registerCreateSchema = z.object({
-  name: z.string().min(4, 'Name is required'),
-  email: z.string().min(3, 'email is required'),
-  password: z.string().min(8, 'password min 8'),
+export const updateSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  email: z.string().email('Please enter a valid email'),
 })
 
-export const updateSchema = registerCreateSchema.pick({
-  name: true,
-  email: true,
-})
-
-export type UpdateSchema = z.infer<typeof updateSchema>
-export type LoginSchema = z.infer<typeof loginSchema>
 export type ChangePassword = z.infer<typeof changePassword>
-export type RegisterSchema = z.infer<typeof registerCreateSchema>
+export type UpdateSchema = z.infer<typeof updateSchema>

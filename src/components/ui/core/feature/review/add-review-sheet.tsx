@@ -94,7 +94,7 @@ function AddReviewSheet({
   const handleTriggerClick = () => {
     if (!session?.user) {
       navigate({
-        to: '/login',
+        to: '/auth',
       })
       toast.error('Silakan login terlebih dahulu untuk memberikan review')
       return

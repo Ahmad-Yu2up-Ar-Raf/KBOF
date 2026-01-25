@@ -13,7 +13,11 @@ import { ExitConfirmationDialog } from './exit-confirmation-dialog'
 import type { useQuizEngine } from '@/hooks/game/use-quiz-engine'
 import { ANIMATION_DURATION } from '@/lib/game/constants'
 import { cn } from '@/lib/utils'
-import { GameContent, GameHeader, QuestionCard } from '@/components/game'
+import {
+  GameContent,
+  GameHeader,
+  QuestionCard,
+} from '@/components/ui/core/block/game/components'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
 
 // =============================================================================

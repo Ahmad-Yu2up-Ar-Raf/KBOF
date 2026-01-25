@@ -31,12 +31,8 @@ export default function SiteFooter({ className, ...props }: StickyFooterProps) {
   const isMobile = useIsMobile()
   const matches = useMatches()
   const paths = matches[matches.length - 1]?.routeId
-  const isActive =
-    paths !== '/game' &&
-    paths !== '/(auth)/login' &&
-    paths !== '/(auth)/register'
-  // '/(auth)/login',
-  // '/(auth)/register',
+  const isActive = paths !== '/game' && paths !== '/auth/'
+
   if (isActive)
     return (
       <footer

@@ -9,6 +9,7 @@ import {
   FieldError,
   FieldLabel,
 } from '@/components/ui/fragments/shadcn-ui/field'
+import { cn } from '@/lib/utils'
 
 export type FormControlProps = {
   label: string
@@ -21,6 +22,7 @@ type FormBaseProps = FormControlProps & {
   children: ReactNode
   horizontal?: boolean
   controlFirst?: boolean
+  showLabel?: boolean
 }
 
 export function FormBase({
@@ -28,6 +30,7 @@ export function FormBase({
   label,
   description,
   controlFirst,
+  showLabel = true,
   horizontal,
 }: FormBaseProps) {
   const field = useFieldContext()
@@ -97,7 +100,9 @@ export function FormBase({
         </>
       ) : (
         <>
-          <FieldContent>{labelElement}</FieldContent>
+          <FieldContent className={cn(!showLabel && 'sr-only')}>
+            {labelElement}
+          </FieldContent>
           {children}
 
           {captionElem}

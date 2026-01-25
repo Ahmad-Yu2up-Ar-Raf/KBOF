@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { Play } from 'lucide-react'
-import { Button } from '../ui/fragments/shadcn-ui/button'
+import { Button } from '../../../../fragments/shadcn-ui/button'
 import type { Level, LevelConfig } from '@/lib/game/types'
 import { cn } from '@/lib/utils'
 import { ANIMATION_DURATION, LEVEL_CONFIGS } from '@/lib/game/constants'

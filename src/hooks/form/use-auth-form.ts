@@ -1,55 +1,60 @@
+// src/hooks/form/use-auth-form.ts
 import { useAppForm } from './use-form'
 import type {
   ChangePassword,
-  LoginSchema,
-  RegisterSchema,
-  UpdateSchema,
+  MagicLinkSchema,
 } from '@/lib/validations/auth-validations'
 import { authClient } from '@/lib/auth/auth-client'
 import {
   changePassword,
-  loginSchema,
-  registerCreateSchema,
-  updateSchema,
+  magicLinkSchema,
 } from '@/lib/validations/auth-validations'
+import { updateProfileSchema } from '@/lib/validations/profile-validations'
+import type { UpdateProfileSchema } from '@/lib/validations/profile-validations'
 
-export type LoginFormReturn = ReturnType<typeof useLoginForm>
-export type RegisterFormReturn = ReturnType<typeof useRegisterForm>
+export type UpdateProfileFormReturn = ReturnType<typeof useUpdateProfileForm>
+export type MagicLinkFormReturn = ReturnType<typeof useMagicLinkForm>
 
-export function useLoginForm({
+// ✅ NEW: Magic Link Form Hook
+// src/hooks/form/use-auth-form.ts - UPDATE useMagicLinkForm
+export function useMagicLinkForm({
   onSuccess,
   onError,
 }: {
-  onSuccess?: (data: LoginSchema) => void | Promise<void>
+  onSuccess?: (data: MagicLinkSchema) => void | Promise<void>
   onError?: (error: Error) => void
 } = {}) {
   return useAppForm({
     validators: {
-      onSubmit: loginSchema,
+      onSubmit: magicLinkSchema,
     },
     defaultValues: {
       email: '',
-      password: '',
     },
     onSubmit: async ({ value: data }) => {
       try {
-        await authClient.signIn.email(
-          {
-            email: data.email,
-            password: data.password,
-          },
-          {
-            onSuccess: () => {
-              onSuccess?.(data)
-            },
-            onError: (ctx) => {
-              throw ctx.error
-            },
-          },
-        )
+        console.log('📤 [FORM] Submitting magic link request for:', data.email)
+
+        const result = await authClient.signIn.magicLink({
+          email: data.email,
+          callbackURL: '/dashboard',
+          newUserCallbackURL: '/dashboard',
+        })
+
+        console.log('📤 [FORM] Magic link result:', result)
+
+        if (result.error) {
+          console.error('📤 [FORM] Magic link error:', result.error)
+          throw new Error(result.error.message || 'Failed to send magic link')
+        }
+
+        console.log('✅ [FORM] Magic link sent successfully')
+        onSuccess?.(data)
       } catch (error) {
-        const message = error instanceof Error ? error.message : 'Login gagal'
-        console.log(message)
+        const message =
+          error instanceof Error ? error.message : 'Failed to send magic link'
+        console.error('❌ [FORM] Magic link error:', message)
+        console.error('❌ [FORM] Full error:', error)
         onError?.(error as Error)
         throw error
       }
@@ -57,49 +62,7 @@ export function useLoginForm({
   })
 }
 
-export function useRegisterForm({
-  onSuccess,
-  onError,
-}: {
-  onSuccess?: (data: RegisterSchema) => void | Promise<void>
-  onError?: (error: Error) => void
-} = {}) {
-  return useAppForm({
-    validators: {
-      onSubmit: registerCreateSchema,
-    },
-    defaultValues: {
-      name: '',
-      email: '',
-      password: '',
-    },
-    onSubmit: async ({ value: data }) => {
-      try {
-        await authClient.signUp.email(
-          {
-            email: data.email,
-            password: data.password,
-            name: data.name,
-          },
-          {
-            onSuccess: () => {
-              onSuccess?.(data)
-            },
-            onError: (ctx) => {
-              throw ctx.error
-            },
-          },
-        )
-      } catch (error) {
-        const message = error instanceof Error ? error.message : 'Login gagal'
-        console.log(message)
-        onError?.(error as Error)
-        throw error
-      }
-    },
-  })
-}
-
+// Keep existing hooks if needed
 export function useChangePassword({
   onSuccess,
   onError,
@@ -119,8 +82,8 @@ export function useChangePassword({
       try {
         await authClient.changePassword(
           {
-            newPassword: data.password, // required
-            currentPassword: data.current_password, // required
+            newPassword: data.password,
+            currentPassword: data.current_password,
             revokeOtherSessions: true,
           },
           {
@@ -133,7 +96,8 @@ export function useChangePassword({
           },
         )
       } catch (error) {
-        const message = error instanceof Error ? error.message : 'Login gagal'
+        const message =
+          error instanceof Error ? error.message : 'Password change failed'
         console.log(message)
         onError?.(error as Error)
         throw error
@@ -142,56 +106,34 @@ export function useChangePassword({
   })
 }
 
-export function useUpdateForm({
+export function useUpdateProfileForm({
   onSuccess,
   onError,
 }: {
-  onSuccess?: (data: UpdateSchema) => void | Promise<void>
+  onSuccess?: (data: UpdateProfileSchema) => void | Promise<void>
   onError?: (error: Error) => void
 } = {}) {
   const { data: session } = authClient.useSession()
+
   return useAppForm({
     validators: {
-      onSubmit: updateSchema,
+      onSubmit: updateProfileSchema,
     },
     defaultValues: {
       name: session?.user?.name || '',
-      email: session?.user?.email || '',
+
+      image: session?.user?.image
+        ? { dataUrl: session.user.image as string, filename: 'image' }
+        : null,
     },
     onSubmit: async ({ value: data }) => {
       try {
-        if (
-          data.name === session?.user?.name &&
-          data.email === session?.user?.email
-        ) {
-          throw new Error('No changes detected.')
-        }
-
-        if (data.name !== session?.user?.name) {
-          await authClient.updateUser(
-            {
-              name: data.name,
-            },
-            {
-              onSuccess: () => {
-                onSuccess?.(data)
-              },
-              onError: (ctx) => {
-                throw ctx.error
-              },
-            },
-          )
-        }
-
-        if (data.email !== session?.user?.email) {
-          await authClient.changeEmail({
-            newEmail: data.email,
-            callbackURL: '/dashboard/settings', // to redirect after verification
-          })
-        }
+        // Form validation passed, call onSuccess
+        // Actual upload + DB update will be handled in component
+        onSuccess?.(data)
       } catch (error) {
-        const message = error instanceof Error ? error.message : 'Login gagal'
-        console.log(message)
+        const message = error instanceof Error ? error.message : 'Update failed'
+        console.error('Profile update error:', message)
         onError?.(error as Error)
         throw error
       }

@@ -1,12 +1,11 @@
+// src/lib/auth/auth.ts
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { admin, magicLink } from 'better-auth/plugins'
-import { Resend } from 'resend'
+import { sendMagicLinkEmail } from '../server/send-magic-link'
 import { ac, roles } from './permissions'
 import * as schema from '@/db/schema'
-import { db } from '@/db' // your drizzle instance
-
-const resend = new Resend(process.env.RESEND_API_KEY as string)
+import { db } from '@/db'
 
 export const auth = betterAuth({
   user: {
@@ -17,7 +16,6 @@ export const auth = betterAuth({
       enabled: true,
       updateEmailWithoutVerification: true,
     },
-    // Additional user fields for onboarding
     additionalFields: {
       role: {
         type: 'string',
@@ -84,7 +82,6 @@ export const auth = betterAuth({
     provider: 'pg',
     schema,
   }),
-  // ...other options
   socialProviders: {
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -92,31 +89,39 @@ export const auth = betterAuth({
     },
   },
   emailAndPassword: {
-    enabled: true,
+    enabled: false, // ❌ DISABLE email/password auth
   },
+ 
   plugins: [
-    // Admin plugin for user management and role-based access control
     admin({
       ac,
       roles: {
-       
         admin: roles.admin,
         superAdmin: roles.superAdmin,
       },
       defaultRole: 'admin',
       adminRoles: ['admin', 'superAdmin'],
     }),
-    // Magic link for passwordless login
     magicLink({
-      disableSignUp: true, // Disable using magic link at signup
-      sendMagicLink: async ({ email, url }) => {
-        await resend.emails.send({
-          from: `${process.env.EMAIL_SENDER_NAME} <${process.env.EMAIL_SENDER_ADDRESS}>`,
-          to: email,
-          subject: 'Magic Link - Suasana',
-          html: `Click the link to login into your account: ${url}`,
-        })
+      expiresIn: 60 * 15, // 15 minutes
+
+      sendMagicLink: async ({ email, token, url }, ctx) => {
+        // ✅ LOG: Magic link triggered
+        console.log('🔗 [BETTER AUTH] sendMagicLink called')
+        console.log('🔗 [BETTER AUTH] Email:', email)
+        console.log('🔗 [BETTER AUTH] Token:', token)
+        console.log('🔗 [BETTER AUTH] URL:', url)
+
+        try {
+          await sendMagicLinkEmail({ email, token, url })
+          console.log('🔗 [BETTER AUTH] Magic link sent successfully')
+        } catch (error) {
+          console.error('🔗 [BETTER AUTH] Failed to send magic link:', error)
+          throw error
+        }
       },
+
+      disableSignUp: false,
     }),
   ],
 })

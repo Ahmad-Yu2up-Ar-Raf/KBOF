@@ -43,10 +43,8 @@ function SiteNavbar() {
   const matches = useMatches()
   const paths = matches[matches.length - 1]?.routeId
   const isActive = paths !== '/' && paths !== '/game'
-  const isActiveFixed =
-    paths == '/destinasi/$destinasiId/' ||
-    paths == '/(auth)/login' ||
-    paths == '/(auth)/register'
+  const isActiveFixed = paths == '/destinasi/$destinasiId/' || paths == '/auth/'
+
   // setOpen((prevState) => !prevState)
   const isMobile = useIsMobile()
   if (isActive && isMobile)

@@ -11,7 +11,7 @@ import { HowToPlaySheet } from '../how-to-play-sheet'
 import { AnimatedRoadmap } from './map-hero'
 import type { Milestone } from './map-hero'
 import { ANIMATION_DURATION } from '@/lib/game/constants'
-import { GameContent } from '@/components/game'
+import { GameContent } from '@/components/ui/core/block/game/components'
 import { Button } from '@/components/ui/fragments/shadcn-ui/button'
 
 // =============================================================================

@@ -429,14 +429,16 @@ export function getDestinationTableColumns({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-40">
-              <DropdownMenuItem asChild>
-                <Link
-                  to="/destinasi/$destinasiId"
-                  params={{ destinasiId: row.original.slug }}
-                >
-                  Preview
-                </Link>
-              </DropdownMenuItem>
+              {row.original.status == 'published' && (
+                <DropdownMenuItem asChild>
+                  <Link
+                    to="/destinasi/$destinasiId"
+                    params={{ destinasiId: row.original.slug }}
+                  >
+                    Preview
+                  </Link>
+                </DropdownMenuItem>
+              )}
               <DropdownMenuItem
                 onSelect={() => setRowAction({ row, variant: 'update' })}
               >
@@ -515,9 +517,10 @@ export function getDestinationTableColumns({
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 onSelect={() => setRowAction({ row, variant: 'delete' })}
+                className="text-destructive"
               >
+                
                 Delete
-                <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

@@ -38,7 +38,7 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
           toast.success('Account logout successfully.', {
             id: 'logout-account',
           })
-          navigate({ to: '/login' })
+          navigate({ to: '/auth' })
         },
         onError(context) {
           setIsPending(false)

@@ -221,7 +221,7 @@ export async function fetchDestinationList(
         userId: destination.userId,
         // Creator info (user)
         creatorName: user.name,
-        creatorAvatar: user.avatar,
+        creatorAvatar: user.image,
         slug: destination.slug,
         name: destination.name,
         description: destination.description,
@@ -469,7 +469,7 @@ export async function fetchDestinationListAdmin(
         userId: destination.userId,
         // Creator info
         creatorName: user.name,
-        creatorAvatar: user.avatar,
+        creatorAvatar: user.image,
         slug: destination.slug,
         name: destination.name,
         description: destination.description,

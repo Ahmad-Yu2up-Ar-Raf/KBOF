@@ -274,14 +274,16 @@ export function getArticleTableColumns({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-40">
-              <DropdownMenuItem asChild>
-                <Link
-                  to="/artikel/$artikelId"
-                  params={{ artikelId: row.original.slug }}
-                >
-                  Preview
-                </Link>
-              </DropdownMenuItem>
+              {row.original.status == 'published' && (
+                <DropdownMenuItem asChild>
+                  <Link
+                    to="/artikel/$artikelId"
+                    params={{ artikelId: row.original.slug }}
+                  >
+                    Preview
+                  </Link>
+                </DropdownMenuItem>
+              )}
               <DropdownMenuItem
                 onSelect={() => setRowAction({ row, variant: 'update' })}
               >
@@ -315,7 +317,7 @@ export function getArticleTableColumns({
                 className="text-destructive"
               >
                 Hapus
-                <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+              
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { toast } from 'sonner'
-import { Check,  ThumbsUp } from 'lucide-react'
+import { Check, ThumbsUp } from 'lucide-react'
 
 import { useNavigate } from '@tanstack/react-router'
 import { Button } from '../../shadcn-ui/button'
@@ -57,7 +57,7 @@ function VoteButton({ destination }: DestinasiDetailBlockProps) {
   const handleVoteClick = () => {
     if (!session?.user) {
       navigate({
-        to: '/login',
+        to: '/auth',
       })
       toast.error('Silakan login terlebih dahulu untuk memberikan vote')
       return

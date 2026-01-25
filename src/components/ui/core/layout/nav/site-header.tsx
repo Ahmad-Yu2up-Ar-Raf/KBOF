@@ -108,7 +108,7 @@ export function SiteHeaderMobile() {
     },
     {
       name: 'Akun',
-      link: session ? '/dashboard' : '/login',
+      link: session ? '/dashboard' : '/auth',
       icon: UserRound,
     },
   ]

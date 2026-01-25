@@ -108,7 +108,7 @@
 - [ ] Timer stops when paused
 - [ ] Overlay shows "Permainan Dijeda"
 - [ ] "Lanjutkan" button resumes game
-- [ ] Timer continues from paused time
+- [ ] Timer Lanjutkans from paused time
 
 ### 13. Responsive Design
 

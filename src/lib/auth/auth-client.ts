@@ -1,20 +1,19 @@
+// src/lib/auth/auth-client.ts
 import { adminClient, magicLinkClient } from 'better-auth/client/plugins'
 import { createAuthClient } from 'better-auth/react'
 import { ac, roles } from './permissions'
 
 export const authClient = createAuthClient({
-  baseURL: process.env.BETTER_AUTH_URL,
+  // ✅ FIX: Use VITE_ prefix for client-side access
+  baseURL: import.meta.env.VITE_BETTER_AUTH_URL || 'http://localhost:3000',
   plugins: [
-    // Admin client for role management and user operations
     adminClient({
       ac,
       roles: {
-       
         admin: roles.admin,
         superAdmin: roles.superAdmin,
       },
     }),
-    // Magic link client
     magicLinkClient(),
   ],
 })

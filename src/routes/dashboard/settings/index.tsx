@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import DeleteUser from '@/components/ui/core/feature/auth/delete-user-block'
-import { UpdateForm } from '@/components/ui/core/feature/form/update-profile-form'
+import {UpdateProfileForm} from '@/components/ui/core/feature/form/update-profile-form'
 
 import HeadingSmall from '@/components/ui/fragments/custom-ui/typography/heading-small'
 
@@ -13,10 +13,10 @@ function RouteComponent() {
     <>
       <div className="space-y-6">
         <HeadingSmall
-          title="Profile information"
-          description="Update your name and email address"
+          title="Informasi profil"
+          description="Perbarui nama dan alamat email Anda"
         />
-        <UpdateForm />
+        <UpdateProfileForm />
       </div>
 
       <DeleteUser />

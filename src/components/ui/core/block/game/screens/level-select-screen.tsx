@@ -8,7 +8,11 @@ import { motion } from 'framer-motion'
 
 import type { Level } from '@/lib/game/types'
 import { ANIMATION_DURATION } from '@/lib/game/constants'
-import { GameContent, GameHeader, LevelSelect } from '@/components/game'
+import {
+  GameContent,
+  GameHeader,
+  LevelSelect,
+} from '@/components/ui/core/block/game/components'
 
 // =============================================================================
 // TYPES

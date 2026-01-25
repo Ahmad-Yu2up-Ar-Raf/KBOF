@@ -8,13 +8,8 @@ import { cn, isSameUrl, resolveUrl } from '@/lib/utils'
 
 const sidebarNavItems: Array<NavItem> = [
   {
-    title: 'Profile',
+    title: 'Profil ',
     href: '/dashboard/settings',
-    icon: null,
-  },
-  {
-    title: 'Password',
-    href: '/dashboard/settings/password',
     icon: null,
   },
 ]
@@ -30,8 +25,8 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
   return (
     <>
       <Heading
-        title="Settings"
-        description="Manage your profile and account settings"
+        title="Setting"
+        description="Kelola profil dan pengaturan akun Anda"
       />
 
       <div className="flex flex-col lg:flex-row lg:space-x-12">

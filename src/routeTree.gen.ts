@@ -15,19 +15,17 @@ import { Route as DashboardRouteRouteImport } from './routes/dashboard/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DestinasiIndexRouteImport } from './routes/destinasi/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
+import { Route as AuthIndexRouteImport } from './routes/auth/index'
 import { Route as ArtikelIndexRouteImport } from './routes/artikel/index'
 import { Route as DestinasiLeaderboardRouteImport } from './routes/destinasi/leaderboard'
 import { Route as DashboardUserMenagementRouteImport } from './routes/dashboard/user-menagement'
 import { Route as DashboardDestinationRouteImport } from './routes/dashboard/destination'
 import { Route as DashboardArticlesRouteImport } from './routes/dashboard/articles'
 import { Route as ArtikelArtikelIdRouteImport } from './routes/artikel/$artikelId'
-import { Route as authRegisterRouteImport } from './routes/(auth)/register'
-import { Route as authLoginRouteImport } from './routes/(auth)/login'
-import { Route as authGet_startedRouteImport } from './routes/(auth)/get_started'
 import { Route as DashboardSettingsRouteRouteImport } from './routes/dashboard/settings/route'
 import { Route as DestinasiDestinasiIdIndexRouteImport } from './routes/destinasi/$destinasiId/index'
 import { Route as DashboardSettingsIndexRouteImport } from './routes/dashboard/settings/index'
-import { Route as DashboardSettingsPasswordRouteImport } from './routes/dashboard/settings/password'
+import { Route as ApiCloudinaryDeleteByUrlRouteImport } from './routes/api/cloudinary/delete-by-url'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
 const GameRoute = GameRouteImport.update({
@@ -60,6 +58,11 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardRouteRoute,
 } as any)
+const AuthIndexRoute = AuthIndexRouteImport.update({
+  id: '/auth/',
+  path: '/auth/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ArtikelIndexRoute = ArtikelIndexRouteImport.update({
   id: '/artikel/',
   path: '/artikel/',
@@ -90,21 +93,6 @@ const ArtikelArtikelIdRoute = ArtikelArtikelIdRouteImport.update({
   path: '/artikel/$artikelId',
   getParentRoute: () => rootRouteImport,
 } as any)
-const authRegisterRoute = authRegisterRouteImport.update({
-  id: '/(auth)/register',
-  path: '/register',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const authLoginRoute = authLoginRouteImport.update({
-  id: '/(auth)/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const authGet_startedRoute = authGet_startedRouteImport.update({
-  id: '/(auth)/get_started',
-  path: '/get_started',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const DashboardSettingsRouteRoute = DashboardSettingsRouteRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -121,11 +109,11 @@ const DashboardSettingsIndexRoute = DashboardSettingsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardSettingsRouteRoute,
 } as any)
-const DashboardSettingsPasswordRoute =
-  DashboardSettingsPasswordRouteImport.update({
-    id: '/password',
-    path: '/password',
-    getParentRoute: () => DashboardSettingsRouteRoute,
+const ApiCloudinaryDeleteByUrlRoute =
+  ApiCloudinaryDeleteByUrlRouteImport.update({
+    id: '/api/cloudinary/delete-by-url',
+    path: '/api/cloudinary/delete-by-url',
+    getParentRoute: () => rootRouteImport,
   } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
@@ -139,39 +127,35 @@ export interface FileRoutesByFullPath {
   '/$': typeof SplatRoute
   '/game': typeof GameRoute
   '/dashboard/settings': typeof DashboardSettingsRouteRouteWithChildren
-  '/get_started': typeof authGet_startedRoute
-  '/login': typeof authLoginRoute
-  '/register': typeof authRegisterRoute
   '/artikel/$artikelId': typeof ArtikelArtikelIdRoute
   '/dashboard/articles': typeof DashboardArticlesRoute
   '/dashboard/destination': typeof DashboardDestinationRoute
   '/dashboard/user-menagement': typeof DashboardUserMenagementRoute
   '/destinasi/leaderboard': typeof DestinasiLeaderboardRoute
-  '/artikel': typeof ArtikelIndexRoute
+  '/artikel/': typeof ArtikelIndexRoute
+  '/auth/': typeof AuthIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
-  '/destinasi': typeof DestinasiIndexRoute
+  '/destinasi/': typeof DestinasiIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/dashboard/settings/password': typeof DashboardSettingsPasswordRoute
+  '/api/cloudinary/delete-by-url': typeof ApiCloudinaryDeleteByUrlRoute
   '/dashboard/settings/': typeof DashboardSettingsIndexRoute
-  '/destinasi/$destinasiId': typeof DestinasiDestinasiIdIndexRoute
+  '/destinasi/$destinasiId/': typeof DestinasiDestinasiIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/game': typeof GameRoute
-  '/get_started': typeof authGet_startedRoute
-  '/login': typeof authLoginRoute
-  '/register': typeof authRegisterRoute
   '/artikel/$artikelId': typeof ArtikelArtikelIdRoute
   '/dashboard/articles': typeof DashboardArticlesRoute
   '/dashboard/destination': typeof DashboardDestinationRoute
   '/dashboard/user-menagement': typeof DashboardUserMenagementRoute
   '/destinasi/leaderboard': typeof DestinasiLeaderboardRoute
   '/artikel': typeof ArtikelIndexRoute
+  '/auth': typeof AuthIndexRoute
   '/dashboard': typeof DashboardIndexRoute
   '/destinasi': typeof DestinasiIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/dashboard/settings/password': typeof DashboardSettingsPasswordRoute
+  '/api/cloudinary/delete-by-url': typeof ApiCloudinaryDeleteByUrlRoute
   '/dashboard/settings': typeof DashboardSettingsIndexRoute
   '/destinasi/$destinasiId': typeof DestinasiDestinasiIdIndexRoute
 }
@@ -182,19 +166,17 @@ export interface FileRoutesById {
   '/$': typeof SplatRoute
   '/game': typeof GameRoute
   '/dashboard/settings': typeof DashboardSettingsRouteRouteWithChildren
-  '/(auth)/get_started': typeof authGet_startedRoute
-  '/(auth)/login': typeof authLoginRoute
-  '/(auth)/register': typeof authRegisterRoute
   '/artikel/$artikelId': typeof ArtikelArtikelIdRoute
   '/dashboard/articles': typeof DashboardArticlesRoute
   '/dashboard/destination': typeof DashboardDestinationRoute
   '/dashboard/user-menagement': typeof DashboardUserMenagementRoute
   '/destinasi/leaderboard': typeof DestinasiLeaderboardRoute
   '/artikel/': typeof ArtikelIndexRoute
+  '/auth/': typeof AuthIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/destinasi/': typeof DestinasiIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/dashboard/settings/password': typeof DashboardSettingsPasswordRoute
+  '/api/cloudinary/delete-by-url': typeof ApiCloudinaryDeleteByUrlRoute
   '/dashboard/settings/': typeof DashboardSettingsIndexRoute
   '/destinasi/$destinasiId/': typeof DestinasiDestinasiIdIndexRoute
 }
@@ -206,39 +188,35 @@ export interface FileRouteTypes {
     | '/$'
     | '/game'
     | '/dashboard/settings'
-    | '/get_started'
-    | '/login'
-    | '/register'
     | '/artikel/$artikelId'
     | '/dashboard/articles'
     | '/dashboard/destination'
     | '/dashboard/user-menagement'
     | '/destinasi/leaderboard'
-    | '/artikel'
+    | '/artikel/'
+    | '/auth/'
     | '/dashboard/'
-    | '/destinasi'
+    | '/destinasi/'
     | '/api/auth/$'
-    | '/dashboard/settings/password'
+    | '/api/cloudinary/delete-by-url'
     | '/dashboard/settings/'
-    | '/destinasi/$destinasiId'
+    | '/destinasi/$destinasiId/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/$'
     | '/game'
-    | '/get_started'
-    | '/login'
-    | '/register'
     | '/artikel/$artikelId'
     | '/dashboard/articles'
     | '/dashboard/destination'
     | '/dashboard/user-menagement'
     | '/destinasi/leaderboard'
     | '/artikel'
+    | '/auth'
     | '/dashboard'
     | '/destinasi'
     | '/api/auth/$'
-    | '/dashboard/settings/password'
+    | '/api/cloudinary/delete-by-url'
     | '/dashboard/settings'
     | '/destinasi/$destinasiId'
   id:
@@ -248,19 +226,17 @@ export interface FileRouteTypes {
     | '/$'
     | '/game'
     | '/dashboard/settings'
-    | '/(auth)/get_started'
-    | '/(auth)/login'
-    | '/(auth)/register'
     | '/artikel/$artikelId'
     | '/dashboard/articles'
     | '/dashboard/destination'
     | '/dashboard/user-menagement'
     | '/destinasi/leaderboard'
     | '/artikel/'
+    | '/auth/'
     | '/dashboard/'
     | '/destinasi/'
     | '/api/auth/$'
-    | '/dashboard/settings/password'
+    | '/api/cloudinary/delete-by-url'
     | '/dashboard/settings/'
     | '/destinasi/$destinasiId/'
   fileRoutesById: FileRoutesById
@@ -270,14 +246,13 @@ export interface RootRouteChildren {
   DashboardRouteRoute: typeof DashboardRouteRouteWithChildren
   SplatRoute: typeof SplatRoute
   GameRoute: typeof GameRoute
-  authGet_startedRoute: typeof authGet_startedRoute
-  authLoginRoute: typeof authLoginRoute
-  authRegisterRoute: typeof authRegisterRoute
   ArtikelArtikelIdRoute: typeof ArtikelArtikelIdRoute
   DestinasiLeaderboardRoute: typeof DestinasiLeaderboardRoute
   ArtikelIndexRoute: typeof ArtikelIndexRoute
+  AuthIndexRoute: typeof AuthIndexRoute
   DestinasiIndexRoute: typeof DestinasiIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  ApiCloudinaryDeleteByUrlRoute: typeof ApiCloudinaryDeleteByUrlRoute
   DestinasiDestinasiIdIndexRoute: typeof DestinasiDestinasiIdIndexRoute
 }
 
@@ -314,7 +289,7 @@ declare module '@tanstack/react-router' {
     '/destinasi/': {
       id: '/destinasi/'
       path: '/destinasi'
-      fullPath: '/destinasi'
+      fullPath: '/destinasi/'
       preLoaderRoute: typeof DestinasiIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -325,10 +300,17 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof DashboardRouteRoute
     }
+    '/auth/': {
+      id: '/auth/'
+      path: '/auth'
+      fullPath: '/auth/'
+      preLoaderRoute: typeof AuthIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/artikel/': {
       id: '/artikel/'
       path: '/artikel'
-      fullPath: '/artikel'
+      fullPath: '/artikel/'
       preLoaderRoute: typeof ArtikelIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -367,27 +349,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArtikelArtikelIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/(auth)/register': {
-      id: '/(auth)/register'
-      path: '/register'
-      fullPath: '/register'
-      preLoaderRoute: typeof authRegisterRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/(auth)/login': {
-      id: '/(auth)/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof authLoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/(auth)/get_started': {
-      id: '/(auth)/get_started'
-      path: '/get_started'
-      fullPath: '/get_started'
-      preLoaderRoute: typeof authGet_startedRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/dashboard/settings': {
       id: '/dashboard/settings'
       path: '/settings'
@@ -398,7 +359,7 @@ declare module '@tanstack/react-router' {
     '/destinasi/$destinasiId/': {
       id: '/destinasi/$destinasiId/'
       path: '/destinasi/$destinasiId'
-      fullPath: '/destinasi/$destinasiId'
+      fullPath: '/destinasi/$destinasiId/'
       preLoaderRoute: typeof DestinasiDestinasiIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -409,12 +370,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardSettingsIndexRouteImport
       parentRoute: typeof DashboardSettingsRouteRoute
     }
-    '/dashboard/settings/password': {
-      id: '/dashboard/settings/password'
-      path: '/password'
-      fullPath: '/dashboard/settings/password'
-      preLoaderRoute: typeof DashboardSettingsPasswordRouteImport
-      parentRoute: typeof DashboardSettingsRouteRoute
+    '/api/cloudinary/delete-by-url': {
+      id: '/api/cloudinary/delete-by-url'
+      path: '/api/cloudinary/delete-by-url'
+      fullPath: '/api/cloudinary/delete-by-url'
+      preLoaderRoute: typeof ApiCloudinaryDeleteByUrlRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/auth/$': {
       id: '/api/auth/$'
@@ -427,13 +388,11 @@ declare module '@tanstack/react-router' {
 }
 
 interface DashboardSettingsRouteRouteChildren {
-  DashboardSettingsPasswordRoute: typeof DashboardSettingsPasswordRoute
   DashboardSettingsIndexRoute: typeof DashboardSettingsIndexRoute
 }
 
 const DashboardSettingsRouteRouteChildren: DashboardSettingsRouteRouteChildren =
   {
-    DashboardSettingsPasswordRoute: DashboardSettingsPasswordRoute,
     DashboardSettingsIndexRoute: DashboardSettingsIndexRoute,
   }
 
@@ -467,14 +426,13 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRouteRoute: DashboardRouteRouteWithChildren,
   SplatRoute: SplatRoute,
   GameRoute: GameRoute,
-  authGet_startedRoute: authGet_startedRoute,
-  authLoginRoute: authLoginRoute,
-  authRegisterRoute: authRegisterRoute,
   ArtikelArtikelIdRoute: ArtikelArtikelIdRoute,
   DestinasiLeaderboardRoute: DestinasiLeaderboardRoute,
   ArtikelIndexRoute: ArtikelIndexRoute,
+  AuthIndexRoute: AuthIndexRoute,
   DestinasiIndexRoute: DestinasiIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  ApiCloudinaryDeleteByUrlRoute: ApiCloudinaryDeleteByUrlRoute,
   DestinasiDestinasiIdIndexRoute: DestinasiDestinasiIdIndexRoute,
 }
 export const routeTree = rootRouteImport

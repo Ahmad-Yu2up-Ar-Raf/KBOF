@@ -29,7 +29,7 @@ export default function DeleteUser() {
     setIsPending(true)
     await authClient.deleteUser(
       {
-        callbackURL: '/login', // you can provide a callback URL to redirect after deletion
+        callbackURL: '/auth', // you can provide a callback URL to redirect after deletion
       },
       {
         onSuccess: () => {
@@ -37,7 +37,7 @@ export default function DeleteUser() {
           toast.success('Account deleted successfully.', {
             id: 'delete-account',
           })
-          navigate({ to: '/login' })
+          navigate({ to: '/auth' })
         },
         onError(context) {
           setIsPending(false)
@@ -51,31 +51,32 @@ export default function DeleteUser() {
   return (
     <div className="space-y-6">
       <HeadingSmall
-        title="Delete account"
-        description="Delete your account and all of its resources"
+        title="Hapus akun"
+        description="Hapus akun Anda dan semua sumber dayanya."
       />
       <div className="space-y-4 rounded-xl border border-red-100 bg-red-50 p-4 dark:border-red-200/10 dark:bg-red-700/10">
         <div className="relative space-y-0.5 text-red-600 dark:text-red-100">
           <p className="font-medium">Warning</p>
           <p className="text-sm">
-            Please proceed with caution, this cannot be undone.
+            Harap berhati-hati, tindakan ini tidak dapat dibatalkan.
           </p>
         </div>
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <Button variant="destructive" data-test="delete-user-button">
-              Delete account
+              Hapus akun
             </Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
               <AlertDialogTitle>
-                Are you sure you want to delete your account?
+                Apakah Anda yakin ingin menghapus akun Anda?
               </AlertDialogTitle>
               <AlertDialogDescription>
-                Once your account is deleted, all of its resources and data will
-                also be permanently deleted. Please enter your password to
-                confirm you would like to permanently delete your account.
+                Setelah akun Anda dihapus, semua sumber daya dan datanya juga
+                akan dihapus secara permanen. Silakan masukkan kata sandi Anda
+                untuk mengkonfirmasi bahwa Anda ingin menghapus akun Anda secara
+                permanen.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
@@ -87,7 +88,7 @@ export default function DeleteUser() {
                     Loading...
                   </>
                 ) : (
-                  'Continue'
+                  'Batal'
                 )}
               </AlertDialogCancel>
               <AlertDialogAction
@@ -101,7 +102,7 @@ export default function DeleteUser() {
                     Loading...
                   </>
                 ) : (
-                  'Continue'
+                  'Lanjutkan'
                 )}
               </AlertDialogAction>
             </AlertDialogFooter>

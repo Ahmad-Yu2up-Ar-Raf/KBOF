@@ -142,8 +142,7 @@ export const user = pgTable(
     fullName: text('full_name'),
     /** Unique username */
     username: text('username'),
-    /** User avatar URL */
-    avatar: text('avatar'),
+
     /** Short bio */
     bio: text('bio'),
 

@@ -59,7 +59,7 @@ interface groupItems {
 }
 type componentProps = {
   user?: User | null
-  /** When true, hides page-user menu (since nav items are visible) and shows simple avatar for guests */
+  /** When true, hides page-user menu (since nav items are visible) and shows simple image for guests */
   isHomePage?: boolean
 }
 
@@ -93,31 +93,13 @@ const listItemsRole: Array<groupItems> = [
   },
 
   {
-    name: 'profile-admin',
-
-    dataGroup: [
-      {
-        label: 'Profile',
-        icon: UserRoundIcon,
-        href: `/dashboard/settings`,
-        role: ['admin', 'superAdmin'],
-      },
-      {
-        label: 'Settings',
-        icon: SettingsIcon,
-        href: `/dashboard/settings`,
-        role: ['admin', 'superAdmin'],
-      },
-    ],
-  },
-  {
     name: 'guest',
 
     dataGroup: [
       {
         label: 'login',
         icon: LogIn,
-        href: `/login`,
+        href: `/auth`,
       },
     ],
   },
@@ -151,6 +133,24 @@ const listItemsRole: Array<groupItems> = [
       },
     ],
   },
+  {
+    name: 'profile-admin',
+
+    dataGroup: [
+      // {
+      //   label: 'Profile',
+      //   icon: UserRoundIcon,
+      //   href: `/dashboard/settings`,
+      //   role: ['admin', 'superAdmin'],
+      // },
+      {
+        label: 'Settings',
+        icon: SettingsIcon,
+        href: `/dashboard/settings`,
+        role: ['admin', 'superAdmin'],
+      },
+    ],
+  },
 ]
 
 function AvatarMenu({ user, isHomePage = false }: componentProps) {
@@ -169,7 +169,7 @@ function AvatarMenu({ user, isHomePage = false }: componentProps) {
           toast.success('Account logout successfully.', {
             id: 'logout-account',
           })
-          navigate({ to: '/login' })
+          navigate({ to: '/auth' })
         },
         onError(context) {
           setIsPending(false)
@@ -219,7 +219,7 @@ function AvatarMenu({ user, isHomePage = false }: componentProps) {
         <DropdownMenuTrigger asChild>
           {isMobile ? (
             <Avatar className="cursor-pointer">
-              <AvatarImage src={`${user.avatar}`} alt={`${user.email}`} />
+              <AvatarImage src={`${user.image}`} alt={`${user.email}`} />
               <AvatarFallback>{useInitial(user.name)}</AvatarFallback>
             </Avatar>
           ) : (
@@ -234,7 +234,7 @@ function AvatarMenu({ user, isHomePage = false }: componentProps) {
         >
           <DropdownMenuLabel className="flex items-center gap-2">
             <Avatar>
-              <AvatarImage src={`${user.avatar}`} alt={`${user.email}`} />
+              <AvatarImage src={`${user.image}`} alt={`${user.email}`} />
               <AvatarFallback className="text-xs">
                 {useInitial(user.name)}
               </AvatarFallback>
@@ -298,10 +298,10 @@ function AvatarMenu({ user, isHomePage = false }: componentProps) {
       </DropdownMenu>
     )
 
-  // Guest on mobile OR guest on homepage - show avatar link to login
+  // Guest on mobile OR guest on homepage - show image link to login
   if (!user && (isMobile || isHomePage))
     return (
-      <Link to="/login">
+      <Link to="/auth">
         <Avatar className="cursor-pointer">
           <AvatarFallback>S</AvatarFallback>
         </Avatar>

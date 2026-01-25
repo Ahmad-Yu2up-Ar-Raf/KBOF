@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight, Check, X } from 'lucide-react'
-import { Badge } from '../ui/fragments/shadcn-ui/badge'
+import { Badge } from '../../../../fragments/shadcn-ui/badge'
 import { FragmentReveal } from './image-fragment'
 import { TimerDisplay } from './timer-display'
 import type { Level, Question } from '@/lib/game/types'

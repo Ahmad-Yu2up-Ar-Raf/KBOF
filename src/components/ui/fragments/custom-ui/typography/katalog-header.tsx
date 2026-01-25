@@ -153,7 +153,7 @@ const KatalogHeader = ({
             children
           ) : (
             <Link
-              to={'/login'}
+              to={'/auth'}
               className={cn(
                 buttonVariants({ variant: 'default' }),
                 ' m-auto md:mr-0 text-sm  mt-3 w-full md:max-w-3xs ',

@@ -4,7 +4,7 @@ import type { FormControlProps } from './form-base'
 import { Input } from '@/components/ui/fragments/shadcn-ui/input'
 import { useFieldContext } from '@/hooks/form/use-form'
 
-export function FormInput(props: FormControlProps) {
+export function FormInput(props: FormControlProps & { showLabel?: boolean }) {
   const field = useFieldContext<string | number>()
   // ✅ Akses form melalui field.form (bukan useFormContext)
   const isSubmitting = useStore(
@@ -25,7 +25,7 @@ export function FormInput(props: FormControlProps) {
   }
 
   return (
-    <FormBase {...props}>
+    <FormBase showLabel={props.showLabel} {...props}>
       <Input
         id={field.name}
         name={field.name}

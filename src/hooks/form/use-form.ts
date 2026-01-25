@@ -1,3 +1,4 @@
+// src/hooks/form/use-form.ts
 import { createFormHook, createFormHookContexts } from '@tanstack/react-form'
 import { FormInput } from '@/components/ui/fragments/custom-ui/form/form-input'
 import { FormTextarea } from '@/components/ui/fragments/custom-ui/form/form-textarea'
@@ -9,7 +10,8 @@ import {
   FormFileUpload,
   FormMultiFileUpload,
 } from '@/components/ui/fragments/custom-ui/form/form-file-upload'
-import { FormImagesUpload } from '@/components/ui/fragments/custom-ui/form/form-images-upload'
+import { FormImagesUpload } from '@/components/ui/fragments/custom-ui/form/form-image-upload'
+import { FormAvatarUpload } from '@/components/ui/fragments/custom-ui/form/form-avatar-upload' // ✅ NEW
 
 const { fieldContext, formContext, useFieldContext, useFormContext } =
   createFormHookContexts()
@@ -25,6 +27,7 @@ const { useAppForm } = createFormHook({
     FileUpload: FormFileUpload,
     MultiFileUpload: FormMultiFileUpload,
     ImagesUpload: FormImagesUpload,
+    AvatarUpload: FormAvatarUpload, // ✅ NEW
   },
   formComponents: {},
   fieldContext,

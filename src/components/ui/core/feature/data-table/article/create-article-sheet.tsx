@@ -108,7 +108,7 @@ function CreateArticleSheet({ className, ...props }: CreateArticleSheetProps) {
                   >
                     {isSubmitting ? (
                       <>
-                        <Spinner className="size-4" />
+                        <Spinner className="size-4 text-primary-foreground" />
                         Menyimpan...
                       </>
                     ) : (
@@ -161,7 +161,7 @@ function CreateArticleSheet({ className, ...props }: CreateArticleSheetProps) {
                 >
                   {isSubmitting ? (
                     <>
-                      <Spinner className="size-4" />
+                      <Spinner className="size-4 text-primary-foreground" />
                       Menyimpan...
                     </>
                   ) : (

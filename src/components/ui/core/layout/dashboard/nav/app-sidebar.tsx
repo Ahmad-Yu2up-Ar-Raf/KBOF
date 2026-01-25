@@ -15,6 +15,7 @@ import {
   SquarePen,
   Telescope,
   Users,
+  Search,
   UsersRound,
 } from 'lucide-react'
 
@@ -54,7 +55,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
     {
       title: 'Destinasi',
       url: '/destinasi',
-      icon: Telescope,
+      icon: Search,
     },
     {
       title: 'Artikel',

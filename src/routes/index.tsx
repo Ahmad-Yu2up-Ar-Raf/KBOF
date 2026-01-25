@@ -4,7 +4,6 @@ import { queryClient } from '@/components/provider/Provider'
 import {
   getFeaturedArticlesQueryOptions,
   getFeaturedDestinationsQueryOptions,
-  getLeaderboardTopQueryOptions,
 } from '@/lib/query-options'
 import HeroSection from '@/components/ui/core/block/section/hero-section'
 import ArtikelSection, {

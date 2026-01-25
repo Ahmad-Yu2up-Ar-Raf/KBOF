@@ -95,7 +95,7 @@ export function DeleteDestinationDialog({
               disabled={isDeletePending}
             >
               <Activity mode={isDeletePending ? 'visible' : 'hidden'}>
-                <Spinner />
+                <Spinner className="text-background" />
               </Activity>
               Hapus
             </Button>
@@ -133,7 +133,7 @@ export function DeleteDestinationDialog({
             disabled={isDeletePending}
           >
             <Activity mode={isDeletePending ? 'visible' : 'hidden'}>
-              <Spinner />
+              <Spinner className="text-background" />
             </Activity>
             Hapus
           </Button>

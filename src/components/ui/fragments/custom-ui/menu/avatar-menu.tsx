@@ -8,12 +8,12 @@ import {
   Newspaper,
   SettingsIcon,
   SquarePen,
-  Telescope,
-  UserIcon,
+  Search,
+  BookOpenText,
   UserRoundIcon,
   UsersRound,
 } from 'lucide-react'
-import { Link, useNavigate } from '@tanstack/react-router'
+import { Link, useNavigate, useMatches } from '@tanstack/react-router'
 import React from 'react'
 import { toast } from 'sonner'
 import { Spinner } from '../../shadcn-ui/spinner'
@@ -37,6 +37,7 @@ import {
 } from '@/components/ui/fragments/shadcn-ui/dropdown-menu'
 import { useInitials } from '@/hooks/use-initials'
 
+import { cn } from '@/lib/utils'
 import { authClient } from '@/lib/auth/auth-client'
 import { useIsMobile } from '@/hooks/use-mobile'
 
@@ -69,14 +70,14 @@ const listItemsRole: Array<groupItems> = [
     dataGroup: [
       {
         label: 'Destinasi',
-        icon: Telescope,
-        href: `/destinasi`,
+        icon: Search,
+        href: `/destinasi/`,
         // No role = accessible by everyone including guests
       },
       {
         label: 'Artikel',
-        icon: Newspaper,
-        href: `/artikel`,
+        icon: BookOpenText,
+        href: `/artikel/`,
       },
       {
         label: 'Peringkat',
@@ -90,25 +91,7 @@ const listItemsRole: Array<groupItems> = [
       },
     ],
   },
-  {
-    name: 'pribumi',
 
-    dataGroup: [
-      {
-        label: 'Profile',
-        icon: UserRoundIcon,
-        href: `/profile`,
-        role: ['pribumi'],
-      },
-
-      {
-        label: 'Settings',
-        icon: SettingsIcon,
-        href: `/profile/settings`,
-        role: ['pribumi'],
-      },
-    ],
-  },
   {
     name: 'profile-admin',
 
@@ -136,29 +119,12 @@ const listItemsRole: Array<groupItems> = [
         icon: LogIn,
         href: `/login`,
       },
-      //   {
-      //     label: 'Settings',
-      //     icon: SettingsIcon,
-      //     href: `/register`,
-      //   },
     ],
   },
   {
     name: 'Menagement',
 
     dataGroup: [
-      {
-        label: 'Destinasi Saya',
-        icon: Telescope,
-        href: `/profile/destinasi`,
-        role: ['pribumi'],
-      },
-      {
-        label: 'Artikel Saya',
-        icon: Newspaper,
-        href: `/profile/destinasi`,
-        role: ['pribumi'],
-      },
       {
         label: 'Dashboard',
         icon: LayoutDashboard,
@@ -220,9 +186,6 @@ function AvatarMenu({ user, isHomePage = false }: componentProps) {
   // Filter groups based on device, user role, and homepage context
   const getVisibleGroups = () => {
     return listItemsRole.filter((group) => {
-      // isMobile: false means hide on mobile, show on desktop
-      // isMobile: true means show on mobile only
-      // isMobile: undefined means show everywhere
       if (group.isMobile === false && isMobile) return false
       if (group.isMobile === true && !isMobile) return false
 
@@ -247,6 +210,8 @@ function AvatarMenu({ user, isHomePage = false }: componentProps) {
       return group.name === 'guest' || group.name === 'page-user'
     })
   }
+  const matches = useMatches()
+  const paths = matches[matches.length - 1]?.routeId
 
   if (user)
     return (
@@ -282,31 +247,46 @@ function AvatarMenu({ user, isHomePage = false }: componentProps) {
             </div>
           </DropdownMenuLabel>
 
-          {getVisibleGroups().map((group, index) => (
-            <React.Fragment key={group.name}>
+          {getVisibleGroups().map((group, i) => (
+            <React.Fragment key={i}>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
                 {group.dataGroup
                   ?.filter((item) =>
                     item.role ? item.role.includes(user.role) : true,
                   )
-                  .map((item, i) => (
-                    <DropdownMenuItem key={i} asChild>
-                      <Link
-                        to={item.href || '#'}
-                        className="flex items-center gap-3 w-full"
-                      >
-                        <item.icon className="h-4 w-4" />
-                        {item.label}
-                      </Link>
-                    </DropdownMenuItem>
-                  ))}
+                  .map((item, i) => {
+                    const isActive = item.href == paths
+                    return (
+                      <DropdownMenuItem key={i} asChild>
+                        <Link
+                          to={item.href || '#'}
+                          className={cn(
+                            'flex cursor-pointer items-center gap-3 w-full',
+                            isActive && '  bg-accent   text-primary ',
+                          )}
+                        >
+                          <item.icon
+                            className={cn(
+                              'h-4 w-4',
+                              isActive && '  fill-background  text-primary',
+                            )}
+                          />
+                          {item.label}
+                        </Link>
+                      </DropdownMenuItem>
+                    )
+                  })}
               </DropdownMenuGroup>
             </React.Fragment>
           ))}
 
           <DropdownMenuSeparator />
-          <DropdownMenuItem disabled={isPending} onSelect={logoutUser}>
+          <DropdownMenuItem
+            className={'cursor-pointer'}
+            disabled={isPending}
+            onSelect={logoutUser}
+          >
             {isPending ? (
               <Spinner className="h-4 w-4" />
             ) : (
@@ -350,7 +330,7 @@ function AvatarMenu({ user, isHomePage = false }: componentProps) {
                 <DropdownMenuItem key={i} asChild>
                   <Link
                     to={item.href || '#'}
-                    className="flex items-center gap-3 w-full"
+                    className="flex cursor-pointer items-center gap-3 w-full"
                   >
                     <item.icon className="h-4 w-4" />
                     {item.label}

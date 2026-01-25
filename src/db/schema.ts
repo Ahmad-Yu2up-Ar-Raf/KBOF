@@ -25,7 +25,6 @@ import {
 
 /** User roles for multi-auth system */
 export const userRole = pgEnum('user_role', [
-  'pribumi', // Default role for registered users
   'admin', // Can manage destinations & articles
   'superAdmin', // Full access including user management
 ])
@@ -122,7 +121,7 @@ export const user = pgTable(
     // ROLE & AUTHENTICATION
     // =============================================================================
     /** User role for access control */
-    role: userRole('role').default('pribumi').notNull(),
+    role: userRole('role').default('admin').notNull(),
     /** Whether user is banned */
     banned: boolean('banned').default(false),
     /** Reason for ban */

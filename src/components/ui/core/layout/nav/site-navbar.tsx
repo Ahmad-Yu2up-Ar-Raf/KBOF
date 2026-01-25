@@ -68,7 +68,7 @@ function SiteNavbar() {
             size={'icon'}
             className={cn(
               'flex w-fit   py-2 md:flex text-base items-center gap-2   group transition-colors',
-             paths == '/destinasi/$destinasiId/' && 'text-accent'
+              paths == '/destinasi/$destinasiId/' && 'text-accent',
             )}
           >
             <ArrowLeft className=" size-5 group-hover:-translate-x-1 group-hover:transform transition-all ease-out duration-300" />

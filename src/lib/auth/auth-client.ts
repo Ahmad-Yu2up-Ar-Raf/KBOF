@@ -9,7 +9,7 @@ export const authClient = createAuthClient({
     adminClient({
       ac,
       roles: {
-        pribumi: roles.pribumi,
+       
         admin: roles.admin,
         superAdmin: roles.superAdmin,
       },

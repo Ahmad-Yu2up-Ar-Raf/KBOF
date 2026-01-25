@@ -152,30 +152,6 @@ export function UserTable({ data: userData }: UserTableProps) {
     [rows],
   )
 
-  // =========================================================================
-  // ACTION BAR HANDLERS (Bulk Operations)
-  // =========================================================================
-
-  const onBulkRoleUpdate = React.useCallback(
-    (role: UserRoleType) => {
-      toast.promise(
-        bulkUpdateRoleMutation.mutateAsync({
-          userIds: selectedIds,
-          role,
-        }),
-        {
-          loading: 'Updating roles...',
-          success: () => {
-            table.toggleAllRowsSelected(false)
-            return 'Roles updated successfully'
-          },
-          error: (err) => err.message || 'Failed to update roles',
-        },
-      )
-    },
-    [selectedIds, bulkUpdateRoleMutation, table],
-  )
-
   const onBulkBan = React.useCallback(() => {
     toast.promise(
       bulkBanMutation.mutateAsync({
@@ -305,7 +281,6 @@ export function UserTable({ data: userData }: UserTableProps) {
           <UserTableActionBar
             table={table}
             onDelete={onBulkDelete}
-            onRoleUpdate={onBulkRoleUpdate}
             onBan={onBulkBan}
             onUnban={onBulkUnban}
             onExport={onExport}

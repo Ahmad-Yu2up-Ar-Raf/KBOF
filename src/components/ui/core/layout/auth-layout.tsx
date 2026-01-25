@@ -70,7 +70,7 @@ const AuthLayoutTemplate = ({
   }
   return (
     <>
-      <div className=" relative  md:mt-6  min-h-svh container z-20   flex items-center justify-center overflow-hidden ">
+      <div className=" relative  md:mt-4  min-h-svh container z-20   flex items-center justify-center overflow-hidden ">
         <div
           className={cn(
             '  w-full relative max-w-lg  overflow-hidden flex flex-col  lg:flex-row     lg:max-w-none h-svh',
@@ -145,7 +145,7 @@ const AuthLayoutTemplate = ({
                         : '',
                     )}
                   >
-                    {formTypeLabel}
+                    {formTypeLabel == 'register' ? 'Daftar' : 'Masuk'}
                   </Link>
                 </div>
               </React.Activity>

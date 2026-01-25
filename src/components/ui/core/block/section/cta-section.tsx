@@ -1,24 +1,12 @@
 import { Link } from '@tanstack/react-router'
-import {
-  BookOpen,
-  BookOpenText,
-  Compass,
-  Gamepad,
-  Gamepad2Icon,
-  MapPinPen,
-  Play,
-  Send,
-  SquarePen,
-  Telescope,
-} from 'lucide-react'
-import {
-  Button,
-  buttonVariants,
-} from '@/components/ui/fragments/shadcn-ui/button'
+import { MapPinPen, SquarePen } from 'lucide-react'
+import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
 import Floating, {
   FloatingElement,
 } from '@/components/ui/fragments/custom-ui/animate-ui/paralax-floating'
 import MediaItem from '@/components/ui/fragments/custom-ui/media/media-item'
+
+import { useModal } from '@/components/provider/context-provider'
 import { cn } from '@/lib/utils'
 import { authClient } from '@/lib/auth/auth-client'
 
@@ -104,9 +92,10 @@ function GridPatternDashed() {
 
 export default function CTASection() {
   const { data: session } = authClient.useSession()
+  const { openImage } = useModal()
   return (
     <section className="container px-6  py-12 md:py-16 lg:pt-0 lg:pb-6">
-      <div className="relative w-full container m-auto   h-[500px] md:h-[300px] overflow-hidden rounded-3xl border border-primary/20 bg-accent px-7">
+      <div className="relative w-full container m-auto   h-125 md:h-75 overflow-hidden rounded-2xl border border-primary/20 bg-background px-7">
         {/* /* Grid Background */}
         <GridPatternDashed />
 
@@ -117,9 +106,11 @@ export default function CTASection() {
             className="top-[-2%] md:top-[-25%] left-[0%]"
           >
             <div className="bg-white px-2 md:px-3 pb-5 md:pb-8 pt-2 md:pt-3 rotate-8 shadow-md">
-              <div className="w-[clamp(90px,22vw,140px)] h-[clamp(90px,22vw,140px)] relative overflow-hidden shadow-xl  opacity-80 hover:opacity-100 transition-opacity">
-                <MediaItem webViewLink={ctaImages[0].url} />
-              </div>
+              <MediaItem
+                onClick={() => openImage(ctaImages[0].url)}
+                className="w-[clamp(80px,19vw,120px)]  cursor-zoom-in h-[clamp(80px,19vw,120px)] relative overflow-hidden shadow-xl opacity-80 hover:opacity-100 transition-opacity"
+                webViewLink={ctaImages[0].url}
+              />
             </div>
           </FloatingElement>
 
@@ -130,7 +121,8 @@ export default function CTASection() {
             <div className="bg-white px-2 md:px-3 pb-5 md:pb-8 pt-2 md:pt-3 -rotate-6 shadow-md w-fit">
               <MediaItem
                 webViewLink={ctaImages[1].url}
-                className="w-[clamp(80px,19vw,120px)] h-[clamp(80px,19vw,120px)] relative overflow-hidden shadow-xl opacity-80 hover:opacity-100 transition-opacity"
+                onClick={() => openImage(ctaImages[1].url)}
+                className="w-[clamp(80px,19vw,120px)]  cursor-zoom-in h-[clamp(80px,19vw,120px)] relative overflow-hidden shadow-xl opacity-80 hover:opacity-100 transition-opacity"
               />
             </div>
           </FloatingElement>
@@ -140,9 +132,11 @@ export default function CTASection() {
             className="left-[24%] top-[-8%] md:top-[-8%] md:left-[87%]"
           >
             <div className="bg-white px-2 md:px-3 pb-5 md:pb-8 pt-2 md:pt-3 -rotate-6 shadow-md w-fit">
-              <div className="w-[clamp(90px,20vw,130px)] h-[clamp(90px,20vw,130px)]  relative overflow-hidden shadow-xl opacity-80 hover:opacity-100 transition-opacity">
-                <MediaItem webViewLink={ctaImages[2].url} />
-              </div>
+              <MediaItem
+                webViewLink={ctaImages[2].url}
+                onClick={() => openImage(ctaImages[2].url)}
+                className="w-[clamp(80px,19vw,120px)]  cursor-zoom-in h-[clamp(80px,19vw,120px)] relative overflow-hidden shadow-xl opacity-80 hover:opacity-100 transition-opacity"
+              />
             </div>
           </FloatingElement>
 
@@ -151,9 +145,11 @@ export default function CTASection() {
             className="bottom-0 md:bottom-[-40%]  right-[0%]"
           >
             <div className="bg-white px-2 md:px-3 pb-5 md:pb-8 pt-2 md:pt-3 rotate-4 shadow-md">
-              <div className="w-[clamp(100px,24vw,150px)] h-[clamp(100px,24vw,150px)]  relative overflow-hidden shadow-xl  opacity-80 hover:opacity-100 transition-opacity">
-                <MediaItem webViewLink={ctaImages[3].url} />
-              </div>
+              <MediaItem
+                webViewLink={ctaImages[3].url}
+                onClick={() => openImage(ctaImages[3].url)}
+                className="w-[clamp(80px,19vw,120px)]  cursor-zoom-in h-[clamp(80px,19vw,120px)] relative overflow-hidden shadow-xl opacity-80 hover:opacity-100 transition-opacity"
+              />
             </div>
           </FloatingElement>
         </Floating>
@@ -172,7 +168,7 @@ export default function CTASection() {
               to={session ? '/dashboard/destination' : '/login'}
               className={cn(
                 buttonVariants({ variant: 'default', size: 'sm' }),
-                'rounded-full w-full text-xs  font-semibold  gap-3  hover:bg-background hover:text-accent-foreground group    sm:px-8   py-6  cursor-target hover:scale-110 transition-all duration-300 ease-out lg:px-4 md:py-4.5',
+                'rounded-full w-full text-xs  font-semibold  gap-3     sm:px-8   py-6  cursor-target hover:scale-110 transition-all duration-300 ease-out lg:px-4 md:py-4.5',
               )}
             >
               Ajukan Destinasi{' '}
@@ -183,11 +179,11 @@ export default function CTASection() {
               to={session ? '/dashboard/articles' : '/login'}
               className={cn(
                 buttonVariants({ variant: 'default', size: 'sm' }),
-                '  bg-background font-semibold text-accent-foreground rounded-full w-full text-xs   gap-3     sm:px-8   group  py-6 hover:bg-primary/90 cursor-target hover:scale-110 transition-all duration-300 ease-out lg:px-4   hover:text-primary-foreground md:py-4.5',
+                '  bg-foreground font-semibold text-primary-foreground  rounded-full w-full text-xs   gap-3     sm:px-8   group  py-6 cursor-target hover:scale-110 transition-all duration-300 ease-out lg:px-4    md:py-4.5',
               )}
             >
               Bagikan Cerita
-              <SquarePen className="  size-4.5    group-hover:text-primary-foreground transition-all duration-300 ease-out       text-primary    sm:size-3.5    " />
+              <SquarePen className="  size-4.5     transition-all duration-300 ease-out       text-primary-foreground     sm:size-3.5    " />
             </Link>
           </div>
         </div>

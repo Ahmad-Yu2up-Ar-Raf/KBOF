@@ -42,7 +42,7 @@ export default function KategoriCard({
         'group cursor-pointer bg-cover bg-center bg-no-repeat',
         'rounded-xl overflow-hidden bg-background p-0 shadow-none border-0',
         'relative min-h-38 w-full transition-all duration-300',
-        'hover:shadow-lg hover:scale-[1.02]',
+        'hover:shadow-lg hover:scale-105 hover:rotate-1',
         className,
       )}
     >

@@ -62,7 +62,7 @@ interface GetUserTableColumnsProps {
 // ROLE ENUM VALUES
 // =============================================================================
 
-const roleEnumValues: Array<UserRoleType> = ['pribumi', 'admin', 'superAdmin']
+const roleEnumValues: Array<UserRoleType> = [  'admin', 'superAdmin']
 
 // =============================================================================
 // ROLE CONFIG
@@ -76,11 +76,7 @@ const roleConfig: Record<
     variant: 'default' | 'secondary' | 'destructive'
   }
 > = {
-  pribumi: {
-    label: 'Pribumi',
-    icon: User,
-    variant: 'secondary',
-  },
+ 
   admin: {
     label: 'Admin',
     icon: Shield,

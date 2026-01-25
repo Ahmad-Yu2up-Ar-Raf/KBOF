@@ -91,7 +91,7 @@ export function DeleteArticleDialog({
               onClick={onDelete}
               disabled={isDeletePending}
             >
-              {isDeletePending && <Spinner className="mr-2" />}
+              {isDeletePending && <Spinner className="mr-2 text-background" />}
               Hapus
             </Button>
           </DrawerFooter>
@@ -125,7 +125,7 @@ export function DeleteArticleDialog({
             onClick={onDelete}
             disabled={isDeletePending}
           >
-            {isDeletePending && <Spinner className="mr-2" />}
+            {isDeletePending && <Spinner className="mr-2 text-background" />}
             Hapus
           </Button>
         </DialogFooter>

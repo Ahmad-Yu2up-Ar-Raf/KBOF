@@ -1,9 +1,8 @@
 import { toast } from 'sonner'
 import { SignInForm } from '../form/login-form'
 import AuthLayoutTemplate from '../../layout/auth-layout'
-import type { UserRoleType } from '@/db/schema'
+
 import { useLoginForm } from '@/hooks/form/use-auth-form'
-import { authClient } from '@/lib/auth/auth-client'
 
 export default function Login() {
   /**
@@ -14,18 +13,10 @@ export default function Login() {
     onSuccess: async () => {
       toast.success('Login berhasil!')
       // Get fresh session to determine redirect
-      const session = await authClient.getSession()
-      const user = session?.data?.user as
-        | { role?: UserRoleType; hasCompletedOnboarding?: boolean }
-        | undefined
-      const role = user?.role || 'pribumi'
 
       // Role-based redirect
-      if (role === 'pribumi') {
-        window.location.href = '/profile'
-      } else {
-        window.location.href = '/dashboard'
-      }
+
+      window.location.href = '/dashboard'
     },
     onError: (error: Error) => {
       toast.error(error.message)

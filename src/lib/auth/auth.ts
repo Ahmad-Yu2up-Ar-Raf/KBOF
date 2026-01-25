@@ -99,7 +99,7 @@ export const auth = betterAuth({
     admin({
       ac,
       roles: {
-        pribumi: roles.pribumi,
+       
         admin: roles.admin,
         superAdmin: roles.superAdmin,
       },

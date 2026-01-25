@@ -119,10 +119,14 @@ function CreateDestinationSheet({
                     className="w-fit"
                     size={'sm'}
                   >
-                    <Activity mode={isSubmitting ? 'visible' : 'hidden'}>
-                      <Spinner />
-                    </Activity>
-                    Ajukan
+                    {isSubmitting ? (
+                      <>
+                        <Spinner className="size-4 text-primary-foreground" />
+                        Menyimpan...
+                      </>
+                    ) : (
+                      'Ajukan'
+                    )}
                   </Button>
                 </SheetFooter>
               </DestinationForm>
@@ -171,7 +175,7 @@ function CreateDestinationSheet({
                 >
                   {isSubmitting ? (
                     <>
-                      <Spinner className="size-4" />
+                      <Spinner className="size-4 text-primary-foreground" />
                       Menyimpan...
                     </>
                   ) : (

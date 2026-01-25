@@ -1,26 +1,14 @@
 'use client'
-import { MenuIcon } from 'lucide-react'
+
 import { motion, useMotionValueEvent, useScroll } from 'motion/react'
 import { Link, useMatches } from '@tanstack/react-router'
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 import type { VariantProps } from 'class-variance-authority'
 import type { LucideIcon } from 'lucide-react'
-import {
-  Button,
-  buttonVariants,
-} from '@/components/ui/fragments/shadcn-ui/button'
+import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
 
-import {
-  Drawer,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from '@/components/ui/fragments/shadcn-ui/drawer'
 import { cn } from '@/lib/utils'
 
 interface NavbarProps {
@@ -275,28 +263,28 @@ export const MobileNavMenu = ({ items }: MobileNavMenuProps) => {
               to={item.link}
               className={cn(
                 buttonVariants({ variant: 'ghost' }),
-                'gap-0.5  cursor-pointer   overflow-visible   flex flex-col items-center   ',
+                'gap-0.5  w-10 cursor-pointer   overflow-visible   flex  justify-center content-center items-center   ',
                 isActive && '  bg-accent   text-primary ',
               )}
             >
               {item.name == 'Game' ? (
                 <Game
                   className={cn(
-                    '  overflow-visible  ml-[-3px] mt-[-3px]   text-accent-foreground size-5',
+                    '  overflow-visible  ml-[-2.3px] -mt-0.5   text-accent-foreground size-5',
                     isActive && '  fill-background  text-primary',
                   )}
                 />
               ) : item.name == 'Beranda' ? (
                 <Home
                   className={cn(
-                    '  overflow-visible  ml-[-3px] mt-[-3px]    text-accent-foreground size-5',
+                    '  overflow-visible ml-[-2.3px] -mt-0.5     text-accent-foreground size-5',
                     isActive && '  fill-background  text-primary',
                   )}
                 />
               ) : item.name == 'Artikel' ? (
                 <BookText
                   className={cn(
-                    '   overflow-visible   ml-[-2.5px] mt-[-2px]    text-accent-foreground size-5',
+                    '   overflow-visible ml-[-2.3px] -mt-0.5      text-accent-foreground size-5',
                     isActive && '  fill-background  text-primary',
                   )}
                 />

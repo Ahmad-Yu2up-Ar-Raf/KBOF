@@ -1,0 +1,824 @@
+[
+  {
+    "wisata-alam": [
+      {
+        "rating": 5,
+        "title": "Pemandangan Luar Biasa!",
+        "content": "Pemandangan alamnya sangat memukau, udara segar dan sejuk. Sangat cocok untuk refreshing dari rutinitas kota. Sangat direkomendasikan!"
+      },
+      {
+        "rating": 5,
+        "title": "Surga Tersembunyi",
+        "content": "Tempat ini benar-benar surga tersembunyi. Alam masih sangat asri dan terjaga. Pengalaman mendaki yang tidak terlupakan."
+      },
+      {
+        "rating": 4,
+        "title": "Indah Tapi Perlu Persiapan",
+        "content": "Pemandangannya indah banget, tapi perlu persiapan fisik yang baik. Jalur pendakian cukup menantang. Sepadan dengan usahanya!"
+      },
+      {
+        "rating": 5,
+        "title": "Pengalaman Alam Terbaik",
+        "content": "Salah satu pengalaman alam terbaik saya di Indonesia. Flora dan fauna yang beragam, pemandangan yang spektakuler."
+      },
+      {
+        "rating": 4,
+        "title": "Wajib Dikunjungi",
+        "content": "Destinasi wajib buat pecinta alam. Sunrise-nya menakjubkan! Hanya saja fasilitas masih perlu ditingkatkan."
+      },
+      {
+        "rating": 5,
+        "title": "Keajaiban Alam Indonesia",
+        "content": "Bangga punya keajaiban alam seperti ini di Indonesia. Konservasi alamnya sangat baik. Semoga tetap terjaga!"
+      },
+      {
+        "rating": 4,
+        "title": "Pengalaman Tak Terlupakan",
+        "content": "Perjalanan yang melelahkan tapi sangat memuaskan. Pemandangan di puncak membayar semua usaha."
+      },
+      {
+        "rating": 3,
+        "title": "Bagus Tapi Ramai",
+        "content": "Tempatnya indah tapi terlalu ramai saat akhir pekan. Lebih baik datang di hari biasa untuk pengalaman yang lebih tenang."
+      },
+      {
+        "rating": 5,
+        "title": "Kesegaran Udara Pegunungan",
+        "content": "Udara di sini masih sangat segar dan bersih. Vegetasi hijau di mana-mana membuat mata dan pikiran rileks."
+      },
+      {
+        "rating": 4,
+        "title": "Pendakian Seru Banget",
+        "content": "Jalur pendakiannya menantang tapi pemandangan sepanjang jalan sangat indah. Jangan lupa bawa bekal yang cukup!"
+      },
+      {
+        "rating": 5,
+        "title": "Spot Foto Cantik",
+        "content": "Setiap sudut bisa dijadikan spot foto! Latar belakang alamnya keren banget. Puas banget foto-foto di sini."
+      },
+      {
+        "rating": 4,
+        "title": "Cocok untuk Berkemah",
+        "content": "Area berkemahnya bagus dan terawat. Malam hari bisa lihat bintang-bintang dengan jelas. Pengalaman berkemah terbaik!"
+      },
+      {
+        "rating": 5,
+        "title": "Air Terjun Memukau",
+        "content": "Air terjunnya deras dan jernih. Suara gemericik air sangat menenangkan. Spa alami yang sesungguhnya!"
+      },
+      {
+        "rating": 3,
+        "title": "Perlu Perbaikan Jalan",
+        "content": "Alamnya cantik tapi akses jalannya masih rusak di beberapa titik. Hati-hati kalau bawa kendaraan pribadi."
+      },
+      {
+        "rating": 5,
+        "title": "Keanekaragaman Hayati",
+        "content": "Banyak sekali jenis burung dan kupu-kupu yang bisa dilihat. Surga bagi pecinta fotografi satwa liar!"
+      },
+      {
+        "rating": 4,
+        "title": "Sunset yang Memanjakan Mata",
+        "content": "Sunset di sini luar biasa indah! Langit berubah warna dari oranye ke ungu. Momen yang sangat romantis."
+      }
+    ],
+    "wisata-bahari": [
+      {
+        "rating": 5,
+        "title": "Surga Bawah Laut!",
+        "content": "Menyelam dan snorkeling di sini luar biasa! Terumbu karang masih sangat sehat, ikan warna-warni sangat banyak."
+      },
+      {
+        "rating": 5,
+        "title": "Pantai Terindah",
+        "content": "Pantainya bersih, airnya jernih, pasirnya putih. Sunset di sini adalah yang terbaik yang pernah saya lihat."
+      },
+      {
+        "rating": 4,
+        "title": "Surga yang Ditemukan",
+        "content": "Benar-benar seperti surga! Snorkeling dengan penyu dan pari manta. Pengalaman sekali seumur hidup."
+      },
+      {
+        "rating": 5,
+        "title": "Surga Bawah Air",
+        "content": "Keanekaragaman hayati lautnya luar biasa. Sebagai penyelam, ini adalah salah satu spot terbaik yang pernah saya kunjungi."
+      },
+      {
+        "rating": 4,
+        "title": "Pantai Impian",
+        "content": "Pantai yang selama ini hanya ada di mimpi ternyata nyata di sini. Air laut yang hangat dan jernih."
+      },
+      {
+        "rating": 5,
+        "title": "Wajib untuk Penyelam",
+        "content": "Wajib dikunjungi untuk para penyelam! Penyelaman di dinding karang yang menakjubkan dengan jarak pandang yang sangat bagus."
+      },
+      {
+        "rating": 4,
+        "title": "Liburan Pantai Menenangkan",
+        "content": "Tempat yang sempurna untuk melarikan diri dari keramaian. Suasana pantai yang menenangkan dan pemandangan yang damai."
+      },
+      {
+        "rating": 3,
+        "title": "Indah Tapi Terpencil",
+        "content": "Sangat indah tapi aksesnya cukup sulit. Perlu perencanaan yang matang dan biaya yang cukup."
+      },
+      {
+        "rating": 5,
+        "title": "Taman Karang Menakjubkan",
+        "content": "Taman karang bawah lautnya seperti di film dokumenter! Warna-warni karang yang masih sehat dan beragam."
+      },
+      {
+        "rating": 4,
+        "title": "Ombak Sempurna untuk Selancar",
+        "content": "Ombaknya konsisten dan pas untuk selancar. Ada spot untuk pemula dan yang sudah mahir. Surga berselancar!"
+      },
+      {
+        "rating": 5,
+        "title": "Pulau Pribadi Rasanya",
+        "content": "Pantainya sepi dan bersih, rasanya seperti punya pulau pribadi. Sangat privat dan tenang."
+      },
+      {
+        "rating": 4,
+        "title": "Snorkeling Seru",
+        "content": "Banyak banget ikan badut yang bisa dilihat! Anak-anak senang sekali. Cocok untuk wisata keluarga."
+      },
+      {
+        "rating": 5,
+        "title": "Laguna Biru yang Nyata",
+        "content": "Air lautnya biru toska jernih banget! Bisa lihat dasar laut dengan jelas. Seperti di film!"
+      },
+      {
+        "rating": 3,
+        "title": "Bagus Tapi Minim Fasilitas",
+        "content": "Pantainya cantik tapi toilet dan warung masih terbatas. Bawa perlengkapan sendiri lebih baik."
+      },
+      {
+        "rating": 5,
+        "title": "Melihat Lumba-lumba Luar Biasa",
+        "content": "Beruntung bisa lihat lumba-lumba berenang bebas! Momen ajaib yang tidak terlupakan."
+      },
+      {
+        "rating": 4,
+        "title": "Kayak Seru",
+        "content": "Menyusuri pantai dengan kayak sangat menyenangkan. Air tenang dan pemandangan dari laut sangat berbeda."
+      }
+    ],
+    "wisata-sejarah": [
+      {
+        "rating": 5,
+        "title": "Warisan Sejarah yang Megah",
+        "content": "Arsitektur dan sejarahnya sangat menakjubkan. Bisa merasakan kebesaran peradaban masa lalu Indonesia."
+      },
+      {
+        "rating": 5,
+        "title": "Warisan Bangsa yang Memukau",
+        "content": "Layak menjadi kebanggaan bangsa Indonesia. Detail ukiran dan relief sangat indah dan penuh makna filosofis."
+      },
+      {
+        "rating": 4,
+        "title": "Perjalanan ke Masa Lalu",
+        "content": "Seperti berjalan menembus waktu ke masa kejayaan kerajaan Nusantara. Guide-nya sangat informatif."
+      },
+      {
+        "rating": 5,
+        "title": "Kebanggaan Indonesia",
+        "content": "Bangga menjadi orang Indonesia melihat warisan sejarah sehebat ini. Perawatannya juga sangat baik."
+      },
+      {
+        "rating": 4,
+        "title": "Wisata Edukatif",
+        "content": "Sangat edukatif! Anak-anak bisa belajar sejarah langsung di tempatnya. Recommended untuk family trip."
+      },
+      {
+        "rating": 5,
+        "title": "Sunrise Terbaik",
+        "content": "Menyaksikan sunrise di sini adalah pengalaman spiritual yang luar biasa. Pemandangannya tidak ada duanya."
+      },
+      {
+        "rating": 4,
+        "title": "Arsitektur Menakjubkan",
+        "content": "Arsitektur kuno yang sangat detail dan presisi. Sulit dipercaya dibangun tanpa teknologi modern."
+      },
+      {
+        "rating": 3,
+        "title": "Bagus Tapi Ramai",
+        "content": "Tempatnya bagus dan bersejarah, tapi terlalu ramai pengunjung. Lebih baik datang pagi-pagi sekali."
+      },
+      {
+        "rating": 5,
+        "title": "Misteri Peradaban Kuno",
+        "content": "Setiap batu punya cerita. Guide menjelaskan dengan sangat menarik tentang misteri di balik bangunan ini."
+      },
+      {
+        "rating": 4,
+        "title": "Koleksi Bersejarah Lengkap",
+        "content": "Museum di sekitarnya punya koleksi benda bersejarah yang sangat lengkap. Bisa belajar banyak tentang sejarah."
+      },
+      {
+        "rating": 5,
+        "title": "Surga Fotografi",
+        "content": "Surga bagi pecinta fotografi arsitektur. Setiap sudut punya nilai estetika yang tinggi."
+      },
+      {
+        "rating": 4,
+        "title": "Wisata Malam Seru",
+        "content": "Berkunjung malam hari dengan pencahayaan khusus memberikan pengalaman berbeda. Suasananya lebih mistis."
+      },
+      {
+        "rating": 5,
+        "title": "Relief yang Menawan",
+        "content": "Relief yang menceritakan kisah sejarah sangat detail dan indah. Karya seni tingkat tinggi!"
+      },
+      {
+        "rating": 3,
+        "title": "Cuaca Panas",
+        "content": "Situs sejarahnya bagus tapi sangat panas di siang hari. Disarankan datang pagi atau sore."
+      },
+      {
+        "rating": 5,
+        "title": "Keagungan Masa Lalu",
+        "content": "Melihat langsung keagungan peradaban leluhur. Bangga menjadi bagian dari bangsa yang memiliki warisan ini."
+      },
+      {
+        "rating": 4,
+        "title": "Pemandu Wisata Membantu",
+        "content": "Tersedia pemandu dalam berbagai bahasa dan sangat membantu memahami sejarah tempat ini."
+      }
+    ],
+    "wisata-budaya": [
+      {
+        "rating": 5,
+        "title": "Kekayaan Budaya Nusantara",
+        "content": "Budaya yang masih sangat terjaga keasliannya. Masyarakat lokalnya ramah dan senang berbagi cerita tradisi."
+      },
+      {
+        "rating": 5,
+        "title": "Pengalaman Budaya Otentik",
+        "content": "Pengalaman budaya yang otentik! Bisa melihat langsung bagaimana tradisi leluhur masih dijaga."
+      },
+      {
+        "rating": 4,
+        "title": "Museum Hidup",
+        "content": "Seperti museum hidup! Tradisi dan adat istiadat masih dipraktekkan dalam kehidupan sehari-hari."
+      },
+      {
+        "rating": 5,
+        "title": "Arsitektur Tradisional Menawan",
+        "content": "Arsitektur tradisionalnya sangat unik dan penuh filosofi. Setiap detail punya makna tersendiri."
+      },
+      {
+        "rating": 4,
+        "title": "Keramahan Penduduk",
+        "content": "Keramahtamahan penduduk lokal sangat terasa. Mereka dengan senang hati menjelaskan budaya mereka."
+      },
+      {
+        "rating": 5,
+        "title": "Perlu Dilestarikan",
+        "content": "Tempat seperti ini harus terus dilestarikan. Generasi muda perlu tahu kekayaan budaya Indonesia."
+      },
+      {
+        "rating": 4,
+        "title": "Pengalaman Unik",
+        "content": "Pengalaman yang unik dan berbeda dari wisata biasa. Banyak pembelajaran tentang nilai-nilai luhur."
+      },
+      {
+        "rating": 3,
+        "title": "Menarik Tapi Aksesnya Sulit",
+        "content": "Budayanya sangat menarik tapi lokasinya cukup terpencil. Perlu persiapan yang baik."
+      },
+      {
+        "rating": 5,
+        "title": "Rumah Adat yang Megah",
+        "content": "Rumah adatnya sangat megah dan penuh ornamen. Setiap ukiran punya cerita dan filosofi tersendiri."
+      },
+      {
+        "rating": 4,
+        "title": "Belajar Tenun Tradisional",
+        "content": "Bisa belajar langsung cara menenun kain tradisional. Pengalaman langsung yang sangat berharga."
+      },
+      {
+        "rating": 5,
+        "title": "Upacara Adat Sakral",
+        "content": "Beruntung bisa menyaksikan upacara adat yang sangat sakral. Pengalaman spiritual yang mendalam."
+      },
+      {
+        "rating": 4,
+        "title": "Musik Tradisional Merdu",
+        "content": "Musik tradisionalnya sangat merdu dan menenangkan. Instrumen unik yang tidak ditemukan di tempat lain."
+      },
+      {
+        "rating": 5,
+        "title": "Pakaian Adat Indah",
+        "content": "Bisa mencoba pakaian adat dan berfoto. Warna dan motifnya sangat indah dan bermakna."
+      },
+      {
+        "rating": 3,
+        "title": "Perlu Pemandu Lokal",
+        "content": "Lebih baik menggunakan pemandu lokal untuk memahami budaya dengan baik. Tanpa pemandu bisa kurang bermakna."
+      },
+      {
+        "rating": 5,
+        "title": "Gotong Royong yang Nyata",
+        "content": "Melihat langsung semangat gotong royong masyarakat. Nilai-nilai luhur yang masih dijaga."
+      },
+      {
+        "rating": 4,
+        "title": "Festival Budaya Meriah",
+        "content": "Datang saat ada festival budaya sangat meriah! Berbagai atraksi dan pertunjukan yang memukau."
+      }
+    ],
+    "wisata-religi": [
+      {
+        "rating": 5,
+        "title": "Tempat yang Sakral",
+        "content": "Aura spiritualnya sangat terasa. Tempat yang tepat untuk kontemplasi dan menemukan ketenangan batin."
+      },
+      {
+        "rating": 5,
+        "title": "Keindahan Arsitektur Religi",
+        "content": "Arsitektur religiusnya sangat indah dan megah. Perpaduan seni dan spiritualitas yang sempurna."
+      },
+      {
+        "rating": 4,
+        "title": "Tempat yang Damai",
+        "content": "Sangat damai dan tenang. Cocok untuk meditasi dan mendekatkan diri dengan Sang Pencipta."
+      },
+      {
+        "rating": 5,
+        "title": "Simbol Toleransi",
+        "content": "Tempat ini adalah simbol toleransi beragama di Indonesia. Sangat menginspirasi!"
+      },
+      {
+        "rating": 4,
+        "title": "Perjalanan Spiritual",
+        "content": "Perjalanan spiritual yang bermakna. Energi positif di tempat ini sangat kuat."
+      },
+      {
+        "rating": 5,
+        "title": "Tempat Ibadah Megah",
+        "content": "Kemegahan tempat ibadah ini luar biasa. Menunjukkan kebesaran dan keagungan spiritual."
+      },
+      {
+        "rating": 4,
+        "title": "Situs Religius Bersejarah",
+        "content": "Selain nilai religiusnya, sejarahnya juga sangat kaya. Wajib dikunjungi!"
+      },
+      {
+        "rating": 3,
+        "title": "Bagus Tapi Perlu Aturan",
+        "content": "Tempatnya bagus dan sakral, hanya saja perlu lebih banyak aturan untuk menjaga kesuciannya."
+      },
+      {
+        "rating": 5,
+        "title": "Ketenangan Batin",
+        "content": "Setelah berkunjung ke sini, pikiran terasa lebih jernih dan hati lebih tenang."
+      },
+      {
+        "rating": 4,
+        "title": "Ornamen Religius Indah",
+        "content": "Ornamen dan dekorasi religiusnya sangat detail dan indah. Menunjukkan dedikasi tinggi pembuatnya."
+      },
+      {
+        "rating": 5,
+        "title": "Sunrise Spiritual",
+        "content": "Menyaksikan sunrise di tempat suci ini memberikan pengalaman spiritual yang luar biasa."
+      },
+      {
+        "rating": 4,
+        "title": "Ritual Keagamaan",
+        "content": "Bisa menyaksikan ritual keagamaan yang masih dilakukan. Sangat khidmat dan menginspirasi."
+      },
+      {
+        "rating": 5,
+        "title": "Arsitektur Megah",
+        "content": "Arsitektur tempat ibadah ini sangat megah dan detail. Menunjukkan kebesaran Tuhan."
+      },
+      {
+        "rating": 3,
+        "title": "Ramai saat Hari Raya",
+        "content": "Tempatnya sangat ramai saat hari raya keagamaan. Lebih baik datang di hari biasa."
+      },
+      {
+        "rating": 5,
+        "title": "Meditasi dan Kontemplasi",
+        "content": "Tempat sempurna untuk meditasi dan kontemplasi. Suasananya sangat mendukung."
+      },
+      {
+        "rating": 4,
+        "title": "Sejarah Keagamaan",
+        "content": "Bisa belajar banyak tentang sejarah keagamaan di Indonesia. Sangat edukatif."
+      }
+    ],
+    "wisata-kuliner": [
+      {
+        "rating": 5,
+        "title": "Surganya Kuliner!",
+        "content": "Makanannya otentik dan lezat! Bumbu rempahnya terasa banget. Porsinya juga pas dan harganya terjangkau."
+      },
+      {
+        "rating": 5,
+        "title": "Rasa Lokal Otentik",
+        "content": "Rasa yang otentik dan tidak bisa ditemukan di tempat lain. Resep turun-temurun yang dijaga."
+      },
+      {
+        "rating": 4,
+        "title": "Wajib Dicoba",
+        "content": "Wajib dicoba! Variasi makanannya banyak dan semuanya enak. Favorit saya adalah hidangan utamanya."
+      },
+      {
+        "rating": 5,
+        "title": "Surga Kuliner",
+        "content": "Surga bagi pecinta kuliner! Setiap hidangan punya cita rasa unik yang khas daerah ini."
+      },
+      {
+        "rating": 4,
+        "title": "Makanan Lokal Terbaik",
+        "content": "Makanan lokal terbaik yang pernah saya coba. Bahan segar dan dimasak dengan sepenuh hati."
+      },
+      {
+        "rating": 5,
+        "title": "Makanan yang Layak Dicari",
+        "content": "Makanan yang layak untuk dicari walau harus jauh-jauh. Tidak heran menjadi ikon kuliner Indonesia."
+      },
+      {
+        "rating": 4,
+        "title": "Enak dan Terjangkau",
+        "content": "Enak dan terjangkau! Tempatnya juga bersih dan pelayanannya ramah. Pasti balik lagi."
+      },
+      {
+        "rating": 3,
+        "title": "Enak Tapi Antri",
+        "content": "Makanannya enak tapi antriannya panjang banget. Datang di luar jam makan untuk menghindari antrian."
+      },
+      {
+        "rating": 5,
+        "title": "Bumbu Rempah Nusantara",
+        "content": "Rasa rempah-rempah Nusantara sangat terasa! Setiap suapan adalah ledakan rasa yang nikmat."
+      },
+      {
+        "rating": 4,
+        "title": "Jajanan Kaki Lima Terbaik",
+        "content": "Jajanan kaki lima di sini juara! Murah, enak, dan banyak pilihan. Wajib coba semuanya!"
+      },
+      {
+        "rating": 5,
+        "title": "Resep Nenek Moyang",
+        "content": "Masakan dengan resep turun-temurun dari nenek moyang. Rasa yang tidak berubah sejak dulu."
+      },
+      {
+        "rating": 4,
+        "title": "Hidangan Laut Segar",
+        "content": "Hidangan lautnya segar langsung dari laut! Diolah dengan bumbu khas yang lezat. Mantap!"
+      },
+      {
+        "rating": 5,
+        "title": "Kue Tradisional",
+        "content": "Jangan lewatkan kue tradisionalnya! Manis legit dan tidak terlalu mengenyangkan."
+      },
+      {
+        "rating": 3,
+        "title": "Tempatnya Sederhana",
+        "content": "Tempatnya sederhana dan tidak ber-AC, tapi rasanya tidak bohong. Dijamin puas!"
+      },
+      {
+        "rating": 5,
+        "title": "Sarapan Legendaris",
+        "content": "Sarapan legendaris yang sudah ada sejak puluhan tahun! Selalu ramai dari pagi."
+      },
+      {
+        "rating": 4,
+        "title": "Minuman Tradisional",
+        "content": "Minuman tradisionalnya segar dan unik! Cocok untuk melepas dahaga setelah jalan-jalan."
+      }
+    ],
+    "kesenian": [
+      {
+        "rating": 5,
+        "title": "Pertunjukan yang Memukau!",
+        "content": "Pertunjukannya luar biasa! Koreografi yang indah dan musik yang menghanyutkan. Tepuk tangan meriah!"
+      },
+      {
+        "rating": 5,
+        "title": "Pertunjukan Berkelas",
+        "content": "Kualitasnya tidak kalah dengan pertunjukan di kota besar. Bangga dengan seni pertunjukan Indonesia."
+      },
+      {
+        "rating": 4,
+        "title": "Pertunjukan Budaya Menawan",
+        "content": "Pertunjukan budaya yang luar biasa! Kostum yang indah dan skill para penampil sangat tinggi."
+      },
+      {
+        "rating": 5,
+        "title": "Warisan Seni yang Hidup",
+        "content": "Seni tradisional yang masih hidup dan berkembang. Perlu dukungan untuk terus dilestarikan."
+      },
+      {
+        "rating": 4,
+        "title": "Pengalaman Tak Terlupakan",
+        "content": "Pengalaman yang tidak terlupakan. Bisa merasakan langsung keindahan seni tradisional Indonesia."
+      },
+      {
+        "rating": 5,
+        "title": "Wajib Ditonton",
+        "content": "Wajib ditonton! Pertunjukan yang penuh emosi dan makna. Dibawakan dengan sangat profesional."
+      },
+      {
+        "rating": 4,
+        "title": "Bentuk Seni yang Indah",
+        "content": "Bentuk seni yang sangat indah. Kombinasi musik, tari, dan kostum yang harmonis."
+      },
+      {
+        "rating": 3,
+        "title": "Bagus Tapi Singkat",
+        "content": "Pertunjukannya bagus tapi durasinya kurang panjang. Ingin melihat lebih banyak."
+      },
+      {
+        "rating": 5,
+        "title": "Gamelan yang Mengalun",
+        "content": "Alunan gamelan sangat merdu dan menenangkan. Instrumen tradisional yang indah sekali."
+      },
+      {
+        "rating": 4,
+        "title": "Tari Tradisional Memukau",
+        "content": "Gerakan tari tradisionalnya sangat anggun dan penuh makna. Penari sangat terlatih."
+      },
+      {
+        "rating": 5,
+        "title": "Wayang yang Hidup",
+        "content": "Pertunjukan wayang yang sangat hidup! Dalang membawakan cerita dengan sangat menarik."
+      },
+      {
+        "rating": 4,
+        "title": "Belajar Kesenian",
+        "content": "Bisa ikut belajar dan mencoba dasar-dasar kesenian tradisional. Sangat menyenangkan!"
+      },
+      {
+        "rating": 5,
+        "title": "Kostum Spektakuler",
+        "content": "Kostum para penampil sangat spektakuler! Detail dan warnanya luar biasa indah."
+      },
+      {
+        "rating": 3,
+        "title": "Suara Kurang Jelas",
+        "content": "Pertunjukannya bagus tapi suaranya kurang optimal. Agak sulit mendengar narasi."
+      },
+      {
+        "rating": 5,
+        "title": "Cerita yang Mengharukan",
+        "content": "Cerita yang dibawakan sangat mengharukan. Banyak pesan moral yang bisa dipetik."
+      },
+      {
+        "rating": 4,
+        "title": "Interaktif dengan Penonton",
+        "content": "Ada sesi interaktif dengan penonton yang seru. Jadi tidak hanya menonton tapi juga berpartisipasi."
+      }
+    ],
+    "kerajinan": [
+      {
+        "rating": 5,
+        "title": "Keahlian Luar Biasa",
+        "content": "Kerajinan tangan dengan kualitas tinggi! Detail dan ketelitiannya menakjubkan. Sangat terampil."
+      },
+      {
+        "rating": 5,
+        "title": "Buatan Tangan Otentik",
+        "content": "Produk buatan tangan yang otentik dengan kualitas terbaik. Setiap karya adalah seni."
+      },
+      {
+        "rating": 4,
+        "title": "Dukung Pengrajin Lokal",
+        "content": "Senang bisa mendukung pengrajin lokal. Produknya berkualitas dan penuh nilai budaya."
+      },
+      {
+        "rating": 5,
+        "title": "Warisan Kerajinan Indonesia",
+        "content": "Kerajinan tradisional yang menjadi kebanggaan Indonesia. Teknik yang diturunkan generasi."
+      },
+      {
+        "rating": 4,
+        "title": "Oleh-oleh Unik",
+        "content": "Tempat terbaik untuk mencari oleh-oleh unik. Setiap produk punya cerita dan makna tersendiri."
+      },
+      {
+        "rating": 5,
+        "title": "Belajar di Tempat Kerajinan",
+        "content": "Bisa belajar langsung proses pembuatan kerajinan. Sangat edukatif dan menyenangkan."
+      },
+      {
+        "rating": 4,
+        "title": "Produk Berkualitas Tinggi",
+        "content": "Kualitas produknya tinggi dan harganya sesuai untuk buatan tangan. Direkomendasikan!"
+      },
+      {
+        "rating": 3,
+        "title": "Bagus Tapi Agak Mahal",
+        "content": "Produknya bagus tapi harganya cukup mahal. Tapi memang sepadan dengan kualitasnya."
+      },
+      {
+        "rating": 5,
+        "title": "Batik Tulis Asli",
+        "content": "Batik tulis asli dengan motif tradisional yang indah. Proses pembuatannya sangat teliti."
+      },
+      {
+        "rating": 4,
+        "title": "Ukiran Kayu Detail",
+        "content": "Ukiran kayunya sangat detail dan halus. Menunjukkan keahlian tinggi para pengrajin."
+      },
+      {
+        "rating": 5,
+        "title": "Tenun Ikat Berkualitas",
+        "content": "Tenun ikat dengan kualitas premium. Warna dan motifnya sangat khas dan indah."
+      },
+      {
+        "rating": 4,
+        "title": "Keramik Tradisional",
+        "content": "Keramik tradisional dengan desain unik. Cocok untuk koleksi atau hadiah."
+      },
+      {
+        "rating": 5,
+        "title": "Perhiasan Perak Cantik",
+        "content": "Perhiasan perak dengan desain tradisional yang cantik. Pengerjaan sangat halus."
+      },
+      {
+        "rating": 3,
+        "title": "Banyak Pilihan",
+        "content": "Banyak sekali pilihan produk, jadi agak bingung memilih. Tapi semua berkualitas bagus."
+      },
+      {
+        "rating": 5,
+        "title": "Proses Pembuatan Menarik",
+        "content": "Melihat langsung proses pembuatan kerajinan sangat menarik dan menambah apresiasi."
+      },
+      {
+        "rating": 4,
+        "title": "Bisa Pesan Khusus",
+        "content": "Bisa pesan khusus sesuai keinginan. Pengrajin sangat kooperatif dan terampil."
+      }
+    ],
+    "adat-istiadat": [
+      {
+        "rating": 5,
+        "title": "Tradisi yang Sakral",
+        "content": "Menyaksikan tradisi sakral yang sudah berlangsung ratusan tahun. Pengalaman spiritual yang mendalam."
+      },
+      {
+        "rating": 5,
+        "title": "Tradisi yang Hidup",
+        "content": "Tradisi yang masih hidup dan dipraktekkan dengan penuh penghormatan. Sangat menginspirasi!"
+      },
+      {
+        "rating": 4,
+        "title": "Budaya yang Unik",
+        "content": "Praktik budaya yang sangat unik dan tidak ada di tempat lain. Layak untuk dikunjungi!"
+      },
+      {
+        "rating": 5,
+        "title": "Kearifan Lokal yang Terjaga",
+        "content": "Kearifan lokal yang masih terjaga dengan baik. Masyarakat sangat menjaga adat istiadat mereka."
+      },
+      {
+        "rating": 4,
+        "title": "Pengalaman yang Membuka Mata",
+        "content": "Pengalaman yang membuka mata tentang kekayaan budaya Indonesia. Sangat mencerahkan."
+      },
+      {
+        "rating": 5,
+        "title": "Hormat pada Leluhur",
+        "content": "Penghormatan terhadap leluhur yang sangat tinggi. Nilai-nilai yang perlu dipelajari."
+      },
+      {
+        "rating": 4,
+        "title": "Upacara Otentik",
+        "content": "Upacara adat yang otentik dan penuh makna. Bersyukur bisa menyaksikan langsung."
+      },
+      {
+        "rating": 3,
+        "title": "Menarik Tapi Perlu Pemandu",
+        "content": "Sangat menarik tapi perlu pemandu untuk memahami maknanya. Tanpa penjelasan bisa kurang paham."
+      },
+      {
+        "rating": 5,
+        "title": "Ritual Turun Temurun",
+        "content": "Ritual yang sudah dilakukan turun-temurun dengan tata cara yang sama. Sangat sakral."
+      },
+      {
+        "rating": 4,
+        "title": "Pakaian Adat Megah",
+        "content": "Pakaian adat yang dikenakan sangat megah dan penuh simbolisme. Setiap detail bermakna."
+      },
+      {
+        "rating": 5,
+        "title": "Musik Ritual Khidmat",
+        "content": "Musik yang mengiringi ritual sangat khidmat dan menenangkan. Membawa ke suasana spiritual."
+      },
+      {
+        "rating": 4,
+        "title": "Persembahan Tradisional",
+        "content": "Persembahan tradisional yang dilakukan dengan penuh kekhusyukan. Sangat berkesan."
+      },
+      {
+        "rating": 5,
+        "title": "Nilai Luhur Leluhur",
+        "content": "Banyak nilai-nilai luhur dari leluhur yang bisa dipelajari. Kebijaksanaan yang abadi."
+      },
+      {
+        "rating": 3,
+        "title": "Butuh Waktu Tepat",
+        "content": "Perlu datang di waktu yang tepat untuk menyaksikan upacara. Tidak setiap hari diadakan."
+      },
+      {
+        "rating": 5,
+        "title": "Harmoni dengan Alam",
+        "content": "Tradisi yang menunjukkan harmoni manusia dengan alam. Filosofi hidup yang mendalam."
+      },
+      {
+        "rating": 4,
+        "title": "Komunitas yang Solid",
+        "content": "Melihat bagaimana komunitas bekerja sama dalam menjaga tradisi. Solidaritas yang tinggi."
+      }
+    ],
+    "festival": [
+      {
+        "rating": 5,
+        "title": "Festival Spektakuler!",
+        "content": "Festival yang spektakuler! Parade yang meriah, kostum yang megah, dan antusiasme yang tinggi."
+      },
+      {
+        "rating": 5,
+        "title": "Pengalaman Sekali Seumur Hidup",
+        "content": "Pengalaman sekali seumur hidup! Energi festivalnya sangat positif dan menggembirakan."
+      },
+      {
+        "rating": 4,
+        "title": "Perayaan Budaya",
+        "content": "Perayaan budaya yang meriah dan penuh warna. Masyarakat sangat antusias berpartisipasi."
+      },
+      {
+        "rating": 5,
+        "title": "Atmosfer Luar Biasa",
+        "content": "Atmosfernya luar biasa! Musik, tarian, dan kemeriahan yang menular ke semua pengunjung."
+      },
+      {
+        "rating": 4,
+        "title": "Festival Berkualitas",
+        "content": "Festival berkelas yang membanggakan! Indonesia patut berbangga dengan acara budaya seperti ini."
+      },
+      {
+        "rating": 5,
+        "title": "Perayaan Tak Terlupakan",
+        "content": "Perayaan yang tidak terlupakan. Semua elemen budaya ditampilkan dengan sangat apik."
+      },
+      {
+        "rating": 4,
+        "title": "Acara Tahunan Seru",
+        "content": "Acara tahunan yang sangat dinanti. Penyelenggaraannya bagus dan pertunjukannya bervariasi."
+      },
+      {
+        "rating": 3,
+        "title": "Seru Tapi Ramai",
+        "content": "Sangat seru tapi sangat ramai. Perlu datang lebih awal untuk dapat tempat yang bagus."
+      },
+      {
+        "rating": 5,
+        "title": "Parade yang Megah",
+        "content": "Parade-nya sangat megah dengan ratusan peserta! Kostum dan properti yang luar biasa."
+      },
+      {
+        "rating": 4,
+        "title": "Kuliner Festival",
+        "content": "Banyak stand kuliner tradisional di festival. Bisa mencoba berbagai makanan khas."
+      },
+      {
+        "rating": 5,
+        "title": "Pertunjukan Tanpa Henti",
+        "content": "Pertunjukan berlangsung tanpa henti dari pagi sampai malam. Tidak ada waktu untuk bosan!"
+      },
+      {
+        "rating": 4,
+        "title": "Oleh-oleh Unik",
+        "content": "Banyak oleh-oleh unik yang dijual. Cocok untuk cinderamata dan koleksi."
+      },
+      {
+        "rating": 5,
+        "title": "Kembang Api Spektakuler",
+        "content": "Acara ditutup dengan kembang api yang spektakuler! Penutupan yang sempurna."
+      },
+      {
+        "rating": 3,
+        "title": "Parkir Sulit",
+        "content": "Festival seru tapi parkir sangat sulit. Lebih baik gunakan transportasi umum."
+      },
+      {
+        "rating": 5,
+        "title": "Kebersamaan yang Hangat",
+        "content": "Festival yang membawa kebersamaan. Semua orang senang dan saling berbagi kegembiraan."
+      },
+      {
+        "rating": 4,
+        "title": "Banyak Spot Foto",
+        "content": "Banyak spot foto yang bagus! Latar belakang festival yang penuh warna dan meriah."
+      }
+    ]
+  }
+]

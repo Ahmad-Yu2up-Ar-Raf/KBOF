@@ -3,7 +3,7 @@ import { useSuspenseQuery } from '@tanstack/react-query'
 import { Shield, UserCog, Users, UsersRound } from 'lucide-react'
 import { Suspense } from 'react'
 
-import type { UserRoleType } from '@/db/schema'
+ 
 import type { UserAggregateInput } from '@/lib/query-options'
 import Heading from '@/components/ui/fragments/custom-ui/typography/heading'
 import { DataTableSkeleton } from '@/components/ui/fragments/shadcn-ui/data-table/data-table-skeleton'
@@ -61,7 +61,7 @@ function UserPageSkeleton() {
   return (
     <div className="space-y-3">
       <Heading
-        Icon={Users}
+        Icon={UsersRound}
         title="Manajemen Pengguna"
         description="Kelola pengguna dan hak akses sistem."
       />
@@ -80,8 +80,7 @@ function RouteComponent() {
 
   // Check if database is truly empty (no users at all)
   const { roleCounts } = userData
-  const totalUsersCount =
-    roleCounts.pribumi + roleCounts.admin + roleCounts.superAdmin
+  const totalUsersCount = roleCounts.admin + roleCounts.superAdmin
   const isDatabaseEmpty = totalUsersCount === 0
 
   return (
@@ -90,7 +89,7 @@ function RouteComponent() {
         className="mb-4"
         Icon={UsersRound}
         title="Manajemen Pengguna"
-        description="Kelola pengguna, role, dan status akun. Fitur ini khusus untuk Super Admin."
+        description="Kelola pengguna dan hak akses sistem."
       />
       <main>
         {isDatabaseEmpty ? (

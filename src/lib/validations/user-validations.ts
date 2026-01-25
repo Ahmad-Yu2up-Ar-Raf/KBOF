@@ -19,7 +19,7 @@ import { getSortingStateParser } from '@/lib/parsers'
 // USER ROLE ENUM
 // ============================================
 
-export const userRoleEnum = z.enum(['pribumi', 'admin', 'superAdmin'])
+export const userRoleEnum = z.enum(['admin', 'superAdmin'])
 
 export const updateUserRoleSchema = z.object({
   userId: z.string().min(1, 'User ID is required'),
@@ -115,7 +115,7 @@ export const completeOnboardingSchema = z.object({
 // NUQS SEARCH PARAMS CACHE
 // ============================================
 
-const roleValues = ['pribumi', 'admin', 'superAdmin', 'all'] as const
+const roleValues = [ 'admin', 'superAdmin', 'all'] as const
 const bannedValues = ['all', 'banned', 'active'] as const
 
 export const searchParamsCacheUser = createSearchParamsCache({
@@ -180,7 +180,7 @@ export const userSearchSchema = z.object({
   search: z.string().catch('').optional(),
 
   role: z
-    .enum(['pribumi', 'admin', 'superAdmin', 'all'])
+    .enum([  'admin', 'superAdmin', 'all'])
     .catch('all')
     .optional(),
 

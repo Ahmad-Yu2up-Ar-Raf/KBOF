@@ -24,7 +24,6 @@ const actions = ['update-role', 'ban', 'unban', 'export', 'delete'] as const
 type Action = (typeof actions)[number]
 
 // Role enum values (excluding superAdmin for bulk operations)
-const roleEnumValues: Array<UserRoleType> = ['pribumi', 'admin']
 
 interface UserTableActionBarProps {
   table: Table<UserTableRow>
@@ -33,13 +32,13 @@ interface UserTableActionBarProps {
   onExport: () => void
   onBan: () => void
   onUnban: () => void
-  onRoleUpdate: (role: UserRoleType) => void
+ 
 }
 
 export function UserTableActionBar({
   table,
   onDelete,
-  onRoleUpdate,
+
   onExport,
   onBan,
   onUnban,
@@ -66,26 +65,6 @@ export function UserTableActionBar({
       />
       <div className="flex items-center gap-1.5">
         {/* Update Role */}
-        <Select onValueChange={(value) => onRoleUpdate(value as UserRoleType)}>
-          <SelectTrigger asChild>
-            <DataTableActionBarAction
-              size="icon"
-              tooltip="Update role"
-              isPending={isPending}
-            >
-              <UserCog />
-            </DataTableActionBarAction>
-          </SelectTrigger>
-          <SelectContent align="center">
-            <SelectGroup>
-              {roleEnumValues.map((role) => (
-                <SelectItem key={role} value={role} className="capitalize">
-                  {role === 'pribumi' ? 'Pribumi' : 'Admin'}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
 
         {/* Ban Users (only show if some users are active) */}
         {hasActiveUsers && (

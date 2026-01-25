@@ -1,6 +1,6 @@
 import { createFileRoute, useSearch } from '@tanstack/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { BookOpen, BookOpenText, FileText, Newspaper, Plus } from 'lucide-react'
+import { BookOpen, SquarePen, FileText, Newspaper, Plus } from 'lucide-react'
 import { Suspense, useState } from 'react'
 
 import type { ArticleAggregateInput } from '@/lib/query-options'
@@ -65,9 +65,9 @@ function ArticlePageSkeleton() {
   return (
     <div className="space-y-3">
       <Heading
-        Icon={BookOpenText}
+        Icon={SquarePen}
         title="Artikel Saya"
-        description="Kelola artikel dan konten edukasi."
+        description="Kelola artikel dan konten edukasi kamu di sini."
       />
 
       <DataTableSkeleton />
@@ -95,9 +95,9 @@ function RouteComponent() {
     <div>
       <Heading
         className="mb-4"
-        Icon={BookOpenText}
+        Icon={SquarePen}
         title="Artikel Saya"
-        description="Kelola artikel dan konten edukasi kamu di sini, agar dapat di kenal oleh publik luas."
+        description="Kelola artikel dan konten edukasi kamu di sini."
       />
       <main>
         {isDatabaseEmpty ? (

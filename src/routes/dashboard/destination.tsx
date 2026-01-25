@@ -1,6 +1,6 @@
 import { createFileRoute, useSearch } from '@tanstack/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { Map, MapPin, Plus, Telescope } from 'lucide-react'
+import { Map, MapPin, Plus, MapPinPen } from 'lucide-react'
 import { Suspense, useState } from 'react'
 
 import type { DestinationAggregateInput } from '@/lib/query-options'
@@ -69,9 +69,9 @@ function DestinationPageSkeleton() {
     <div className="space-y-3">
       <Heading
         className="mb-4 lg:mb-6"
-        Icon={Telescope}
+        Icon={MapPinPen}
         title="Destinasi Lokal"
-        description="Ajukan dan kelola destinasi wisata dan budaya Indonesia local mu di sini. agar dapat di kenal oleh publik luas."
+        description="Ajukan dan kelola destinasi wisata dan budaya Indonesia local mu."
       />
 
       <DataTableSkeleton />
@@ -102,9 +102,9 @@ function RouteComponent() {
     <div>
       <Heading
         className="mb-4 lg:mb-6"
-        Icon={Telescope}
+        Icon={MapPinPen}
         title="Destinasi Lokal"
-        description="Ajukan dan kelola destinasi wisata dan budaya Indonesia local mu di sini. agar dapat di kenal oleh publik luas."
+        description="Ajukan dan kelola destinasi wisata dan budaya Indonesia local mu."
       />
       <main>
         {isDatabaseEmpty ? (
@@ -113,7 +113,7 @@ function RouteComponent() {
             <EmptyState
               title="Belum ada destinasi"
               description="Tambahkan destinasi wisata atau budaya Indonesia untuk memulai."
-              icons={[MapPin, Telescope, Plus]}
+              icons={[MapPin, MapPinPen, Plus]}
               action={{
                 label: 'Tambah Destinasi',
                 onClick: () => setSheetOpen(true),

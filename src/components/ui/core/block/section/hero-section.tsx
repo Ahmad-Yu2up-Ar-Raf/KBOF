@@ -17,6 +17,7 @@ import animationData from '@/assets/animations/Businessman.json'
 
 import { BlurFade } from '@/components/ui/fragments/custom-ui/animate-ui/blur-fade'
 import { Image } from '@unpic/react'
+import MediaItem from '@/components/ui/fragments/custom-ui/media/media-item'
 
 const fallbackImages = [
   'assets/images/hero/hero1.jpg',
@@ -58,24 +59,11 @@ export default function HeroSection() {
               // Use will-change sparingly
               style={{ willChange: 'transform, opacity' }}
             >
-              <div
-                role="button"
-                tabIndex={0}
+              <MediaItem
                 className="w-full h-full cursor-zoom-in"
                 onClick={() => openImage(fallbackImages[0])}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ')
-                    openImage(fallbackImages[0])
-                }}
-              >
-                <Image
-                  className=" w-full h-full object-cover object-center "
-                  width={800}
-                  height={400}
-                  alt={fallbackImages[0]}
-                  src={fallbackImages[0]}
-                />
-              </div>
+                webViewLink={fallbackImages[0]}
+              />
             </BlurFade>
           </FloatingElement>
 
@@ -89,24 +77,11 @@ export default function HeroSection() {
               className="w-40 h-40 relative overflow-hidden sm:w-48 sm:h-48 md:w-60 md:h-60 lg:w-55 lg:h-67 object-cover -rotate-[4deg] hover:scale-105 duration-200 transition-transform shadow-2xl rounded-xl"
               style={{ willChange: 'transform, opacity' }}
             >
-              <div
-                role="button"
-                tabIndex={0}
-                className="w-full h-full  cursor-zoom-in"
+              <MediaItem
+                className="w-full h-full cursor-zoom-in"
                 onClick={() => openImage(fallbackImages[1])}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ')
-                    openImage(fallbackImages[1])
-                }}
-              >
-                <Image
-                  className=" w-full h-full object-cover object-center "
-                  width={800}
-                  height={400}
-                  alt={fallbackImages[1]}
-                  src={fallbackImages[1]}
-                />
-              </div>
+                webViewLink={fallbackImages[1]}
+              />
             </BlurFade>
           </FloatingElement>
 
@@ -120,24 +95,11 @@ export default function HeroSection() {
               className="w-40 rotate-12 h-36 overflow-hidden sm:w-48 sm:h-44 md:w-60 md:h-52 lg:w-55 lg:h-67 object-cover hover:scale-105 duration-200 transition-transform shadow-2xl rounded-xl"
               style={{ willChange: 'transform, opacity' }}
             >
-              <div
-                role="button"
-                tabIndex={0}
-                className="w-full h-full  cursor-zoom-in"
+              <MediaItem
+                className="w-full h-full cursor-zoom-in"
                 onClick={() => openImage(fallbackImages[2])}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ')
-                    openImage(fallbackImages[2])
-                }}
-              >
-                <Image
-                  className=" w-full h-full object-cover object-center "
-                  width={800}
-                  height={400}
-                  alt={fallbackImages[2]}
-                  src={fallbackImages[2]}
-                />
-              </div>
+                webViewLink={fallbackImages[2]}
+              />
             </BlurFade>
           </FloatingElement>
 
@@ -151,24 +113,11 @@ export default function HeroSection() {
               className="w-44 overflow-hidden rotate-[4deg] h-44 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-55 lg:h-67 object-cover hover:scale-105 duration-200 transition-transform shadow-2xl rounded-xl"
               style={{ willChange: 'transform, opacity' }}
             >
-              <div
-                role="button"
-                tabIndex={0}
+              <MediaItem
                 className="w-full h-full cursor-zoom-in"
                 onClick={() => openImage(fallbackImages[3])}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ')
-                    openImage(fallbackImages[3])
-                }}
-              >
-                <Image
-                  className=" w-full h-full object-cover objec "
-                  width={800}
-                  height={400}
-                  alt={fallbackImages[3]}
-                  src={fallbackImages[3]}
-                />
-              </div>
+                webViewLink={fallbackImages[3]}
+              />
             </BlurFade>
           </FloatingElement>
         </Floating>

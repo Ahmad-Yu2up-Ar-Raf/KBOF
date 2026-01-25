@@ -2,8 +2,7 @@
 // ACCESS CONTROL & PERMISSIONS - SUASANA
 // =============================================================================
 // Role-based access control (RBAC) configuration using Better Auth
-// Roles: PRIBUMI (default), ADMIN, SUPER_ADMIN
-// =============================================================================
+ 
 
 import { createAccessControl } from 'better-auth/plugins/access'
 import { adminAc, defaultStatements } from 'better-auth/plugins/admin/access'
@@ -42,21 +41,6 @@ export const ac = createAccessControl(statement)
 // =============================================================================
 // ROLE DEFINITIONS
 // =============================================================================
-
-/**
- * PRIBUMI Role (Default for new users)
- * - Can create own destinations (pending status)
- * - Can manage own articles
- * - Cannot approve destinations or manage other users
- */
-export const pribumi = ac.newRole({
-  // Destination: Create (pending), read all, update/delete own only
-  destination: ['create', 'read'],
-  // Article: Full control of own articles
-  article: ['create', 'read', 'update', 'delete', 'publish'],
-  // No analytics access
-  // No user management
-})
 
 /**
  * ADMIN Role
@@ -101,7 +85,6 @@ export const superAdmin = ac.newRole({
 // =============================================================================
 
 export const roles = {
-  pribumi,
   admin,
   superAdmin,
 } as const
@@ -111,7 +94,7 @@ export const roles = {
 // =============================================================================
 
 export type UserRole = keyof typeof roles
-export const USER_ROLES = ['pribumi', 'admin', 'superAdmin'] as const
+export const USER_ROLES = ['admin', 'superAdmin'] as const
 
 // =============================================================================
 // ROLE HELPER FUNCTIONS
@@ -125,7 +108,7 @@ export function getRedirectPathForRole(role: UserRole): string {
     case 'superAdmin':
     case 'admin':
       return '/dashboard'
-    case 'pribumi':
+
     default:
       return '/profile'
   }

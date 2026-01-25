@@ -1,9 +1,8 @@
 import { toast } from 'sonner'
 import { SignUpForm } from '../form/register-form'
 import AuthLayoutTemplate from '../../layout/auth-layout'
-import type { UserRoleType } from '@/db/schema'
+
 import { useRegisterForm } from '@/hooks/form/use-auth-form'
-import { authClient } from '@/lib/auth/auth-client'
 
 export default function Register() {
   /**
@@ -14,19 +13,8 @@ export default function Register() {
     onSuccess: async () => {
       toast.success('Register berhasil!')
       // Get fresh session to determine redirect
-      const session = await authClient.getSession()
-      const user = session?.data?.user as
-        | { role?: UserRoleType; hasCompletedOnboarding?: boolean }
-        | undefined
-      const role = user?.role || 'pribumi'
 
-      // Role-based redirect - new users are pribumi by default
-      if (role === 'pribumi') {
-        // New users always go to onboarding first
-        window.location.href = '/profile'
-      } else {
-        window.location.href = '/dashboard'
-      }
+      window.location.href = '/dashboard'
     },
     onError: (error: Error) => {
       toast.error(error.message)

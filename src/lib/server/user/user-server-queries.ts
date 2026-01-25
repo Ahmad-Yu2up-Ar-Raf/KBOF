@@ -34,7 +34,7 @@ export const userAggregateInputSchema = z.object({
     .array(z.object({ id: z.string(), desc: z.boolean() }))
     .default([{ id: 'createdAt', desc: true }]),
   search: z.string().default(''),
-  role: z.enum(['pribumi', 'admin', 'superAdmin', 'all']).default('all'),
+  role: z.enum(['admin', 'superAdmin', 'all']).default('all'),
   banned: z.enum(['all', 'banned', 'active']).default('all'),
   filters: z
     .array(
@@ -214,7 +214,6 @@ export async function fetchRoleCounts(): Promise<Record<UserRoleType, number>> {
     .groupBy(user.role)
 
   const roleCounts: Record<UserRoleType, number> = {
-    pribumi: 0,
     admin: 0,
     superAdmin: 0,
   }
@@ -236,7 +235,8 @@ export async function fetchRoleCounts(): Promise<Record<UserRoleType, number>> {
  * Get aggregated user data (SuperAdmin only)
  * Returns paginated users with role counts in single request
  */
-export const getUserAggregateServerFn = createServerFn({ method: 'GET' })
+// Use POST for aggregated queries to avoid large serialized payloads in GET headers
+export const getUserAggregateServerFn = createServerFn({ method: 'POST' })
   .middleware([superAdminServerMiddleware])
   .inputValidator(
     z.object({

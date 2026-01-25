@@ -10,7 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from '../../shadcn-ui/card'
-import { buttonVariants } from '../../shadcn-ui/button'
+import { Button, buttonVariants } from '../../shadcn-ui/button'
 import { Skeleton } from '../../shadcn-ui/skeleton'
 import type { DestinasiDestination } from '@/lib/server/explore/destinasi-server-queries'
 import MediaItem from '@/components/ui/fragments/custom-ui/media/media-item'
@@ -91,108 +91,114 @@ function DestinasiCard({
   const typeLabel = getTypeLabel(destination.type)
   const TypeIcon = getTypeIcon(destination.type)
   return (
-    <Card
-      onMouseEnter={() => setHovered(index)}
-      onMouseLeave={() => setHovered(null)}
-      className={cn(
-        'relative  group  cursor-target w-full  m-auto         rounded-2xl',
-        'transform transition-all duration-300 hover:scale-105 hover:rotate-1 ',
-        'mx-auto cursor-target content-center w-full        p-5  rounded-none shadow-none      bg-background  ',
-        ' overflow-hidden hover:shadow-2xl flex flex-col h-full',
-        'cursor-target',
-        cornerClasses,
-        hovered !== null && hovered !== index && 'lg:blur-sm   lg:scale-[0.98]',
-        className,
-      )}
-      style={{ willChange: 'transform' }}
-      // onClick={() => onClick?.(destination)}
+    <Link
+      params={{ destinasiId: destination.slug }}
+      to={`/destinasi/$destinasiId`}
     >
-      <CardContent className=" rounded-[30px] content-center justify-center gap-4.5 flex flex-col flex-1 relative mx-auto w-full      shadow-none  border-0   p-0 h-full   md:items-start     ">
-        {/* Category Badge */}
-
-        {/* Header */}
-        <CardHeader className="p-0 w-full max-w-[15em] gap-2">
-          <Badge
-            variant="secondary"
-            className={cn('text-xs my-1.5  font-semibold w-fit')}
-          >
-            <CategoriIcon className="mr-1 size-3 " />
-            {categoriLabel}
-          </Badge>
-          <CardTitle className="text-xl  w-full  leading-6 font-bold tracking-tighter md:leading-6 line-clamp-1">
-            {destination.name}
-          </CardTitle>
-
-          <CardDescription className="text-muted-foreground  text-sm line-clamp-2 ">
-            {destination.description}
-          </CardDescription>
-        </CardHeader>
-
-        {/* Image */}
-        {primaryImage && (
-          <div className="  h-45 w-full rounded-xl overflow-hidden">
-            <MediaItem
-              webViewLink={primaryImage}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-            />
-          </div>
+      <Card
+        onMouseEnter={() => setHovered(index)}
+        onMouseLeave={() => setHovered(null)}
+        className={cn(
+          'relative  group  cursor-target w-full  m-auto         rounded-2xl',
+          'transform transition-all duration-300 hover:scale-105 hover:rotate-1 ',
+          'mx-auto cursor-target content-center w-full        p-5  rounded-none shadow-none      bg-background  ',
+          ' overflow-hidden hover:shadow-2xl flex flex-col h-full',
+          'cursor-target',
+          cornerClasses,
+          hovered !== null &&
+            hovered !== index &&
+            'lg:blur-sm   lg:scale-[0.98]',
+          className,
         )}
+        style={{ willChange: 'transform' }}
+        // onClick={() => onClick?.(destination)}
+      >
+        <CardContent className=" rounded-[30px] content-center justify-center gap-4.5 flex flex-col flex-1 relative mx-auto w-full      shadow-none  border-0   p-0 h-full   md:items-start     ">
+          {/* Category Badge */}
 
-        {/* Creator Info */}
-        <div className="space-y-4 w-full">
-          <div className="  gap-20 items-center relative     w-full ">
-            <div className="flex  gap-2.5  w-full items-start  justify-between   text-xs">
-              <MapPin className=" size-6.5 fill-primary   text-background" />
+          {/* Header */}
+          <CardHeader className="p-0 w-full max-w-[15em] gap-2">
+            <Badge
+              variant="secondary"
+              className={cn('text-xs my-1.5  font-semibold w-fit')}
+            >
+              <CategoriIcon className="mr-1 size-3 " />
+              {categoriLabel}
+            </Badge>
+            <CardTitle className="text-xl  w-full  leading-6 font-bold tracking-tighter md:leading-6 line-clamp-1">
+              {destination.name}
+            </CardTitle>
 
-              <div className="flex-1">
-                <p className="font-medium  truncate">
-                  {destination.kabupatenKota}
-                </p>
-                <p className="text-muted-foreground   text-xs  capitalize  truncate flex items-center gap-1">
-                  {getProvinsiLabel(destination.provinsi)}
-                </p>
+            <CardDescription className="text-muted-foreground  text-sm line-clamp-2 ">
+              {destination.description}
+            </CardDescription>
+          </CardHeader>
+
+          {/* Image */}
+          {primaryImage && (
+            <div className="  h-45 w-full rounded-xl overflow-hidden">
+              <MediaItem
+                webViewLink={primaryImage}
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+            </div>
+          )}
+
+          {/* Creator Info */}
+          <div className="space-y-4 w-full">
+            <div className="  gap-20 items-center relative     w-full ">
+              <div className="flex  gap-2.5  w-full items-start  justify-between   text-xs">
+                <MapPin className=" size-6.5 fill-primary   text-background" />
+
+                <div className="flex-1">
+                  <p className="font-medium  truncate">
+                    {destination.kabupatenKota}
+                  </p>
+                  <p className="text-muted-foreground   text-xs  capitalize  truncate flex items-center gap-1">
+                    {getProvinsiLabel(destination.provinsi)}
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col absolute  bottom-1/2 right-0 top-1/2  gap-1 items-end">
+                <Badge
+                  variant="outline"
+                  className="text-accent-foreground text-xs w-fit border-0 p-0"
+                >
+                  <ThumbsUp className="size-3.5 fill-primary text-primary mr-1" />
+                  <span className="font-semibold ">
+                    {destination.totalVote}
+                  </span>
+                </Badge>
               </div>
             </div>
-            <div className="flex flex-col absolute  bottom-1/2 right-0 top-1/2  gap-1 items-end">
+            <div className="flex flex-wrap gap-1.5">
+              <Badge className="px-2 py-0.5 bg-primary/10 text-primary rounded-full text-xs font-medium">
+                <TypeIcon /> {typeLabel}
+              </Badge>
               <Badge
-                variant="outline"
-                className="text-accent-foreground text-xs w-fit border-0 p-0"
+                variant={'outline'}
+                className="px-2 py-0 bg-background text-primary rounded-full text-xs font-medium"
               >
-                <ThumbsUp className="size-3.5 fill-primary text-primary mr-1" />
-                <span className="font-semibold ">{destination.totalVote}</span>
+                <StarIcon className=" fill-primary" />
+                {(destination.averageRating ?? 0).toFixed(1)}
               </Badge>
             </div>
           </div>
-          <div className="flex flex-wrap gap-1.5">
-            <Badge className="px-2 py-0.5 bg-primary/10 text-primary rounded-full text-xs font-medium">
-              <TypeIcon /> {typeLabel}
-            </Badge>
-            <Badge
-              variant={'outline'}
-              className="px-2 py-0 bg-background text-primary rounded-full text-xs font-medium"
-            >
-              <StarIcon className=" fill-primary" />
-              {(destination.averageRating ?? 0).toFixed(1)}
-            </Badge>
-          </div>
-        </div>
 
-        {/* Footer */}
-        <CardFooter className="flex mt-0  [.border-t]:pt-4  w-full border-t pt- py-1 items-center justify-between  px-0 ">
-          <Link
-            to={'/destinasi/$destinasiId'}
-            params={{ destinasiId: destination.slug }}
-            className={cn(
-              buttonVariants({ variant: 'default', size: 'sm' }),
-              'hover:opacity-90 transition-transform w-full hover:scale-105 text-xs ',
-            )}
-          >
-            Jelajahi Sekarang{' '}
-            <ArrowRight className="ml-2 w-3 h-3 md:w-4 md:h-4" />
-          </Link>
-        </CardFooter>
-      </CardContent>
-    </Card>
+          {/* Footer */}
+          <CardFooter className="flex mt-0  [.border-t]:pt-4  w-full border-t pt- py-1 items-center justify-between  px-0 ">
+            <Button
+              className={cn(
+                'hover:opacity-90 transition-transform w-full hover:scale-105 text-xs ',
+              )}
+            >
+              Jelajahi Sekarang{' '}
+              <ArrowRight className="ml-2 w-3 h-3 md:w-4 md:h-4" />
+            </Button>
+          </CardFooter>
+        </CardContent>
+      </Card>
+    </Link>
   )
 }
 

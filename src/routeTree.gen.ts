@@ -11,16 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as GameRouteImport } from './routes/game'
 import { Route as SplatRouteImport } from './routes/$'
-import { Route as ProfileRouteRouteImport } from './routes/profile/route'
 import { Route as DashboardRouteRouteImport } from './routes/dashboard/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ProfileIndexRouteImport } from './routes/profile/index'
 import { Route as DestinasiIndexRouteImport } from './routes/destinasi/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as ArtikelIndexRouteImport } from './routes/artikel/index'
-import { Route as ProfileSettingsRouteImport } from './routes/profile/settings'
-import { Route as ProfileDestinasiRouteImport } from './routes/profile/destinasi'
-import { Route as ProfileArtikelRouteImport } from './routes/profile/artikel'
 import { Route as DestinasiLeaderboardRouteImport } from './routes/destinasi/leaderboard'
 import { Route as DashboardUserMenagementRouteImport } from './routes/dashboard/user-menagement'
 import { Route as DashboardDestinationRouteImport } from './routes/dashboard/destination'
@@ -45,11 +40,6 @@ const SplatRoute = SplatRouteImport.update({
   path: '/$',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProfileRouteRoute = ProfileRouteRouteImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const DashboardRouteRoute = DashboardRouteRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -59,11 +49,6 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
-} as any)
-const ProfileIndexRoute = ProfileIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => ProfileRouteRoute,
 } as any)
 const DestinasiIndexRoute = DestinasiIndexRouteImport.update({
   id: '/destinasi/',
@@ -79,21 +64,6 @@ const ArtikelIndexRoute = ArtikelIndexRouteImport.update({
   id: '/artikel/',
   path: '/artikel/',
   getParentRoute: () => rootRouteImport,
-} as any)
-const ProfileSettingsRoute = ProfileSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => ProfileRouteRoute,
-} as any)
-const ProfileDestinasiRoute = ProfileDestinasiRouteImport.update({
-  id: '/destinasi',
-  path: '/destinasi',
-  getParentRoute: () => ProfileRouteRoute,
-} as any)
-const ProfileArtikelRoute = ProfileArtikelRouteImport.update({
-  id: '/artikel',
-  path: '/artikel',
-  getParentRoute: () => ProfileRouteRoute,
 } as any)
 const DestinasiLeaderboardRoute = DestinasiLeaderboardRouteImport.update({
   id: '/destinasi/leaderboard',
@@ -166,7 +136,6 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteRouteWithChildren
-  '/profile': typeof ProfileRouteRouteWithChildren
   '/$': typeof SplatRoute
   '/game': typeof GameRoute
   '/dashboard/settings': typeof DashboardSettingsRouteRouteWithChildren
@@ -178,13 +147,9 @@ export interface FileRoutesByFullPath {
   '/dashboard/destination': typeof DashboardDestinationRoute
   '/dashboard/user-menagement': typeof DashboardUserMenagementRoute
   '/destinasi/leaderboard': typeof DestinasiLeaderboardRoute
-  '/profile/artikel': typeof ProfileArtikelRoute
-  '/profile/destinasi': typeof ProfileDestinasiRoute
-  '/profile/settings': typeof ProfileSettingsRoute
   '/artikel': typeof ArtikelIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/destinasi': typeof DestinasiIndexRoute
-  '/profile/': typeof ProfileIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/dashboard/settings/password': typeof DashboardSettingsPasswordRoute
   '/dashboard/settings/': typeof DashboardSettingsIndexRoute
@@ -202,13 +167,9 @@ export interface FileRoutesByTo {
   '/dashboard/destination': typeof DashboardDestinationRoute
   '/dashboard/user-menagement': typeof DashboardUserMenagementRoute
   '/destinasi/leaderboard': typeof DestinasiLeaderboardRoute
-  '/profile/artikel': typeof ProfileArtikelRoute
-  '/profile/destinasi': typeof ProfileDestinasiRoute
-  '/profile/settings': typeof ProfileSettingsRoute
   '/artikel': typeof ArtikelIndexRoute
   '/dashboard': typeof DashboardIndexRoute
   '/destinasi': typeof DestinasiIndexRoute
-  '/profile': typeof ProfileIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/dashboard/settings/password': typeof DashboardSettingsPasswordRoute
   '/dashboard/settings': typeof DashboardSettingsIndexRoute
@@ -218,7 +179,6 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteRouteWithChildren
-  '/profile': typeof ProfileRouteRouteWithChildren
   '/$': typeof SplatRoute
   '/game': typeof GameRoute
   '/dashboard/settings': typeof DashboardSettingsRouteRouteWithChildren
@@ -230,13 +190,9 @@ export interface FileRoutesById {
   '/dashboard/destination': typeof DashboardDestinationRoute
   '/dashboard/user-menagement': typeof DashboardUserMenagementRoute
   '/destinasi/leaderboard': typeof DestinasiLeaderboardRoute
-  '/profile/artikel': typeof ProfileArtikelRoute
-  '/profile/destinasi': typeof ProfileDestinasiRoute
-  '/profile/settings': typeof ProfileSettingsRoute
   '/artikel/': typeof ArtikelIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/destinasi/': typeof DestinasiIndexRoute
-  '/profile/': typeof ProfileIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/dashboard/settings/password': typeof DashboardSettingsPasswordRoute
   '/dashboard/settings/': typeof DashboardSettingsIndexRoute
@@ -247,7 +203,6 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/dashboard'
-    | '/profile'
     | '/$'
     | '/game'
     | '/dashboard/settings'
@@ -259,13 +214,9 @@ export interface FileRouteTypes {
     | '/dashboard/destination'
     | '/dashboard/user-menagement'
     | '/destinasi/leaderboard'
-    | '/profile/artikel'
-    | '/profile/destinasi'
-    | '/profile/settings'
     | '/artikel'
     | '/dashboard/'
     | '/destinasi'
-    | '/profile/'
     | '/api/auth/$'
     | '/dashboard/settings/password'
     | '/dashboard/settings/'
@@ -283,13 +234,9 @@ export interface FileRouteTypes {
     | '/dashboard/destination'
     | '/dashboard/user-menagement'
     | '/destinasi/leaderboard'
-    | '/profile/artikel'
-    | '/profile/destinasi'
-    | '/profile/settings'
     | '/artikel'
     | '/dashboard'
     | '/destinasi'
-    | '/profile'
     | '/api/auth/$'
     | '/dashboard/settings/password'
     | '/dashboard/settings'
@@ -298,7 +245,6 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/dashboard'
-    | '/profile'
     | '/$'
     | '/game'
     | '/dashboard/settings'
@@ -310,13 +256,9 @@ export interface FileRouteTypes {
     | '/dashboard/destination'
     | '/dashboard/user-menagement'
     | '/destinasi/leaderboard'
-    | '/profile/artikel'
-    | '/profile/destinasi'
-    | '/profile/settings'
     | '/artikel/'
     | '/dashboard/'
     | '/destinasi/'
-    | '/profile/'
     | '/api/auth/$'
     | '/dashboard/settings/password'
     | '/dashboard/settings/'
@@ -326,7 +268,6 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRouteRoute: typeof DashboardRouteRouteWithChildren
-  ProfileRouteRoute: typeof ProfileRouteRouteWithChildren
   SplatRoute: typeof SplatRoute
   GameRoute: typeof GameRoute
   authGet_startedRoute: typeof authGet_startedRoute
@@ -356,13 +297,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SplatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/profile': {
-      id: '/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof ProfileRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
@@ -376,13 +310,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
-    }
-    '/profile/': {
-      id: '/profile/'
-      path: '/'
-      fullPath: '/profile/'
-      preLoaderRoute: typeof ProfileIndexRouteImport
-      parentRoute: typeof ProfileRouteRoute
     }
     '/destinasi/': {
       id: '/destinasi/'
@@ -404,27 +331,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/artikel'
       preLoaderRoute: typeof ArtikelIndexRouteImport
       parentRoute: typeof rootRouteImport
-    }
-    '/profile/settings': {
-      id: '/profile/settings'
-      path: '/settings'
-      fullPath: '/profile/settings'
-      preLoaderRoute: typeof ProfileSettingsRouteImport
-      parentRoute: typeof ProfileRouteRoute
-    }
-    '/profile/destinasi': {
-      id: '/profile/destinasi'
-      path: '/destinasi'
-      fullPath: '/profile/destinasi'
-      preLoaderRoute: typeof ProfileDestinasiRouteImport
-      parentRoute: typeof ProfileRouteRoute
-    }
-    '/profile/artikel': {
-      id: '/profile/artikel'
-      path: '/artikel'
-      fullPath: '/profile/artikel'
-      preLoaderRoute: typeof ProfileArtikelRouteImport
-      parentRoute: typeof ProfileRouteRoute
     }
     '/destinasi/leaderboard': {
       id: '/destinasi/leaderboard'
@@ -556,28 +462,9 @@ const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(
   DashboardRouteRouteChildren,
 )
 
-interface ProfileRouteRouteChildren {
-  ProfileArtikelRoute: typeof ProfileArtikelRoute
-  ProfileDestinasiRoute: typeof ProfileDestinasiRoute
-  ProfileSettingsRoute: typeof ProfileSettingsRoute
-  ProfileIndexRoute: typeof ProfileIndexRoute
-}
-
-const ProfileRouteRouteChildren: ProfileRouteRouteChildren = {
-  ProfileArtikelRoute: ProfileArtikelRoute,
-  ProfileDestinasiRoute: ProfileDestinasiRoute,
-  ProfileSettingsRoute: ProfileSettingsRoute,
-  ProfileIndexRoute: ProfileIndexRoute,
-}
-
-const ProfileRouteRouteWithChildren = ProfileRouteRoute._addFileChildren(
-  ProfileRouteRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRouteRoute: DashboardRouteRouteWithChildren,
-  ProfileRouteRoute: ProfileRouteRouteWithChildren,
   SplatRoute: SplatRoute,
   GameRoute: GameRoute,
   authGet_startedRoute: authGet_startedRoute,

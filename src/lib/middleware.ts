@@ -26,22 +26,7 @@ export const guestMiddleware = createMiddleware().server(
     const session = await auth.api.getSession({ headers: request.headers })
 
     if (session) {
-      const user = session.user as {
-        role?: UserRoleType
-        hasCompletedOnboarding?: boolean
-      }
-      const role = user?.role || 'pribumi'
-
-      // Redirect based on role
-      if (role === 'pribumi') {
-        // Check if onboarding is completed
-        // if (!user?.hasCompletedOnboarding) {
-        //   throw redirect({ to: '/onboarding' })
-        // }
-        throw redirect({ to: '/profile' })
-      } else {
-        throw redirect({ to: '/dashboard', search: { createdAt: [] } })
-      }
+      throw redirect({ to: '/dashboard', search: { createdAt: [] } })
     }
     return await next()
   },
@@ -62,147 +47,15 @@ export const authServerMiddleware = createMiddleware().server(
 )
 
 // =============================================================================
-// ROLE-BASED MIDDLEWARE FACTORY
-// =============================================================================
-
-/**
- * Creates a middleware that checks if user has one of the allowed roles
- * @param allowedRoles - Array of roles that can access the route
- */
-export function createRoleMiddleware(allowedRoles: Array<UserRoleType>) {
-  return createMiddleware().server(async ({ next, request }) => {
-    const session = await auth.api.getSession({ headers: request.headers })
-
-    if (!session) {
-      throw redirect({ to: '/login' })
-    }
-
-    const userRole =
-      (session.user as { role?: UserRoleType })?.role || 'pribumi'
-
-    if (!allowedRoles.includes(userRole)) {
-      // Redirect to appropriate page based on their actual role
-      if (userRole === 'pribumi') {
-        throw redirect({ to: '/profile' })
-      } else {
-        throw redirect({ to: '/dashboard', search: { createdAt: [] } })
-      }
-    }
-
-    return next({ context: { user: session.user } })
-  })
-}
-
-// =============================================================================
 // PRE-DEFINED ROLE MIDDLEWARES
 // =============================================================================
 
-/**
- * Dashboard middleware - Admin & Super Admin only
- * Redirects Pribumi users to /profile
- */
 export const dashboardMiddleware = createMiddleware().server(
   async ({ next, request }) => {
     const session = await auth.api.getSession({ headers: request.headers })
 
     if (!session) {
       throw redirect({ to: '/login' })
-    }
-
-    const role = (session.user as { role?: UserRoleType })?.role || 'pribumi'
-
-    if (role === 'pribumi') {
-      throw redirect({ to: '/profile' })
-    }
-
-    return next({ context: { user: session.user } })
-  },
-)
-
-/**
- * Admin panel middleware - Super Admin only
- * Used for /dashboard/admin routes
- */
-export const superAdminMiddleware = createMiddleware().server(
-  async ({ next, request }) => {
-    const session = await auth.api.getSession({ headers: request.headers })
-
-    if (!session) {
-      throw redirect({ to: '/login' })
-    }
-
-    const role = (session.user as { role?: UserRoleType })?.role || 'pribumi'
-
-    if (role !== 'superAdmin') {
-      if (role === 'pribumi') {
-        throw redirect({ to: '/profile' })
-      } else {
-        throw redirect({ to: '/dashboard', search: { createdAt: [] } })
-      }
-    }
-
-    return next({ context: { user: session.user } })
-  },
-)
-
-/**
- * Profile middleware - Pribumi only
- * Used for /profile routes
- * Redirects to onboarding if not completed
- */
-export const profileMiddleware = createMiddleware().server(
-  async ({ next, request }) => {
-    const session = await auth.api.getSession({ headers: request.headers })
-
-    if (!session) {
-      throw redirect({ to: '/login' })
-    }
-
-    const user = session.user as {
-      role?: UserRoleType
-      hasCompletedOnboarding?: boolean
-    }
-    const role = user?.role || 'pribumi'
-
-    // Only Pribumi can access profile routes
-    if (role !== 'pribumi') {
-      throw redirect({ to: '/dashboard', search: { createdAt: [] } })
-    }
-
-    // // Check if onboarding is completed
-    // if (!user?.hasCompletedOnboarding) {
-    //   throw redirect({ to: '/onboarding' })
-    // }
-
-    return next({ context: { user: session.user } })
-  },
-)
-
-/**
- * Onboarding middleware - Pribumi who haven't completed onboarding
- */
-export const onboardingMiddleware = createMiddleware().server(
-  async ({ next, request }) => {
-    const session = await auth.api.getSession({ headers: request.headers })
-
-    if (!session) {
-      throw redirect({ to: '/login' })
-    }
-
-    const user = session.user as {
-      role?: UserRoleType
-      hasCompletedOnboarding?: boolean
-    }
-    const role = user?.role || 'pribumi'
-
-    // Only Pribumi needs onboarding
-    if (role !== 'pribumi') {
-      throw redirect({ to: '/dashboard', search: { createdAt: [] } })
-    }
-
-    // If already completed onboarding, redirect to profile
-    if (user?.hasCompletedOnboarding) {
-      throw redirect({ to: '/profile' })
     }
 
     return next({ context: { user: session.user } })
@@ -223,10 +76,10 @@ export function createAuthServerMiddlewareWithRole(
       throw new Error('Unauthorized')
     }
 
-    const userRole =
-      (session.user as { role?: UserRoleType })?.role || 'pribumi'
+    const userRole = (session.user as { role?: UserRoleType }).role
 
-    if (!allowedRoles.includes(userRole)) {
+    // Ensure role is defined before checking allowed roles to satisfy TS
+    if (!userRole || !allowedRoles.includes(userRole)) {
       throw new Error('Forbidden: Insufficient permissions')
     }
 

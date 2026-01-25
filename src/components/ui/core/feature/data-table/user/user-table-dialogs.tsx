@@ -274,12 +274,6 @@ const roleConfig: Record<
     variant: 'default' | 'secondary' | 'outline'
   }
 > = {
-  pribumi: {
-    label: 'Pribumi',
-    icon: <User className="h-4 w-4" />,
-    description: 'Dapat membuat destinasi & artikel, vote, dan review',
-    variant: 'secondary',
-  },
   admin: {
     label: 'Admin',
     icon: <Shield className="h-4 w-4" />,

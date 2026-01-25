@@ -42,6 +42,7 @@ import {
 import { useInitials } from '@/hooks/use-initials'
 import { batasiKata } from '@/hooks/use-word'
 import { useModal } from '@/components/provider/context-provider'
+import { Link } from '@tanstack/react-router'
 
 // Status enum values
 const statusEnumValues: Array<DestinationStatus> = [
@@ -273,6 +274,14 @@ export function getArticleTableColumns({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-40">
+              <DropdownMenuItem asChild>
+                <Link
+                  to="/artikel/$artikelId"
+                  params={{ artikelId: row.original.slug }}
+                >
+                  Preview
+                </Link>
+              </DropdownMenuItem>
               <DropdownMenuItem
                 onSelect={() => setRowAction({ row, variant: 'update' })}
               >

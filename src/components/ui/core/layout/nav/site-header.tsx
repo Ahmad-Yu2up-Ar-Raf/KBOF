@@ -5,14 +5,20 @@ import {
   BookOpenText,
   Gamepad,
   Gamepad2,
+  Gamepad2Icon,
+  Grid,
   Home,
   House,
+  FileText,
   MapPin,
   Medal,
   Newspaper,
+  Puzzle,
+  PuzzleIcon,
   Search,
   Telescope,
   UserRound,
+  LucideLayoutDashboard,
 } from 'lucide-react'
 import type { User } from '@/db/schema'
 import { NavbarLogo } from '@/components/ui/fragments/custom-ui/header/app-logo'
@@ -104,7 +110,7 @@ export function SiteHeaderMobile() {
     {
       name: 'Game',
       link: '/game',
-      icon: Gamepad2,
+      icon: Puzzle,
     },
     {
       name: 'Akun',

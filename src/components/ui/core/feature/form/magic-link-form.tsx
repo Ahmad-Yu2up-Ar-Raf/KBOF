@@ -22,10 +22,11 @@ export function MagicLinkForm({ form, isPending }: MagicLinkFormProps) {
       id="magic-link-form"
       className="space-y-3"
     >
-      <FieldGroup className="gap-4.5">
+      <FieldGroup className="gap-4.5  [&_input]:sm:text-sm [&_input]:text-xs">
         <form.AppField name="email">
           {(field) => (
             <field.Input
+              
               showLabel={false}
               label="Email"
               type="email"
@@ -39,7 +40,8 @@ export function MagicLinkForm({ form, isPending }: MagicLinkFormProps) {
 
       <Button
         type="submit"
-        className="w-full cursor-pointer"
+        size={"sm"}
+        className="w-full text-xs  sm:text-sm cursor-pointer"
         disabled={isPending}
       >
         {isPending ? (

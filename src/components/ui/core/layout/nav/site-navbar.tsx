@@ -52,7 +52,10 @@ function SiteNavbar() {
       <nav
         className={cn(
           '  top-0  z-40  bg-transparent  rounded-b-2xl     w-full',
-          isActiveFixed ? ' absolute ' : 'relative',
+          isActiveFixed ? '   absolute ' : 'relative',
+
+          paths == '/destinasi/$destinasiId/' &&
+            'bg-blend-difference mix-blend-difference  ',
         )}
       >
         <header
@@ -100,7 +103,7 @@ function SiteNavbar() {
         >
           <div
             className={cn(
-              'z-50  w-fit   bg-transparent  absolute  left-5.5 md:left-0   md:relative  backdrop-blur flex justify-between',
+              'z-50  w-fit   bg-none  absolute  left-5.5 md:left-0   md:relative  backdrop-blur flex justify-between',
             )}
           >
             <Button
@@ -108,7 +111,7 @@ function SiteNavbar() {
               onClick={() => window.history.back()}
               size={'icon'}
               className={cn(
-                'flex w-fit bg-transparent   py-2 md:flex text-base items-center gap-2    group transition-colors',
+                'flex w-fit bg-none   py-2 md:flex text-base items-center gap-2    group transition-colors',
               )}
             >
               <ArrowLeft className=" size-5 group-hover:-translate-x-1 group-hover:transform transition-all ease-out duration-300" />

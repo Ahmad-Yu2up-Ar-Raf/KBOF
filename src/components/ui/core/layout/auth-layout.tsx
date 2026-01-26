@@ -81,9 +81,7 @@ const AuthLayoutTemplate = ({
           >
             <div className="justify-center max-w-sm flex m-auto flex-col h-full">
               <header
-                className={cn(
-                  'flex text-center flex-col items-left mb-5',
-                )}
+                className={cn('flex text-center flex-col items-left mb-5')}
               >
                 <div className="m-auto w-50 h-42">{View}</div>
 
@@ -95,10 +93,12 @@ const AuthLayoutTemplate = ({
                   <Logo className="size-12 opacity-0 transition-transform ease-in-out duration-500 dark:opacity-100" />
                 </div>
 
-                <h2 className="text-xl lg:text-2xl mt-3 font-medium tracking-tight">
+                <h2 className=" text-lg sm:text-xl lg:text-2xl mt-3 font-medium tracking-tight">
                   {title}
                 </h2>
-                <p className="line-clamp-1 opacity-80">{description}</p>
+                <p className="line-clamp-1 sm:text-sm text-sm opacity-80">
+                  {description}
+                </p>
               </header>
               {props.children}
               <React.Activity mode={signInGoogleButton ? 'visible' : 'hidden'}>
@@ -106,8 +106,8 @@ const AuthLayoutTemplate = ({
                   <div className="absolute inset-0 flex items-center">
                     <span className="w-full border-t" />
                   </div>
-                  <div className="relative flex justify-center text-sm">
-                    <span className="bg-background px-2 text-muted-foreground">
+                  <div className="relative flex justify-center sm:text-sm text-xs ">
+                    <span className="bg-background px-2    text-muted-foreground">
                       Atau lanjutkan dengan
                     </span>
                   </div>
@@ -116,13 +116,13 @@ const AuthLayoutTemplate = ({
                   onClick={signInGoogle}
                   variant="ghost"
                   type="button"
-                  className="border border-input/80 cursor-pointer"
+                  className="border sm:text-sm   text-xs border-input/80 cursor-pointer"
                   disabled={loadingState}
                 >
                   {loadingState ? (
-                    <Spinner className="mr-2 h-4 w-4" />
+                    <Spinner className="mr-2 size-3 md:size-4" />
                   ) : (
-                    <Icons.google className="mr-2 h-4 w-4" />
+                    <Icons.google className="mr-2 size-3  md:size-4" />
                   )}{' '}
                   Google
                 </Button>

@@ -95,12 +95,12 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
               exit={{ scale: 0.95, y: 20 }}
               className="relative w-full aspect-[16/9]
                                  max-w-[100dvw] sm:max-w-[85dvw] md:max-w-[84.5dvw] 
-                               max-h-[60svh] md:max-h-[80svh]   h-auto h-full  overflow-hidden "
+                               max-h-[30svh] md:max-h-[80svh]    h-full  overflow-hidden "
             >
               <MediaItem
                 webViewLink={imageSrc}
-                imageClassName="  m-auto  rounded-xl  object-contain  "
-                className="w-full h-full rounded-xl   overflow-hidden absolute"
+                imageClassName="  m-auto  sm:rounded-xl  object-contain  "
+                className="w-full h-full sm:rounded-xl   overflow-hidden absolute"
               />
             </motion.div>
 

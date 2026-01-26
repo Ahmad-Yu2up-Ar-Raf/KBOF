@@ -1,25 +1,13 @@
 'use client'
 
-import { Link } from '@tanstack/react-router'
-
-import {
-  ArrowLeft,
-  Calendar,
-  MapPin,
-  MoreVertical,
-  Star,
-  StarIcon,
-  ThumbsUp,
-} from 'lucide-react'
+import { Calendar, MapPin, Star, ThumbsUp } from 'lucide-react'
 import React from 'react'
 import { ReviewsSection } from './reviews-section'
 import { RelatedDestinationsSection } from './related-destinations-section'
 import type { DestinasiDetailDestination } from '@/lib/query-options'
-import { buttonVariants } from '@/components/ui/fragments/shadcn-ui/button'
 
 import { cn } from '@/lib/utils'
 
-import MediaItem from '@/components/ui/fragments/custom-ui/media/media-item'
 import { formatDate } from '@/lib/format'
 import { Badge } from '@/components/ui/fragments/shadcn-ui/badge'
 import { getProvinsiLabel } from '@/lib/utils/destination-utils'
@@ -54,7 +42,7 @@ export default function DestinasiDetailBlock({
             backgroundImage: `url(${destination.coverImage})`,
           }}
           className={cn(
-            'relative min-h-50  bg-fixed bg-no-repeat     z-10   flex items-center justify-center overflow-hidden hero-parallax ',
+            'relative min-h-60  bg-fixed bg-no-repeat     z-10   flex items-center justify-center overflow-hidden hero-parallax ',
           )}
         >
           <div className="absolute inset-0 bg-linear-to-b from-background/10 via-background/50 to-background     " />

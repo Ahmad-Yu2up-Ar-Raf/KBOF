@@ -36,7 +36,7 @@ function RouteComponent() {
     <div className="mx-auto container max-w-6xl space-y-4  ">
       <KatalogHeader
         titleMain="Cerita"
-        titleSecond="Lokal*"
+        titleSecond="Menarik*"
         linkText="Bagikan Kisahmu"
         subTitle="Setiap tempat punya cerita"
         deskription="Dengarkan suara hati lokal melalui artikel-artikel inspiratif yang menghubungkan budaya, cerita."

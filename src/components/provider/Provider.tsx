@@ -12,6 +12,7 @@ import { InfiniteScrollProvider } from './infinite-scroll-context'
 import { ModalProvider } from './context-provider'
 import Preload from '@/components/ui/fragments/custom-ui/animate-ui/preload-animation'
 import { Toaster } from '@/components/ui/fragments/shadcn-ui/sonner'
+import { NavigationProgressProvider } from '@/lib/ui/useNavigationProgress'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,13 +30,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
   const currentRouteId = matches[matches.length - 1]?.routeId
 
   // Routes yang skip preload animation
-  const routesWithoutPreload = [
-    '/auth',
-    
-    '/dashboard',
-    '/profile',
-    '/$',
-  ]
+  const routesWithoutPreload = ['/auth', '/dashboard', '/profile', '/$']
 
   const shouldShowPreload = !routesWithoutPreload.some((routeId) =>
     currentRouteId?.startsWith(routeId),
@@ -117,7 +112,9 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
           ) : contentReady && isWebsiteReady ? (
             <ModalProvider key="main-content">
               <InfiniteScrollProvider>
-                <LayoutWrapper>{children}</LayoutWrapper>
+                <NavigationProgressProvider>
+                  <LayoutWrapper>{children}</LayoutWrapper>
+                </NavigationProgressProvider>
               </InfiniteScrollProvider>
             </ModalProvider>
           ) : null}

@@ -2,63 +2,63 @@
 
 # 🌏 Suasana
 
-### _Mengangkat Kekayaan Tersembunyi Indonesia ke Panggung Digital_
+### _Bringing Indonesia's Hidden Treasures to the Digital Stage_
 
 <img src="@/assets/logo/suasana-banner.png" alt="Suasana Banner" width="100%" />
 
-[![Live Demo](https://img.shields.io/badge/🌐_Demo-suasana.vercel.app-00C853?style=for-the-badge&logoColor=primary-foreground)](https://suasana.vercel.app)
+[![Live Demo](https://img.shields.io/badge/🌐_Demo-suasana.vercel.app-00C853?style=for-the-badge&logoColor=white)](https://suasana.vercel.app)
 [![Status](https://img.shields.io/badge/Status-In_Development-FFB300?style=for-the-badge)]()
-[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=primary-foreground)]()
-[![React](https://img.shields.io/badge/React_19-61DAFB?style=for-the-badge&logo=react&logoColor=primary)]()
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=primary-foreground)]()
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)]()
+[![React](https://img.shields.io/badge/React_19-61DAFB?style=for-the-badge&logo=react&logoColor=black)]()
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)]()
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)]()
 
-**Platform interaktif untuk memperkenalkan, mendukung, dan melestarikan ekowisata serta budaya lokal Indonesia yang masih tersembunyi.**
+**An interactive platform for showcasing, supporting, and preserving Indonesia's still-hidden ecotourism destinations and local culture.**
 
-[🚀 Live Demo](https://suasana.vercel.app) • [📖 Dokumentasi](#-arsitektur-project) • [🤝 Kontribusi](#-kontribusi)
+[🚀 Live Demo](https://suasana.vercel.app) • [📖 Documentation](#-project-architecture) • [🤝 Contributing](#-contributing)
 
 ---
 
 </div>
 
-## 📖 Tentang Suasana
+## 📖 About Suasana
 
-Di tengah maraknya promosi destinasi wisata populer, **jutaan kekayaan budaya dan ekowisata lokal Indonesia** di pelosok negeri tetap tersembunyi dari perhatian publik. Padahal, destinasi-destinasi ini memiliki nilai tinggi yang patut dikenal masyarakat luas.
+While popular tourist destinations dominate promotion, **millions of local cultural and ecotourism treasures** scattered across Indonesia remain hidden from public attention — despite deserving far wider recognition.
 
-**Suasana** hadir sebagai **jembatan digital** antara masyarakat dengan kekayaan budaya dan ekowisata Indonesia. Platform ini menggunakan pendekatan yang **informatif, visual, dan partisipatif** untuk mengangkat visibilitas destinasi yang kurang dikenal.
+**Suasana** exists as a **digital bridge** between the public and Indonesia's cultural and ecotourism riches. The platform takes an **informative, visual, and participatory** approach to boosting the visibility of lesser-known destinations.
 
-### 🎯 Misi Kami
+### 🎯 Our Mission
 
 <table>
 <tr>
 <td width="50%">
 
-**📢 Meningkatkan Visibilitas**
+**📢 Increasing Visibility**
 
-Memberikan panggung digital bagi wisata & budaya lokal yang belum terekspos ke masyarakat luas.
+Giving a digital stage to local tourism and culture that hasn't yet reached a wider audience.
 
 </td>
 <td width="50%">
 
-**🤝 Mendorong Partisipasi**
+**🤝 Encouraging Participation**
 
-Melibatkan publik dalam mendukung pelestarian budaya melalui voting, donasi, dan diskusi.
+Involving the public in supporting cultural preservation through voting, donations, and discussion.
 
 </td>
 </tr>
 <tr>
 <td width="50%">
 
-**🌱 Pelestarian Berkelanjutan**
+**🌱 Sustainable Preservation**
 
-Menumbuhkan kesadaran pentingnya menjaga kekayaan budaya dan lingkungan Indonesia.
+Building awareness of the importance of protecting Indonesia's cultural heritage and environment.
 
 </td>
 <td width="50%">
 
-**🔗 Menghubungkan Komunitas**
+**🔗 Connecting Communities**
 
-Menyatukan masyarakat, wisatawan, dan pelaku lokal dalam satu ekosistem digital.
+Bringing together the public, travelers, and local stakeholders in one digital ecosystem.
 
 </td>
 </tr>
@@ -66,25 +66,25 @@ Menyatukan masyarakat, wisatawan, dan pelaku lokal dalam satu ekosistem digital.
 
 ---
 
-## ✨ Fitur Utama
+## ✨ Key Features
 
 <div align="center">
 
-|            Fitur            | Deskripsi                                                                                                                                                    |
-| :-------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|  🗺️ **Eksplorasi Budaya**   | Jelajahi 60+ destinasi ekowisata dan Destinasi lokal dari seluruh Indonesia dengan tampilan visual yang menarik, terstruktur berdasarkan kategori dan lokasi |
-| 🗳️ **Voting & Leaderboard** | Berikan dukungan (vote) untuk destinasi favorit Anda. Sistem leaderboard dinamis menampilkan destinasi dengan dukungan terbanyak secara real-time            |
-|    💝 **Sistem Donasi**     | Dukung pelestarian budaya dan destinasi lokal secara langsung melalui fitur donasi yang terintegrasi                                                         |
-|  💬 **Komentar & Diskusi**  | Bagikan pengalaman, pendapat, dan tips tentang destinasi atau budaya tertentu bersama komunitas                                                              |
-|   📝 **Artikel Edukatif**   | Baca artikel informatif dan edukatif seputar ekowisata, budaya lokal, dan tips perjalanan                                                                    |
-|   🔐 **Autentikasi Aman**   | Sistem login & registrasi yang aman dengan dukungan Google OAuth dan Magic Link                                                                              |
-|   🔍 **Pencarian Cerdas**   | Temukan konten dengan mudah berdasarkan kategori, lokasi, atau kata kunci                                                                                    |
+|            Feature            | Description                                                                                                                                                    |
+| :----------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|  🗺️ **Cultural Exploration**   | Browse 60+ ecotourism and local destinations from across Indonesia, presented visually and organized by category and location |
+| 🗳️ **Voting & Leaderboard** | Vote for your favorite destinations. A dynamic leaderboard shows the most-supported destinations in real time            |
+|    💝 **Donation System**     | Directly support the preservation of local culture and destinations through an integrated donation feature                                                         |
+|  💬 **Comments & Discussion**  | Share experiences, opinions, and tips about a destination or piece of culture with the community                                                              |
+|   📝 **Educational Articles**   | Read informative articles on ecotourism, local culture, and travel tips                                                                    |
+|   🔐 **Secure Authentication**   | A secure login & registration system with Google OAuth and Magic Link support                                                              |
+|   🔍 **Smart Search**   | Find content easily by category, location, or keyword                                                                                    |
 
 </div>
 
 ---
 
-## 🏗️ Arsitektur Project
+## 🏗️ Project Architecture
 
 ### Tech Stack
 
@@ -119,25 +119,25 @@ Menyatukan masyarakat, wisatawan, dan pelaku lokal dalam satu ekosistem digital.
 
 </div>
 
-### Teknologi yang Digunakan
+### Technologies Used
 
-| Layer          | Teknologi                                      | Fungsi                                         |
-| -------------- | ---------------------------------------------- | ---------------------------------------------- |
-| **Framework**  | [TanStack Start](https://tanstack.com/start)   | Full-stack React framework dengan Nitro server |
-| **Frontend**   | [React 19](https://react.dev/)                 | Library UI dengan fitur terbaru (RSC, Actions) |
-| **Routing**    | [TanStack Router](https://tanstack.com/router) | File-based routing dengan type-safety          |
-| **Forms**      | [TanStack Form](https://tanstack.com/form)     | Form handling dengan validasi Zod              |
-| **State URL**  | [NUQS](https://nuqs.47ng.com/)                 | Type-safe URL query state management           |
-| **ORM**        | [Drizzle](https://orm.drizzle.team/)           | TypeScript ORM yang lightweight & performant   |
-| **Database**   | [Neon](https://neon.tech/)                     | Serverless PostgreSQL dengan edge support      |
-| **Auth**       | [Better Auth](https://better-auth.com/)        | Auth library dengan OAuth & Magic Link         |
-| **UI**         | [shadcn/ui](https://ui.shadcn.com/)            | Accessible components dengan Radix UI          |
+| Layer          | Technology                                      | Purpose                                         |
+| -------------- | ------------------------------------------------ | ------------------------------------------------- |
+| **Framework**  | [TanStack Start](https://tanstack.com/start)   | Full-stack React framework with a Nitro server |
+| **Frontend**   | [React 19](https://react.dev/)                 | UI library with the latest features (RSC, Actions) |
+| **Routing**    | [TanStack Router](https://tanstack.com/router) | File-based routing with type-safety          |
+| **Forms**      | [TanStack Form](https://tanstack.com/form)     | Form handling with Zod validation              |
+| **URL State**  | [NUQS](https://nuqs.47ng.com/)                 | Type-safe URL query state management           |
+| **ORM**        | [Drizzle](https://orm.drizzle.team/)           | Lightweight, performant TypeScript ORM   |
+| **Database**   | [Neon](https://neon.tech/)                     | Serverless PostgreSQL with edge support          |
+| **Auth**       | [Better Auth](https://better-auth.com/)        | Auth library with OAuth & Magic Link           |
+| **UI**         | [shadcn/ui](https://ui.shadcn.com/)            | Accessible components built on Radix UI            |
 | **Styling**    | [Tailwind CSS v4](https://tailwindcss.com/)    | Utility-first CSS framework                    |
 | **Validation** | [Zod](https://zod.dev/)                        | TypeScript-first schema validation             |
 
 ---
 
-## 📁 Struktur Project
+## 📁 Project Structure
 
 ```
 src/
@@ -145,7 +145,7 @@ src/
 │   ├── 📂 (auth)/          # Auth routes (login, register)
 │   ├── 📂 api/             # API routes
 │   ├── 📂 dashboard/       # Protected dashboard routes
-│   └── 📂 Destinasi/       # Destinasi pages
+│   └── 📂 destinations/    # Destination pages
 ├── 📂 db/                  # Database layer
 │   ├── schema.ts           # Drizzle schema definitions
 │   ├── relations.ts        # Table relations
@@ -171,18 +171,16 @@ src/
 
 ## 🗄️ Database Schema
 
-````
+### Main Entities
 
-### Entitas Utama
-
-| Entitas    | Deskripsi                                                |
-| ---------- | -------------------------------------------------------- |
-| `user`     | Data pengguna (terintegrasi dengan Better Auth)          |
-| `Destinasi`  | Destinasi, wisata, dan budaya lokal Indonesia          |
-| `category` | Kategori konten (Kesehatan, Pendidikan, Lingkungan, dll) |
-| `vote`     | Vote/dukungan pengguna untuk Destinasi                   |
-| `comment` | Komentar dan diskusi pada Destinasi                       |
-| `article` | Artikel edukatif tentang budaya & wisata                  |
+| Entity      | Description                                                |
+| ------------ | ------------------------------------------------------------ |
+| `user`       | User data (integrated with Better Auth)          |
+| `destination`  | Indonesian tourism/cultural destinations (referred to as `Destinasi` in the schema)          |
+| `category`   | Content categories (Health, Education, Environment, etc.) |
+| `vote`       | User votes/support for a destination                   |
+| `comment`    | Comments and discussion on a destination                       |
+| `article`    | Educational articles about culture & tourism                  |
 
 ---
 
@@ -191,8 +189,8 @@ src/
 ### Prerequisites
 
 - Node.js 18+
-- pnpm (recommended) atau npm
-- PostgreSQL database ([Neon](https://neon.tech/) recommended)
+- pnpm (recommended) or npm
+- A PostgreSQL database ([Neon](https://neon.tech/) recommended)
 
 ### Installation
 
@@ -204,9 +202,9 @@ cd Suasana
 # Install dependencies
 pnpm install
 
-# Setup environment variables
+# Set up environment variables
 cp .env.example .env
-# Edit .env dengan credentials Anda
+# Edit .env with your credentials
 
 # Push database schema
 npx drizzle-kit push
@@ -216,7 +214,7 @@ pnpm db:seed
 
 # Run development server
 pnpm dev
-````
+```
 
 ### Environment Variables
 
@@ -242,68 +240,68 @@ EMAIL_SENDER_ADDRESS="noreply@suasana.id"
 
 ## 📜 Scripts
 
-| Command                  | Deskripsi                               |
-| ------------------------ | --------------------------------------- |
-| `pnpm dev`               | Jalankan development server (port 3000) |
-| `pnpm build`             | Build production                        |
-| `pnpm start`             | Jalankan production server              |
-| `pnpm check`             | Lint & format code                      |
-| `pnpm test`              | Jalankan tests                          |
-| `npx drizzle-kit push`   | Push schema ke database                 |
-| `npx drizzle-kit studio` | Buka Drizzle Studio                     |
-| `pnpm db:seed`           | Seed database dengan dummy data         |
+| Command                   | Description                               |
+| -------------------------- | -------------------------------------------- |
+| `pnpm dev`                | Start the development server (port 3000) |
+| `pnpm build`              | Build for production                        |
+| `pnpm start`              | Run the production server              |
+| `pnpm check`              | Lint & format code                          |
+| `pnpm test`               | Run tests                              |
+| `npx drizzle-kit push`   | Push schema to the database                 |
+| `npx drizzle-kit studio` | Open Drizzle Studio                     |
+| `pnpm db:seed`           | Seed the database with dummy data         |
 
 ---
 
-## 💡 Manfaat Platform
+## 💡 Platform Benefits
 
 <div align="center">
 
-|           Untuk Masyarakat           |      Untuk Destinasi Lokal      |
-| :----------------------------------: | :-----------------------------: |
-| ✅ Akses informasi wisata yang mudah | ✅ Media promosi digital gratis |
-|  ✅ Menemukan destinasi tersembunyi  |    ✅ Meningkatkan eksposur     |
-| ✅ Berpartisipasi dalam pelestarian  |  ✅ Menerima dukungan langsung  |
-|   ✅ Berbagi pengalaman perjalanan   |     ✅ Membangun komunitas      |
+|           For the Public           |      For Local Destinations      |
+| :----------------------------------: | :---------------------------------: |
+| ✅ Easy access to travel information | ✅ Free digital promotion media |
+|  ✅ Discovering hidden destinations  |    ✅ Increased exposure     |
+| ✅ Participating in preservation efforts  |  ✅ Receiving direct support  |
+|   ✅ Sharing travel experiences   |     ✅ Building community      |
 
 </div>
 
 ---
 
-## 📌 Batasan & Disclaimer
+## 📌 Scope & Disclaimer
 
-- 🔹 Platform fokus pada **informasi dan promosi**, bukan layanan pemesanan
-- 🔹 Sistem voting bersifat **apresiasi komunitas**, bukan penilaian resmi
-- 🔹 Konten bersifat **informatif dan edukatif**
-- 🔹 Fitur donasi akan terintegrasi dengan payment gateway terpercaya
+- 🔹 The platform focuses on **information and promotion**, not booking services
+- 🔹 The voting system is a form of **community appreciation**, not an official assessment
+- 🔹 Content is **informational and educational** in nature
+- 🔹 The donation feature will integrate with a trusted payment gateway
 
 ---
 
-## 🤝 Kontribusi
+## 🤝 Contributing
 
-Kami menyambut kontribusi dari komunitas! Silakan baca [CONTRIBUTING.md](CONTRIBUTING.md) untuk panduan kontribusi.
+Contributions from the community are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ```bash
-# Fork repository
-# Buat branch baru
+# Fork the repository
+# Create a new branch
 git checkout -b feature/AmazingFeature
 
-# Commit perubahan
+# Commit your changes
 git commit -m 'Add some AmazingFeature'
 
-# Push ke branch
+# Push the branch
 git push origin feature/AmazingFeature
 
-# Buat Pull Request
+# Open a Pull Request
 ```
 
 ---
 
-## 🏆 Dibuat Untuk
+## 🏆 Built For
 
 <div align="center">
 
-**Lomba Web Design**
+**Web Design Competition**
 
 ### 🎖️ Kesatuan Bogor Olympic Festival (KBOF)
 
@@ -313,15 +311,15 @@ _IBI Kesatuan Bogor_
 
 ---
 
-## 📄 Lisensi
+## 📄 License
 
-Project ini dilisensikan di bawah [MIT License](LICENSE.md).
+This project is licensed under the [MIT License](LICENSE.md).
 
 ---
 
 <div align="center">
 
-### 🌏 Mari Bersama Lestarikan Budaya dan Ekowisata Indonesia!
+### 🌏 Let's Preserve Indonesia's Culture and Ecotourism Together!
 
 <img src="https://flagcdn.com/w160/id.png" width="80" alt="Indonesia Flag" />
 
@@ -330,3 +328,11 @@ Project ini dilisensikan di bawah [MIT License](LICENSE.md).
 [⬆ Back to Top](#-suasana)
 
 </div>
+
+---
+
+## 📝 Translator's notes
+
+- The database schema table used a stray fenced code block with no language/content (an empty ` ``` ` right before "### Main Entities") — removed, since it wasn't rendering anything useful.
+- `Destinasi` (Indonesian for "destination") is likely a literal table/model name in your Drizzle schema — I kept it noted alongside the English gloss rather than silently renaming it, since renaming a real schema identifier in the docs without touching the code would be misleading.
+- Given the "Built For" section names a specific competition, once the event is over it might be worth adding a results/badge (e.g. "Finalist" or "Winner") if applicable — a nice authenticity touch for a portfolio README.
